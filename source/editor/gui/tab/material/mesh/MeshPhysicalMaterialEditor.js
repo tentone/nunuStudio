@@ -1,4 +1,11 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {MeshStandardMaterialEditor} from "./MeshStandardMaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {TextureForm} from "../../../../components/input/TextureForm.js";
+import {Slider} from "../../../../components/input/Slider.js";
+
 
 function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 {
@@ -24,7 +31,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.clearcoatMap);
 	this.clearcoatMap = new TextureForm(this.form);
 	this.clearcoatMap.size.set(0, 100);
-	this.clearcoatMap.setOnChange(function(file)
+	this.clearcoatMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "clearcoatMap", self.clearcoatMap.getValue()));
 		self.material.needsUpdate = true;
@@ -50,7 +57,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.clearcoatRoughnessMap);
 	this.clearcoatRoughnessMap = new TextureForm(this.form);
 	this.clearcoatRoughnessMap.size.set(0, 100);
-	this.clearcoatRoughnessMap.setOnChange(function(file)
+	this.clearcoatRoughnessMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "clearcoatRoughnessMap", self.clearcoatRoughnessMap.getValue()));
 		self.material.needsUpdate = true;
@@ -90,7 +97,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.clearcoatNormalMap);
 	this.clearcoatNormalMap = new TextureForm(this.form);
 	this.clearcoatNormalMap.size.set(0, 100);
-	this.clearcoatNormalMap.setOnChange(function(file)
+	this.clearcoatNormalMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "clearcoatNormalMap", self.clearcoatNormalMap.getValue()));
 		self.material.needsUpdate = true;
@@ -128,3 +135,4 @@ MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 	this.clearcoatMap.setValue(material.clearcoatMap);
 	this.clearcoatRoughnessMap.setValue(material.clearcoatRoughnessMap);
 };
+export {MeshPhysicalMaterialEditor};

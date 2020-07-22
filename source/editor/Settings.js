@@ -1,4 +1,8 @@
-"use strict";
+import {LocalStorage} from "../core/utils/LocalStorage.js";
+import {RendererConfiguration} from "../core/renderer/RendererConfiguration.js";
+import {Viewport} from "../core/objects/cameras/Viewport.js";
+import {Nunu} from "../core/Nunu.js";
+import {FileSystem} from "../core/FileSystem.js";
 
 /** 
  * Settings store all user configurable settings of the editor.
@@ -285,3 +289,4 @@ Settings.prototype.load = function()
 		console.warn("nunuStudio: Failed to load configuration file");
 	}
 };
+export {Settings};

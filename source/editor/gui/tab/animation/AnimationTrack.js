@@ -1,4 +1,5 @@
-"use strict";
+import {AnimationKeyframe} from "./AnimationKeyframe.js";
+import {Component} from "../../../components/Component.js";
 
 function AnimationTrack(parent, editor, track)
 {
@@ -30,3 +31,5 @@ AnimationTrack.prototype.createKeyframes = function()
 		key.updateInterface();
 	}
 };
+
+export {AnimationTrack};

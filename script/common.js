@@ -23,7 +23,8 @@ module.exports = {
 	getFileName: getFileName,
 	getFileNameNoExt: getFileNameNoExt,
 	download: download,
-	calculateRelativePath: calculateRelativePath
+	calculateRelativePath: calculateRelativePath,
+	testCalculateRelativePath: testCalculateRelativePath
 };
 
 /**
@@ -36,15 +37,15 @@ const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar"
 function testCalculateRelativePath()
 {
 	var tests = [
-		["/c/d/e", "/f/h", "../../../f/h"],
-		["/a/b/c/d/e", "/a/b/f/h", "../../../f/h"],
-		["/a/b/c", "a/b/c/d", "d"],
-		["/c", "/c/d", "d"]
+		["/c/d/e", "/f/h", "../../f/h"],
+		["/a/b/c/d/e", "/a/b/f/h", "../../f/h"],
+		["/a/b/c", "a/b/c/d", "./d"],
+		["/c", "/c/d", "./d"]
 	];
 
 	for(var i = 0; i < tests.length; i++)
 	{
-		var a = common.calculateRelativePath(tests[i][0], tests[i][1]);
+		var a = calculateRelativePath(tests[i][0], tests[i][1]);
 		console.log(a ===  tests[i][2], a);
 	}
 }
@@ -63,12 +64,12 @@ function calculateRelativePath(a, b)
 	a = a.split("/");
 	b = b.split("/");
 
-	if(a.length > 0 && a[0].length === 0)
+	while(a.length > 0 && a[0].length === 0)
 	{
 		a.shift();
 	}
 
-	if(b.length > 0 && b[0].length === 0)
+	while(b.length > 0 && b[0].length === 0)
 	{
 		b.shift();
 	}
@@ -90,13 +91,20 @@ function calculateRelativePath(a, b)
 	var c = [];
 
 	// Check steps to take backwards
-	while(a.length > 0)
+	while(a.length > 1)
 	{
 		a.shift();
 		b.unshift("..")
 	}
 
-	return b.join("/");
+	var res = b.join("/");
+
+	if(!res.startsWith(".."))
+	{
+		res = "./" + res;
+	}
+
+	return res;
 }
 
 /**

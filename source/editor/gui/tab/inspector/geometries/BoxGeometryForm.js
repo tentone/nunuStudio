@@ -1,4 +1,9 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Editor} from "../../../../Editor.js";
+import {NumberRow} from "../../../../components/input/NumberRow.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {BoxBufferGeometry, BoxGeometry, BufferGeometry} from "three";
 
 function BoxGeometryForm(form, object)
 {
@@ -66,7 +71,7 @@ function BoxGeometryForm(form, object)
 
 BoxGeometryForm.prototype.updateGeometry = function()
 {
-	var GeometryConstructor = this.buffer.getValue() ? THREE.BoxBufferGeometry : THREE.BoxGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? BoxBufferGeometry : BoxGeometry;
 	var geometry = new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
 
 	this.object.geometry.dispose();
@@ -82,5 +87,6 @@ BoxGeometryForm.prototype.updateValues = function()
 	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 1);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
 	this.depthSegments.setValue(this.object.geometry.parameters.depthSegments || 1);
-	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
 };
+export {BoxGeometryForm};

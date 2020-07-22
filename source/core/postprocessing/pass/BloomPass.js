@@ -1,4 +1,7 @@
-"use strict";
+import {Pass} from "../Pass.js";
+import {WebGLRenderTarget, UniformsUtils, ShaderMaterial, AdditiveBlending, Vector2} from "three";
+import {ConvolutionShader} from "three/examples/jsm/shaders/ConvolutionShader";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 
 /**
  * Simple bloom effect pass.
@@ -15,15 +18,6 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 {
 	Pass.call(this);
 
-	if(THREE.ConvolutionShader === undefined)
-	{
-		console.error("BloomPass relies on THREE.ConvolutionShader");
-	}
-	if(THREE.CopyShader === undefined)
-	{
-		console.error("BloomPass relies on THREE.CopyShader");
-	}
-
 	this.type = "Bloom";
 	this.copyToScreen = true;
 
@@ -35,34 +29,34 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	resolution = (resolution !== undefined) ? resolution : 256;
 
 	// Render targets
-	this.renderTargetX = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
+	this.renderTargetX = new WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
 
 	// Render targets
-	this.renderTargetY = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
+	this.renderTargetY = new WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
 
 	// Copy material
-	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
+	this.copyUniforms = UniformsUtils.clone(CopyShader.uniforms);
 	this.copyUniforms["opacity"].value = strength;
 
 	// Copy material
-	this.materialCopy = new THREE.ShaderMaterial(
+	this.materialCopy = new ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
-		vertexShader: THREE.CopyShader.vertexShader,
-		fragmentShader: THREE.CopyShader.fragmentShader,
-		blending: THREE.AdditiveBlending,
+		vertexShader: CopyShader.vertexShader,
+		fragmentShader: CopyShader.fragmentShader,
+		blending: AdditiveBlending,
 		transparent: true
 	});
 
 	// Convolution material
-	this.convolutionUniforms = THREE.UniformsUtils.clone(THREE.ConvolutionShader.uniforms);
+	this.convolutionUniforms = UniformsUtils.clone(ConvolutionShader.uniforms);
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurX;
-	this.convolutionUniforms["cKernel"].value = THREE.ConvolutionShader.buildKernel(sigma);
-	this.materialConvolution = new THREE.ShaderMaterial(
+	this.convolutionUniforms["cKernel"].value = ConvolutionShader.buildKernel(sigma);
+	this.materialConvolution = new ShaderMaterial(
 	{
 		uniforms: this.convolutionUniforms,
-		vertexShader:  THREE.ConvolutionShader.vertexShader,
-		fragmentShader: THREE.ConvolutionShader.fragmentShader,
+		vertexShader:  ConvolutionShader.vertexShader,
+		fragmentShader: ConvolutionShader.fragmentShader,
 		defines:
 		{
 			"KERNEL_SIZE_FLOAT": kernelSize.toFixed(1),
@@ -72,8 +66,8 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	
 }
 
-BloomPass.blurX = new THREE.Vector2(0.001953125, 0.0);
-BloomPass.blurY = new THREE.Vector2(0.0, 0.001953125);
+BloomPass.blurX = new Vector2(0.001953125, 0.0);
+BloomPass.blurY = new Vector2(0.0, 0.001953125);
 
 BloomPass.prototype = Object.create(Pass.prototype);
 
@@ -123,3 +117,4 @@ BloomPass.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {BloomPass};

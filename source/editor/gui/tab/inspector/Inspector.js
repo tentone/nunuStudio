@@ -1,4 +1,5 @@
-"use strict";
+import {TableForm} from "../../../components/TableForm.js";
+import {Component} from "../../../components/Component.js";
 
 /**
  * A panel inspector is used to inspect and change the attributes of an object.
@@ -64,3 +65,5 @@ Inspector.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+
+export {Inspector};

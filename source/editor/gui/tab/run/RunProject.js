@@ -1,4 +1,13 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Program} from "../../../../core/objects/Program.js";
+import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
+import {Nunu} from "../../../../core/Nunu.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {RendererCanvas} from "../../../components/RendererCanvas.js";
+import {Component} from "../../../components/Component.js";
+import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
 
 /** 
  * Tab used to preview a project running.
@@ -46,21 +55,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.fullscreenButton.setStyle("borderRadius", "5px");
 	this.fullscreenButton.setVisibility(true);
-
-	// TODO <USE BUTTON STYLES>
-	/*
-	this.fullscreenButton.setStyle("opacity", 0.5);
-	this.fullscreenButton.setStyle("backgroundColor", "var(--panel-color)");
-	this.fullscreenButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.fullscreenButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
-	*/
-
+	this.fullscreenButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 	var fullscreen = true;
 	this.fullscreenButton.setOnClick(function()
 	{
@@ -85,17 +80,8 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.vrButton.setVisibility(false);
-	this.vrButton.setStyle("backgroundColor", "var(--panel-color)");
 	this.vrButton.setStyle("borderRadius", "5px");
-	this.vrButton.setStyle("opacity", 0.5);
-	this.vrButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.vrButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
+	this.vrButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 }
 
 RunProject.prototype = Object.create(TabComponent.prototype);
@@ -320,3 +306,5 @@ RunProject.prototype.updateSize = function()
 		this.program.resize(this.canvas.size.x, this.canvas.size.y);
 	}
 };
+
+export {RunProject};

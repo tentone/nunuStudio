@@ -1,7 +1,11 @@
-"use strict";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {Resource} from "./Resource.js";
+import {FileSystem} from "../FileSystem.js";
+import {ShapePath, ShapeUtils} from "three";
+import {TTFLoader} from "three/examples/jsm/loaders/TTFLoader";
 
 /**
- * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).
+ * Font class stores font data, font data can be stored as an  json or as a TTF file (stored in Base64).
  * 
  * Font objects are used to draw text using the TextMesh object and/or generate text bitmap.
  * 
@@ -116,7 +120,7 @@ Font.prototype.reverseGlyphs = function()
  */
 Font.prototype.loadTTF = function()
 {
-	var loader = new THREE.TTFLoader();
+	var loader = new TTFLoader();
 	loader.reversed = this.reversed;
 	this.font = loader.parse(this.data);
 };
@@ -238,10 +242,10 @@ Font.prototype.generateShapes = function(text, size, divisions)
 			return;
 		}
 
-		var path = new THREE.ShapePath();
+		var path = new ShapePath();
 
 		// Temporary variables
-		var pts = [], b2 = THREE.ShapeUtils.b2, b3 = THREE.ShapeUtils.b3;
+		var pts = [], b2 = ShapeUtils.b2, b3 = ShapeUtils.b3;
 		var x, y, cpx, cpy, cpx0, cpy0, cpx1, cpy1, cpx2, cpy2, laste;
 
 		if(glyph.o)
@@ -322,3 +326,5 @@ Font.prototype.generateShapes = function(text, size, divisions)
 		return {width: glyph.ha * scale, path: path};
 	}
 };
+
+export {Font};

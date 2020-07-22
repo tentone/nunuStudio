@@ -1,4 +1,17 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
+import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
+import {Nunu} from "../../../../../core/Nunu.js";
+import {FileSystem} from "../../../../../core/FileSystem.js";
+import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Asset} from "./Asset.js";
+import {DragBuffer} from "../../../DragBuffer.js";
+import {Global} from "../../../../Global.js";
+import {Editor} from "../../../../Editor.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../../components/DocumentBody.js";
+
 
 function AudioAsset(parent)
 {
@@ -107,10 +120,11 @@ function AudioAsset(parent)
 	};
 
 	// Drag end (called after of ondrop)
-	this.element.ondragend = function(event)
+	this.element.ondragend = function()
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
 }
 
 AudioAsset.prototype = Object.create(Asset.prototype);
+export {AudioAsset};

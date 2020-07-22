@@ -1,4 +1,19 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
+import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
+import {Mouse} from "../../../../core/input/Mouse.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {RendererCanvas} from "../../../components/RendererCanvas.js";
+import {TextBox} from "../../../components/input/TextBox.js";
+import {ImageChooser} from "../../../components/input/ImageChooser.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {Division} from "../../../components/Division.js";
+import {DualContainer} from "../../../components/containers/DualContainer.js";
+import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
@@ -24,7 +39,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.camera = new PerspectiveCamera(100, this.canvas.width / this.canvas.height);
 
 	// Scene
-	this.scene = new THREE.Scene();
+	this.scene = new Scene();
 
 	// Texture
 	this.texture = null;
@@ -64,12 +79,12 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
-	this.minFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
-	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
-	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
-	this.minFilter.addValue("MIP Linear Nearest", THREE.LinearMipMapNearestFilter);
-	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
+	this.minFilter.addValue(Locale.nearest, NearestFilter);
+	this.minFilter.addValue(Locale.linear, LinearFilter);
+	this.minFilter.addValue("MIP Nearest Nearest", NearestMipMapNearestFilter);
+	this.minFilter.addValue("MIP Nearest Linear", NearestMipMapLinearFilter);
+	this.minFilter.addValue("MIP Linear Nearest", LinearMipMapNearestFilter);
+	this.minFilter.addValue("MIP Linear Linear", LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
 		if(self.texture !== null)
@@ -85,8 +100,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
-	this.magFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
+	this.magFilter.addValue(Locale.nearest, NearestFilter);
+	this.magFilter.addValue(Locale.linear, LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
 		if(self.texture !== null)
@@ -102,13 +117,13 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this.form);
 	this.mapping.size.set(150, 18);
-	this.mapping.addValue("Cube Reflection", THREE.CubeReflectionMapping);
-	this.mapping.addValue("Cube Refraction", THREE.CubeRefractionMapping);
-	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularReflectionMapping);
-	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularRefractionMapping);
-	this.mapping.addValue("Spherical Reflection", THREE.SphericalReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVRefractionMapping);
+	this.mapping.addValue("Cube Reflection", CubeReflectionMapping);
+	this.mapping.addValue("Cube Refraction", CubeRefractionMapping);
+	this.mapping.addValue("Equirectangular Reflection", EquirectangularReflectionMapping);
+	this.mapping.addValue("Equirectangular Reflection", EquirectangularRefractionMapping);
+	this.mapping.addValue("Spherical Reflection", SphericalReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", CubeUVReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", CubeUVRefractionMapping);
 	this.mapping.setOnChange(function()
 	{
 		self.texture.mapping = self.mapping.getValue();
@@ -412,3 +427,4 @@ CubeTextureEditor.prototype.updateSize = function()
 	this.division.size.copy(this.size);
 	this.division.updateInterface();
 };
+export {CubeTextureEditor};

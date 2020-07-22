@@ -1,4 +1,4 @@
-"use strict";
+import {Component} from "./Component.js";
 
 /**
  * DOM form element.
@@ -38,3 +38,5 @@ Form.prototype.submit = function()
 {
 	this.element.submit();
 };
+
+export {Form};

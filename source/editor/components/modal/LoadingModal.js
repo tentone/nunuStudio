@@ -1,4 +1,8 @@
-"use strict";
+import {AnimationTimer} from "../../../core/utils/timer/AnimationTimer.js";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Text} from "../Text.js";
+import {ImageContainer} from "../ImageContainer.js";
+import {Component} from "../Component.js";
 
 /**
  * Loading box, used to force the user to wait for data from a request.
@@ -53,7 +57,7 @@ function LoadingModal(parent)
 
 	// Icon
 	this.icon = new ImageContainer(this);
-	this.icon.setImage("source/files/loading.png");
+	this.icon.setImage("files/loading.png");
 	
 	var rotation = 0.0;
 	
@@ -66,7 +70,7 @@ function LoadingModal(parent)
 	
 	// Event manager
 	this.manager = new EventManager();
-	this.manager.add(window, "resize", function(event)
+	this.manager.add(window, "resize", function()
 	{
 		self.updateInterface();
 	});
@@ -148,3 +152,5 @@ LoadingModal.prototype.updateSize = function()
 	this.icon.position.y += 30;
 	this.icon.updateInterface();
 };
+
+export {LoadingModal};

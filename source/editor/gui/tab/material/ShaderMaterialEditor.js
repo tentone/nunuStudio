@@ -1,4 +1,22 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Sky} from "../../../../core/objects/misc/Sky.js";
+import {Mouse} from "../../../../core/input/Mouse.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {MaterialEditor} from "./MaterialEditor.js";
+import {CodeEditor} from "../code/CodeEditor.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabGroup} from "../../../components/tabs/TabGroup.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {RendererCanvas} from "../../../components/RendererCanvas.js";
+import {TextBox} from "../../../components/input/TextBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {DualDivision} from "../../../components/containers/DualDivision.js";
+import {DualContainer} from "../../../components/containers/DualContainer.js";
+import {PerspectiveCamera, Scene, Object3D, PointLight, AmbientLight, Mesh, FrontSide, BackSide, DoubleSide, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending} from "three";
+
 
 function ShaderMaterialEditor(parent, closeable, container, index)
 {
@@ -53,14 +71,14 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.material = null;
 
 	// Material camera
-	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
+	this.camera = new PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
 	
 	// Scene
-	this.scene = new THREE.Scene();
+	this.scene = new Scene();
 	
 	// Interactive object
-	this.interactive = new THREE.Object3D();
+	this.interactive = new Object3D();
 	this.scene.add(this.interactive);
 	
 	// Scene
@@ -68,17 +86,17 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.sky.visible = false;
 	this.scene.add(this.sky);
 
-	this.pointLight = new THREE.PointLight(0x777777);
+	this.pointLight = new PointLight(0x777777);
 	this.pointLight.position.set(-3, 0, 3);
 	this.pointLight.visible = false;
 	this.scene.add(this.pointLight);
 	
-	this.ambientLight = new THREE.AmbientLight(0x555555);
+	this.ambientLight = new AmbientLight(0x555555);
 	this.ambientLight.visible = false;
 	this.scene.add(this.ambientLight);
 
 	// Mesh
-	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
+	this.mesh = new Mesh(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.mesh);
 	
 	// Test model
@@ -158,9 +176,9 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(150, 18);
-	this.side.addValue(Locale.front, THREE.FrontSide);
-	this.side.addValue(Locale.back, THREE.BackSide);
-	this.side.addValue(Locale.double, THREE.DoubleSide);
+	this.side.addValue(Locale.front, FrontSide);
+	this.side.addValue(Locale.back, BackSide);
+	this.side.addValue(Locale.double, DoubleSide);
 	this.side.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "side", self.side.getValue()));
@@ -210,11 +228,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
-	this.blending.addValue(Locale.none, THREE.NoBlending);
-	this.blending.addValue(Locale.normal, THREE.NormalBlending);
-	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
-	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
-	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
+	this.blending.addValue(Locale.none, NoBlending);
+	this.blending.addValue(Locale.normal, NormalBlending);
+	this.blending.addValue(Locale.additive, AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, SubtractiveBlending);
+	this.blending.addValue(Locale.multiply, MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "blending", self.blending.getValue()));
@@ -293,3 +311,4 @@ ShaderMaterialEditor.prototype.updateSize = function()
 	this.form.size.copy(this.general.size);
 	this.form.updateInterface();
 };
+export {ShaderMaterialEditor};

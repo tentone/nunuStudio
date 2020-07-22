@@ -1,4 +1,5 @@
-"use strict";
+import {Global} from "../../Global.js";
+import {Component} from "../Component.js";
 
 /**
  * Check box input element.
@@ -133,3 +134,5 @@ CheckBox.prototype.updateSize = function()
 	this.element.style.width = this.size.y + "px";
 	this.element.style.height = this.size.y + "px";
 };
+
+export {CheckBox};

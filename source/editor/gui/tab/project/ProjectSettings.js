@@ -1,4 +1,7 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Global} from "../../../Global.js";
+import {TabGroup} from "../../../components/tabs/TabGroup.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
 
 function ProjectSettings(parent, closeable, container, index)
 {
@@ -18,3 +21,4 @@ ProjectSettings.prototype.updateSize = function()
 	this.tab.size.copy(this.size);
 	this.tab.updateInterface();
 };
+export {ProjectSettings};

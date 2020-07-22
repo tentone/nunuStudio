@@ -1,4 +1,7 @@
-"use strict";
+import {TabGroup} from "../TabGroup.js";
+import {TabComponent} from "../TabComponent.js";
+import {TabGroupSplit} from "./TabGroupSplit.js";
+import {Component} from "../../Component.js";
 
 /**
  * Tab container is the root for a tree of tab groups.
@@ -187,7 +190,9 @@ TabContainer.prototype.getTab = function(type, object)
  * 
  * @method clear
  */
-TabContainer.prototype.clear = function(forceAll)
+TabContainer.prototype.clear = function()
 {
 	this.group.clear();
 };
+
+export {TabContainer};

@@ -1,4 +1,8 @@
-"use strict";
+import {Locale} from "../../locale/LocaleManager.js";
+import {Editor} from "../../Editor.js";
+import {ContextMenu} from "../dropdown/ContextMenu.js";
+import {DocumentBody} from "../DocumentBody.js";
+import {Component} from "../Component.js";
 
 /**
  * DOM text input element.
@@ -50,7 +54,6 @@ function TextBox(parent)
 		});
 		context.addOption(Locale.selectAll, function()
 		{
-			console.log(self.element);
 			self.element.select();
 		});
 		context.updateInterface();
@@ -109,9 +112,8 @@ TextBox.prototype.setOnInput = function(onInput, timeout)
 	if(timeout !== undefined)
 	{
 		var timer = null;
-		var self = this;
 
-		this.element.oninput = function(event)
+		this.element.oninput = function()
 		{
 			if(timer !== null)
 			{
@@ -164,3 +166,5 @@ TextBox.prototype.getText = function()
 {
 	return this.element.value;
 };
+
+export {TextBox};

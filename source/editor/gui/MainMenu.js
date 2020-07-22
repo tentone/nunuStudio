@@ -1,4 +1,33 @@
-"use strict";
+import {Locale} from "../locale/LocaleManager.js";
+import {UnitConverter} from "../../core/utils/UnitConverter.js";
+import {Mesh} from "../../core/objects/mesh/Mesh.js";
+import {Nunu} from "../../core/Nunu.js";
+import {ObjectLoader} from "../../core/loaders/ObjectLoader.js";
+import {TwistModifier} from "../../core/geometries/modifiers/TwistModifier.js";
+import {FileSystem} from "../../core/FileSystem.js";
+import {RemoveAction} from "../history/action/objects/RemoveAction.js";
+import {AddAction} from "../history/action/objects/AddAction.js";
+import {ChangeAction} from "../history/action/ChangeAction.js";
+import {ActionBundle} from "../history/action/ActionBundle.js";
+import {SettingsTab} from "./tab/settings/SettingsTab.js";
+import {AboutTab} from "./tab/AboutTab.js";
+import {Global} from "../Global.js";
+import {ProjectExporters} from "../ProjectExporters.js";
+import {Editor} from "../Editor.js";
+import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
+import {Component} from "../components/Component.js";
+import {ButtonText} from "../components/buttons/ButtonText.js";
+import {StaticPair} from "@as-com/pson";
+import {BufferGeometry, Geometry} from "three";
+import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
+import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
+import {OBJExporter} from "three/examples/jsm/exporters/OBJExporter";
+import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
+import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
+import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
+import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
+import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
+import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
@@ -67,7 +96,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
 	// Save readable legacy format
-	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
+	if(DEVELOPMENT && Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption("Save ISP", function()
 		{
@@ -107,7 +136,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportWebProject(files[0].path);
+					ProjectExporters.exportWebProject(files[0].path);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
@@ -118,7 +147,7 @@ function MainMenu(parent)
 		}, Global.FILE_PATH + "icons/platform/web.png");
 
 		// Android
-		if(Nunu.developmentMode())
+		if(DEVELOPMENT)
 		{
 			var android = publish.addMenu("Android", Global.FILE_PATH + "icons/platform/android.png");
 
@@ -126,7 +155,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportAndroid(Exporters.ANDROID_RUN);
+					ProjectExporters.exportAndroid(ProjectExporters.ANDROID_RUN);
 				}
 				catch(e)
 				{
@@ -141,7 +170,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportAndroid(Exporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
+						ProjectExporters.exportAndroid(ProjectExporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
 					}
 					catch(e)
 					{
@@ -161,7 +190,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportWindows(files[0].path);
+						ProjectExporters.exportWindows(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -179,7 +208,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportLinux(files[0].path);
+						ProjectExporters.exportLinux(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -198,7 +227,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportMacOS(files[0].path);
+						ProjectExporters.exportMacOS(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -219,7 +248,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportWebProjectZip(fname);
+					ProjectExporters.exportWebProjectZip(fname);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
@@ -239,15 +268,16 @@ function MainMenu(parent)
 			if(files.length > 0)
 			{
 				var file = files[0];
-				var binary = file.name.endsWith(".nsp");
-
+				var binary = FileSystem.getFileExtension(file.name) !== "isp";
+				
 				var loader = new ObjectLoader();
 				var reader = new FileReader();
+
 				reader.onload = function()
 				{
-					if(" + Locale.binary + ")
+					if(binary)
 					{
-						var pson = new dcodeIO.PSON.StaticPair();
+						var pson = new StaticPair();
 						var data = pson.decode(reader.result);
 						var program = loader.parse(data);
 					}
@@ -266,7 +296,7 @@ function MainMenu(parent)
 					Editor.addAction(new ActionBundle(actions));
 				};
 
-				if(" + Locale.binary + ")
+				if(binary)
 				{
 					reader.readAsArrayBuffer(file);
 				}
@@ -287,7 +317,7 @@ function MainMenu(parent)
 	{	
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.OBJExporter();
+			var exporter = new OBJExporter();
 			var data = exporter.parse(Editor.getScene());
 			FileSystem.writeFile(fname, data);
 		}, ".obj");
@@ -310,7 +340,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.GLTFExporter();
+			var exporter = new GLTFExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
@@ -334,7 +364,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.GLTFExporter();
+			var exporter = new GLTFExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFileArrayBuffer(fname, result);
@@ -352,7 +382,7 @@ function MainMenu(parent)
 		}
 
 		var geometry = Editor.selection[0].geometry;
-		var exporter = new THREE.DRACOExporter();
+		var exporter = new DRACOExporter();
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
@@ -366,7 +396,7 @@ function MainMenu(parent)
 	{
 		var path = FileSystem.getFilePath(fname);
 
-		var exporter = new THREE.ColladaExporter();
+		var exporter = new ColladaExporter();
 		exporter.parse(Editor.program, function(result)
 		{
 			for(var i = 0; i < result.textures.length; i++)
@@ -419,7 +449,7 @@ function MainMenu(parent)
 		
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.PLYExporter();
+			var exporter = new PLYExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFile(fname, result);
@@ -434,7 +464,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.PLYExporter();
+			var exporter = new PLYExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFileArrayBuffer(fname, result);
@@ -450,7 +480,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.STLExporter();
+			var exporter = new STLExporter();
 			var data = exporter.parse(Editor.program, config);
 			FileSystem.writeFile(fname, data);
 		}, ".stl");
@@ -463,7 +493,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new THREE.STLExporter();
+			var exporter = new STLExporter();
 			var data = exporter.parse(Editor.program, config);
 			FileSystem.writeFileArrayBuffer(fname, data.buffer);
 		}, ".stl");
@@ -532,9 +562,9 @@ function MainMenu(parent)
 	{
 		var geometry = object.geometry;
 
-		if(geometry instanceof THREE.BufferGeometry)
+		if(geometry instanceof BufferGeometry)
 		{
-			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+			geometry = new Geometry().fromBufferGeometry(geometry);
 		}
 		else
 		{
@@ -624,7 +654,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var simplifier = new THREE.SimplifyModifier();
+		var simplifier = new SimplifyModifier();
 
 		var level = parseFloat(Editor.prompt("Simplification level in %")) / 100;
 		if(isNaN(level) || level > 100 || level < 0)
@@ -635,7 +665,7 @@ function MainMenu(parent)
 
 		var original = Editor.selection[0].geometry;
 
-		if(original instanceof THREE.BufferGeometry)
+		if(original instanceof BufferGeometry)
 		{
 			var vertices = original.getAttribute("position").array.length / 3;
 		}
@@ -660,7 +690,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var modifier = new THREE.SubdivisionModifier();
+		var modifier = new SubdivisionModifier();
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
@@ -739,7 +769,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var geometry = new THREE.Geometry();
+		var geometry = new Geometry();
 
 		for(var i = 0; i < Editor.selection.length; i++)
 		{	
@@ -747,9 +777,9 @@ function MainMenu(parent)
 			if(obj.geometry !== undefined)
 			{
 				// Convert to geometry and merge
-				if(obj.geometry instanceof THREE.BufferGeometry)
+				if(obj.geometry instanceof BufferGeometry)
 				{
-					var converted = new THREE.Geometry();
+					var converted = new Geometry();
 					converted.fromBufferGeometry(obj.geometry);
 					geometry.merge(converted, obj.matrixWorld)
 				}
@@ -836,3 +866,5 @@ MainMenu.prototype.updateInterface = function()
 {
 	this.updateVisibility();
 };
+
+export {MainMenu};

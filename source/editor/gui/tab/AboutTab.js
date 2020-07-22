@@ -1,4 +1,10 @@
-"use strict";
+import {Locale} from "../../locale/LocaleManager.js";
+import {Nunu} from "../../../core/Nunu.js";
+import {Global} from "../../Global.js";
+import {Text} from "../../components/Text.js";
+import {TabComponent} from "../../components/tabs/TabComponent.js";
+import {REVISION} from "three";
+import * as CANNON from "cannon";
 
 function AboutTab(parent, closeable, container, index)
 {
@@ -25,11 +31,13 @@ function AboutTab(parent, closeable, container, index)
 	this.name.element.style.width = "100%";
 	this.name.setTextSize(25);
 	this.name.setAlignment(Text.CENTER);
-	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "Build " + Nunu.TIMESTAMP);
+	this.name.setText(Nunu.NAME + " " + VERSION + " Build " + TIMESTAMP);
+
+
 
 	// Libraries
 	var libs = [];
-	libs.push("three.js R" + THREE.REVISION);
+	libs.push("three.js R" + REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);
 	libs.push("CannonJS V" + CANNON.version);
 	libs.push("TernJS V" + tern.version);
@@ -55,3 +63,4 @@ function AboutTab(parent, closeable, container, index)
 }
 
 AboutTab.prototype = Object.create(TabComponent.prototype);
+export {AboutTab};

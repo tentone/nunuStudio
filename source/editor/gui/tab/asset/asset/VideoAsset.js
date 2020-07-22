@@ -1,4 +1,15 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {Nunu} from "../../../../../core/Nunu.js";
+import {FileSystem} from "../../../../../core/FileSystem.js";
+import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Asset} from "./Asset.js";
+import {DragBuffer} from "../../../DragBuffer.js";
+import {Global} from "../../../../Global.js";
+import {Editor} from "../../../../Editor.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../../components/DocumentBody.js";
+
 
 function VideoAsset(parent)
 {
@@ -85,7 +96,7 @@ function VideoAsset(parent)
 	};
 
 	// Drag end (called after of ondrop)
-	this.element.ondragend = function(event)
+	this.element.ondragend = function()
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
@@ -107,3 +118,4 @@ VideoAsset.prototype.updateMetadata = function()
 		this.setText(this.asset.name);
 	}
 };
+export {VideoAsset};

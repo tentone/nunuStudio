@@ -1,4 +1,4 @@
-"use strict";
+import {Texture, RGBAFormat} from "three";
 
 /**
  * Canvas textures can be used to draw content to the texture during runtime, using the context property.
@@ -28,11 +28,11 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	 * @property image
 	 * @type {Element}
 	 */
-	THREE.Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.name = "canvas";
 	this.category = "Canvas";
-	this.format = THREE.RGBAFormat;
+	this.format = RGBAFormat;
 
 	Object.defineProperties(this,
 	{
@@ -73,7 +73,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	this.context = this.image.getContext("2d");
 }
 
-CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
+CanvasTexture.prototype = Object.create(Texture.prototype);
 CanvasTexture.prototype.constructor = CanvasTexture;
 CanvasTexture.prototype.isCanvasTexture = true;
 
@@ -122,10 +122,11 @@ CanvasTexture.prototype.clear = function(color)
  */
 CanvasTexture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = Texture.prototype.toJSON.call(this, meta);
 
 	data.width = this.width;
 	data.height = this.height;
 
 	return data;
 };
+export {CanvasTexture};

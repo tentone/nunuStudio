@@ -1,4 +1,4 @@
-"use strict";
+import {PCFSoftShadowMap, NoToneMapping, WebGLRenderer} from "three";
 
 /** 
  * Renderer configuration stores all the WebGL renderer related parameters.
@@ -96,7 +96,7 @@ function RendererConfiguration(options)
 	 * @type {number}
 	 * @default PCFSoftShadowMap
 	 */
-	this.shadowsType = THREE.PCFSoftShadowMap;
+	this.shadowsType = PCFSoftShadowMap;
 
 	/** 
 	 * Enables automatic updates to the shadows in the scene.
@@ -115,9 +115,9 @@ function RendererConfiguration(options)
 	 *
 	 * @property toneMapping
 	 * @type {number}
-	 * @default THREE.NoToneMapping
+	 * @default NoToneMapping
 	 */
-	this.toneMapping = THREE.NoToneMapping;
+	this.toneMapping = NoToneMapping;
 
 	/**
 	 * Exposure level of tone mapping.
@@ -272,7 +272,7 @@ RendererConfiguration.WEBGL2 = 2;
  * Create a THREE renderer object based on the renderer configuration.
  *
  * @method createRenderer
- * @return {THREE.WebGLRenderer} Renderer created from the configuration.
+ * @return {WebGLRenderer} Renderer created from the configuration.
  */
 RendererConfiguration.prototype.createRenderer = function(canvas)
 {
@@ -287,7 +287,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		catch(e){}
 	}
 
-	var renderer = new THREE.WebGLRenderer(
+	var renderer = new WebGLRenderer(
 	{
 		canvas: canvas,
 		context: context,
@@ -400,3 +400,5 @@ RendererConfiguration.prototype.fromJSON = function(data)
 	this.maxMorphTargets = data.maxMorphTargets;
 	this.maxMorphNormals = data.maxMorphNormals;
 };
+
+export {RendererConfiguration};

@@ -1,7 +1,7 @@
-"use strict";
+import {LoopRepeat} from "three";
 
 THREE.AnimationClip.prototype.enabled = true;
-THREE.AnimationClip.prototype.loop = THREE.LoopRepeat;
+THREE.AnimationClip.prototype.loop = LoopRepeat;
 THREE.AnimationClip.prototype.timeScale = 1;
 THREE.AnimationClip.prototype.weight = 1;
 

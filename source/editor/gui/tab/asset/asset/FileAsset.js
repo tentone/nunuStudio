@@ -1,4 +1,14 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {Nunu} from "../../../../../core/Nunu.js";
+import {FileSystem} from "../../../../../core/FileSystem.js";
+import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {TextEditor} from "../../code/TextEditor.js";
+import {Asset} from "./Asset.js";
+import {Global} from "../../../../Global.js";
+import {Editor} from "../../../../Editor.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../../components/DocumentBody.js";
 
 function FileAsset(parent)
 {
@@ -103,3 +113,5 @@ FileAsset.prototype.updateMetadata = function()
 		this.image.src = Global.FILE_PATH + "icons/misc/file.png";
 	}
 };
+
+export {FileAsset};

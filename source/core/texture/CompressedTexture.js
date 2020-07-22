@@ -1,4 +1,4 @@
-"use strict";
+import {Texture} from "three";
 
 /**
  * CompressTexture class is used to store textures using GPU compatible compressed data.
@@ -29,7 +29,7 @@
  */
 function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
 {
-	THREE.Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.category = "Compressed";
 
@@ -47,7 +47,7 @@ CompressedTexture.prototype.isCompressedTexture = true;
 
 CompressedTexture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = Texture.prototype.toJSON.call(this, meta);
 
 	data.isCubeTexture = this.isCubeTexture;
 
@@ -96,3 +96,4 @@ CompressedTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {CompressedTexture};

@@ -1,5 +1,3 @@
-"use strict";
-
 var ParticleShaderChunks =
 {
 	// Register color-packing define statements.
@@ -265,3 +263,4 @@ var ParticleShaderChunks =
 		"    vec4 rotatedTexture = texture2D(textureSampler, vUv);",
 	].join("\n")
 };
+export {ParticleShaderChunks};

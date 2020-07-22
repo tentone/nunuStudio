@@ -1,4 +1,24 @@
-"use strict";
+import {Video} from "../../../../core/resources/Video.js";
+import {ResourceManager} from "../../../../core/resources/ResourceManager.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {Font} from "../../../../core/resources/Font.js";
+import {Audio} from "../../../../core/resources/Audio.js";
+import {Loaders} from "../../../Loaders.js";
+import {AssetExplorerMenu} from "./AssetExplorerMenu.js";
+import {VideoAsset} from "./asset/VideoAsset.js";
+import {TextureAsset} from "./asset/TextureAsset.js";
+import {MaterialAsset} from "./asset/MaterialAsset.js";
+import {ImageAsset} from "./asset/ImageAsset.js";
+import {GeometryAsset} from "./asset/GeometryAsset.js";
+import {FontAsset} from "./asset/FontAsset.js";
+import {FileAsset} from "./asset/FileAsset.js";
+import {AudioAsset} from "./asset/AudioAsset.js";
+import {Asset} from "./asset/Asset.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {SearchBox} from "../../../components/SearchBox.js";
+import {Component} from "../../../components/Component.js";
 
 function AssetExplorer(parent, closeable, container, index)
 {
@@ -19,7 +39,6 @@ function AssetExplorer(parent, closeable, container, index)
 		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
-			var name = file.name;
 
 			// Image
 			if(Image.fileIsImage(file))
@@ -246,3 +265,4 @@ AssetExplorer.prototype.updateSize = function()
 	this.assets.size.set(this.size.x, this.size.y - 20);
 	this.assets.updateInterface();
 };
+export {AssetExplorer};

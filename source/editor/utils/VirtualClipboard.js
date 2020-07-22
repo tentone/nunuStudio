@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Alternative to node clipboard to enable simple copy paste inside the editor web version.
  *
@@ -67,3 +65,4 @@ VirtualClipboard.copy = function(text)
 
 	document.body.removeChild(textArea);
 };
+export {VirtualClipboard};

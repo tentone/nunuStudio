@@ -1,4 +1,6 @@
-"use strict";
+import {Pass} from "../Pass.js";
+import {UniformsUtils, WebGLRenderTarget, LinearFilter, NearestFilter, RGBAFormat, ShaderMaterial, MeshBasicMaterial} from "three";
+import {AfterimageShader} from "three/examples/jsm/shaders/AfterimageShader";
 
 /**
  * After image render pass blends the current frame with the previous frame.
@@ -10,39 +12,34 @@
  */
 function AfterimagePass(damp)
 {
-	if(THREE.AfterimageShader === undefined)
-	{
-		console.error("AfterimagePass relies on THREE.AfterimageShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "Afterimage";
 
-	this.uniforms = THREE.UniformsUtils.clone(THREE.AfterimageShader.uniforms);
+	this.uniforms = UniformsUtils.clone(AfterimageShader.uniforms);
 
-	this.textureComp = new THREE.WebGLRenderTarget(1, 1,
+	this.textureComp = new WebGLRenderTarget(1, 1,
 	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.NearestFilter,
-		format: THREE.RGBAFormat
+		minFilter: LinearFilter,
+		magFilter: NearestFilter,
+		format: RGBAFormat
 	});
 
-	this.textureOld = new THREE.WebGLRenderTarget(1, 1,
+	this.textureOld = new WebGLRenderTarget(1, 1,
 	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.NearestFilter,
-		format: THREE.RGBAFormat
+		minFilter: LinearFilter,
+		magFilter: NearestFilter,
+		format: RGBAFormat
 	});
 
-	this.shaderMaterial = new THREE.ShaderMaterial(
+	this.shaderMaterial = new ShaderMaterial(
 	{
 		uniforms: this.uniforms,
-		vertexShader: THREE.AfterimageShader.vertexShader,
-		fragmentShader: THREE.AfterimageShader.fragmentShader
+		vertexShader: AfterimageShader.vertexShader,
+		fragmentShader: AfterimageShader.fragmentShader
 	});
 
-	this.basicMaterial = new THREE.MeshBasicMaterial();
+	this.basicMaterial = new MeshBasicMaterial();
 
 	this.createQuadScene();
 
@@ -121,3 +118,5 @@ AfterimagePass.prototype.toJSON = function(meta)
 	return data;
 };
 
+
+export {AfterimagePass};

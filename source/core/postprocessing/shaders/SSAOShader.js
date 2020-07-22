@@ -1,4 +1,4 @@
-"use strict";
+import {Vector2} from "three";
 
 /**
  * Screen-space ambient occlusion shader
@@ -17,7 +17,7 @@ var SSAOShader =
 	{
 		tDiffuse: {value: null},
 		tDepth: {value: null},
-		size: {value: new THREE.Vector2(512, 512)},
+		size: {value: new Vector2(512, 512)},
 		cameraNear: {value: 1},
 		cameraFar: {value: 100},
 		radius: {value: 32},
@@ -195,3 +195,5 @@ var SSAOShader =
 		gl_FragColor = vec4(final, 1.0);\n\
 	}"
 };
+
+export {SSAOShader};

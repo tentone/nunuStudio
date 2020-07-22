@@ -1,4 +1,4 @@
-"use strict";
+import {DefaultLoadingManager, MaterialLoader as TMaterialLoader} from "three";
 
 /**
  * MaterialLoader can be used to load external materials.
@@ -9,7 +9,7 @@
  */
 function MaterialLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 	this.textures = {};
 }
 
@@ -53,7 +53,7 @@ MaterialLoader.prototype.setTextures = function(value)
  */
 MaterialLoader.prototype.parse = function(json)
 {
-	var material = THREE.MaterialLoader.prototype.parse.call(this, json);
+	var material = TMaterialLoader.prototype.parse.call(this, json);
 
 	// Legacy multi-material
 	if(json.materials !== undefined)
@@ -66,3 +66,4 @@ MaterialLoader.prototype.parse = function(json)
 
 	return material;
 };
+export {MaterialLoader};

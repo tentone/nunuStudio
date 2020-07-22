@@ -1,4 +1,4 @@
-"use strict";
+import {NormalBlending, FrontSide, NoColors} from "three";
 
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don"t have to rewrite materials if you decide to use a different renderer.
@@ -272,15 +272,15 @@ THREE.Material.prototype.toJSON = function(meta)
 	}
 
 	// Shading, blending
-	if(this.blending !== THREE.NormalBlending)
+	if(this.blending !== NormalBlending)
 	{
 		data.blending = this.blending;
 	}
-	if(this.side !== THREE.FrontSide)
+	if(this.side !== FrontSide)
 	{
 		data.side = this.side;
 	}
-	if(this.vertexColors !== THREE.NoColors)
+	if(this.vertexColors !== NoColors)
 	{
 		data.vertexColors = this.vertexColors;
 	}

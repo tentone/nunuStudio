@@ -1,5 +1,3 @@
-"use strict";
-
 THREE.BufferAttribute.prototype.toJSON = function()
 {
 	return {

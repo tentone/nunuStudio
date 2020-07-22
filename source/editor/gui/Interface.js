@@ -1,4 +1,18 @@
-"use strict";
+import {Locale} from "../locale/LocaleManager.js";
+import {Nunu} from "../../core/Nunu.js";
+import {FileSystem} from "../../core/FileSystem.js";
+import {TreeView} from "./tab/tree-view/TreeView.js";
+import {ProfilingTab} from "./tab/profiling/ProfilingTab.js";
+import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
+import {ConsoleTab} from "./tab/console/ConsoleTab.js";
+import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
+import {AnimationTab} from "./tab/animation/AnimationTab.js";
+import {MainMenu} from "./MainMenu.js";
+import {Editor} from "../Editor.js";
+import {TabGroup} from "../components/tabs/TabGroup.js";
+import {TabGroupSplit} from "../components/tabs/splittable/TabGroupSplit.js";
+import {TabContainer} from "../components/tabs/splittable/TabContainer.js";
+import {DocumentBody} from "../components/DocumentBody.js";
 
 /**
  * The full GUI of the application.
@@ -23,7 +37,6 @@ function Interface()
 
 	var left = main.elementA.split(TabGroup.BOTTOM).parent;
 	left.tabPosition = 0.7;
-	var leftTop = left.elementA;
 	var leftBottom = left.elementB;
 
 	var right = main.elementB.split(TabGroup.BOTTOM).parent;
@@ -113,3 +126,5 @@ Interface.prototype.updateInterface = function()
 	this.tab.size.set(width, height - this.menuBar.size.y);
 	this.tab.updateInterface();
 };
+
+export {Interface};

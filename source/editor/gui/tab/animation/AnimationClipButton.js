@@ -1,4 +1,11 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {MathUtils} from "../../../../core/utils/MathUtils.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {Editor} from "../../../Editor.js";
+import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../components/DocumentBody.js";
+import {Component} from "../../../components/Component.js";
+import {VectorKeyframeTrack, InterpolateLinear, Color, ColorKeyframeTrack, QuaternionKeyframeTrack, StringKeyframeTrack, InterpolateDiscrete, BooleanKeyframeTrack, NumberKeyframeTrack} from "three";
 
 /**
  * Button displyed on the left side that contains the name of the animation track.
@@ -69,33 +76,33 @@ function AnimationClipButton(parent, editor, animation)
 
 			if(value.isVector3)
 			{
-				var track = new THREE.VectorKeyframeTrack(attribute, [0], value.toArray());
-				track.setInterpolation(THREE.InterpolateLinear);
+				var track = new VectorKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(InterpolateLinear);
 			}
-			else if(value instanceof THREE.Color)
+			else if(value instanceof Color)
 			{
-				var track = new THREE.ColorKeyframeTrack(attribute, [0], value.toArray());
-				track.setInterpolation(THREE.InterpolateLinear);
+				var track = new ColorKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(InterpolateLinear);
 			}
 			else if(value.isQuaternion)
 			{
-				var track = new THREE.QuaternionKeyframeTrack(attribute, [0], value.toArray());
-				track.setInterpolation(THREE.InterpolateLinear);
+				var track = new QuaternionKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(InterpolateLinear);
 			}
 			else if(typeof value === "string")
 			{
-				var track = new THREE.StringKeyframeTrack(attribute, [0], [value]);
-				track.setInterpolation(THREE.InterpolateDiscrete);
+				var track = new StringKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(InterpolateDiscrete);
 			}
 			else if(typeof value === "boolean")
 			{
-				var track = new THREE.BooleanKeyframeTrack(attribute, [0], [value]);
-				track.setInterpolation(THREE.InterpolateDiscrete);
+				var track = new BooleanKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(InterpolateDiscrete);
 			}
 			else if(typeof value === "number")
 			{
-				var track = new THREE.NumberKeyframeTrack(attribute, [0], [value]);
-				track.setInterpolation(THREE.InterpolateLinear);
+				var track = new NumberKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(InterpolateLinear);
 			}
 			else
 			{
@@ -162,3 +169,4 @@ AnimationClipButton.prototype.updateAnimation = function()
 };
 
 AnimationClipButton.prototype.updateInterface = function(){};
+export {AnimationClipButton};

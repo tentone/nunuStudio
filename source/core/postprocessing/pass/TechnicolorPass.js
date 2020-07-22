@@ -1,4 +1,5 @@
-"use strict";
+import {ShaderPass} from "../ShaderPass.js";
+import {TechnicolorShader} from "three/examples/jsm/shaders/TechnicolorShader";
 
 /**
  * Simulate technicolor television colors.
@@ -8,9 +9,11 @@
  */
 function TechnicolorPass()
 {
-	ShaderPass.call(this, THREE.TechnicolorShader);
+	ShaderPass.call(this, TechnicolorShader);
 
 	this.type = "Technicolor";
 }
 
 TechnicolorPass.prototype = Object.create(ShaderPass.prototype);
+
+export {TechnicolorPass};

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * A helper class for TypedArrays.
  *
@@ -329,3 +327,4 @@ TypedArrayHelper.prototype.getComponentValueAtIndex = function(index)
 {
 	return this.array.subarray(this.indexOffset + (index * this.componentSize));
 };
+export {TypedArrayHelper};

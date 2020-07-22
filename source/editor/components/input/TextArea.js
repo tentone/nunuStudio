@@ -1,4 +1,8 @@
-"use strict";
+import {Locale} from "../../locale/LocaleManager.js";
+import {Editor} from "../../Editor.js";
+import {ContextMenu} from "../dropdown/ContextMenu.js";
+import {DocumentBody} from "../DocumentBody.js";
+import {Component} from "../Component.js";
 
 /**
  * Text area input is used to handle multi line string values.
@@ -140,9 +144,8 @@ TextArea.prototype.setOnInput = function(onInput, timeout)
 	if(timeout !== undefined)
 	{
 		var timer = null;
-		var self = this;
 
-		this.element.oninput = function(event)
+		this.element.oninput = function()
 		{
 			if(timer !== null)
 			{
@@ -211,3 +214,5 @@ TextArea.prototype.setValue = TextArea.prototype.setText;
  * @return {string} Text stored in the input element.
  */
 TextArea.prototype.getValue = TextArea.prototype.getText;
+
+export {TextArea};

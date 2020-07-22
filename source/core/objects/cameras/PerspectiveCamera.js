@@ -1,9 +1,13 @@
-"use strict";
+import {RenderPass} from "../../postprocessing/RenderPass.js";
+import {EffectComposer} from "../../postprocessing/EffectComposer.js";
+import {Scene} from "../Scene.js";
+import {Viewport} from "./Viewport.js";
+import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math as TMath} from "three";
 
 /**
  * Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.
  * 
- * Based on THREE.PerspectiveCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.
+ * Based on PerspectiveCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.
  * 
  * @class PerspectiveCamera
  * @extends {PerspectiveCamera}
@@ -44,7 +48,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	*/
 	this.viewport = new Viewport();
 	
-	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
+	TPerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
 
@@ -101,7 +105,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.composer.addPass(renderPass);
 }
 
-PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
+PerspectiveCamera.prototype = Object.create(TPerspectiveCamera.prototype);
 
 /**
  * Resize this camera, should be called every time after resizing the screen.
@@ -165,7 +169,7 @@ PerspectiveCamera.prototype.destroy = function()
 		scene.removeCamera(this);
 	}
 	
-	THREE.Object3D.prototype.destroy.call(this);
+	Object3D.prototype.destroy.call(this);
 };
 
 /**
@@ -177,7 +181,7 @@ PerspectiveCamera.prototype.destroy = function()
  */
 PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
-	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov) / this.zoom;
+	var top = this.near * Math.tan(TMath.DEG2RAD * 0.5 * this.fov) / this.zoom;
 	var height = 2 * top;
 	var width = this.aspect * height;
 	var left = -0.5 * width;
@@ -193,7 +197,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
+	var data = TPerspectiveCamera.prototype.toJSON.call(this, meta);
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;
@@ -206,3 +210,4 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {PerspectiveCamera};

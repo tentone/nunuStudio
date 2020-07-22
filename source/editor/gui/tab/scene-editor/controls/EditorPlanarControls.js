@@ -1,4 +1,10 @@
-"use strict";
+import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {Keyboard} from "../../../../../core/input/Keyboard.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {Settings} from "../../../../Settings.js";
+import {EditorOrbitControls} from "./EditorOrbitControls.js";
+import {Editor} from "../../../../Editor.js";
 
 /**
  * The planar controls are used to control 2D movement, fixed to one camera orientation.
@@ -148,3 +154,5 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 		this.updateControls();
 	}
 };
+
+export {EditorPlanarControls};

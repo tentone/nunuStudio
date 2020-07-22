@@ -1,4 +1,6 @@
-"use strict";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {Audio} from "../resources/Audio.js";
+import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * Audio loader can be used to load external audio resources.
@@ -9,7 +11,7 @@
  */
 function AudioLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 }
 
 /**
@@ -23,7 +25,7 @@ function AudioLoader(manager)
  */
 AudioLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		onLoad(self.parse(JSON.parse(text)));
@@ -63,3 +65,4 @@ AudioLoader.prototype.parse = function(json)
 
 	return audio;
 };
+export {AudioLoader};

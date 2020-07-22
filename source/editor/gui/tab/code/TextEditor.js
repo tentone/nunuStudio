@@ -1,4 +1,5 @@
-"use strict";
+import {CodeEditor} from "./CodeEditor.js";
+import {Editor} from "../../../Editor.js";
 
 /**
  * The text editor is used to edit text files.
@@ -102,3 +103,5 @@ TextEditor.prototype.updateCode = function()
 		this.resource.data = this.code.getValue();
 	}
 };
+
+export {TextEditor};

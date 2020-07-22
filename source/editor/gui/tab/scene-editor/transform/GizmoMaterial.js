@@ -1,18 +1,18 @@
-"use strict";
+import {MeshBasicMaterial, FrontSide} from "three";
 
 /**
  * Basic material to represent the solid portion of a gizmo.
  *
  * @class GizmoMaterial
- * @extends {THREE.MeshBasicMaterial}
+ * @extends {MeshBasicMaterial}
  */
 function GizmoMaterial(parameters)
 {
-	THREE.MeshBasicMaterial.call(this);
+	MeshBasicMaterial.call(this);
 
 	this.depthTest = false;
 	this.depthWrite = false;
-	this.side = THREE.FrontSide;
+	this.side = FrontSide;
 	this.transparent = true;
 
 	this.setValues(parameters);
@@ -21,7 +21,7 @@ function GizmoMaterial(parameters)
 	this.baseOpacity = this.opacity;
 }
 
-GizmoMaterial.prototype = Object.create(THREE.MeshBasicMaterial.prototype);
+GizmoMaterial.prototype = Object.create(MeshBasicMaterial.prototype);
 
 GizmoMaterial.red = new GizmoMaterial({color: 0xff0000});
 GizmoMaterial.green = new GizmoMaterial({color: 0x00ff00});
@@ -54,3 +54,5 @@ GizmoMaterial.prototype.highlight = function(highlighted)
 		this.opacity = this.baseOpacity;
 	}
 };
+
+export {GizmoMaterial};

@@ -1,4 +1,5 @@
-"use strict";
+import {ParticleShaderChunks} from "./ParticleShaderChunks.js";
+import {ShaderChunk} from "three";
 
 var ParticleShaders =
 {
@@ -9,9 +10,9 @@ var ParticleShaders =
 		ParticleShaderChunks.attributes,
 		ParticleShaderChunks.varyings,
 
-		THREE.ShaderChunk.common,
-		THREE.ShaderChunk.logdepthbuf_pars_vertex,
-		THREE.ShaderChunk.fog_pars_vertex,
+		ShaderChunk.common,
+		ShaderChunk.logdepthbuf_pars_vertex,
+		ShaderChunk.fog_pars_vertex,
 
 		ParticleShaderChunks.branchAvoidanceFunctions,
 		ParticleShaderChunks.unpackColor,
@@ -131,8 +132,8 @@ var ParticleShaders =
 		"    gl_PointSize = pointSizePerspective;",
 		"    gl_Position = projectionMatrix * mvPosition;",
 
-		THREE.ShaderChunk.logdepthbuf_vertex,
-		THREE.ShaderChunk.fog_vertex,
+		ShaderChunk.logdepthbuf_vertex,
+		ShaderChunk.fog_vertex,
 
 		"}"
 	].join("\n"),
@@ -141,9 +142,9 @@ var ParticleShaders =
 	[
 		ParticleShaderChunks.uniforms,
 
-		THREE.ShaderChunk.common,
-		THREE.ShaderChunk.fog_pars_fragment,
-		THREE.ShaderChunk.logdepthbuf_pars_fragment,
+		ShaderChunk.common,
+		ShaderChunk.fog_pars_fragment,
+		ShaderChunk.logdepthbuf_pars_fragment,
 
 		ParticleShaderChunks.varyings,
 
@@ -158,13 +159,15 @@ var ParticleShaders =
 
 		ParticleShaderChunks.rotateTexture,
 
-		THREE.ShaderChunk.logdepthbuf_fragment,
+		ShaderChunk.logdepthbuf_fragment,
 
 		"    outgoingLight = vColor.xyz * rotatedTexture.xyz;",
 		"    gl_FragColor = vec4(outgoingLight.xyz, rotatedTexture.w * vColor.w);",
 
-		THREE.ShaderChunk.fog_fragment,
+		ShaderChunk.fog_fragment,
 
 		"}"
 	].join("\n")
 };
+
+export {ParticleShaders};

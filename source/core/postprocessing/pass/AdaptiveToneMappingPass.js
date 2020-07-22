@@ -1,3 +1,9 @@
+import {Pass} from "../Pass.js";
+import {UniformsUtils, ShaderMaterial, NoBlending, WebGLRenderTarget, LinearMipMapLinearFilter, LinearFilter, RGBAFormat, MeshBasicMaterial} from "three";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {LuminosityShader} from "three/examples/jsm/shaders/LuminosityShader";
+import {ToneMapShader} from "three/examples/jsm/shaders/ToneMapShader";
+
 /**
  * Generate a texture that represents the luminosity of the current scene, adapted over time to simulate the optic nerve responding to the amount of light it is receiving.
  *
@@ -12,7 +18,6 @@
 function AdaptiveToneMappingPass(adaptive, resolution)
 {
 	Pass.call(this);
-
 	var self = this;
 	
 	this.type = "AdaptiveToneMapping";
@@ -25,37 +30,37 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 	this.previousLuminanceRT = null;
 	this.currentLuminanceRT = null;
 
-	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
-	this.materialCopy = new THREE.ShaderMaterial(
+	this.copyUniforms = UniformsUtils.clone(CopyShader.uniforms);
+	this.materialCopy = new ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
-		vertexShader: THREE.CopyShader.vertexShader,
-		fragmentShader: THREE.CopyShader.fragmentShader,
-		blending: THREE.NoBlending,
+		vertexShader: CopyShader.vertexShader,
+		fragmentShader: CopyShader.fragmentShader,
+		blending: NoBlending,
 		depthTest: false
 	});
 
-	this.materialLuminance = new THREE.ShaderMaterial(
+	this.materialLuminance = new ShaderMaterial(
 	{
-		uniforms: THREE.UniformsUtils.clone(THREE.LuminosityShader.uniforms),
-		vertexShader: THREE.LuminosityShader.vertexShader,
-		fragmentShader: THREE.LuminosityShader.fragmentShader,
-		blending: THREE.NoBlending
+		uniforms: UniformsUtils.clone(LuminosityShader.uniforms),
+		vertexShader: LuminosityShader.vertexShader,
+		fragmentShader: LuminosityShader.fragmentShader,
+		blending: NoBlending
 	});
 
 	this.createShader();
 
-	if(THREE.ToneMapShader === undefined)
+	if(ToneMapShader === undefined)
 	{
-		console.error("nunuStudio: AdaptiveToneMappingPass relies on THREE.ToneMapShader");
+		console.error("nunuStudio: AdaptiveToneMappingPass relies on ToneMapShader");
 	}
 
-	this.materialToneMap = new THREE.ShaderMaterial(
+	this.materialToneMap = new ShaderMaterial(
 	{
-		uniforms: THREE.UniformsUtils.clone(THREE.ToneMapShader.uniforms),
-		vertexShader: THREE.ToneMapShader.vertexShader,
-		fragmentShader: THREE.ToneMapShader.fragmentShader,
-		blending: THREE.NoBlending
+		uniforms: UniformsUtils.clone(ToneMapShader.uniforms),
+		vertexShader: ToneMapShader.vertexShader,
+		fragmentShader: ToneMapShader.fragmentShader,
+		blending: NoBlending
 	});
 
 	this.createQuadScene();
@@ -224,13 +229,13 @@ AdaptiveToneMappingPass.prototype.createShader = function()
 		}",
 	};
 
-	this.materialAdaptiveLum = new THREE.ShaderMaterial(
+	this.materialAdaptiveLum = new ShaderMaterial(
 	{
-		uniforms: THREE.UniformsUtils.clone(this.adaptLuminanceShader.uniforms),
+		uniforms: UniformsUtils.clone(this.adaptLuminanceShader.uniforms),
 		vertexShader: this.adaptLuminanceShader.vertexShader,
 		fragmentShader: this.adaptLuminanceShader.fragmentShader,
 		defines: this.adaptLuminanceShader.defines,
-		blending: THREE.NoBlending
+		blending: NoBlending
 	});
 };
 
@@ -250,18 +255,18 @@ AdaptiveToneMappingPass.prototype.reset = function()
 		this.previousLuminanceRT.dispose();
 	}
 
-	this.luminanceRT = new THREE.WebGLRenderTarget(this.resolution, this.resolution, Pass.RGBALinear);
+	this.luminanceRT = new WebGLRenderTarget(this.resolution, this.resolution, Pass.RGBALinear);
 	this.luminanceRT.texture.generateMipmaps = false;
 
-	this.previousLuminanceRT = new THREE.WebGLRenderTarget(this.resolution, this.resolution, Pass.RGBALinear);
+	this.previousLuminanceRT = new WebGLRenderTarget(this.resolution, this.resolution, Pass.RGBALinear);
 	this.previousLuminanceRT.texture.generateMipmaps = false;
 
 	// We only need mipmapping for the current luminosity because we want a down-sampled version to sample in our adaptive shader
-	this.currentLuminanceRT = new THREE.WebGLRenderTarget(this.resolution, this.resolution,
+	this.currentLuminanceRT = new WebGLRenderTarget(this.resolution, this.resolution,
 	{
-		minFilter: THREE.LinearMipMapLinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat
+		minFilter: LinearMipMapLinearFilter,
+		magFilter: LinearFilter,
+		format: RGBAFormat
 	});
 
 	if(this._adaptive)
@@ -271,7 +276,7 @@ AdaptiveToneMappingPass.prototype.reset = function()
 	}
 
 	// Put something in the adaptive luminance texture so that the scene can render initially
-	this.quad.material = new THREE.MeshBasicMaterial({color: 0x777777});
+	this.quad.material = new MeshBasicMaterial({color: 0x777777});
 	this.materialLuminance.needsUpdate = true;
 	this.materialAdaptiveLum.needsUpdate = true;
 	this.materialToneMap.needsUpdate = true;
@@ -319,3 +324,4 @@ AdaptiveToneMappingPass.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {AdaptiveToneMappingPass};

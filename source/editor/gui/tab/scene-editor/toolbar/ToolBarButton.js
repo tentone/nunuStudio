@@ -1,4 +1,6 @@
-"use strict";
+import {Text} from "../../../../components/Text.js";
+import {Component} from "../../../../components/Component.js";
+import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
 
 /**
  * Editor tool bar button.
@@ -65,3 +67,5 @@ ToolBarButton.prototype.updateSize = function()
 	this.text.position.set((this.size.x - this.text.size.x) / 2, this.size.y + 2);
 	this.text.updatePosition();
 };
+
+export {ToolBarButton};

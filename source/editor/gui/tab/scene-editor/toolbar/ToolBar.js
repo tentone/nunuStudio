@@ -1,4 +1,8 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {ToolBarGroup} from "./ToolBarGroup.js";
+import {SceneEditor} from "../SceneEditor.js";
+import {Global} from "../../../../Global.js";
+import {Component} from "../../../../components/Component.js";
 
 /**
  * The tool bar is used to store tool groups.
@@ -110,3 +114,5 @@ ToolBar.prototype.updateGroups = function()
 		}
 	}
 };
+
+export {ToolBar};

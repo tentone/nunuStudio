@@ -1,4 +1,10 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Text} from "../../../components/Text.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {Component} from "../../../components/Component.js";
+import {LoopOnce, LoopRepeat, LoopPingPong} from "three";
 
 /**
  * Animation tab menu bar with options to set the properties of the animation clip.
@@ -62,9 +68,9 @@ function AnimationClipMenuBar(parent, editor, animation)
 	this.loop = new DropdownList(this);
 	this.loop.position.set(260, 5);
 	this.loop.size.set(90, 18);
-	this.loop.addValue("Once", THREE.LoopOnce);
-	this.loop.addValue(Locale.repeat, THREE.LoopRepeat);
-	this.loop.addValue("PingPong", THREE.LoopPingPong);
+	this.loop.addValue("Once", LoopOnce);
+	this.loop.addValue(Locale.repeat, LoopRepeat);
+	this.loop.addValue("PingPong", LoopPingPong);
 	this.loop.updateInterface();
 	this.loop.setOnChange(function()
 	{
@@ -102,3 +108,4 @@ AnimationClipMenuBar.prototype.updateAnimation = function()
 };
 
 AnimationClipMenuBar.prototype.updateInterface = function(){};
+export {AnimationClipMenuBar};

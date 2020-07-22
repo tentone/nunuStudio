@@ -1,4 +1,8 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {Image} from "../../resources/Image.js";
+import {SpineTexture} from "./SpineTexture.js";
+import {Clock, Object3D} from "three";
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
 
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
@@ -9,10 +13,10 @@
  * 
  * @class SpineAnimation
  * @extends {spine.threejs.SkeletonMesh}
- * @param {Object} json
- * @param {string} atlas
- * @param {string} path
- * @param {Array} textures
+ * @param {Object} json Object containing the spine JSON encoded data for this animation. 
+ * @param {string} atlas Atlas file path.
+ * @param {string} path Path to retrieve images from.
+ * @param {Texture[]} textures List of textures provided for this animation.
  * @module Animations
  */
 function SpineAnimation(json, atlas, path, textures)
@@ -135,7 +139,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 */
 	this.loop = true;
 
-	this.clock = new THREE.Clock();
+	this.clock = new Clock();
 	
 	this.play();
 }
@@ -145,7 +149,7 @@ SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 SpineAnimation.prototype.update = function(delta)
 {
 	spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
-	THREE.Object3D.prototype.update.call(this);
+	Object3D.prototype.update.call(this);
 };
 
 /**
@@ -252,7 +256,7 @@ SpineAnimation.prototype.toJSON = function(meta)
 	// Store textures
 	var textures = [];
 	var self = this;
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
 		for(var i = 0; i < self.textures.length; i++)
 		{
@@ -280,3 +284,5 @@ SpineAnimation.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {SpineAnimation};

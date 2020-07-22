@@ -1,4 +1,13 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {GeometryForm} from "./GeometryForm.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {TorusBufferGeometry, TorusGeometry, BufferGeometry} from "three";
 
 function TorusGeometryForm(form, object)
 {
@@ -75,7 +84,7 @@ function TorusGeometryForm(form, object)
 TorusGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? THREE.TorusBufferGeometry : THREE.TorusGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? TorusBufferGeometry : TorusGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue())));
 };
 
@@ -86,5 +95,6 @@ TorusGeometryForm.prototype.updateValues = function()
 	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
 	this.tubularSegments.setValue(this.object.geometry.parameters.tubularSegments || 6);
 	this.arc.setValue(this.object.geometry.parameters.arc || Math.PI * 2);
-	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
 };
+export {TorusGeometryForm};

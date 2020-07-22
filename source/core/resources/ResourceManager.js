@@ -1,4 +1,11 @@
-"use strict";
+import {Video} from "./Video.js";
+import {ResourceContainer} from "./ResourceContainer.js";
+import {Resource} from "./Resource.js";
+import {Image} from "./Image.js";
+import {Font} from "./Font.js";
+import {Audio} from "./Audio.js";
+import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
+import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
 
 /**
  * Resource manager is used to manage available resources used by objects
@@ -13,11 +20,11 @@
  */
 function ResourceManager()
 {
-	THREE.Object3D.call(this);
+	Object3D.call(this);
 	ResourceContainer.call(this);
 }
 
-ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
+ResourceManager.prototype = Object.create(Object3D.prototype);
 Object.assign(ResourceManager.prototype, ResourceContainer.prototype);
 
 /**
@@ -206,7 +213,7 @@ ResourceManager.prototype.getMaterialByName = function(name)
  */
 ResourceManager.prototype.addMaterial = function(material)
 {
-	if(material instanceof THREE.Material)
+	if(material instanceof Material)
 	{
  		this.materials[material.uuid] = material;
  	}
@@ -224,15 +231,15 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
 {
 	if(defaultMeshMaterial === undefined)
 	{
-		defaultMeshMaterial = new THREE.MeshBasicMaterial();
+		defaultMeshMaterial = new MeshBasicMaterial();
 	}
 
 	if(defaultSpriteMaterial === undefined)
 	{
-		defaultSpriteMaterial = new THREE.SpriteMaterial();
+		defaultSpriteMaterial = new SpriteMaterial();
 	}
 
-	if(material instanceof THREE.Material)
+	if(material instanceof Material)
 	{
 		delete this.materials[material.uuid];
 		
@@ -240,7 +247,7 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
 		{
 			if(child.material !== undefined && child.material.uuid === material.uuid)
 			{
-				if(child instanceof THREE.Sprite)
+				if(child instanceof Sprite)
 				{
 					child.material = defaultSpriteMaterial;
 				}
@@ -282,7 +289,7 @@ ResourceManager.prototype.getTextureByName = function(name)
  */
 ResourceManager.prototype.addTexture = function(texture)
 {
-	if(material instanceof THREE.Texture)
+	if(material instanceof Texture)
 	{
  		this.textures[texture.uuid] = texture;
 	}
@@ -300,10 +307,10 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 {
 	if(defaultTexture === undefined)
 	{
-		defaultTexture = new THREE.Texture();
+		defaultTexture = new Texture();
 	}
 
-	if(texture instanceof THREE.Texture)
+	if(texture instanceof Texture)
 	{
 		delete this.textures[texture.uuid];
 		
@@ -500,3 +507,4 @@ ResourceManager.prototype.removeAudio = function(audio, defaultAudio)
 		});
 	}
 };
+export {ResourceManager};

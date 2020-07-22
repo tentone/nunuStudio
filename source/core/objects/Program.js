@@ -1,4 +1,15 @@
-"use strict";
+import {EventManager} from "../utils/EventManager.js";
+import {ResourceManager} from "../resources/ResourceManager.js";
+import {ResourceContainer} from "../resources/ResourceContainer.js";
+import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
+import {TargetConfig} from "../platform/TargetConfig.js";
+import {Script} from "./script/Script.js";
+import {App} from "../App.js";
+import {Nunu} from "../Nunu.js";
+import {ObjectLoader} from "../loaders/ObjectLoader.js";
+import {Mouse} from "../input/Mouse.js";
+import {Keyboard} from "../input/Keyboard.js";
+import {Scene, Camera, Clock, Object3D} from "three";
 
 /**
  * Program class contains all the data of a nunuStudio program.
@@ -9,10 +20,9 @@
  * 
  * @class Program
  * @module Core
- * @param {string} name Program name
  * @extends {ResourceManager}
  */
-function Program(name)
+function Program()
 {
 	ResourceManager.call(this);
 
@@ -26,7 +36,7 @@ function Program(name)
 	 * Inside the editor communication with the app is simulated on the debug console.
 	 *
 	 * @property app
-	 * @type {NunuApp}
+	 * @type {App}
 	 */
 	this.app = null;
 
@@ -36,7 +46,7 @@ function Program(name)
 	 * @property name
 	 * @type {string}
 	 */
-	this.name = (name !== undefined) ? name : "program";
+	this.name = "program";
 
 	/**
 	 * Program description, will be stamped when the app is exported.
@@ -125,7 +135,7 @@ function Program(name)
 	 * Scene loaded as default on startup.
 	 *
 	 * @property defaultScene
-	 * @type {THREE.Scene}
+	 * @type {Scene}
 	 */
 	this.defaultScene = null;
 
@@ -135,7 +145,7 @@ function Program(name)
 	 * On the editor this value is automatically set to the last editor camera point used
 	 *
 	 * @property defaultCamera
-	 * @type {THREE.Camera}
+	 * @type {Camera}
 	 */
 	this.defaultCamera = null;
 
@@ -209,9 +219,9 @@ function Program(name)
 	 * The time measured is passed down to the scene and its children elements.
 	 *
 	 * @property clock
-	 * @type {THREE.Clock}
+	 * @type {Clock}
 	 */
-	this.clock = new THREE.Clock();
+	this.clock = new Clock();
 
 	/**
 	 * VR runtime control, true when the app is running in VR mode.
@@ -267,7 +277,7 @@ Program.prototype.initialize = function()
 	}
 	
 	// Lock mouse pointer
-	if(this.lockPointer)
+	if(this.lockPointer && this.mouse !== null)
 	{
 		this.mouse.setLock(true);
 	}
@@ -468,6 +478,7 @@ Program.prototype.setScene = function(scene)
 		}
 
 		this.scene.initialize();
+		// this.scene.resize();
 	}
 	else
 	{
@@ -568,13 +579,13 @@ Program.prototype.setInitialScene = function(scene)
  */
 Program.prototype.dispose = function()
 {
-	if(this.lockPointer)
-	{
-		this.mouse.setLock(false);
-	}
-
 	if(this.mouse !== null)
 	{
+		if(this.lockPointer)
+		{
+			this.mouse.setLock(false);
+		}
+
 		this.mouse.dispose();
 	}
 
@@ -595,7 +606,7 @@ Program.prototype.dispose = function()
 	}
 	
 	ResourceManager.prototype.dispose.call(this);
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 /**
@@ -662,7 +673,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 {
 	var self = this;
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
 		if(exportResources !== false)
 		{
@@ -705,3 +716,4 @@ Program.prototype.toJSON = function(meta, exportResources)
 
 	return data;
 };
+export {Program};

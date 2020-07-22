@@ -1,4 +1,9 @@
-"use strict";
+import {Image} from "../../../core/resources/Image.js";
+import {FileSystem} from "../../../core/FileSystem.js";
+import {DragBuffer} from "../../gui/DragBuffer.js";
+import {Global} from "../../Global.js";
+import {Editor} from "../../Editor.js";
+import {Component} from "../Component.js";
 
 /**
  * Image chooser is used for the user to select images.
@@ -137,3 +142,5 @@ ImageChooser.prototype.getValue = function()
 {
 	return this.value;
 };
+
+export {ImageChooser};

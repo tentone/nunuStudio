@@ -1,5 +1,3 @@
-"use strict";
-
 THREE.InterleavedBuffer.prototype.toJSON = function()
 {
 	return {

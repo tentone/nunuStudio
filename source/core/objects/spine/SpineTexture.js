@@ -1,13 +1,14 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
 
 /**
- * Spine animation textures adapted to work with nunuStudio textures.
+ * Spine animation textures are used alognside with SpineAnimation objects.
  * 
- * Based on SpineTexture from original spine runtime for three.js
- * 
+ * Each animations sprite atlas uses a SpineTexture object.
+ *
  * @class SpineTexture
  * @module Textures
- * @param {Texture} texture
+ * @param {Texture} texture Texture to be used inside of this spine texture.
  */
 function SpineTexture(texture)
 {
@@ -18,3 +19,5 @@ function SpineTexture(texture)
 };
 
 SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
+
+export {SpineTexture};

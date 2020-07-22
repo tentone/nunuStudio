@@ -1,4 +1,5 @@
-"use strict";
+import {TextBox} from "./input/TextBox.js";
+import {Component} from "./Component.js";
 
 /**
  * DOM password text input element.
@@ -15,3 +16,5 @@ function PasswordBox(parent)
 }
 
 PasswordBox.prototype = Object.create(TextBox.prototype);
+
+export {PasswordBox};

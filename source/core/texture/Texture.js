@@ -1,4 +1,5 @@
-"use strict";
+import {Image} from "../resources/Image.js";
+import {Texture as TTexture, RGBAFormat, RGBFormat, LinearFilter} from "three";
 
 /**
  * Basic image texture object wraps a texture from a img DOM element
@@ -40,7 +41,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 		this.source = source;
 	}
 
-	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	TTexture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 	
 	var self = this;
 
@@ -63,7 +64,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	 */
 	this.disposed = false;
 
-	this.format = this.source.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
+	this.format = this.source.hasTransparency() ? RGBAFormat : RGBFormat;
 
 	this.updateSource();
 
@@ -71,8 +72,8 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	if(this.source.encoding === "gif")
 	{
 		this.generateMipmaps = false;
-		this.magFilter = THREE.LinearFilter;
-		this.minFilter = THREE.LinearFilter;
+		this.magFilter = LinearFilter;
+		this.minFilter = LinearFilter;
 
 		function update()
 		{
@@ -86,7 +87,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	}
 }
 
-Texture.prototype = Object.create(THREE.Texture.prototype);
+Texture.prototype = Object.create(TTexture.prototype);
 Texture.isTexture = true;
 
 /**
@@ -133,21 +134,21 @@ Texture.prototype.updateSource = function()
  */
 Texture.prototype.dispose = function()
 {	
-	THREE.Texture.prototype.dispose.call(this);
+	TTexture.prototype.dispose.call(this);
 
 	this.disposed = true;
 };
 
 /**
  * Create JSON description for texture, serializes image used in the texture
- * THREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.
+ * Texture serialization is different inside nunuStudio, the Texture class does not serialize any image data.
  *
  * @param {Object} meta
  * @method toJSON
  */
 Texture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = TTexture.prototype.toJSON.call(this, meta);
 	var image = this.source.toJSON(meta);
 
 	data.image = image.uuid;
@@ -209,3 +210,4 @@ Texture.prototype.toJSON = function(meta)
  * @property image
  * @type {Element}
  */
+export {Texture};

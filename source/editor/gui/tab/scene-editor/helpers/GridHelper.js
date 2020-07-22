@@ -1,4 +1,4 @@
-"use strict";
+import {LineSegments, BufferGeometry, LineBasicMaterial, Float32BufferAttribute} from "three";
 
 /**
  * Grid helper is used to visualize a grid in the editor.
@@ -15,7 +15,7 @@ function GridHelper(size, spacing, color)
 	this.size = (size !== undefined) ? size : 100;
 	this.spacing = (spacing !== undefined) ? spacing : 1;
 
-	THREE.LineSegments.call(this, new THREE.BufferGeometry(), new THREE.LineBasicMaterial(
+	LineSegments.call(this, new BufferGeometry(), new LineBasicMaterial(
 	{
 		color: (color !== undefined) ? color : 0x888888,
 		depthWrite: false,
@@ -26,7 +26,7 @@ function GridHelper(size, spacing, color)
 	this.update();
 };
 
-GridHelper.prototype = Object.create(THREE.LineSegments.prototype);
+GridHelper.prototype = Object.create(LineSegments.prototype);
 
 GridHelper.prototype.setSize = function(size)
 {
@@ -60,5 +60,7 @@ GridHelper.prototype.update = function()
 		vertices.push(k, 0, -this.size, k, 0, this.size);
 	}
 
-	geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+	geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
 };
+
+export {GridHelper};

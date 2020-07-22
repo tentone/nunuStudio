@@ -1,4 +1,10 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {EventManager} from "../../../../core/utils/EventManager.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../components/DocumentBody.js";
 
 /**
  * Code editor tab element based on the codemirror code editor library.
@@ -221,3 +227,5 @@ CodeEditor.prototype.updateSize = function()
 
 	this.code.setSize(this.size.x, this.size.y);
 };
+
+export {CodeEditor};

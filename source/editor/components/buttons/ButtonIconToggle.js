@@ -1,4 +1,5 @@
-"use strict";
+import {Component} from "../Component.js";
+import {ButtonToggle} from "./ButtonToggle.js";
 
 /**
  * A image button that can be toggled.
@@ -56,3 +57,5 @@ ButtonIconToggle.prototype.setImageScale = function(x, y)
 	this.icon.style.width = (x * 100) + "%";
 	this.icon.style.height = (y * 100) + "%";
 };
+
+export {ButtonIconToggle};

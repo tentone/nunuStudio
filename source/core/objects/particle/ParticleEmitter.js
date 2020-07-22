@@ -1,4 +1,8 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {ParticleGroup} from "./core/ParticleGroup.js";
+import {ParticleEmitterControl} from "./core/ParticleEmitterControl.js";
+import {ObjectLoader} from "../../loaders/ObjectLoader.js";
+import {Points, Clock, Vector4, Vector3, AdditiveBlending, Object3D, Vector2, Color} from "three";
 
 /**
  * Particle emitter is a wrapper for SPE particle system.
@@ -32,7 +36,7 @@ function ParticleEmitter(group, emitter)
 	this.emitter = new ParticleEmitterControl(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
 	this.group.addEmitter(this.emitter);
 
-	THREE.Points.call(this, this.group.geometry, this.group.material);
+	Points.call(this, this.group.geometry, this.group.material);
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
@@ -46,8 +50,8 @@ function ParticleEmitter(group, emitter)
 	 */
 	this.dynamicEmitter = false;
 
-	this.clock = new THREE.Clock();
-	this.temp = new THREE.Vector4();
+	this.clock = new Clock();
+	this.temp = new Vector4();
 
 	/**
 	 * Texture attached to the group of this particle emitter.
@@ -67,40 +71,6 @@ function ParticleEmitter(group, emitter)
 }
 
 /**
- * A map of supported distribution types used by ParticleEmitterControl instances.
- *
- * These distribution types can be applied to an emitter globally, which will affect the position, velocity, and acceleration value calculations for an emitter, or they can be applied on a per-property basis.
- *
- * @class ParticleDistributions
- */
-var ParticleDistributions = {
-	/**
-	 * Values will be distributed within a box.
-	 *
-	 * @attribute BOX
-	 * @type {number}
-	 */
-	BOX: 1,
-
-	/**
-	 * Values will be distributed on a sphere.
-	 *
-	 * @attribute SPHERE
-	 * @type {number}
-	 */
-	SPHERE: 2,
-
-	/**
-	 * Values will be distributed on a 2d-disc shape.
-	 *
-	 * @attribute DISC
-	 * @type {number}
-	 */
-	DISC: 3,
-};
-
-
-/**
  * Set this value to however many "steps" you want value-over-lifetime properties to have.
  *
  * Its adjustable to fix an interpolation problem:
@@ -115,7 +85,7 @@ var ParticleDistributions = {
  */
 ParticleEmitter.valueOverLifetimeLength = 4;
 
-ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
+ParticleEmitter.prototype = Object.create(Points.prototype);
 
 /**
  * Default particle emitter configuration.
@@ -128,13 +98,13 @@ ParticleEmitter.defaultEmitter =
 	particleCount: 200,
 	velocity:
 	{
-		value: new THREE.Vector3(0, 0, 0),
-		spread: new THREE.Vector3(3, 3, 3)
+		value: new Vector3(0, 0, 0),
+		spread: new Vector3(3, 3, 3)
 	},
 	acceleration:
 	{
-		value: new THREE.Vector3(0, 0, 0),
-		spread: new THREE.Vector3(0, 0, 0)
+		value: new Vector3(0, 0, 0),
+		spread: new Vector3(0, 0, 0)
 	}
 };
 
@@ -151,7 +121,7 @@ ParticleEmitter.defaultGroup =
 		value: null
 	},
 	maxParticleCount: 200,
-	blending: THREE.AdditiveBlending,
+	blending: AdditiveBlending,
 	fog: false,
 	depthWrite: false,
 	depthTest: true,
@@ -232,7 +202,7 @@ ParticleEmitter.prototype.dispose = function()
 {
 	this.group.dispose();
 
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 ParticleEmitter.prototype.toJSON = function(meta)
@@ -243,7 +213,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	this.geometry = undefined;
 
 	var texture = this.group.texture;
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
 		texture = texture.toJSON(meta);
 	});
@@ -264,14 +234,14 @@ ParticleEmitter.fromJSON = function(data, resources)
 {
 	function loadVector3(data)
 	{
-		return Array.isArray(data) ? new THREE.Vector3().fromArray(data) : new THREE.Vector3(data.x, data.y, data.z);
+		return Array.isArray(data) ? new Vector3().fromArray(data) : new Vector3(data.x, data.y, data.z);
 	}
 
 	if(data.group !== undefined)
 	{
 		var group = data.group;
 		group.texture.value = resources.getTexture(group.texture.value);
-		group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
+		group.texture.frames = new Vector2().fromArray(group.texture.frames || [1, 1]);
 	}
 
 	if(data.emitter !== undefined)
@@ -286,10 +256,11 @@ ParticleEmitter.fromJSON = function(data, resources)
 		
 		for(var i = 0; i < emitter.color.value.length; i++)
 		{
-			emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
+			emitter.color.value[i] = new Color(emitter.color.value[i]);
 			emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
 		}
 	}
 
 	return new ParticleEmitter(data.group, data.emitter);
 };
+export {ParticleEmitter};

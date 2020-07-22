@@ -1,4 +1,7 @@
-"use strict";
+import {Component} from "../Component.js";
+import {Canvas} from "../Canvas.js";
+import {Button} from "../buttons/Button.js";
+import {Color} from "three";
 
 /**
  * Color gradient chooser is used to select and preview a gradient of colors store in an array.
@@ -143,7 +146,7 @@ ColorGradientChooser.prototype.updateValues = function()
 	{
 		gradient.addColorStop(colorPercentage, this.values[i].getStyle());
 
-		this.buttons[i].color.fromRGB(this.values[i].r * 255, this.values[i].g * 255, this.values[i].b * 255);
+		this.buttons[i].color.fromRGBA(this.values[i].r * 255, this.values[i].g * 255, this.values[i].b * 255, 255);
 		this.buttons[i].style.left = buttonPosition + "px";
 
 		colorPercentage += colorStep;
@@ -177,7 +180,7 @@ ColorGradientChooser.prototype.setValue = function(values)
 
 	for(var i = 0; i < values.length; i++)
 	{
-		var color = new THREE.Color();
+		var color = new Color();
 		color.copy(values[i]);
 		this.values.push(color);
 	}
@@ -206,3 +209,5 @@ ColorGradientChooser.prototype.updateSize = function()
 
 	this.updateValues();
 };
+
+export {ColorGradientChooser};

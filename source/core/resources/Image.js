@@ -1,4 +1,8 @@
-"use strict";
+import {MathUtils} from "../utils/MathUtils.js";
+import {Base64Utils} from "../utils/binary/Base64Utils.js";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {Resource} from "./Resource.js";
+import {FileSystem} from "../FileSystem.js";
 
 /**
  * Image class is used to store image data that is used to create Textures.
@@ -333,3 +337,4 @@ Image.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {Image};

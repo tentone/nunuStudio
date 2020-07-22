@@ -1,4 +1,4 @@
-"use strict";
+import {InstancedMesh as TInstancedMesh, BufferAttribute, Object3D} from "three";
 
 /**
  * A instanced mesh is a mesh that can be drawn multiple times at once, it can be used to optimize the draw of large amount of the same geometry material combination.
@@ -9,11 +9,11 @@
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
  * @param {Material} material Material used to shade the superficie of the geometry
- * @extends {THREE.InstancedMesh}
+ * @extends {InstancedMesh}
  */
 function InstancedMesh(geometry, material, count)
 {
-	THREE._InstancedMesh.call(this, geometry, material, count);
+	TInstancedMesh.call(this, geometry, material, count);
 
 	this.name = "instanced";
 	this.type = "InstancedMesh";
@@ -39,7 +39,7 @@ function InstancedMesh(geometry, material, count)
 				// Resize the instanceMatrix to fit the number of instances
 				if(value > count)
 				{
-					this.instanceMatrix = new THREE.BufferAttribute(new Float32Array(value * 16), 16);
+					this.instanceMatrix = new BufferAttribute(new Float32Array(value * 16), 16);
 				}
 				
 				count = value;
@@ -48,33 +48,30 @@ function InstancedMesh(geometry, material, count)
 	});
 }
 
-THREE._InstancedMesh = THREE.InstancedMesh;
-THREE.InstancedMesh = InstancedMesh;
-
-InstancedMesh.prototype = Object.create(THREE._InstancedMesh.prototype);
+InstancedMesh.prototype = Object.create(TInstancedMesh.prototype);
 
 InstancedMesh.prototype.dispose = function()
 {
-	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
-	if(this.geometry !== null)
+	if(this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}
 
-	// Children
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 InstancedMesh.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.instanceMatrix = this.instanceMatrix.toJSON();
 	data.object.count = this.count;
 
 	return data;
 };
+
+export {InstancedMesh};

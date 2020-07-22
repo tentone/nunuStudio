@@ -1,4 +1,12 @@
-"use strict";
+import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
+import {MathUtils} from "../../../../../core/utils/MathUtils.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {Keyboard} from "../../../../../core/input/Keyboard.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {OrientationCube} from "../utils/OrientationCube.js";
+import {EditorControls} from "./EditorControls.js";
+import {Editor} from "../../../../Editor.js";
+import {Vector2, Vector3} from "three";
 
 /**
  * Free controls can be used to navigate the world in a first person like way.
@@ -20,7 +28,7 @@ function EditorFreeControls()
 	 * @property orientation
 	 * @type {Vector2}
 	 */	 
-	this.orientation = new THREE.Vector2();
+	this.orientation = new Vector2();
 
 	this.camera = null;
 
@@ -34,7 +42,7 @@ function EditorFreeControls()
 	 */
 	this.needsUpdate = false;
 
-	this.temp = new THREE.Vector3();
+	this.temp = new Vector3();
 
 	this.reset();
 	this.updateControls();
@@ -42,7 +50,7 @@ function EditorFreeControls()
 
 EditorFreeControls.prototype = Object.create(EditorControls.prototype);
 
-EditorFreeControls.ZERO = new THREE.Vector3(0, 0, 0);
+EditorFreeControls.ZERO = new Vector3(0, 0, 0);
 
 EditorFreeControls.prototype.reset = function()
 {
@@ -56,8 +64,8 @@ EditorFreeControls.prototype.focusObject = function(object)
 	var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
 
-	var size = box.getSize(new THREE.Vector3()).length();
-	var distance = this.getWorldPosition(new THREE.Vector3()).distanceTo(object.getWorldPosition(new THREE.Vector3()));
+	var size = box.getSize(new Vector3()).length();
+	var distance = this.getWorldPosition(new Vector3()).distanceTo(object.getWorldPosition(new Vector3()));
 
 	var direction = object.position.clone();
 	direction.sub(this.position);
@@ -229,3 +237,5 @@ EditorFreeControls.prototype.updateControls = function()
 
 	this.updateMatrixWorld(true);
 };
+
+export {EditorFreeControls};

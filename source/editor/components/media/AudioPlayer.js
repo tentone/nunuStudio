@@ -1,4 +1,7 @@
-"use strict";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Global} from "../../Global.js";
+import {Component} from "../Component.js";
+import {AudioContext} from "three";
 
 function AudioPlayer(parent)
 {
@@ -9,7 +12,7 @@ function AudioPlayer(parent)
 	var self = this;
 
 	// WebAudio context
-	this.context = THREE.AudioContext.getContext();
+	this.context = AudioContext.getContext();
 
 	// Timer
 	this.timer = document.createElement("div");
@@ -108,7 +111,7 @@ function AudioPlayer(parent)
 		self.scrubber.style.left = self.progress.style.width;
 	});
 
-	this.manager.add(window, "mouseup", function(event)
+	this.manager.add(window, "mouseup", function()
 	{	
 		self.dragging = false;
 		self.time = self.seekProgress * self.buffer.duration;
@@ -332,3 +335,5 @@ AudioPlayer.prototype.updateSize = function()
 	this.scrubber.style.height = (this.size.y * 0.8) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.15) + "px";
 };
+
+export {AudioPlayer};

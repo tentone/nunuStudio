@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * String utils contains auxiliar methods for string manipulation.
  *
@@ -48,3 +46,5 @@ StringUtils.removePunctuation = function(str)
 {
 	return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g,"");
 };
+
+export {StringUtils};

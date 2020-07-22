@@ -1,4 +1,4 @@
-"use strict";
+import {Nunu} from "../../Nunu.js";
 
 // Serialization does not serialize any image data.
 THREE.Texture.prototype.toJSON = function(meta)
@@ -14,7 +14,7 @@ THREE.Texture.prototype.toJSON = function(meta)
 	{
 		metadata:
 		{
-			version: Nunu.VERSION,
+			version: VERSION,
 			type: "Texture"
 		},
 

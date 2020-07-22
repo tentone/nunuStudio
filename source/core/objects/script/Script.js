@@ -1,3 +1,11 @@
+import {Scene} from "../Scene.js";
+import {Program} from "../Program.js";
+import {FileSystem} from "../../FileSystem.js";
+import {Group, Object3D} from "three";
+import * as THREE from "three";
+import * as CANNON from "cannon";
+import * as NUNU from "../../Main.js";
+
 /**
  * Script objects are used to control other objects present in the scene.
  *
@@ -12,7 +20,7 @@
  */
 function Script(code, mode)
 {
-	THREE.Group.call(this);
+	Group.call(this);
 	
 	this.type = "Script";
 	this.name = "script";
@@ -100,7 +108,7 @@ function Script(code, mode)
 	this.scene = null;
 }
 
-Script.prototype = Object.create(THREE.Group.prototype);
+Script.prototype = Object.create(Group.prototype);
 
 /**
  * Regular expression to obtain all the include calls placed inside of scripts.
@@ -122,6 +130,8 @@ Script.DEFAULT = "function initialize()\n{\n	// TODO <INITIALIZATION CODE>\n}\n\
 
 /**
  * List of default methods that can be implemented by scripts.
+ * 
+ * This list is used to search for these implementations in the script object at runtime.
  *
  * @attribute METHODS
  * @type {Array}
@@ -170,7 +180,7 @@ Script.INCLUDE = 102;
  */
 
 /**
- * Get includes from the code.
+ * Get includes from the code, includes are fetched from the resource manager or if not found fetched using XHR.
  *
  * Used to extract includes from code when loading libraries in APPEND mode.
  *
@@ -240,7 +250,7 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	THREE.Object3D.prototype.initialize.call(this);
+	Object3D.prototype.initialize.call(this);
 
 	var self = this;
 
@@ -254,9 +264,9 @@ Script.prototype.initialize = function()
 };
 
 /**
- * Update script state.
+ * Update script state automatically calls for mouse events if they are defined and for the script update method.
  * 
- * Calls the script update method if it exists.
+ * This method is executed every frame, script logic should not relly on the frame time, use the "delta" value provided.
  * 
  * @method update
  */
@@ -276,7 +286,7 @@ Script.prototype.update = function(delta)
 		this.script.update.call(this, delta);
 	}
 
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -293,7 +303,7 @@ Script.prototype.dispose = function()
 		this.script.dispose.call(this);
 	}
 
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 }
 
 /**
@@ -469,19 +479,48 @@ Script.prototype.compileCode = function(code, onReady)
 			}
 		}
 
+		// Code used to import context data to the scope of the script
+		var contextCode = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}"
+
 		// Evaluate code and create constructor
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
+		var Constructor = new Function("__context__", contextCode + code);
 
 		// Create script object
 		try
 		{
-			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
+			var context = {};
+
+			Object.assign(context, CANNON);
+			Object.assign(context, THREE);
+			Object.assign(context, NUNU);
+			
+			var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc", ];
+			var math = {};
+			for(var i of mathProps)
+			{
+				math[i] = window.Math[i];
+			}
+			Object.assign(math, THREE.Math);
+
+			Object.assign(context,
+			{	
+				program: this.program, 
+				scene: this.scene, 
+				self: this,
+				THREE: THREE,
+				CANNON: CANNON,
+				Math: math,
+				Keyboard: this.program.keyboard,
+				Mouse: this.program.mouse
+			});
+
+			this.script = new Constructor(context);
 		}
 		catch(e)
 		{
+			this.script = {};
 			console.warn("nunuStudio: Error initializing script code", e);
 			throw "Error initializing script code";
-			this.script = {};
 		}
 
 		if(this.mode !== Script.INCLUDE)
@@ -491,18 +530,20 @@ Script.prototype.compileCode = function(code, onReady)
 	}
 	catch(e)
 	{
+		this.script = {};
 		console.warn("nunuStudio: Error compiling script code", e);
 		throw "Error compiling script code";
-		this.script = {};
 	}
 };
 
 Script.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.code = this.code;
 	data.object.mode = this.mode;
 
 	return data;
 };
+
+export {Script};

@@ -1,4 +1,7 @@
-"use strict";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {LineBasicMaterialEditor} from "./LineBasicMaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
 
 function LineDashedMaterialEditor(parent, closeable, container, index)
 {
@@ -59,3 +62,5 @@ LineDashedMaterialEditor.prototype.attach = function(material, asset)
 	this.gapSize.setValue(material.gapSize);
 	this.dashScale.setValue(material.scale);
 };
+
+export {LineDashedMaterialEditor};

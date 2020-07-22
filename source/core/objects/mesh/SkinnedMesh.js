@@ -1,21 +1,21 @@
-"use strict";
+import {SkinnedMesh as TSkinnedMesh, Object3D} from "three";
 
 /**
  * SkinnedMesh is a Mesh that has a Skeleton attached.
  * 
  * A skeleton contains bones that are used to animate the vertices of the geometry.
  * 
- * Based on THREE.SkinnedMesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
+ * Based on SkinnedMesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
  * 
  * @class SkinnedMesh
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
  * @param {Material} material Material used to shade the superficie of the geometry
- * @extends {THREE.SkinnedMesh}
+ * @extends {SkinnedMesh}
  */
 function SkinnedMesh(geometry, material)
 {
-	THREE._SkinnedMesh.call(this, geometry, material);
+	TSkinnedMesh.call(this, geometry, material);
 
 	this.name = "skinned";
 	
@@ -25,10 +25,7 @@ function SkinnedMesh(geometry, material)
 	this.skeleton = null;
 }
 
-THREE._SkinnedMesh = THREE.SkinnedMesh;
-THREE.SkinnedMesh = SkinnedMesh;
-
-SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
+SkinnedMesh.prototype = Object.create(TSkinnedMesh.prototype);
 
 /**
  * Dispose mesh along with its material and geometry.
@@ -47,14 +44,14 @@ SkinnedMesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var self = this;
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
 		if(self.skeleton !== null)
 		{
@@ -112,3 +109,4 @@ SkinnedMesh.prototype.toJSON = function(meta)
  * @property drawMode
  * @default TrianglesDrawMode
  */
+export {SkinnedMesh};

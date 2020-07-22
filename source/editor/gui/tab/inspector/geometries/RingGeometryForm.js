@@ -1,4 +1,13 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {GeometryForm} from "./GeometryForm.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {RingBufferGeometry, RingGeometry, BufferGeometry} from "three";
 
 function RingGeometryForm(form, object)
 {
@@ -85,7 +94,7 @@ function RingGeometryForm(form, object)
 RingGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? THREE.RingBufferGeometry : THREE.RingGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? RingBufferGeometry : RingGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.innerRadius.getValue(), this.outerRadius.getValue(), this.thetaSegments.getValue(), this.phiSegments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
@@ -97,5 +106,6 @@ RingGeometryForm.prototype.updateValues = function()
 	this.phiSegments.setValue(this.object.geometry.parameters.phiSegments || 8);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
-	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
 };
+export {RingGeometryForm};

@@ -1,4 +1,4 @@
-"use strict";
+import {Texture, LinearFilter, RGBFormat} from "three";
 
 /**
  * Webcam texture is used to capture and display video from a webcam in real-time.
@@ -25,7 +25,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	 * @property image
 	 * @type {Element}
 	 */
-	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+	Texture.call(this, video, mapping, wrapS, wrapT, LinearFilter, LinearFilter, RGBFormat, type, anisotropy);
 	
 	var self = this;
 	
@@ -79,7 +79,7 @@ WebcamTexture.USER = 21;
  */
 WebcamTexture.ENVIRONMENT = 22;
 
-WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
+WebcamTexture.prototype = Object.create(Texture.prototype);
 WebcamTexture.prototype.constructor = WebcamTexture;
 WebcamTexture.isTexture = true;
 
@@ -152,7 +152,7 @@ WebcamTexture.prototype.disconnect = function()
  */
 WebcamTexture.prototype.dispose = function()
 {	
-	THREE.Texture.prototype.dispose.call(this);
+	Texture.prototype.dispose.call(this);
 
 	this.disconnect();
 	this.disposed = true;
@@ -171,9 +171,10 @@ WebcamTexture.prototype.dispose = function()
  */
 WebcamTexture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = Texture.prototype.toJSON.call(this, meta);
 
 	data.mode = this.mode;
 
 	return data;
 };
+export {WebcamTexture};

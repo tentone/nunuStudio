@@ -1,4 +1,6 @@
-"use strict";
+import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon";
+import {Vector3, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
+import {ConvexHull} from "three/examples/jsm/math/ConvexHull"
 
 /**
  * Physics generator is used to create Cannon.js shapes from three.js geometries.
@@ -38,7 +40,7 @@ PhysicsGenerator.Type =
  * @method createShape
  * @param {Object3D} object
  * @param {string} type PhysicsGenerator.Type
- * @return {CANNON.Shape} shape
+ * @return {Shape} shape
  */
 PhysicsGenerator.createShape = function(object, type)
 {
@@ -99,7 +101,7 @@ PhysicsGenerator.createShape = function(object, type)
  *
  * @method createBoxShape
  * @param {Geometry} geometry
- * @return {CANNON.Box} shape
+ * @return {Box} shape
  */
 PhysicsGenerator.createBoxShape = function(geometry)
 {
@@ -114,7 +116,7 @@ PhysicsGenerator.createBoxShape = function(geometry)
 	
 	var box = geometry.boundingBox;
 	
-	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2,(box.max.y - box.min.y) / 2,(box.max.z - box.min.z) / 2));
+	return new Box(new Vec3((box.max.x - box.min.x) / 2,(box.max.y - box.min.y) / 2,(box.max.z - box.min.z) / 2));
 };
 
 /**
@@ -122,7 +124,7 @@ PhysicsGenerator.createBoxShape = function(geometry)
  *
  * @method createBoundingBoxShape
  * @param {Geometry} geometry
- * @return {CANNON.Box} shape
+ * @return {Box} shape
  */
 PhysicsGenerator.createBoundingBoxShape = function(object)
 {
@@ -134,26 +136,26 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
 		return null;
 	}
 
-	var shape = new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
+	var shape = new Box(new Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 
 	object.updateMatrixWorld();
 
-	var worldPosition = new THREE.Vector3();
+	var worldPosition = new Vector3();
 	worldPosition.setFromMatrixPosition(object.matrixWorld);
 
 	return shape;
 };
 
 /**
- * Computes 3D convex hull as a CANNON.ConvexPolyhedron.
+ * Computes 3D convex hull as a ConvexPolyhedron.
  *
  * @method createConvexPolyhedron
  * @param {ConvexPolyhedron} geometry
- * @return {CANNON.Shape} shape
+ * @return {Shape} shape
  */
 PhysicsGenerator.createConvexPolyhedron = function(object)
 {
-	var quickhull = new THREE.QuickHull();
+	var quickhull = new ConvexHull();
 	quickhull.setFromObject(object);
 
 	var vertices = [];
@@ -170,17 +172,17 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 		do
 		{
 			var point = edge.head().point;
-			vertices.push(new CANNON.Vec3(point.x, point.y, point.z));
+			vertices.push(new Vec3(point.x, point.y, point.z));
 			edge = edge.next;
 		}
 		while(edge !== face.edge);
 
 		// The face always has 3 points
 		faces.push([vertices.length - 3, vertices.length - 2, vertices.length - 1]);
-		normals.push(new CANNON.Vec3(face.normal.x, face.normal.y, face.normal.z));
+		normals.push(new Vec3(face.normal.x, face.normal.y, face.normal.z));
 	}
 
-	return new CANNON.ConvexPolyhedron(vertices, faces, normals);
+	return new ConvexPolyhedron(vertices, faces, normals);
 };
 
 /**
@@ -188,14 +190,14 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
  *
  * @method createCylinderShape
  * @param {Geometry} geometry
- * @return {CANNON.Cylinder} shape
+ * @return {Cylinder} shape
  */
 PhysicsGenerator.createCylinderShape = function(geometry)
 {
 	var params = geometry.parameters;
 
-	var shape = new CANNON.Cylinder(params.radiusTop, params.radiusBottom, params.height, params.radialSegments);
-	shape.orientation = new CANNON.Quaternion();
+	var shape = new Cylinder(params.radiusTop, params.radiusBottom, params.height, params.radialSegments);
+	shape.orientation = new CQuaternion();
 	shape.orientation.setFromEuler(0, 0, 0, "XYZ").normalize();
 
 	return shape;
@@ -206,7 +208,7 @@ PhysicsGenerator.createCylinderShape = function(geometry)
  *
  * @method createBoundingCylinderShape
  * @param {Object3D} object
- * @return {CANNON.Cylinder} shape
+ * @return {Cylinder} shape
  */
 PhysicsGenerator.createBoundingCylinderShape = function(object)
 {
@@ -222,8 +224,8 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]],geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
 	// Create shape
-	var shape = new CANNON.Cylinder(radius, radius, height, 12);
-	shape.orientation = new CANNON.Quaternion();
+	var shape = new Cylinder(radius, radius, height, 12);
+	shape.orientation = new CQuaternion();
 	shape.orientation.setFromEuler(Math.PI / 2, 0, 0, "XYZ").normalize();
 	
 	return shape;
@@ -234,14 +236,14 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
  *
  * @method createPlaneShape
  * @param {Geometry} geometry
- * @return {CANNON.Box} shape
+ * @return {Box} shape
  */
 PhysicsGenerator.createPlaneShape = function(geometry)
 {
 	geometry.computeBoundingBox();
 	var box = geometry.boundingBox;
 
-	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
+	return new Box(new Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 };
 
 /**
@@ -249,11 +251,11 @@ PhysicsGenerator.createPlaneShape = function(geometry)
  *
  * @method createSphereShape
  * @param {Geometry} geometry
- * @return {CANNON.Sphere} shape
+ * @return {Sphere} shape
  */
 PhysicsGenerator.createSphereShape = function(geometry)
 {
-	return new CANNON.Sphere(geometry.parameters.radius);
+	return new Sphere(geometry.parameters.radius);
 };
 
 /**
@@ -261,14 +263,14 @@ PhysicsGenerator.createSphereShape = function(geometry)
  *
  * @method createBoundingSphereShape
  * @param {Geometry} geometry
- * @return {CANNON.Sphere} shape
+ * @return {Sphere} shape
  */
 PhysicsGenerator.createBoundingSphereShape = function(object)
 {
 	var geometry = PhysicsGenerator.getGeometry(object);
 	geometry.computeBoundingSphere();
 
-	return new CANNON.Sphere(geometry.boundingSphere.radius);
+	return new Sphere(geometry.boundingSphere.radius);
 };
 
 /**
@@ -276,11 +278,11 @@ PhysicsGenerator.createBoundingSphereShape = function(object)
  *
  * @method createTubeShape
  * @param {Geometry} geometry
- * @return {CANNON.Trimesh} shape
+ * @return {Trimesh} shape
  */
 PhysicsGenerator.createTubeShape = function(geometry)
 {
-	var tmp = new THREE.BufferGeometry();
+	var tmp = new BufferGeometry();
 	tmp.fromGeometry(geometry);
 	return createTrimeshShape(tmp);
 };
@@ -290,7 +292,7 @@ PhysicsGenerator.createTubeShape = function(geometry)
  * 
  * @method createTrimeshShape
  * @param {Geometry} geometry
- * @return {CANNON.Trimesh} shape
+ * @return {Trimesh} shape
  */
 PhysicsGenerator.createTrimeshShape = function(geometry)
 {
@@ -302,7 +304,7 @@ PhysicsGenerator.createTrimeshShape = function(geometry)
 	}
 
 	indices = Object.keys(vertices).map(Number);
-	return new CANNON.Trimesh(vertices, indices);
+	return new Trimesh(vertices, indices);
 };
 
 /**
@@ -323,14 +325,14 @@ PhysicsGenerator.getGeometry = function(object)
 		return null;
 	}
 
-	var tmp = new THREE.Geometry();
+	var tmp = new Geometry();
 	
 	// Apply scale (it can't easily be applied to a Shape later)
 	if(meshes.length === 1)
 	{
-		var position = new THREE.Vector3();
-		var quaternion = new THREE.Quaternion();
-		var scale = new THREE.Vector3(1, 1, 1);
+		var position = new Vector3();
+		var quaternion = new TQuaternion();
+		var scale = new Vector3(1, 1, 1);
 
 		tmp = meshes[0].geometry.clone();
 		meshes[0].updateMatrixWorld();
@@ -341,7 +343,7 @@ PhysicsGenerator.getGeometry = function(object)
 	// If more than one mesh found merge into single geometry
 	else
 	{
-		var combined = new THREE.Geometry();
+		var combined = new Geometry();
 		var mesh;
 
 		// Recursively merge geometry, preserving local transforms
@@ -349,7 +351,7 @@ PhysicsGenerator.getGeometry = function(object)
 		{
 			mesh.updateMatrixWorld();
 
-			if(mesh.geometry instanceof THREE.BufferGeometry)
+			if(mesh.geometry instanceof BufferGeometry)
 			{
 				tmp.fromBufferGeometry(mesh.geometry);
 				combined.merge(tmp, mesh.matrixWorld);
@@ -360,7 +362,7 @@ PhysicsGenerator.getGeometry = function(object)
 			}
 		}
 
-		var matrix = new THREE.Matrix4();
+		var matrix = new Matrix4();
 		matrix.scale(object.scale);
 		combined.applyMatrix4(matrix);
 		return combined;
@@ -378,13 +380,13 @@ PhysicsGenerator.getVertices = function(geometry)
 {
 	if(!geometry.attributes)
 	{
-		geometry = new THREE.BufferGeometry().fromGeometry(geometry);
+		geometry = new BufferGeometry().fromGeometry(geometry);
 	}
 	return geometry.attributes.position.array;
 };
 
 /**
- * Returns a array of THREE.Mesh instances from the given object.
+ * Returns a array of Mesh instances from the given object.
  * 
  * If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
  *
@@ -398,7 +400,7 @@ PhysicsGenerator.getMeshes = function(object)
 
 	object.traverse(function(child)
 	{
-		if(child instanceof THREE.Mesh)
+		if(child instanceof Mesh)
 		{
 			meshes.push(child);
 		}
@@ -406,3 +408,5 @@ PhysicsGenerator.getMeshes = function(object)
 
 	return meshes;
 };
+
+export {PhysicsGenerator};

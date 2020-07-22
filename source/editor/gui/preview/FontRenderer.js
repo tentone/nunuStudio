@@ -1,4 +1,7 @@
-"use strict";
+import {TextMesh} from "../../../core/objects/text/TextMesh.js";
+import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
+import {PreviewRenderer} from "./PreviewRenderer.js";
+import {MeshBasicMaterial} from "three";
 
 /** 
  * The font renderer is used to generate preview thumbnails for fonts.
@@ -14,7 +17,7 @@ function FontRenderer()
 	this.camera = new OrthographicCamera(3, 1);
 
 	// Text
-	this.text = new TextMesh("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
+	this.text = new TextMesh("Abc", new MeshBasicMaterial({color: 0xFFFFFF}), null);
 	this.text.position.z = -3;
 	this.scene.add(this.text);
 }
@@ -49,3 +52,5 @@ FontRenderer.prototype.render = function(font, onRender)
 	// Callback
 	onRender(this.canvas.toDataURL());
 };
+
+export {FontRenderer};

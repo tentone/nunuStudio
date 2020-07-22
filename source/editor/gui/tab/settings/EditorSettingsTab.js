@@ -1,4 +1,15 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
+import {Settings} from "../../../Settings.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {Slider} from "../../../components/input/Slider.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+
 
 function EditorSettingsTab(parent, closeable, container, index)
 {
@@ -411,3 +422,4 @@ EditorSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {EditorSettingsTab};

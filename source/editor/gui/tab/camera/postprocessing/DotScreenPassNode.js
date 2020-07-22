@@ -1,4 +1,13 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {Pass} from "../../../../../core/postprocessing/Pass.js";
+import {DotScreenPass} from "../../../../../core/postprocessing/pass/DotScreenPass.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {PassNode} from "./PassNode.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
 
 function DotScreenPassNode(parent)
 {
@@ -56,3 +65,4 @@ DotScreenPassNode.prototype.setPass = function(pass)
 	this.scale.setValue(pass.scale);
 	this.center.setValue(pass.center);
 };
+export {DotScreenPassNode};

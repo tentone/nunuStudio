@@ -1,5 +1,3 @@
-"use strict";
-
 THREE.LightShadow.prototype.toJSON = function()
 {
 	var data = {};

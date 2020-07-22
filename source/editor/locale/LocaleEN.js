@@ -1,4 +1,4 @@
-"use strict";
+import {LocaleManager} from "./LocaleManager.js";
 
 /**
  * Locale EN defines text of the GUI for the English language.
@@ -6,8 +6,7 @@
  * @static
  * @class LocaleEN
  */
-LocaleManager.register(
-{
+var LocaleEN = {
 	// Metadata
 	meta:
 	{
@@ -564,4 +563,6 @@ LocaleManager.register(
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",
 	updateFailed: "Failed to download update files."
-});
+};
+
+export {LocaleEN};

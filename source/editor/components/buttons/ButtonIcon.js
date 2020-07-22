@@ -1,4 +1,5 @@
-"use strict";
+import {Component} from "../Component.js";
+import {Button} from "./Button.js";
 
 /**
  * Button with a centered icon.
@@ -52,3 +53,5 @@ ButtonIcon.prototype.setImageScale = function(x, y)
 	this.icon.style.width = (x * 100) + "%";
 	this.icon.style.height = (y * 100) + "%";
 };
+
+export {ButtonIcon};

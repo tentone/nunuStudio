@@ -1,4 +1,7 @@
-"use strict";
+import {ToolBarToogleButton} from "./ToolBarToogleButton.js";
+import {ToolBarButton} from "./ToolBarButton.js";
+import {Component} from "../../../../components/Component.js";
+import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
 
 /**
  * Group of tools contained inside of the ToolBar object.
@@ -63,3 +66,5 @@ ToolBarGroup.prototype.addOption = function(text, icon, callback)
 
 	return button;
 };
+
+export {ToolBarGroup};

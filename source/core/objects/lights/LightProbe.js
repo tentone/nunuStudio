@@ -1,4 +1,5 @@
-"use strict";
+import {LightProbe as TLightProbe, WebGLRenderer, RGBAFormat, LinearFilter, Light} from "three";
+import {LightProbeGenerator} from "three/examples/jsm/lights/LightProbeGenerator";
 
 /**
  * A LightProbe is a source of indirect-diffuse light.
@@ -11,16 +12,15 @@
  */
 function LightProbe(sh, intensity)
 {
-	THREE._LightProbe.call(this, sh, intensity);
+	TLightProbe.call(this, sh, intensity);
 
 	this.type = "LightProbe";
 	this.name = "probe";
 }
 
-THREE._LightProbe = THREE.LightProbe;
-THREE.LightProbe = LightProbe;
+LightProbe.prototype = Object.create(TLightProbe.prototype);
 
-LightProbe.prototype = Object.create(THREE._LightProbe.prototype);
+// THREE.LightProbe = LightProbe;
 
 /**
  * Generate light probe data from cube camera render.
@@ -38,13 +38,13 @@ LightProbe.prototype.generate = function()
 
 	var canvas = new OffscreenCanvas(256, 256);
 
-	var renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true});
+	var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
 	
-	var cubeCamera = new THREE._CubeCamera(1, 1000, 256,
+	var cubeCamera = new TCubeCamera(1, 1000, 256,
 	{	
-		format: THREE.RGBAFormat,
-		magFilter: THREE.LinearFilter,
-		minFilter: THREE.LinearFilter
+		format: RGBAFormat,
+		magFilter: LinearFilter,
+		minFilter: LinearFilter
 	});
 	cubeCamera.matrixAutoUpdate = false;
 	cubeCamera.matrix.copy(this.matrix);
@@ -61,9 +61,11 @@ LightProbe.prototype.generate = function()
 
 LightProbe.prototype.toJSON = function(meta)
 {
-	var data = THREE.Light.prototype.toJSON.call(this, meta);
+	var data = Light.prototype.toJSON.call(this, meta);
 
 	data.object.sh = this.sh.toArray();
 
 	return data;
 };
+
+export {LightProbe};

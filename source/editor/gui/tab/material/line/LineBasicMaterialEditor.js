@@ -1,11 +1,19 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {MaterialEditor} from "../MaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {ColorChooser} from "../../../../components/input/ColorChooser.js";
+import {LineLoop, Color} from "three";
 
 function LineBasicMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 	
 	// Line
-	this.line = new THREE.LineLoop(MaterialEditor.geometries[0][1], null);
+	this.line = new LineLoop(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.line);
 	
 	// Test model
@@ -32,7 +40,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -74,3 +82,4 @@ LineBasicMaterialEditor.prototype.update = function()
 		// TODO <CHANGE LINE DRAW MODE>
 	}
 };
+export {LineBasicMaterialEditor};

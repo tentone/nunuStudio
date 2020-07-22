@@ -1,4 +1,12 @@
-"use strict";
+import {WebcamTexture} from "../texture/WebcamTexture.js";
+import {VideoTexture} from "../texture/VideoTexture.js";
+import {Texture} from "../texture/Texture.js";
+import {SpriteSheetTexture} from "../texture/SpriteSheetTexture.js";
+import {DataTexture} from "../texture/DataTexture.js";
+import {CubeTexture} from "../texture/CubeTexture.js";
+import {CompressedTexture} from "../texture/CompressedTexture.js";
+import {CanvasTexture} from "../texture/CanvasTexture.js";
+import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * TextureLoader can be used to load external textures.
@@ -9,7 +17,7 @@
  */
 function TextureLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 	
 	this.path = "";
 	this.crossOrigin = "anonymous";
@@ -18,9 +26,6 @@ function TextureLoader(manager)
 	this.videos = [];
 	this.fonts = [];
 }
-
-THREE._TextureLoader = THREE.TextureLoader;
-THREE.TextureLoader = TextureLoader;
 
 /**
  * Set cross origin path for the loader.
@@ -133,7 +138,7 @@ TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
 	
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);
@@ -157,12 +162,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		if(json.video === undefined)
 		{
-			console.warn("TextureLoader: No video specified for", json.uuid);
+			console.warn("nunuStudio: TextureLoader, No video specified for", json.uuid);
 		}
 
 		if(this.videos[json.video] === undefined)
 		{
-			console.warn("TextureLoader: Undefined video", json.video);
+			console.warn("nunuStudio: TextureLoader, Undefined video", json.video);
 		}
 
 		texture = new VideoTexture(this.videos[json.video]);
@@ -263,6 +268,9 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		// SpriteSheet texture
 		if(category === "SpriteSheet")
 		{
+			// TODO <REMOVE THIS>
+			console.log(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
+
 			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
 			texture.loop = json.loop;
 			texture.animationSpeed = json.animationSpeed;
@@ -311,3 +319,5 @@ TextureLoader.prototype.parse = function(json, onLoad)
 
 	return texture;
 };
+
+export {TextureLoader};

@@ -1,4 +1,4 @@
-"use strict";
+import {LocaleEN} from "./LocaleEN.js";
 
 /**
  * LocaleManager is used to manager multime locale configuration available.
@@ -82,3 +82,7 @@ LocaleManager.setLocale = function(locale)
 		Locale = locale;
 	}
 };
+
+LocaleManager.register(LocaleEN);
+
+export {Locale, LocaleManager};

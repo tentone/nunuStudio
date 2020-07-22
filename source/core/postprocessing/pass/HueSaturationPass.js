@@ -1,4 +1,6 @@
-"use strict";
+import {ShaderPass} from "../ShaderPass.js";
+import {Pass} from "../Pass.js";
+import {HueSaturationShader} from "three/examples/jsm/shaders/HueSaturationShader";
 
 /**
  * Hue and saturation pass.
@@ -10,7 +12,7 @@
  */
 function HueSaturationPass(hue, saturation)
 {
-	ShaderPass.call(this, THREE.HueSaturationShader);
+	ShaderPass.call(this, HueSaturationShader);
 
 	this.type = "HueSaturation";
 
@@ -51,3 +53,4 @@ HueSaturationPass.prototype.toJSON = function(meta)
 	
 	return data;
 };
+export {HueSaturationPass};

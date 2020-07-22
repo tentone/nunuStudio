@@ -1,4 +1,8 @@
-"use strict";
+import {ResourceContainer} from "../../resources/ResourceContainer.js";
+import {Scene} from "../../objects/Scene.js";
+import {Nunu} from "../../Nunu.js";
+import {AnimationMixer} from "../../animation/AnimationMixer.js";
+import {Material, AnimationClip} from "three";
 
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
@@ -20,7 +24,7 @@ THREE.Object3D.prototype.locked = false;
  * Check if this object contains a object.
  *
  * @method contains
- * @param {Object3D} object Object to look for.
+ * @param {THREE.Object3D} object Object to look for.
  * @return {boolean} True if this object contains the object.
  */
 THREE.Object3D.prototype.contains = function(object)
@@ -104,7 +108,7 @@ THREE.Object3D.prototype.update = function(delta)
  * @param {number} x Screen width.
  * @param {number} y Screen height.
  */
-THREE.Object3D.prototype.resize = function(x, y){};
+THREE.Object3D.prototype.resize = function(){};
 
 /**
  * Disposes the object from memory.
@@ -125,7 +129,7 @@ THREE.Object3D.prototype.dispose = function()
  * Add object as children of this object above the indicated children
  *
  * @method addAbove
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {number} index
  */
 THREE.Object3D.prototype.addAbove = function(object, children)
@@ -136,7 +140,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
 		return this;
 	}
 
-	if(object && object.isObject3D)
+	if(object && object.isTHREE.Object3D)
 	{
 		if(object.parent !== null)
 		{
@@ -162,7 +166,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
  * Add object as children of this object bellow the indicated children
  *
  * @method addBellow
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {number} index
  */
 THREE.Object3D.prototype.addBellow = function(object, children)
@@ -173,7 +177,7 @@ THREE.Object3D.prototype.addBellow = function(object, children)
 		return this;
 	}
 
-	if(object && object.isObject3D)
+	if(object && object.isTHREE.Object3D)
 	{
 		if(object.parent !== null)
 		{
@@ -199,7 +203,7 @@ THREE.Object3D.prototype.addBellow = function(object, children)
  * Get scene that contains this object.
  *
  * @method getScene
- * @return {Object3D} scene
+ * @return {THREE.Object3D} scene
  */
 THREE.Object3D.prototype.getScene = function()
 {
@@ -292,7 +296,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		meta = new ResourceContainer();
 		output.metadata =
 		{
-			version:  Nunu.VERSION,
+			version:  VERSION,
 			type: "Object3D"
 		};
 	}
@@ -351,7 +355,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	// Material
 	if(this.material !== undefined)
 	{
-		if(this.material instanceof THREE.Material)
+		if(this.material instanceof Material)
 		{
 			object.material = serialize(meta.materials, this.material);
 		}
@@ -373,7 +377,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 		for(var i = 0; i < this.animations.length; i++)
 		{
-			object.animations.push(THREE.AnimationClip.toJSON(this.animations[i]));
+			object.animations.push(AnimationClip.toJSON(this.animations[i]));
 		}
 	}
 
@@ -483,7 +487,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * @type {boolean}
 */
 /**
- * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
+ * The global transform of the object. If the Object3D has no parent, then it's identical to the local transform.
  * @property matrixWorld
  * @type {Matrix4}
 */
@@ -611,7 +615,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 /**
  * Searches through the object's children and returns the first with a matching name.
- * @param {string} name String to match to the children's Object3d.name property.
+ * @param {string} name String to match to the children's Object3D.name property.
  * @method getObjectByName
  */
 

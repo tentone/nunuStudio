@@ -1,4 +1,13 @@
-"use strict";
+import {Locale} from "../../locale/LocaleManager.js";
+import {Video} from "../../../core/resources/Video.js";
+import {Image} from "../../../core/resources/Image.js";
+import {Loaders} from "../../Loaders.js";
+import {TableForm} from "../TableForm.js";
+import {VectorBox} from "./VectorBox.js";
+import {TextureChooser} from "./TextureChooser.js";
+import {DropdownList} from "./DropdownList.js";
+import {CheckBox} from "./CheckBox.js";
+import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, Texture} from "three";
 
 function TextureForm(parent)
 {
@@ -20,9 +29,9 @@ function TextureForm(parent)
 	this.form.addText("Wrap Hor");
 	this.wrapS = new DropdownList(this);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapS.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapS.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapS.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapS.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.form.add(this.wrapS);
 	this.form.nextRow();
 
@@ -30,9 +39,9 @@ function TextureForm(parent)
 	this.form.addText("Wrap Vert");
 	this.wrapT = new DropdownList(this);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapT.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapT.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapT.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapT.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.form.add(this.wrapT);
 	this.form.nextRow();
 
@@ -71,7 +80,7 @@ TextureForm.prototype.setOnChange = function(onChange)
  */
 TextureForm.prototype.setValue = function(texture)
 {
-	if(texture instanceof THREE.Texture && !texture.isCubeTexture)
+	if(texture instanceof Texture && !texture.isCubeTexture)
 	{
 		this.texture = texture;
 
@@ -146,3 +155,5 @@ TextureForm.prototype.updateSize = function()
 	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
 	this.form.updateInterface();
 };
+
+export {TextureForm};

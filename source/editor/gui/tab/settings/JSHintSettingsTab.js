@@ -1,4 +1,11 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+
 
 function JSHintSettingsTab(parent, closeable, container, index)
 {
@@ -250,3 +257,4 @@ JSHintSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {JSHintSettingsTab};

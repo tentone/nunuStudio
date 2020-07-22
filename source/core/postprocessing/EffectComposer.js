@@ -1,4 +1,26 @@
-"use strict";
+import {RendererState} from "../renderer/RendererState.js";
+import {ShaderPass} from "./ShaderPass.js";
+import {RenderPass} from "./RenderPass.js";
+import {Pass} from "./Pass.js";
+import {UnrealBloomPass} from "./pass/UnrealBloomPass.js";
+import {TechnicolorPass} from "./pass/TechnicolorPass.js";
+import {SSAOPass} from "./pass/SSAOPass.js";
+import {SSAONOHPass} from "./pass/SSAONOHPass.js";
+import {SobelPass} from "./pass/SobelPass.js";
+import {HueSaturationPass} from "./pass/HueSaturationPass.js";
+import {FilmPass} from "./pass/FilmPass.js";
+import {DotScreenPass} from "./pass/DotScreenPass.js";
+import {CopyPass} from "./pass/CopyPass.js";
+import {ColorifyPass} from "./pass/ColorifyPass.js";
+import {BokehPass} from "./pass/BokehPass.js";
+import {BloomPass} from "./pass/BloomPass.js";
+import {FXAAPass} from "./pass/antialiasing/FXAAPass.js";
+import {AfterimagePass} from "./pass/AfterimagePass.js";
+import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
+import {Scene} from "../objects/Scene.js";
+import {Math as TMath, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass";
 
 /**
  * The effect composer is used to organize multiple post-processing passes.
@@ -10,12 +32,7 @@
  */
 function EffectComposer()
 {
-	if(THREE.CopyShader === undefined)
-	{
-		console.error("EffectComposer relies on THREE.CopyShader");
-	}
-
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = TMath.generateUUID();
 	this.width = 1;
 	this.height = 1;
 
@@ -33,17 +50,17 @@ function EffectComposer()
 	 * Input buffer passed to the render pass.
 	 *
 	 * @property writeBuffer
-	 * @type {THREE.WebGLRenderTarget}
+	 * @type {WebGLRenderTarget}
 	 */
-	this.writeBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
+	this.writeBuffer = new WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
 	/**
 	 * Input buffer passed to the render pass.
 	 *
 	 * @property readBuffer
-	 * @type {THREE.WebGLRenderTarget}
+	 * @type {WebGLRenderTarget}
 	 */
-	this.readBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
+	this.readBuffer = new WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
 	/**
 	 * Copy shader used to copy data between the read and write buffer or to copy the writeBuffer to screen when necessary.
@@ -51,7 +68,7 @@ function EffectComposer()
 	 * @property copyPass
 	 * @type {ShaderPass}
 	 */
-	this.copyPass = new ShaderPass(THREE.CopyShader);
+	this.copyPass = new ShaderPass(CopyShader);
 
 	/**
 	 * Renderer state configuration, stored the clear configuration of the renderer.
@@ -66,9 +83,9 @@ function EffectComposer()
 
 EffectComposer.bufferParameters =
 {
-	minFilter: THREE.LinearFilter,
-	magFilter: THREE.LinearFilter,
-	format: THREE.RGBAFormat,
+	minFilter: LinearFilter,
+	magFilter: LinearFilter,
+	format: RGBAFormat,
 	stencilBuffer: false
 };
 
@@ -229,13 +246,13 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 
 			// Check mask passes
-			if(THREE.MaskPass !== undefined)
+			if(MaskPass !== undefined)
 			{
-				if(pass instanceof THREE.MaskPass)
+				if(pass instanceof MaskPass)
 				{
 					maskActive = true;
 				}
-				else if(pass instanceof THREE.ClearMaskPass)
+				else if(pass instanceof ClearMaskPass)
 				{
 					maskActive = false;
 				}
@@ -281,9 +298,9 @@ EffectComposer.prototype.reset = function()
 {
 	this.dispose();
 
-	this.writeBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
+	this.writeBuffer = new WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
-	this.readBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
+	this.readBuffer = new WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 };
 
 /**
@@ -449,3 +466,4 @@ EffectComposer.fromJSON = function(json)
 	
 	return composer;
 };
+export {EffectComposer};

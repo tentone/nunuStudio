@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Stores and manages icons of the object types available in the platform.
  *
@@ -15,7 +13,7 @@ var ObjectIcons = {};
  * @attribute path
  * @type {string}
  */
-ObjectIcons.path = "source/files/icons/";
+ObjectIcons.path = "files/icons/";
 
 ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";
@@ -93,3 +91,5 @@ ObjectIcons.get = function(type)
 
 	return ObjectIcons.default;
 };
+
+export {ObjectIcons};

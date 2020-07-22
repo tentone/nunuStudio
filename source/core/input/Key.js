@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Key is used by Keyboard, Mouse, etc, to represent a key state.
  *
@@ -112,3 +110,4 @@ Key.prototype.reset = function()
 	this.pressed = false;
 	this.justReleased = false;
 };
+export {Key};

@@ -1,4 +1,4 @@
-"use strict";
+import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry, DefaultLoadingManager} from "three";
 
 /**
  * Legacy geometry loader is used to load the old geometry file format.
@@ -20,7 +20,7 @@ LegacyGeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	var self = this;
 	var path = (this.path === undefined) ? LoaderUtils.extractUrlBase(url) : this.path;
 
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.setPath(this.path);
 	loader.setWithCredentials(this.withCredentials);
 	loader.load(url, function (text)
@@ -120,7 +120,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		while(offset < zLength)
 		{
-			vertex = new THREE.Vector3();
+			vertex = new Vector3();
 			vertex.x = vertices[offset++] * scale;
 			vertex.y = vertices[offset++] * scale;
 			vertex.z = vertices[offset++] * scale;
@@ -145,12 +145,12 @@ LegacyGeometryLoader.prototype.parse = (function()
 			if(isQuad)
 			{
 
-				faceA = new THREE.Face3();
+				faceA = new Face3();
 				faceA.a = faces[offset];
 				faceA.b = faces[offset + 1];
 				faceA.c = faces[offset + 3];
 
-				faceB = new THREE.Face3();
+				faceB = new Face3();
 				faceB.a = faces[offset + 1];
 				faceB.b = faces[offset + 2];
 				faceB.c = faces[offset + 3];
@@ -183,7 +183,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 							u = uvLayer[uvIndex * 2];
 							v = uvLayer[uvIndex * 2 + 1];
 
-							uv = new THREE.Vector2(u, v);
+							uv = new Vector2(u, v);
 
 							if(j !== 2)
 							{
@@ -216,7 +216,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					{
 						normalIndex = faces[offset++] * 3;
 
-						normal = new THREE.Vector3(
+						normal = new Vector3(
 							normals[normalIndex++],
 							normals[normalIndex++],
 							normals[normalIndex]
@@ -254,7 +254,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 			}
 			else
 			{
-				face = new THREE.Face3();
+				face = new Face3();
 				face.a = faces[offset++];
 				face.b = faces[offset++];
 				face.c = faces[offset++];
@@ -282,7 +282,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 							u = uvLayer[uvIndex * 2];
 							v = uvLayer[uvIndex * 2 + 1];
 
-							uv = new THREE.Vector2(u, v);
+							uv = new Vector2(u, v);
 
 							geometry.faceVertexUvs[i][fi].push(uv);
 						}
@@ -306,7 +306,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					{
 						normalIndex = faces[offset++] * 3;
 
-						normal = new THREE.Vector3(
+						normal = new Vector3(
 							normals[normalIndex++],
 							normals[normalIndex++],
 							normals[normalIndex]
@@ -370,7 +370,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		if(geometry.bones && geometry.bones.length > 0 && (geometry.skinWeights.length !== geometry.skinIndices.length || geometry.skinIndices.length !== geometry.vertices.length))
 		{
-			console.warn("When skinning, number of vertices (" + geometry.vertices.length + "), skinIndices (" + geometry.skinIndices.length + "), and skinWeights (" + geometry.skinWeights.length + ") should match.");
+			console.warn("nunuStudio: When skinning, number of vertices (" + geometry.vertices.length + "), skinIndices (" + geometry.skinIndices.length + "), and skinWeights (" + geometry.skinWeights.length + ") should match.");
 		}
 	}
 
@@ -391,7 +391,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 				for(var v = 0, vl = srcVertices.length; v < vl; v += 3)
 				{
-					var vertex = new THREE.Vector3();
+					var vertex = new Vector3();
 					vertex.x = srcVertices[v] * scale;
 					vertex.y = srcVertices[v + 1] * scale;
 					vertex.z = srcVertices[v + 2] * scale;
@@ -438,7 +438,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		for(var i = 0; i < animations.length; i++)
 		{
-			var clip = THREE.AnimationClip.parseAnimation(animations[i], geometry.bones);
+			var clip = AnimationClip.parseAnimation(animations[i], geometry.bones);
 			if(clip)
 			{
 				outputAnimations.push(clip);
@@ -448,7 +448,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 		// parse implicit morph animations
 		if(geometry.morphTargets)
 		{
-			var morphAnimationClips = THREE.AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
+			var morphAnimationClips = AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
 			outputAnimations = outputAnimations.concat(morphAnimationClips);
 		}
 
@@ -474,7 +474,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 			json.scale = 1.0;
 		}
 
-		var geometry = new THREE.Geometry();
+		var geometry = new Geometry();
 		parseModel(json, geometry);
 		parseSkin(json, geometry);
 		parseMorphing(json, geometry);
@@ -494,3 +494,5 @@ LegacyGeometryLoader.prototype.parse = (function()
 		}
 	};
 })();
+
+export {LegacyGeometryLoader};

@@ -1,4 +1,45 @@
-"use strict";
+import {TextFile} from "../resources/TextFile.js";
+import {ResourceContainer} from "../resources/ResourceContainer.js";
+import {EffectComposer} from "../postprocessing/EffectComposer.js";
+import {TextSprite} from "../objects/text/TextSprite.js";
+import {TextMesh} from "../objects/text/TextMesh.js";
+import {TextBitmap} from "../objects/text/TextBitmap.js";
+import {Sprite} from "../objects/sprite/Sprite.js";
+import {SpineAnimation} from "../objects/spine/SpineAnimation.js";
+import {Script} from "../objects/script/Script.js";
+import {Scene} from "../objects/Scene.js";
+import {Program} from "../objects/Program.js";
+import {PhysicsObject} from "../objects/physics/PhysicsObject.js";
+import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
+import {Sky} from "../objects/misc/Sky.js";
+import {LensFlare} from "../objects/misc/LensFlare.js";
+import {HTMLView} from "../objects/misc/HTMLView.js";
+import {Container} from "../objects/misc/Container.js";
+import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
+import {Mesh} from "../objects/mesh/Mesh.js";
+import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
+import {SpotLight} from "../objects/lights/SpotLight.js";
+import {RectAreaLight} from "../objects/lights/RectAreaLight.js";
+import {PointLight} from "../objects/lights/PointLight.js";
+import {LightProbe} from "../objects/lights/LightProbe.js";
+import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
+import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
+import {AmbientLight} from "../objects/lights/AmbientLight.js";
+import {OrbitControls} from "../objects/controls/OrbitControls.js";
+import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
+import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
+import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
+import {CubeCamera} from "../objects/cameras/CubeCamera.js";
+import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
+import {AudioEmitter} from "../objects/audio/AudioEmitter.js";
+import {VideoLoader} from "./VideoLoader.js";
+import {TextureLoader} from "./TextureLoader.js";
+import {MaterialLoader} from "./MaterialLoader.js";
+import {ImageLoader} from "./ImageLoader.js";
+import {GeometryLoader} from "./GeometryLoader.js";
+import {FontLoader} from "./FontLoader.js";
+import {AudioLoader} from "./AudioLoader.js";
+import {DefaultLoadingManager, FileLoader, Skeleton, Color, Fog, FogExp2, BufferAttribute, LOD, Line, LineLoop, LineSegments, Points, Bone, AnimationClip} from "three";
 
 /**
  * Objectloader can be used to load external objects from files.
@@ -15,7 +56,7 @@ function ObjectLoader(manager)
 {
 	ResourceContainer.call(this);
 
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 	this.texturePath = "";
 }
 
@@ -38,7 +79,7 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}
 
 	var self = this;
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);
@@ -324,7 +365,7 @@ ObjectLoader.prototype.parseSkeletons = function(json, object)
 	{
 		for(var i = 0; i < json.length; i++)
 		{
-			this.skeletons[json[i].uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
+			this.skeletons[json[i].uuid] = Skeleton.fromJSON(json[i], object, this);
 		}
 	}
 
@@ -350,7 +391,7 @@ ObjectLoader.prototype.bindSkeletons = function(object)
 			var skeleton = self.skeletons[child.skeletonUUID];
 			if(skeleton === undefined)
 			{
-				console.warn("ObjectLoader: Skeleton not found.", child.skeletonUUID);
+				console.warn("nunuStudio: ObjectLoader Skeleton not found.", child.skeletonUUID);
 				return
 			}
 
@@ -438,7 +479,7 @@ ObjectLoader.prototype.parseObject = function(data)
 
 				for(var i = 0; i < data.elements.length; i++)
 				{
-					object.addFlare(this.getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new THREE.Color(data.elements[i].color));
+					object.addFlare(this.getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new Color(data.elements[i].color));
 				}
 
 				break;
@@ -489,32 +530,6 @@ ObjectLoader.prototype.parseObject = function(data)
 
 				break;
 
-			case "LeapDevice":
-				object = new LeapMotion();
-				object.mode = data.mode;
-				object.useArm = data.useArm;
-				if(data.debugModel !== undefined)
-				{
-					object.debugModel = data.debugModel;
-				}
-				if(data.gesturesEnabled !== undefined)
-				{
-					object.gesturesEnabled = data.gesturesEnabled;
-				}
-				if(data.posesEnabled !== undefined)
-				{
-					object.posesEnabled = data.posesEnabled;
-				}
-				break;
-
-			case "Kinect":
-				object = new KinectDevice();
-				if(data.debugModel !== undefined)
-				{
-					object.debugModel = data.debugModel;
-				}
-				break;
-
 			case "Sky":
 				object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
 				
@@ -533,7 +548,7 @@ ObjectLoader.prototype.parseObject = function(data)
 					object.colorTop = [];
 					for(var i = 0; i < data.colorTop.length; i++)
 					{
-						object.colorTop.push(new THREE.Color(data.colorTop[i])); 
+						object.colorTop.push(new Color(data.colorTop[i])); 
 					}
 				}
 				if(data.colorBottom !== undefined)
@@ -541,7 +556,7 @@ ObjectLoader.prototype.parseObject = function(data)
 					object.colorBottom = [];
 					for(var i = 0; i < data.colorBottom.length; i++)
 					{
-						object.colorBottom.push(new THREE.Color(data.colorBottom[i])); 
+						object.colorBottom.push(new Color(data.colorBottom[i])); 
 					}
 				}
 				if(data.sunColor !== undefined)
@@ -607,7 +622,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				{
 					if(Number.isInteger(data.background))
 					{
-						object.background = new THREE.Color(data.background);
+						object.background = new Color(data.background);
 					}
 					else
 					{
@@ -624,11 +639,11 @@ ObjectLoader.prototype.parseObject = function(data)
 				{
 					if(data.fog.type === "Fog")
 					{
-						object.fog = new THREE.Fog(data.fog.color, data.fog.near, data.fog.far);
+						object.fog = new Fog(data.fog.color, data.fog.near, data.fog.far);
 					}
 					else if(data.fog.type === "FogExp2")
 					{
-						object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
+						object.fog = new FogExp2(data.fog.color, data.fog.density);
 					}
 				}
 
@@ -806,7 +821,7 @@ ObjectLoader.prototype.parseObject = function(data)
 
 			case "InstancedMesh":
 				object = new InstancedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material), data.count);
-				object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
+				object.instanceMatrix = new BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
 				break;
 
 			case "SkinnedMesh":
@@ -832,24 +847,24 @@ ObjectLoader.prototype.parseObject = function(data)
 				break;
 
 			case "LOD":
-				object = new THREE.LOD();
+				object = new LOD();
 				break;
 
 			case "Line":
-				object = new THREE.Line(this.getGeometry(data.geometry), this.getMaterial(data.material), data.mode);
+				object = new Line(this.getGeometry(data.geometry), this.getMaterial(data.material), data.mode);
 				break;
 
 			case "LineLoop":
-				object = new THREE.LineLoop(this.getGeometry(data.geometry), this.getMaterial(data.material));
+				object = new LineLoop(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "LineSegments":
-				object = new THREE.LineSegments(this.getGeometry(data.geometry), this.getMaterial(data.material));
+				object = new LineSegments(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "PointCloud":
 			case "Points":
-				object = new THREE.Points(this.getGeometry(data.geometry), this.getMaterial(data.material));
+				object = new Points(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "Sprite":
@@ -861,7 +876,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				break;
 
 			case "Bone":
-				object = new THREE.Bone();
+				object = new Bone();
 				break;
 
 			default:
@@ -897,7 +912,7 @@ ObjectLoader.prototype.parseObject = function(data)
 
 		for(var i = 0; i < data.animations.length; i++)
 		{
-			var clip = THREE.AnimationClip.parse(data.animations[i]);
+			var clip = AnimationClip.parse(data.animations[i]);
 
 			if(data.animations[i].uuid !== undefined)
 			{
@@ -994,3 +1009,4 @@ ObjectLoader.prototype.parseObject = function(data)
 
 	return object;
 };
+export {ObjectLoader};

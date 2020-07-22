@@ -1,4 +1,14 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Asset} from "./Asset.js";
+import {FontRenderer} from "../../../preview/FontRenderer.js";
+import {DragBuffer} from "../../../DragBuffer.js";
+import {Global} from "../../../../Global.js";
+import {Editor} from "../../../../Editor.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../../components/DocumentBody.js";
+
 
 function FontAsset(parent)
 {
@@ -72,7 +82,7 @@ function FontAsset(parent)
 	};
 
 	// Drag end (called after of ondrop)
-	this.element.ondragend = function(event)
+	this.element.ondragend = function()
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
@@ -91,3 +101,4 @@ FontAsset.prototype.updateMetadata = function()
 
 	this.setText(this.asset.name);
 };
+export {FontAsset};

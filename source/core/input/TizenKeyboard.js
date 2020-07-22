@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Tizen keyboard contains codes of multiple tizen specific key codes.
  *
@@ -375,3 +373,5 @@ TizenKeyboard.MEDIA_TRACK_NEXT = 10233;
  * @type {number}
  */
 TizenKeyboard.MEDIA_3D = 10199;
+
+export {TizenKeyboard};

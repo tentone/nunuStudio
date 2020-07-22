@@ -1,4 +1,5 @@
-"use strict";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Component} from "../Component.js";
 
 /**
  * Slider element is used to select a numeric value using a visual slider bar.
@@ -122,7 +123,7 @@ function Slider(parent)
 		}
 	});
 
-	this.manager.add(window, "mouseup", function(event)
+	this.manager.add(window, "mouseup", function()
 	{	
 		self.manager.destroy();
 	});
@@ -159,7 +160,7 @@ Slider.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} value.
  */
-Slider.prototype.setDisabled = function(value)
+Slider.prototype.setDisabled = function()
 {
 	// TODO
 };
@@ -273,3 +274,4 @@ Slider.prototype.destroy = function()
 		document.body.removeChild(this.text);
 	}
 };
+export {Slider};

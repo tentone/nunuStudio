@@ -1,4 +1,6 @@
-"use strict";
+import {Script} from "../../../../core/objects/script/Script.js";
+import {CodeEditor} from "./CodeEditor.js";
+import {Editor} from "../../../Editor.js";
 
 /**
  * The script editor is used to view and edit code of script objects.
@@ -145,3 +147,5 @@ ScriptEditor.prototype.updateCode = function()
 		this.script.code = this.code.getValue();
 	}
 };
+
+export {ScriptEditor};

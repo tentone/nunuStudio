@@ -1,4 +1,62 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Video} from "../../../../core/resources/Video.js";
+import {Resource} from "../../../../core/resources/Resource.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {TextSprite} from "../../../../core/objects/text/TextSprite.js";
+import {TextMesh} from "../../../../core/objects/text/TextMesh.js";
+import {TextBitmap} from "../../../../core/objects/text/TextBitmap.js";
+import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
+import {Script} from "../../../../core/objects/script/Script.js";
+import {Scene} from "../../../../core/objects/Scene.js";
+import {Program} from "../../../../core/objects/Program.js";
+import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
+import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
+import {Sky} from "../../../../core/objects/misc/Sky.js";
+import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
+import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
+import {FirstPersonControls} from "../../../../core/objects/controls/FirstPersonControls.js";
+import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
+import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
+import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
+import {TextureInspector} from "./textures/TextureInspector.js";
+import {VideoInspector} from "./resources/VideoInspector.js";
+import {ResourceInspector} from "./resources/ResourceInspector.js";
+import {ImageInspector} from "./resources/ImageInspector.js";
+import {GeometryInspector} from "./resources/GeometryInspector.js";
+import {AudioInspector} from "./resources/AudioInspector.js";
+import {TextSpriteInspector} from "./objects/text/TextSpriteInspector.js";
+import {TextMeshInspector} from "./objects/text/TextMeshInspector.js";
+import {TextBitmapInspector} from "./objects/text/TextBitmapInspector.js";
+import {SpineInspector} from "./objects/spine/SpineInspector.js";
+import {ScriptInspector} from "./objects/ScriptInspector.js";
+import {SceneInspector} from "./objects/SceneInspector.js";
+import {ProgramInspector} from "./objects/ProgramInspector.js";
+import {PhysicsInspector} from "./objects/physics/PhysicsInspector.js";
+import {ObjectInspector} from "./objects/ObjectInspector.js";
+import {SkyInspector} from "./objects/misc/SkyInspector.js";
+import {ParticleEmitterInspector} from "./objects/misc/ParticleEmitterInspector.js";
+import {CubeCameraInspector} from "./objects/misc/CubeCameraInspector.js";
+import {MeshInspector} from "./objects/mesh/MeshInspector.js";
+import {InstancedMeshInspector} from "./objects/mesh/InstancedMeshInspector.js";
+import {LockedInspector} from "./objects/LockedInspector.js";
+import {SpotLightInspector} from "./objects/lights/SpotLightInspector.js";
+import {RectAreaLightInspector} from "./objects/lights/RectAreaLightInspector.js";
+import {PointLightInspector} from "./objects/lights/PointLightInspector.js";
+import {LightProbeInspector} from "./objects/lights/LightProbeInspector.js";
+import {HemisphereLightInspector} from "./objects/lights/HemisphereLightInspector.js";
+import {DirectionalLightInspector} from "./objects/lights/DirectionalLightInspector.js";
+import {AmbientLightInspector} from "./objects/lights/AmbientLightInspector.js";
+import {OrbitControlsInspector} from "./objects/controls/OrbitControlsInspector.js";
+import {FirstPersonControlsInspector} from "./objects/controls/FirstPersonControlsInspector.js";
+import {PerspectiveCameraInspector} from "./objects/cameras/PerspectiveCameraInspector.js";
+import {OrthographicCameraInspector} from "./objects/cameras/OrthographicCameraInspector.js";
+import {AudioEmitterInspector} from "./objects/audio/AudioEmitterInspector.js";
+import {MaterialInspector} from "./materials/MaterialInspector.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, Geometry, BufferGeometry, Material, Texture} from "three";
 
 /**
  * Inspector container is used to display object inspector panels.
@@ -89,7 +147,7 @@ InspectorContainer.prototype.updateSelection = function()
 
 	this.destroyInspector();
 
-	if(object instanceof THREE.Object3D)
+	if(object instanceof Object3D)
 	{
 		if(object.locked)
 		{
@@ -107,7 +165,7 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new InstancedMeshInspector(this, object);
 		}
-		else if(object instanceof THREE.SkinnedMesh)
+		else if(object instanceof SkinnedMesh)
 		{
 			this.panel = new MeshInspector(this, object);
 		}
@@ -123,33 +181,33 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new TextMeshInspector(this, object);
 		}
-		else if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
+		else if(object instanceof Mesh || object instanceof Points || object instanceof Line)
 		{
 			this.panel = new MeshInspector(this, object);
 		}
-		else if(object instanceof THREE.Light)
+		else if(object instanceof Light)
 		{
-			if(object instanceof THREE.PointLight)
+			if(object instanceof PointLight)
 			{
 				this.panel = new PointLightInspector(this, object);
 			}
-			else if(object instanceof THREE.RectAreaLight)
+			else if(object instanceof RectAreaLight)
 			{
 				this.panel = new RectAreaLightInspector(this, object);
 			}
-			else if(object instanceof THREE.SpotLight)
+			else if(object instanceof SpotLight)
 			{
 				this.panel = new SpotLightInspector(this, object);
 			}
-			else if(object instanceof THREE.DirectionalLight)
+			else if(object instanceof DirectionalLight)
 			{
 				this.panel = new DirectionalLightInspector(this, object);
 			}
-			else if(object instanceof THREE.HemisphereLight)
+			else if(object instanceof HemisphereLight)
 			{
 				this.panel = new HemisphereLightInspector(this, object);
 			}
-			else if(object instanceof THREE.LightProbe)
+			else if(object instanceof LightProbe)
 			{
 				this.panel = new LightProbeInspector(this, object);
 			}
@@ -161,14 +219,6 @@ InspectorContainer.prototype.updateSelection = function()
 		else if(object instanceof Sky)
 		{
 			this.panel = new SkyInspector(this, object);
-		}
-		else if(object instanceof LeapMotion)
-		{
-			this.panel = new LeapInspector(this, object);
-		}
-		else if(object instanceof KinectDevice)
-		{
-			this.panel = new KinectInspector(this, object);
 		}
 		else if(object instanceof PerspectiveCamera)
 		{
@@ -182,7 +232,7 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new CubeCameraInspector(this, object);
 		}
-		else if(object instanceof THREE.Audio)
+		else if(object instanceof Audio)
 		{
 			this.panel = new AudioEmitterInspector(this, object);
 		}
@@ -215,7 +265,7 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ObjectInspector(this, object);
 		}
 	}
-	else if(object instanceof THREE.Geometry || object instanceof THREE.BufferGeometry)
+	else if(object instanceof Geometry || object instanceof BufferGeometry)
 	{
 		this.panel = new GeometryInspector(this, object);
 	}
@@ -238,11 +288,11 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ResourceInspector(this, object);
 		}
 	}
-	else if(object instanceof THREE.Material)
+	else if(object instanceof Material)
 	{
 		this.panel = new MaterialInspector(this, object);
 	}
-	else if(object instanceof THREE.Texture)
+	else if(object instanceof Texture)
 	{
 		this.panel = new TextureInspector(this, object);
 	}
@@ -279,3 +329,5 @@ InspectorContainer.prototype.updateSize = function()
 		this.panel.updateInterface();
 	}
 };
+
+export {InspectorContainer};

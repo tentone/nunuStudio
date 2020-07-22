@@ -1,4 +1,5 @@
-"use strict";
+import {Component} from "../Component.js";
+import {ButtonText} from "../buttons/ButtonText.js";
 
 /**
  * Button used in dropdown menus, context menus, etc.
@@ -50,3 +51,5 @@ ButtonMenu.prototype.setIcon = function(icon)
 	
 	this.icon.src = icon;
 };
+
+export {ButtonMenu};

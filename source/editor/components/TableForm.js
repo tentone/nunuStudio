@@ -1,4 +1,7 @@
-"use strict";
+import {Text} from "./Text.js";
+import {Division} from "./Division.js";
+import {Component} from "./Component.js";
+import {Vector2} from "three";
 
 /**
  * Table form element automatically organizes element into a grid like form.
@@ -33,9 +36,9 @@ function TableForm(parent)
 	 * Spacing between elements and rows.
 	 *
 	 * @property spacing
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.spacing = new THREE.Vector2(5, 5);
+	this.spacing = new Vector2(5, 5);
 
 	/**
 	 * Default text width.
@@ -231,3 +234,5 @@ TableForm.prototype.updateSize = function()
 
 	Component.prototype.updateSize.call(this);
 };
+
+export {TableForm};

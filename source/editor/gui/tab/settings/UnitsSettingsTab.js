@@ -1,4 +1,10 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Settings} from "../../../Settings.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
 
 function UnitsSettingsTab(parent, closeable, container, index)
 {
@@ -56,3 +62,5 @@ UnitsSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+
+export {UnitsSettingsTab};

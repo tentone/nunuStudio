@@ -1,4 +1,7 @@
-"use strict";
+import {BufferUtils} from "./utils/binary/BufferUtils.js";
+import {Base64Utils} from "./utils/binary/Base64Utils.js";
+import {ArraybufferUtils} from "./utils/binary/ArraybufferUtils.js";
+import {Nunu} from "./Nunu.js";
 
 /**
  * FileSystem is used to read and write files using nunuStudio.
@@ -15,7 +18,7 @@ function FileSystem(){}
 
 try
 {
-	FileSystem.fs = require("fs");
+	FileSystem.fs = window.require("fs");
 }
 catch(e){}
 
@@ -511,7 +514,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 		chooser.multiple = true;
 	}
 
-	chooser.onchange = function(event)
+	chooser.onchange = function()
 	{	
 		if(onLoad !== undefined)
 		{
@@ -640,7 +643,7 @@ FileSystem.deleteFolder = function(path)
 	{
 		if(FileSystem.fs.existsSync(path))
 		{
-			FileSystem.fs.readdirSync(path).forEach(function(file, index)
+			FileSystem.fs.readdirSync(path).forEach(function(file)
 			{
 				var curPath = path + "/" + file;
 
@@ -827,3 +830,4 @@ FileSystem.getFileExtension = function(file)
 	
 	return "";
 };
+export {FileSystem};

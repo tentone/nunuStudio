@@ -1,4 +1,4 @@
-"use strict";
+import {Mouse} from "../input/Mouse.js";
 
 /**
  * EventManager is used to manager DOM events creationg and destruction in a single function call.
@@ -154,3 +154,4 @@ EventManager.prototype.addScrollEvent = function(target, callback)
 		this.add(target, "wheel", callback);
 	}
 };
+export {EventManager};

@@ -1,6 +1,6 @@
-"use strict";
+import {ShaderMaterial, OrthographicCamera, Scene, PlaneBufferGeometry, BufferAttribute, Mesh} from "three";
 
-/** 
+/**
  * The cube map flat renderer generates preview for cube map textures.
  *
  * Is draws the faces of the cube map into a flat surface.
@@ -32,7 +32,7 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 		[[1, 1, -1], [-1, 1, -1], [1, -1, -1], [-1, -1, -1]] // face 5
 	];
 
-	var material = new THREE.ShaderMaterial(
+	var material = new ShaderMaterial(
 	{
 		vertexShader: "attribute vec3 envLookup;\n\
 		varying vec3 vEnvLookup;\n\
@@ -53,20 +53,20 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 		}
 	});
 	
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene  = new THREE.Scene();
+	this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
+	this.scene  = new Scene();
 
 	this.faces = [];
 	for(var i = 0; i < 6; i++)
 	{
-		var geometry = new THREE.PlaneBufferGeometry(faceSize, faceSize);
+		var geometry = new PlaneBufferGeometry(faceSize, faceSize);
 		var envLookupArray = new Float32Array(12);
-		geometry.setAttribute("envLookup", new THREE.BufferAttribute(envLookupArray, 3));
+		geometry.setAttribute("envLookup", new BufferAttribute(envLookupArray, 3));
 		for(var j = 0; j < 4; j++)
 		{
 			setEnvLookupVector(j, geometryEnvLookupVectors[i][j], envLookupArray);
 		}
-		this.faces[i] = new THREE.Mesh(geometry, material);
+		this.faces[i] = new Mesh(geometry, material);
 		this.scene.add(this.faces[i]);
 	}
 
@@ -114,3 +114,4 @@ CubemapFlatRenderer.prototype.render = function(renderer)
 {
 	renderer.render(this.scene, this.camera);
 };
+export {CubemapFlatRenderer};

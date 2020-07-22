@@ -1,4 +1,20 @@
-"use strict";
+import {Locale} from "../../../../locale/LocaleManager.js";
+import {RendererConfiguration} from "../../../../../core/renderer/RendererConfiguration.js";
+import {Program} from "../../../../../core/objects/Program.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {ObjectInspector} from "./ObjectInspector.js";
+import {Inspector} from "../Inspector.js";
+import {Interface} from "../../../Interface.js";
+import {RendererConfigurationFormSnippet} from "../../../form-snippet/RendererConfigurationFormSnippet.js";
+import {FormSnippet} from "../../../form-snippet/FormSnippet.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TextBox} from "../../../../components/input/TextBox.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
 
 function ProgramInspector(parent, object)
 {
@@ -105,3 +121,5 @@ ProgramInspector.prototype.updateInspector = function()
 
 	this.rendererConfig.attach(this.object.rendererConfig);
 };
+
+export {ProgramInspector};

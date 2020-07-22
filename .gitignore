@@ -18,3 +18,5 @@ config\.json
 temp/
 
 .idea/
+
+dist/

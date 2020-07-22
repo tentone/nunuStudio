@@ -1,4 +1,6 @@
-"use strict";
+import {Text} from "../Text.js";
+import {NumberBox} from "./NumberBox.js";
+import {Component} from "../Component.js";
 
 /**
  * The vector array box represents multiple numeric variables as a vector.
@@ -110,3 +112,5 @@ NumberRow.prototype.updateSize = function()
 		x += width + this.labelSize;
 	}
 };
+
+export {NumberRow};

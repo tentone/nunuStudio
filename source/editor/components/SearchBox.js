@@ -1,4 +1,8 @@
-"use strict";
+import {Locale} from "../locale/LocaleManager.js";
+import {Global} from "../Global.js";
+import {TextBox} from "./input/TextBox.js";
+import {ImageContainer} from "./ImageContainer.js";
+import {Component} from "./Component.js";
 
 /**
  * Search box input element.
@@ -50,3 +54,4 @@ SearchBox.prototype.updateSize = function()
 	this.search.position.set(this.size.y * 0.2, this.size.y * 0.1);
 	this.search.updateInterface();
 };
+export {SearchBox};

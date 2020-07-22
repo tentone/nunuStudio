@@ -1,4 +1,8 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Editor} from "../../../Editor.js";
+import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
+import {DocumentBody} from "../../../components/DocumentBody.js";
+import {Component} from "../../../components/Component.js";
 
 /**
  * Animation keyframe is a point the the animation track relative to a specific object.
@@ -23,7 +27,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 
 	var self = this;
 
-	this.element.ondblclick = function(event)
+	this.element.ondblclick = function()
 	{
 		var time = self.track.times[self.index];
 		self.editor.mixer.setTime(time);
@@ -100,3 +104,5 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 }
 
 AnimationKeyframe.prototype = Object.create(Component.prototype);
+
+export {AnimationKeyframe};

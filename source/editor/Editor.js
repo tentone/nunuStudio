@@ -1,4 +1,40 @@
-"use strict";
+import {Locale} from "./locale/LocaleManager.js";
+import {EventManager} from "../core/utils/EventManager.js";
+import {Video} from "../core/resources/Video.js";
+import {TextFile} from "../core/resources/TextFile.js";
+import {Resource} from "../core/resources/Resource.js";
+import {Image} from "../core/resources/Image.js";
+import {Font} from "../core/resources/Font.js";
+import {Audio} from "../core/resources/Audio.js";
+import {Scene} from "../core/objects/Scene.js";
+import {Program} from "../core/objects/Program.js";
+import {Sky} from "../core/objects/misc/Sky.js";
+import {Mesh} from "../core/objects/mesh/Mesh.js";
+import {Nunu} from "../core/Nunu.js";
+import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
+import {Keyboard} from "../core/input/Keyboard.js";
+import {FileSystem} from "../core/FileSystem.js";
+import {VirtualClipboard} from "./utils/VirtualClipboard.js";
+import {Settings} from "./Settings.js";
+import {Loaders} from "./Loaders.js";
+import {ResourceCrawler} from "./history/ResourceCrawler.js";
+import {History} from "./history/History.js";
+import {RemoveResourceAction} from "./history/action/resources/RemoveResourceAction.js";
+import {AddResourceAction} from "./history/action/resources/AddResourceAction.js";
+import {RemoveAction} from "./history/action/objects/RemoveAction.js";
+import {AddAction} from "./history/action/objects/AddAction.js";
+import {ChangeAction} from "./history/action/ChangeAction.js";
+import {ActionBundle} from "./history/action/ActionBundle.js";
+import {Action} from "./history/action/Action.js";
+import {SceneEditor} from "./gui/tab/scene-editor/SceneEditor.js";
+import {RunProject} from "./gui/tab/run/RunProject.js";
+import {CodeEditor} from "./gui/tab/code/CodeEditor.js";
+import {Interface} from "./gui/Interface.js";
+import {Global} from "./Global.js";
+import {LoadingModal} from "./components/modal/LoadingModal.js";
+import {DocumentBody} from "./components/DocumentBody.js";
+import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
+import {StaticPair} from "@as-com/pson";
 
 /**
  * nunuStudio main editor entry point. 
@@ -41,20 +77,20 @@ Editor.initialize = function()
 	document.body.style.fontSize = "var(--font-main-size)";
 	
 	// Disable context menu
-	document.body.oncontextmenu = function(event)
+	document.body.oncontextmenu = function()
 	{
 		return false;
 	};
 
 	// Watch for changes in the screen pixel ratio (drag between screens)
-	window.matchMedia("screen and (min-resolution: 2dppx)").addListener(function(e)
+	window.matchMedia("screen and (min-resolution: 2dppx)").addListener(function()
 	{
 		Editor.resize();
 	});
 
 	if(Nunu.runningOnDesktop())
 	{
-		var gui = require("nw.gui");
+		var gui = window.require("nw.gui");
 		Editor.clipboard = gui.Clipboard.get();
 		Editor.args = gui.App.argv;
 
@@ -297,7 +333,7 @@ Editor.runProject = function()
  * Select single object.
  * 
  * @method selectObject
- * @param {THREE.Object3D} object Object to select.
+ * @param {Object3D} object Object to select.
  */
 Editor.selectObject = function(object)
 {
@@ -330,7 +366,7 @@ Editor.selectObject = function(object)
  * Add object to selection.
  * 
  * @method addToSelection
- * @param {THREE.Object3D} object Object to add to selection.
+ * @param {Object3D} object Object to add to selection.
  * @param {boolean} updateClient If false does not update the management client.
  */
 Editor.addToSelection = function(object)
@@ -356,7 +392,7 @@ Editor.addToSelection = function(object)
  * Remove from selection.
  * 
  * @method unselectObject
- * @param {THREE.Object3D} object Object to remove from selection.
+ * @param {Object3D} object Object to remove from selection.
  */
 Editor.unselectObject = function(object)
 {
@@ -395,7 +431,7 @@ Editor.getPixelRatio = function()
  * Check if a object is selected.
  * 
  * @method isSelected
- * @param {THREE.Object3D} Check if object is selected.
+ * @param {Object3D} Check if object is selected.
  */
 Editor.isSelected = function(object)
 {
@@ -572,12 +608,12 @@ Editor.deleteObject = function(object)
 			actions.push(new RemoveAction(selected[i]));
 		}
 		// Material
-		else if(selected[i] instanceof THREE.Material)
+		else if(selected[i] instanceof Material)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "materials"));
 		}
 		// Texture
-		else if(selected[i] instanceof THREE.Texture)
+		else if(selected[i] instanceof Texture)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "textures"));
 		}
@@ -597,12 +633,12 @@ Editor.deleteObject = function(object)
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "videos"));
 		}
 		// Geometries
-		else if(selected[i] instanceof THREE.Geometry || selected[i] instanceof THREE.BufferGeometry)
+		else if(selected[i] instanceof Geometry || selected[i] instanceof BufferGeometry)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "geometries"));
 		}
 		// Shapes
-		else if(selected[i] instanceof THREE.Shape)
+		else if(selected[i] instanceof Shape)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "shapes"));
 		}
@@ -714,7 +750,7 @@ Editor.pasteObject = function(target)
 		var obj = new ObjectLoader().parse(data);
 		obj.traverse(function(child)
 		{
-			child.uuid = THREE.Math.generateUUID();
+			child.uuid = Math.generateUUID();
 		});
 
 		// Add object to target
@@ -788,13 +824,13 @@ Editor.createDefaultResouces = function()
 	Editor.defaultImageTerrain = new Image(Global.FILE_PATH + "terrain.png");
 	Editor.defaultImageTerrain.name = "terrain";
 
-	Editor.defaultGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
+	Editor.defaultGeometry = new BoxBufferGeometry(1, 1, 1);
 	Editor.defaultGeometry.name = "box";
 
-	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+	Editor.defaultMaterial = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.defaultMaterial.name = "standard";
 	
-	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xFFFFFF});
+	Editor.defaultSpriteMaterial = new SpriteMaterial({map: Editor.defaultTexture, color: 0xFFFFFF});
 	Editor.defaultSpriteMaterial.name = "sprite";
 
 	Editor.defaultTextureLensFlare = [];
@@ -877,7 +913,7 @@ Editor.addDefaultScene = function(material)
 {
 	if(material === undefined)
 	{
-		material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+		material = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 		material.name = "default";
 	}
 
@@ -895,7 +931,7 @@ Editor.addDefaultScene = function(material)
 	scene.add(model);
 
 	// Floor
-	var ground = new THREE.BoxBufferGeometry(20, 1, 20);
+	var ground = new BoxBufferGeometry(20, 1, 20);
 	ground.name = "ground";
 	
 	model = new Mesh(ground, material);
@@ -934,7 +970,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		{
 			fname = fname.replace(".isp", ".nsp");
 
-			var pson = new dcodeIO.PSON.StaticPair();
+			var pson = new StaticPair();
 			var data = pson.toArrayBuffer(Editor.program.toJSON());
 			FileSystem.writeFileArrayBuffer(fname, data);
 		}
@@ -1028,7 +1064,7 @@ Editor.loadProgram = function(file, binary)
 
 			if(binary === true)
 			{
-				var pson = new dcodeIO.PSON.StaticPair();
+				var pson = new StaticPair();
 				var data = pson.decode(reader.result);
 				program = loader.parse(data);
 			}
@@ -1108,12 +1144,12 @@ Editor.setOpenFile = function(file)
 			Editor.openFile = file;
 		}
 
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ") (" + Editor.openFile + ")";
+		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ") (" + Editor.openFile + ")";
 	}
 	else
 	{
 		Editor.openFile = null;
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
+		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ")";
 	}
 };
 
@@ -1159,7 +1195,7 @@ Editor.prompt = function(message, defaultValue)
 /**
  * Try to update nunuStudio editor version using build from github repo.
  *
- * The version timestamp (Nunu.TIMESTAMP) is parsed compared to the local timestamp.
+ * The version timestamp (TIMESTAMP) is parsed compared to the local timestamp.
  *
  * @static
  * @method updateNunu
@@ -1177,7 +1213,7 @@ Editor.updateNunu = function(silent)
 
 		FileSystem.readFile(url, false, function(data)
 		{
-			var token = "Nunu.TIMESTAMP";
+			var token = "TIMESTAMP";
 			var pos = data.search(token);
 			var timestamp = data.slice(pos + token.length + 2, pos + token.length + 14);
 
@@ -1229,7 +1265,7 @@ Editor.exit = function()
 	{
 		Editor.settings.store();
 		
-		var gui = require("nw.gui");
+		var gui = window.require("nw.gui");
 		var win = gui.Window.get();
 
 		gui.App.closeAllWindows();
@@ -1237,3 +1273,5 @@ Editor.exit = function()
 		gui.App.quit();
 	}
 };
+
+export {Editor};

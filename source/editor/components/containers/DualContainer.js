@@ -1,4 +1,5 @@
-"use strict";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Component} from "../Component.js";
 
 /**
  * Dual container is used to place two components.
@@ -155,3 +156,5 @@ DualContainer.prototype.updateSize = function()
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
 };
+
+export {DualContainer};

@@ -1,4 +1,6 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {Mesh, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
+import {Lensflare as TLensflare, LensflareElement} from "three/examples/jsm/objects/Lensflare";
 
 /**
  * LensFlare object can be used to simulate lens flare from lights.
@@ -18,7 +20,7 @@
  */
 function LensFlare()
 {
-	THREE.Mesh.call(this, THREE.Lensflare.Geometry, new THREE.MeshBasicMaterial({opacity: 0, transparent: true}));
+	Mesh.call(this, TLensflare.Geometry, new MeshBasicMaterial({opacity: 0, transparent: true}));
 
 	this.name = "lensflare";
 	this.type = "LensFlare";
@@ -31,27 +33,27 @@ function LensFlare()
 	
 	this.elements = [];
 
-	var positionScreen = new THREE.Vector3();
+	var positionScreen = new Vector3();
 
 	// textures
-	var tempMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
-	tempMap.minFilter = THREE.NearestFilter;
-	tempMap.magFilter = THREE.NearestFilter;
-	tempMap.wrapS = THREE.ClampToEdgeWrapping;
-	tempMap.wrapT = THREE.ClampToEdgeWrapping;
+	var tempMap = new DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, RGBFormat);
+	tempMap.minFilter = NearestFilter;
+	tempMap.magFilter = NearestFilter;
+	tempMap.wrapS = ClampToEdgeWrapping;
+	tempMap.wrapT = ClampToEdgeWrapping;
 	tempMap.needsUpdate = true;
 
-	var occlusionMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
-	occlusionMap.minFilter = THREE.NearestFilter;
-	occlusionMap.magFilter = THREE.NearestFilter;
-	occlusionMap.wrapS = THREE.ClampToEdgeWrapping;
-	occlusionMap.wrapT = THREE.ClampToEdgeWrapping;
+	var occlusionMap = new DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, RGBFormat);
+	occlusionMap.minFilter = NearestFilter;
+	occlusionMap.magFilter = NearestFilter;
+	occlusionMap.wrapS = ClampToEdgeWrapping;
+	occlusionMap.wrapT = ClampToEdgeWrapping;
 	occlusionMap.needsUpdate = true;
 
 	// material
-	var geometry = THREE.Lensflare.Geometry;
-	var shader = THREE.Lensflare.Shader;
-	var material1a = new THREE.RawShaderMaterial(
+	var geometry = TLensflare.Geometry;
+	var shader = TLensflare.Shader;
+	var material1a = new RawShaderMaterial(
 	{
 		uniforms:
 		{
@@ -78,7 +80,7 @@ function LensFlare()
 		transparent: false
 	});
 
-	var material1b = new THREE.RawShaderMaterial(
+	var material1b = new RawShaderMaterial(
 	{
 		uniforms:
 		{
@@ -112,30 +114,30 @@ function LensFlare()
 	});
 
 	// The following object is used for occlusionMap generation
-	var mesh1 = new THREE.Mesh(geometry, material1a);
-	var shader = THREE.LensflareElement.Shader;
-	var material2 = new THREE.RawShaderMaterial(
+	var mesh1 = new Mesh(geometry, material1a);
+	var shader = LensflareElement.Shader;
+	var material2 = new RawShaderMaterial(
 	{
 		uniforms:
 		{
 			map: {value: null},
 			occlusionMap: {value: occlusionMap},
-			color: {value: new THREE.Color(0xFFFFFF)},
-			scale: {value: new THREE.Vector2()},
-			screenPosition: {value: new THREE.Vector3()}
+			color: {value: new Color(0xFFFFFF)},
+			scale: {value: new Vector2()},
+			screenPosition: {value: new Vector3()}
 		},
 		vertexShader: shader.vertexShader,
 		fragmentShader: shader.fragmentShader,
-		blending: THREE.AdditiveBlending,
+		blending: AdditiveBlending,
 		transparent: true,
 		depthWrite: false
 	});
 
-	var mesh2 = new THREE.Mesh(geometry, material2);
-	var scale = new THREE.Vector2();
-	var screenPositionPixels = new THREE.Vector2();
-	var validArea = new THREE.Box2();
-	var viewport = new THREE.Vector4();
+	var mesh2 = new Mesh(geometry, material2);
+	var scale = new Vector2();
+	var screenPositionPixels = new Vector2();
+	var validArea = new Box2();
+	var viewport = new Vector4();
 
 	this.onBeforeRender = function(renderer, scene, camera)
 	{
@@ -151,40 +153,40 @@ function LensFlare()
 		validArea.min.set(viewport.x, viewport.y);
 		validArea.max.set(viewport.x + (viewport.z - 16), viewport.y + (viewport.w - 16));
 
-		// calculate position in screen space
+		// Calculate position in screen space
 		positionScreen.setFromMatrixPosition(this.matrixWorld);
 
 		positionScreen.applyMatrix4(camera.matrixWorldInverse);
 		positionScreen.applyMatrix4(camera.projectionMatrix);
 
-		// horizontal and vertical coordinate of the lower left corner of the pixels to copy
+		// Horizontal and vertical coordinate of the lower left corner of the pixels to copy
 		screenPositionPixels.x = viewport.x + (positionScreen.x * halfViewportWidth) + halfViewportWidth - 8;
 		screenPositionPixels.y = viewport.y + (positionScreen.y * halfViewportHeight) + halfViewportHeight - 8;
 
-		// screen cull
+		// Screen cull
 		if(validArea.containsPoint(screenPositionPixels))
 		{
-			// save current RGB to temp texture
+			// Save current RGB to temp texture
 			renderer.copyFramebufferToTexture(screenPositionPixels, tempMap);
 
-			// render pink quad
+			// Render pink quad
 			var uniforms = material1a.uniforms;
 			uniforms.scale.value = scale;
 			uniforms.screenPosition.value = positionScreen;
 
 			renderer.renderBufferDirect(camera, null, geometry, material1a, mesh1, null);
 
-			// copy result to occlusionMap
+			// Copy result to occlusionMap
 			renderer.copyFramebufferToTexture(screenPositionPixels, occlusionMap);
 
-			// restore graphics
+			// Restore graphics
 			var uniforms = material1b.uniforms;
 			uniforms.scale.value = scale;
 			uniforms.screenPosition.value = positionScreen;
 
 			renderer.renderBufferDirect(camera, null, geometry, material1b, mesh1, null);
 
-			// render elements
+			// Render elements
 			var vecX = - positionScreen.x * 2;
 			var vecY = - positionScreen.y * 2;
 
@@ -226,7 +228,7 @@ function LensFlare()
 	};
 }
 
-LensFlare.prototype = Object.create(THREE.Mesh.prototype);
+LensFlare.prototype = Object.create(Mesh.prototype);
 
 /**
  * Add texture to the lensFlare object.
@@ -254,7 +256,7 @@ LensFlare.prototype.addFlare = function(texture, size, distance, color)
 
 	distance = Math.min(distance, Math.max(0, distance));
 	
-	this.addElement(new THREE.LensflareElement(texture, size, distance, color));
+	this.addElement(new LensflareElement(texture, size, distance, color));
 };
 
 LensFlare.prototype.addElement = function(element)
@@ -267,7 +269,7 @@ LensFlare.prototype.toJSON = function(meta)
 	var self = this;
 	var elements = [];
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		for(var i = 0; i < self.elements.length; i++)
 		{
@@ -284,3 +286,5 @@ LensFlare.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {LensFlare};

@@ -1,4 +1,20 @@
-"use strict";
+import {WebGLRenderer} from "three";
+
+import "./three/animation/AnimationClip.js";
+import "./three/animation/KeyframeTrack.js";
+import "./three/cameras/Camera.js";
+import "./three/core/BufferAttribute.js";
+import "./three/core/InstancedBufferAttribute.js";
+import "./three/core/InterleavedBuffer.js";
+import "./three/core/InterleavedBufferAttribute.js";
+import "./three/core/Object3D.js";
+import "./three/lights/LightShadow.js";
+import "./three/loaders/BufferGeometryLoader.js";
+import "./three/materials/Material.js";
+import "./three/objects/Points.js";
+import "./three/objects/Skeleton.js";
+import "./three/scenes/Fog.js";
+import "./three/textures/Texture.js";
 
 /**
  * nunuStudio core main file.
@@ -11,7 +27,7 @@
 function Nunu(){}
 
 /**
- * nunuStudio
+ * Aplication name (might be usefull if getting the module as a unnamed export)
  * 
  * @attribute NAME
  * @type {string}
@@ -20,20 +36,18 @@ function Nunu(){}
 Nunu.NAME = "nunuStudio";
 
 /**
- * Stores the nunu runtime version.
+ * Stores the runtime version.
  * 
  * @attribute VERSION
  * @type {string}
  */
-Nunu.VERSION = "<PLACEHOLDER_VERSION>";
 
 /**
- * Stores the nunu runtime dev timestamp.
+ * Stores the timestamp of the application build.
  * 
  * @attribute TIMESTAMP
  * @type {string}
  */
-Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
 
 /**
  * Repository branch, used to track the version after publishing.
@@ -42,7 +56,6 @@ Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
  * @attribute REPOSITORY_BRANCH
  * @type {string}
  */
-Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
@@ -51,7 +64,16 @@ Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
  * @attribute REPOSITORY_COMMIT
  * @type {string}
  */
-Nunu.REPOSITORY_COMMIT = "<PLACEHOLDER_REPOSITORY_COMMIT>";
+
+/**
+ * Indicates if the application/library is being used in development mode.
+ * 
+ * Can be usefull to restrict development functionality when building to production. 
+ *
+ * @static
+ * @attribute DEVELOPMENT
+ * @type {boolean}
+ */
 
 /**
  * NWJS platform, used for desktop version.
@@ -86,9 +108,9 @@ Nunu.CORDOVA = 202;
  * If not target is specified window is used.
  *
  * @static
- * @method importFrom
+ * @method copyNamespace
  */
-Nunu.importFrom = function(namespace, target)
+Nunu.copyNamespace = function(namespace, target)
 {
 	if(target === undefined)
 	{
@@ -102,20 +124,6 @@ Nunu.importFrom = function(namespace, target)
 			target[i] = namespace[i];
 		}
 	}
-};
-
-Nunu.importFrom(THREE);
-Nunu.importFrom(CANNON);
-
-/**
- * Check if nunu if running in development mode.
- *
- * @method developmentMode
- * @return {boolean} True if running as development mode.
- */
-Nunu.developmentMode = function()
-{
-	return Nunu.TIMESTAMP === "<PLACEHOLDER_TIMESTAMP>";
 };
 
 /**
@@ -139,7 +147,7 @@ Nunu.vrAvailable = function()
  * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
  *
  * @method enterVR
- * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
+ * @param {WebGLRenderer} renderer Renderer used to draw the scene.
  * @param {Function} onSuccess Method called if the application entered VR successfully.
  */
 Nunu.enterVR = function(renderer, onSuccess)
@@ -184,7 +192,7 @@ Nunu.enterVR = function(renderer, onSuccess)
  * Enter virtual reality mode, if the application is not running on VR mode does not do anything.
  *
  * @method exitVR
- * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
+ * @param {WebGLRenderer} renderer Renderer used to draw the scene.
  */
 Nunu.exitVR = function(renderer)
 {
@@ -465,7 +473,6 @@ Nunu.runningOnDesktop = function()
 	return window.nw !== undefined;
 };
 
-
 /**
  * Open a webpage on a new window.
  *
@@ -479,7 +486,7 @@ Nunu.openWebpage = function(url)
 {
 	if(Nunu.runningOnDesktop())
 	{
-		require("nw.gui").Shell.openExternal(url);
+		window.require("nw.gui").Shell.openExternal(url);
 	}
 	else
 	{
@@ -549,3 +556,5 @@ Nunu.setFullscreen = function(fullscreen, element)
 		}
 	}
 };
+
+export {Nunu};

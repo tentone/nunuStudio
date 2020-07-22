@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Fog class is used to store fog attributes attached to a Scene
  * 

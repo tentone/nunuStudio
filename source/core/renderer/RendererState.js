@@ -1,4 +1,4 @@
-"use strict";
+import {Color, WebGlRenderer} from "three";
 
 /**
  * Renderer state can be used to store and restore a renderer state between postprocessing passes.
@@ -16,7 +16,7 @@ function RendererState()
 	
 	this.sortObjects = true;
 
-	this.clearColor = new THREE.Color();
+	this.clearColor = new Color();
 	this.clearAlpha = 1;
 }
 
@@ -24,7 +24,7 @@ function RendererState()
  * Store the renderer state.
  *
  * @method backup
- * @param {THREE.WebGlRenderer} renderer
+ * @param {WebGlRenderer} renderer
  */ 
 RendererState.prototype.backup = function(renderer)
 {
@@ -43,7 +43,7 @@ RendererState.prototype.backup = function(renderer)
  * Restore the renderer state.
  *
  * @method restore
- * @param {THREE.WebGlRenderer} renderer
+ * @param {WebGlRenderer} renderer
  */ 
 RendererState.prototype.restore = function(renderer)
 {
@@ -57,3 +57,5 @@ RendererState.prototype.restore = function(renderer)
 	renderer.setClearColor(this.clearColor);
 	renderer.setClearAlpha(this.clearAlpha);
 };
+
+export {RendererState};

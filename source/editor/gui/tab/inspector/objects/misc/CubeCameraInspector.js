@@ -1,4 +1,15 @@
-"use strict";
+import {Locale} from "../../../../../locale/LocaleManager.js";
+import {CubeCamera} from "../../../../../../core/objects/cameras/CubeCamera.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {ObjectInspector} from "../ObjectInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
 function CubeCameraInspector(parent, object)
 {
@@ -73,3 +84,5 @@ CubeCameraInspector.prototype.updateInspector = function()
 	this.near.setValue(this.object.near);
 	this.far.setValue(this.object.far);
 };
+
+export {CubeCameraInspector};

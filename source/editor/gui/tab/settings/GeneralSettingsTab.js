@@ -1,4 +1,15 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Nunu} from "../../../../core/Nunu.js";
+import {ThemeManager} from "../../../theme/ThemeManager.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {ButtonText} from "../../../components/buttons/ButtonText.js";
+
 
 function GeneralSettingsTab(parent, closeable, container, index)
 {
@@ -137,3 +148,4 @@ GeneralSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {GeneralSettingsTab};

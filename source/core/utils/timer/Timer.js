@@ -1,4 +1,3 @@
-"use strict";
 
 /**
  * Time is user to call functions in loop at a defined rate.
@@ -84,3 +83,5 @@ Timer.prototype.stop = function()
 	this.running = false;
 	clearTimeout(self.id);
 };
+
+export {Timer};

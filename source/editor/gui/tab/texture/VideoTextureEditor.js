@@ -1,4 +1,11 @@
-"use strict";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {TextureEditor} from "./TextureEditor.js";
+import {Editor} from "../../../Editor.js";
+import {Slider} from "../../../components/input/Slider.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+
 
 function VideoTextureEditor(parent, closeable, container, index)
 {
@@ -66,3 +73,4 @@ VideoTextureEditor.prototype.attach = function(texture)
 	this.loop.setValue(this.texture.loop);
 	this.playbackRate.setValue(this.texture.playbackRate);
 };
+export {VideoTextureEditor};
