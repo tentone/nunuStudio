@@ -1,0 +1,10 @@
+source/*
+page/*
+script/*
+docs/*
+index.html
+CNAME
+CHANGELOG.md
+CODESTYLE.md
+package-lock.json
+webpack.*
