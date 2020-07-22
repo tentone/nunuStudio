@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/logo.png">
 
 [![GitHub version](https://badge.fury.io/gh/tentone%2FnunuStudio.svg)](https://badge.fury.io/gh/tentone%2FnunuStudio)[![npm version](https://badge.fury.io/js/nunu-studio.svg)](https://badge.fury.io/js/nunu-studio)[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
 
@@ -10,7 +10,7 @@
  - Fully featured [web version](https://nunustudio.org/editor) of the editor is available on the project page.
  - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
 
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/web.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/web.png">
 
 ### Getting Started
  - [API Documentation](https://nunustudio.org/docs) with full details about the inner working of every module are available. These can also be generated from the project source code by running `npm run docs`.
@@ -19,9 +19,9 @@
 
 
 ### Screenshots
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/3.png">
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/4.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png">
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/3.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/4.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/1.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/6.png">
 
 
 
