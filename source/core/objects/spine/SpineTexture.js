@@ -12,15 +12,12 @@ import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
  */
 function SpineTexture(texture)
 {
-	// TODO <REMOVE>
-	console.log(spine);
-
-	spine.Texture.call(this, texture.image);
+	spine.threejs.ThreeJsTexture.call(this, texture.image);
 	
 	this.texture = texture;
 	this.texture.flipY = false;	
 };
 
-SpineTexture.prototype = Object.create(spine.Texture.prototype);
+SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
 
 export {SpineTexture};

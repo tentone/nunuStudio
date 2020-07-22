@@ -23,14 +23,6 @@ function Sprite(material)
 	this.name = "sprite";
 }
 
-Object.defineProperty(THREE, "Sprite", {
-	get: function()
-	{
-		return Sprite;
-	}
-});
-
-
 Sprite.prototype.dispose = function()
 {
 	if(this.material !== null && this.material.dispose !== undefined)
