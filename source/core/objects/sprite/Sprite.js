@@ -23,6 +23,8 @@ function Sprite(material)
 	this.name = "sprite";
 }
 
+Sprite.prototype = Object.create(TSprite.prototype);
+
 Sprite.prototype.dispose = function()
 {
 	if(this.material !== null && this.material.dispose !== undefined)

@@ -37,7 +37,7 @@ import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxB
 import {StaticPair} from "@as-com/pson";
 
 /**
- * nunuStudio main editor entry point. 
+ * Main editor entry point. 
  *
  * @class Editor 
  */
