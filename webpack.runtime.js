@@ -40,18 +40,15 @@ module.exports = [
 		output: {
 			filename: "nunu.min.js",
 			path: output,
-			library: 'Nunu',
-			libraryTarget: 'umd'	
+			library: "Nunu",
+			libraryTarget: "umd"	
 		}
 	}, config),
 	Object.assign({
 		output: {
 			filename: "nunu.module.min.js",
 			path: output,
-			libraryTarget: 'umd'	
+			libraryTarget: "umd"	
 		}
 	}, config),
 ];
-
-
-libraryTarget: 'umd'

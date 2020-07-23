@@ -1,15 +1,14 @@
-const WebpackCleanupPlugin  = require("webpack-cleanup-plugin");
-
 const Merge = require("webpack-merge");
 const common = require("./webpack.config.js");
 
-module.exports = Merge(common, {
-	devtool: "none",
-	mode: "production",
-	optimization: {
-		minimize: true
-	},
-	plugins: [
-		new WebpackCleanupPlugin()
-	]
-});
+module.exports = [
+	Merge(common[0], {
+		devtool: "none",
+		mode: "production",
+		optimization: {
+			minimize: true
+		},
+		plugins: []
+	}),
+	common[1]
+];
