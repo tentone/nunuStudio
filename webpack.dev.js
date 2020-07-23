@@ -11,7 +11,7 @@ module.exports = [
 			minimize: false
 		},
 		devServer: {
-			contentBase: common.output.path,
+			contentBase: common[0].output.path,
 			compress: false,
 			historyApiFallback: true,
 			hot: true,
