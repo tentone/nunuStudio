@@ -5,7 +5,7 @@ import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
 import {TargetConfig} from "../platform/TargetConfig.js";
 import {Script} from "./script/Script.js";
 import {App} from "../App.js";
-import {Nunu} from "../Nunu.js";
+import {VRHandler} from "../VRHandler.js";
 import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
 import {Keyboard} from "../input/Keyboard.js";
@@ -31,7 +31,7 @@ function Program()
 	this.matrixAutoUpdate = false;
 
 	/**
-	 * NunuRuntime instance used to communication between nunu app and the host webpage.
+	 * Runtime instance used to communication between nunu app and the host webpage.
 	 *
 	 * Inside the editor communication with the app is simulated on the debug console.
 	 *
@@ -102,7 +102,7 @@ function Program()
 	 * @default false
 	 * @type {boolean}
 	 */
-	this.vr = false;
+	this.vr = true;
 
 	/**
 	 * Virtual reality movement scale.
@@ -411,7 +411,7 @@ Program.prototype.updateRenderer = function()
  */
 Program.prototype.vrAvailable = function()
 {
-	return this.vr && Nunu.vrAvailable();
+	return this.vr && VRHandler.vrAvailable();
 };
 
 /**
@@ -424,7 +424,7 @@ Program.prototype.enterVR = function()
 	if(this.vr)
 	{
 		var self = this;
-		Nunu.enterVR(this.renderer, function()
+		VRHandler.enterVR(this.renderer, function()
 		{
 			self.vrRunning = true;
 		});
@@ -440,7 +440,7 @@ Program.prototype.exitVR = function()
 {
 	if(this.vr)
 	{
-		Nunu.exitVR(this.renderer);
+		VRHandler.exitVR(this.renderer);
 		this.vrRunning = false;
 	}
 };

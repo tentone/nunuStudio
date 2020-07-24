@@ -82,11 +82,9 @@ Button.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} disabled
  */
-Button.prototype.setDisabled = function(disabled)
+Button.prototype.updateDisabled = function()
 {
-	this.disabled = disabled;
-
-	if(this.disabled === true)
+	if(this.disabled)
 	{
 		this.setStyles(this.styleDisabled);
 	}
@@ -120,6 +118,8 @@ Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabl
 	{
 		this.styleDisabled = styleDisabled;
 	}
+
+	this.updateDisabled(this.disabled);
 };
 
 export {Button};
