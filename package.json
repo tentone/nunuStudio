@@ -11,18 +11,17 @@
 	},
 	"scripts": {
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
-		"start-nwjs": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
+		"start-nwjs": "run --with-ffmpeg --mirror https://dl.nwjs.io/ https://www.nunustudio.org/build/editor",
 		"serve": "http-server . -p 8081 --cors -o",
-		"serve-editor": "http-server ./build/editor -p 8081 --cors -o",
-		"serve-docs": "http-server ./docs -p 8081 --cors -o",
 		"docs": "yuidoc -o ./docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
 		"pub": "npm publish --access public .",
 		"lint": "eslint --ext .js .",
 		"lint-fix": "eslint --ext .js --fix .",
-		"build": "npm version --no-commit-hooks patch && webpack --config webpack.runtime.js && webpack --config webpack.prod.js",
+		"build": "npm version --no-commit-hooks patch && npm run build-runtime && npm run build-editor",
 		"build-runtime": "webpack --config webpack.runtime.js",
 		"build-editor": "webpack --config webpack.prod.js",
-		"build-editor-nwjs": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./build/editor"
+		"build-nwjs-win": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64 ./build/editor/",
+		"build-nwjs": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./build/editor/"
 	},
 	"repository": {
 		"type": "git",
@@ -85,7 +84,7 @@
 	"js-flags": "--stack-size 65500",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
-		"icon": "source/files/icon.png",
+		"icon": "files/icon.ico",
 		"frame": true,
 		"width": 1280,
 		"height": 720,
@@ -100,14 +99,13 @@
 	"build": {
 		"nwVersion": "0.45.4",
 		"appId": "io.tentone.nunustudio",
-		"output": "../../build/desktop/",
+		"output": "./build/desktop/",
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
 		"nwFlavor": "sdk",
 		"targets": [
-			"zip",
-			"7z"
+			"zip"
 		],
 		"excludes": [
 			"node_modules",
@@ -123,7 +121,7 @@
 			"productName": "nunuStudio",
 			"companyName": "tentone",
 			"copyright": "MIT",
-			"icon": "source/files/icon.ico",
+			"icon": "files/icon.ico",
 			"versionStrings": {}
 		},
 		"mac": {
