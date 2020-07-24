@@ -51,7 +51,7 @@ export {Model} from "./resources/Model.js";
 export {TextFile} from "./resources/TextFile.js";
 export {ResourceContainer} from "./resources/ResourceContainer.js";
 export {ResourceManager} from "./resources/ResourceManager.js";
-export {VideoStream} from "./resources/stream/VideoStream.js";
+export {VideoStream} from "./resources/VideoStream.js";
 
 export {Texture} from "./texture/Texture.js";
 export {CanvasTexture} from "./texture/CanvasTexture.js";

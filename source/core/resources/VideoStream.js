@@ -1,5 +1,5 @@
-import {Video} from "../Video.js";
-import {FileSystem} from "../../FileSystem.js";
+import {Video} from "./Video.js";
+import {FileSystem} from "../FileSystem.js";
 
 /**
  * Video stream resource, used to load streamable video files directly from URL.

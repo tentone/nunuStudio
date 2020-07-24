@@ -109,7 +109,7 @@ VideoTexture.isVideoTexture = true;
  *
  * Can be a Video, VideoStream or a URL String.
  * 
- * @param {Video} video
+ * @param {Video | VideoStream | string} video
  * @method setVideo
  */
 VideoTexture.prototype.setVideo = function(video)
@@ -121,15 +121,7 @@ VideoTexture.prototype.setVideo = function(video)
 		return;
 	}
 
-	if(typeof video === "string")
-	{
-		this.video = new Video(video);
-	}
-	else if(video instanceof Video)
-	{
-		this.video = video;
-	}
-
+	this.video = (typeof video === "string") ? new Video(video) : video;
 	this.image.src = this.video.data;
 };
 
