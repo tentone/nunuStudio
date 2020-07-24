@@ -1,6 +1,4 @@
 import {Component} from "../Component.js";
-import {Canvas} from "../Canvas.js";
-import {Button} from "../buttons/Button.js";
 import {Color} from "three";
 
 /**
@@ -71,11 +69,12 @@ ColorGradientChooser.prototype.updateButtons = function()
 {
 	var self = this;
 
+	// Color change method called in the context of the DOM input
 	function buttonOnChange()
 	{
-		var rgb = this.color.rgb;
+		var color = new Color(this.value);
 
-		self.values[this.index].setRGB(rgb[0] / 255, rgb[1] / 255, rgb[2] / 255);
+		self.values[this.index].setRGB(color.r, color.g, color.b);
 		self.updateValues();
 
 		if(self.onChange !== null)
@@ -92,7 +91,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 	while(this.buttons.length < this.values.length)
 	{
 		var button = document.createElement("input");
-		button.type = "text";
+		button.type = "color";
 		button.style.display = "block";
 		button.style.position = "absolute";
 		button.style.top = "0px";
@@ -103,19 +102,9 @@ ColorGradientChooser.prototype.updateButtons = function()
 		button.style.borderStyle = "none";
 		button.style.boxSizing = "border-box";
 		button.style.borderRadius = "2px";
-		this.element.appendChild(button);
-
-		var color = new jscolor(button);
-		color.backgroundColor = "var(--box-color)";
-		color.insetColor = "var(--box-color)";
-		color.shadow = false;
-		color.borderWidth = 0;
-		color.borderRadius = 0;
-		color.zIndex = 2000;
-
 		button.onchange = buttonOnChange;
-		button.color = color;
 		button.index = -1;
+		this.element.appendChild(button);
 
 		this.buttons.push(button);
 	}

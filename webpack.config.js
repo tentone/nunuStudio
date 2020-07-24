@@ -71,9 +71,6 @@ module.exports = [
 						"source/editor/style.css",
 						"source/editor/theme/dark.css",
 					],
-					"jscolor.js": [
-						"node_modules/@eastdesire/jscolor/jscolor.js",
-					],
 					"draco_encoder.js": [
 						"source/lib/draco_encoder.js"
 					],

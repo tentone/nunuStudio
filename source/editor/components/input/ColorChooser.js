@@ -5,30 +5,17 @@ function ColorChooser(parent)
 {
 	Component.call(this, parent, "input");
 
-	this.element.type = "text";
+	this.element.type = "color";
 	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
+	this.element.style.border = "0px solid";
 	this.element.style.textIndent = "4px";
 	this.element.style.borderRadius = "4px";
 	this.element.style.boxShadow = "none";
 	this.element.style.MozAppearance = "textfield";
 	this.element.style.webkitAppearance = "caret";
 	this.element.style.appearance = "textfield";
-
-	/**
-	 * Color chooser object automatically creates the color selector box.
-	 *
-	 * @attribute color
-	 * @type {jscolor}
-	 */
-	this.color = new jscolor(this.element);
-	this.color.backgroundColor = "var(--box-color)";
-	this.color.insetColor = "var(--box-color)";
-	this.color.shadow = false;
-	this.color.borderWidth = 0;
-	this.color.borderRadius = 0;
-	this.color.zIndex = 2000;
 
 	/**
 	 * On change callback function automatically called everytime that the color is changed.
@@ -64,11 +51,12 @@ ColorChooser.prototype.setValue = function(r, g, b)
 {
 	if(r instanceof Color)
 	{
-		this.color.fromRGBA(r.r * 255, r.g * 255, r.b * 255, 255)
+		this.element.value = "#" + r.getHexString();
 	}
 	else
 	{
-		this.color.fromRGBA(r * 255, g * 255, b * 255, 255);
+		var c = new Color(r, g, b);
+		this.element.value = "#" + c.getHexString();
 	}
 };
 
@@ -81,7 +69,9 @@ ColorChooser.prototype.setValue = function(r, g, b)
 ColorChooser.prototype.setValueHex = function(hex)
 {
 	hex = Math.floor(hex);
-	this.color.fromRGBA(hex >> 16 & 255, hex >> 8 & 255, hex & 255, 255);
+
+	var c = new Color(hex);
+	this.element.value = "#" + c.getHexString();
 };
 
 /**
@@ -92,7 +82,7 @@ ColorChooser.prototype.setValueHex = function(hex)
  */
 ColorChooser.prototype.setValueString = function(color)
 {
-	this.color.fromString(color);
+	this.element.value = color;
 };
 
 /**
@@ -103,18 +93,20 @@ ColorChooser.prototype.setValueString = function(color)
  */
 ColorChooser.prototype.getValueString = function(color)
 {
-	return this.color.toHEXString();
+	return this.element.value;
 };
 
 /**
  * Get color value object.
  *
  * @method getValue
- * @return {Object} Color object.
+ * @return {Color} Color object.
  */
 ColorChooser.prototype.getValue = function()
 {
-	return {r: this.color.rgb[0] / 255, g: this.color.rgb[1] / 255, b: this.color.rgb[2] / 255};
+	var c = new Color();
+	c.setStyle(this.element.value);
+	return c;
 };
 
 /**
@@ -125,7 +117,9 @@ ColorChooser.prototype.getValue = function()
  */
 ColorChooser.prototype.getValueHex = function()
 {
-	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
+	var c = new Color();
+	c.setStyle(this.element.value);
+	return c.getHex();
 };
 
 export {ColorChooser};
