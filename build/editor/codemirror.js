@@ -8117,7 +8117,7 @@
           { from = Pos(from.line, from.ch - deleted); }
         else if (cm.state.overwrite && !paste) // Handle overwrite
           { to = Pos(to.line, Math.min(getLine(doc, to.line).text.length, to.ch + lst(textLines).length)); }
-        else if (paste && lastCopied && lastCopied.lineWise && lastCopied.text.join("\n") == inserted)
+        else if (paste && lastCopied && lastCopied.lineWise && lastCopied.text.join("\n") == textLines.join("\n"))
           { from = to = Pos(from.line, 0); }
       }
       var changeEvent = {from: from, to: to, text: multiPaste ? multiPaste[i$1 % multiPaste.length] : textLines,
@@ -9771,7 +9771,7 @@
 
   addLegacyProps(CodeMirror);
 
-  CodeMirror.version = "5.55.0";
+  CodeMirror.version = "5.56.0";
 
   return CodeMirror;
 
@@ -20551,12 +20551,14 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     },
 
     scrollToActive: function() {
-      var node = this.hints.childNodes[this.selectedHint]
+      var margin = this.completion.options.scrollMargin || 0;
+      var node1 = this.hints.childNodes[Math.max(0, this.selectedHint - margin)];
+      var node2 = this.hints.childNodes[Math.min(this.data.list.length - 1, this.selectedHint + margin)];
       var firstNode = this.hints.firstChild;
-      if (node.offsetTop < this.hints.scrollTop)
-        this.hints.scrollTop = node.offsetTop - firstNode.offsetTop;
-      else if (node.offsetTop + node.offsetHeight > this.hints.scrollTop + this.hints.clientHeight)
-        this.hints.scrollTop = node.offsetTop + node.offsetHeight - this.hints.clientHeight + firstNode.offsetTop;
+      if (node1.offsetTop < this.hints.scrollTop)
+        this.hints.scrollTop = node1.offsetTop - firstNode.offsetTop;
+      else if (node2.offsetTop + node2.offsetHeight > this.hints.scrollTop + this.hints.clientHeight)
+        this.hints.scrollTop = node2.offsetTop + node2.offsetHeight - this.hints.clientHeight + firstNode.offsetTop;
     },
 
     screenAmount: function() {

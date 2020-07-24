@@ -51,8 +51,13 @@ var jsc = {
 	},
 
 
-	installBySelector : function (selector) {
-		var elms = document.querySelectorAll(selector);
+	installBySelector : function (selector, rootNode) {
+		rootNode = rootNode ? jsc.node(rootNode) : document;
+		if (!rootNode) {
+			throw new Error('Missing root node');
+		}
+
+		var elms = rootNode.querySelectorAll(selector);
 
 		// for backward compatibility with DEPRECATED installation/configuration using className
 		var matchClass = new RegExp('(^|\\s)(' + jsc.pub.lookupClass + ')(\\s*(\\{[^}]*\\})|\\s|$)', 'i');
@@ -80,7 +85,7 @@ var jsc = {
 					optsStr = dataOpts;
 
 				} else if (m) { // installation using className (DEPRECATED)
-					console.warn('Installation using class name is DEPRECATED. Use data-jscolor="" attribute instead.');
+					console.warn('Installation using class name is DEPRECATED. Use data-jscolor="" attribute instead.' + jsc.docsRef);
 					if (m[4]) {
 						optsStr = m[4];
 					}
@@ -139,14 +144,21 @@ var jsc = {
 	},
 
 
-	fetchElement : function (elementOrSelector) {
-		if (!elementOrSelector) {
+	createEl : function (tagName) {
+		var el = document.createElement(tagName);
+		jsc.setData(el, 'gui', true)
+		return el;
+	},
+
+
+	node : function (nodeOrSelector) {
+		if (!nodeOrSelector) {
 			return null;
 		}
 
-		if (typeof elementOrSelector === 'string') {
+		if (typeof nodeOrSelector === 'string') {
 			// query selector
-			var sel = elementOrSelector;
+			var sel = nodeOrSelector;
 			var el = null;
 			try {
 				el = document.querySelector(sel);
@@ -160,13 +172,22 @@ var jsc = {
 			return el;
 		}
 
-		if (typeof elementOrSelector === 'object' && elementOrSelector instanceof HTMLElement) {
-			// HTML element
-			return elementOrSelector;
+		if (jsc.isNode(nodeOrSelector)) {
+			// DOM node
+			return nodeOrSelector;
 		}
 
-		console.warn('Invalid element of type %s: %s', typeof elementOrSelector, elementOrSelector);
+		console.warn('Invalid node of type %s: %s', typeof nodeOrSelector, nodeOrSelector);
 		return null;
+	},
+
+
+	// See https://stackoverflow.com/questions/384286/
+	isNode : function (val) {
+		if (typeof Node === 'object') {
+			return val instanceof Node;
+		}
+		return val && typeof val === 'object' && typeof val.nodeType === 'number' && typeof val.nodeName === 'string';
 	},
 
 
@@ -745,7 +766,7 @@ var jsc = {
 			// rgb(...) or rgba(...) notation
 
 			var params = m[1].split(',');
-			var re = /^\s*(\d+|\d*\.\d+)\s*$/;
+			var re = /^\s*(\d+|\d*\.\d+|\d+\.\d*)\s*$/;
 			var mR, mG, mB, mA;
 			if (
 				params.length >= 3 &&
@@ -799,7 +820,7 @@ var jsc = {
 		var cWidth = specWidth ? specWidth : sqSize * 2;
 		var cHeight = sqSize * 2;
 
-		var canvas = document.createElement('canvas');
+		var canvas = jsc.createEl('canvas');
 		var ctx = canvas.getContext('2d');
 
 		canvas.width = cWidth;
@@ -961,7 +982,7 @@ var jsc = {
 		if (jsc.getSliderChannel(thisObj)) {
 			dims[0] += sliderSpace;
 		}
-		if (thisObj.isAlphaEnabled()) {
+		if (thisObj.hasAlphaChannel()) {
 			dims[0] += sliderSpace;
 		}
 		if (thisObj.closeButton) {
@@ -1010,14 +1031,18 @@ var jsc = {
 	onDocumentMouseDown : function (e) {
 		var target = e.target || e.srcElement;
 
-		if (target.jscolor && target.jscolor instanceof jsc.pub) {
+		if (target.jscolor && target.jscolor instanceof jsc.pub) { // clicked targetElement -> show picker
 			if (target.jscolor.showOnClick && !target.disabled) {
 				target.jscolor.show();
 			}
-		} else if (target._jscControlName) {
-			jsc.onControlPointerStart(e, target, target._jscControlName, 'mouse');
+		} else if (jsc.getData(target, 'gui')) { // clicked jscolor's GUI element
+			var control = jsc.getData(target, 'control');
+			if (control) {
+				// jscolor's control
+				jsc.onControlPointerStart(e, target, jsc.getData(target, 'control'), 'mouse');
+			}
 		} else {
-			// Mouse is outside the picker controls -> hide the color picker!
+			// mouse is outside the picker's controls -> hide the color picker!
 			if (jsc.picker && jsc.picker.owner) {
 				jsc.picker.owner.hide();
 			}
@@ -1050,8 +1075,8 @@ var jsc = {
 	onPickerTouchStart : function (e) {
 		var target = e.target || e.srcElement;
 
-		if (target._jscControlName) {
-			jsc.onControlPointerStart(e, target, target._jscControlName, 'touch');
+		if (jsc.getData(target, 'control')) {
+			jsc.onControlPointerStart(e, target, jsc.getData(target, 'control'), 'touch');
 		}
 	},
 
@@ -1106,7 +1131,7 @@ var jsc = {
 
 
 	onControlPointerStart : function (e, target, controlName, pointerType) {
-		var thisObj = target._jscInstance;
+		var thisObj = jsc.getData(target, 'instance');
 
 		jsc.preventDefault(e);
 		jsc.captureTarget(target);
@@ -1156,7 +1181,7 @@ var jsc = {
 
 	onDocumentPointerMove : function (e, target, controlName, pointerType, offset) {
 		return function (e) {
-			var thisObj = target._jscInstance;
+			var thisObj = jsc.getData(target, 'instance');
 			switch (controlName) {
 			case 'pad':
 				jsc.setPad(thisObj, e, offset[0], offset[1]);
@@ -1177,7 +1202,7 @@ var jsc = {
 
 	onDocumentPointerEnd : function (e, target, controlName, pointerType) {
 		return function (e) {
-			var thisObj = target._jscInstance;
+			var thisObj = jsc.getData(target, 'instance');
 			jsc.detachGroupEvents('drag');
 			jsc.releaseTarget();
 
@@ -1192,8 +1217,8 @@ var jsc = {
 
 	setPad : function (thisObj, e, ofsX, ofsY) {
 		var pointerAbs = jsc.getAbsPointerPos(e);
-		var x = ofsX + pointerAbs.x - jsc._pointerOrigin.x - thisObj.padding - thisObj.controlBorderWidth - thisObj.borderWidth;
-		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth - thisObj.borderWidth;
+		var x = ofsX + pointerAbs.x - jsc._pointerOrigin.x - thisObj.padding - thisObj.controlBorderWidth;
+		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth;
 
 		var xVal = x * (360 / (thisObj.width - 1));
 		var yVal = 100 - (y * (100 / (thisObj.height - 1)));
@@ -1207,7 +1232,7 @@ var jsc = {
 
 	setSld : function (thisObj, e, ofsY) {
 		var pointerAbs = jsc.getAbsPointerPos(e);
-		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth - thisObj.borderWidth;
+		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth;
 		var yVal = 100 - (y * (100 / (thisObj.height - 1)));
 
 		switch (jsc.getSliderChannel(thisObj)) {
@@ -1219,8 +1244,15 @@ var jsc = {
 
 	setASld : function (thisObj, e, ofsY) {
 		var pointerAbs = jsc.getAbsPointerPos(e);
-		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth - thisObj.borderWidth;
+		var y = ofsY + pointerAbs.y - jsc._pointerOrigin.y - thisObj.padding - thisObj.controlBorderWidth;
 		var yVal = 1.0 - (y * (1.0 / (thisObj.height - 1)));
+
+		if (yVal < 1.0) {
+			// if format is flexible and the current format doesn't support alpha, switch to a suitable one
+			if (thisObj.format.toLowerCase() === 'any' && thisObj.getFormat() !== 'rgba') {
+				thisObj._currentFormat = 'rgba';
+			}
+		}
 
 		thisObj.fromHSVA(null, null, null, yVal);
 	},
@@ -1233,7 +1265,7 @@ var jsc = {
 			draw: null
 		};
 
-		var canvas = document.createElement('canvas');
+		var canvas = jsc.createEl('canvas');
 		var ctx = canvas.getContext('2d');
 
 		var drawFunc = function (width, height, type) {
@@ -1283,7 +1315,7 @@ var jsc = {
 			draw: null
 		};
 
-		var canvas = document.createElement('canvas');
+		var canvas = jsc.createEl('canvas');
 		var ctx = canvas.getContext('2d');
 
 		var drawFunc = function (width, height, color1, color2) {
@@ -1314,7 +1346,7 @@ var jsc = {
 			draw: null
 		};
 
-		var canvas = document.createElement('canvas');
+		var canvas = jsc.createEl('canvas');
 		var ctx = canvas.getContext('2d');
 
 		var drawFunc = function (width, height, color) {
@@ -1405,7 +1437,11 @@ var jsc = {
 		'closable': 'closeButton',
 		'insetWidth': 'controlBorderWidth',
 		'insetColor': 'controlBorderColor',
+		'refine': null,
 	},
+
+
+	docsRef : ' ' + 'See https://jscolor.com/docs/',
 
 
 	//
@@ -1447,8 +1483,7 @@ var jsc = {
 		this.previewSize = 32; // (px) width of the color preview displayed in previewElement
 		this.previewPadding = 8; // (px) space between color preview and content of the previewElement
 		this.required = true; // whether the associated text input must always contain a color value. If false, the input can be left empty.
-		this.refine = true; // whether to auto-format the entered color code (e.g. remove whitespace)
-		this.hash = false; // whether to prefix the HEX color code with # symbol (only applicable for HEX format)
+		this.hash = true; // whether to prefix the HEX color code with # symbol (only applicable for HEX format)
 		this.uppercase = true; // whether to show the HEX color code in upper case (only applicable for HEX format)
 		this.forceStyle = true; // whether to overwrite CSS style of the previewElement using !important flag
 
@@ -1465,21 +1500,21 @@ var jsc = {
 		this.crossSize = 8; // px
 		this.closeButton = false; // whether to display the Close button
 		this.closeText = 'Close';
-		this.buttonColor = '#000000'; // CSS color
+		this.buttonColor = 'rgba(0,0,0,1)'; // CSS color
 		this.buttonHeight = 18; // px
 		this.padding = 12; // px
-		this.backgroundColor = '#FFFFFF'; // CSS color
+		this.backgroundColor = 'rgba(255,255,255,1)'; // CSS color
 		this.borderWidth = 1; // px
-		this.borderColor = '#BBBBBB'; // CSS color
+		this.borderColor = 'rgba(187,187,187,1)'; // CSS color
 		this.borderRadius = 8; // px
 		this.controlBorderWidth = 1; // px
-		this.controlBorderColor = '#BBBBBB'; // CSS color
+		this.controlBorderColor = 'rgba(187,187,187,1)'; // CSS color
 		this.shadow = true; // whether to display a shadow
 		this.shadowBlur = 15; // px
 		this.shadowColor = 'rgba(0,0,0,0.2)'; // CSS color
-		this.pointerColor = '#4C4C4C'; // px
+		this.pointerColor = 'rgba(76,76,76,1)'; // CSS color
 		this.pointerBorderWidth = 1; // px
-		this.pointerBorderColor = '#FFFFFF'; // CSS color
+		this.pointerBorderColor = 'rgba(255,255,255,1)'; // CSS color
 		this.pointerThickness = 2; // px
 		this.zIndex = 5000;
 		this.container = undefined; // where to append the color picker (BODY element by default)
@@ -1523,8 +1558,10 @@ var jsc = {
 			}
 		}
 
-		// always use the 'default' preset as a baseline
-		presetsArr.push('default');
+		// always use the 'default' preset. If it's not listed, append it to the end.
+		if (presetsArr.indexOf('default') === -1) {
+			presetsArr.push('default');
+		}
 
 		// let's apply the presets in reverse order, so that should there be any overlapping options,
 		// the formerly listed preset will override the latter
@@ -1717,7 +1754,7 @@ var jsc = {
 			}
 			if (a !== null) {
 				if (isNaN(a)) { return false; }
-				this.channels.a = this.isAlphaEnabled() ?
+				this.channels.a = this.hasAlphaChannel() ?
 					Math.max(0, Math.min(1, this.maxA, a), this.minA) :
 					1.0; // if alpha channel is disabled, the color should stay 100% opaque
 			}
@@ -1761,7 +1798,7 @@ var jsc = {
 			}
 			if (a !== null) {
 				if (isNaN(a)) { return false; }
-				this.channels.a = this.isAlphaEnabled() ?
+				this.channels.a = this.hasAlphaChannel() ?
 					Math.max(0, Math.min(1, this.maxA, a), this.minA) :
 					1.0; // if alpha channel is disabled, the color should stay 100% opaque
 			}
@@ -1793,7 +1830,7 @@ var jsc = {
 		// DEPRECATED. Use .fromHSVA() instead
 		//
 		this.fromHSV = function (h, s, v, flags) {
-			console.warn('fromHSV() method is DEPRECATED. Using fromHSVA() instead.');
+			console.warn('fromHSV() method is DEPRECATED. Using fromHSVA() instead.' + jsc.docsRef);
 			return this.fromHSVA(h, s, v, null, flags);
 		};
 
@@ -1801,18 +1838,29 @@ var jsc = {
 		// DEPRECATED. Use .fromRGBA() instead
 		//
 		this.fromRGB = function (r, g, b, flags) {
-			console.warn('fromRGB() method is DEPRECATED. Using fromRGBA() instead.');
+			console.warn('fromRGB() method is DEPRECATED. Using fromRGBA() instead.' + jsc.docsRef);
 			return this.fromRGBA(r, g, b, null, flags);
 		};
 
 
 		this.fromString = function (str, flags) {
+			if (!this.required && str.trim() === '') {
+				// setting empty string to an optional color input
+				this.setPreviewElementBg(null);
+				this.setValueElementValue('');
+				return true;
+			}
+
 			var color = jsc.parseColorString(str);
 			if (!color) {
 				return false; // could not parse
 			}
 			if (this.format.toLowerCase() === 'any') {
 				this._currentFormat = color.format; // adapt format
+				if (this.getFormat() !== 'rgba') {
+					color.rgba[3] = 1.0; // when switching to a format that doesn't support alpha, set full opacity
+				}
+				this.redraw(); // to show/hide the alpha slider according to current format
 			}
 			this.fromRGBA(
 				color.rgba[0],
@@ -1827,7 +1875,7 @@ var jsc = {
 
 		this.toString = function (format) {
 			if (format === undefined) {
-				format = this._currentFormat; // format not specified -> use the current format
+				format = this.getFormat(); // format not specified -> use the current format
 			}
 			switch (format.toLowerCase()) {
 				case 'hex': return this.toHEXString(); break;
@@ -1886,20 +1934,7 @@ var jsc = {
 
 
 		this.toBackground = function () {
-			var backgrounds = [];
-
-			// CSS gradient for background color preview
-			backgrounds.push(jsc.genColorPreviewGradient(this.toRGBAString()));
-
-			// data URL of generated PNG image with a gray transparency chessboard
-			var preview = jsc.genColorPreviewCanvas();
-			backgrounds.push([
-				'url(\'' + preview.canvas.toDataURL() + '\')',
-				'left top',
-				'repeat',
-			].join(' '));
-
-			return backgrounds.join(', ');
+			return jsc.pub.background(this.toRGBAString());
 		};
 
 
@@ -1927,39 +1962,26 @@ var jsc = {
 		};
 
 
-		this.isAlphaEnabled = function () {
-			if (this.alphaChannel === true) {
-				return true; // the alpha channel is explicitly enabled
-			}
+		this.getFormat = function () {
+			return this._currentFormat;
+		};
+
+
+		this.hasAlphaChannel = function () {
 			if (this.alphaChannel === 'auto') {
 				return (
-					this.format.toLowerCase() === 'any' || // when the format is 'any', it can change on the fly (e.g. from hex to rgba), so let's consider the alpha channel enabled
-					this._currentFormat === 'rgba' || // the current format supports alpha channel
-					this.alphaElement // the alpha value is redirected, so we're working with alpha channel
+					this.format.toLowerCase() === 'any' || // format can change on the fly (e.g. from hex to rgba), so let's consider the alpha channel enabled
+					this.getFormat() === 'rgba' || // the current format supports alpha channel
+					this.alpha !== undefined || // initial alpha value is set, so we're working with alpha channel
+					this.alphaElement !== undefined // the alpha value is redirected, so we're working with alpha channel
 				);
 			}
-			return false;
+
+			return this.alphaChannel; // the alpha channel is explicitly set
 		};
 
 
 		this.processValueInput = function (str) {
-
-			if (!this.required && str.trim() === '') {
-				// input's value is empty (or just whitespace) -> leave the value
-				this.setPreviewElementBg(null);
-				this.exposeColor(jsc.flags.leaveValue | jsc.flags.leavePreview);
-				return;
-			}
-
-			if (!this.refine) {
-				if (!this.fromString(str, jsc.flags.leaveValue)) {
-					// input's value could not be parsed -> remove background
-					this.setPreviewElementBg(null);
-					this.exposeColor(jsc.flags.leaveValue | jsc.flags.leavePreview);
-				}
-				return;
-			}
-
 			if (!this.fromString(str)) {
 				// could not parse the color value - let's just expose the current color
 				this.exposeColor();
@@ -1980,26 +2002,17 @@ var jsc = {
 			if (!(flags & jsc.flags.leaveValue) && this.valueElement) {
 				var value = this.toString();
 
-				if (this._currentFormat === 'hex') {
+				if (this.getFormat() === 'hex') {
 					if (!this.uppercase) { value = value.toLowerCase(); }
 					if (!this.hash) { value = value.replace(/^#/, ''); }
 				}
 
-				if (jsc.nodeName(this.valueElement) === 'input') {
-					this.valueElement.value = value;
-				} else {
-					this.valueElement.innerHTML = value;
-				}
+				this.setValueElementValue(value);
 			}
 
 			if (!(flags & jsc.flags.leaveAlpha) && this.alphaElement) {
 				var value = Math.round(this.channels.a * 100) / 100;
-
-				if (jsc.nodeName(this.alphaElement) === 'input') {
-					this.alphaElement.value = value;
-				} else {
-					this.alphaElement.innerHTML = value;
-				}
+				this.setAlphaElementValue(value);
 			}
 
 			if (!(flags & jsc.flags.leavePreview) && this.previewElement) {
@@ -2122,6 +2135,28 @@ var jsc = {
 		};
 
 
+		this.setValueElementValue = function (str) {
+			if (this.valueElement) {
+				if (jsc.nodeName(this.valueElement) === 'input') {
+					this.valueElement.value = str;
+				} else {
+					this.valueElement.innerHTML = str;
+				}
+			}
+		};
+
+
+		this.setAlphaElementValue = function (str) {
+			if (this.alphaElement) {
+				if (jsc.nodeName(this.alphaElement) === 'input') {
+					this.alphaElement.value = str;
+				} else {
+					this.alphaElement.innerHTML = str;
+				}
+			}
+		};
+
+
 		this._processParentElementsInDOM = function () {
 			if (this._linkedElementsProcessed) { return; }
 			this._linkedElementsProcessed = true;
@@ -2141,9 +2176,9 @@ var jsc = {
 					//
 					// Note: It's not just offsetParents that can be scrollable,
 					// that's why we loop through all parent nodes
-					if (!elm._jscEventsAttached) {
+					if (!jsc.getData(elm, 'hasScrollListener')) {
 						elm.addEventListener('scroll', jsc.onParentScroll, false);
-						elm._jscEventsAttached = true;
+						jsc.setData(elm, 'hasScrollListener', true);
 					}
 				}
 			} while ((elm = elm.parentNode) && jsc.nodeName(elm) !== 'body');
@@ -2171,7 +2206,7 @@ var jsc = {
 				var newOpt = jsc.deprecatedOpts[option];
 				if (newOpt) {
 					// if we have a new name for this option, let's log a warning and use the new name
-					console.warn('Option \'%s\' is DEPRECATED, using \'%s\' instead', oldOpt, newOpt);
+					console.warn('Option \'%s\' is DEPRECATED, using \'%s\' instead.' + jsc.docsRef, oldOpt, newOpt);
 					option = newOpt;
 				} else {
 					// new name not available for the option
@@ -2195,7 +2230,7 @@ var jsc = {
 				var newOpt = jsc.deprecatedOpts[option];
 				if (newOpt) {
 					// if we have a new name for this option, let's log a warning and use the new name
-					console.warn('Option \'%s\' is DEPRECATED, using \'%s\' instead', oldOpt, newOpt);
+					console.warn('Option \'%s\' is DEPRECATED, using \'%s\' instead.' + jsc.docsRef, oldOpt, newOpt);
 					option = newOpt;
 				} else {
 					// new name not available for the option
@@ -2228,37 +2263,37 @@ var jsc = {
 			if (!jsc.picker) {
 				jsc.picker = {
 					owner: null, // owner picker instance
-					wrap : document.createElement('div'),
-					box : document.createElement('div'),
-					boxS : document.createElement('div'), // shadow area
-					boxB : document.createElement('div'), // border
-					pad : document.createElement('div'),
-					padB : document.createElement('div'), // border
-					padM : document.createElement('div'), // mouse/touch area
+					wrap : jsc.createEl('div'),
+					box : jsc.createEl('div'),
+					boxS : jsc.createEl('div'), // shadow area
+					boxB : jsc.createEl('div'), // border
+					pad : jsc.createEl('div'),
+					padB : jsc.createEl('div'), // border
+					padM : jsc.createEl('div'), // mouse/touch area
 					padPal : jsc.createPalette(),
-					cross : document.createElement('div'),
-					crossBY : document.createElement('div'), // border Y
-					crossBX : document.createElement('div'), // border X
-					crossLY : document.createElement('div'), // line Y
-					crossLX : document.createElement('div'), // line X
-					sld : document.createElement('div'), // slider
-					sldB : document.createElement('div'), // border
-					sldM : document.createElement('div'), // mouse/touch area
+					cross : jsc.createEl('div'),
+					crossBY : jsc.createEl('div'), // border Y
+					crossBX : jsc.createEl('div'), // border X
+					crossLY : jsc.createEl('div'), // line Y
+					crossLX : jsc.createEl('div'), // line X
+					sld : jsc.createEl('div'), // slider
+					sldB : jsc.createEl('div'), // border
+					sldM : jsc.createEl('div'), // mouse/touch area
 					sldGrad : jsc.createSliderGradient(),
-					sldPtrS : document.createElement('div'), // slider pointer spacer
-					sldPtrIB : document.createElement('div'), // slider pointer inner border
-					sldPtrMB : document.createElement('div'), // slider pointer middle border
-					sldPtrOB : document.createElement('div'), // slider pointer outer border
-					asld : document.createElement('div'), // alpha slider
-					asldB : document.createElement('div'), // border
-					asldM : document.createElement('div'), // mouse/touch area
+					sldPtrS : jsc.createEl('div'), // slider pointer spacer
+					sldPtrIB : jsc.createEl('div'), // slider pointer inner border
+					sldPtrMB : jsc.createEl('div'), // slider pointer middle border
+					sldPtrOB : jsc.createEl('div'), // slider pointer outer border
+					asld : jsc.createEl('div'), // alpha slider
+					asldB : jsc.createEl('div'), // border
+					asldM : jsc.createEl('div'), // mouse/touch area
 					asldGrad : jsc.createASliderGradient(),
-					asldPtrS : document.createElement('div'), // slider pointer spacer
-					asldPtrIB : document.createElement('div'), // slider pointer inner border
-					asldPtrMB : document.createElement('div'), // slider pointer middle border
-					asldPtrOB : document.createElement('div'), // slider pointer outer border
-					btn : document.createElement('div'),
-					btnT : document.createElement('span'), // text
+					asldPtrS : jsc.createEl('div'), // slider pointer spacer
+					asldPtrIB : jsc.createEl('div'), // slider pointer inner border
+					asldPtrMB : jsc.createEl('div'), // slider pointer middle border
+					asldPtrOB : jsc.createEl('div'), // slider pointer outer border
+					btn : jsc.createEl('div'),
+					btnT : jsc.createEl('span'), // text
 				};
 
 				jsc.picker.pad.appendChild(jsc.picker.padPal.elm);
@@ -2303,7 +2338,7 @@ var jsc = {
 			var p = jsc.picker;
 
 			var displaySlider = !!jsc.getSliderChannel(THIS);
-			var displayAlphaSlider = THIS.isAlphaEnabled();
+			var displayAlphaSlider = THIS.hasAlphaChannel();
 			var dims = jsc.getPickerDims(THIS);
 			var crossOuterSize = (2 * THIS.pointerBorderWidth + THIS.pointerThickness + 2 * THIS.crossSize);
 			var controlPadding = jsc.getControlPadding(THIS);
@@ -2323,6 +2358,7 @@ var jsc = {
 			p.box.className = 'jscolor-picker';
 			p.box.style.width = dims[0] + 'px';
 			p.box.style.height = dims[1] + 'px';
+			p.box.style.position = 'relative';
 
 			// picker shadow
 			p.boxS.className = 'jscolor-picker-shadow';
@@ -2369,14 +2405,16 @@ var jsc = {
 			p.padB.style.borderColor = THIS.controlBorderColor;
 
 			// pad mouse area
-			p.padM._jscInstance = THIS;
-			p.padM._jscControlName = 'pad';
 			p.padM.style.position = 'absolute';
-			p.padM.style.left = -THIS.borderWidth + 'px';
-			p.padM.style.top = -THIS.borderWidth + 'px';
-			p.padM.style.width = (THIS.borderWidth + THIS.padding + 2 * THIS.controlBorderWidth + THIS.width + controlPadding) + 'px';
-			p.padM.style.height = (2 * THIS.borderWidth + dims[1]) + 'px';
+			p.padM.style.left = 0 + 'px';
+			p.padM.style.top = 0 + 'px';
+			p.padM.style.width = (THIS.padding + 2 * THIS.controlBorderWidth + THIS.width + controlPadding) + 'px';
+			p.padM.style.height = (2 * THIS.controlBorderWidth + 2 * THIS.padding + THIS.height) + 'px';
 			p.padM.style.cursor = padCursor;
+			jsc.setData(p.padM, {
+				instance: THIS,
+				control: 'pad',
+			})
 
 			// pad cross
 			p.cross.style.position = 'absolute';
@@ -2445,18 +2483,20 @@ var jsc = {
 			p.sldB.style.borderColor = THIS.controlBorderColor;
 
 			// slider mouse area
-			p.sldM._jscInstance = THIS;
-			p.sldM._jscControlName = 'sld';
 			p.sldM.style.display = displaySlider ? 'block' : 'none';
 			p.sldM.style.position = 'absolute';
 			p.sldM.style.left = (THIS.padding + THIS.width + 2 * THIS.controlBorderWidth + controlPadding) + 'px';
-			p.sldM.style.top = -THIS.borderWidth + 'px';
+			p.sldM.style.top = 0 + 'px';
 			p.sldM.style.width = (
 					(THIS.sliderSize + 2 * controlPadding + 2 * THIS.controlBorderWidth) +
 					(displayAlphaSlider ? 0 : Math.max(0, THIS.padding - controlPadding)) // remaining padding to the right edge
 				) + 'px';
-			p.sldM.style.height = (2 * THIS.borderWidth + dims[1]) + 'px';
+			p.sldM.style.height = (2 * THIS.controlBorderWidth + 2 * THIS.padding + THIS.height) + 'px';
 			p.sldM.style.cursor = 'default';
+			jsc.setData(p.sldM, {
+				instance: THIS,
+				control: 'sld',
+			})
 
 			// slider pointer inner and outer border
 			p.sldPtrIB.style.border =
@@ -2496,21 +2536,23 @@ var jsc = {
 			p.asldB.style.borderColor = THIS.controlBorderColor;
 
 			// alpha slider mouse area
-			p.asldM._jscInstance = THIS;
-			p.asldM._jscControlName = 'asld';
 			p.asldM.style.display = displayAlphaSlider ? 'block' : 'none';
 			p.asldM.style.position = 'absolute';
 			p.asldM.style.left = (
 					(THIS.padding + THIS.width + 2 * THIS.controlBorderWidth + controlPadding) +
 					(displaySlider ? (THIS.sliderSize + 2 * controlPadding + 2 * THIS.controlBorderWidth) : 0)
 				) + 'px';
-			p.asldM.style.top = -THIS.borderWidth + 'px';
+			p.asldM.style.top = 0 + 'px';
 			p.asldM.style.width = (
 					(THIS.sliderSize + 2 * controlPadding + 2 * THIS.controlBorderWidth) +
 					Math.max(0, THIS.padding - controlPadding) // remaining padding to the right edge
 				) + 'px';
-			p.asldM.style.height = (2 * THIS.borderWidth + dims[1]) + 'px';
+			p.asldM.style.height = (2 * THIS.controlBorderWidth + 2 * THIS.padding + THIS.height) + 'px';
 			p.asldM.style.cursor = 'default';
+			jsc.setData(p.asldM, {
+				instance: THIS,
+				control: 'asld',
+			})
 
 			// alpha slider pointer inner and outer border
 			p.asldPtrIB.style.border =
@@ -2536,13 +2578,17 @@ var jsc = {
 				var outsetColor = insetColors.length < 2 ? insetColors[0] : insetColors[1] + ' ' + insetColors[0] + ' ' + insetColors[0] + ' ' + insetColors[1];
 				p.btn.style.borderColor = outsetColor;
 			}
+			var btnPadding = 15; // px
 			p.btn.className = 'jscolor-btn-close';
 			p.btn.style.display = THIS.closeButton ? 'block' : 'none';
 			p.btn.style.position = 'absolute';
 			p.btn.style.left = THIS.padding + 'px';
 			p.btn.style.bottom = THIS.padding + 'px';
-			p.btn.style.padding = '0 15px';
+			p.btn.style.padding = '0 ' + btnPadding + 'px';
+			p.btn.style.maxWidth = (dims[0] - 2 * THIS.padding - 2 * THIS.controlBorderWidth - 2 * btnPadding) + 'px';
+			p.btn.style.overflow = 'hidden';
 			p.btn.style.height = THIS.buttonHeight + 'px';
+			p.btn.style.whiteSpace = 'nowrap';
 			p.btn.style.border = THIS.controlBorderWidth + 'px solid';
 			setBtnBorder();
 			p.btn.style.color = THIS.buttonColor;
@@ -2651,20 +2697,6 @@ var jsc = {
 		}
 
 
-		function onValueBlur () {
-			if (THIS.valueElement) {
-				THIS.processValueInput(THIS.valueElement.value);
-			}
-		}
-
-
-		function onAlphaBlur () {
-			if (THIS.alphaElement) {
-				THIS.processAlphaInput(THIS.alphaElement.value);
-			}
-		}
-
-
 		function onValueKeyDown (ev) {
 			if (jsc.eventKey(ev) === 'Enter') {
 				if (THIS.valueElement) {
@@ -2689,10 +2721,17 @@ var jsc = {
 			if (jsc.getData(ev, 'internal')) {
 				return; // skip if the event was internally triggered by jscolor
 			}
+
+			var oldVal = THIS.valueElement.value;
+
+			THIS.processValueInput(THIS.valueElement.value); // this might change the value
+
 			jsc.triggerCallback(THIS, 'onChange');
 
-			// triggering valueElement's onChange
-			// (not needed, it was dispatched normally by the browser)
+			if (THIS.valueElement.value !== oldVal) {
+				// value was additionally changed -> let's trigger the change event again, even though it was natively dispatched
+				jsc.triggerInputEvent(THIS.valueElement, 'change', true, true);
+			}
 		}
 
 
@@ -2700,10 +2739,20 @@ var jsc = {
 			if (jsc.getData(ev, 'internal')) {
 				return; // skip if the event was internally triggered by jscolor
 			}
+
+			var oldVal = THIS.alphaElement.value;
+
+			THIS.processAlphaInput(THIS.alphaElement.value); // this might change the value
+
 			jsc.triggerCallback(THIS, 'onChange');
 
 			// triggering valueElement's onChange (because changing alpha changes the entire color, e.g. with rgba format)
 			jsc.triggerInputEvent(THIS.valueElement, 'change', true, true);
+
+			if (THIS.alphaElement.value !== oldVal) {
+				// value was additionally changed -> let's trigger the change event again, even though it was natively dispatched
+				jsc.triggerInputEvent(THIS.alphaElement, 'change', true, true);
+			}
 		}
 
 
@@ -2749,7 +2798,7 @@ var jsc = {
 			this.container = document.body; // default container is BODY element
 
 		} else { // explicitly set to custom element
-			this.container = jsc.fetchElement(this.container);
+			this.container = jsc.node(this.container);
 		}
 
 		if (!this.container) {
@@ -2758,7 +2807,7 @@ var jsc = {
 
 
 		// Fetch the target element
-		this.targetElement = jsc.fetchElement(targetElement);
+		this.targetElement = jsc.node(targetElement);
 
 		if (!this.targetElement) {
 			// temporarily customized error message to help with migrating from versions prior to 2.2
@@ -2827,12 +2876,12 @@ var jsc = {
 			// leave it null
 
 		} else { // explicitly set to custom element
-			this.valueElement = jsc.fetchElement(this.valueElement);
+			this.valueElement = jsc.node(this.valueElement);
 		}
 
 		// Determine the alpha element
 		if (this.alphaElement) {
-			this.alphaElement = jsc.fetchElement(this.alphaElement);
+			this.alphaElement = jsc.node(this.alphaElement);
 		}
 
 		// Determine the preview element
@@ -2843,7 +2892,7 @@ var jsc = {
 			// leave it null
 
 		} else { // explicitly set to custom element
-			this.previewElement = jsc.fetchElement(this.previewElement);
+			this.previewElement = jsc.node(this.previewElement);
 		}
 
 		// valueElement
@@ -2856,7 +2905,6 @@ var jsc = {
 			};
 			this.valueElement.oninput = null;
 
-			this.valueElement.addEventListener('blur', onValueBlur, false);
 			this.valueElement.addEventListener('keydown', onValueKeyDown, false);
 			this.valueElement.addEventListener('change', onValueChange, false);
 			this.valueElement.addEventListener('input', onValueInput, false);
@@ -2866,16 +2914,21 @@ var jsc = {
 			}
 
 			this.valueElement.setAttribute('autocomplete', 'off');
+			this.valueElement.setAttribute('autocorrect', 'off');
+			this.valueElement.setAttribute('autocapitalize', 'off');
+			this.valueElement.setAttribute('spellcheck', false);
 		}
 
 		// alphaElement
 		if (this.alphaElement && jsc.isTextInput(this.alphaElement)) {
-			this.alphaElement.addEventListener('blur', onAlphaBlur, false);
 			this.alphaElement.addEventListener('keydown', onAlphaKeyDown, false);
 			this.alphaElement.addEventListener('change', onAlphaChange, false);
 			this.alphaElement.addEventListener('input', onAlphaInput, false);
 
 			this.alphaElement.setAttribute('autocomplete', 'off');
+			this.alphaElement.setAttribute('autocorrect', 'off');
+			this.alphaElement.setAttribute('autocapitalize', 'off');
+			this.alphaElement.setAttribute('spellcheck', false);
 		}
 
 		// determine initial color value
@@ -2884,13 +2937,8 @@ var jsc = {
 
 		if (this.value !== undefined) {
 			initValue = this.value; // get initial color from the 'value' property
-		}
-		if (this.valueElement && this.valueElement.value !== undefined) {
-			if (this.value !== undefined) {
-				this.valueElement.value = this.value; // sync valueElement's value with the 'value' property
-			} else {
-				initValue = this.valueElement.value; // get initial color from valueElement's value
-			}
+		} else if (this.valueElement && this.valueElement.value !== undefined) {
+			initValue = this.valueElement.value; // get initial color from valueElement's value
 		}
 
 		// determine initial alpha value
@@ -2899,13 +2947,8 @@ var jsc = {
 
 		if (this.alpha !== undefined) {
 			initAlpha = (''+this.alpha); // get initial alpha value from the 'alpha' property
-		}
-		if (this.alphaElement && this.alphaElement.value !== undefined) {
-			if (this.alpha !== undefined) {
-				this.alphaElement.value = (''+this.alpha); // sync alphaElement's value with the 'alpha' property
-			} else {
-				initAlpha = this.alphaElement.value; // get initial color from alphaElement's value
-			}
+		} else if (this.alphaElement && this.alphaElement.value !== undefined) {
+			initAlpha = this.alphaElement.value; // get initial color from alphaElement's value
 		}
 
 		// determine current format based on the initial color value
@@ -2967,12 +3010,20 @@ jsc.pub.presets = {};
 // built-in presets
 jsc.pub.presets['default'] = {}; // baseline for customization
 
-jsc.pub.presets['light'] = { backgroundColor:'#FFFFFF', controlBorderColor:'#BBBBBB' }; // default color scheme
-jsc.pub.presets['dark'] = { backgroundColor:'#333333', controlBorderColor:'#999999' };
+jsc.pub.presets['light'] = { // default color scheme
+	backgroundColor: 'rgba(255,255,255,1)',
+	controlBorderColor: 'rgba(187,187,187,1)',
+	buttonColor: 'rgba(0,0,0,1)',
+};
+jsc.pub.presets['dark'] = {
+	backgroundColor: 'rgba(51,51,51,1)',
+	controlBorderColor: 'rgba(153,153,153,1)',
+	buttonColor: 'rgba(240,240,240,1)',
+};
 
-jsc.pub.presets['small'] = { width:101, height:101, padding:10 };
-jsc.pub.presets['medium'] = { width:181, height:101, padding:12 }; // default size
-jsc.pub.presets['large'] = { width:271, height:151, padding:12 };
+jsc.pub.presets['small'] = { width:101, height:101, padding:10, sliderSize:14 };
+jsc.pub.presets['medium'] = { width:181, height:101, padding:12, sliderSize:16 }; // default size
+jsc.pub.presets['large'] = { width:271, height:151, padding:12, sliderSize:24 };
 
 jsc.pub.presets['thin'] = { borderWidth:1, controlBorderWidth:1, pointerBorderWidth:1 }; // default thickness
 jsc.pub.presets['thick'] = { borderWidth:2, controlBorderWidth:2, pointerBorderWidth:2 };
@@ -2991,16 +3042,30 @@ jsc.pub.previewSeparator = ['rgba(255,255,255,.65)', 'rgba(128,128,128,.65)'];
 
 
 // Installs jscolor on current DOM tree
-jsc.pub.install = function () {
-	jsc.installBySelector('[data-jscolor]');
+jsc.pub.install = function (rootNode) {
+	var success = true;
+
+	try {
+		jsc.installBySelector('[data-jscolor]', rootNode);
+	} catch (e) {
+		success = false;
+		console.warn(e);
+	}
 
 	// for backward compatibility with DEPRECATED installation using class name
 	if (jsc.pub.lookupClass) {
-		jsc.installBySelector(
-			'input.' + jsc.pub.lookupClass + ', ' +
-			'button.' + jsc.pub.lookupClass
-		);
+		try {
+			jsc.installBySelector(
+				(
+					'input.' + jsc.pub.lookupClass + ', ' +
+					'button.' + jsc.pub.lookupClass
+				),
+				rootNode
+			);
+		} catch (e) {}
 	}
+
+	return success;
 };
 
 
@@ -3036,6 +3101,25 @@ jsc.pub.chessboard = function (color) {
 };
 
 
+// Returns a data URL of a gray chessboard image that indicates transparency
+jsc.pub.background = function (color) {
+	var backgrounds = [];
+
+	// CSS gradient for background color preview
+	backgrounds.push(jsc.genColorPreviewGradient(color));
+
+	// data URL of generated PNG image with a gray transparency chessboard
+	var preview = jsc.genColorPreviewCanvas();
+	backgrounds.push([
+		'url(\'' + preview.canvas.toDataURL() + '\')',
+		'left top',
+		'repeat',
+	].join(' '));
+
+	return backgrounds.join(', ');
+};
+
+
 //
 // DEPRECATED properties and methods
 //
@@ -3060,7 +3144,7 @@ jsc.pub.lookupClass = 'jscolor';
 // DEPRECATED. Use jscolor.install() instead
 //
 jsc.pub.init = function () {
-	console.warn('jscolor.init() is DEPRECATED. Using jscolor.install() instead.');
+	console.warn('jscolor.init() is DEPRECATED. Using jscolor.install() instead.' + jsc.docsRef);
 	return jsc.pub.install();
 };
 
@@ -3069,7 +3153,7 @@ jsc.pub.init = function () {
 //
 // Install jscolor on all elements that have the specified class name
 jsc.pub.installByClassName = function () {
-	console.error('jscolor.installByClassName() is DEPRECATED. Use data-jscolor="" attribute instead of a class name.');
+	console.error('jscolor.installByClassName() is DEPRECATED. Use data-jscolor="" attribute instead of a class name.' + jsc.docsRef);
 	return false;
 };
 
