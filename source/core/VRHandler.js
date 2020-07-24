@@ -10,6 +10,42 @@ import {WebGLRenderer} from "three";
 function VRHandler(){}
 
 /**
+ * Flag checking if there is support for XR immersive VR mode.
+ *
+ * Checked on the library startup if XR is supported, while the check does not finish it is set to null.
+ *
+ * @attribute webXRSupported
+ * @type {boolean}
+ */
+VRHandler.webXRAvailable = false;
+
+/**
+ * WebXR session if there is one active.
+ *
+ * @attribute webXRSession
+ * @type {XRSession}
+ */
+VRHandler.webXRSession = null;
+
+/**
+ * Flag indicating if there are any VR displays available.
+ *
+ * Checked on the library bootup if WebVR is available, while the check does not finish it is set to null.
+ *
+ * @attribute webVRHasDisplay
+ * @type {boolean}
+ */
+VRHandler.webVRAvailable = false;
+
+/**
+ * WebVR display if there is one active.
+ *
+ * @attribute webVRDisplay
+ * @type {VRDisplay}
+ */
+VRHandler.webVRDisplay = null;
+
+/**
  * Check if there is any VR API available, on the device.
  *
  * Checks if there is support for WebVR or WebXR.
@@ -19,7 +55,7 @@ function VRHandler(){}
  */
 VRHandler.vrAvailable = function()
 {
-	return VRHandler.webVRAvailable() || VRHandler.webXRAvailable();
+	return VRHandler.webXRAvailable || VRHandler.webVRAvailable;
 };
 
 /**
@@ -35,12 +71,13 @@ VRHandler.vrAvailable = function()
  */
 VRHandler.enterVR = function(renderer, onSuccess)
 {
-	if(VRHandler.webXRAvailable())
+	if(VRHandler.webXRAvailable)
 	{
-		VRHandler.getXRSession(function(session)
+		VRHandler.getWebXRSession().then(function(session)
 		{
 			renderer.xr.enabled = true;
 			renderer.xr.setSession(session);
+			VRHandler.webXRSession = session;
 
 			if(onSuccess !== undefined)
 			{
@@ -48,21 +85,26 @@ VRHandler.enterVR = function(renderer, onSuccess)
 			}
 		});
 	}
-	else if(VRHandler.webVRAvailable())
+	else if(VRHandler.webVRAvailable)
 	{
-		VRHandler.getVRDisplay(function(display)
+		VRHandler.getWebVRDisplay().then(function(display)
 		{
-			if(!display.isPresenting)
+			if(displays.length > 0)
 			{
-				renderer.xr.enabled = true;
-				renderer.xr.setDevice(display);
-				display.requestPresent([{source : renderer.domElement}]);
-				
-				if(onSuccess !== undefined)
+				VRHandler.webVRDisplay = displays[0];
+
+				if(!VRHandler.webVRDisplay.isPresenting)
 				{
-					onSuccess();
+					renderer.xr.enabled = true;
+					renderer.xr.setDevice(VRHandler.webVRDisplay);
+					VRHandler.webVRDisplay.requestPresent([{source : renderer.domElement}]);
+					
+					if(onSuccess !== undefined)
+					{
+						onSuccess();
+					}
 				}
-			}
+			};
 		});
 	}
 	else
@@ -79,163 +121,76 @@ VRHandler.enterVR = function(renderer, onSuccess)
  */
 VRHandler.exitVR = function(renderer)
 {
-	if(VRHandler.webXRAvailable())
+	if(VRHandler.webXRAvailable && VRHandler.webXRSession !== null)
 	{
-		VRHandler.getXRSession(function(session)
+		renderer.xr.enabled = false;
+		renderer.xr.setSession(null);
+
+		VRHandler.webXRSession.end();
+		VRHandler.webXRSession = null;
+	}
+	else if(VRHandler.webVRAvailable && VRHandler.webVRDisplay !== null)
+	{
+		if(VRHandler.webVRDisplay.isPresenting)
 		{
 			renderer.xr.enabled = false;
-			renderer.xr.setSession(null);
-		});
+			renderer.xr.setDevice(null);
+
+			VRHandler.webVRDisplay.exitPresent();
+			VRHandler.webVRDisplay = null;
+		}
 	}
-	else if(VRHandler.webVRAvailable())
-	{
-		VRHandler.getVRDisplay(function(display)
-		{
-			if(display.isPresenting)
-			{
-				renderer.xr.enabled = false;
-				renderer.xr.setDevice(null);
-				device.exitPresent();
-			}
-		});
-	}
-};
-
-/**
- * WebXR session created.
- *
- * @attribute webXRSession
- * @type {XRSession}
- */
-VRHandler.webXRSession = null;
-
-/**
- * Flag checking if there is support for XR immersive VR mode.
- *
- * Checked on the library startup if XR is supported, while the check does not finish it is set to null.
- *
- * @attribute webXRSupported
- * @type {boolean}
- */
-VRHandler.webXRSupported = null;
-
-if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
-{
-	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
-	{
-		VRHandler.webXRSupported = supported;
-	});
-}
-
-/**
- * Check if host supports WebXR.
- * 
- * @method webXRAvailable
- * @return {boolean} True is WebVR is available.
- */
-VRHandler.webXRAvailable = function()
-{
-	return navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined && VRHandler.webXRSupported !== false;
 };
 
 /**
  * Get WebXR session.
  *
  * @method getXRSession
- * @param {Function} onSession Function used to get the XR session, receives the session as argument.
+ * @return {Promise} Promise used to get the XR session, receives the session as argument.
  */
-VRHandler.getXRSession = function(onSession)
+VRHandler.getWebXRSession = function()
 {
-	if(!VRHandler.webXRAvailable())
+	if(!VRHandler.webXRAvailable)
 	{
-		console.warn("nunuStudio: WebXR support is not available.");
-		return;
+		return Promise.reject("WebXR support is not available.");
 	}
 
-	if(VRHandler.webXRSession !== null)
-	{
-		onSession(VRHandler.webXRSession);
-	}
-	else
-	{	
-		navigator.xr.requestSession("immersive-vr").then(function(session)
-		{
-			VRHandler.webXRSession = session;
-			onSession(session);
-		});
-	}
-}
+	var sessionInit = {optionalFeatures: ["local-floor", "bounded-floor"]};
 
-/**
- * Web VR display obtained.
- *
- * @attribute webVRDisplay
- * @type {VRDisplay}
- */
-VRHandler.webVRDisplay = null;
-
-/**
- * Flag indicating if there are any VR displays available.
- *
- * Checked on the library bootup if WebVR is available, while the check does not finish it is set to null.
- *
- * @attribute webVRHasDisplay
- * @type {boolean}
- */
-VRHandler.webVRHasDisplay = null;
-
-if(navigator.getVRDisplays !== undefined)
-{
-	navigator.getVRDisplays().then(function(displays)
-	{
-		VRHandler.webVRHasDisplay = displays.length > 0;
-	});
-}
-
-/**
- * Check if host supports WebVR.
- * 
- * @method webVRAvailable
- * @return {boolean} True is WebVR is available.
- */
-VRHandler.webVRAvailable = function()
-{
-	return navigator.getVRDisplays !== undefined && VRHandler.webVRHasDisplay !== false;
+	return navigator.xr.requestSession("immersive-vr",  sessionInit);
 };
 
 /**
  * Used to get the first VR display available, the display is returned as argument of the onDisplay function.
  * 
  * @method getVRDisplays
- * @param {Function} onDisplay Function used to get the display, receives the display as argument.
+ * @return {Promise} Promise used to get the display, receives the display as argument.
  */
-VRHandler.getVRDisplay = function(onDisplay)
+VRHandler.getWebVRDisplay = function(onDisplay)
 {
-	if(!VRHandler.webVRAvailable())
+	if(!VRHandler.webVRAvailable)
 	{
-		console.warn("nunuStudio: WebVR support is not available.");
-		return;
+		return Promise.reject("WebVR support is not available.");
 	}
 
-	if(VRHandler.webVRDisplay !== null)
-	{
-		onDisplay(VRHandler.webVRDisplay);
-	}
-	else
-	{
-		navigator.getVRDisplays().then(function(displays)
-		{
-			if(displays.length > 0)
-			{
-				VRHandler.webVRDisplay = displays[0];
-				onDisplay(displays[0]);
-			}
-			else
-			{
-				console.warn("nunuStudio: WebVR supported but no display is available.");
-			}
-		});
-	}
+	return navigator.getVRDisplays();
 };
+
+// Look into WebXR support (chrome, edge, ...)
+if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
+{
+	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
+	{
+		VRHandler.webXRAvailable = true;
+	});
+}
+// Only look into WebVR support if WebXR is not available (firefox, samsung internet, ...)
+else if(navigator.getVRDisplays !== undefined)
+{
+	navigator.getVRDisplays().then(function(displays)
+	{
+		VRHandler.webVRAvailable = displays.length > 0;
+	});
+}
 
 export {VRHandler};
