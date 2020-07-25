@@ -127,7 +127,7 @@ RunProject.prototype.destroy = function()
 };
 
 /**
- * Set fullscreen mode of the tab canvas
+ * Set fullscreen mode of the tab canvas.
  *
  * @method setFullscreen
  * @param {boolean} fullscreen If true enters fullscreen if false exits fullscreen.
@@ -163,45 +163,9 @@ RunProject.prototype.stopProgram = function()
 		this.program.dispose();
 		this.program = null;
 	}
+
+	this.canvas.renderer.setAnimationLoop(null);
 };
-
-/**
- * Update the program logic and render the program to the canvas using the renderer.
- *
- * @method update
- */
-RunProject.prototype.update = function()
-{
-	if(this.program === null)
-	{
-		return;
-	}
-
-	try
-	{
-		this.program.update();
-	}
-	catch(error)
-	{
-		Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
-		console.warn("nunuStudio: Error while running program.", error);
-		this.close();
-		return;
-	}
-
-	try
-	{
-		this.program.render(this.canvas.renderer);
-	}
-	catch(error)
-	{
-		Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
-		console.warn("nunuStudio: Error while rendering program.", error);
-		this.close();
-		return;
-	}
-};
-
 
 RunProject.prototype.resetCanvas = function()
 {
@@ -280,6 +244,41 @@ RunProject.prototype.runProgram = function()
 			}
 		});
 	}
+
+	var self = this;
+
+	//Update the program logic and render the program to the canvas using the renderer.
+	this.canvas.renderer.setAnimationLoop(function()
+	{
+		if(self.program === null)
+		{
+			return;
+		}
+
+		try
+		{
+			self.program.update();
+		}
+		catch(error)
+		{
+			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
+			console.warn("nunuStudio: Error while running program.", error);
+			self.close();
+			return;
+		}
+
+		try
+		{
+			self.program.render(self.canvas.renderer);
+		}
+		catch(error)
+		{
+			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
+			console.warn("nunuStudio: Error while rendering program.", error);
+			self.close();
+			return;
+		}
+	});
 };
 
 /** 

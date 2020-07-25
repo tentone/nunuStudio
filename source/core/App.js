@@ -321,16 +321,12 @@ App.prototype.resume = function()
 	if(this.program !== null && !this.running)
 	{
 		var self = this;
-		var update = function()
+		this.renderer.setAnimationLoop(function()
 		{
-			if(self.running)
-			{
-				self.update();
-				requestAnimationFrame(update);
-			}
-		};
+			self.update();
+		});
+
 		this.running = true;
-		update();
 	}
 };
 
@@ -342,6 +338,7 @@ App.prototype.resume = function()
 App.prototype.pause = function()
 {
 	this.running = false;
+	this.renderer.setAnimationLoop(null);
 };
 
 /**

@@ -451,7 +451,7 @@ Program.prototype.exitVR = function()
  * This method should be used inside of script objects during runtime.
  * 
  * @method setScene
- * @param {Scene|String} scene Scene object or name of the scene to be used.
+ * @param {Scene | string} scene Scene object or name of the scene to be used.
  */
 Program.prototype.setScene = function(scene)
 {
