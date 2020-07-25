@@ -254,16 +254,28 @@ Scene.prototype.render = function(renderer)
 
 	if(this.cameras.length > 0)
 	{
-		renderer.setScissorTest(true);
-		
-		for(var i = 0; i < this.cameras.length; i++)
+		if(this.program.vrEnabled)
 		{
-			this.cameras[i].setupRenderer(renderer);
-			this.cameras[i].render(renderer, this);
+			for(var i = 0; i < this.cameras.length; i++)
+			{
+				this.cameras[i].render(renderer, this);
+			}
+		}
+		else
+		{
+			renderer.setScissorTest(true);
+
+			for(var i = 0; i < this.cameras.length; i++)
+			{
+				this.cameras[i].setupRenderer(renderer);
+				this.cameras[i].render(renderer, this);
+			}
+	
+			renderer.setScissorTest(false);
 		}
 
-		renderer.setScissorTest(false);
 	}
+	
 	else if(this.defaultCamera !== null)
 	{
 		this.defaultCamera.render(renderer, this);

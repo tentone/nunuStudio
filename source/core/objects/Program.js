@@ -226,10 +226,10 @@ function Program()
 	/**
 	 * VR runtime control, true when the app is running in VR mode.
 	 *
-	 * @property vrRunning
+	 * @property vrEnabled
 	 * @type {boolean}
 	 */
-	this.vrRunning = false;
+	this.vrEnabled = false;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -426,7 +426,7 @@ Program.prototype.enterVR = function()
 		var self = this;
 		VRHandler.enterVR(this.renderer, function()
 		{
-			self.vrRunning = true;
+			self.vrEnabled = true;
 		});
 	}
 };
@@ -441,7 +441,7 @@ Program.prototype.exitVR = function()
 	if(this.vr)
 	{
 		VRHandler.exitVR(this.renderer);
-		this.vrRunning = false;
+		this.vrEnabled = false;
 	}
 };
 

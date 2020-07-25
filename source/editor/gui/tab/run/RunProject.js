@@ -234,7 +234,7 @@ RunProject.prototype.runProgram = function()
 		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
-			if(program.vrRunning)
+			if(program.vrEnabled)
 			{
 				program.exitVR();
 			}
