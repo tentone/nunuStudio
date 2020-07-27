@@ -27,9 +27,7 @@ var SSAOShader =
 		aoClamp: {value: 0.25},
 		lumInfluence: {value: 0.7}
 	},
-
 	vertexShader: SSAOShaderVertex,
-
 	fragmentShader: SSAOShaderFragment
 };
 

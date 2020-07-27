@@ -117,7 +117,6 @@ export {ParticleGroup} from "./objects/particle/core/ParticleGroup.js";
 export {ShaderUtils} from "./objects/particle/core/ShaderUtils.js";
 export {ShaderAttribute} from "./objects/particle/helpers/ShaderAttribute.js";
 export {TypedArrayHelper} from "./objects/particle/helpers/TypedArrayHelper.js";
-export {ParticleShaderChunks} from "./objects/particle/shaders/ParticleShaderChunks.js";
 export {ParticleShaders} from "./objects/particle/shaders/ParticleShaders.js";
 export {ParticleEmitter} from "./objects/particle/ParticleEmitter.js";
 
