@@ -1,22 +1,5 @@
 var ParticleShaderChunks =
 {
-	// Register color-packing define statements.
-	defines:
-	[
-		"#define PACKED_COLOR_SIZE 256.0",
-		"#define PACKED_COLOR_DIVISOR 255.0"
-	].join("\n"),
-
-	// All uniforms used by vertex / fragment shaders
-	uniforms:
-	[
-		"uniform float deltaTime;",
-		"uniform float runTime;",
-		"uniform sampler2D textureSampler;",
-		"uniform vec4 textureAnimation;",
-		"uniform float scale;",
-	].join("\n"),
-
 	// All attributes used by the vertex shader.
 	//
 	// Note that some attributes are squashed into other ones:

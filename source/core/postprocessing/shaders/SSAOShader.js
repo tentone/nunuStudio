@@ -1,6 +1,6 @@
 import {Vector2} from "three";
-import SSAOShaderFragment from "./SSAOShaderFragment.glsl";
-import SSAOShaderVertex from "./SSAOShaderVertex.glsl";
+import SSAOShaderFragment from "./ssao_fragment.glsl";
+import SSAOShaderVertex from "./ssao_vertex.glsl";
 
 /**
  * Screen-space ambient occlusion shader

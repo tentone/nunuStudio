@@ -1,13 +1,14 @@
 import {ParticleShaderChunks} from "./ParticleShaderChunks.js";
 import {ShaderChunk} from "three";
-import ParticleShaderVertex from "./ParticleShaderVertex.glsl";
-
+import ParticleShaderVertex from "./particle_vertex.glsl";
+import ParticleShaderDefines from "./chunks/particle_defines.glsl";
+import ParticleShaderUniforms from "./chunks/particle_uniforms.glsl";
 var ParticleShaders =
 {
 	vertex:
 	[
-		ParticleShaderChunks.defines,
-		ParticleShaderChunks.uniforms,
+		ParticleShaderDefines,
+		ParticleShaderUniforms,
 		ParticleShaderChunks.attributes,
 		ParticleShaderChunks.varyings,
 
@@ -36,7 +37,7 @@ var ParticleShaders =
 
 	fragment:
 	[
-		ParticleShaderChunks.uniforms,
+		ParticleShaderUniforms,
 
 		ShaderChunk.common,
 		ShaderChunk.fog_pars_fragment,
