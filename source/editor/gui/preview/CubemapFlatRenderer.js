@@ -1,4 +1,6 @@
 import {ShaderMaterial, OrthographicCamera, Scene, PlaneBufferGeometry, BufferAttribute, Mesh} from "three";
+import CubemapFlatVertex from "./cubemap_flat_vertex.glsl";
+import CubemapFlatFragment from "./cubemap_flat_fragment.glsl";
 
 /**
  * The cube map flat renderer generates preview for cube map textures.
@@ -34,19 +36,8 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 
 	var material = new ShaderMaterial(
 	{
-		vertexShader: "attribute vec3 envLookup;\n\
-		varying vec3 vEnvLookup;\n\
-		void main()\n\
-		{\n\
-			vEnvLookup = envLookup;\n\
-			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-		}",
-		fragmentShader: "uniform samplerCube envMap;\n\
-		varying vec3 vEnvLookup;\n\
-		void main()\n\
-		{\n\
-			gl_FragColor = textureCube(envMap, vEnvLookup);\n\
-		}",
+		vertexShader: CubemapFlatVertex,
+		fragmentShader: CubemapFlatFragment,
 		uniforms:
 		{
 			envMap: {type: "t", value: envMap}
