@@ -26,7 +26,6 @@ import {Texture, Vector2, Math as TMath, AdditiveBlending, Vector4, ShaderMateri
  * @property {number} scale The scale factor to apply to this group"s particle sizes. Useful for setting particle sizes to be relative to renderer size.
  */
 
-
 /**
  * The ParticleGroup class. Creates a new group, containing a material, geometry, and mesh.
  *

@@ -1,6 +1,8 @@
 import {MathUtils} from "../../utils/MathUtils.js";
 import {DirectionalLight} from "../lights/DirectionalLight.js";
 import {Group, Color, HemisphereLight, SphereBufferGeometry, ShaderMaterial, BackSide, Mesh, Object3D} from "three";
+import SkyFragmentShader from "./sky_fragment.glsl";
+import SkyVertexShader from "./sky_vertex.glsl";
 
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
@@ -104,8 +106,8 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	var geometry = new SphereBufferGeometry(1500, 16, 16);
 	var material = new ShaderMaterial(
 	{
-		vertexShader: Sky.VERTEX,
-		fragmentShader: Sky.FRAGMENT,
+		vertexShader: SkyVertexShader,
+		fragmentShader: SkyFragmentShader,
 		uniforms: uniforms,
 		side: BackSide
 	});
@@ -164,25 +166,6 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 }
 
 Sky.prototype = Object.create(Group.prototype);
-
-Sky.VERTEX = "varying vec3 vWorldPosition;\n\
-void main()\n\
-{\n\
-	vec4 worldPosition = modelMatrix * vec4(position, 1.0);\n\
-	vWorldPosition = worldPosition.xyz;\n\
-	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-}";
-
-Sky.FRAGMENT = "uniform vec3 topColor;\n\
-uniform vec3 bottomColor;\n\
-uniform float offset;\n\
-uniform float exponent;\n\
-varying vec3 vWorldPosition;\n\
-void main()\n\
-{\n\
-	float h = normalize(vWorldPosition + offset).y;\n\
-	gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\n\
-}";
 
 Sky.prototype.initialize = function()
 {
