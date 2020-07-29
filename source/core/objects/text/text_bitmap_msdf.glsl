@@ -1,5 +1,3 @@
-#extension GL_OES_standard_derivatives : enable
-
 /*
  * Shader object used to render single channel MSDF data.
  *
@@ -22,8 +20,8 @@ float median(float r, float g, float b)
 
 void main()
 {
-	vec3 sample = texture2D(map, vUv).rgb;
-	float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
+	vec3 smpl = texture2D(map, vUv).rgb;
+	float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
 	float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);
 	gl_FragColor = vec4(color, 1.0 - alpha);
 }

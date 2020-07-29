@@ -350,6 +350,8 @@ TextBitmap.prototype.updateShader = function()
 		transparent: true,
 		depthTest: true
 	});
+
+	this.material.extensions.derivatives = this.shader === TextBitmap.MSDF;
 };
 
 
