@@ -254,7 +254,7 @@ Scene.prototype.render = function(renderer)
 
 	if(this.cameras.length > 0)
 	{
-		if(this.program.vrEnabled)
+		if(this.program.xrEnabled)
 		{
 			for(var i = 0; i < this.cameras.length; i++)
 			{

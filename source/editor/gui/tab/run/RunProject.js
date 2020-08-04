@@ -254,7 +254,7 @@ RunProject.prototype.runProgram = function()
 		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
-			if(program.vrEnabled)
+			if(program.xrEnabled)
 			{
 				program.exitVR();
 			}
@@ -264,12 +264,20 @@ RunProject.prototype.runProgram = function()
 			}
 		});
 	}
-	else if(this.program.arAvailable())
+	
+	if(this.program.arAvailable())
 	{
 		// Show AR button
 		this.arButton.setVisibility(true);
 
-		// TODO <ADD CODE>
+		if(program.xrEnabled)
+		{
+			program.exitAR();
+		}
+		else
+		{
+			program.enterAR();
+		}
 
 	}
 

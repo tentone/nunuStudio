@@ -458,7 +458,7 @@ App.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
-		if(this.program.vrEnabled)
+		if(this.program.xrEnabled)
 		{
 			this.program.exitVR();
 		}

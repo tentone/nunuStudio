@@ -30,10 +30,10 @@ ARHandler.webXRSession = null;
  *
  * Checks if there is support for WebAR or WebXR.
  *
- * @method ARAvailable
+ * @method arAvailable
  * @return {boolean} True if the browser supports AR.
  */
-ARHandler.ARAvailable = function()
+ARHandler.arAvailable = function()
 {
 	return ARHandler.webXRAvailable;
 };
@@ -56,7 +56,9 @@ ARHandler.enterAR = function(renderer, onSuccess)
 		ARHandler.getWebXRSession().then(function(session)
 		{
 			renderer.xr.enabled = true;
+			renderer.xr.setReferenceSpaceType("local");
 			renderer.xr.setSession(session);
+
 			ARHandler.webXRSession = session;
 
 			if(onSuccess !== undefined)
@@ -102,15 +104,13 @@ ARHandler.getWebXRSession = function()
 		return Promise.reject("WebXR support is not available.");
 	}
 
-	var sessionInit = {optionalFeatures: ["local-floor", "bounded-floor"]};
-
-	return navigator.xr.requestSession("immersive-AR",  sessionInit);
+	return navigator.xr.requestSession("immersive-ar", {});
 };
 
 // Look into WebXR support (chrome, edge, ...)
 if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
-	navigator.xr.isSessionSupported("immersive-AR").then(function(supported)
+	navigator.xr.isSessionSupported("immersive-ar").then(function(supported)
 	{
 		ARHandler.webXRAvailable = true;
 	});

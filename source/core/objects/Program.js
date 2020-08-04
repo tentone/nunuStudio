@@ -6,6 +6,7 @@ import {TargetConfig} from "../platform/TargetConfig.js";
 import {Script} from "./script/Script.js";
 import {App} from "../App.js";
 import {VRHandler} from "../VRHandler.js";
+import {ARHandler} from "../ARHandler.js";
 import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
 import {Keyboard} from "../input/Keyboard.js";
@@ -233,12 +234,14 @@ function Program()
 	this.clock = new Clock();
 
 	/**
-	 * VR runtime control, true when the app is running in VR mode.
+	 * WebX runtime control, true when the app is running in an XR environment.
+	 * 
+	 * XR enviroment can be VR or AR only one of them can be used at a time.
 	 *
-	 * @property vrEnabled
+	 * @property xrEnabled
 	 * @type {boolean}
 	 */
-	this.vrEnabled = false;
+	this.xrEnabled = false;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -421,9 +424,38 @@ Program.prototype.updateRenderer = function()
  */
 Program.prototype.arAvailable = function()
 {
-	// TODO <ADD CODE HERE>
-	
-	return this.ar;
+	return this.ar && ARHandler.arAvailable();
+};
+
+/**
+ * Enter virtual reality mode.
+ * 
+ * @method enterAR
+ */
+Program.prototype.enterAR = function()
+{
+	if(this.arAvailable() && !self.xrEnabled)
+	{
+		var self = this;
+		VRHandler.enterAR(this.renderer, function()
+		{
+			self.xrEnabled = true;
+		});
+	}
+};
+
+/**
+ * Exit augmented reality mode.
+ * 
+ * @method exitAR
+ */
+Program.prototype.exitAR = function()
+{
+	if(self.xrEnabled)
+	{
+		ARHandler.exitAR(this.renderer);
+		this.xrEnabled = false;
+	}
 };
 
 /**
@@ -448,13 +480,13 @@ Program.prototype.enterVR = function()
 		var self = this;
 		VRHandler.enterVR(this.renderer, function()
 		{
-			self.vrEnabled = true;
+			self.xrEnabled = true;
 		});
 	}
 };
 
 /**
- * Exit virtual relity mode.
+ * Exit virtual reality mode.
  * 
  * @method exitVR
  */
@@ -463,7 +495,7 @@ Program.prototype.exitVR = function()
 	if(this.vr)
 	{
 		VRHandler.exitVR(this.renderer);
-		this.vrEnabled = false;
+		this.xrEnabled = false;
 	}
 };
 
