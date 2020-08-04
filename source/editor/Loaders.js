@@ -41,6 +41,7 @@ import {XLoader} from "three/examples/jsm/loaders/XLoader";
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
 import {PCDLoader} from "three/examples/jsm/loaders/PCDLoader";
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
+import {VOXLoader} from "three/examples/jsm/loaders/VOXLoader";
 import {AWDLoader} from "./loaders/AWDLoader";
 import {BabylonLoader} from "./loaders/BabylonLoader";
 import "js.blend/build/js.blend.js";
@@ -440,6 +441,29 @@ Loaders.loadModel = function(file, parent)
 				try
 				{
 					var loader = new ThreeMFLoader();
+					loader.parse(reader.result, function(obj)
+					{
+						Editor.addObject(obj, parent);
+						modal.destroy();
+					});
+				}
+				catch(e)
+				{
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		//VOX
+		else if(extension === "vox")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new VOXLoader();
 					loader.parse(reader.result, function(obj)
 					{
 						Editor.addObject(obj, parent);
