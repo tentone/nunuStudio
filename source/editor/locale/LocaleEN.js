@@ -494,6 +494,7 @@ var LocaleEN = {
 
 	// Run tab
 	toggleVR: "Toggle Virtual Reality",
+	toggleAR: "Toggle Augmented Reality",
 	toggleFullscreen: "Toggle Fullscreen",
 
 	// Messages

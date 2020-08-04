@@ -82,6 +82,26 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.setVisibility(false);
 	this.vrButton.setStyle("borderRadius", "5px");
 	this.vrButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
+
+	/**
+	 * AR button used to toggle ar mode.
+	 *
+	 * It is only displayed when AR is available.
+	 *
+	 * @attribute arButton
+	 * @type {ButtonIcon}
+	 */
+	this.arButton = new ButtonIcon(this);
+	this.arButton.size.set(30, 30);
+	this.arButton.position.set(40, 5);
+	this.arButton.setImage(Global.FILE_PATH + "icons/misc/ar.png");
+	this.arButton.setAltText(Locale.toggleAR);
+	this.arButton.setImageScale(0.8, 0.8);
+	this.arButton.updateSize();
+	this.arButton.updatePosition(Component.BOTTOM_RIGHT);
+	this.arButton.setVisibility(false);
+	this.arButton.setStyle("borderRadius", "5px");
+	this.arButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 }
 
 RunProject.prototype = Object.create(TabComponent.prototype);
@@ -243,6 +263,14 @@ RunProject.prototype.runProgram = function()
 				program.enterVR();
 			}
 		});
+	}
+	else if(this.program.arAvailable())
+	{
+		// Show AR button
+		this.arButton.setVisibility(true);
+
+		// TODO <ADD CODE>
+
 	}
 
 	var self = this;
