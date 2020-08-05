@@ -8,3 +8,4 @@ CHANGELOG.md
 CODESTYLE.md
 package-lock.json
 webpack.*
+node_modules
