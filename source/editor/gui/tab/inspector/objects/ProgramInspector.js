@@ -1,20 +1,11 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {RendererConfiguration} from "../../../../../core/renderer/RendererConfiguration.js";
-import {Program} from "../../../../../core/objects/Program.js";
-import {Mouse} from "../../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {ObjectInspector} from "./ObjectInspector.js";
-import {Inspector} from "../Inspector.js";
-import {Interface} from "../../../Interface.js";
 import {RendererConfigurationFormSnippet} from "../../../form-snippet/RendererConfigurationFormSnippet.js";
-import {FormSnippet} from "../../../form-snippet/FormSnippet.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {TextBox} from "../../../../components/input/TextBox.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
 
 function ProgramInspector(parent, object)
 {
@@ -52,7 +43,7 @@ function ProgramInspector(parent, object)
 
 	// Mouse lock
 	this.lockPointer = new CheckBox(this.form);
-	this.form.addText("Lock pointer");
+	this.form.addText(Locale.lockPointer);
 	this.lockPointer.size.set(18, 18);
 	this.lockPointer.setOnChange(function()
 	{
@@ -72,13 +63,27 @@ function ProgramInspector(parent, object)
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
 
+	// AR
+	this.form.addText(Locale.augmentedReality);
+	this.form.nextRow();
+
+	this.ar = new CheckBox(this.form);
+	this.form.addText(Locale.enabled);
+	this.ar.size.set(18, 18);
+	this.ar.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "ar", self.ar.getValue()));
+	});
+	this.form.add(this.ar);
+	this.form.nextRow();
+
 	// VR
 	this.form.addText(Locale.virtualReality);
 	this.form.nextRow();
 
 	// VR Enabled
 	this.vr = new CheckBox(this.form);
-	this.form.addText("VR Enabled");
+	this.form.addText(Locale.enabled);
 	this.vr.size.set(18, 18);
 	this.vr.setOnChange(function()
 	{
@@ -88,7 +93,7 @@ function ProgramInspector(parent, object)
 	this.form.nextRow();
 
 	// VR Movement Scale
-	this.form.addText("Room Scale");
+	this.form.addText(Locale.roomScale);
 	this.vrScale = new NumberBox(this.form);
 	this.vrScale.size.set(50, 18);
 	this.vrScale.setRange(0, 1000);

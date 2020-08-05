@@ -1,7 +1,6 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Inspector} from "../Inspector.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 
 function LockedInspector(parent, object)
 {

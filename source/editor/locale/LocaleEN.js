@@ -1,5 +1,3 @@
-import {LocaleManager} from "./LocaleManager.js";
-
 /**
  * Locale EN defines text of the GUI for the English language.
  * 
@@ -137,6 +135,8 @@ var LocaleEN = {
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	lockPointer: "Lock Pointer",
+	roomScale: "Room Scale",
 	moveSpeed: "Move Speed",
 	movePlane: "Move Plane",
 	kernelRadius: "Kernel Radius",
@@ -339,6 +339,7 @@ var LocaleEN = {
 	version: "Version",
 	author: "Author",
 	virtualReality: "Virtual Reality",
+	augmentedReality: "Augmented Reality",
 	pixelRatio: "Pixel Ratio",
 	radius: "Radius",
 	segments: "Segments",

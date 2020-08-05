@@ -56,6 +56,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.setStyle("borderRadius", "5px");
 	this.fullscreenButton.setVisibility(true);
 	this.fullscreenButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
+
 	var fullscreen = true;
 	this.fullscreenButton.setOnClick(function()
 	{
@@ -93,7 +94,7 @@ function RunProject(parent, closeable, container, index)
 	 */
 	this.arButton = new ButtonIcon(this);
 	this.arButton.size.set(30, 30);
-	this.arButton.position.set(40, 5);
+	this.arButton.position.set(75, 5);
 	this.arButton.setImage(Global.FILE_PATH + "icons/misc/ar.png");
 	this.arButton.setAltText(Locale.toggleAR);
 	this.arButton.setImageScale(0.8, 0.8);
@@ -249,7 +250,8 @@ RunProject.prototype.runProgram = function()
 	{
 		// Show VR button
 		this.vrButton.setVisibility(true);
-
+		this.vrButton.position.set(40, 5);
+		
 		// Create VR switch callback
 		var program = this.program;
 		this.vrButton.setOnClick(function()
@@ -269,16 +271,20 @@ RunProject.prototype.runProgram = function()
 	{
 		// Show AR button
 		this.arButton.setVisibility(true);
+		this.arButton.position.set(this.program.vrAvailable() ? 75 : 40, 5);
 
-		if(program.xrEnabled)
+		var program = this.program;
+		this.arButton.setOnClick(function()
 		{
-			program.exitAR();
-		}
-		else
-		{
-			program.enterAR();
-		}
-
+			if(program.xrEnabled)
+			{
+				program.exitAR();
+			}
+			else
+			{
+				program.enterAR();
+			}
+		});
 	}
 
 	var self = this;

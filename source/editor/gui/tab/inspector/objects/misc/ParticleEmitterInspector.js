@@ -1,11 +1,7 @@
 import {Locale} from "../../../../../locale/LocaleManager.js";
-import {ParticleEmitter} from "../../../../../../core/objects/particle/ParticleEmitter.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
 import {ObjectInspector} from "../ObjectInspector.js";
-import {Inspector} from "../../Inspector.js";
 import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
 function ParticleEmitterInspector(parent, object)

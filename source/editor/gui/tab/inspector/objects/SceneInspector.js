@@ -1,13 +1,7 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
-import {Scene} from "../../../../../core/objects/Scene.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {ObjectInspector} from "./ObjectInspector.js";
-import {Inspector} from "../Inspector.js";
-import {Interface} from "../../../Interface.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {TableForm} from "../../../../components/TableForm.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureChooser} from "../../../../components/input/TextureChooser.js";
@@ -16,9 +10,7 @@ import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
-import {Button} from "../../../../components/buttons/Button.js";
 import {Color, Fog, FogExp2, Texture} from "three";
 
 function SceneInspector(parent, object)
@@ -67,7 +59,7 @@ function SceneInspector(parent, object)
 	this.backgroundTexture = new TextureChooser(this.form);
 	this.backgroundTexture.acceptAll = true;
 	this.backgroundTexture.size.set(0, 100);
-	this.backgroundTexture.setOnChange(function(file)
+	this.backgroundTexture.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
 	});
@@ -89,7 +81,7 @@ function SceneInspector(parent, object)
 	this.form.addText(Locale.environmentMap);
 	this.environment = new CubeTextureBox(this.form);
 	this.environment.size.set(0, 100);
-	this.environment.setOnChange(function(file)
+	this.environment.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "environment", self.environment.getValue()));
 	});
