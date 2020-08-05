@@ -121,6 +121,7 @@ ProgramInspector.prototype.updateInspector = function()
 	this.version.setText(this.object.version);
 	this.lockPointer.setValue(this.object.lockPointer);
 	this.handlePixelRatio.setValue(this.object.handlePixelRatio);
+	this.ar.setValue(this.object.ar);
 	this.vr.setValue(this.object.vr);
 	this.vrScale.setValue(this.object.vrScale);
 

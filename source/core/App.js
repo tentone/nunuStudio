@@ -474,6 +474,41 @@ App.prototype.toggleVR = function()
 };
 
 /**
+ * Check if augmented reality mode is available.
+ * 
+ * @method arAvailable
+ * @return {boolean} True if VR mode available
+ */
+App.prototype.arAvailable = function()
+{
+	return this.program !== null && this.program.vrAvailable();
+};
+
+/**
+ * Toggle augmented reality mode, only works if augmented reality mode is available.
+ * 
+ * @method toggleAR
+ */
+App.prototype.toggleAR = function()
+{
+	if(this.arAvailable())
+	{
+		if(this.program.xrEnabled)
+		{
+			this.program.exitAR();
+		}
+		else
+		{
+			this.program.enterAR();
+		}
+	}
+	else
+	{
+		console.warn("nunuStudio: Loaded program is not AR enabled.");
+	}
+};
+
+/**
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen

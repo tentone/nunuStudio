@@ -181,7 +181,7 @@ if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
 	{
-		VRHandler.webXRAvailable = true;
+		VRHandler.webXRAvailable = supported;
 	});
 }
 // Only look into WebVR support if WebXR is not available (firefox, samsung internet, ...)

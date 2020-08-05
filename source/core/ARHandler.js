@@ -112,7 +112,7 @@ if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-ar").then(function(supported)
 	{
-		ARHandler.webXRAvailable = true;
+		ARHandler.webXRAvailable = true; // supported;
 	});
 }
 

@@ -1,6 +1,8 @@
 export {Nunu} from "./Nunu.js";
 export {App} from "./App.js";
 export {FileSystem} from "./FileSystem.js";
+export {ARHandler} from "./ARHandler.js";
+export {VRHandler} from "./VRHandler.js";
 
 export {TargetConfig} from "./platform/TargetConfig.js";
 

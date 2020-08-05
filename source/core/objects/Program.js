@@ -765,6 +765,9 @@ Program.prototype.toJSON = function(meta, exportResources)
 	data.object.lockPointer = this.lockPointer;
 	data.object.handlePixelRatio = this.handlePixelRatio;
 	
+	// AR
+	data.object.ar = this.ar;
+	
 	// VR
 	data.object.vr = this.vr;
 	data.object.vrScale = this.vrScale;

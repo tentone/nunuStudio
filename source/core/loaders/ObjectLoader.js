@@ -496,6 +496,8 @@ ObjectLoader.prototype.parseObject = function(data)
 				object.author = data.author;
 				object.version = data.version;
 
+				object.ar = data.ar === true;
+				
 				object.vr = data.vr;
 				object.vrScale = data.vrScale;
 
