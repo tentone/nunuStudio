@@ -107,7 +107,7 @@ ARHandler.getWebXRSession = function()
 	return navigator.xr.requestSession("immersive-ar", {});
 };
 
-// Look into WebXR support (chrome, edge, ...)
+// Look into WebXR support with AR extensions (chrome, edge, ...)
 if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-ar").then(function(supported)
