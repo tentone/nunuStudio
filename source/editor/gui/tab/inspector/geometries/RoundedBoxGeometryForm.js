@@ -1,13 +1,8 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
-import {GeometryForm} from "./GeometryForm.js";
-import {BoxGeometryForm} from "./BoxGeometryForm.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
-import {Form} from "../../../../components/Form.js";
 
 function RoundedBoxGeometryForm(form, object)
 {
