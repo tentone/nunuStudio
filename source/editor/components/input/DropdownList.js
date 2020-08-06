@@ -1,5 +1,4 @@
 import {Global} from "../../Global.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
 
 function DropdownList(parent)

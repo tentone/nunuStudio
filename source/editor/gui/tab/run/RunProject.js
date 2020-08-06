@@ -8,7 +8,6 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
-import {ARHandler} from "../../../../core/ARHandler.js";
 
 /** 
  * Tab used to preview a project running.

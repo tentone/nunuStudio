@@ -1,6 +1,5 @@
 import {DirectionalLight as TDirectionalLight} from "three";
 
-
 /**
  * A light that gets emitted in a specific direction.
  * 

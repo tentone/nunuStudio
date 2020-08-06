@@ -1,10 +1,6 @@
-import {Pass} from "../../../../../core/postprocessing/Pass.js";
-import {HueSaturationPass} from "../../../../../core/postprocessing/pass/HueSaturationPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {PassNode} from "./PassNode.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {Slider} from "../../../../components/input/Slider.js";
 
 function HueSaturationPassNode(parent)

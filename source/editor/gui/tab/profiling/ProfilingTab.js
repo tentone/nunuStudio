@@ -2,7 +2,6 @@ import {Locale} from "../../../locale/LocaleManager.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Component} from "../../../components/Component.js";
 import {Canvas} from "../../../components/Canvas.js";
 
 /**
@@ -38,7 +37,6 @@ ProfilingTab.prototype.update = function()
 		var renderer = tab.renderer || (tab.canvas ? tab.canvas.renderer : undefined);
 		if(renderer !== undefined)
 		{
-			var info = renderer.info;
 			
 			// TODO <CHANGE THIS>
 			//console.log(info);

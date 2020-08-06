@@ -1,4 +1,3 @@
-
 import {BufferGeometry, DefaultLoadingManager, DirectionalLight, FileLoader, Float32BufferAttribute, Group, HemisphereLight, Mesh, MeshPhongMaterial, PerspectiveCamera, PointLight, Scene, SpotLight} from "three";
 
 /**

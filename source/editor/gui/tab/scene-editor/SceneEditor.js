@@ -19,7 +19,6 @@ import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../core/input/Keyboard.js";
-import {FileSystem} from "../../../../core/FileSystem.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
 import {Settings} from "../../../Settings.js";
 import {Loaders} from "../../../Loaders.js";

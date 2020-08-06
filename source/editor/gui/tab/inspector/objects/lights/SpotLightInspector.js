@@ -1,18 +1,11 @@
 import {Locale} from "../../../../../locale/LocaleManager.js";
-import {SpotLight} from "../../../../../../core/objects/lights/SpotLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
 import {ObjectInspector} from "../ObjectInspector.js";
-import {Inspector} from "../../Inspector.js";
-import {Interface} from "../../../../Interface.js";
 import {LightShadowFormSnippet} from "../../../../form-snippet/LightShadowFormSnippet.js";
-import {FormSnippet} from "../../../../form-snippet/FormSnippet.js";
 import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
 import {Slider} from "../../../../../components/input/Slider.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Form} from "../../../../../components/Form.js";
 import {Color} from "three";
 
 function SpotLightInspector(parent, object)

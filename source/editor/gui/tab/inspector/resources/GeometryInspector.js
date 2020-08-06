@@ -1,17 +1,10 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Timer} from "../../../../../core/utils/timer/Timer.js";
 import {AnimationTimer} from "../../../../../core/utils/timer/AnimationTimer.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {EditorOrbitControls} from "../../scene-editor/controls/EditorOrbitControls.js";
 import {ResourceInspector} from "./ResourceInspector.js";
-import {Inspector} from "../Inspector.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {RendererCanvas} from "../../../../components/RendererCanvas.js";
-import {Canvas} from "../../../../components/Canvas.js";
 import {Scene, DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3, GridHelper} from "three";
 
 function GeometryInspector(parent, object)

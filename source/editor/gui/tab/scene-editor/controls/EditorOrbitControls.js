@@ -3,7 +3,6 @@ import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../core/input/Key.js";
 import {OrientationCube} from "../utils/OrientationCube.js";
 import {EditorControls} from "./EditorControls.js";
 import {Editor} from "../../../../Editor.js";

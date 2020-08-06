@@ -1,12 +1,7 @@
 import {Locale} from "../../../../../locale/LocaleManager.js";
-import {Sky} from "../../../../../../core/objects/misc/Sky.js";
-import {HemisphereLight} from "../../../../../../core/objects/lights/HemisphereLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
 import {ObjectInspector} from "../ObjectInspector.js";
-import {Inspector} from "../../Inspector.js";
 import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {Color} from "three";
 

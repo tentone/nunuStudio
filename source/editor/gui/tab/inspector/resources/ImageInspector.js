@@ -1,16 +1,11 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {Image} from "../../../../../core/resources/Image.js";
 import {ResourceInspector} from "./ResourceInspector.js";
-import {Inspector} from "../Inspector.js";
-import {Text} from "../../../../components/Text.js";
 import {ImageChooser} from "../../../../components/input/ImageChooser.js";
 
 function ImageInspector(parent, object)
 {
 	ResourceInspector.call(this, parent, object);
 
-	var self = this;
 
 	this.form.addText(Locale.image);
 	this.image = new ImageChooser(this.form);

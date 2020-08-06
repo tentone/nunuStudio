@@ -1,7 +1,4 @@
-import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
-import {Keyboard} from "../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../core/input/Key.js";
 import {Settings} from "../../../../Settings.js";
 import {EditorOrbitControls} from "./EditorOrbitControls.js";
 import {Editor} from "../../../../Editor.js";
@@ -22,7 +19,7 @@ function EditorPlanarControls(mode)
 
 EditorPlanarControls.prototype = Object.create(EditorOrbitControls.prototype);
 
-EditorPlanarControls.prototype.setOrientation = function(code){};
+EditorPlanarControls.prototype.setOrientation = function(){};
 
 EditorPlanarControls.prototype.setMode = function(mode)
 {
@@ -63,7 +60,7 @@ EditorPlanarControls.prototype.reset = function()
 	this.updateControls();
 };
 
-EditorPlanarControls.prototype.update = function(mouse, keyboard)
+EditorPlanarControls.prototype.update = function(mouse)
 {
 	var needsUpdate = false;
 

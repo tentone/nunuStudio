@@ -1,8 +1,5 @@
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {OrientationCube} from "../utils/OrientationCube.js";
-import {Editor} from "../../../../Editor.js";
 import {Group, Object3D} from "three";
 
 /**
@@ -57,14 +54,14 @@ EditorControls.prototype.reset = function(){};
  * @method focusObject
  * @param {Object3D} object Object to point camera at.
  */
-EditorControls.prototype.focusObject = function(object){};
+EditorControls.prototype.focusObject = function(){};
 
 /** 
  * Set controls orientation, using orientation code form OrientationCube 
  *
  * @method setOrientation
  */
-EditorControls.prototype.setOrientation = function(orientation){};
+EditorControls.prototype.setOrientation = function(){};
 
 /**
  * Update the orbit controls position, the keyboard movement should be optional.
@@ -74,7 +71,7 @@ EditorControls.prototype.setOrientation = function(orientation){};
  * @param {Keyboard} keyboard
  * @param {number} delta Time passed after from the last update.
  */
-EditorControls.prototype.update = function(mouse, keyboard, delta){};
+EditorControls.prototype.update = function(){};
 
 /**
  * Update controls position and rotation.

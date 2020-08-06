@@ -26,7 +26,6 @@ import {OrthographicCamera} from "../../../../../core/objects/cameras/Orthograph
 import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
 import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
-import {Nunu} from "../../../../../core/Nunu.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";

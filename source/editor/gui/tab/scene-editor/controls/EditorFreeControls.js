@@ -2,7 +2,6 @@ import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
 import {MathUtils} from "../../../../../core/utils/MathUtils.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../core/input/Key.js";
 import {OrientationCube} from "../utils/OrientationCube.js";
 import {EditorControls} from "./EditorControls.js";
 import {Editor} from "../../../../Editor.js";

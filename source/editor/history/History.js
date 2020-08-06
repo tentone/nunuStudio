@@ -1,5 +1,4 @@
 import {Action} from "./action/Action.js";
-import {Editor} from "../Editor.js";
 
 /**
  * Manages the history state of multiple objects.

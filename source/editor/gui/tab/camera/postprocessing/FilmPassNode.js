@@ -1,11 +1,7 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Pass} from "../../../../../core/postprocessing/Pass.js";
-import {FilmPass} from "../../../../../core/postprocessing/pass/FilmPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {PassNode} from "./PassNode.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 

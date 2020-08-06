@@ -1,6 +1,5 @@
 import {AmbientLight as TAmbientLight} from "three";
 
-
 /**
  * Ambient lights are used to create base ilumanition for the scene.
  *

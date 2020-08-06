@@ -1,8 +1,5 @@
-import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
 import {DrawableInspector} from "../DrawableInspector.js";
-import {Inspector} from "../../Inspector.js";
 import {GeometryForm} from "../../geometries/GeometryForm.js";
-import {Form} from "../../../../../components/Form.js";
 
 function MeshInspector(parent, object)
 {
