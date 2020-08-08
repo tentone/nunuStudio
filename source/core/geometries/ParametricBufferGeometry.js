@@ -1,4 +1,4 @@
-import {ParametricBufferGeometry as TParametricBufferGeometry} from "three";
+import {ParametricBufferGeometry as TParametricBufferGeometry, Vector3} from "three";
 
 /**
  * Parametric bufffer geometry are constructed from javascript code describing a parametric surface.
@@ -15,7 +15,9 @@ import {ParametricBufferGeometry as TParametricBufferGeometry} from "three";
  */
 function ParametricBufferGeometry(code, slices, stacks)
 {
-	TParametricBufferGeometry.call(this, this.compile(code), slices, stacks);
+	var generator = this.compile(code);
+	
+	TParametricBufferGeometry.call(this, generator, slices, stacks);
 
 	this.type = "ParametricBufferGeometry";
 
@@ -35,7 +37,18 @@ ParametricBufferGeometry.prototype = Object.create(TParametricBufferGeometry.pro
  */
 ParametricBufferGeometry.prototype.compile = function(code)
 {
-	return new Function("u, v, target", code);
+	try
+	{
+		return new Function("u, v, target", code);
+	}
+	catch(e)
+	{
+		console.error("nunuStudio: Error occured while compiling ParametricBufferGeometry code.", e);
+	}
+
+	return function(u, v, target) {
+		return target || new Vector3();
+	}
 };
 
 export {ParametricBufferGeometry};
