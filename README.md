@@ -7,14 +7,14 @@
  - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters and a powerful scripting API that allows the creation of complex applications.
  - The project  build on top of open source libraries with good community support like [nwjs.io](https://nwjs.io), [three.js](https://github.com/mrdoob/three.js), [cannon.js](https://schteppe.github.io/cannon.js), [opentype](https://opentype.js.org), [jscolor.com](http://jscolor.com), [codemirror.net](https://codemirror.net), [leapjs](https://github.com/leapmotion/leapjs), [jshint.com](https://jshint.com), [yuidoc](https://yui.github.io/yuidoc)
 
- - Fully featured [web version](https://nunustudio.org/editor) of the editor is available on the project page.
+ - Fully featured [web version](https://www.nunustudio.org/build/editor/index.html) of the editor is available on the project page.
  - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/page/img/github/web.png">
 
 ### Getting Started
  - [API Documentation](https://nunustudio.org/docs) with full details about the inner working of every module are available. These can also be generated from the project source code by running `npm run docs`.
- - Basic tutorials are available on the [project page](). The basic tutorials explain step-by-step how to use the editor.
+ - Basic tutorials are available on the [project page](https://www.nunustudio.org/page/learn.html). The basic tutorials explain step-by-step how to use the editor.
 
 
 
