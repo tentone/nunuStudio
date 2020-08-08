@@ -811,7 +811,7 @@ Editor.undo = function()
  */
 Editor.createDefaultResouces = function()
 {
-	Editor.defaultImage = new Image(Global.FILE_PATH + "default.png");
+	Editor.defaultImage = new Image(Global.FILE_PATH + "uv_color.jpg");
 	Editor.defaultFont = new Font(Global.FILE_PATH + "default.json");
 	Editor.defaultAudio = new Audio(Global.FILE_PATH + "default.mp3");
 
