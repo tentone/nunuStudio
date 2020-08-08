@@ -285,19 +285,6 @@ function RendererConfigurationFormSnippet(form, object)
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
 
-	// Tonemapping whitepoint
-	this.form.addText(Locale.whitepoint);
-	this.toneMappingWhitePoint = new NumberBox(this.form);
-	this.toneMappingWhitePoint.size.set(60, 18);
-	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
-	this.toneMappingWhitePoint.setStep(0.1);
-	this.toneMappingWhitePoint.setOnChange(function()
-	{
-		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()), updateRenderers));
-	});
-	this.form.add(this.toneMappingWhitePoint);
-	this.form.nextRow();
-
 	// Check shader errors
 	this.form.addText(Locale.checkShaderErrors).setAltText(Locale.hintCheckShaderErrors);
 	this.checkShaderErrors = new CheckBox(this.form);
@@ -326,7 +313,6 @@ RendererConfigurationFormSnippet.prototype.updateValues = function()
 	this.shadowsAutoUpdate.setValue(this.object.shadowsAutoUpdate);
 	this.toneMapping.setValue(this.object.toneMapping);
 	this.toneMappingExposure.setValue(this.object.toneMappingExposure);
-	this.toneMappingWhitePoint.setValue(this.object.toneMappingWhitePoint);
 	this.sortObjects.setValue(this.object.sortObjects);
 	this.gammaFactor.setValue(this.object.gammaFactor);
 	this.precision.setValue(this.object.precision);

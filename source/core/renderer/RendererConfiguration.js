@@ -127,14 +127,6 @@ function RendererConfiguration(options)
 	 */
 	this.toneMappingExposure = 1.0;
 
-	/**
-	 * Tone mapping white point.
-	 *
-	 * @property toneMappingWhitePoint
-	 * @type {number}
-	 */
-	this.toneMappingWhitePoint = 1.0;
-
 	/** 
 	 * If true the renderer sorts the objects from back to front for rendering.
 	 *
@@ -327,7 +319,6 @@ RendererConfiguration.prototype.apply = function(renderer)
 
 	renderer.toneMapping = this.toneMapping;
 	renderer.toneMappingExposure = this.toneMappingExposure;
-	renderer.toneMappingWhitePoint = this.toneMappingWhitePoint;
 
 	renderer.debug.checkShaderErrors = this.checkShaderErrors;
 	renderer.sortObjects = this.sortObjects;
@@ -355,7 +346,6 @@ RendererConfiguration.prototype.toJSON = function()
 		shadowsAutoUpdate: this.shadowsAutoUpdate,
 		toneMapping: this.toneMapping,
 		toneMappingExposure: this.toneMappingExposure,
-		toneMappingWhitePoint: this.toneMappingWhitePoint,
 		sortObjects: this.sortObjects,
 		checkShaderErrors: this.checkShaderErrors,
 		gammaFactor: this.gammaFactor,
@@ -386,7 +376,6 @@ RendererConfiguration.prototype.fromJSON = function(data)
 	this.shadowsAutoUpdate = data.shadowsAutoUpdate;
 	this.toneMapping = data.toneMapping;
 	this.toneMappingExposure = data.toneMappingExposure;
-	this.toneMappingWhitePoint = data.toneMappingWhitePoint;
 	this.sortObjects = data.sortObjects;
 	this.checkShaderErrors = data.checkShaderErrors;
 	this.gammaFactor = data.gammaFactor;

@@ -511,7 +511,6 @@ ObjectLoader.prototype.parseObject = function(data)
 					object.rendererConfig.shadows = data.shadows;
 					object.rendererConfig.shadowsType = data.shadowsType;
 					object.rendererConfig.toneMapping = data.toneMapping;
-					object.rendererConfig.toneMappingWhitePoint = data.toneMappingWhitePoint;
 					object.rendererConfig.toneMappingExposure = data.toneMappingExposure;
 				}
 
