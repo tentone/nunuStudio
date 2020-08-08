@@ -429,6 +429,7 @@ var LocaleEN = {
 	twist: "Twist",
 
 	// Editor
+	custom: "Custom",
 	binary: "Binary",
 	modifiers: "Modifiers",
 	useTexture: "Use Texture",

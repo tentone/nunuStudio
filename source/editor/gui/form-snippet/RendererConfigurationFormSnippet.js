@@ -8,7 +8,7 @@ import {Editor} from "../../Editor.js";
 import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
 import {CheckBox} from "../../components/input/CheckBox.js";
-import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, VSMShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
+import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, VSMShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CustomToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
 
 /** 
  * Renderer configuration object form template.
@@ -262,9 +262,9 @@ function RendererConfigurationFormSnippet(form, object)
 	this.toneMapping.addValue(Locale.none, NoToneMapping);
 	this.toneMapping.addValue(Locale.linear, LinearToneMapping);
 	this.toneMapping.addValue("Reinhard", ReinhardToneMapping);
-	this.toneMapping.addValue("Uncharted", Uncharted2ToneMapping);
 	this.toneMapping.addValue("Cineon", CineonToneMapping);
 	this.toneMapping.addValue("ACES Filmic", ACESFilmicToneMapping);
+	this.toneMapping.addValue(Locale.custom, CustomToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()), updateRenderers));
