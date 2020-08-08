@@ -28,6 +28,7 @@ import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
+import {ParametricBufferGeometry} from "../../../../../core/geometries/ParametricBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";
@@ -345,38 +346,36 @@ SideBar.prototype.createObject = function()
 	}, Locale.terrain);
 
 	// Parametric
-	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
+	models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{
-		var klein = function (v, u, optionalTarget)
+		var klein = `
+		var result = target || new Vector3();
+
+		u *= Math.PI;
+		v *= 2 * Math.PI;
+
+		u = u * 2;
+		var x, y, z;
+		if (u < Math.PI)
 		{
-			var result = optionalTarget || new Vector3();
+			x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
+			z = - 8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
+		}
+		else
+		{
+			x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
+			z = - 8 * Math.sin(u);
+		}
 
-			u *= Math.PI;
-			v *= 2 * Math.PI;
+		y = - 2 * (1 - Math.cos(u) / 2) * Math.sin(v);
 
-			u = u * 2;
-			var x, y, z;
-			if (u < Math.PI)
-			{
-				x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
-				z = - 8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
-			}
-			else
-			{
-				x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
-				z = - 8 * Math.sin(u);
-			}
+		return result.set(x, y, z);`;
 
-			y = - 2 * (1 - Math.cos(u) / 2) * Math.sin(v);
-
-			return result.set(x, y, z);
-		};
-
-		var geometry = new ParametricGeometry(klein, 25, 25);
+		var geometry = new ParametricBufferGeometry(klein, 25, 25);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "parametric";
 		Editor.addObject(model, self.editor.scene);
-	}, Locale.parametric);*/
+	}, Locale.parametric);
 
 	models.updateOptions();
 

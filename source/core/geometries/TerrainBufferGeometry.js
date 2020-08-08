@@ -136,4 +136,5 @@ TerrainBufferGeometry.prototype.toJSON = function()
 
 	return data;
 };
+
 export {TerrainBufferGeometry};

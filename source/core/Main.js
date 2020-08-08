@@ -77,6 +77,7 @@ export {ObjectLoader} from "./loaders/ObjectLoader.js";
 export {CapsuleBufferGeometry} from "./geometries/CapsuleBufferGeometry.js";
 export {RoundedBoxBufferGeometry} from "./geometries/RoundedBoxBufferGeometry.js";
 export {TerrainBufferGeometry} from "./geometries/TerrainBufferGeometry.js";
+export {ParametricBufferGeometry} from "./geometries/ParametricBufferGeometry.js";
 
 export {TwistModifier} from "./geometries/modifiers/TwistModifier.js";
 

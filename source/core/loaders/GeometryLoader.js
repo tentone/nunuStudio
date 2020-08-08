@@ -2,6 +2,7 @@ import {LegacyGeometryLoader} from "./LegacyGeometryLoader.js";
 import {TerrainBufferGeometry} from "../geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../geometries/RoundedBoxBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../geometries/CapsuleBufferGeometry.js";
+import {ParametricBufferGeometry} from "../geometries/ParametricBufferGeometry.js";
 import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
 
 /**
@@ -86,7 +87,10 @@ GeometryLoader.prototype.parse = function(data)
 	{
 		geometry = new TerrainBufferGeometry(data.width, data.height, data.widthSegments, data.heightSegments, data.scale, this.images[data.image]);
 	}
-
+	else if(data.type === "ParametricBufferGeometry")
+	{
+		geometry = new ParametricBufferGeometry(data.code, data.slices, data.stacks);
+	}
 	else if(data.type === "Geometry")
 	{
 		var loader = new LegacyGeometryLoader();
