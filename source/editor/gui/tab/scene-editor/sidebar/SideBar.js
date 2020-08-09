@@ -349,27 +349,25 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{
 		var klein = `
-		var result = target || new Vector3();
+u *= Math.PI;
+v *= 2 * Math.PI;
 
-		u *= Math.PI;
-		v *= 2 * Math.PI;
+u = u * 2;
+var x, y, z;
+if (u < Math.PI)
+{
+	x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
+	z = - 8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
+}
+else
+{
+	x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
+	z = - 8 * Math.sin(u);
+}
 
-		u = u * 2;
-		var x, y, z;
-		if (u < Math.PI)
-		{
-			x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
-			z = - 8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
-		}
-		else
-		{
-			x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
-			z = - 8 * Math.sin(u);
-		}
+y = - 2 * (1 - Math.cos(u) / 2) * Math.sin(v);
 
-		y = - 2 * (1 - Math.cos(u) / 2) * Math.sin(v);
-
-		return result.set(x, y, z);`;
+return target.set(x, y, z);`;
 
 		var geometry = new ParametricBufferGeometry(klein, 25, 25);
 		var model = new Mesh(geometry, Editor.defaultMaterial);

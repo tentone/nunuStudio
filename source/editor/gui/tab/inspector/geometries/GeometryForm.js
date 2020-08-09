@@ -1,6 +1,7 @@
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
+import {ParametricBufferGeometry} from "../../../../../core/geometries/ParametricBufferGeometry.js";
 import {TorusKnotGeometryForm} from "./TorusKnotGeometryForm.js";
 import {TorusGeometryForm} from "./TorusGeometryForm.js";
 import {TetrahedronGeometryForm} from "./TetrahedronGeometryForm.js";
@@ -17,7 +18,7 @@ import {ConeGeometryForm} from "./ConeGeometryForm.js";
 import {CircleGeometryForm} from "./CircleGeometryForm.js";
 import {CapsuleGeometryForm} from "./CapsuleGeometryForm.js";
 import {BoxGeometryForm} from "./BoxGeometryForm.js";
-import {Form} from "../../../../components/Form.js";
+import {ParametricGeometryForm} from "./ParametricGeometryForm.js";
 import {BoxGeometry, BoxBufferGeometry, SphereGeometry, SphereBufferGeometry, TorusGeometry, TorusBufferGeometry, PlaneGeometry, PlaneBufferGeometry, ConeGeometry, ConeBufferGeometry, CylinderGeometry, CylinderBufferGeometry, TetrahedronGeometry, TetrahedronBufferGeometry, DodecahedronGeometry, DodecahedronBufferGeometry, CircleGeometry, CircleBufferGeometry, TorusKnotGeometry, TorusKnotBufferGeometry, RingGeometry, RingBufferGeometry, IcosahedronGeometry, IcosahedronBufferGeometry, OctahedronGeometry, OctahedronBufferGeometry} from "three";
 
 function GeometryForm(){}
@@ -89,6 +90,10 @@ GeometryForm.create = function(form, object)
 	else if(geometry instanceof TerrainBufferGeometry)
 	{
 		return new TerrainGeometryForm(form, object);
+	}
+	else if(geometry instanceof ParametricBufferGeometry)
+	{
+		return new ParametricGeometryForm(form, object);
 	}
 
 	return null;

@@ -46,6 +46,7 @@
 		"js.blend": "github:acweathersby/js.blend",
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
 		"tern": "^0.24.3",
+		"escher.js": "^0.1.15",
 		"three": "^0.119.1",
 		"sparse-octree": "^6.0.2",
 		"iterator-result": "^1.0.0",

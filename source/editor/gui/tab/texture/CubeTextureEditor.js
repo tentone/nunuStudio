@@ -13,7 +13,7 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {Division} from "../../../components/Division.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
+import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
@@ -121,7 +121,6 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.mapping.addValue("Cube Refraction", CubeRefractionMapping);
 	this.mapping.addValue("Equirectangular Reflection", EquirectangularReflectionMapping);
 	this.mapping.addValue("Equirectangular Reflection", EquirectangularRefractionMapping);
-	this.mapping.addValue("Spherical Reflection", SphericalReflectionMapping);
 	this.mapping.addValue("Cube UV Reflection", CubeUVReflectionMapping);
 	this.mapping.addValue("Cube UV Reflection", CubeUVRefractionMapping);
 	this.mapping.setOnChange(function()

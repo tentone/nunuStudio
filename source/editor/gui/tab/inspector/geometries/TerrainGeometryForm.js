@@ -88,4 +88,5 @@ TerrainGeometryForm.prototype.updateValues = function()
 	this.scale.setValue(this.object.geometry.parameters.scale);
 	this.image.setValue(this.object.geometry.image);
 };
+
 export {TerrainGeometryForm};

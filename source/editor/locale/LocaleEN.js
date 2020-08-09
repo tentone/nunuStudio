@@ -135,6 +135,8 @@ var LocaleEN = {
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	stacks: "Stacks",
+	slices: "Slices",
 	lockPointer: "Lock Pointer",
 	roomScale: "Room Scale",
 	moveSpeed: "Move Speed",
