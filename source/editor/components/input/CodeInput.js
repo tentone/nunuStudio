@@ -36,7 +36,7 @@ function CodeInput(parent)
 	this.code.setOption("tabSize", Editor.settings.code.tabSize);
 	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
 	this.code.setOption("autoCloseBrackets", Editor.settings.code.autoCloseBrackets);
-	
+
 	var self = this;
 
 	this.element.oncontextmenu = function(event)
@@ -44,6 +44,17 @@ function CodeInput(parent)
 		var context = new ContextMenu(DocumentBody);
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
+		
+		var refactor = context.addMenu(Locale.refactor);
+		refactor.addOption(Locale.rename, function()
+		{
+			self.server.rename(self.code);
+		});
+
+		refactor.addOption(Locale.select, function()
+		{
+			self.server.selectName(self.code);
+		});
 
 		context.addOption(Locale.search, function()
 		{
@@ -58,6 +69,11 @@ function CodeInput(parent)
 		context.addOption(Locale.replaceAll, function()
 		{
 			self.code.execCommand("replaceAll");
+		});
+
+		context.addOption(Locale.documentation, function()
+		{
+			self.server.jumpToDef(self.code);
 		});
 
 		context.addOption(Locale.copy, function()
@@ -102,6 +118,23 @@ function CodeInput(parent)
 }
 
 CodeInput.prototype = Object.create(Component.prototype);
+
+/**
+ * Set code editor font size.
+ *
+ * @method setFontSize
+ * @param {number} size
+ */
+CodeInput.prototype.setFontSize = function(size)
+{
+	if(size < 5)
+	{
+		size = 5;
+	}
+
+	Editor.settings.code.fontSize = size;
+	this.code.display.wrapper.style.fontSize = size + "px";
+};
 
 /**
  * Set language mode (javascript, glsl, etc).
