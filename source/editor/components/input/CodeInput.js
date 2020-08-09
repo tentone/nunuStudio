@@ -30,7 +30,13 @@ function CodeInput(parent)
 		},
 		gutters: ["CodeMirror-lint-markers"]
 	});
-
+	
+	this.code.setOption("theme", Editor.settings.code.theme);
+	this.code.setOption("indentWithTabs", Editor.settings.code.indentWithTabs);
+	this.code.setOption("tabSize", Editor.settings.code.tabSize);
+	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
+	this.code.setOption("autoCloseBrackets", Editor.settings.code.autoCloseBrackets);
+	
 	var self = this;
 
 	this.element.oncontextmenu = function(event)

@@ -348,8 +348,7 @@ SideBar.prototype.createObject = function()
 	// Parametric
 	models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{
-		var klein = `
-u *= Math.PI;
+		var klein = `u *= Math.PI;
 v *= 2 * Math.PI;
 
 u = u * 2;

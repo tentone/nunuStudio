@@ -24,7 +24,7 @@ function ParametricGeometryForm(form, object)
 	this.form.addText(Locale.code);
 	this.code = new CodeInput(this.form);
 	this.code.size.set(0, 100);
-	this.code.setOnChange(updateGeometry);
+	// this.code.setOnChange(updateGeometry);
 	this.form.add(this.code);
 	this.form.nextRow();
 
