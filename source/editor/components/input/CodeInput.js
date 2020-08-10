@@ -14,6 +14,8 @@ function CodeInput(parent)
 {
 	Component.call(this, parent, "div");
 
+	this.element.style.overflow = "auto";
+
 	/**
 	 * CodeMirror editor instance should be used to access any codemirror functionality.
 	 * 
