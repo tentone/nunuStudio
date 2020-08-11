@@ -7,7 +7,7 @@ import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
+import {Group} from"../../../../core/objects/misc/Group.js";
 import {LightProbe} from "../../../../core/objects/lights/LightProbe.js";
 import {ObjectLoader} from "../../../../core/loaders/ObjectLoader.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
@@ -224,7 +224,7 @@ function TreeNode(container)
 				// TODO <USE THE MOVE ACTIONS INSTEAD TO KEEP EVERYTHING ON THE SAME POSITION>
 				
 				var actions = [];
-				var group = new Container();
+				var group = new Group();
 				var parent = self.object.parent;
 				var found = false;
 

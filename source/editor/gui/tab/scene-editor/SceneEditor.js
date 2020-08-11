@@ -10,7 +10,7 @@ import {Audio} from "../../../../core/resources/Audio.js";
 import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {LensFlare} from "../../../../core/objects/misc/LensFlare.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
+import {Group} from"../../../../core/objects/misc/Group.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
@@ -50,7 +50,7 @@ import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
-import {Vector2, Mesh, SkinnedMesh, MeshStandardMaterial, Line, LineBasicMaterial, Points, PointsMaterial, Sprite, SpriteMaterial, Material, ShaderMaterial, Texture, Geometry, BufferGeometry, Raycaster, Object3D, Scene, AxesHelper, Group, Camera, CameraHelper, Light, DirectionalLight, DirectionalLightHelper, LightProbe, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper, HemisphereLight, HemisphereLightHelper, Bone, BoxHelper} from "three";
+import {Vector2, Mesh, SkinnedMesh, MeshStandardMaterial, Line, LineBasicMaterial, Points, PointsMaterial, Sprite, SpriteMaterial, Material, ShaderMaterial, Texture, Geometry, BufferGeometry, Raycaster, Object3D, Scene, AxesHelper, Camera, CameraHelper, Light, DirectionalLight, DirectionalLightHelper, LightProbe, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper, HemisphereLight, HemisphereLightHelper, Bone, BoxHelper} from "three";
 
 /** 
  * The scene editor is the core of the nunuStudio editor.
@@ -1298,8 +1298,8 @@ SceneEditor.prototype.updateSelection = function()
 		{
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
-		// Container
-		else if(object instanceof Container)
+		// Group
+		else if(object instanceof Group)
 		{
 			this.objectHelper.add(new BoxHelper(object, 0xFFFF00));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));

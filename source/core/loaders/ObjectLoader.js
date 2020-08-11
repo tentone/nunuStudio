@@ -14,7 +14,7 @@ import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {Sky} from "../objects/misc/Sky.js";
 import {LensFlare} from "../objects/misc/LensFlare.js";
 import {HTMLView} from "../objects/misc/HTMLView.js";
-import {Container} from "../objects/misc/Container.js";
+import {Group} from"../objects/misc/Group.js";
 import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
 import {Mesh} from "../objects/mesh/Mesh.js";
 import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
@@ -873,7 +873,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				break;
 
 			case "Group":
-				object = new Container();
+				object = new Group();
 				break;
 
 			case "Bone":
@@ -881,13 +881,13 @@ ObjectLoader.prototype.parseObject = function(data)
 				break;
 
 			default:
-				object = new Container();
+				object = new Group();
 		}
 	}
 	catch(e)
 	{
 		console.error("nunuStudio: Error parsing and creating object " + data.uuid + ", object skiped.", e, data);
-		object = new Container();
+		object = new Group();
 	}
 
 	object.uuid = data.uuid;

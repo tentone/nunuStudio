@@ -10,7 +10,7 @@ import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmit
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
 import {HTMLView} from "../../../../../core/objects/misc/HTMLView.js";
-import {Container} from "../../../../../core/objects/misc/Container.js";
+import {Group} from"../../../../../core/objects/misc/Group.js";
 import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {SpotLight} from "../../../../../core/objects/lights/SpotLight.js";
 import {RectAreaLight} from "../../../../../core/objects/lights/RectAreaLight.js";
@@ -519,7 +519,7 @@ return target.set(x, y, z);`;
 	// Container
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()
 	{
-		Editor.addObject(new Container(), self.editor.scene);
+		Editor.addObject(new Group(), self.editor.scene);
 	}, Locale.container);
 
 	// Cube Camera

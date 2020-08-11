@@ -1,5 +1,5 @@
 import {EventManager} from "../../core/utils/EventManager.js";
-import {Container} from "../../core/objects/misc/Container.js";
+import {Group} from"../../core/objects/misc/Group.js";
 import {Vector2} from "three";
 
 /**
@@ -323,7 +323,7 @@ Component.prototype.removeAllChildren = function()
  * Destroys the object and reataches the base DOM element to the new parent element.
  * 
  * @method attachTo
- * @param {Container} parent Parent container.
+ * @param {Component} parent Parent container.
  */
 Component.prototype.attachTo = function(parent)
 {

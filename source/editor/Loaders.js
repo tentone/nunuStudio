@@ -8,7 +8,7 @@ import {Image} from "../core/resources/Image.js";
 import {Font} from "../core/resources/Font.js";
 import {Audio} from "../core/resources/Audio.js";
 import {SpineAnimation} from "../core/objects/spine/SpineAnimation.js";
-import {Container} from "../core/objects/misc/Container.js";
+import {Group} from"../core/objects/misc/Group.js";
 import {Nunu} from "../core/Nunu.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {AddResourceAction} from "./history/action/resources/AddResourceAction.js";
@@ -16,7 +16,8 @@ import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {LinearFilter, CubeReflectionMapping, WebGLRenderer, Object3D, Mesh, SkinnedMesh, AnimationClip,  MeshBasicMaterial, ShapeBufferGeometry, JSONLoader} from "three";
+import {InstancedMesh} from "../core/objects/mesh/InstancedMesh.js";
+import {LinearFilter, CubeReflectionMapping, WebGLRenderer, Object3D, Mesh, SkinnedMesh, AnimationClip,  MeshBasicMaterial, MeshPhongMaterial, ShapeBufferGeometry, JSONLoader, Matrix4} from "three";
 import {BasisTextureLoader} from "three/examples/jsm/loaders/BasisTextureLoader";
 import {AMFLoader} from "three/examples/jsm/loaders/AMFLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
@@ -464,9 +465,33 @@ Loaders.loadModel = function(file, parent)
 				try
 				{
 					var loader = new VOXLoader();
-					loader.parse(reader.result, function(obj)
+					loader.parse(reader.result, function(chunks)
 					{
-						Editor.addObject(obj, parent);
+						var material = new MeshPhongMaterial();
+						var matrix = new Matrix4();
+
+						var group = new Group();
+						group.name = FileSystem.getFileName(file);
+
+						for(var i = 0; i < chunks.length; i++)
+						{
+							var chunk = chunks[i];
+							var size = chunk.size;
+							var data = chunk.data;
+	
+							var mesh = new InstancedMesh(geometry, material, data.length / 4);
+							for(var j = 0, k = 0; j < data.length; j += 4, k++)
+							{
+								var x = data[j + 0] - size.x / 2;
+								var y = data[j + 1] - size.y / 2;
+								var z = data[j + 2] - size.z / 2;
+								mesh.setMatrixAt(k, matrix.setPosition(x, z, - y));
+							}
+							group.add(mesh);
+
+						}
+						
+						Editor.addObject(group, parent);
 						modal.destroy();
 					});
 				}
@@ -582,7 +607,7 @@ Loaders.loadModel = function(file, parent)
 				{
 					JSBLEND(reader.result).then(function(blend)
 					{
-						var container = new Container();
+						var container = new Group();
 						container.name = FileSystem.getNameWithoutExtension(name);
 						blend.three.loadScene(container);
 						Editor.addObject(container, parent);
@@ -998,7 +1023,7 @@ Loaders.loadModel = function(file, parent)
 					var loader = new SVGLoader();
 					var paths = loader.parse(reader.result);
 
-					var group = new Container();
+					var group = new Group();
 					var position = 0;
 
 					for(var i = 0; i < paths.length; i ++)

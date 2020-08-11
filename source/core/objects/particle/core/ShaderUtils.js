@@ -680,4 +680,5 @@ var ShaderUtils =
 		};
 	}())
 };
+
 export {ShaderUtils};
