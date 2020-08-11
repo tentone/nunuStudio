@@ -465,35 +465,35 @@ Loaders.loadModel = function(file, parent)
 				try
 				{
 					var loader = new VOXLoader();
-					loader.parse(reader.result, function(chunks)
+					var chunks = loader.parse(reader.result);
+
+					var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+					var material = new MeshPhongMaterial();
+					var matrix = new Matrix4();
+
+					var group = new Group();
+					// group.name = FileSystem.getFileName(file);
+
+					for(var i = 0; i < chunks.length; i++)
 					{
-						var material = new MeshPhongMaterial();
-						var matrix = new Matrix4();
+						var chunk = chunks[i];
+						var size = chunk.size;
+						var data = chunk.data;
 
-						var group = new Group();
-						group.name = FileSystem.getFileName(file);
-
-						for(var i = 0; i < chunks.length; i++)
+						var mesh = new InstancedMesh(geometry, material, data.length / 4);
+						for(var j = 0, k = 0; j < data.length; j += 4, k++)
 						{
-							var chunk = chunks[i];
-							var size = chunk.size;
-							var data = chunk.data;
-	
-							var mesh = new InstancedMesh(geometry, material, data.length / 4);
-							for(var j = 0, k = 0; j < data.length; j += 4, k++)
-							{
-								var x = data[j + 0] - size.x / 2;
-								var y = data[j + 1] - size.y / 2;
-								var z = data[j + 2] - size.z / 2;
-								mesh.setMatrixAt(k, matrix.setPosition(x, z, - y));
-							}
-							group.add(mesh);
-
+							var x = data[j + 0] - size.x / 2;
+							var y = data[j + 1] - size.y / 2;
+							var z = data[j + 2] - size.z / 2;
+							mesh.setMatrixAt(k, matrix.setPosition(x, z, - y));
 						}
-						
-						Editor.addObject(group, parent);
-						modal.destroy();
-					});
+						group.add(mesh);
+
+					}
+					
+					Editor.addObject(group, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
