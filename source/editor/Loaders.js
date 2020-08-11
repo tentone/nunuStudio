@@ -466,13 +466,19 @@ Loaders.loadModel = function(file, parent)
 				{
 					var loader = new VOXLoader();
 					var chunks = loader.parse(reader.result);
+					
+					var name = FileSystem.getFileName(file) || "vox";
 
 					var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+					geometry.name = name;
+				
 					var material = new MeshPhongMaterial();
+					material.name = name;
+
 					var matrix = new Matrix4();
 
 					var group = new Group();
-					// group.name = FileSystem.getFileName(file);
+					group.name = name;
 
 					for(var i = 0; i < chunks.length; i++)
 					{
