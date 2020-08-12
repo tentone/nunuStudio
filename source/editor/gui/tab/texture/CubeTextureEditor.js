@@ -47,7 +47,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	// Form
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
-	this.form.addText("Cube Texture Editor");
+	this.form.addText(Locale.cubeTexture);
 	this.form.nextRow();
 
 	// Dual division
@@ -81,10 +81,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue(Locale.nearest, NearestFilter);
 	this.minFilter.addValue(Locale.linear, LinearFilter);
-	this.minFilter.addValue("MIP Nearest Nearest", NearestMipMapNearestFilter);
-	this.minFilter.addValue("MIP Nearest Linear", NearestMipMapLinearFilter);
-	this.minFilter.addValue("MIP Linear Nearest", LinearMipMapNearestFilter);
-	this.minFilter.addValue("MIP Linear Linear", LinearMipMapLinearFilter);
+	this.minFilter.addValue(Locale.mipNearestNearest, NearestMipMapNearestFilter);
+	this.minFilter.addValue(Locale.mipNearestLinear, NearestMipMapLinearFilter);
+	this.minFilter.addValue(Locale.mipLinearNearest, LinearMipMapNearestFilter);
+	this.minFilter.addValue(Locale.mipLinearLinear, LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
 		if(self.texture !== null)
@@ -117,12 +117,12 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this.form);
 	this.mapping.size.set(150, 18);
-	this.mapping.addValue("Cube Reflection", CubeReflectionMapping);
-	this.mapping.addValue("Cube Refraction", CubeRefractionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularReflectionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularRefractionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVRefractionMapping);
+	this.mapping.addValue(Locale.cubeReflection, CubeReflectionMapping);
+	this.mapping.addValue(Locale.cubeRefraction, CubeRefractionMapping);
+	this.mapping.addValue(Locale.equirectangularReflection, EquirectangularReflectionMapping);
+	this.mapping.addValue(Locale.equirectangularRefraction, EquirectangularRefractionMapping);
+	this.mapping.addValue(Locale.cubeUvReflection, CubeUVReflectionMapping);
+	this.mapping.addValue(Locale.cubeUvRefraction, CubeUVRefractionMapping);
 	this.mapping.setOnChange(function()
 	{
 		self.texture.mapping = self.mapping.getValue();
@@ -162,8 +162,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 		Editor.updateObjectsViewsGUI();
 	});
 	this.mode.addValue(Locale.cube, CubeTexture.CUBE);
-	this.mode.addValue("Cross", CubeTexture.CROSS);
-	this.mode.addValue("Equirectangular", CubeTexture.EQUIRECTANGULAR);
+	this.mode.addValue(Locale.cross, CubeTexture.CROSS);
+	this.mode.addValue(Locale.equirectangular, CubeTexture.EQUIRECTANGULAR);
 	this.form.add(this.mode);
 	this.form.nextRow();
 
@@ -180,7 +180,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Cube texture
-	this.form.addText("Cube texture");
+	this.form.addText(Locale.cubeTexture);
 	this.form.nextRow();
 
 	// Cube images

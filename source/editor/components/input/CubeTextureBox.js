@@ -10,7 +10,7 @@ import {TableForm} from "../TableForm.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
 import {Component} from "../Component.js";
-import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
+import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 
 function CubeTextureBox(parent)
 {
@@ -104,13 +104,12 @@ function CubeTextureBox(parent)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
-	this.mapping.addValue("Cube Reflection", CubeReflectionMapping);
-	this.mapping.addValue("Cube Refraction", CubeRefractionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularReflectionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularRefractionMapping);
-	this.mapping.addValue("Spherical Reflection", SphericalReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVRefractionMapping);
+	this.mapping.addValue(Locale.cubeReflection, CubeReflectionMapping);
+	this.mapping.addValue(Locale.cubeRefraction, CubeRefractionMapping);
+	this.mapping.addValue(Locale.equirectangularReflection, EquirectangularReflectionMapping);
+	this.mapping.addValue(Locale.equirectangularRefraction, EquirectangularRefractionMapping);
+	this.mapping.addValue(Locale.cubeUvReflection, CubeUVReflectionMapping);
+	this.mapping.addValue(Locale.cubeUvRefraction, CubeUVRefractionMapping);
 	this.form.add(this.mapping);
 	this.form.nextRow();
 

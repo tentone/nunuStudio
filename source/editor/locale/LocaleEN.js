@@ -369,6 +369,18 @@ var LocaleEN = {
 	meters: "Meters",
 
 	// Values
+	cross: "Cross",
+	equirectangular: "Equirectangular",
+	cubeReflection: "Cube Reflection",
+	cubeRefraction: "Cube Refraction",
+	equirectangularReflection: "Equirectangular Reflection",
+	equirectangularRefraction: "Equirectangular Refraction",
+	cubeUvReflection: "Cube UV Reflection",
+	cubeUvRefraction: "Cube UV Refraction",
+	mipNearestNearest: "MIP Nearest Nearest",
+	mipNearestLinear: "MIP Nearest Linear",
+	mipLinearNearest: "MIP Linear Nearest",
+	mipLinearLinear: "MIP Linear Linear",
 	evaluate: "Evaluate",
 	append: "Append",
 	include: "Include",

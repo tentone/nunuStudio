@@ -123,10 +123,10 @@ function TextureInspector(parent, object)
 	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue(Locale.nearest, NearestFilter);
 	this.minFilter.addValue(Locale.linear, LinearFilter);
-	this.minFilter.addValue("MIP Nearest Nearest", NearestMipMapNearestFilter);
-	this.minFilter.addValue("MIP Nearest Linear", NearestMipMapLinearFilter);
-	this.minFilter.addValue("MIP Linear Nearest", LinearMipMapNearestFilter);
-	this.minFilter.addValue("MIP Linear Linear", LinearMipMapLinearFilter);
+	this.minFilter.addValue(Locale.mipNearestNearest, NearestMipMapNearestFilter);
+	this.minFilter.addValue(Locale.mipNearestLinear, NearestMipMapLinearFilter);
+	this.minFilter.addValue(Locale.mipLinearNearest, LinearMipMapNearestFilter);
+	this.minFilter.addValue(Locale.mipLinearLinear, LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "minFilter", self.minFilter.getValue()));
