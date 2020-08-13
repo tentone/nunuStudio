@@ -135,6 +135,7 @@ var LocaleEN = {
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	animation: "Animation",
 	stacks: "Stacks",
 	slices: "Slices",
 	lockPointer: "Lock Pointer",
@@ -443,6 +444,7 @@ var LocaleEN = {
 	twist: "Twist",
 
 	// Editor
+	console: "Console",
 	custom: "Custom",
 	binary: "Binary",
 	modifiers: "Modifiers",

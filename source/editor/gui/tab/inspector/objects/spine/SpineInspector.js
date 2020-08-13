@@ -12,7 +12,7 @@ function SpineInspector(parent, object)
 	var self = this;
 
 	// Animation
-	this.form.addText("Animation");
+	this.form.addText(Locale.animation);
 	this.animation = new DropdownList(this.form);
 	this.animation.size.set(100, 18);
 	this.animation.setOnChange(function()

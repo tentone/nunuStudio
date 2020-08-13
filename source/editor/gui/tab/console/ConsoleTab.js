@@ -21,7 +21,7 @@ import {Texture, Material, Matrix4, Matrix3} from "three";
  */
 function ConsoleTab(parent, closeable, container, index)
 {
-	TabComponent.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.console, Global.FILE_PATH + "icons/misc/console.png");
 
 	var self = this;
 

@@ -25,7 +25,7 @@ import {Clock, VectorKeyframeTrack, AnimationClip, InterpolateLinear, Quaternion
  */
 function AnimationTab(parent, closeable, container, index)
 {
-	TabComponent.call(this, parent, closeable, container, index, "Animation", Global.FILE_PATH + "icons/misc/animation.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.animation, Global.FILE_PATH + "icons/misc/animation.png");
 
 	var self = this;
 
@@ -69,7 +69,7 @@ function AnimationTab(parent, closeable, container, index)
 				self.object.animations = [];
 			}
 
-			var clip = new AnimationClip("Animation" + self.object.animations.length, 3, []);
+			var clip = new AnimationClip(Locale.animation + self.object.animations.length, 3, []);
 			
 			// Object 3D
 			if(self.object.isObject3D)
