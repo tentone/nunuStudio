@@ -738,13 +738,13 @@ FileSystem.fileExists = function(file)
  */
 FileSystem.getFileName = function(file)
 {
-	if(file instanceof File)
-	{
-		file = file.name;
-	}
-	
 	if(file !== undefined)
 	{
+		if(file instanceof File)
+		{
+			file = file.name;
+		}
+
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
@@ -765,13 +765,13 @@ FileSystem.getFileName = function(file)
  */
 FileSystem.getFileNameWithExtension = function(file)
 {
-	if(file instanceof File)
-	{
-		file = file.name;
-	}
-
 	if(file !== undefined)
 	{
+		if(file instanceof File)
+		{
+			file = file.name;
+		}
+
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
@@ -792,13 +792,13 @@ FileSystem.getFileNameWithExtension = function(file)
  */
 FileSystem.getNameWithoutExtension = function(file)
 {
-	if(file instanceof File)
-	{
-		file = file.name;
-	}
-
 	if(file !== undefined)
 	{
+		if(file instanceof File)
+		{
+			file = file.name;
+		}
+
 		return file.substring(0, file.lastIndexOf("."));
 	}
 
@@ -816,13 +816,13 @@ FileSystem.getNameWithoutExtension = function(file)
  */
 FileSystem.getFilePath = function(file)
 {
-	if(file instanceof File)
-	{
-		file = file.name;
-	}
-	
 	if(file !== undefined)
 	{
+		if(file instanceof File)
+		{
+			file = file.name;
+		}
+		
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
@@ -843,13 +843,13 @@ FileSystem.getFilePath = function(file)
  */
 FileSystem.getFileExtension = function(file)
 {	
-	if(file instanceof File)
-	{
-		file = file.name;
-	}
-	
 	if(file !== undefined)
 	{
+		if(file instanceof File)
+		{
+			file = file.name;
+		}
+
 		return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
 	}
 	
