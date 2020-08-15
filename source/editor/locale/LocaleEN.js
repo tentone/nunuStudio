@@ -444,6 +444,7 @@ var LocaleEN = {
 	twist: "Twist",
 
 	// Editor
+	attribute: "Attribute",
 	console: "Console",
 	custom: "Custom",
 	binary: "Binary",

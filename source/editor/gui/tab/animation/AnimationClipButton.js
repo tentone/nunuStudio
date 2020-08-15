@@ -47,7 +47,7 @@ function AnimationClipButton(parent, editor, animation)
 		});
 		context.addOption("Add track", function()
 		{
-			var attribute = Editor.prompt("Attribute");
+			var attribute = Editor.prompt(Locale.attribute);
 			if(!attribute.startsWith("."))
 			{
 				attribute = "." + attribute;
