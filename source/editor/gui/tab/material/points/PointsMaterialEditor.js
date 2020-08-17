@@ -61,7 +61,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Size atenuation
-	this.form.addText("Size atenuation");
+	this.form.addText(Locale.sizeAttenuation);
 	this.sizeAttenuation = new CheckBox(this.form);
 	this.sizeAttenuation.size.set(18, 18);
 	this.sizeAttenuation.setOnChange(function()

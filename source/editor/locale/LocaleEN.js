@@ -135,6 +135,9 @@ var LocaleEN = {
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	sizeAttenuation: "Size Attenuation",
+	particleRate: "Particle Rate",
+	particleCount: "Particle Count",
 	animation: "Animation",
 	stacks: "Stacks",
 	slices: "Slices",

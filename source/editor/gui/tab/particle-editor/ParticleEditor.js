@@ -96,7 +96,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Max particle count
-	this.form.addText("Particle Count");
+	this.form.addText(Locale.particleCount);
 	this.maxParticleCount = new NumberBox(this.form);
 	this.maxParticleCount.setStep(1.0);
 	this.maxParticleCount.size.set(100, 18);
@@ -140,7 +140,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Particle Count
-	this.form.addText("Particle Rate");
+	this.form.addText(Locale.particleRate);
 	this.particleCount = new NumberBox(this.form);
 	this.particleCount.size.set(50, 18);
 	this.particleCount.setStep(1);
