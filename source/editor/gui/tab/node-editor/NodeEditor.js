@@ -14,7 +14,22 @@ function NodeEditor(parent, closeable, container, index)
 
 	this.canvas = new Canvas(this);
 
+	this.group = new Escher.Object2D();
+
+	this.viewport = new Escher.Viewport(this.canvas.element);
+
+	this.renderer = new Escher.Renderer(this.canvas.element);
+
+	this.controls = new Escher.ViewportControls(this.viewport);
 }
 
 NodeEditor.prototype = Object.create(TabComponent.prototype);
-export {NodeEditor as AboutTab};
+
+NodeEditor.prototype.update = function()
+{
+	this.controls.update(this.renderer.pointer);
+	this.renderer.update(this.group, this.viewport);
+};
+
+
+export {NodeEditor};
