@@ -1,8 +1,7 @@
-import {Locale} from "../../locale/LocaleManager.js";
-import {Global} from "../../Global.js";
-import {TabComponent} from "../../components/tabs/TabComponent.js";
-import {Canvas} from "../../components/Canvas.js";
+import {Object2D, Renderer, Viewport, ViewportControls} from "escher.js/build/escher.module.js";
+import {Canvas} from "../../../components/Canvas.js";
 import {SideBar} from "./SideBar.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
 
 function NodeEditor(parent, closeable, container, index)
 {
@@ -20,13 +19,13 @@ function NodeEditor(parent, closeable, container, index)
 
 	this.canvas = new Canvas(this);
 
-	this.group = new Escher.Object2D();
+	this.group = new Object2D();
 
-	this.viewport = new Escher.Viewport(this.canvas.element);
+	this.viewport = new Viewport(this.canvas.element);
 
-	this.renderer = new Escher.Renderer(this.canvas.element);
+	this.renderer = new Renderer(this.canvas.element);
 
-	this.controls = new Escher.ViewportControls(this.viewport);
+	this.controls = new ViewportControls(this.viewport);
 }
 
 NodeEditor.prototype = Object.create(TabComponent.prototype);
