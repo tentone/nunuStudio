@@ -1,45 +1,8 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {TextSprite} from "../../../../../core/objects/text/TextSprite.js";
-import {TextMesh} from "../../../../../core/objects/text/TextMesh.js";
-import {TextBitmap} from "../../../../../core/objects/text/TextBitmap.js";
-import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
-import {Script} from "../../../../../core/objects/script/Script.js";
-import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
-import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
-import {Sky} from "../../../../../core/objects/misc/Sky.js";
-import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
-import {HTMLView} from "../../../../../core/objects/misc/HTMLView.js";
-import {Group} from"../../../../../core/objects/misc/Group.js";
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
-import {SpotLight} from "../../../../../core/objects/lights/SpotLight.js";
-import {RectAreaLight} from "../../../../../core/objects/lights/RectAreaLight.js";
-import {PointLight} from "../../../../../core/objects/lights/PointLight.js";
-import {LightProbe} from "../../../../../core/objects/lights/LightProbe.js";
-import {HemisphereLight} from "../../../../../core/objects/lights/HemisphereLight.js";
-import {DirectionalLight} from "../../../../../core/objects/lights/DirectionalLight.js";
-import {AmbientLight} from "../../../../../core/objects/lights/AmbientLight.js";
-import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
-import {FirstPersonControls} from "../../../../../core/objects/controls/FirstPersonControls.js";
-import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
-import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
-import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
-import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
-import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
-import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
-import {ParametricBufferGeometry} from "../../../../../core/geometries/ParametricBufferGeometry.js";
-import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
-import {FileSystem} from "../../../../../core/FileSystem.js";
-import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";
-import {SceneEditor} from "../SceneEditor.js";
 import {Global} from "../../../../Global.js";
-import {Editor} from "../../../../Editor.js";
 import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonDrawer} from "../../../../components/buttons/ButtonDrawer.js";
-import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon";
-import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 
 /**
  * Side bar is used to add more nodes to the node editor graph.
@@ -65,7 +28,7 @@ function SideBar(parent)
 	this.buttons = [];
 
 	this.createObject();
-
+    
 	this.add = new Text(this);
 	this.add.setText(Locale.add);
 	this.add.size.set(40, 20);
@@ -143,7 +106,6 @@ SideBar.prototype.updateSize = function()
  */
 SideBar.prototype.createObject = function()
 {
-	var self = this;
 
 	// Events
 	var events = new ButtonDrawer(this);

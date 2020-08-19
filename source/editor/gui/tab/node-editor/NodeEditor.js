@@ -2,7 +2,6 @@ import {Locale} from "../../locale/LocaleManager.js";
 import {Global} from "../../Global.js";
 import {TabComponent} from "../../components/tabs/TabComponent.js";
 import {Canvas} from "../../components/Canvas.js";
-import {Component} from "../../components/Component.js";
 import {SideBar} from "./SideBar.js";
 
 function NodeEditor(parent, closeable, container, index)
@@ -11,7 +10,13 @@ function NodeEditor(parent, closeable, container, index)
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 
-	this.sideBar = new Component(this, "div");
+	/** 
+	 * Side bar contains the buttons to add new nodes into the node editor graph.
+	 *
+	 * @attribute sideBar
+	 * @type {SideBar}
+	 */
+	this.sideBar = new SideBar(this);
 
 	this.canvas = new Canvas(this);
 
@@ -32,5 +37,20 @@ NodeEditor.prototype.update = function()
 	this.renderer.update(this.group, this.viewport);
 };
 
+NodeEditor.prototype.updateSize = function()
+{
+	TabComponent.prototype.updateSize.call(this);
+
+	this.sideBar.position.set(0, 0);
+	this.sideBar.size.set(40, this.size.y);
+	this.sideBar.updateInterface();
+
+	var width = this.size.x - this.sideBar.size.x;
+	var height = this.size.y;
+
+	this.canvas.position.set(this.sideBar.size.x, 0);
+	this.canvas.size.set(width, height);
+	this.canvas.updateInterface();
+};
 
 export {NodeEditor};

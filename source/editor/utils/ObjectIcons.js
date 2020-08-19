@@ -43,12 +43,14 @@ ObjectIcons.icons = new Map([
 	["SkinnedMesh", ObjectIcons.path + "misc/skeleton.png"],
 	["Mesh", ObjectIcons.path + "models/cube.png"],
 	["ParticleEmiter", ObjectIcons.path + "misc/particles.png"],
-	["Script", ObjectIcons.path + "script/script.png"],
 	["Sprite", ObjectIcons.path + "misc/image.png"],
 	["Points", ObjectIcons.path + "models/points.png"],
 	["Line", ObjectIcons.path + "misc/nodes.png"],
 	["LineSegments", ObjectIcons.path + "misc/nodes.png"],
 	
+	["Script", ObjectIcons.path + "script/script.png"],
+	["NodeScript", ObjectIcons.path + "script/workflow.png"],
+
 	// Text
 	["TextMesh", ObjectIcons.path + "text/textmesh.png"],
 	["TextBitmap", ObjectIcons.path + "text/text.png"],

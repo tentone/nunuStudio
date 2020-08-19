@@ -492,7 +492,13 @@ return target.set(x, y, z);`;
 	scripts.addOption(Global.FILE_PATH + "icons/script/script.png", function()
 	{
 		Editor.addObject(new Script(), self.editor.scene);
-	}, "Javascript Script");
+	}, Locale.javascript);
+
+	// Node Graph script
+	scripts.addOption(Global.FILE_PATH + "icons/script/workflow.png", function()
+	{
+		Editor.addObject(new NodeScript(), self.editor.scene);
+	}, Locale.nodeGraph);
 
 	scripts.updateOptions();
 
