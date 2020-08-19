@@ -1,7 +1,10 @@
 import {Group, Object3D} from "three";
+import {NodeGraph} from "escher.js/build/escher.module.js";
 
 /**
  * Node scripts are build using a graph composed of operations.
+ * 
+ * They can be used to create interaction without requiring any coding.
  * 
  * @class NodeScript
  * @extends {Object}
@@ -13,9 +16,27 @@ function NodeScript()
 	
 	this.type = "NodeScript";
 	this.name = "script";
+
+	/**
+	 * Node graph that composes this script.
+	 * 
+	 * @attribute graph
+	 * @type {NodeGraph}
+	 */
+	this.graph = null;
 }
 
 NodeScript.prototype = Object.create(Group.prototype);
+
+/**
+ * Add a node the graph, these nodes can be connected with other already existing nodes in the graph.
+ * 
+ * @param {Node} node Node to be added into the graph.
+ */
+NodeScript.prototype.addNode = function(node)
+{
+	this.graph.addNode(node);
+};
 
 /**
  * Initialize script, automatically called by the runtime.
@@ -73,7 +94,7 @@ NodeScript.prototype.toJSON = function(meta)
 {
 	var data = Object3D.prototype.toJSON.call(this, meta);
 
-	// TODO <ADD CODE HERE>
+	data.object.graph =  this.graph.serialize();
 
 	return data;
 };

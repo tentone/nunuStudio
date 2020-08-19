@@ -3,6 +3,7 @@ import {Global} from "../../Global.js";
 import {TabComponent} from "../../components/tabs/TabComponent.js";
 import {Canvas} from "../../components/Canvas.js";
 import {Component} from "../../components/Component.js";
+import {SideBar} from "./SideBar.js";
 
 function NodeEditor(parent, closeable, container, index)
 {
