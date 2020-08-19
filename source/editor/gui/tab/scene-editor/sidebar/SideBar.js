@@ -5,6 +5,7 @@ import {TextMesh} from "../../../../../core/objects/text/TextMesh.js";
 import {TextBitmap} from "../../../../../core/objects/text/TextBitmap.js";
 import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
 import {Script} from "../../../../../core/objects/script/Script.js";
+import {NodeScript} from "../../../../../core/objects/script/NodeScript.js";
 import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";

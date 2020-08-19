@@ -29,6 +29,8 @@ import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
 import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
+import {NodeScript} from "../../../../core/Main.js";
+import {NodeEditor} from "../node-editor/NodeEditor.js";
 
 /**
  * Represents a tree node element.
@@ -667,6 +669,10 @@ function TreeNode(container)
 			else if(self.object instanceof Camera)
 			{
 				openTab(CameraEditor, self.object);
+			}
+			else if(self.object instanceof NodeScript)
+			{
+				openTab(NodeEditor, self.object);
 			}
 			else
 			{
