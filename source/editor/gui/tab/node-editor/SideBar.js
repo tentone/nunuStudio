@@ -1,14 +1,15 @@
-import {Locale} from "../../../locale/LocaleManager.js";
-import {Global} from "../../../Global.js";
-import {Text} from "../../../components/Text.js";
-import {Component} from "../../../components/Component.js";
 import {ButtonDrawer} from "../../../components/buttons/ButtonDrawer.js";
+import {Component} from "../../../components/Component.js";
+import {Global} from "../../../Global.js";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Text} from "../../../components/Text.js";
 
 /**
  * Side bar is used to add more nodes to the node editor graph.
  *
  * @class SideBar
  * @extends {Component}
+ * @param {NodeEditor} parent Node editor where the sidebar is placed at.
  */
 function SideBar(parent)
 {
@@ -47,6 +48,42 @@ function SideBar(parent)
 }
 
 SideBar.prototype = Object.create(Component.prototype);
+
+/** 
+ * Create the icons to add objects to the scene.
+ *
+ * @method create
+ */
+SideBar.prototype.createObject = function()
+{
+
+	// Events
+	var events = new ButtonDrawer(this);
+	events.setImage(Global.FILE_PATH + "icons/models/models.png");
+	this.buttons.push(events);
+
+	// Initialization
+	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	{
+		// TODO <ADD CODE HERE>
+    }, Locale.initialization);
+    
+    // Update
+	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	{
+		// TODO <ADD CODE HERE>
+	}, Locale.update);
+    
+    // Resize
+	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	{
+		// TODO <ADD CODE HERE>
+    }, Locale.resize);
+	
+	// Operations
+
+	events.updateOptions();
+};
 
 SideBar.prototype.updateSize = function()
 {
@@ -97,40 +134,6 @@ SideBar.prototype.updateSize = function()
 			this.more.setVisibility(false);
 		}
 	}
-};
-
-/** 
- * Create the icons to add objects to the scene.
- *
- * @method create
- */
-SideBar.prototype.createObject = function()
-{
-
-	// Events
-	var events = new ButtonDrawer(this);
-	events.setImage(Global.FILE_PATH + "icons/models/models.png");
-	this.buttons.push(events);
-
-	// Initialization
-	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
-	{
-		// TODO <ADD CODE HERE>
-    }, Locale.initialization);
-    
-    // Update
-	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
-	{
-		// TODO <ADD CODE HERE>
-	}, Locale.update);
-    
-    // Resize
-	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
-	{
-		// TODO <ADD CODE HERE>
-    }, Locale.resize);
-    
-	events.updateOptions();
 };
 
 export {SideBar};
