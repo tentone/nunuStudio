@@ -1,8 +1,8 @@
-import {Locale} from "../../../../locale/LocaleManager.js";
-import {Global} from "../../../../Global.js";
-import {Text} from "../../../../components/Text.js";
-import {Component} from "../../../../components/Component.js";
-import {ButtonDrawer} from "../../../../components/buttons/ButtonDrawer.js";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Global} from "../../../Global.js";
+import {Text} from "../../../components/Text.js";
+import {Component} from "../../../components/Component.js";
+import {ButtonDrawer} from "../../../components/buttons/ButtonDrawer.js";
 
 /**
  * Side bar is used to add more nodes to the node editor graph.

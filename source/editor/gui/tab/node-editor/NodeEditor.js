@@ -2,6 +2,8 @@ import {Object2D, Renderer, Viewport, ViewportControls} from "escher.js/build/es
 import {Canvas} from "../../../components/Canvas.js";
 import {SideBar} from "./SideBar.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Global} from "../../../Global.js";
 
 function NodeEditor(parent, closeable, container, index)
 {
