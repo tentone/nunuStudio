@@ -211,7 +211,7 @@ Script.getIncludes = function(code)
 	}
 
 	return results;
-}
+};
 
 /**
  * Remove includes from code.
@@ -228,7 +228,7 @@ Script.removeIncludes = function(code)
 }
 
 /**
- * Initialize script. Automatically called by the runtime.
+ * Initialize script, code automatically called by the runtime on program initialization.
  *
  * Compiles the script code and calls the script initialize method if it exists after the code is compiled.
  *
@@ -322,9 +322,9 @@ Script.prototype.resize = function(x, y)
 };
 
 /**
- * Call onAppData if available.
+ * Call onAppData() from the script if available.
  *
- * Called automatically every time external data is passed to the runtime.
+ * This method is called everytime that external data is passed to the runtime.
  * 
  * @method appData
  * @param {Object} data

@@ -783,6 +783,10 @@ ObjectLoader.prototype.parseObject = function(data)
 			case "Script":
 				object = new Script(data.code, data.mode);
 				break;
+			
+			case "NodeScript":
+				object = new NodeScript();
+				break;
 
 			case "RectAreaLight":
 				object = new RectAreaLight(data.color, data.intensity, data.width, data.height);

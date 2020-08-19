@@ -109,6 +109,7 @@ export {AudioEmitter} from "./objects/audio/AudioEmitter.js";
 export {PositionalAudio} from "./objects/audio/PositionalAudio.js";
 
 export {Script} from "./objects/script/Script.js";
+export {NodeScript} from "./objects/script/NodeScript.js";
 
 export {PhysicsObject} from "./objects/physics/PhysicsObject.js";
 
