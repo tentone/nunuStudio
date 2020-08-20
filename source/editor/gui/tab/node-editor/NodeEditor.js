@@ -1,9 +1,10 @@
 import {Object2D, Renderer, Viewport, ViewportControls} from "escher.js/build/escher.module.js";
+
 import {Canvas} from "../../../components/Canvas.js";
+import {Global} from "../../../Global.js";
+import {Locale} from "../../../locale/LocaleManager.js";
 import {SideBar} from "./SideBar.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Locale} from "../../../locale/LocaleManager.js";
-import {Global} from "../../../Global.js";
 
 function NodeEditor(parent, closeable, container, index)
 {
@@ -19,10 +20,22 @@ function NodeEditor(parent, closeable, container, index)
 	 */
 	this.sideBar = new SideBar(this);
 
+	/**
+	 * Canvas used to display the graph.
+	 * 
+	 * @attribute canvas
+	 * @type {Canvas}
+	 */
 	this.canvas = new Canvas(this);
 
 	this.group = new Object2D();
 
+	/**
+	 * Viewport used to display the graph.
+	 * 
+	 * @attribute canvas
+	 * @type {Canvas}
+	 */
 	this.viewport = new Viewport(this.canvas.element);
 
 	this.renderer = new Renderer(this.canvas.element);
@@ -31,6 +44,26 @@ function NodeEditor(parent, closeable, container, index)
 }
 
 NodeEditor.prototype = Object.create(TabComponent.prototype);
+
+NodeEditor.prototype.updateMetadata = function()
+{
+	if(this.node !== null)
+	{
+		this.setName(this.node.name);
+	}
+}
+
+NodeEditor.prototype.attach = function(node)
+{
+	this.node = node;
+	this.updateMetadata();
+};
+
+NodeEditor.prototype.isAttached = function(node)
+{
+	return this.node === node;
+};
+
 
 NodeEditor.prototype.update = function()
 {

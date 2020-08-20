@@ -1,56 +1,57 @@
-import {Locale} from "../../../locale/LocaleManager.js";
-import {EventManager} from "../../../../core/utils/EventManager.js";
-import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
-import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
-import {Video} from "../../../../core/resources/Video.js";
-import {Model} from "../../../../core/resources/Model.js";
-import {Image} from "../../../../core/resources/Image.js";
-import {Font} from "../../../../core/resources/Font.js";
-import {Audio} from "../../../../core/resources/Audio.js";
-import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
-import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
-import {LensFlare} from "../../../../core/objects/misc/LensFlare.js";
-import {Group} from"../../../../core/objects/misc/Group.js";
-import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
-import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
-import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
-import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
-import {Nunu} from "../../../../core/Nunu.js";
-import {Mouse} from "../../../../core/input/Mouse.js";
-import {Keyboard} from "../../../../core/input/Keyboard.js";
-import {ObjectIcons} from "../../../utils/ObjectIcons.js";
-import {Settings} from "../../../Settings.js";
-import {Loaders} from "../../../Loaders.js";
-import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
-import {SwapAction} from "../../../history/action/objects/SwapAction.js";
-import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, DirectionalLight, DirectionalLightHelper, Geometry, HemisphereLight, HemisphereLightHelper, Light, LightProbe, Line, LineBasicMaterial, Material, Mesh, MeshStandardMaterial, Object3D, PointLight, PointLightHelper, Points, PointsMaterial, Raycaster, RectAreaLight, Scene, ShaderMaterial, SkinnedMesh, SpotLight, SpotLightHelper, Sprite, SpriteMaterial, Texture, Vector2} from "three";
+
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
-import {OrientationCube} from "./utils/OrientationCube.js";
-import {TransformControls} from "./transform/TransformControls.js";
-import {ToolBar} from "./toolbar/ToolBar.js";
-import {SideBar} from "./sidebar/SideBar.js";
-import {WireframeHelper} from "./helpers/WireframeHelper.js";
-import {SkeletonHelper} from "./helpers/SkeletonHelper.js";
-import {RectAreaLightHelper} from "./helpers/RectAreaLightHelper.js";
-import {PointsHelper} from "./helpers/PointsHelper.js";
-import {PhysicsObjectHelper} from "./helpers/PhysicsObjectHelper.js";
-import {ObjectIconHelper} from "./helpers/ObjectIconHelper.js";
-import {LineHelper} from "./helpers/LineHelper.js";
-import {LightProbeHelper} from "./helpers/LightProbeHelper.js";
-import {GridHelper} from "./helpers/GridHelper.js";
-import {EditorPlanarControls} from "./controls/EditorPlanarControls.js";
-import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
-import {EditorFreeControls} from "./controls/EditorFreeControls.js";
-import {DragBuffer} from "../../DragBuffer.js";
-import {Global} from "../../../Global.js";
-import {Editor} from "../../../Editor.js";
-import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {RendererCanvas} from "../../../components/RendererCanvas.js";
-import {DropdownList} from "../../../components/input/DropdownList.js";
-import {Component} from "../../../components/Component.js";
+import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
+import {Audio} from "../../../../core/resources/Audio.js";
+import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
-import {Vector2, Mesh, SkinnedMesh, MeshStandardMaterial, Line, LineBasicMaterial, Points, PointsMaterial, Sprite, SpriteMaterial, Material, ShaderMaterial, Texture, Geometry, BufferGeometry, Raycaster, Object3D, Scene, AxesHelper, Camera, CameraHelper, Light, DirectionalLight, DirectionalLightHelper, LightProbe, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper, HemisphereLight, HemisphereLightHelper, Bone, BoxHelper} from "three";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {Component} from "../../../components/Component.js";
+import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
+import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
+import {DragBuffer} from "../../DragBuffer.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {Editor} from "../../../Editor.js";
+import {EditorFreeControls} from "./controls/EditorFreeControls.js";
+import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
+import {EditorPlanarControls} from "./controls/EditorPlanarControls.js";
+import {EventManager} from "../../../../core/utils/EventManager.js";
+import {Font} from "../../../../core/resources/Font.js";
+import {Global} from "../../../Global.js";
+import {GridHelper} from "./helpers/GridHelper.js";
+import {Group} from"../../../../core/objects/misc/Group.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {Keyboard} from "../../../../core/input/Keyboard.js";
+import {LensFlare} from "../../../../core/objects/misc/LensFlare.js";
+import {LightProbeHelper} from "./helpers/LightProbeHelper.js";
+import {LineHelper} from "./helpers/LineHelper.js";
+import {Loaders} from "../../../Loaders.js";
+import {Locale} from "../../../locale/LocaleManager.js";
+import {Model} from "../../../../core/resources/Model.js";
+import {Mouse} from "../../../../core/input/Mouse.js";
+import {Nunu} from "../../../../core/Nunu.js";
+import {ObjectIconHelper} from "./helpers/ObjectIconHelper.js";
+import {ObjectIcons} from "../../../utils/ObjectIcons.js";
+import {OrientationCube} from "./utils/OrientationCube.js";
+import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
+import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
+import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
+import {PhysicsObjectHelper} from "./helpers/PhysicsObjectHelper.js";
+import {PointsHelper} from "./helpers/PointsHelper.js";
+import {RectAreaLightHelper} from "./helpers/RectAreaLightHelper.js";
+import {RendererCanvas} from "../../../components/RendererCanvas.js";
+import {Settings} from "../../../Settings.js";
+import {SideBar} from "./sidebar/SideBar.js";
+import {SkeletonHelper} from "./helpers/SkeletonHelper.js";
+import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
+import {SwapAction} from "../../../history/action/objects/SwapAction.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {ToolBar} from "./toolbar/ToolBar.js";
+import {TransformControls} from "./transform/TransformControls.js";
+import {Video} from "../../../../core/resources/Video.js";
+import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
+import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
+import {WireframeHelper} from "./helpers/WireframeHelper.js";
 
 /** 
  * The scene editor is the core of the nunuStudio editor.
@@ -810,7 +811,7 @@ SceneEditor.prototype.attach = function(scene)
  * Check if a scene or object is attached to the editor.
  *
  * @method isAttached
- * @param {Object3D} scene
+ * @param {Scene} scene Scene to verify if is attached to this tab.
  */
 SceneEditor.prototype.isAttached = function(scene)
 {
