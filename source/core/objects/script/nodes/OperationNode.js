@@ -1,4 +1,5 @@
 import {NodeSocket, Object2D, Text, Vector2} from "escher.js/build/escher.module.js";
+
 import {BaseNode} from "./BaseNode.js";
 
 /**
@@ -81,14 +82,14 @@ OperationNode.prototype.registerSockets = function()
     }
 };
 
-OperationNode.prototype.onUpdate() = function()
+OperationNode.prototype.onUpdate = function()
 {
     BaseNode.prototype.onUpdate.call(this);
 
     this.text.text = this.label;
 };
 
-OperationNode.prototype.serialize(recursive) = function()
+OperationNode.prototype.serialize = function(recursive)
 {
     var data = BaseNode.prototype.serialize.call(this, recursive);
 
@@ -101,7 +102,7 @@ OperationNode.prototype.serialize(recursive) = function()
     return data;
 };
 
-OperationNode.prototype.parse(data, root) = function()
+OperationNode.prototype.parse = function(data, root)
 {
     BaseNode.prototype.parse.call(this, data, root);
 
@@ -129,3 +130,5 @@ OperationNode.prototype.parse(data, root) = function()
 };
 
 Object2D.register(OperationNode, "OperationNode");
+
+export {OperationNode};

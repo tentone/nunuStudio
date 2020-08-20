@@ -50,3 +50,5 @@ BaseNode.prototype.onUpdate = function()
 
 	Node.prototype.onUpdate.call(this);
 };
+
+export {BaseNode};

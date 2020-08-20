@@ -2,6 +2,7 @@ import {ButtonDrawer} from "../../../components/buttons/ButtonDrawer.js";
 import {Component} from "../../../components/Component.js";
 import {Global} from "../../../Global.js";
 import {Locale} from "../../../locale/LocaleManager.js";
+import {OperationNode} from "../../../../core/objects/script/nodes/OperationNode.js";
 import {Text} from "../../../components/Text.js";
 
 /**
@@ -81,7 +82,18 @@ SideBar.prototype.createObject = function()
     }, Locale.resize);
 	
 	// Operations
+	var events = new ButtonDrawer(this);
+	events.setImage(Global.FILE_PATH + "icons/models/models.png");
+	this.buttons.push(events);
 
+	// Add
+	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	{
+		// new OperationNode("+");
+		// TODO <ADD CODE HERE>
+    }, Locale.add);
+
+	
 	events.updateOptions();
 };
 
