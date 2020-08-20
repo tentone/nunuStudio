@@ -129,4 +129,3 @@ OperationNode.prototype.parse(data, root) = function()
 };
 
 Object2D.register(OperationNode, "OperationNode");
-
