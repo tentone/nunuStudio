@@ -44,6 +44,8 @@ function BaseNode()
 	this.add(this.destroyButton);
 }
 
+BaseNode.prototype = Object.create(Node.prototype);
+
 BaseNode.prototype.onUpdate = function()
 {
 	this.destroyButton.position.set(this.box.max.x, this.box.min.y);

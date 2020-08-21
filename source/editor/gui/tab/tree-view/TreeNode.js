@@ -681,6 +681,7 @@ function TreeNode(container)
 		}
 	};
 
+	// Auxiliary method to open a new tab and attach a object to it.
 	function openTab(Constructor, object)
 	{
 		var tab = Editor.gui.tab.getTab(Constructor, object);

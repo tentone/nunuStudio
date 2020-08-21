@@ -1,11 +1,10 @@
 import {Group, Object3D} from "three";
-
 import {NodeGraph} from "escher.js/build/escher.module.js";
 
 /**
  * Node scripts are build using a graph composed of operations.
  * 
- * They can be used to create interaction without requiring any coding.
+ * They can be used to create interaction without requiring any coding, logic can be build from provided blocks.
  * 
  * @class NodeScript
  * @extends {Object}

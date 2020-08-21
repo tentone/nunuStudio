@@ -57,6 +57,7 @@ SideBar.prototype = Object.create(Component.prototype);
  */
 SideBar.prototype.createObject = function()
 {
+	var self = this;
 
 	// Events
 	var events = new ButtonDrawer(this);
@@ -81,20 +82,22 @@ SideBar.prototype.createObject = function()
 		// TODO <ADD CODE HERE>
     }, Locale.resize);
 	
+	events.updateOptions();
+
 	// Operations
-	var events = new ButtonDrawer(this);
-	events.setImage(Global.FILE_PATH + "icons/models/models.png");
-	this.buttons.push(events);
+	var methods = new ButtonDrawer(this);
+	methods.setImage(Global.FILE_PATH + "icons/models/models.png");
+	this.buttons.push(methods);
 
 	// Add
-	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	methods.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
-		// new OperationNode("+");
-		// TODO <ADD CODE HERE>
-    }, Locale.add);
+		// TODO <REMOVE THIS>
+		console.log(self);
 
-	
-	events.updateOptions();
+		self.parent.node.graph.addNode(new OperationNode("+"));
+    }, Locale.add);
+	methods.updateOptions();
 };
 
 SideBar.prototype.updateSize = function()
