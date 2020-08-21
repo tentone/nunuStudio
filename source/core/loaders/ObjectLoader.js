@@ -1,45 +1,46 @@
-import {TextFile} from "../resources/TextFile.js";
-import {ResourceContainer} from "../resources/ResourceContainer.js";
-import {EffectComposer} from "../postprocessing/EffectComposer.js";
-import {TextSprite} from "../objects/text/TextSprite.js";
-import {TextMesh} from "../objects/text/TextMesh.js";
-import {TextBitmap} from "../objects/text/TextBitmap.js";
-import {Sprite} from "../objects/sprite/Sprite.js";
-import {SpineAnimation} from "../objects/spine/SpineAnimation.js";
-import {Script} from "../objects/script/Script.js";
-import {Scene} from "../objects/Scene.js";
-import {Program} from "../objects/Program.js";
-import {PhysicsObject} from "../objects/physics/PhysicsObject.js";
-import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
-import {Sky} from "../objects/misc/Sky.js";
-import {LensFlare} from "../objects/misc/LensFlare.js";
-import {HTMLView} from "../objects/misc/HTMLView.js";
-import {Group} from"../objects/misc/Group.js";
-import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
-import {Mesh} from "../objects/mesh/Mesh.js";
-import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
-import {SpotLight} from "../objects/lights/SpotLight.js";
-import {RectAreaLight} from "../objects/lights/RectAreaLight.js";
-import {PointLight} from "../objects/lights/PointLight.js";
-import {LightProbe} from "../objects/lights/LightProbe.js";
-import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
-import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
+import {AnimationClip, Bone, BufferAttribute, Color, DefaultLoadingManager, FileLoader, Fog, FogExp2, LOD, Line, LineLoop, LineSegments, Points, Skeleton} from "three";
+
 import {AmbientLight} from "../objects/lights/AmbientLight.js";
-import {OrbitControls} from "../objects/controls/OrbitControls.js";
-import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
-import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
-import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../objects/cameras/CubeCamera.js";
-import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../objects/audio/AudioEmitter.js";
-import {VideoLoader} from "./VideoLoader.js";
-import {TextureLoader} from "./TextureLoader.js";
-import {MaterialLoader} from "./MaterialLoader.js";
-import {ImageLoader} from "./ImageLoader.js";
-import {GeometryLoader} from "./GeometryLoader.js";
-import {FontLoader} from "./FontLoader.js";
 import {AudioLoader} from "./AudioLoader.js";
-import {DefaultLoadingManager, FileLoader, Skeleton, Color, Fog, FogExp2, BufferAttribute, LOD, Line, LineLoop, LineSegments, Points, Bone, AnimationClip} from "three";
+import {CubeCamera} from "../objects/cameras/CubeCamera.js";
+import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
+import {EffectComposer} from "../postprocessing/EffectComposer.js";
+import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
+import {FontLoader} from "./FontLoader.js";
+import {GeometryLoader} from "./GeometryLoader.js";
+import {Group} from"../objects/misc/Group.js";
+import {HTMLView} from "../objects/misc/HTMLView.js";
+import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
+import {ImageLoader} from "./ImageLoader.js";
+import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
+import {LensFlare} from "../objects/misc/LensFlare.js";
+import {LightProbe} from "../objects/lights/LightProbe.js";
+import {MaterialLoader} from "./MaterialLoader.js";
+import {Mesh} from "../objects/mesh/Mesh.js";
+import {OrbitControls} from "../objects/controls/OrbitControls.js";
+import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
+import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
+import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
+import {PhysicsObject} from "../objects/physics/PhysicsObject.js";
+import {PointLight} from "../objects/lights/PointLight.js";
+import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
+import {Program} from "../objects/Program.js";
+import {RectAreaLight} from "../objects/lights/RectAreaLight.js";
+import {ResourceContainer} from "../resources/ResourceContainer.js";
+import {Scene} from "../objects/Scene.js";
+import {Script} from "../objects/script/Script.js";
+import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
+import {Sky} from "../objects/misc/Sky.js";
+import {SpineAnimation} from "../objects/spine/SpineAnimation.js";
+import {SpotLight} from "../objects/lights/SpotLight.js";
+import {Sprite} from "../objects/sprite/Sprite.js";
+import {TextBitmap} from "../objects/text/TextBitmap.js";
+import {TextFile} from "../resources/TextFile.js";
+import {TextMesh} from "../objects/text/TextMesh.js";
+import {TextSprite} from "../objects/text/TextSprite.js";
+import {TextureLoader} from "./TextureLoader.js";
+import {VideoLoader} from "./VideoLoader.js";
 
 /**
  * Objectloader can be used to load external objects from files.
@@ -786,6 +787,7 @@ ObjectLoader.prototype.parseObject = function(data)
 			
 			case "NodeScript":
 				object = new NodeScript();
+				object.graph = Object2D.parse(data.graph);
 				break;
 
 			case "RectAreaLight":

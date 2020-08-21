@@ -1,5 +1,4 @@
-import {Object2D, Renderer, Viewport, ViewportControls} from "escher.js/build/escher.module.js";
-
+import {Renderer, Viewport, ViewportControls} from "escher.js/build/escher.module.js";
 import {Canvas} from "../../../components/Canvas.js";
 import {Global} from "../../../Global.js";
 import {Locale} from "../../../locale/LocaleManager.js";
@@ -12,7 +11,15 @@ function NodeEditor(parent, closeable, container, index)
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 
-	/** 
+	/**
+	 * Node script being edited in this tab.
+	 * 
+	 * @attribute graph
+	 * @type {NodeScript}
+	 */
+	this.node = null;
+
+	/**
 	 * Side bar contains the buttons to add new nodes into the node editor graph.
 	 *
 	 * @attribute sideBar
@@ -28,8 +35,6 @@ function NodeEditor(parent, closeable, container, index)
 	 */
 	this.canvas = new Canvas(this);
 
-	this.group = new Object2D();
-
 	/**
 	 * Viewport used to display the graph.
 	 * 
@@ -38,8 +43,20 @@ function NodeEditor(parent, closeable, container, index)
 	 */
 	this.viewport = new Viewport(this.canvas.element);
 
+	/**
+	 * 2D renderer object used to draw the graph editor into the canvas.
+	 * 
+	 * @attribute renderer
+	 * @type {Renderer}
+	 */
 	this.renderer = new Renderer(this.canvas.element);
 
+	/**
+	 * Viewport controls used to control the viewport object.
+	 * 
+	 * @attribute controls
+	 * @type {ViewportControls}
+	 */
 	this.controls = new ViewportControls(this.viewport);
 }
 
@@ -50,7 +67,7 @@ NodeEditor.prototype.updateMetadata = function()
 	if(this.node !== null)
 	{
 		this.setName(this.node.name);
-	}
+	}	
 }
 
 NodeEditor.prototype.attach = function(node)
@@ -64,11 +81,13 @@ NodeEditor.prototype.isAttached = function(node)
 	return this.node === node;
 };
 
-
 NodeEditor.prototype.update = function()
 {
-	this.controls.update(this.renderer.pointer);
-	this.renderer.update(this.group, this.viewport);
+	if(this.node !== null && this.node.graph !== null)
+	{
+		this.controls.update(this.renderer.pointer);
+		this.renderer.update(this.node.graph, this.viewport);
+	}
 };
 
 NodeEditor.prototype.updateSize = function()

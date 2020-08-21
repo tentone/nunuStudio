@@ -1,4 +1,5 @@
 import {Group, Object3D} from "three";
+
 import {NodeGraph} from "escher.js/build/escher.module.js";
 
 /**
@@ -23,7 +24,7 @@ function NodeScript()
 	 * @attribute graph
 	 * @type {NodeGraph}
 	 */
-	this.graph = null;
+	this.graph = new NodeGraph();
 }
 
 NodeScript.prototype = Object.create(Group.prototype);

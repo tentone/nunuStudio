@@ -1,5 +1,6 @@
-import {Video} from "../resources/Video.js";
 import {DefaultLoadingManager, FileLoader} from "three";
+
+import {Video} from "../resources/Video.js";
 
 /**
  * VideoLoader can be used to load external video resources.

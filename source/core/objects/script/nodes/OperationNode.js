@@ -1,5 +1,4 @@
 import {NodeSocket, Object2D, Text, Vector2} from "escher.js/build/escher.module.js";
-
 import {BaseNode} from "./BaseNode.js";
 
 /**
@@ -8,9 +7,8 @@ import {BaseNode} from "./BaseNode.js";
  * @constructor
  * @class OperationNode
  * @param {string} operation Math operation symbol to be performed.
- * @param {string} label Label of the node.
  */
-function OperationNode(operation, label)
+function OperationNode(operation)
 {
     BaseNode.call(this);
 
@@ -20,11 +18,6 @@ function OperationNode(operation, label)
 	 * Math operation performed by this node.
 	 */
     this.operation = operation;
-
-    /**
-	 * Label shown to the user in th graph.
-	 */
-    this.label = label;
 
     this.box.set(new Vector2(-50, -35), new Vector2(50, 35));
 
@@ -86,7 +79,7 @@ OperationNode.prototype.onUpdate = function()
 {
     BaseNode.prototype.onUpdate.call(this);
 
-    this.text.text = this.label;
+    this.text.text = this.operation;
 };
 
 OperationNode.prototype.serialize = function(recursive)
@@ -94,7 +87,6 @@ OperationNode.prototype.serialize = function(recursive)
     var data = BaseNode.prototype.serialize.call(this, recursive);
 
     data.operation = this.operation;
-    data.label = this.label;
     data.a = this.a !== null ? this.a.uuid : null;
     data.b = this.b !== null ? this.b.uuid : null;
     data.r = this.r !== null ? this.r.uuid : null;
@@ -107,7 +99,6 @@ OperationNode.prototype.parse = function(data, root)
     BaseNode.prototype.parse.call(this, data, root);
 
     this.operation = data.operation;
-    this.label = data.label;
 
     if(data.a !== null)
     {
