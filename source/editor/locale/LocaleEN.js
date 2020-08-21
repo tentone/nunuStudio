@@ -31,9 +31,7 @@ var LocaleEN = {
 	select: "Select",
 	redo: "Redo",
 	undo: "Undo",
-	add: "Add",
 	mix: "Mix",
-	multiply: "Multiply",
 	setTransparent: "Set transparent",
 	mergeGeometries: "Merge Geometries",
 	executeScript: "Execute Script",
@@ -446,6 +444,9 @@ var LocaleEN = {
 	simplify: "Simplify",
 	subdivide: "Subdivide",
 	twist: "Twist",
+	divide: "Divide",
+	add: "Add",
+	multiply: "Multiply",
 
 	// Editor
 	initialization: "Initialization",

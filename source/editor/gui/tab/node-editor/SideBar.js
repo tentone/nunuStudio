@@ -89,14 +89,27 @@ SideBar.prototype.createObject = function()
 	methods.setImage(Global.FILE_PATH + "icons/models/models.png");
 	this.buttons.push(methods);
 
-	// Add
-	methods.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	methods.addOption(Global.FILE_PATH + "icons/math/plus.png", function()
 	{
-		// TODO <REMOVE THIS>
-		console.log(self);
-
 		self.parent.node.graph.addNode(new OperationNode("+"));
-    }, Locale.add);
+	}, Locale.add);
+
+	methods.addOption(Global.FILE_PATH + "icons/math/subtract.png", function()
+	{
+		self.parent.node.graph.addNode(new OperationNode("-"));
+	}, Locale.subtract);
+
+	methods.addOption(Global.FILE_PATH + "icons/math/multiply.png", function()
+	{
+		self.parent.node.graph.addNode(new OperationNode("*"));
+	}, Locale.multiply);
+
+
+	methods.addOption(Global.FILE_PATH + "icons/math/divide.png", function()
+	{
+		self.parent.node.graph.addNode(new OperationNode("/"));
+	}, Locale.divide);
+
 	methods.updateOptions();
 };
 
