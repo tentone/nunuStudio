@@ -350,6 +350,32 @@ Component.prototype.attachTo = function(parent)
 	}
 };
 
+Component.prototype.watchPointer = function()
+{
+	/**
+ * Element to be used for coordinates calculation relative to that canvas.
+ * 
+ * @method setCanvas
+ * @param {Component} canvas Canvas to be attached to the Mouse instance
+ */
+Mouse.setCanvas = function(element)
+{
+	var self = this;
+
+	this.pointerInside = false;
+
+	this.element.addEventListener("mouseenter", function()
+	{
+		self.pointerInside = true;
+	});
+
+	this.element.addEventListener("mouseleave", function()
+	{
+		self.pointerInside = false;
+	});
+};
+}
+
 /**
  * Called to destroy a component.
  *

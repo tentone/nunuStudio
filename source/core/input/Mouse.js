@@ -251,25 +251,25 @@ Mouse.BACK = 3;
 Mouse.FORWARD = 4;
 
 /**
- * Element to be used for coordinates calculation relative to that canvas.
+ * Element to be used to calculate coordinates relative to that canvas.
  * 
  * @method setCanvas
  * @param {Component} canvas Canvas to be attached to the Mouse instance
  */
-Mouse.setCanvas = function(element)
+Mouse.setCanvas = function(canvas)
 {
-	this.canvas = element;
+	this.canvas = canvas;
 
-	element.mouseInside = false;
+	element.pointerInside = false;
 
 	element.addEventListener("mouseenter", function()
 	{
-		this.mouseInside = true;
+		this.pointerInside = true;
 	});
 
 	element.addEventListener("mouseleave", function()
 	{
-		this.mouseInside = false;
+		this.pointerInside = false;
 	});
 };
 
@@ -281,7 +281,7 @@ Mouse.setCanvas = function(element)
  */
 Mouse.insideCanvas = function()
 {
-	return this.canvas !== null && this.canvas.mouseInside;
+	return this.canvas !== null && this.canvas.pointerInside;
 };
 
 /**
