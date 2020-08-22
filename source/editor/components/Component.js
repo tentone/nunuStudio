@@ -350,15 +350,14 @@ Component.prototype.attachTo = function(parent)
 	}
 };
 
-Component.prototype.watchPointer = function()
-{
-	/**
- * Element to be used for coordinates calculation relative to that canvas.
+/**
+ * Create event listeners to watch for pointer enter/leave events.
  * 
- * @method setCanvas
- * @param {Component} canvas Canvas to be attached to the Mouse instance
+ * Store the pointer state in the pointerInside attribute.
+ * 
+ * @method watchPointer
  */
-Mouse.setCanvas = function(element)
+Component.prototype.watchPointer = function()
 {
 	var self = this;
 
@@ -374,7 +373,6 @@ Mouse.setCanvas = function(element)
 		self.pointerInside = false;
 	});
 };
-}
 
 /**
  * Called to destroy a component.
