@@ -260,14 +260,14 @@ Mouse.setCanvas = function(canvas)
 {
 	this.canvas = canvas;
 
-	element.pointerInside = false;
+	canvas.pointerInside = false;
 
-	element.addEventListener("mouseenter", function()
+	canvas.addEventListener("mouseenter", function()
 	{
 		this.pointerInside = true;
 	});
 
-	element.addEventListener("mouseleave", function()
+	canvas.addEventListener("mouseleave", function()
 	{
 		this.pointerInside = false;
 	});

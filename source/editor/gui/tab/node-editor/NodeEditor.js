@@ -10,7 +10,7 @@ function NodeEditor(parent, closeable, container, index)
 	TabComponent.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = "var(--bar-color)";
-
+	
 	/**
 	 * Node script being edited in this tab.
 	 * 
@@ -34,6 +34,7 @@ function NodeEditor(parent, closeable, container, index)
 	 * @type {Canvas}
 	 */
 	this.canvas = new Canvas(this);
+	this.canvas.watchPointer();
 
 	/**
 	 * Viewport used to display the graph.
@@ -85,7 +86,11 @@ NodeEditor.prototype.update = function()
 {
 	if(this.node !== null && this.node.graph !== null)
 	{
-		this.controls.update(this.renderer.pointer);
+		if(this.canvas.pointerInside)
+		{
+			this.controls.update(this.renderer.pointer);
+		}
+
 		this.renderer.update(this.node.graph, this.viewport);
 	}
 };
