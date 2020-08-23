@@ -1,14 +1,18 @@
 // eslint-disable-next-line no-undef
 module.exports = {
 	root: true,
-	plugins: [
-		"eslint-plugin-import",
-		"eslint-plugin-jsdoc"
-	],
+	parserOptions: {
+		sourceType: "module",
+		ecmaVersion: 2015,
+		ecmaFeatures: {
+			modules: true
+		}
+	},
+	plugins: ["import", "jsdoc"],
 	rules: {
 		"arrow-body-style": ["error", "always"],
 		"arrow-parens": "error",
-		"brace-style": ["error", "1tbs", {allowSingleLine: true}],
+		"brace-style": ["error", "allman", {allowSingleLine: true}],
 		camelcase: "error",
 		indent: ["error", "tab"],
 		complexity: "off",

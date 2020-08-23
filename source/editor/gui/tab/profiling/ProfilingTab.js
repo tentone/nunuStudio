@@ -3,7 +3,7 @@ import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {Canvas} from "../../../components/Canvas.js";
-import {Object2D, Viewport, Renderer, ViewportControls} from "escher.js/build/escher.module.js";
+import {Object2D, Viewport, Renderer, ViewportControls, Box, Circle} from "escher.js/build/escher.module.js";
 
 /**
  * Profiling tab is used to measure the performance of the application booth in the editor and while it is running.
@@ -39,11 +39,11 @@ function ProfilingTab(parent, closeable, container, index)
 
 	this.controls = new ViewportControls(this.viewport);
 
-	var box = new Escher.Box();
+	var box = new Box();
 	box.position.set(-100, 0);
 	this.group.add(box);
 
-	var circle = new Escher.Circle();
+	var circle = new Circle();
 	circle.position.set(100, 0);
 	circle.radius = 50;
 	this.group.add(circle);
