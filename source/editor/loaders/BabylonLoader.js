@@ -136,7 +136,7 @@ BabylonLoader.prototype =
 				camera.name = data.name;
 				camera.position.fromArray(data.position);
 
-				if(data.rotation) camera.rotation.fromArray(data.rotation);
+				if(data.rotation){camera.rotation.fromArray(data.rotation);}
 
 				objects[data.id] = camera;
 			}

@@ -1,6 +1,6 @@
+import {Vector2} from "three";
 import {EventManager} from "../utils/EventManager.js";
 import {Key} from "./Key.js";
-import {Vector2} from "three";
 
 /**
  * Mouse instance for sync input the mouse should be updated everytime before.

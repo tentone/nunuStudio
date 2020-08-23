@@ -4,9 +4,7 @@ module.exports = {
 	parserOptions: {
 		sourceType: "module",
 		ecmaVersion: 2015,
-		ecmaFeatures: {
-			modules: true
-		}
+		ecmaFeatures: {modules: true}
 	},
 	plugins: ["import", "jsdoc"],
 	rules: {
@@ -41,7 +39,7 @@ module.exports = {
 		"lines-between-class-members": "error",
 		"space-before-blocks": ["error", "always"],
 		"no-multi-spaces": "error",
-		"keyword-spacing": ["error", {after: false}],
+		"keyword-spacing": ["error", {after: true, before: true}],
 		"new-parens": "error",
 		"no-bitwise": "off",
 		"no-caller": "error",
