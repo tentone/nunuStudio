@@ -8,7 +8,7 @@ import {BufferGeometry, DefaultLoadingManager, DirectionalLight, FileLoader, Flo
  */
 var BabylonLoader = function(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 };
 
 BabylonLoader.prototype =
@@ -68,7 +68,8 @@ BabylonLoader.prototype =
 
 		}
 
-		function parseGeometry(json) {
+		function parseGeometry(json)
+		{
 
 			var geometry = new BufferGeometry();
 
