@@ -6,9 +6,9 @@ import {Loader, Object3D, FileLoader, Mesh, MeshPhongMaterial, Texture, ImageLoa
  */
 var AWDLoader = (function()
 {
-	var //UNCOMPRESSED = 0,
-		//DEFLATE = 1,
-		//LZMA = 2,
+	var // UNCOMPRESSED = 0,
+		// DEFLATE = 1,
+		// LZMA = 2,
 		AWD_FIELD_INT8 = 1,
 		AWD_FIELD_INT16 = 2,
 		AWD_FIELD_INT32 = 3,
@@ -18,10 +18,10 @@ var AWDLoader = (function()
 		AWD_FIELD_FLOAT32 = 7,
 		AWD_FIELD_FLOAT64 = 8,
 		AWD_FIELD_BOOL = 21,
-		//AWD_FIELD_COLOR = 22,
+		// AWD_FIELD_COLOR = 22,
 		AWD_FIELD_BADDR = 23,
-		//AWD_FIELD_STRING = 31,
-		//AWD_FIELD_BYTEARRAY = 32,
+		// AWD_FIELD_STRING = 31,
+		// AWD_FIELD_BYTEARRAY = 32,
 		AWD_FIELD_VECTOR2x1 = 41,
 		AWD_FIELD_VECTOR3x1 = 42,
 		AWD_FIELD_VECTOR4x1 = 43,
@@ -30,14 +30,14 @@ var AWDLoader = (function()
 		AWD_FIELD_MTX4x3 = 46,
 		AWD_FIELD_MTX4x4 = 47,
 		BOOL = 21,
-		//COLOR = 22,
+		// COLOR = 22,
 		BADDR = 23,
-		//INT8 = 1,
-		//INT16 = 2,
-		//INT32 = 3,
+		// INT8 = 1,
+		// INT16 = 2,
+		// INT32 = 3,
 		UINT8 = 4,
 		UINT16 = 5,
-		//UINT32 = 6,
+		// UINT32 = 6,
 		FLOAT32 = 7,
 		FLOAT64 = 8;
 	var littleEndian = true;
@@ -169,7 +169,7 @@ var AWDLoader = (function()
 					assetData = this.parseAnimatorSet();
 					break;
 				default:
-					//debug('Ignoring block!',type, len);
+					// debug('Ignoring block!',type, len);
 					this._ptr += len;
 					break;
 			}
@@ -206,11 +206,11 @@ var AWDLoader = (function()
 		{
 			var parent,
 				ctr = new Object3D(),
-				par_id = this.readU32(),
+				parId = this.readU32(),
 				mtx = this.parseMatrix4();
 			ctr.name = this.readUTF();
 			ctr.applyMatrix(mtx);
-			parent = this._blocks[par_id].data || this.trunk;
+			parent = this._blocks[parId].data || this.trunk;
 			parent.add(ctr);
 			this.parseProperties(
 			{
@@ -226,23 +226,23 @@ var AWDLoader = (function()
 		{
 			var name,
 				mesh, geometries, meshLen, meshes,
-				par_id, data_id,
+				parId, dataId,
 				mtx,
-				materials, mat, mat_id,
-				num_materials,
+				materials, mat, matId,
+				numMaterials,
 				parent,
 				i;
-			par_id = this.readU32();
+			parId = this.readU32();
 			mtx = this.parseMatrix4();
 			name = this.readUTF();
-			data_id = this.readU32();
-			num_materials = this.readU16();
-			geometries = this.getBlock(data_id);
+			dataId = this.readU32();
+			numMaterials = this.readU16();
+			geometries = this.getBlock(dataId);
 			materials = [];
-			for (i = 0; i < num_materials; i++)
+			for (i = 0; i < numMaterials; i++)
 			{
-				mat_id = this.readU32();
-				mat = this.getBlock(mat_id);
+				matId = this.readU32();
+				mat = this.getBlock(matId);
 				materials.push(mat);
 			}
 			meshLen = geometries.length;
@@ -266,7 +266,7 @@ var AWDLoader = (function()
 			}
 			mesh.applyMatrix(mtx);
 			mesh.name = name;
-			parent = this.getBlock(par_id) || this.trunk;
+			parent = this.getBlock(parId) || this.trunk;
 			parent.add(mesh);
 			var matLen = materials.length;
 			var maxLen = Math.max(meshLen, matLen);
@@ -283,12 +283,12 @@ var AWDLoader = (function()
 				props,
 				mat,
 				attributes,
-				num_methods,
-				methods_parsed;
+				numMethods,
+				methodsParsed;
 			name = this.readUTF();
 			type = this.readU8();
-			num_methods = this.readU8();
-			//log( "AWDLoader parseMaterial ",name )
+			numMethods = this.readU8();
+			// log( "AWDLoader parseMaterial ",name )
 			// Read material numerical properties
 			// (1=color, 2=bitmap url, 11=alpha_blending, 12=alpha_threshold, 13=repeat)
 			props = this.parseProperties(
@@ -299,8 +299,8 @@ var AWDLoader = (function()
 				12: AWD_FIELD_FLOAT32,
 				13: AWD_FIELD_BOOL
 			});
-			methods_parsed = 0;
-			while (methods_parsed < num_methods)
+			methodsParsed = 0;
+			while (methodsParsed < numMethods)
 			{
 				// read method_type before
 				this.readU16();
@@ -322,8 +322,8 @@ var AWDLoader = (function()
 			else if (type === 2)
 			{
 				// Bitmap material
-				var tex_addr = props.get(2, 0);
-				mat.map = this.getBlock(tex_addr);
+				var texAddr = props.get(2, 0);
+				mat.map = this.getBlock(texAddr);
 			}
 			mat.extra = attributes;
 			mat.alphaThreshold = props.get(12, 0.0);
@@ -335,12 +335,12 @@ var AWDLoader = (function()
 			var name = this.readUTF(),
 				type = this.readU8(),
 				asset,
-				data_len;
+				dataLen;
 			// External
 			if (type === 0)
 			{
-				data_len = this.readU32();
-				var url = this.readUTFBytes(data_len);
+				dataLen = this.readU32();
+				var url = this.readUTFBytes(dataLen);
 				asset = this.loadTexture(url);
 				asset.userData = {};
 				asset.userData.name = name;
@@ -371,11 +371,11 @@ var AWDLoader = (function()
 			// Array<Bone>
 			//
 			this.readUTF();
-			var num_joints = this.readU16(),
+			var numJoints = this.readU16(),
 				skeleton = [],
-				joints_parsed = 0;
+				jointsParsed = 0;
 			this.parseProperties(null);
-			while (joints_parsed < num_joints)
+			while (jointsParsed < numJoints)
 			{
 				var joint, ibp;
 				// Ignore joint id
@@ -389,7 +389,7 @@ var AWDLoader = (function()
 				this.parseProperties(null);
 				this.parseUserAttributes();
 				skeleton.push(joint);
-				joints_parsed++;
+				jointsParsed++;
 			}
 			// Discard attributes for now
 			this.parseUserAttributes();
@@ -398,14 +398,14 @@ var AWDLoader = (function()
 		parseSkeletonPose: function()
 		{
 			var name = this.readUTF();
-			var num_joints = this.readU16();
+			var numJoints = this.readU16();
 			this.parseProperties(null);
-			// debug( 'parse Skeleton Pose. joints : ' + num_joints);
+			// debug( 'parse Skeleton Pose. joints : ' + numJoints);
 			var pose = [];
-			var joints_parsed = 0;
-			while (joints_parsed < num_joints)
+			var jointsParsed = 0;
+			while (jointsParsed < numJoints)
 			{
-				var has_transform; //:uint;
+				var has_transform; // :uint;
 				var mtx_data;
 				has_transform = this.readU8();
 				if (has_transform === 1)
@@ -416,8 +416,8 @@ var AWDLoader = (function()
 				{
 					mtx_data = new Matrix4();
 				}
-				pose[joints_parsed] = mtx_data;
-				joints_parsed++;
+				pose[jointsParsed] = mtx_data;
+				jointsParsed++;
 			}
 			// Skip attributes for now
 			this.parseUserAttributes();
@@ -426,26 +426,26 @@ var AWDLoader = (function()
 		parseSkeletonAnimation: function()
 		{
 			var frame_dur;
-			var pose_addr;
+			var poseAddr;
 			var pose;
 			var name = this.readUTF();
 			var clip = [];
-			var num_frames = this.readU16();
+			var numFrames = this.readU16();
 			this.parseProperties(null);
-			var frames_parsed = 0;
-			// debug( 'parse Skeleton Animation. frames : ' + num_frames);
-			while (frames_parsed < num_frames)
+			var framesParsed = 0;
+			// debug( 'parse Skeleton Animation. frames : ' + numFrames);
+			while (framesParsed < numFrames)
 			{
-				pose_addr = this.readU32();
+				poseAddr = this.readU32();
 				frame_dur = this.readU16();
-				pose = this._blocks[pose_addr].data;
+				pose = this._blocks[poseAddr].data;
 				// debug( 'pose address ',pose[2].elements[12],pose[2].elements[13],pose[2].elements[14] );
 				clip.push(
 				{
 					pose: pose,
 					duration: frame_dur
 				});
-				frames_parsed++;
+				framesParsed++;
 			}
 			if (clip.length === 0)
 			{
@@ -460,26 +460,26 @@ var AWDLoader = (function()
 		{
 			var poseBlockAdress,
 				name = this.readUTF(),
-				num_frames = this.readU16(),
+				numFrames = this.readU16(),
 				props = this.parseProperties(
 				{
 					1: UINT16
 				}),
-				frames_parsed = 0,
+				framesParsed = 0,
 				skeletonFrames = [];
-			while (frames_parsed < num_frames)
+			while (framesParsed < numFrames)
 			{
 				poseBlockAdress = this.readU32();
 				skeletonFrames.push(this._blocks[poseBlockAdress].data);
-				frames_parsed++;
+				framesParsed++;
 			}
 			this.parseUserAttributes();
 			return skeletonFrames;
 		},
 		parseAnimatorSet: function()
 		{
-			var animSetBlockAdress; //:int
-			var targetAnimationSet; //:AnimationSetBase;
+			var animSetBlockAdress; // :int
+			var targetAnimationSet; // :AnimationSetBase;
 			var name = this.readUTF();
 			var type = this.readU16();
 			var props = this.parseProperties(
@@ -488,13 +488,13 @@ var AWDLoader = (function()
 			});
 			animSetBlockAdress = this.readU32();
 			var targetMeshLength = this.readU16();
-			var meshAdresses = []; //:Vector.<uint> = new Vector.<uint>;
+			var meshAdresses = []; // :Vector.<uint> = new Vector.<uint>;
 			for (var i = 0; i < targetMeshLength; i++) meshAdresses.push(this.readU32());
 			var activeState = this.readU16();
 			var autoplay = Boolean(this.readU8());
 			this.parseUserAttributes();
 			this.parseUserAttributes();
-			var targetMeshes = []; //:Vector.<Mesh> = new Vector.<Mesh>;
+			var targetMeshes = []; // :Vector.<Mesh> = new Vector.<Mesh>;
 			for (i = 0; i < meshAdresses.length; i++)
 			{
 				//			returnedArray = getAssetByID(meshAdresses[i], [AssetType.MESH]);
@@ -524,9 +524,9 @@ var AWDLoader = (function()
 		parseMeshData: function()
 		{
 			var name = this.readUTF(),
-				num_subs = this.readU16(),
+				numSubs = this.readU16(),
 				geom,
-				subs_parsed = 0,
+				subsParsed = 0,
 				buffer,
 				geometries = [];
 			// Ignore for now
@@ -536,14 +536,14 @@ var AWDLoader = (function()
 				2: this._geoNrType
 			});
 			// Loop through sub meshes
-			while (subs_parsed < num_subs)
+			while (subsParsed < numSubs)
 			{
-				var sm_len, sm_end, attrib;
+				var smLen, smEnd, attrib;
 				geom = new BufferGeometry();
 				geom.name = name;
 				geometries.push(geom);
-				sm_len = this.readU32();
-				sm_end = this._ptr + sm_len;
+				smLen = this.readU32();
+				smEnd = this._ptr + smLen;
 				// Ignore for now
 				this.parseProperties(
 				{
@@ -551,21 +551,21 @@ var AWDLoader = (function()
 					2: this._geoNrType
 				});
 				// Loop through data streams
-				while (this._ptr < sm_end)
+				while (this._ptr < smEnd)
 				{
 					var idx = 0,
 						str_type = this.readU8(),
 						str_ftype = this.readU8(),
-						str_len = this.readU32(),
-						str_end = str_len + this._ptr;
+						strLen = this.readU32(),
+						strEnd = strLen + this._ptr;
 					if (str_type === 1)
 					{
 						// VERTICES
-						buffer = new Float32Array((str_len / 12) * 3);
+						buffer = new Float32Array((strLen / 12) * 3);
 						attrib = new BufferAttribute(buffer, 3);
 						geom.addAttribute('position', attrib);
 						idx = 0;
-						while (this._ptr < str_end)
+						while (this._ptr < strEnd)
 						{
 							buffer[idx] = -this.readF32();
 							buffer[idx + 1] = this.readF32();
@@ -576,11 +576,11 @@ var AWDLoader = (function()
 					else if (str_type === 2)
 					{
 						// INDICES
-						buffer = new Uint16Array(str_len / 2);
+						buffer = new Uint16Array(strLen / 2);
 						attrib = new BufferAttribute(buffer, 1);
 						geom.setIndex(attrib);
 						idx = 0;
-						while (this._ptr < str_end)
+						while (this._ptr < strEnd)
 						{
 							buffer[idx + 1] = this.readU16();
 							buffer[idx] = this.readU16();
@@ -591,11 +591,11 @@ var AWDLoader = (function()
 					else if (str_type === 3)
 					{
 						// UVS
-						buffer = new Float32Array((str_len / 8) * 2);
+						buffer = new Float32Array((strLen / 8) * 2);
 						attrib = new BufferAttribute(buffer, 2);
 						geom.addAttribute('uv', attrib);
 						idx = 0;
-						while (this._ptr < str_end)
+						while (this._ptr < strEnd)
 						{
 							buffer[idx] = this.readF32();
 							buffer[idx + 1] = 1.0 - this.readF32();
@@ -605,11 +605,11 @@ var AWDLoader = (function()
 					else if (str_type === 4)
 					{
 						// NORMALS
-						buffer = new Float32Array((str_len / 12) * 3);
+						buffer = new Float32Array((strLen / 12) * 3);
 						attrib = new BufferAttribute(buffer, 3);
 						geom.addAttribute('normal', attrib);
 						idx = 0;
-						while (this._ptr < str_end)
+						while (this._ptr < strEnd)
 						{
 							buffer[idx] = -this.readF32();
 							buffer[idx + 1] = this.readF32();
@@ -619,30 +619,30 @@ var AWDLoader = (function()
 					}
 					else
 					{
-						this._ptr = str_end;
+						this._ptr = strEnd;
 					}
 				}
 				this.parseUserAttributes();
 				geom.computeBoundingSphere();
-				subs_parsed++;
+				subsParsed++;
 			}
-			//geom.computeFaceNormals();
+			// geom.computeFaceNormals();
 			this.parseUserAttributes();
-			//finalizeAsset(geom, name);
+			// finalizeAsset(geom, name);
 			return geometries;
 		},
 		parseMeshPoseAnimation: function(poseOnly)
 		{
-			var num_frames = 1,
-				num_submeshes,
-				frames_parsed,
+			var numFrames = 1,
+				numSubmeshes,
+				framesParsed,
 				subMeshParsed,
-				str_len,
-				str_end,
+				strLen,
+				strEnd,
 				geom,
 				idx = 0,
 				clip = {},
-				num_Streams,
+				numStreams,
 				streamsParsed,
 				streamtypes = [],
 				props,
@@ -656,14 +656,14 @@ var AWDLoader = (function()
 			}
 			geom = mesh.geometry;
 			geom.morphTargets = [];
-			if (!poseOnly) num_frames = this.readU16();
-			num_submeshes = this.readU16();
-			num_Streams = this.readU16();
-			// debug("VA num_frames : ", num_frames );
-			// debug("VA num_submeshes : ", num_submeshes );
-			// debug("VA numstreams : ", num_Streams );
+			if (!poseOnly) numFrames = this.readU16();
+			numSubmeshes = this.readU16();
+			numStreams = this.readU16();
+			// debug("VA numFrames : ", numFrames );
+			// debug("VA numSubmeshes : ", numSubmeshes );
+			// debug("VA numstreams : ", numStreams );
 			streamsParsed = 0;
-			while (streamsParsed < num_Streams)
+			while (streamsParsed < numStreams)
 			{
 				streamtypes.push(this.readU16());
 				streamsParsed++;
@@ -675,29 +675,29 @@ var AWDLoader = (function()
 			});
 			clip.looping = props.get(1, true);
 			clip.stitchFinalFrame = props.get(2, false);
-			frames_parsed = 0;
-			while (frames_parsed < num_frames)
+			framesParsed = 0;
+			while (framesParsed < numFrames)
 			{
 				this.readU16();
 				subMeshParsed = 0;
-				while (subMeshParsed < num_submeshes)
+				while (subMeshParsed < numSubmeshes)
 				{
 					streamsParsed = 0;
-					str_len = this.readU32();
-					str_end = this._ptr + str_len;
-					while (streamsParsed < num_Streams)
+					strLen = this.readU32();
+					strEnd = this._ptr + strLen;
+					while (streamsParsed < numStreams)
 					{
 						if (streamtypes[streamsParsed] === 1)
 						{
-							//geom.addAttribute( 'morphTarget'+frames_parsed, Float32Array, str_len/12, 3 );
-							var buffer = new Float32Array(str_len / 4);
+							// geom.addAttribute( 'morphTarget'+framesParsed, Float32Array, strLen/12, 3 );
+							var buffer = new Float32Array(strLen / 4);
 							geom.morphTargets.push(
 							{
 								array: buffer
 							});
-							//buffer = geom.attributes['morphTarget'+frames_parsed].array
+							// buffer = geom.attributes['morphTarget'+framesParsed].array
 							idx = 0;
-							while (this._ptr < str_end)
+							while (this._ptr < strEnd)
 							{
 								buffer[idx] = this.readF32();
 								buffer[idx + 1] = this.readF32();
@@ -706,11 +706,11 @@ var AWDLoader = (function()
 							}
 							subMeshParsed++;
 						}
-						else this._ptr = str_end;
+						else this._ptr = strEnd;
 						streamsParsed++;
 					}
 				}
-				frames_parsed++;
+				framesParsed++;
 			}
 			this.parseUserAttributes();
 			return null;
@@ -727,32 +727,32 @@ var AWDLoader = (function()
 			e[1] = this.readF32();
 			e[2] = this.readF32();
 			e[3] = 0.0;
-			//e[3] = 0.0;
+			// e[3] = 0.0;
 			e[4] = this.readF32();
 			e[5] = this.readF32();
 			e[6] = this.readF32();
-			//e[7] = this.readF32();
+			// e[7] = this.readF32();
 			e[7] = 0.0;
 			e[8] = this.readF32();
 			e[9] = this.readF32();
 			e[10] = this.readF32();
-			//e[11] = this.readF32();
+			// e[11] = this.readF32();
 			e[11] = 0.0;
 			e[12] = -this.readF32();
 			e[13] = this.readF32();
 			e[14] = this.readF32();
-			//e[15] = this.readF32();
+			// e[15] = this.readF32();
 			e[15] = 1.0;
 			return mtx;
 		},
 		parseProperties: function(expected)
 		{
-			var list_len = this.readU32();
-			var list_end = this._ptr + list_len;
+			var listLen = this.readU32();
+			var listEnd = this._ptr + listLen;
 			var props = new AWDProperties();
 			if (expected)
 			{
-				while (this._ptr < list_end)
+				while (this._ptr < listEnd)
 				{
 					var key = this.readU16();
 					var len = this.readU32();
@@ -778,43 +778,43 @@ var AWDLoader = (function()
 		},
 		parseAttrValue: function(type, len)
 		{
-			var elem_len;
-			var read_func;
+			var elemLen;
+			var readFunc;
 			switch (type)
 			{
 				case AWD_FIELD_INT8:
-					elem_len = 1;
-					read_func = this.readI8;
+					elemLen = 1;
+					readFunc = this.readI8;
 					break;
 				case AWD_FIELD_INT16:
-					elem_len = 2;
-					read_func = this.readI16;
+					elemLen = 2;
+					readFunc = this.readI16;
 					break;
 				case AWD_FIELD_INT32:
-					elem_len = 4;
-					read_func = this.readI32;
+					elemLen = 4;
+					readFunc = this.readI32;
 					break;
 				case AWD_FIELD_BOOL:
 				case AWD_FIELD_UINT8:
-					elem_len = 1;
-					read_func = this.readU8;
+					elemLen = 1;
+					readFunc = this.readU8;
 					break;
 				case AWD_FIELD_UINT16:
-					elem_len = 2;
-					read_func = this.readU16;
+					elemLen = 2;
+					readFunc = this.readU16;
 					break;
 				case AWD_FIELD_UINT32:
 				case AWD_FIELD_BADDR:
-					elem_len = 4;
-					read_func = this.readU32;
+					elemLen = 4;
+					readFunc = this.readU32;
 					break;
 				case AWD_FIELD_FLOAT32:
-					elem_len = 4;
-					read_func = this.readF32;
+					elemLen = 4;
+					readFunc = this.readF32;
 					break;
 				case AWD_FIELD_FLOAT64:
-					elem_len = 8;
-					read_func = this.readF64;
+					elemLen = 8;
+					readFunc = this.readF64;
 					break;
 				case AWD_FIELD_VECTOR2x1:
 				case AWD_FIELD_VECTOR3x1:
@@ -823,28 +823,28 @@ var AWDLoader = (function()
 				case AWD_FIELD_MTX3x3:
 				case AWD_FIELD_MTX4x3:
 				case AWD_FIELD_MTX4x4:
-					elem_len = 8;
-					read_func = this.readF64;
+					elemLen = 8;
+					readFunc = this.readF64;
 					break;
 			}
-			if (elem_len < len)
+			if (elemLen < len)
 			{
 				var list;
-				var num_read;
-				var num_elems;
+				var numRead;
+				var numElems;
 				list = [];
-				num_read = 0;
-				num_elems = len / elem_len;
-				while (num_read < num_elems)
+				numRead = 0;
+				numElems = len / elemLen;
+				while (numRead < numElems)
 				{
-					list.push(read_func.call(this));
-					num_read++;
+					list.push(readFunc.call(this));
+					numRead++;
 				}
 				return list;
 			}
 			else
 			{
-				return read_func.call(this);
+				return readFunc.call(this);
 			}
 		},
 		readU8: function()
