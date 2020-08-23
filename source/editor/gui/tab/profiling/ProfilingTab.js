@@ -3,7 +3,7 @@ import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {Canvas} from "../../../components/Canvas.js";
-import * as Escher from "escher.js/build/escher.module.js";
+import {Object2D, Viewport, Renderer, ViewportControls} from "escher.js/build/escher.module.js";
 
 /**
  * Profiling tab is used to measure the performance of the application booth in the editor and while it is running.
@@ -22,16 +22,22 @@ function ProfilingTab(parent, closeable, container, index)
 {
 	TabComponent.call(this, parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
 
-	// Canvas
+	/**
+	 * Canvas used to draw the profilling graphs.
+	 * 
+	 * @attribute canvas
+	 * @type {Canvas}
+	 */
 	this.canvas = new Canvas(this);
+	this.canvas.watchPointer();
 
-	this.group = new Escher.Object2D();
+	this.group = new Object2D();
 
-	this.viewport = new Escher.Viewport(this.canvas.element);
+	this.viewport = new Viewport(this.canvas.element);
 
-	this.renderer = new Escher.Renderer(this.canvas.element);
+	this.renderer = new Renderer(this.canvas.element);
 
-	this.controls = new Escher.ViewportControls(this.viewport);
+	this.controls = new ViewportControls(this.viewport);
 
 	var box = new Escher.Box();
 	box.position.set(-100, 0);
@@ -60,7 +66,10 @@ ProfilingTab.prototype.update = function()
 		}
 	}
 
-	this.controls.update(this.renderer.pointer);
+	if(this.canvas.pointerInside)
+	{
+		this.controls.update(this.renderer.pointer);
+	}
 	this.renderer.update(this.group, this.viewport);
 
 	// System metrics
