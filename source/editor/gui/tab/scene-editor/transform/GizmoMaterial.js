@@ -43,7 +43,7 @@ GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
  */
 GizmoMaterial.prototype.highlight = function(highlighted)
 {
-	if(highlighted)
+	if (highlighted)
 	{
 		this.color.setRGB(1.0, 1.0, 0);
 		this.opacity = 1.0;

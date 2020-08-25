@@ -1,6 +1,11 @@
 import {Locale} from "../locale/LocaleManager.js";
 import {Nunu} from "../../core/Nunu.js";
 import {FileSystem} from "../../core/FileSystem.js";
+import {Editor} from "../Editor.js";
+import {TabGroup} from "../components/tabs/TabGroup.js";
+import {TabGroupSplit} from "../components/tabs/splittable/TabGroupSplit.js";
+import {TabContainer} from "../components/tabs/splittable/TabContainer.js";
+import {DocumentBody} from "../components/DocumentBody.js";
 import {TreeView} from "./tab/tree-view/TreeView.js";
 import {ProfilingTab} from "./tab/profiling/ProfilingTab.js";
 import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
@@ -8,11 +13,6 @@ import {ConsoleTab} from "./tab/console/ConsoleTab.js";
 import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
 import {AnimationTab} from "./tab/animation/AnimationTab.js";
 import {MainMenu} from "./MainMenu.js";
-import {Editor} from "../Editor.js";
-import {TabGroup} from "../components/tabs/TabGroup.js";
-import {TabGroupSplit} from "../components/tabs/splittable/TabGroupSplit.js";
-import {TabContainer} from "../components/tabs/splittable/TabContainer.js";
-import {DocumentBody} from "../components/DocumentBody.js";
 
 /**
  * The full GUI of the application.
@@ -67,7 +67,7 @@ function Interface()
  */
 Interface.prototype.saveProgram = function()
 {
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -92,11 +92,11 @@ Interface.prototype.saveProgram = function()
  */
 Interface.prototype.loadProgram = function()
 {
-	if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
+	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			if (files.length > 0)
 			{
 				Editor.loadProgram(files[0], files[0].name.endsWith(".nsp"));
 			}
@@ -111,7 +111,7 @@ Interface.prototype.loadProgram = function()
  */
 Interface.prototype.newProgram = function()
 {
-	if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
+	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
 	{
 		Editor.createNewProgram();
 	}

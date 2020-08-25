@@ -1,5 +1,5 @@
-import {Image} from "../resources/Image.js";
 import {CubeReflectionMapping, Texture, Math as TMath, Vector3} from "three";
+import {Image} from "../resources/Image.js";
 
 
 /**
@@ -24,20 +24,20 @@ import {CubeReflectionMapping, Texture, Math as TMath, Vector3} from "three";
  */
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
-	if(mapping === undefined)
+	if (mapping === undefined)
 	{
 		mapping = CubeReflectionMapping;
 	}
 
 	var array = [];
-	for(var i = 0; i < 6; i++)
+	for (var i = 0; i < 6; i++)
 	{
 		array.push(document.createElement("canvas"));
 	}	
 
 	Texture.call(this, array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-	this.images = (images !== undefined) ? images : [];
+	this.images = images !== undefined ? images : [];
 
 	/**
 	 * Size of each one of the texture that compose the CubeTexture.
@@ -54,12 +54,13 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 	 * Cube texture mode, the mode specifies how the cube texture is created.
 	 *
 	 * Source format may vary from a mode to another.
+	 *
 	 * @property mode
 	 * @type {number}
 	 */
-	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.CROSS;
+	this.mode = this.images.length === 6 ? CubeTexture.CUBE : CubeTexture.CROSS;
 
-	if(this.images.length > 0)
+	if (this.images.length > 0)
 	{
 		this.updateImages();
 	}
@@ -157,7 +158,7 @@ CubeTexture.EQUIRECTANGULAR = 22;
  */
 CubeTexture.prototype.setSize = function(size)
 {
-	if((size & (size - 1)) !== 0)
+	if ((size & size - 1) !== 0)
 	{
 		console.warn("nunuStudio: CubeTexture new size is not a power of two.");
 		return;
@@ -175,7 +176,7 @@ CubeTexture.prototype.setSize = function(size)
  */
 CubeTexture.prototype.setImages = function(images, mode)
 {
-	this.mode = (mode !== undefined) ? mode : CubeTexture.CUBE;
+	this.mode = mode !== undefined ? mode : CubeTexture.CUBE;
 	this.images = images;
 };
 
@@ -188,11 +189,11 @@ CubeTexture.prototype.updateImages = function()
 {
 	var self = this;
 
-	if(this.mode === CubeTexture.CUBE)
+	if (this.mode === CubeTexture.CUBE)
 	{
-		for(var i = 0; i < this.images.length; i++)
+		for (var i = 0; i < this.images.length; i++)
 		{
-			if(typeof this.images[i] === "string")
+			if (typeof this.images[i] === "string")
 			{
 				this.images[i] = new Image(this.images[i]);
 			}
@@ -213,9 +214,9 @@ CubeTexture.prototype.updateImages = function()
 			};
 		}
 	}
-	else if(this.mode === CubeTexture.CROSS)
+	else if (this.mode === CubeTexture.CROSS)
 	{
-		for(var i = 0; i < this.image.length; i++)
+		for (var i = 0; i < this.image.length; i++)
 		{
 			this.image[i].width = this.size;
 			this.image[i].height = this.size;
@@ -238,9 +239,9 @@ CubeTexture.prototype.updateImages = function()
 			self.needsUpdate = true;
 		};
 	}
-	else if(this.mode === CubeTexture.EQUIRECTANGULAR)
+	else if (this.mode === CubeTexture.EQUIRECTANGULAR)
 	{
-		for(var i = 0; i < this.image.length; i++)
+		for (var i = 0; i < this.image.length; i++)
 		{
 			this.image[i].width = this.size;
 			this.image[i].height = this.size;
@@ -258,7 +259,7 @@ CubeTexture.prototype.updateImages = function()
 			context.drawImage(image, 0, 0);
 			var data = context.getImageData(0, 0, canvas.width, canvas.height);
 
-			for(var i = 0; i < 6; i++)
+			for (var i = 0; i < 6; i++)
 			{
 				var out = CubeTexture.renderEquirectFace(data, i, Math.PI, self.size);
 				self.image[i].getContext("2d").putImageData(out, 0, 0);
@@ -298,7 +299,7 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 	var rl = 4 * (yr * width + xl);
 	var rr = 4 * (yr * width + xr);
 
-	for(var k = 0; k < 3; k++)
+	for (var k = 0; k < 3; k++)
 	{
 		var a = data[ll + k] * (1 - xf) + data[lr + k] * xf;
 		var b = data[rl + k] * (1 - xf) + data[rr + k] * xf;
@@ -322,9 +323,9 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 	var out = new ImageData(size, size);
 	var orientation = CubeTexture.faces[face];
 
-	for(var x = 0; x < size; x++)
+	for (var x = 0; x < size; x++)
 	{
-		for(var y = 0; y < size; y++)
+		for (var y = 0; y < size; y++)
 		{
 			var index = 4 * (y * size + x);
 
@@ -395,14 +396,14 @@ CubeTexture.prototype.toJSON = function(meta)
 
 	data.images = [];
 
-	if(this.mode === CubeTexture.EQUIRECTANGULAR || this.mode === CubeTexture.CROSS)
+	if (this.mode === CubeTexture.EQUIRECTANGULAR || this.mode === CubeTexture.CROSS)
 	{
 		var image = this.images[0].toJSON(meta);
 		data.images.push(image.uuid);
 	}
 	else
 	{
-		for(var i = 0; i < this.images.length; i++)
+		for (var i = 0; i < this.images.length; i++)
 		{	
 			var image = this.images[i].toJSON(meta);
 			data.images.push(image.uuid);

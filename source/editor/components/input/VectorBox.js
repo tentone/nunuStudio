@@ -113,7 +113,7 @@ VectorBox.prototype = Object.create(Component.prototype);
  */
 VectorBox.prototype.setType = function(type)
 {
-	if(this.type !== type)
+	if (this.type !== type)
 	{
 		this.type = type;
 		this.updateInterface();
@@ -166,7 +166,7 @@ VectorBox.prototype.getValue = function()
 {
 	var value = {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 
-	if(this.isAngle)
+	if (this.isAngle)
 	{
 		value.x = UnitConverter.convert(value.x, Editor.settings.units.angle, "r");
 		value.y = UnitConverter.convert(value.y, Editor.settings.units.angle, "r");
@@ -189,9 +189,9 @@ VectorBox.prototype.getValue = function()
  */
 VectorBox.prototype.setValue = function(x, y, z, w)
 {
-	if(x.isVector2)
+	if (x.isVector2)
 	{
-		if(this.isAngle)
+		if (this.isAngle)
 		{
 			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
 			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
@@ -204,9 +204,9 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 
 		this.setType(VectorBox.VECTOR2);
 	}
-	else if(x.isVector3)
+	else if (x.isVector3)
 	{
-		if(this.isAngle)
+		if (this.isAngle)
 		{
 			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
 			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
@@ -221,9 +221,9 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 
 		this.setType(VectorBox.VECTOR3);
 	}
-	else if(x.isEuler)
+	else if (x.isEuler)
 	{
-		if(this.isAngle)
+		if (this.isAngle)
 		{
 			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
 			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
@@ -239,7 +239,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 		this.order = x.order;
 		this.setType(VectorBox.VECTOR3);
 	}
-	else if(x.isQuaternion)
+	else if (x.isQuaternion)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
@@ -249,7 +249,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else
 	{
-		if(this.isAngle)
+		if (this.isAngle)
 		{
 			x = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
 			y = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
@@ -259,8 +259,8 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 
 		this.x.value = x;
 		this.y.value = y;
-		this.z.value = (z !== undefined) ? z : 0;
-		this.w.value = (w !== undefined) ? w : 0;
+		this.z.value = z !== undefined ? z : 0;
+		this.w.value = w !== undefined ? w : 0;
 	}
 };
 
@@ -289,26 +289,26 @@ VectorBox.prototype.updateSize = function()
 	this.xText.style.lineHeight = sizeY;
 	this.x.style.width = sizeX + "px";
 
-	this.yText.style.left = (15 + sizeX) + "px";
+	this.yText.style.left = 15 + sizeX + "px";
 	this.yText.style.height = sizeY;
 	this.yText.style.lineHeight = sizeY;
-	this.y.style.left = (30 + sizeX) + "px";
+	this.y.style.left = 30 + sizeX + "px";
 	this.y.style.width = sizeX + "px";
 
-	if(this.type >= VectorBox.VECTOR3)
+	if (this.type >= VectorBox.VECTOR3)
 	{
-		this.zText.style.left = (30 + (2 * sizeX)) + "px";
+		this.zText.style.left = 30 + 2 * sizeX + "px";
 		this.zText.style.height = sizeY;
 		this.zText.style.lineHeight = sizeY;
-		this.z.style.left = (45 + (2 * sizeX)) + "px";
+		this.z.style.left = 45 + 2 * sizeX + "px";
 		this.z.style.width = sizeX + "px";
 
-		if(this.type === VectorBox.QUATERNION)
+		if (this.type === VectorBox.QUATERNION)
 		{
-			this.wText.style.left = (45 + (3 * sizeX)) + "px";
+			this.wText.style.left = 45 + 3 * sizeX + "px";
 			this.wText.style.height = sizeY;
 			this.wText.style.lineHeight = sizeY;
-			this.w.style.left = (60 + (3 * sizeX)) + "px";
+			this.w.style.left = 60 + 3 * sizeX + "px";
 			this.w.style.width = sizeX + "px";
 
 			this.zText.style.visibility = "visible";

@@ -52,7 +52,7 @@ function Timer(callback, time)
  */
 Timer.prototype.start = function()
 {
-	if(this.running)
+	if (this.running)
 	{
 		return;
 	}
@@ -64,7 +64,7 @@ Timer.prototype.start = function()
 	{
 		self.callback();
 
-		if(self.running)
+		if (self.running)
 		{
 			self.id = setTimeout(loop, self.time);
 		}

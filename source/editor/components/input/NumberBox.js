@@ -94,7 +94,7 @@ NumberBox.prototype.setOnChange = function(onChange)
  */
 NumberBox.prototype.setValue = function(value)
 {
-	if(this.isAngle)
+	if (this.isAngle)
 	{
 		value = UnitConverter.convert(value, "r", Editor.settings.units.angle);
 	}
@@ -111,7 +111,7 @@ NumberBox.prototype.setValue = function(value)
 NumberBox.prototype.getValue = function()
 {	
 	var value = Number.parseFloat(this.element.value);
-	if(this.isAngle)
+	if (this.isAngle)
 	{
 		value = UnitConverter.convert(value, Editor.settings.units.angle, "r");
 	}

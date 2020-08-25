@@ -98,15 +98,15 @@ Graph.prototype = Object.create(Component.prototype);
  */
 function SubGraph(canvas, name, color)
 {
-	if(canvas === undefined)
+	if (canvas === undefined)
 	{
 		canvas = document.createElement("canvas");
 		canvas.style.position = "absolute";
 	}
 
 	this.canvas = canvas;
-	this.name = (name !== undefined) ? name : "default";
-	this.color = (color !== undefined) ? color : DOMUtils.getCSSVariable("--color-light");
+	this.name = name !== undefined ? name : "default";
+	this.color = color !== undefined ? color : DOMUtils.getCSSVariable("--color-light");
 	this.values = [];
 	this.buttons = [];
 	this.onchange = null;
@@ -120,21 +120,21 @@ function SubGraph(canvas, name, color)
  */
 Graph.prototype.createScale = function(size)
 {
-	for(var i = 0; i < this.scale; i++)
+	for (var i = 0; i < this.scale; i++)
 	{
 		this.element.removeChild(this.scale[i]);
 	}
 	
 	var step = (this.max - this.min) / (size - 1);
 
-	for(var i = 0; i < size; i++)
+	for (var i = 0; i < size; i++)
 	{
 		var scale = document.createElement("div");
 		scale.style.position = "absolute";
 		scale.style.pointerEvents = "none";
 		scale.style.color = DOMUtils.getCSSVariable("--color-light");
 
-		var text = document.createTextNode(this.max - (step * i));
+		var text = document.createTextNode(this.max - step * i);
 		scale.text = text;
 		scale.appendChild(text);
 
@@ -152,9 +152,9 @@ Graph.prototype.updateScale = function()
 {
 	var step = (this.max - this.min) / (this.scale.length - 1);
 
-	for(var i = 0; i < this.scale.length; i++)
+	for (var i = 0; i < this.scale.length; i++)
 	{
-		this.scale[(this.scale.length - 1) - i].text.data = this.min + (step * i);
+		this.scale[this.scale.length - 1 - i].text.data = this.min + step * i;
 	}
 };
 
@@ -201,26 +201,26 @@ Graph.prototype.setRange = function(min, max)
 	this.max = max;
 
 	// Limit graphs values
-	for(var i in this.graph)
+	for (var i in this.graph)
 	{
 		var graph = this.graph[i];
 
-		for(var j = 0; j < graph.values.length; j++)
+		for (var j = 0; j < graph.values.length; j++)
 		{
-			if(graph.values[j] < min)
+			if (graph.values[j] < min)
 			{
 				graph.values[j] = min;
 
-				if(graph.onchange !== null)
+				if (graph.onchange !== null)
 				{
 					graph.onchange(graph.values);
 				}
 			}
-			else if(graph.values[j] > max)
+			else if (graph.values[j] > max)
 			{
 				graph.values[j] = max;
 
-				if(graph.onchange !== null)
+				if (graph.onchange !== null)
 				{
 					graph.onchange(graph.values);
 				}
@@ -231,7 +231,7 @@ Graph.prototype.setRange = function(min, max)
 	this.updateScale();
 
 	// Update grid to fit new scale
-	for(var i = 0; i < this.graph.length; i++)
+	for (var i = 0; i < this.graph.length; i++)
 	{
 		this.updateGraph(this.graph[i]);
 	}
@@ -253,15 +253,15 @@ Graph.prototype.setValue = function(values, name)
 	graph.values = values;
 
 	// Add buttons if necessary
-	while(graph.buttons.length < graph.values.length)
+	while (graph.buttons.length < graph.values.length)
 	{
 		var button = document.createElement("div");
 		button.style.borderRadius = "5px";
 		button.style.backgroundColor = graph.color;
 		button.style.cursor = "pointer";
 		button.style.position = "absolute";
-		button.style.marginTop = "-" + (this.buttonRadius / 2) + "px";
-		button.style.marginLeft = (this.scaleMargin - (this.buttonRadius / 2)) + "px";
+		button.style.marginTop = "-" + this.buttonRadius / 2 + "px";
+		button.style.marginLeft = this.scaleMargin - this.buttonRadius / 2 + "px";
 		button.style.width = this.buttonRadius + "px";
 		button.style.height = this.buttonRadius + "px";
 		button.index = graph.buttons.length;
@@ -277,18 +277,18 @@ Graph.prototype.setValue = function(values, name)
 			{
 				var delta = event.movementY;
 
-				graph.values[index] -= (delta * ((self.max - self.min) / self.size.y));
+				graph.values[index] -= delta * ((self.max - self.min) / self.size.y);
 
-				if(graph.values[index] > self.max)
+				if (graph.values[index] > self.max)
 				{
 					graph.values[index] = self.max;
 				}
-				else if(graph.values[index] < self.min)
+				else if (graph.values[index] < self.min)
 				{
 					graph.values[index] = self.min;
 				}
 
-				if(graph.onchange !== null)
+				if (graph.onchange !== null)
 				{
 					graph.onchange(graph.values);
 				}
@@ -309,22 +309,22 @@ Graph.prototype.setValue = function(values, name)
 	}
 
 	// Remove buttons if necessary
-	while(graph.buttons.length > graph.values.length)
+	while (graph.buttons.length > graph.values.length)
 	{
 		this.element.removeChild(graph.buttons.pop());
 	}
 
 	// Check if new values are in range
 	var update = false;
-	for(var i = 0; i < values.length; i++)
+	for (var i = 0; i < values.length; i++)
 	{
-		if(values[i] < this.min)
+		if (values[i] < this.min)
 		{
 			this.min = Math.ceil(values[i]);
 			update = true;
 			break;
 		}
-		else if(values[i] > this.max)
+		else if (values[i] > this.max)
 		{
 			this.max = Math.ceil(values[i] + 1.0);
 			update = true;
@@ -333,7 +333,7 @@ Graph.prototype.setValue = function(values, name)
 	}
 
 	// If some value not in range update range
-	if(update)
+	if (update)
 	{
 		this.setRange(this.min, this.max);
 	}
@@ -352,7 +352,7 @@ Graph.prototype.getValue = function(name)
 {
 	var graph = this.getGraph(name);
 
-	if(graph !== null)
+	if (graph !== null)
 	{
 		return graph.values;
 	}
@@ -368,18 +368,18 @@ Graph.prototype.getValue = function(name)
  */
 Graph.prototype.getGraph = function(name)
 {
-	if(name !== undefined)
+	if (name !== undefined)
 	{
-		for(var i = 0; i < this.graph.length; i++)
+		for (var i = 0; i < this.graph.length; i++)
 		{
-			if(this.graph[i].name === name)
+			if (this.graph[i].name === name)
 			{
 				return this.graph[i];
 			}
 		}
 	}
 
-	if(this.graph.length > 0)
+	if (this.graph.length > 0)
 	{
 		return this.graph[0];
 	}
@@ -410,10 +410,10 @@ Graph.prototype.updateGraph = function(graph)
 	context.moveTo(0, graph.values[0] * this.size.y);
 	context.beginPath();
 
-	for(var i = 0; i < graph.values.length; i++)
+	for (var i = 0; i < graph.values.length; i++)
 	{
 		var x = i * step;
-		var y = (1 - ((graph.values[i] - this.min) / delta)) * this.size.y;
+		var y = (1 - (graph.values[i] - this.min) / delta) * this.size.y;
 
 		context.lineTo(x, y);
 
@@ -446,13 +446,13 @@ Graph.prototype.updateGrid = function()
 	context.moveTo(0, 0);
 
 	var step = width / 10;
-	if(step <= 0)
+	if (step <= 0)
 	{
 		return;
 	}
 
 	// Vertical lines	
-	for(var i = 0; i < width - 1; i += step)
+	for (var i = 0; i < width - 1; i += step)
 	{
 		context.beginPath();
 		context.moveTo(i, 0);
@@ -461,7 +461,7 @@ Graph.prototype.updateGrid = function()
 	}
 
 	// Horizontal lines
-	for(var i = 0; i < this.size.y; i += step)
+	for (var i = 0; i < this.size.y; i += step)
 	{
 		context.beginPath();
 		context.moveTo(0, i);
@@ -484,7 +484,7 @@ Graph.prototype.updateSize = function()
 	this.updateGrid();
 
 	// Graph
-	for(var i = 0; i < this.graph.length; i++)
+	for (var i = 0; i < this.graph.length; i++)
 	{
 		var graph = this.graph[i];
 		graph.canvas.width = width;
@@ -496,9 +496,9 @@ Graph.prototype.updateSize = function()
 
 	// Scale
 	var step = (this.size.y - 14) / (this.scale.length - 1);
-	for(var i = 0; i < this.scale.length; i++)
+	for (var i = 0; i < this.scale.length; i++)
 	{
-		this.scale[i].style.top = (i * step) + "px";
+		this.scale[i].style.top = i * step + "px";
 	}
 };
 

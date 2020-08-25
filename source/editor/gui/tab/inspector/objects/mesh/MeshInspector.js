@@ -14,13 +14,13 @@ MeshInspector.prototype.updateInspector = function()
 {
 	DrawableInspector.prototype.updateInspector.call(this);
 	
-	if(this.geometry !== null)
+	if (this.geometry !== null)
 	{
 		try
 		{
 			this.geometry.updateValues();
 		}
-		catch(e)
+		catch (e)
 		{
 			this.geometry.destroy();
 			this.geometry = GeometryForm.create(this.form, this.object);

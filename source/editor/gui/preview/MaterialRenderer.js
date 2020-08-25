@@ -1,6 +1,6 @@
+import {SphereGeometry, Mesh, Points, Line, Sprite, AmbientLight, PointLight, Material, SpriteMaterial, LineBasicMaterial, PointsMaterial} from "three";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
-import {SphereGeometry, Mesh, Points, Line, Sprite, AmbientLight, PointLight, Material, SpriteMaterial, LineBasicMaterial, PointsMaterial} from "three";
 
 /** 
  * The material renderer is used to generate preview thumbnails.
@@ -67,7 +67,7 @@ MaterialRenderer.generateElement = function(material)
 
 MaterialRenderer.render = function(material, onRender)
 {
-	if(MaterialRenderer.instance === undefined)
+	if (MaterialRenderer.instance === undefined)
 	{
 		MaterialRenderer.instance = new MaterialRenderer();
 	}
@@ -77,7 +77,7 @@ MaterialRenderer.render = function(material, onRender)
 
 MaterialRenderer.prototype.render = function(material, onRender)
 {
-	if(material instanceof SpriteMaterial)
+	if (material instanceof SpriteMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = true;
@@ -87,7 +87,7 @@ MaterialRenderer.prototype.render = function(material, onRender)
 		this.sprite.material = material;
 		this.camera.position.set(0, 0, 0.5);
 	}
-	else if(material instanceof LineBasicMaterial)
+	else if (material instanceof LineBasicMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = false;
@@ -97,7 +97,7 @@ MaterialRenderer.prototype.render = function(material, onRender)
 		this.line.material = material;
 		this.camera.position.set(0, 0, 0.5);
 	}
-	else if(material instanceof PointsMaterial)
+	else if (material instanceof PointsMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = false;

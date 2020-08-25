@@ -33,6 +33,7 @@ PointLight.prototype = Object.create(TPointLight.prototype);
 
 /**
  * Update light shadow map atributtes at runtime
+ *
  * @method updateShadowMap
  */
 PointLight.prototype.updateShadowMap = function()

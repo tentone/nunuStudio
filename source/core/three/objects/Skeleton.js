@@ -1,6 +1,6 @@
+import {Math, Object3D, Bone, Matrix4} from "three";
 import {DataTexture} from "../../texture/DataTexture.js";
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
-import {Math, Object3D, Bone, Matrix4} from "three";
 
 /**
  * Use an array of bones to create a skeleton that can be used by a SkinnedMesh.
@@ -15,7 +15,7 @@ THREE.Skeleton.prototype.toJSON = function()
 	var data = {};
 
 	// Generate a new UUID of there is none.
-	if(this.uuid === undefined)
+	if (this.uuid === undefined)
 	{
 		this.uuid = Math.generateUUID();
 	}
@@ -23,13 +23,13 @@ THREE.Skeleton.prototype.toJSON = function()
 	data.uuid = this.uuid;
 
 	data.bones = [];
-	for(var i = 0; i < this.bones.length; i++)
+	for (var i = 0; i < this.bones.length; i++)
 	{
 		data.bones.push(this.bones[i].uuid);
 	}
 
 	data.boneInverses = [];
-	for(var i = 0; i < this.boneInverses.length; i++)
+	for (var i = 0; i < this.boneInverses.length; i++)
 	{
 		data.boneInverses.push(this.boneInverses[i].toArray());
 	}
@@ -51,10 +51,10 @@ THREE.Skeleton.fromJSON = function(data, object)
 	var bones = [];
 	var boneInverses = [];
 
-	for(var j = 0; j < data.bones.length; j++)
+	for (var j = 0; j < data.bones.length; j++)
 	{
 		var bone = object.getObjectByProperty("uuid", data.bones[j]);
-		if(bone === undefined)
+		if (bone === undefined)
 		{
 			console.warn("Skeleton.fromJSON: Not found Bone with uuid " + data.bones[j]);
 			bone = new Bone();

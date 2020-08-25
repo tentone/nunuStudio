@@ -16,7 +16,7 @@
 		"docs": "yuidoc -o ./docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
 		"pub": "npm publish --access public .",
 		"lint": "eslint --ext .js source/core source/editor",
-		"lint-fix": "eslint --ext .js --fix source",
+		"lint-fix": "eslint --ext .js --fix source/core source/editor",
 		"build": "npm version --no-commit-hooks patch && npm run build-runtime && npm run build-editor",
 		"build-runtime": "webpack --config webpack.runtime.js",
 		"build-editor": "webpack --config webpack.prod.js",

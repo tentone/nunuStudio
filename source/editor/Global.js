@@ -1,5 +1,5 @@
 export var Global =
 {
 	FILE_PATH: "./files/",
-	RUNTIME_PATH: "./files/runtime/",
+	RUNTIME_PATH: "./files/runtime/"
 };

@@ -1,11 +1,11 @@
+import {StaticPair} from "@as-com/pson";
+import {Component} from "../editor/components/Component.js";
 import {EventManager} from "./utils/EventManager.js";
 import {Program} from "./objects/Program.js";
 import {PerspectiveCamera} from "./objects/cameras/PerspectiveCamera.js";
 import {Nunu} from "./Nunu.js";
 import {ObjectLoader} from "./loaders/ObjectLoader.js";
 import {FileSystem} from "./FileSystem.js";
-import {Component} from "../editor/components/Component.js";
-import {StaticPair} from "@as-com/pson";
 
 /**
  * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
@@ -21,6 +21,7 @@ function App(canvas)
 {
 	/**
 	 * Nunu Program
+	 *
 	 * @property program
 	 * @type {Program}
 	 */
@@ -28,6 +29,7 @@ function App(canvas)
 	
 	/**
 	 * Graphics renderer in use by this app instance
+	 *
 	 * @property renderer
 	 * @type {Renderer}
 	 */
@@ -54,6 +56,7 @@ function App(canvas)
 
 	/**
 	 * Canvas used to render graphics.
+	 *
 	 * @property canvas
 	 * @type {Element}
 	 */
@@ -67,7 +70,7 @@ function App(canvas)
 	 */
 	this.events = new EventManager();
 
-	if(canvas === undefined)
+	if (canvas === undefined)
 	{
 		this.canvas = document.createElement("canvas");
 		this.canvas.style.position = "absolute";
@@ -90,7 +93,7 @@ function App(canvas)
  */
 App.loadApp = function(url, canvas)
 {	
-	if(typeof canvas === "string")
+	if (typeof canvas === "string")
 	{
 		canvas = document.getElementById(canvas);
 	}
@@ -100,7 +103,7 @@ App.loadApp = function(url, canvas)
 
 	window.addEventListener("resize", function()
 	{
-		if(Nunu.isFullscreen())
+		if (Nunu.isFullscreen())
 		{
 			app.canvas.width = window.innerWidth;
 			app.canvas.height = window.innerHeight;
@@ -125,7 +128,7 @@ App.loadApp = function(url, canvas)
  */
 App.prototype.run = function()
 {
-	if(this.program === null)
+	if (this.program === null)
 	{
 		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
 		return;
@@ -148,7 +151,7 @@ App.prototype.run = function()
 	this.program.initialize();
 
 	// Lock mouse pointer
-	if(this.program.lockPointer)
+	if (this.program.lockPointer)
 	{
 		var canvas = this.canvas;
 		var mouse = this.mouse;
@@ -184,7 +187,7 @@ App.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 	{
 		app.run();
 
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			onLoad(app);
 		}
@@ -200,14 +203,14 @@ App.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 App.prototype.loadProgram = function(fname)
 {
 	// JSON project
-	if(fname.endsWith(".isp"))
+	if (fname.endsWith(".isp"))
 	{
 		var loader = new ObjectLoader();
 		var data = FileSystem.readFile(fname);
 		this.program = loader.parse(JSON.parse(data));
 	}
 	// Binary project
-	else if(fname.endsWith(".nsp"))
+	else if (fname.endsWith(".nsp"))
 	{
 		var loader = new ObjectLoader();
 		var data = FileSystem.readFileArrayBuffer(fname);
@@ -229,21 +232,21 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 	var self = this;
 
 	// JSON project
-	if(fname.endsWith(".isp"))
+	if (fname.endsWith(".isp"))
 	{
 		FileSystem.readFile(fname, false, function(data)
 		{
 			var loader = new ObjectLoader();
 			self.program = loader.parse(JSON.parse(data));
 			
-			if(onLoad !== undefined)
+			if (onLoad !== undefined)
 			{
 				onLoad(self);
 			}
 		}, onProgress);
 	}
 	// Binary project
-	else if(fname.endsWith(".nsp"))
+	else if (fname.endsWith(".nsp"))
 	{
 		FileSystem.readFileArrayBuffer(fname, false, function(data)
 		{
@@ -251,7 +254,7 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 			var pson = new StaticPair();
 			
 			self.program = loader.parse(pson.decode(data));
-			if(onLoad !== undefined)
+			if (onLoad !== undefined)
 			{
 				onLoad(self);
 			}
@@ -289,21 +292,21 @@ App.prototype.exit = function()
 	this.events.destroy();
 
 	// Dispose program
-	if(this.program !== null)
+	if (this.program !== null)
 	{
 		this.program.dispose();
 		this.program = null;
 	}
 
 	// Dispose renderer
-	if(this.renderer !== null)
+	if (this.renderer !== null)
 	{
 		this.renderer.dispose();
 		this.renderer = null;
 	}
 
 	// Run onExit callback if any
-	if(this.onExit !== undefined)
+	if (this.onExit !== undefined)
 	{
 		this.onExit();
 	}
@@ -318,7 +321,7 @@ App.prototype.exit = function()
  */
 App.prototype.resume = function()
 {
-	if(this.program !== null && !this.running)
+	if (this.program !== null && !this.running)
 	{
 		var self = this;
 		this.renderer.setAnimationLoop(function()
@@ -364,13 +367,13 @@ App.prototype.setCanvas = function(canvas)
  */
 App.prototype.resize = function()
 {
-	if(this.canvas !== null && this.program !== null && this.renderer !== null)
+	if (this.canvas !== null && this.program !== null && this.renderer !== null)
 	{
 		var width = 1;
 		var height = 1;
 
 		// Automatically fit window
-		if(this.canvasFitWindow)
+		if (this.canvasFitWindow)
 		{
 			this.canvas.style.width = window.innerWidth + "px";
 			this.canvas.style.height = window.innerHeight + "px";	
@@ -384,7 +387,7 @@ App.prototype.resize = function()
 		}
 
 		// Device pixel ratio
-		if(this.program.handlePixelRatio)
+		if (this.program.handlePixelRatio)
 		{
 			width *= window.devicePixelRatio;
 			height *= window.devicePixelRatio;
@@ -406,7 +409,7 @@ App.prototype.resize = function()
  */
 App.prototype.sendData = function(data)
 {
-	if(this.program !== null)
+	if (this.program !== null)
 	{
 		this.program.receiveDataApp(data);
 	}
@@ -456,9 +459,9 @@ App.prototype.vrAvailable = function()
  */
 App.prototype.toggleVR = function()
 {
-	if(this.vrAvailable())
+	if (this.vrAvailable())
 	{
-		if(this.program.xrEnabled)
+		if (this.program.xrEnabled)
 		{
 			this.program.exitVR();
 		}
@@ -491,9 +494,9 @@ App.prototype.arAvailable = function()
  */
 App.prototype.toggleAR = function()
 {
-	if(this.arAvailable())
+	if (this.arAvailable())
 	{
-		if(this.program.xrEnabled)
+		if (this.program.xrEnabled)
 		{
 			this.program.exitAR();
 		}
@@ -518,7 +521,7 @@ App.prototype.toggleFullscreen = function(element)
 {
 	var fullscreen = Nunu.isFullscreen();
 
-	if(element === undefined)
+	if (element === undefined)
 	{
 		element = this.canvas;
 	}

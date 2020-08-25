@@ -1,5 +1,5 @@
-import {Component} from "../Component.js";
 import {Color} from "three";
+import {Component} from "../Component.js";
 
 function ColorChooser(parent)
 {
@@ -49,7 +49,7 @@ ColorChooser.prototype.setOnChange = function(onChange)
  */
 ColorChooser.prototype.setValue = function(r, g, b)
 {
-	if(r instanceof Color)
+	if (r instanceof Color)
 	{
 		this.element.value = "#" + r.getHexString();
 	}

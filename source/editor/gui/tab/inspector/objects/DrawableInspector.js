@@ -1,8 +1,8 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {ObjectInspector} from "./ObjectInspector.js";
 import {Editor} from "../../../../Editor.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {ObjectInspector} from "./ObjectInspector.js";
 
 function DrawableInspector(parent, object)
 {

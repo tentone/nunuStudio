@@ -1,6 +1,6 @@
-import {Texture} from "../../texture/Texture.js";
 import {Mesh, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
 import {Lensflare as TLensflare, LensflareElement} from "three/examples/jsm/objects/Lensflare";
+import {Texture} from "../../texture/Texture.js";
 
 /**
  * LensFlare object can be used to simulate lens flare from lights.
@@ -54,13 +54,13 @@ function LensFlare()
 	var geometry = TLensflare.Geometry;
 	var shader = TLensflare.Shader;
 	var material1a = new RawShaderMaterial(
-	{
-		uniforms:
+		{
+			uniforms:
 		{
 			scale: {value: null},
 			screenPosition: {value: null}
 		},
-		vertexShader: 
+			vertexShader: 
 			"precision highp float;\n\
 			uniform vec3 screenPosition;\n\
 			uniform vec2 scale;\n\
@@ -69,26 +69,26 @@ function LensFlare()
 			{\n\
 				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);\n\
 			}",
-		fragmentShader:
+			fragmentShader:
 			"precision highp float;\n\
 			void main()\n\
 			{\n\
 				gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);\n\
 			}",
-		depthTest: true,
-		depthWrite: false,
-		transparent: false
-	});
+			depthTest: true,
+			depthWrite: false,
+			transparent: false
+		});
 
 	var material1b = new RawShaderMaterial(
-	{
-		uniforms:
+		{
+			uniforms:
 		{
 			map: {value: tempMap},
 			scale: {value: null},
 			screenPosition: {value: null}
 		},
-		vertexShader:
+			vertexShader:
 			"precision highp float;\n\
 			uniform vec3 screenPosition;\n\
 			uniform vec2 scale;\n\
@@ -100,7 +100,7 @@ function LensFlare()
 				vUV = uv;\n\
 				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);\n\
 			}",
-		fragmentShader:
+			fragmentShader:
 			"precision highp float;\n\
 			uniform sampler2D map;\n\
 			varying vec2 vUV;\n\
@@ -108,17 +108,17 @@ function LensFlare()
 			{\n\
 				gl_FragColor = texture2D(map, vUV);\n\
 			}",
-		depthTest: false,
-		depthWrite: false,
-		transparent: false
-	});
+			depthTest: false,
+			depthWrite: false,
+			transparent: false
+		});
 
 	// The following object is used for occlusionMap generation
 	var mesh1 = new Mesh(geometry, material1a);
 	var shader = LensflareElement.Shader;
 	var material2 = new RawShaderMaterial(
-	{
-		uniforms:
+		{
+			uniforms:
 		{
 			map: {value: null},
 			occlusionMap: {value: occlusionMap},
@@ -126,12 +126,12 @@ function LensFlare()
 			scale: {value: new Vector2()},
 			screenPosition: {value: new Vector3()}
 		},
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader,
-		blending: AdditiveBlending,
-		transparent: true,
-		depthWrite: false
-	});
+			vertexShader: shader.vertexShader,
+			fragmentShader: shader.fragmentShader,
+			blending: AdditiveBlending,
+			transparent: true,
+			depthWrite: false
+		});
 
 	var mesh2 = new Mesh(geometry, material2);
 	var scale = new Vector2();
@@ -160,11 +160,11 @@ function LensFlare()
 		positionScreen.applyMatrix4(camera.projectionMatrix);
 
 		// Horizontal and vertical coordinate of the lower left corner of the pixels to copy
-		screenPositionPixels.x = viewport.x + (positionScreen.x * halfViewportWidth) + halfViewportWidth - 8;
-		screenPositionPixels.y = viewport.y + (positionScreen.y * halfViewportHeight) + halfViewportHeight - 8;
+		screenPositionPixels.x = viewport.x + positionScreen.x * halfViewportWidth + halfViewportWidth - 8;
+		screenPositionPixels.y = viewport.y + positionScreen.y * halfViewportHeight + halfViewportHeight - 8;
 
 		// Screen cull
-		if(validArea.containsPoint(screenPositionPixels))
+		if (validArea.containsPoint(screenPositionPixels))
 		{
 			// Save current RGB to temp texture
 			renderer.copyFramebufferToTexture(screenPositionPixels, tempMap);
@@ -190,7 +190,7 @@ function LensFlare()
 			var vecX = - positionScreen.x * 2;
 			var vecY = - positionScreen.y * 2;
 
-			for(var i = 0, l = this.elements.length; i < l; i++)
+			for (var i = 0, l = this.elements.length; i < l; i++)
 			{
 				var element = this.elements[i];
 
@@ -221,7 +221,7 @@ function LensFlare()
 		tempMap.dispose();
 		occlusionMap.dispose();
 
-		for(var i = 0; i < this.elements.length; i++)
+		for (var i = 0; i < this.elements.length; i++)
 		{
 			this.elements[i].texture.dispose();
 		}
@@ -241,17 +241,17 @@ LensFlare.prototype = Object.create(Mesh.prototype);
  */
 LensFlare.prototype.addFlare = function(texture, size, distance, color)
 {
-	if(size === undefined)
+	if (size === undefined)
 	{
 		size = -1;
 	}
-	if(distance === undefined)
+	if (distance === undefined)
 	{
 		distance = 0;
 	}
-	if(color === undefined)
+	if (color === undefined)
 	{
-		color = new Color(0xFFFFFF)
+		color = new Color(0xFFFFFF);
 	}
 
 	distance = Math.min(distance, Math.max(0, distance));
@@ -271,7 +271,7 @@ LensFlare.prototype.toJSON = function(meta)
 
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		for(var i = 0; i < self.elements.length; i++)
+		for (var i = 0; i < self.elements.length; i++)
 		{
 			var flare = {};
 			flare.texture = self.elements[i].texture.toJSON(meta).uuid;

@@ -23,9 +23,9 @@ function History(limit)
  */
 History.prototype.getAction = function(id)
 {
-	for(var i = 0; i < this.actions.length; i++)
+	for (var i = 0; i < this.actions.length; i++)
 	{
-		if(this.actions[i].id === id)
+		if (this.actions[i].id === id)
 		{
 			return this.actions[i];
 		}
@@ -44,7 +44,7 @@ History.prototype.getAction = function(id)
 History.prototype.add = function(action, editor)
 {	
 	// If there are more recent changes remove them
-	while(this.actions.length > this.position + 1)
+	while (this.actions.length > this.position + 1)
 	{
 		this.actions.pop();
 	}
@@ -57,9 +57,9 @@ History.prototype.add = function(action, editor)
 	action.apply(editor, true);
 
 	// Limit actions size
-	while(this.actions.length > this.limit)
+	while (this.actions.length > this.limit)
 	{
-		this.actions.splice(0, 1)
+		this.actions.splice(0, 1);
 		this.position = this.actions.length - 1;
 	}
 };
@@ -72,7 +72,7 @@ History.prototype.add = function(action, editor)
  */
 History.prototype.undo = function(editor)
 {
-	if(this.actions.length > 0 && this.position >= 0)
+	if (this.actions.length > 0 && this.position >= 0)
 	{
 		var action = this.actions[this.position];
 		action.revert(editor, true);
@@ -93,7 +93,7 @@ History.prototype.undo = function(editor)
  */
 History.prototype.redo = function(editor)
 {
-	if(this.position < this.actions.length - 1)
+	if (this.position < this.actions.length - 1)
 	{
 		this.position++;
 

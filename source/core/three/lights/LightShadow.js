@@ -26,20 +26,20 @@ THREE.LightShadow.prototype.toJSON = function()
 
 THREE.LightShadow.prototype.fromJSON = function(data)
 {
-	if(data.bias !== undefined)
+	if (data.bias !== undefined)
 	{
 		this.bias = data.bias;
 	}
-	if(data.radius !== undefined)
+	if (data.radius !== undefined)
 	{	
 		this.radius = data.radius;
 	}
-	if(data.mapSize !== undefined)
+	if (data.mapSize !== undefined)
 	{
 		var mapSize = data.mapSize;
 		this.mapSize.set(mapSize.x, mapSize.y);
 	}
-	if(data.camera !== undefined)
+	if (data.camera !== undefined)
 	{
 		var camera = data.camera;
 		this.camera.top = camera.top;

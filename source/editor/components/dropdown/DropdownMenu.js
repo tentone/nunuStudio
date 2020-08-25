@@ -1,9 +1,9 @@
+import {Vector2} from "three";
 import {DOMUtils} from "../../utils/DOMUtils.js";
 import {Global} from "../../Global.js";
 import {Text} from "../Text.js";
-import {ButtonMenu} from "./ButtonMenu.js";
 import {Component} from "../Component.js";
-import {Vector2} from "three";
+import {ButtonMenu} from "./ButtonMenu.js";
 
 /**
  * Dropdown menu element, used to create dropdowns in menu bars and in context menus.
@@ -153,7 +153,7 @@ DropdownMenu.prototype.showArrow = function()
  */
 DropdownMenu.prototype.setIcon = function(icon)
 {
-	if(this.icon === null)
+	if (this.icon === null)
 	{
 		this.icon = document.createElement("img");
 		this.icon.style.display = "block";
@@ -176,7 +176,7 @@ DropdownMenu.prototype.setIcon = function(icon)
  */
 DropdownMenu.prototype.removeOption = function(index)
 {
-	if(index >= 0 && index < this.options.length)
+	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
@@ -207,7 +207,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 		self.setExpanded(false);
 	});
 
-	if(icon !== undefined)
+	if (icon !== undefined)
 	{
 		button.setIcon(icon);
 	}
@@ -234,7 +234,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	menu.setAlignment(Text.LEFT);
 	menu.setMargin(25);
 	
-	if(icon !== undefined)
+	if (icon !== undefined)
 	{
 		menu.setIcon(icon);
 	}
@@ -254,71 +254,71 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 {
 	this.expanded = expanded;
 
-	if(this.expanded)
+	if (this.expanded)
 	{
 		this.panel.element.style.display = "block";
 
-		if(this.direction === DropdownMenu.DOWN)
+		if (this.direction === DropdownMenu.DOWN)
 		{
-			this.panel.element.style.top = (this.position.y + this.size.y) + "px";
+			this.panel.element.style.top = this.position.y + this.size.y + "px";
 			this.panel.element.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 
-			if(out.y !== 0)
+			if (out.y !== 0)
 			{
 				this.panel.element.style.top = null;
-				this.panel.element.style.bottom = (this.position.y + this.size.y) + "px";
+				this.panel.element.style.bottom = this.position.y + this.size.y + "px";
 			}
-			if(out.x !== 0)
+			if (out.x !== 0)
 			{
-				this.panel.element.style.left = (this.position.x - out.x) + "px"; 
+				this.panel.element.style.left = this.position.x - out.x + "px"; 
 			}
 		}
-		else if(this.direction === DropdownMenu.UP)
+		else if (this.direction === DropdownMenu.UP)
 		{
-			this.panel.element.style.bottom = (this.position.y + this.size.y) + "px";
+			this.panel.element.style.bottom = this.position.y + this.size.y + "px";
 			this.panel.element.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
-			if(out.y !== 0)
+			if (out.y !== 0)
 			{
 				this.panel.element.style.bottom = null;
-				this.panel.element.style.top = (this.position.y + this.size.y) + "px";
+				this.panel.element.style.top = this.position.y + this.size.y + "px";
 			}
-			if(out.x !== 0)
+			if (out.x !== 0)
 			{
-				this.panel.element.style.left = (this.position.x - out.x) + "px"; 
-			}
-		}
-		else if(this.direction === DropdownMenu.LEFT)
-		{
-			this.panel.element.style.top = this.position.y + "px";
-			this.panel.element.style.left = (this.position.x + this.size.x) + "px";
-
-			var out = DOMUtils.checkBorder(this.panel);
-			if(out.x !== 0)
-			{
-				this.panel.element.style.left = (this.position.x - this.size.x) + "px"; 
-			}
-			if(out.y !== 0)
-			{
-				this.panel.element.style.top = (this.position.y - out.y) + "px";
+				this.panel.element.style.left = this.position.x - out.x + "px"; 
 			}
 		}
-		else if(this.direction === DropdownMenu.RIGHT)
+		else if (this.direction === DropdownMenu.LEFT)
 		{
 			this.panel.element.style.top = this.position.y + "px";
-			this.panel.element.style.left = (this.position.x - this.size.x) + "px";
+			this.panel.element.style.left = this.position.x + this.size.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
-			if(out.x !== 0)
+			if (out.x !== 0)
 			{
-				this.panel.element.style.left = (this.position.x + this.size.x) + "px";
+				this.panel.element.style.left = this.position.x - this.size.x + "px"; 
 			}
-			if(out.y !== 0)
+			if (out.y !== 0)
 			{
-				this.panel.element.style.top = (this.position.y - out.y) + "px";
+				this.panel.element.style.top = this.position.y - out.y + "px";
+			}
+		}
+		else if (this.direction === DropdownMenu.RIGHT)
+		{
+			this.panel.element.style.top = this.position.y + "px";
+			this.panel.element.style.left = this.position.x - this.size.x + "px";
+
+			var out = DOMUtils.checkBorder(this.panel);
+			if (out.x !== 0)
+			{
+				this.panel.element.style.left = this.position.x + this.size.x + "px";
+			}
+			if (out.y !== 0)
+			{
+				this.panel.element.style.top = this.position.y - out.y + "px";
 			}
 		}
 	}
@@ -335,7 +335,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
  */
 DropdownMenu.prototype.updateOptions = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
 		this.options[i].position.set(0, this.optionsSize.y * i);
@@ -343,7 +343,7 @@ DropdownMenu.prototype.updateOptions = function()
 	}
 
 	this.panel.element.style.width = this.size.x + "px";
-	this.panel.element.style.height = (this.optionsSize.y * this.options.length) + "px";
+	this.panel.element.style.height = this.optionsSize.y * this.options.length + "px";
 };
 
 DropdownMenu.prototype.destroy = function()

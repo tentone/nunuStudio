@@ -1,14 +1,14 @@
+import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, VSMShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CustomToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
 import {Locale} from "../../locale/LocaleManager.js";
 import {RendererConfiguration} from "../../../core/renderer/RendererConfiguration.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
 import {CallbackAction} from "../../history/action/CallbackAction.js";
 import {SceneEditor} from "../tab/scene-editor/SceneEditor.js";
-import {FormSnippet} from "./FormSnippet.js";
 import {Editor} from "../../Editor.js";
 import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
 import {CheckBox} from "../../components/input/CheckBox.js";
-import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, VSMShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CustomToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
+import {FormSnippet} from "./FormSnippet.js";
 
 /** 
  * Renderer configuration object form template.
@@ -28,11 +28,11 @@ function RendererConfigurationFormSnippet(form, object)
 	{
 		var tabs = Editor.gui.tab.getActiveTab();
 
-		for(var i = 0; i < tabs.length; i++)
+		for (var i = 0; i < tabs.length; i++)
 		{
 			var tab = tabs[i];
 
-			if(tab instanceof SceneEditor)
+			if (tab instanceof SceneEditor)
 			{
 				tab.canvas.reloadContext();
 			}
@@ -225,7 +225,7 @@ function RendererConfigurationFormSnippet(form, object)
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaFactor", self.gammaFactor.getValue()), updateRenderers));
 	});
 	this.form.add(this.gammaFactor);
-	this.form.nextRow()
+	this.form.nextRow();
 	
 	// Power preference
 	this.form.addText(Locale.powerPreference).setAltText(Locale.hintPowerPreference);

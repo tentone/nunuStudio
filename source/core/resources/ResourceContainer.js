@@ -111,7 +111,7 @@ ResourceContainer.prototype.copyResources = function(container)
 
 ResourceContainer.prototype.getTexture = function(uuid)
 {
-	if(this.textures[uuid] === undefined)
+	if (this.textures[uuid] === undefined)
 	{
 		console.warn("nunuStudio: ResourceContainer, Undefined texture", uuid);
 	}
@@ -121,7 +121,7 @@ ResourceContainer.prototype.getTexture = function(uuid)
 
 ResourceContainer.prototype.getGeometry = function(uuid)
 {
-	if(this.geometries[uuid] === undefined)
+	if (this.geometries[uuid] === undefined)
 	{
 		console.warn("nunuStudio: ResourceContainer, Undefined geometry", uuid);
 	}
@@ -131,12 +131,12 @@ ResourceContainer.prototype.getGeometry = function(uuid)
 
 ResourceContainer.prototype.getMaterial = function(uuid)
 {
-	if(uuid instanceof Array)
+	if (uuid instanceof Array)
 	{
 		var array = [];
-		for(var i = 0; i < uuid.length; i++)
+		for (var i = 0; i < uuid.length; i++)
 		{
-			if(this.materials[uuid[i]] === undefined)
+			if (this.materials[uuid[i]] === undefined)
 			{
 				console.warn("nunuStudio: ResourceContainer, Undefined material", uuid);
 			}
@@ -147,7 +147,7 @@ ResourceContainer.prototype.getMaterial = function(uuid)
 		return array;
 	}
 
-	if(this.materials[uuid] === undefined)
+	if (this.materials[uuid] === undefined)
 	{
 		console.warn("nunuStudio: ResourceContainer, Undefined material", uuid);
 	}
@@ -157,7 +157,7 @@ ResourceContainer.prototype.getMaterial = function(uuid)
 
 ResourceContainer.prototype.getFont = function(uuid)
 {
-	if(this.fonts[uuid] === undefined)
+	if (this.fonts[uuid] === undefined)
 	{
 		console.warn("nunuStudio: ResourceContainer, Undefined font", uuid);
 	}
@@ -166,7 +166,7 @@ ResourceContainer.prototype.getFont = function(uuid)
 
 ResourceContainer.prototype.getAudio = function(uuid)
 {
-	if(this.audio[uuid] === undefined)
+	if (this.audio[uuid] === undefined)
 	{
 		console.warn("nunuStudio: ResourceContainer, Undefined audio", uuid);
 	}

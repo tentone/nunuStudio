@@ -4,11 +4,11 @@ import {FileSystem} from "../../../../../core/FileSystem.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {TextEditor} from "../../code/TextEditor.js";
-import {Asset} from "./Asset.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
+import {Asset} from "./Asset.js";
 
 function FileAsset(parent)
 {
@@ -41,7 +41,7 @@ function FileAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(Editor.confirm(Locale.delete + " " + Locale.file))
+			if (Editor.confirm(Locale.delete + " " + Locale.file))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
 			}
@@ -49,11 +49,11 @@ function FileAsset(parent)
 
 		context.addOption(Locale.export, function()
 		{
-			if(Nunu.runningOnDesktop())
+			if (Nunu.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{
-					if(files.length > 0)
+					if (files.length > 0)
 					{
 						self.asset.export(files[0].path);
 					}
@@ -88,14 +88,14 @@ function FileAsset(parent)
 	{
 		var tab = Editor.gui.tab.getTab(TextEditor, self.asset);
 
-		if(tab === null)
+		if (tab === null)
 		{
 			tab = Editor.gui.tab.addTab(TextEditor, true);
 			tab.attach(self.asset, self);
 		}
 		
 		tab.select();
-	}
+	};
 }
 
 FileAsset.prototype = Object.create(Asset.prototype);
@@ -104,7 +104,7 @@ FileAsset.prototype.updateMetadata = function()
 {
 	this.setText(this.asset.name);
 
-	if(this.asset.encoding === "js" || this.asset.encoding === "glsl")
+	if (this.asset.encoding === "js" || this.asset.encoding === "glsl")
 	{
 		this.image.src = Global.FILE_PATH + "icons/script/script.png";
 	}

@@ -1,3 +1,4 @@
+import {InterpolateLinear, InterpolateSmooth, InterpolateDiscrete} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
@@ -6,7 +7,6 @@ import {ColorChooser} from "../../../components/input/ColorChooser.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {InterpolateLinear, InterpolateSmooth, InterpolateDiscrete} from "three";
 
 /**
  * Button displyed on the left side that shows the attribute track being edited.
@@ -58,13 +58,13 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 
 		context.addOption(Locale.delete, function()
 		{
-			if(!Editor.confirm("Delete track?"))
+			if (!Editor.confirm("Delete track?"))
 			{
 				return;
 			}
 
 			var index = animation.tracks.indexOf(track);
-			if(index !== -1)
+			if (index !== -1)
 			{
 				animation.tracks.splice(index, 1);
 			}
@@ -91,7 +91,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		{
 			var time = Number.parseFloat(Editor.prompt("Time to shift track"));
 
-			if(isNaN(time))
+			if (isNaN(time))
 			{
 				Editor.alert("Invalid time value");
 				return;
@@ -108,7 +108,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 			var start = Number.parseFloat(Editor.prompt("Start time"));
 			var end = Number.parseFloat(Editor.prompt("End time"));
 
-			if(isNaN(start) || isNaN(end))
+			if (isNaN(start) || isNaN(end))
 			{
 				Editor.alert("Invalid time value");
 				return;

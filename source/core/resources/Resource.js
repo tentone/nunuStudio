@@ -1,5 +1,5 @@
-import {FileSystem} from "../FileSystem.js";
 import {Math} from "three";
+import {FileSystem} from "../FileSystem.js";
 
 /**
  * Resource class is used to represent resources.
@@ -74,23 +74,23 @@ function Resource(name, type)
  */
 Resource.prototype.export = function(fname)
 {
-	if(this.format === "base64")
+	if (this.format === "base64")
 	{
 		FileSystem.writeFileBase64(fname, this.data);
 	}
-	else if(this.format === "arraybuffer")
+	else if (this.format === "arraybuffer")
 	{
 		FileSystem.writeFileArrayBuffer(fname, this.arraybuffer !== undefined ? this.arraybuffer : this.data);
 	}
-	else if(this.format === "string")
+	else if (this.format === "string")
 	{
 		FileSystem.writeFile(fname, this.data);
 	}
-	else if(this.format === "json")
+	else if (this.format === "json")
 	{
 		FileSystem.writeFile(fname, JSON.stringify(this.data));
 	}
-	else if(this.format === "url")
+	else if (this.format === "url")
 	{
 		FileSystem.writeFileArrayBuffer(fname, FileSystem.readFileArrayBuffer(this.data));
 	}
@@ -101,7 +101,7 @@ Resource.prototype.export = function(fname)
  *
  * @method dispose
  */
-Resource.prototype.dispose = function(){};
+Resource.prototype.dispose = function() {};
 
 /**
  * Serialize resource to json.

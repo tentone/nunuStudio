@@ -67,13 +67,13 @@ SpineInspector.prototype.updateInspector = function()
 	this.skin.clearValues();
 	
 	var animations = this.object.getAnimations();
-	for(var i = 0; i < animations.length; i++)
+	for (var i = 0; i < animations.length; i++)
 	{
 		this.animation.addValue(animations[i].name, animations[i].name);
 	}
 
 	var skins = this.object.getSkins();
-	for(var i = 0; i < skins.length; i++)
+	for (var i = 0; i < skins.length; i++)
 	{
 		this.skin.addValue(skins[i].name, skins[i].name);
 	}

@@ -1,7 +1,7 @@
+import {Object3D} from "three";
+import {Action} from "../Action.js";
 import {RemoveAction} from "./RemoveAction.js";
 import {AddAction} from "./AddAction.js";
-import {Action} from "../Action.js";
-import {Object3D} from "three";
 
 /**
  * Swap an object for another one.
@@ -40,9 +40,9 @@ SwapAction.prototype.apply = function()
 	this.parent.children.splice(this.index, 0, this.newObject);
 
 	// Move children from original to new
-	if(this.moveChildren)
+	if (this.moveChildren)
 	{
-		while(this.originalObject.children.length > 0)
+		while (this.originalObject.children.length > 0)
 		{
 			var children = this.originalObject.children[0];
 			this.originalObject.remove(children);
@@ -63,9 +63,9 @@ SwapAction.prototype.revert = function()
 	this.parent.children.splice(this.index, 0, this.originalObject);
 
 	// Move children from new back to original
-	if(this.moveChildren)
+	if (this.moveChildren)
 	{
-		while(this.newObject.children.length > 0)
+		while (this.newObject.children.length > 0)
 		{
 			var children = this.newObject.children[0];
 			this.newObject.remove(children);

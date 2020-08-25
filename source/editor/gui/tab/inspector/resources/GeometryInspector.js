@@ -1,11 +1,11 @@
+import {Scene, DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3, GridHelper} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {AnimationTimer} from "../../../../../core/utils/timer/AnimationTimer.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {EditorOrbitControls} from "../../scene-editor/controls/EditorOrbitControls.js";
-import {ResourceInspector} from "./ResourceInspector.js";
 import {RendererCanvas} from "../../../../components/RendererCanvas.js";
-import {Scene, DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3, GridHelper} from "three";
+import {ResourceInspector} from "./ResourceInspector.js";
 
 function GeometryInspector(parent, object)
 {
@@ -55,7 +55,7 @@ function GeometryInspector(parent, object)
 	// Render loop timer
 	this.timer = new AnimationTimer(function()
 	{
-		if(self.object === null)
+		if (self.object === null)
 		{
 			return;
 		}
@@ -74,7 +74,7 @@ GeometryInspector.prototype.destroy = function()
 	ResourceInspector.prototype.destroy.call(this);
 
 	this.timer.stop();
-}
+};
 
 GeometryInspector.prototype.updateInspector = function()
 {
@@ -96,7 +96,7 @@ GeometryInspector.prototype.updateInspector = function()
 		return a > b ? a : b;
 	});
 
-	if(this.grid !== null)
+	if (this.grid !== null)
 	{
 		this.scene.remove(this.grid);
 	}

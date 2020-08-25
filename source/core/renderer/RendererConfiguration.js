@@ -205,7 +205,7 @@ function RendererConfiguration(options)
 	 * Defines whether material shader programs are checked for errors during compilation and linkage process.
 	 *
 	 * @property checkShaderErrors
- 	 * @type {boolean}
+	 * @type {boolean}
 	 */
 	this.checkShaderErrors = true;
 	
@@ -226,11 +226,11 @@ function RendererConfiguration(options)
 	this.maxMorphNormals = 4;
 
 	// Copy values received from the options parameter
-	if(options !== undefined)
+	if (options !== undefined)
 	{	
-		for(var i in this)
+		for (var i in this)
 		{
-			if(options[i] !== undefined)
+			if (options[i] !== undefined)
 			{
 				this[i] = options[i];
 			}
@@ -270,36 +270,35 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 {
 	var context = null;
 
-	if(this.backend === RendererConfiguration.WEBGL2)
+	if (this.backend === RendererConfiguration.WEBGL2)
 	{
 		try
 		{
 			context = canvas.getContext("webgl2");
 		}
-		catch(e){}
+		catch (e) {}
 	}
 
 	var renderer = new WebGLRenderer(
-	{
-		canvas: canvas,
-		context: context,
-		precision: this.precision,
-		alpha: this.alpha,
-		premultipliedAlpha: this.premultipliedAlpha,
-		antialias: this.antialiasing,
-		stencil: this.stencil,
-		preserveDrawingBuffer: this.preserveDrawingBuffer,
-		powerPreference: this.powerPreference,
-		logarithmicDepthBuffer: this.logarithmicDepthBuffer
-	});
+		{
+			canvas: canvas,
+			context: context,
+			precision: this.precision,
+			alpha: this.alpha,
+			premultipliedAlpha: this.premultipliedAlpha,
+			antialias: this.antialiasing,
+			stencil: this.stencil,
+			preserveDrawingBuffer: this.preserveDrawingBuffer,
+			powerPreference: this.powerPreference,
+			logarithmicDepthBuffer: this.logarithmicDepthBuffer
+		});
 
 	this.apply(renderer);
 
-	if(this.backgroundColor !== null)
+	if (this.backgroundColor !== null)
 	{
 		canvas.style.backgroundColor = this.backgroundColor;
 	}
-
 
 
 	return renderer;

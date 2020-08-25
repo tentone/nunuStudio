@@ -1,8 +1,8 @@
-import {Pass} from "../Pass.js";
 import {UniformsUtils, ShaderMaterial, NoBlending, WebGLRenderTarget, LinearMipMapLinearFilter, LinearFilter, RGBAFormat, MeshBasicMaterial} from "three";
 import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 import {LuminosityShader} from "three/examples/jsm/shaders/LuminosityShader";
 import {ToneMapShader} from "three/examples/jsm/shaders/ToneMapShader";
+import {Pass} from "../Pass.js";
 
 /**
  * Generate a texture that represents the luminosity of the current scene, adapted over time to simulate the optic nerve responding to the amount of light it is receiving.
@@ -12,6 +12,7 @@ import {ToneMapShader} from "three/examples/jsm/shaders/ToneMapShader";
  * Full-screen tone-mapping shader based on http:// www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf
  *
  * class AdaptiveToneMappingPass
+ *
  * @module Postprocessing
  * @author miibond
  */
@@ -32,77 +33,77 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 
 	this.copyUniforms = UniformsUtils.clone(CopyShader.uniforms);
 	this.materialCopy = new ShaderMaterial(
-	{
-		uniforms: this.copyUniforms,
-		vertexShader: CopyShader.vertexShader,
-		fragmentShader: CopyShader.fragmentShader,
-		blending: NoBlending,
-		depthTest: false
-	});
+		{
+			uniforms: this.copyUniforms,
+			vertexShader: CopyShader.vertexShader,
+			fragmentShader: CopyShader.fragmentShader,
+			blending: NoBlending,
+			depthTest: false
+		});
 
 	this.materialLuminance = new ShaderMaterial(
-	{
-		uniforms: UniformsUtils.clone(LuminosityShader.uniforms),
-		vertexShader: LuminosityShader.vertexShader,
-		fragmentShader: LuminosityShader.fragmentShader,
-		blending: NoBlending
-	});
+		{
+			uniforms: UniformsUtils.clone(LuminosityShader.uniforms),
+			vertexShader: LuminosityShader.vertexShader,
+			fragmentShader: LuminosityShader.fragmentShader,
+			blending: NoBlending
+		});
 
 	this.createShader();
 
-	if(ToneMapShader === undefined)
+	if (ToneMapShader === undefined)
 	{
 		console.error("nunuStudio: AdaptiveToneMappingPass relies on ToneMapShader");
 	}
 
 	this.materialToneMap = new ShaderMaterial(
-	{
-		uniforms: UniformsUtils.clone(ToneMapShader.uniforms),
-		vertexShader: ToneMapShader.vertexShader,
-		fragmentShader: ToneMapShader.fragmentShader,
-		blending: NoBlending
-	});
+		{
+			uniforms: UniformsUtils.clone(ToneMapShader.uniforms),
+			vertexShader: ToneMapShader.vertexShader,
+			fragmentShader: ToneMapShader.fragmentShader,
+			blending: NoBlending
+		});
 
 	this.createQuadScene();
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Minimum luminance.
 		 *
 		 * @property minLuminance
 		 * @type {number}
 		 */
-		minLuminance:
+			minLuminance:
 		{
-			get: function(){return self.adaptLuminanceShader.uniforms["minLuminance"].value;},
-			set: function(value){self.adaptLuminanceShader.uniforms["minLuminance"].value = value;}
+			get: function() {return self.adaptLuminanceShader.uniforms["minLuminance"].value;},
+			set: function(value) {self.adaptLuminanceShader.uniforms["minLuminance"].value = value;}
 		},
 
-		/**
-		 * Rate of luminance variation (adaptation rate).
-		 *
-		 * @property tau
-		 * @type {number}
-		 */
-		tau:
+			/**
+			 * Rate of luminance variation (adaptation rate).
+			 *
+			 * @property tau
+			 * @type {number}
+			 */
+			tau:
 		{
-			get: function(){return self.adaptLuminanceShader.uniforms["tau"].value;},
-			set: function(value){self.adaptLuminanceShader.uniforms["tau"].value = value;}
+			get: function() {return self.adaptLuminanceShader.uniforms["tau"].value;},
+			set: function(value) {self.adaptLuminanceShader.uniforms["tau"].value = value;}
 		},
 
-		/**
-		 * Rate of luminance variation (adaptation rate).
-		 *
-		 * @property tau
-		 * @type {number}
-		 */
-		adaptive:
+			/**
+			 * Rate of luminance variation (adaptation rate).
+			 *
+			 * @property tau
+			 * @type {number}
+			 */
+			adaptive:
 		{
-			get: function(){return self._adaptive;},
+			get: function() {return self._adaptive;},
 			set: function(adaptive)
 			{
-				if(adaptive)
+				if (adaptive)
 				{
 					this._adaptive = true;
 					this.materialToneMap.defines["ADAPTED_LUMINANCE"] = "";
@@ -118,7 +119,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 				this.materialToneMap.needsUpdate = true;
 			}
 		}
-	});
+		});
 };
 
 AdaptiveToneMappingPass.prototype = Object.create(Pass.prototype);
@@ -127,7 +128,7 @@ AdaptiveToneMappingPass.prototype.constructor = AdaptiveToneMappingPass;
 
 AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive)
 {
-	if(this.needsInit)
+	if (this.needsInit)
 	{
 		this.reset();
 
@@ -137,7 +138,7 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 		this.needsInit = false;
 	}
 
-	if(this._adaptive)
+	if (this._adaptive)
 	{
 		// Render the luminance of the current scene into a render target with mipmapping enabled
 		this.quad.material = this.materialLuminance;
@@ -163,7 +164,7 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 	this.quad.material = this.materialToneMap;
 	this.materialToneMap.uniforms.tDiffuse.value = readBuffer.texture;
 
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;
@@ -184,9 +185,7 @@ AdaptiveToneMappingPass.prototype.createShader = function()
 	this.adaptLuminanceShader =
 	{
 		defines:
-		{
-			MIP_LEVEL_1X1 : (Math.log(this.resolution) / Math.log(2.0)).toFixed(1)
-		},
+		{MIP_LEVEL_1X1: (Math.log(this.resolution) / Math.log(2.0)).toFixed(1)},
 		uniforms:
 		{
 			lastLum: {value: null},
@@ -226,31 +225,31 @@ AdaptiveToneMappingPass.prototype.createShader = function()
 			// Adapt the luminance using Pattanaik's technique\
 			float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau));\n\
 			gl_FragColor.r = fAdaptedLum;\n\
-		}",
+		}"
 	};
 
 	this.materialAdaptiveLum = new ShaderMaterial(
-	{
-		uniforms: UniformsUtils.clone(this.adaptLuminanceShader.uniforms),
-		vertexShader: this.adaptLuminanceShader.vertexShader,
-		fragmentShader: this.adaptLuminanceShader.fragmentShader,
-		defines: this.adaptLuminanceShader.defines,
-		blending: NoBlending
-	});
+		{
+			uniforms: UniformsUtils.clone(this.adaptLuminanceShader.uniforms),
+			vertexShader: this.adaptLuminanceShader.vertexShader,
+			fragmentShader: this.adaptLuminanceShader.fragmentShader,
+			defines: this.adaptLuminanceShader.defines,
+			blending: NoBlending
+		});
 };
 
 AdaptiveToneMappingPass.prototype.reset = function()
 {
 	// Render targets
-	if(this.luminanceRT)
+	if (this.luminanceRT)
 	{
 		this.luminanceRT.dispose();
 	}
-	if(this.currentLuminanceRT)
+	if (this.currentLuminanceRT)
 	{
 		this.currentLuminanceRT.dispose();
 	}
-	if(this.previousLuminanceRT)
+	if (this.previousLuminanceRT)
 	{
 		this.previousLuminanceRT.dispose();
 	}
@@ -263,13 +262,13 @@ AdaptiveToneMappingPass.prototype.reset = function()
 
 	// We only need mipmapping for the current luminosity because we want a down-sampled version to sample in our adaptive shader
 	this.currentLuminanceRT = new WebGLRenderTarget(this.resolution, this.resolution,
-	{
-		minFilter: LinearMipMapLinearFilter,
-		magFilter: LinearFilter,
-		format: RGBAFormat
-	});
+		{
+			minFilter: LinearMipMapLinearFilter,
+			magFilter: LinearFilter,
+			format: RGBAFormat
+		});
 
-	if(this._adaptive)
+	if (this._adaptive)
 	{
 		this.materialToneMap.defines["ADAPTED_LUMINANCE"] = "";
 		this.materialToneMap.uniforms.luminanceMap.value = this.luminanceRT.texture;
@@ -284,31 +283,31 @@ AdaptiveToneMappingPass.prototype.reset = function()
 
 AdaptiveToneMappingPass.prototype.dispose = function()
 {
-	if(this.luminanceRT)
+	if (this.luminanceRT)
 	{
 		this.luminanceRT.dispose();
 	}
-	if(this.previousLuminanceRT)
+	if (this.previousLuminanceRT)
 	{
 		this.previousLuminanceRT.dispose();
 	}
-	if(this.currentLuminanceRT)
+	if (this.currentLuminanceRT)
 	{
 		this.currentLuminanceRT.dispose();
 	}
-	if(this.materialLuminance)
+	if (this.materialLuminance)
 	{
 		this.materialLuminance.dispose();
 	}
-	if(this.materialAdaptiveLum)
+	if (this.materialAdaptiveLum)
 	{
 		this.materialAdaptiveLum.dispose();
 	}
-	if(this.materialCopy)
+	if (this.materialCopy)
 	{
 		this.materialCopy.dispose();
 	}
-	if(this.materialToneMap)
+	if (this.materialToneMap)
 	{
 		this.materialToneMap.dispose();
 	}

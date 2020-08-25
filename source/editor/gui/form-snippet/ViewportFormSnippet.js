@@ -2,10 +2,10 @@ import {Locale} from "../../locale/LocaleManager.js";
 import {Viewport} from "../../../core/objects/cameras/Viewport.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../history/action/ActionBundle.js";
-import {FormSnippet} from "./FormSnippet.js";
 import {Editor} from "../../Editor.js";
 import {VectorBox} from "../../components/input/VectorBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
+import {FormSnippet} from "./FormSnippet.js";
 
 /** 
  * Viewport object form snippet, used to edit camera/renderer viewport.
@@ -29,10 +29,10 @@ function ViewportFormSnippet(form, object)
 	{	
 		var value = self.offset.getValue();
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.offset, "x", value.x),
-			new ChangeAction(self.object.offset, "y", value.y)
-		]));
+			[
+				new ChangeAction(self.object.offset, "x", value.x),
+				new ChangeAction(self.object.offset, "y", value.y)
+			]));
 	});
 	this.form.add(this.offset);
 	this.form.nextRow();
@@ -47,10 +47,10 @@ function ViewportFormSnippet(form, object)
 	{
 		var value = self.sizeBox.getValue();
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.size, "x", value.x),
-			new ChangeAction(self.object.size, "y", value.y)
-		]));
+			[
+				new ChangeAction(self.object.size, "x", value.x),
+				new ChangeAction(self.object.size, "y", value.y)
+			]));
 	});
 	this.form.add(this.sizeBox);
 	this.form.nextRow();

@@ -19,7 +19,7 @@ function LightProbeHelper(lightProbe, size)
 			'void main() {',
 			'	vNormal = normalize(normalMatrix * normal);',
 			'	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
-			'}',
+			'}'
 		].join('\n'),
 
 		fragmentShader: [
@@ -79,7 +79,7 @@ function LightProbeHelper(lightProbe, size)
 LightProbeHelper.prototype = Object.create(Mesh.prototype);
 LightProbeHelper.prototype.constructor = LightProbeHelper;
 
-LightProbeHelper.prototype.dispose = function ()
+LightProbeHelper.prototype.dispose = function()
 {
 	this.geometry.dispose();
 	this.material.dispose();

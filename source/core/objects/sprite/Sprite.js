@@ -13,9 +13,10 @@ import {Sprite as TSprite, Object3D} from "three";
 
 /**
  * Material used to render the sprite.
+ *
  * @property material
  * @type {Material}
-*/
+ */
 function Sprite(material)
 {
 	TSprite.call(this, material);
@@ -27,7 +28,7 @@ Sprite.prototype = Object.create(TSprite.prototype);
 
 Sprite.prototype.dispose = function()
 {
-	if(this.material !== null && this.material.dispose !== undefined)
+	if (this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}

@@ -43,6 +43,6 @@ FormSnippet.prototype.attach = function(object)
  *
  * @method updateValues
  */
-FormSnippet.prototype.updateValues = function(){};
+FormSnippet.prototype.updateValues = function() {};
 
 export {FormSnippet};

@@ -1,5 +1,5 @@
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js";
 import {Texture} from "../../texture/Texture.js";
-import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
 
 /**
  * Spine animation textures are used alognside with SpineAnimation objects.

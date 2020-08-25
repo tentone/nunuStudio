@@ -1,7 +1,7 @@
+import {Vector2} from "three";
 import {Text} from "./Text.js";
 import {Division} from "./Division.js";
 import {Component} from "./Component.js";
-import {Vector2} from "three";
 
 /**
  * Table form element automatically organizes element into a grid like form.
@@ -79,7 +79,7 @@ TableForm.prototype.setAutoSize = function(autoSize)
  */
 TableForm.prototype.add = function(element)
 {
-	if(this.rows.length > 0)
+	if (this.rows.length > 0)
 	{
 		this.rows[this.rows.length - 1].push(element);
 		element.attachTo(this);
@@ -98,7 +98,7 @@ TableForm.prototype.addText = function(text, fit)
 	element.setText(text);
 	element.size.set(this.defaultTextWidth, 20);
 	
-	if(fit === true)
+	if (fit === true)
 	{
 		element.fitContent = true;
 	}
@@ -143,11 +143,11 @@ TableForm.prototype.nextRow = function()
  */
 TableForm.prototype.removeLastRow = function()
 {
-	if(this.rows.length > 0)
+	if (this.rows.length > 0)
 	{
 		var row = this.rows.pop();
 
-		for(var i = 0; i < row.length; i++)
+		for (var i = 0; i < row.length; i++)
 		{
 			row[i].destroy();
 		}
@@ -161,9 +161,9 @@ TableForm.prototype.removeLastRow = function()
  */
 TableForm.prototype.removeAll = function()
 {
-	for(var i = 0; i < this.rows.length; i++)
+	for (var i = 0; i < this.rows.length; i++)
 	{
-		for(var j = 0; j < this.rows[i].length; j++)
+		for (var j = 0; j < this.rows[i].length; j++)
 		{
 			this.rows[i][j].destroy();
 		}
@@ -178,24 +178,24 @@ TableForm.prototype.updateSize = function()
 	var x = 0, y = 0;
 	var sizeX = 0;
 
-	if(!this.autoSize)
+	if (!this.autoSize)
 	{
 		x = this.spacing.x;
 		y = this.spacing.y;
 	}
 
-	for(var i = 0; i < this.rows.length; i++)
+	for (var i = 0; i < this.rows.length; i++)
 	{
 		var maxSizeY = 0;
 
-		for(var j = 0; j < this.rows[i].length; j++)
+		for (var j = 0; j < this.rows[i].length; j++)
 		{
 			var element = this.rows[i][j];
 			
-			if(element.visible)
+			if (element.visible)
 			{
 				// Resize last element
-				if(this.fitElements && j === this.rows[i].length - 1)
+				if (this.fitElements && j === this.rows[i].length - 1)
 				{
 					element.size.x = this.size.x - x - 15;
 				}
@@ -204,7 +204,7 @@ TableForm.prototype.updateSize = function()
 				element.updateInterface();
 
 				// Size tracker
-				if(element.size.y > maxSizeY)
+				if (element.size.y > maxSizeY)
 				{
 					maxSizeY = element.size.y;
 				}
@@ -214,20 +214,20 @@ TableForm.prototype.updateSize = function()
 		}
 
 		// Form size x
-		if(sizeX < x)
+		if (sizeX < x)
 		{
 			sizeX = x;
 		}
 
 		// Update position tracker
-		if(x !== 0)
+		if (x !== 0)
 		{
 			x = this.autoSize ? 0 : this.spacing.x;
 			y += maxSizeY + this.spacing.y;
 		}
 	}
 
-	if(this.autoSize)
+	if (this.autoSize)
 	{
 		this.size.set(sizeX, y);
 	}

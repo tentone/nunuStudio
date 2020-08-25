@@ -3,8 +3,8 @@
  *
  * Does not export any of the internal editor modules, creates events on the document.body to load the editor code properly.
  */
-import {Editor} from "./Editor.js";
 import GLSL from "glsl-editor/glsl.js";
+import {Editor} from "./Editor.js";
 
 // Register the GLSL plugin in Codemirror
 GLSL(CodeMirror);

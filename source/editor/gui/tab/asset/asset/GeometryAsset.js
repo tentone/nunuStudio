@@ -1,13 +1,13 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Asset} from "./Asset.js";
 import {GeometryRenderer} from "../../../preview/GeometryRenderer.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
+import {Asset} from "./Asset.js";
 
 
 function GeometryAsset(parent)
@@ -51,7 +51,7 @@ function GeometryAsset(parent)
 		
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "geometries"));
@@ -65,7 +65,7 @@ function GeometryAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		// Insert into drag buffer
-		if(self.asset !== null)
+		if (self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);
@@ -83,7 +83,7 @@ GeometryAsset.prototype = Object.create(Asset.prototype);
 
 GeometryAsset.prototype.updateMetadata = function()
 {
-	if(this.asset !== null)
+	if (this.asset !== null)
 	{
 		this.setText(this.asset.name);
 

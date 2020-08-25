@@ -12,7 +12,7 @@ function LockedInspector(parent, object)
 	this.form.nextRow();
 
 	// Type
-	if(Editor.settings.general.showType)
+	if (Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
 		this.type = this.form.addText("");
@@ -20,7 +20,7 @@ function LockedInspector(parent, object)
 	}
 
 	// UUID
-	if(Editor.settings.general.showUUID)
+	if (Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
@@ -35,12 +35,12 @@ LockedInspector.prototype.updateInspector = function()
 {
 	this.name.setText(this.object.name);
 	
-	if(this.type !== undefined)
+	if (this.type !== undefined)
 	{
 		this.type.setText(this.object.type);
 	}
 
-	if(this.uuid !== undefined)
+	if (this.uuid !== undefined)
 	{
 		this.uuid.setText(this.object.uuid);
 	}

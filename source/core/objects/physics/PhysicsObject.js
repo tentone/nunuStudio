@@ -1,6 +1,6 @@
-import {Scene} from "../Scene.js";
 import {Body, World, Shape, Sphere, Box, Vec3, Particle, Plane, Heightfield, ConvexPolyhedron} from "cannon";
 import {Group, Vector3, Quaternion, Object3D, Matrix4} from "three";
+import {Scene} from "../Scene.js";
 
 /**
  * Wrapper for cannon.js physics objects.
@@ -40,6 +40,7 @@ function PhysicsObject()
 	 *  - fixedRotation Boolean
 	 *  - shape Array
 	 *  
+	 *
 	 * @attribute body
 	 * @type {Body}
 	 */
@@ -97,12 +98,12 @@ PhysicsObject.WORLD = 101;
  */
 PhysicsObject.prototype.initialize = function()
 {
-	if(this.mode === PhysicsObject.LOCAL)
+	if (this.mode === PhysicsObject.LOCAL)
 	{
 		this.body.position.copy(this.position);
 		this.body.quaternion.copy(this.quaternion);	
 	}
-	else if(this.mode === PhysicsObject.WORLD)
+	else if (this.mode === PhysicsObject.WORLD)
 	{
 		var position = new Vector3();
 		this.getWorldPosition(position);
@@ -115,10 +116,10 @@ PhysicsObject.prototype.initialize = function()
 
 	// Physics world
 	var node = this;
-	while(node.parent !== null)
+	while (node.parent !== null)
 	{
 		node = node.parent;
-		if(node instanceof Scene)
+		if (node instanceof Scene)
 		{
 			this.world = node.world;
 			this.world.addBody(this.body);
@@ -135,20 +136,20 @@ PhysicsObject.prototype.initialize = function()
  */
 PhysicsObject.prototype.update = function(delta)
 {
-	if(this.mode === PhysicsObject.LOCAL)
+	if (this.mode === PhysicsObject.LOCAL)
 	{
 		this.position.copy(this.body.position);
-		if(!this.body.fixedRotation)
+		if (!this.body.fixedRotation)
 		{
 			this.quaternion.copy(this.body.quaternion);
 		}
 	}
-	else if(this.mode === PhysicsObject.WORLD)
+	else if (this.mode === PhysicsObject.WORLD)
 	{
 
 		// Physics transform matrix
 		var transform = new Matrix4();
-		if(this.body.fixedRotation)
+		if (this.body.fixedRotation)
 		{
 			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
 		}
@@ -182,7 +183,7 @@ PhysicsObject.prototype.update = function(delta)
  */
 PhysicsObject.prototype.addShape = function(shape)
 {
-	if(shape instanceof Shape)
+	if (shape instanceof Shape)
 	{
 		this.body.addShape(shape);
 	}
@@ -210,7 +211,7 @@ PhysicsObject.prototype.toJSON = function(meta)
 
 	// Shapes array
 	var shapes = this.body.shapes;
-	for(var i = 0; i < shapes.length; i++)
+	for (var i = 0; i < shapes.length; i++)
 	{
 		var shape = shapes[i];
 		var values = {};
@@ -218,30 +219,30 @@ PhysicsObject.prototype.toJSON = function(meta)
 		// Shape type
 		values.type = shape.type;
 
-		if(shape.type === Shape.types.SPHERE)
+		if (shape.type === Shape.types.SPHERE)
 		{
 			values.radius = shape.radius;
 		}
-		else if(shape.type === Shape.types.BOX)
+		else if (shape.type === Shape.types.BOX)
 		{
-			values.halfExtents = {}
+			values.halfExtents = {};
 			values.halfExtents.x = shape.halfExtents.x;
 			values.halfExtents.y = shape.halfExtents.y;
 			values.halfExtents.z = shape.halfExtents.z;
 		}
-		else if(shape.type === Shape.types.CONVEXPOLYHEDRON)
+		else if (shape.type === Shape.types.CONVEXPOLYHEDRON)
 		{
 			values.vertices = shape.vertices;
 			values.faces = shape.faces;
 		}
-		else if(shape.type === Shape.types.HEIGHTFIELD)
+		else if (shape.type === Shape.types.HEIGHTFIELD)
 		{
 			values.data = shape.data;
 			values.maxValue = shape.maxValue;
 			values.minValue = shape.minValue;
 			values.elementSize = shape.elementSize;
 		}
-		else if(shape.type === Shape.types.TRIMESH)
+		else if (shape.type === Shape.types.TRIMESH)
 		{
 			values.vertices = shape.vertices;
 			values.normals = shape.normals;
@@ -261,7 +262,7 @@ PhysicsObject.fromJSON = function(data)
 {
 	var object = new PhysicsObject();
 	
-	if(data.mode !== undefined)
+	if (data.mode !== undefined)
 	{
 		object.mode = data.mode;
 	}
@@ -280,38 +281,38 @@ PhysicsObject.fromJSON = function(data)
 
 	// Shapes
 	var shapes = data.body.shapes;
-	for(var i = 0; i < shapes.length; i++)
+	for (var i = 0; i < shapes.length; i++)
 	{
 		var shape = shapes[i];
 
-		if(shape.type === Shape.types.SPHERE)
+		if (shape.type === Shape.types.SPHERE)
 		{
 			object.body.addShape(new Sphere(shape.radius));
 		}
-		else if(shape.type === Shape.types.BOX)
+		else if (shape.type === Shape.types.BOX)
 		{
 			object.body.addShape(new Box(new Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
 		}
-		else if(shape.type === Shape.types.PARTICLE)
+		else if (shape.type === Shape.types.PARTICLE)
 		{
 			object.body.addShape(new Particle());
 		}
-		else if(shape.type === Shape.types.PLANE)
+		else if (shape.type === Shape.types.PLANE)
 		{
 			object.body.addShape(new Plane());
 		}
-		else if(shape.type === Shape.types.HEIGHTFIELD)
+		else if (shape.type === Shape.types.HEIGHTFIELD)
 		{
 			object.body.addShape(new Heightfield(shape.data,
-			{
-				maxValue : shape.maxValue,
-				minValue : shape.minValue,
-				elementSize : shape.elementSize
-			}));
+				{
+					maxValue: shape.maxValue,
+					minValue: shape.minValue,
+					elementSize: shape.elementSize
+				}));
 		}
-		else if(shape.type === Shape.types.CONVEXPOLYHEDRON)
+		else if (shape.type === Shape.types.CONVEXPOLYHEDRON)
 		{
-			for(var k = 0; k < shape.vertices.length; k++)
+			for (var k = 0; k < shape.vertices.length; k++)
 			{
 				shape.vertices[k] = new Vec3(shape.vertices[k].x, shape.vertices[k].y, shape.vertices[k].z);
 			}

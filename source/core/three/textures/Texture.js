@@ -4,7 +4,7 @@ import {Nunu} from "../../Nunu.js";
 THREE.Texture.prototype.toJSON = function(meta)
 {
 	// Check if this texture was already serialized
-	if(meta.textures[this.uuid] !== undefined)
+	if (meta.textures[this.uuid] !== undefined)
 	{
 		return meta.textures[this.uuid];
 	}

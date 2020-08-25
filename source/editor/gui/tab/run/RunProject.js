@@ -115,7 +115,7 @@ RunProject.prototype.activate = function()
 	this.canvas.createRenderer();
 	this.updateSettings();
 
-	if(this.program === null)
+	if (this.program === null)
 	{
 		this.getProgram();
 		this.runProgram();
@@ -155,7 +155,7 @@ RunProject.prototype.destroy = function()
  */
 RunProject.prototype.setFullscreen = function(fullscreen)
 {
-	if(fullscreen)
+	if (fullscreen)
 	{
 		Nunu.setFullscreen(true, this.element);
 
@@ -179,7 +179,7 @@ RunProject.prototype.stopProgram = function()
 {
 	this.setFullscreen(false);
 
-	if(this.program !== null)
+	if (this.program !== null)
 	{
 		this.program.dispose();
 		this.program = null;
@@ -192,7 +192,7 @@ RunProject.prototype.resetCanvas = function()
 {
 	RendererCanvas.prototype.resetCanvas.call(this);
 
-	if(this.program !== null && this.program.mouse !== null)
+	if (this.program !== null && this.program.mouse !== null)
 	{
 		this.program.mouse.setCanvas(this.canvas.canvas);
 	}
@@ -206,7 +206,7 @@ RunProject.prototype.resetCanvas = function()
 RunProject.prototype.getProgram = function()
 {
 	// Run the program directly all changed made with code are kept
-	if(Editor.settings.general.immediateMode)
+	if (Editor.settings.general.immediateMode)
 	{
 		this.program = Editor.program;
 	}
@@ -237,7 +237,7 @@ RunProject.prototype.runProgram = function()
 		this.program.initialize();
 		this.program.resize(this.canvas.canvas.width, this.canvas.canvas.height);
 	}
-	catch(error)
+	catch (error)
 	{
 		Editor.alert(Locale.errorRunInitialize + "\n(" + error + ")");
 		console.warn("nunuStudio: Error while initializing program.", error);
@@ -246,7 +246,7 @@ RunProject.prototype.runProgram = function()
 	}
 
 	// If program uses VR set button
-	if(this.program.vrAvailable())
+	if (this.program.vrAvailable())
 	{
 		// Show VR button
 		this.vrButton.setVisibility(true);
@@ -256,7 +256,7 @@ RunProject.prototype.runProgram = function()
 		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
-			if(program.xrEnabled)
+			if (program.xrEnabled)
 			{
 				program.exitVR();
 			}
@@ -267,7 +267,7 @@ RunProject.prototype.runProgram = function()
 		});
 	}
 
-	if(this.program.arAvailable())
+	if (this.program.arAvailable())
 	{
 		// Show AR button
 		this.arButton.setVisibility(true);
@@ -276,7 +276,7 @@ RunProject.prototype.runProgram = function()
 		var program = this.program;
 		this.arButton.setOnClick(function()
 		{
-			if(program.xrEnabled)
+			if (program.xrEnabled)
 			{
 				program.exitAR();
 			}
@@ -289,10 +289,10 @@ RunProject.prototype.runProgram = function()
 
 	var self = this;
 
-	//Update the program logic and render the program to the canvas using the renderer.
+	// Update the program logic and render the program to the canvas using the renderer.
 	this.canvas.renderer.setAnimationLoop(function()
 	{
-		if(self.program === null)
+		if (self.program === null)
 		{
 			return;
 		}
@@ -301,7 +301,7 @@ RunProject.prototype.runProgram = function()
 		{
 			self.program.update();
 		}
-		catch(error)
+		catch (error)
 		{
 			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
 			console.warn("nunuStudio: Error while running program.", error);
@@ -313,7 +313,7 @@ RunProject.prototype.runProgram = function()
 		{
 			self.program.render(self.canvas.renderer);
 		}
-		catch(error)
+		catch (error)
 		{
 			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
 			console.warn("nunuStudio: Error while rendering program.", error);
@@ -342,7 +342,7 @@ RunProject.prototype.updateSize = function()
 	this.canvas.size.copy(this.size);
 	this.canvas.updateSize();
 
-	if(this.program !== null)
+	if (this.program !== null)
 	{
 		this.program.resize(this.canvas.size.x, this.canvas.size.y);
 	}

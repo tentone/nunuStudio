@@ -34,12 +34,12 @@ SkinnedMesh.prototype = Object.create(TSkinnedMesh.prototype);
  */
 SkinnedMesh.prototype.dispose = function()
 {
-	if(this.material !== null && this.material.dispose !== undefined)
+	if (this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 
-	if(this.geometry !== null && this.geometry.dispose !== undefined)
+	if (this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}
@@ -53,9 +53,9 @@ SkinnedMesh.prototype.toJSON = function(meta)
 
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
-		if(self.skeleton !== null)
+		if (self.skeleton !== null)
 		{
-			if(meta.skeletons[self.skeleton.uuid] === undefined)
+			if (meta.skeletons[self.skeleton.uuid] === undefined)
 			{
 				meta.skeletons[self.skeleton.uuid] = self.skeleton.toJSON(meta);
 			}
@@ -64,12 +64,12 @@ SkinnedMesh.prototype.toJSON = function(meta)
 		}
 	});
 
-	if(this.bindMode !== undefined)
+	if (this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;
 	}
 
-	if(this.bindMatrix !== undefined)
+	if (this.bindMatrix !== undefined)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
 	}
@@ -89,7 +89,7 @@ SkinnedMesh.prototype.toJSON = function(meta)
  *
  * @property material
  * @type {Material}
-*/
+ */
 
 /**
  * Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.

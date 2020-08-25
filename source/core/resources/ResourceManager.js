@@ -1,11 +1,11 @@
+import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
+import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {Video} from "./Video.js";
 import {ResourceContainer} from "./ResourceContainer.js";
 import {Resource} from "./Resource.js";
 import {Image} from "./Image.js";
 import {Font} from "./Font.js";
 import {Audio} from "./Audio.js";
-import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
-import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
 
 /**
  * Resource manager is used to manage available resources used by objects
@@ -34,13 +34,13 @@ Object.assign(ResourceManager.prototype, ResourceContainer.prototype);
  */
 ResourceManager.prototype.dispose = function()
 {
-	for(var i = 0; i < ResourceContainer.libraries.length; i++)
+	for (var i = 0; i < ResourceContainer.libraries.length; i++)
 	{
 		var library = ResourceContainer.libraries[i];
 
-		for(var a in this[library])
+		for (var a in this[library])
 		{
-			if(this[library][a].dispose instanceof Function)
+			if (this[library][a].dispose instanceof Function)
 			{
 				this[library][a].dispose();
 			}
@@ -58,7 +58,7 @@ ResourceManager.prototype.removeGeometry = function(geometry, defaultGeometry)
 {
 	this.traverse(function(child)
 	{
-		if(child.geometry !== undefined && child.geometry.uuid === geometry.uuid)
+		if (child.geometry !== undefined && child.geometry.uuid === geometry.uuid)
 		{
 			child.geometry = defaultGeometry;
 		}
@@ -76,9 +76,9 @@ ResourceManager.prototype.removeGeometry = function(geometry, defaultGeometry)
  */
 ResourceManager.prototype.getResourceByName = function(name)
 {
-	for(var i in this.resources)
+	for (var i in this.resources)
 	{
-		if(this.resources[i].name === name)
+		if (this.resources[i].name === name)
 		{
 			return this.resources[i];
 		}
@@ -96,11 +96,11 @@ ResourceManager.prototype.getResourceByName = function(name)
  */
 ResourceManager.prototype.addResource = function(resource)
 {
-	if(resource instanceof Resource)
+	if (resource instanceof Resource)
 	{
 		this.resources[resource.uuid] = resource;
 	}
-}
+};
 
 /**
  * Remove resource from font list.
@@ -122,9 +122,9 @@ ResourceManager.prototype.removeResource = function(resource)
  */
 ResourceManager.prototype.getImageByName = function(name)
 {
-	for(var i in this.images)
+	for (var i in this.images)
 	{
-		if(this.images[i].name === name)
+		if (this.images[i].name === name)
 		{
 			return this.images[i];
 		}
@@ -142,7 +142,7 @@ ResourceManager.prototype.getImageByName = function(name)
  */
 ResourceManager.prototype.removeImage = function(image)
 {
-	if(image instanceof Image)
+	if (image instanceof Image)
 	{
 		delete this.images[image.uuid];
 	}
@@ -158,9 +158,9 @@ ResourceManager.prototype.removeImage = function(image)
  */
 ResourceManager.prototype.getVideoByName = function(name)
 {
-	for(var i in this.videos)
+	for (var i in this.videos)
 	{
-		if(this.videos[i].name === name)
+		if (this.videos[i].name === name)
 		{
 			return this.videos[i];
 		}
@@ -178,7 +178,7 @@ ResourceManager.prototype.getVideoByName = function(name)
  */
 ResourceManager.prototype.removeVideo = function(video)
 {
-	if(video instanceof Video)
+	if (video instanceof Video)
 	{
 		delete this.videos[video.uuid];
 	}
@@ -193,9 +193,9 @@ ResourceManager.prototype.removeVideo = function(video)
  */
 ResourceManager.prototype.getMaterialByName = function(name)
 {
-	for(var i in this.materials)
+	for (var i in this.materials)
 	{
-		if(this.materials[i].name === name)
+		if (this.materials[i].name === name)
 		{
 			return this.materials[i];
 		}
@@ -213,7 +213,7 @@ ResourceManager.prototype.getMaterialByName = function(name)
  */
 ResourceManager.prototype.addMaterial = function(material)
 {
-	if(material instanceof Material)
+	if (material instanceof Material)
 	{
  		this.materials[material.uuid] = material;
  	}
@@ -229,25 +229,25 @@ ResourceManager.prototype.addMaterial = function(material)
  */
 ResourceManager.prototype.removeMaterial = function(material, defaultMeshMaterial, defaultSpriteMaterial)
 {
-	if(defaultMeshMaterial === undefined)
+	if (defaultMeshMaterial === undefined)
 	{
 		defaultMeshMaterial = new MeshBasicMaterial();
 	}
 
-	if(defaultSpriteMaterial === undefined)
+	if (defaultSpriteMaterial === undefined)
 	{
 		defaultSpriteMaterial = new SpriteMaterial();
 	}
 
-	if(material instanceof Material)
+	if (material instanceof Material)
 	{
 		delete this.materials[material.uuid];
 		
 		this.traverse(function(child)
 		{
-			if(child.material !== undefined && child.material.uuid === material.uuid)
+			if (child.material !== undefined && child.material.uuid === material.uuid)
 			{
-				if(child instanceof Sprite)
+				if (child instanceof Sprite)
 				{
 					child.material = defaultSpriteMaterial;
 				}
@@ -269,9 +269,9 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
  */
 ResourceManager.prototype.getTextureByName = function(name)
 {
-	for(var i in this.textures)
+	for (var i in this.textures)
 	{
-		if(this.textures[i].name === name)
+		if (this.textures[i].name === name)
 		{
 			return this.textures[i];
 		}
@@ -289,7 +289,7 @@ ResourceManager.prototype.getTextureByName = function(name)
  */
 ResourceManager.prototype.addTexture = function(texture)
 {
-	if(material instanceof Texture)
+	if (material instanceof Texture)
 	{
  		this.textures[texture.uuid] = texture;
 	}
@@ -305,75 +305,75 @@ ResourceManager.prototype.addTexture = function(texture)
  */
 ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 {
-	if(defaultTexture === undefined)
+	if (defaultTexture === undefined)
 	{
 		defaultTexture = new Texture();
 	}
 
-	if(texture instanceof Texture)
+	if (texture instanceof Texture)
 	{
 		delete this.textures[texture.uuid];
 		
 		this.traverse(function(child)
 		{
-			if(child.material !== undefined)
+			if (child.material !== undefined)
 			{
 				var material = child.material;
 				
-				if(material.map != null && material.map.uuid === texture.uuid)
+				if (material.map != null && material.map.uuid === texture.uuid)
 				{
 					material.map = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
+				if (material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
 				{
 					material.bumpMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.normalMap != null && material.normalMap.uuid === texture.uuid)
+				if (material.normalMap != null && material.normalMap.uuid === texture.uuid)
 				{
 					material.normalMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
+				if (material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
 				{
 					material.displacementMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.specularMap != null && material.specularMap.uuid === texture.uuid)
+				if (material.specularMap != null && material.specularMap.uuid === texture.uuid)
 				{
 					material.specularMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
+				if (material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
 				{
 					material.emissiveMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
+				if (material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
 				{
 					material.alphaMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
+				if (material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
 				{
 					material.roughnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
+				if (material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
 				{
 					material.metalnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if(material.envMap != null && material.envMap.uuid === texture.uuid)
+				if (material.envMap != null && material.envMap.uuid === texture.uuid)
 				{
 					material.envMap = null;
 					material.needsUpdate = true;
 				}
 			}
-			else if(child instanceof ParticleEmitter)
+			else if (child instanceof ParticleEmitter)
 			{
-				if(child.group.texture.uuid === texture.uuid)
+				if (child.group.texture.uuid === texture.uuid)
 				{
 					child.group.texture = defaultTexture;
 				}
@@ -391,9 +391,9 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
  */
 ResourceManager.prototype.getFontByName = function(name)
 {
-	for(var i in this.fonts)
+	for (var i in this.fonts)
 	{
-		if(this.fonts[i].name === name)
+		if (this.fonts[i].name === name)
 		{
 			return this.fonts[i];
 		}
@@ -411,11 +411,11 @@ ResourceManager.prototype.getFontByName = function(name)
  */
 ResourceManager.prototype.addFont = function(font)
 {
-	if(font instanceof Font)
+	if (font instanceof Font)
 	{
  		this.fonts[font.uuid] = font;
  	}
-}
+};
 
 /**
  * Remove font from font list.
@@ -426,18 +426,18 @@ ResourceManager.prototype.addFont = function(font)
  */
 ResourceManager.prototype.removeFont = function(font, defaultFont)
 {
-	if(defaultFont === undefined)
+	if (defaultFont === undefined)
 	{
 		defaultFont = new Font();
 	}
 
-	if(font instanceof Font)
+	if (font instanceof Font)
 	{
 		delete this.fonts[font.uuid];
 		
 		this.traverse(function(child)
 		{
-			if(child.font !== undefined && child.font.uuid === font.uuid)
+			if (child.font !== undefined && child.font.uuid === font.uuid)
 			{
 				child.setFont(defaultFont);
 			}
@@ -454,9 +454,9 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
  */
 ResourceManager.prototype.getAudioByName = function(name)
 {
-	for(var i in this.audio)
+	for (var i in this.audio)
 	{
-		if(this.audio[i].name === name)
+		if (this.audio[i].name === name)
 		{
 			return this.audio[i];
 		}
@@ -474,7 +474,7 @@ ResourceManager.prototype.getAudioByName = function(name)
  */
 ResourceManager.prototype.addAudio = function(audio)
 {
-	if(audio instanceof Audio)
+	if (audio instanceof Audio)
 	{
  		this.audio[audio.uuid] = audio;
  	}
@@ -489,18 +489,18 @@ ResourceManager.prototype.addAudio = function(audio)
  */
 ResourceManager.prototype.removeAudio = function(audio, defaultAudio)
 {
-	if(defaultAudio === undefined)
+	if (defaultAudio === undefined)
 	{
 		defaultAudio = new Audio();
 	}
 
-	if(audio instanceof Audio)
+	if (audio instanceof Audio)
 	{
 		delete this.audio[audio.uuid];
 		
 		this.traverse(function(child)
 		{
-			if(child.audio !== undefined && child.audio.uuid === audio.uuid)
+			if (child.audio !== undefined && child.audio.uuid === audio.uuid)
 			{
 				child.setAudio(defaultAudio);
 			}

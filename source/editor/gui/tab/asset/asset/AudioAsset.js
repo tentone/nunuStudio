@@ -5,12 +5,12 @@ import {Nunu} from "../../../../../core/Nunu.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Asset} from "./Asset.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
+import {Asset} from "./Asset.js";
 
 
 function AudioAsset(parent)
@@ -42,7 +42,7 @@ function AudioAsset(parent)
 
 		menu.addOption("Audio Emitter", function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				var emitter = new AudioEmitter(self.asset);
 				emitter.name = self.asset.name;
@@ -52,7 +52,7 @@ function AudioAsset(parent)
 
 		menu.addOption("Positional", function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				var emitter = new PositionalAudio(self.asset);
 				emitter.name = self.asset.name;
@@ -67,11 +67,11 @@ function AudioAsset(parent)
 
 		context.addOption(Locale.export, function()
 		{
-			if(Nunu.runningOnDesktop())
+			if (Nunu.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{
-					if(files.length > 0)
+					if (files.length > 0)
 					{
 						self.asset.export(files[0].path);
 					}
@@ -88,7 +88,7 @@ function AudioAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(Editor.confirm("Delete audio?"))
+			if (Editor.confirm("Delete audio?"))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
 			}
@@ -112,7 +112,7 @@ function AudioAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		// Insert into drag buffer
-		if(self.asset !== null)
+		if (self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);

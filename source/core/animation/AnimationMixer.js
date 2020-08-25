@@ -29,7 +29,7 @@ AnimationMixer.prototype = Object.create(TAnimationMixer.prototype);
  */
 AnimationMixer.prototype.createActions = function(animations)
 {
-	for(var i = 0; i < animations.length; i++)
+	for (var i = 0; i < animations.length; i++)
 	{
 		var action = this.clipAction(animations[i]);
 		action.setLoop(animations[i].loop);
@@ -52,7 +52,7 @@ AnimationMixer.prototype.setTime = function(time)
 {
 	this.time = time;
 
-	for(var i = 0; i < this._actions.length; i++)
+	for (var i = 0; i < this._actions.length; i++)
 	{
 		this._actions[i].time = time;
 	}
@@ -106,20 +106,20 @@ AnimationMixer.prototype.dispose = function()
  */
 AnimationMixer.prototype.update = function(delta, forceUpdate)
 {
-	if(this.playing || forceUpdate)
+	if (this.playing || forceUpdate)
 	{
 		this.time += delta;
 
 		var direction = Math.sign(delta);
 
 		// Run active actions
-		for(var i = 0; i < this._actions.length; i++)
+		for (var i = 0; i < this._actions.length; i++)
 		{
 			this._actions[i]._update(this.time, delta, direction, this._accuIndex);
 		}
 
 		// Update scene graph
-		for(var i = 0; i < this._bindings.length; i++)
+		for (var i = 0; i < this._bindings.length; i++)
 		{
 			this._bindings[i].apply(this._accuIndex);
 		}

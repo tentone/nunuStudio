@@ -1,5 +1,5 @@
-import {Image} from "../resources/Image.js";
 import {BufferGeometry, Float32BufferAttribute} from "three";
+import {Image} from "../resources/Image.js";
 
 /**
  * Terrrain geometry is a plane like geometry deformed by a height map texture.
@@ -78,38 +78,38 @@ TerrainBufferGeometry.prototype.generate = function()
 		{
 			var imgX = Math.round((x + widthHalf) * widthRatio);
 			var imgY = Math.round((z + heightHalf) * heightRatio);
-			var iy = (imgY * (imgWidth * imgChannels) + imgX * imgChannels);
+			var iy = imgY * (imgWidth * imgChannels) + imgX * imgChannels;
 			return data.data[iy] / 255;
 		}
 
 		// Generate vertices, normals and uvs
-		for(var iz = 0; iz <= gridY; iz++)
+		for (var iz = 0; iz <= gridY; iz++)
 		{
 			var z = iz * segHeight - heightHalf;
 
-			for(var ix = 0; ix <= gridX; ix++)
+			for (var ix = 0; ix <= gridX; ix++)
 			{
 				var x = ix * segWidth - widthHalf;
 
 				// Read height from the image data
-				var y = (getPixel(x, z) * scale);
+				var y = getPixel(x, z) * scale;
 				vertices.push(x, y, z);
 				normals.push(0, 1, 0);
 
 				uvs.push(ix / gridX);
-				uvs.push(1 - (iz / gridY));
+				uvs.push(1 - iz / gridY);
 			}
 		}
 
 		// Indices
-		for(var iz = 0; iz < gridY; iz ++)
+		for (var iz = 0; iz < gridY; iz ++)
 		{
-			for(var ix = 0; ix < gridX; ix ++)
+			for (var ix = 0; ix < gridX; ix ++)
 			{
 				var a = ix + gridX1 * iz;
 				var b = ix + gridX1 * (iz + 1);
-				var c = (ix + 1) + gridX1 * (iz + 1);
-				var d = (ix + 1) + gridX1 * iz;
+				var c = ix + 1 + gridX1 * (iz + 1);
+				var d = ix + 1 + gridX1 * iz;
 
 				indices.push(a, b, d);
 				indices.push(b, c, d);

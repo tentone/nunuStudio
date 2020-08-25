@@ -6,7 +6,7 @@
  * @module BinaryUtils
  * @static
  */
-function Base64Utils(){}
+function Base64Utils() {}
 
 /**
  * Charset used to encode binary data.
@@ -27,21 +27,21 @@ Base64Utils.encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
  */
 Base64Utils.isBase64 = function(data)
 {
-	if(typeof data !== "string")
+	if (typeof data !== "string")
 	{
 		return false;
 	}
 
 	// Check if it has a base64 header
-	if(data.startsWith("data:"))
+	if (data.startsWith("data:"))
 	{
 		return true;
 	}
 
 	// Check string data
-	for(var i = 0; i < data.length; i++)
+	for (var i = 0; i < data.length; i++)
 	{
-		if(!Base64Utils.encoding.includes(data.charAt(i)))
+		if (!Base64Utils.encoding.includes(data.charAt(i)))
 		{
 			return false;
 		}
@@ -98,20 +98,20 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 	var chunk;
 
 	// Chunks of 3 bytes for cycle
-	for(var i = 0; i < length; i += 3)
+	for (var i = 0; i < length; i += 3)
 	{
-		chunk = (view[i] << 16) | (view[i + 1] << 8) | view[i + 2];
+		chunk = view[i] << 16 | view[i + 1] << 8 | view[i + 2];
 
 		a = (chunk & 16515072) >> 18;
 		b = (chunk & 258048) >> 12;
 		c = (chunk & 4032) >> 6;
 		d = chunk & 63;
 
-		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + Base64Utils.encoding[c] + Base64Utils.encoding[d]
+		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + Base64Utils.encoding[c] + Base64Utils.encoding[d];
 	}
 
 	// Remaining bytes
-	if(remainder === 1)
+	if (remainder === 1)
 	{
 		chunk = view[length];
 
@@ -120,9 +120,9 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 
 		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + "==";
 	}
-	else if(remainder === 2)
+	else if (remainder === 2)
 	{
-		chunk = (view[length] << 8) | view[length + 1];
+		chunk = view[length] << 8 | view[length + 1];
 
 		a = (chunk & 64512) >> 10;
 		b = (chunk & 1008) >> 4;
@@ -149,19 +149,19 @@ Base64Utils.fromBinaryString = function(str)
 
 	var a, b, c;
 
-	for(var i = 0; i < length; i += 3)
+	for (var i = 0; i < length; i += 3)
 	{
 		a = str.charCodeAt(i) & 0xff;
 		b = str.charCodeAt(i + 1);
 		c = str.charCodeAt(i + 2);
 
 		base64 += Base64Utils.encoding.charAt(a >> 2);
-		base64 += Base64Utils.encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
-		base64 += Base64Utils.encoding.charAt(((b & 0xF) << 2) | ((c & 0xC0) >> 6));
+		base64 += Base64Utils.encoding.charAt((a & 0x3) << 4 | (b & 0xF0) >> 4);
+		base64 += Base64Utils.encoding.charAt((b & 0xF) << 2 | (c & 0xC0) >> 6);
 		base64 += Base64Utils.encoding.charAt(c & 0x3F);
 	}
 	
-	if(remainder === 1)
+	if (remainder === 1)
 	{
 		a = str.charCodeAt(i) & 0xff;
 
@@ -169,13 +169,13 @@ Base64Utils.fromBinaryString = function(str)
 		base64 += Base64Utils.encoding.charAt((a & 0x3) << 4);
 		base64 += "==";
 	}
-	else if(remainder === 2)
+	else if (remainder === 2)
 	{
 		a = str.charCodeAt(i) & 0xff;
 		b = str.charCodeAt(i + 1);
 
 		base64 += Base64Utils.encoding.charAt(a >> 2);
-		base64 += Base64Utils.encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
+		base64 += Base64Utils.encoding.charAt((a & 0x3) << 4 | (b & 0xF0) >> 4);
 		base64 += Base64Utils.encoding.charAt((b & 0xF) << 2);
 		base64 += "=";
 	}

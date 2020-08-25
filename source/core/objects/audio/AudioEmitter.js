@@ -62,7 +62,7 @@ function AudioEmitter(audio)
 	 * @property audio
 	 * @type {Audio}
 	 */
-	this.audio = (audio !== undefined) ? audio : null;
+	this.audio = audio !== undefined ? audio : null;
 
 	/**
 	 * If true the playback starts automatically.
@@ -138,7 +138,7 @@ AudioEmitter.SOURCE = {
 	EMPTY: "empty",
 	BUFFER: "buffer",
 	NODE: "audioNode"
-}
+};
 
 /**
  * Method called when the audio playback stoped.
@@ -159,7 +159,7 @@ AudioEmitter.prototype.onEnded = function()
  */
 AudioEmitter.prototype.connect = function()
 {
-	if(this.filters.length > 0)
+	if (this.filters.length > 0)
 	{
 		this.source.connect(this.filters[0]);
 
@@ -188,7 +188,7 @@ AudioEmitter.prototype.connect = function()
  */
 AudioEmitter.prototype.disconnect = function()
 {
-	if(this.filters.length > 0)
+	if (this.filters.length > 0)
 	{
 		this.source.disconnect(this.filters[0]);
 
@@ -214,7 +214,7 @@ AudioEmitter.prototype.disconnect = function()
  */
 AudioEmitter.prototype.initialize = function()
 {
-	if(this.audio !== null)
+	if (this.audio !== null)
 	{
 		var self = this;
 
@@ -246,7 +246,7 @@ AudioEmitter.prototype.setBuffer = function(audioBuffer)
 	this.buffer = audioBuffer;
 	this.sourceType = "buffer";
 
-	if(this.autoplay === true)
+	if (this.autoplay === true)
 	{
 		this.play();
 	}
@@ -262,13 +262,13 @@ AudioEmitter.prototype.setBuffer = function(audioBuffer)
  */
 AudioEmitter.prototype.play = function()
 {
-	if(this.buffer === null)
+	if (this.buffer === null)
 	{
 		console.warn("nunuStudio: Audio buffer not ready, audio will not play.");
 		return;
 	}
 
-	if(this.isPlaying)
+	if (this.isPlaying)
 	{
 		console.warn("nunuStudio: Audio is already playing, its only possible to control the last playing instance.");
 	}
@@ -329,9 +329,9 @@ AudioEmitter.prototype.setAudio = function(audio)
 {
 	this.audio = audio;
 
-	if(this.buffer !== null)
+	if (this.buffer !== null)
 	{
-		if(this.isPlaying)
+		if (this.isPlaying)
 		{
 			this.stop();
 		}
@@ -383,7 +383,7 @@ AudioEmitter.prototype.setLoop = function(loop)
 {
 	this.loop = loop;
 
-	if(this.isPlaying)
+	if (this.isPlaying)
 	{
 		this.source.loop = this.loop;
 	}
@@ -402,7 +402,7 @@ AudioEmitter.prototype.setDetune = function(value)
 {
 	this.detune = value;
 
-	if(this.isPlaying === true)
+	if (this.isPlaying === true)
 	{
 		this.source.detune.setTargetAtTime(this.detune, this.context.currentTime, 0.01);
 	}
@@ -428,11 +428,11 @@ AudioEmitter.prototype.getLoop = function()
  * @param {number} speed
  * @return {AudioEmitter} Self pointer for chaining.
  */
-AudioEmitter.prototype.setPlaybackRate = function (speed)
+AudioEmitter.prototype.setPlaybackRate = function(speed)
 {
 	this.playbackRate = speed;
 
-	if(this.isPlaying)
+	if (this.isPlaying)
 	{
 		this.source.playbackRate.setValueAtTime(this.playbackRate, this.context.currentTime);
 	}
@@ -471,12 +471,12 @@ AudioEmitter.prototype.getFilters = function()
  */
 AudioEmitter.prototype.setFilters = function(value)
 {
-	if(!value)
+	if (!value)
 	{
 		value = [];
 	}
 
-	if(this.isPlaying)
+	if (this.isPlaying)
 	{
 		this.disconnect();
 		this.filters = value;
@@ -549,7 +549,7 @@ AudioEmitter.prototype.getOutput = function()
  */
 AudioEmitter.prototype.dispose = function()
 {
-	if(this.isPlaying)
+	if (this.isPlaying)
 	{
 		this.stop();
 		this.disconnect();

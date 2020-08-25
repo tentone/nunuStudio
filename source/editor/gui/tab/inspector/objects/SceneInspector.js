@@ -1,6 +1,6 @@
+import {Color, Fog, FogExp2, Texture} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {ObjectInspector} from "./ObjectInspector.js";
 import {Editor} from "../../../../Editor.js";
 import {TableForm} from "../../../../components/TableForm.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
@@ -11,7 +11,7 @@ import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
-import {Color, Fog, FogExp2, Texture} from "three";
+import {ObjectInspector} from "./ObjectInspector.js";
 
 function SceneInspector(parent, object)
 {
@@ -25,17 +25,17 @@ function SceneInspector(parent, object)
 	this.default.size.set(18, 18);
 	this.default.setOnChange(function()
 	{
-		if(self.object !== null)
+		if (self.object !== null)
 		{
 			var program = self.object.parent;
 			
-			if(self.default.getValue())
+			if (self.default.getValue())
 			{
-				Editor.addAction(new ChangeAction(program, "defaultScene",  self.object.uuid));
+				Editor.addAction(new ChangeAction(program, "defaultScene", self.object.uuid));
 			}
 			else
 			{
-				Editor.addAction(new ChangeAction(program, "defaultScene",  null));
+				Editor.addAction(new ChangeAction(program, "defaultScene", null));
 			}
 		}
 	});
@@ -164,7 +164,7 @@ function SceneInspector(parent, object)
 	this.fogExponentialForm.nextRow();
 
 	// Exponential fog density
-	this.fogExponentialForm.addText(Locale.density)
+	this.fogExponentialForm.addText(Locale.density);
 	this.fogDensity = new NumberBox(this.fogExponentialForm);
 	this.fogDensity.size.set(100, 18);
 	this.fogDensity.setStep(0.0001);
@@ -238,7 +238,7 @@ SceneInspector.prototype.updateInspector = function()
 {
 	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
 	
-	if(this.object.fog instanceof Fog)
+	if (this.object.fog instanceof Fog)
 	{
 		this.fog.setValue(Fog.LINEAR);
 		this.fogLinearColor.setValueHex(this.object.fog.color.getHex());
@@ -246,7 +246,7 @@ SceneInspector.prototype.updateInspector = function()
 		this.fogFar.setValue(this.object.fog.far);
 		this.updateForms();
 	}
-	else if(this.object.fog instanceof FogExp2)
+	else if (this.object.fog instanceof FogExp2)
 	{
 		this.fog.setValue(Fog.EXPONENTIAL);
 		this.fogExponentialColor.setValueHex(this.object.fog.color.getHex());
@@ -259,13 +259,13 @@ SceneInspector.prototype.updateInspector = function()
 		this.updateForms();
 	}
 
-	if(this.object.background !== null)
+	if (this.object.background !== null)
 	{
-		if(this.object.background instanceof Color)
+		if (this.object.background instanceof Color)
 		{
 			this.background.setValue(this.object.background.r, this.object.background.g, this.object.background.b);
 		}
-		else if(this.object.background instanceof Texture)
+		else if (this.object.background instanceof Texture)
 		{
 			this.backgroundTexture.setValue(this.object.background);
 		}
@@ -288,10 +288,10 @@ SceneInspector.prototype.updateForms = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);
 	
-	this.fogLinearForm.visible = (this.object.fog instanceof Fog) ? true : false;
+	this.fogLinearForm.visible = this.object.fog instanceof Fog;
 	this.fogLinearForm.updateInterface();
 
-	this.fogExponentialForm.visible = (this.object.fog instanceof FogExp2) ? true : false;
+	this.fogExponentialForm.visible = this.object.fog instanceof FogExp2;
 	this.fogExponentialForm.updateInterface();
 
 	this.form.updateInterface();

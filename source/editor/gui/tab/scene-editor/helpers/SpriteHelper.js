@@ -10,9 +10,7 @@ import {Object3D, Sprite, SpriteMaterial, Mesh} from "three";
 function SpriteHelper(object, hex) 
 {
 	Sprite.call(this, new SpriteMaterial(
-	{
-		color: hex !== undefined ? hex : 0xFFFFFF
-	}));
+		{color: hex !== undefined ? hex : 0xFFFFFF}));
 
 	/**
 	 * Object attached to the helper

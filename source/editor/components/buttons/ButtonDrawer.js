@@ -1,6 +1,6 @@
+import {Vector2} from "three";
 import {Component} from "../Component.js";
 import {ButtonIcon} from "./ButtonIcon.js";
-import {Vector2} from "three";
 
 /**
  * Button with text, inherits all methods available on the Text class.
@@ -68,7 +68,7 @@ function ButtonDrawer(parent)
 
 	this.addEvent("mouseenter", function()
 	{
-		if(self.disabled === false)
+		if (self.disabled === false)
 		{
 			self.setExpanded(true);
 		}
@@ -94,7 +94,7 @@ ButtonDrawer.prototype = Object.create(ButtonIcon.prototype);
 
 ButtonDrawer.prototype.clear = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].destroy();
 	}
@@ -147,7 +147,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 		self.updateInterface();
 	});
 
-	if(altText !== undefined)
+	if (altText !== undefined)
 	{
 		button.setAltText(altText);
 	}
@@ -163,7 +163,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
  */
 ButtonDrawer.prototype.removeOption = function(index)
 {
-	if(index >= 0 && index < this.options.length)
+	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
@@ -177,10 +177,10 @@ ButtonDrawer.prototype.removeOption = function(index)
  */
 ButtonDrawer.prototype.updatePanelSize = function()
 {
-	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
+	var optionsPerLine = this.options.length < this.optionsPerLine ? this.options.length : this.optionsPerLine;
 
-	this.panel.size.x = (this.optionsSize.x * optionsPerLine);
-	this.panel.size.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / optionsPerLine) + 1));
+	this.panel.size.x = this.optionsSize.x * optionsPerLine;
+	this.panel.size.y = this.optionsSize.y * (Math.floor((this.options.length - 1) / optionsPerLine) + 1);
 	this.panel.updateSize();
 
 	this.panel.position.set(this.optionsSize.x, 0);
@@ -198,9 +198,9 @@ ButtonDrawer.prototype.updateOptions = function()
 {
 	this.updatePanelSize();
 
-	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
+	var optionsPerLine = this.options.length < this.optionsPerLine ? this.options.length : this.optionsPerLine;
 
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
 		this.options[i].position.x = this.optionsSize.x * (i % optionsPerLine);

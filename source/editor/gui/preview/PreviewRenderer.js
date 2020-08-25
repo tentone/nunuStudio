@@ -1,5 +1,5 @@
-import {Component} from "../../components/Component.js";
 import {WebGLRenderer, Scene} from "three";
+import {Component} from "../../components/Component.js";
 
 /** 
  * The preview renderer is used to generate preview thumbnails to preview resources in the editor.
@@ -44,7 +44,7 @@ function PreviewRenderer()
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function(){};
+PreviewRenderer.prototype.render = function() {};
 
 /**
  * Set thumbnail renderer size.
@@ -67,6 +67,6 @@ PreviewRenderer.prototype.setSize = function(x, y)
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function(){};
+PreviewRenderer.prototype.render = function() {};
 
 export {PreviewRenderer};

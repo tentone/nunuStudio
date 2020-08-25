@@ -1,6 +1,6 @@
+import {Vector3, Object3D, Box3, Matrix4, BufferGeometry} from "three";
 import {Sprite} from "../objects/sprite/Sprite.js";
 import {Mesh} from "../objects/mesh/Mesh.js";
-import {Vector3, Object3D, Box3, Matrix4, BufferGeometry} from "three";
 
 
 /**
@@ -10,7 +10,7 @@ import {Vector3, Object3D, Box3, Matrix4, BufferGeometry} from "three";
  * @class ObjectUtils
  * @module Utils
  */
-function ObjectUtils(){}
+function ObjectUtils() {}
 
 /**
  * Get object tree root by traversing the tree upwards.
@@ -25,7 +25,7 @@ ObjectUtils.getRoot = function(obj)
 {
 	var node = obj;
 	
-	while(node.parent !== null)
+	while (node.parent !== null)
 	{
 		node = node.parent;
 	}
@@ -45,7 +45,7 @@ ObjectUtils.centerUnitary = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	
-	if(box !== null)
+	if (box !== null)
 	{
 		var size = new Vector3();
 		box.getSize(size);
@@ -79,14 +79,14 @@ ObjectUtils.calculateBoundingBox = function(object)
 		var boundingBox = null;
 
 		// Sprites
-		if(children.isSprite === true)
+		if (children.isSprite === true)
 		{
 			var position = new Vector3();
 			children.getWorldPosition(position);
 			boundingBox = new Box3(position.clone().subScalar(0.5), position.clone().addScalar(0.5));
 		}
 		// Mesh, Points, Lines
-		else if(children.geometry !== undefined)
+		else if (children.geometry !== undefined)
 		{
 			children.geometry.computeBoundingBox();
 			boundingBox = children.geometry.boundingBox.clone();
@@ -97,22 +97,22 @@ ObjectUtils.calculateBoundingBox = function(object)
 		}
 
 		// Update bouding box size
-		if(boundingBox !== null)
+		if (boundingBox !== null)
 		{
 			// First box
-			if(box === null)
+			if (box === null)
 			{
 				box = boundingBox;
 			}
 			// Ajust box size to contain new box
 			else
 			{
-				if(boundingBox.min.x < box.min.x) {box.min.x = boundingBox.min.x;}
-				if(boundingBox.max.x > box.max.x) {box.max.x = boundingBox.max.x;}
-				if(boundingBox.min.y < box.min.y) {box.min.y = boundingBox.min.y;}
-				if(boundingBox.max.y > box.max.y) {box.max.y = boundingBox.max.y;}
-				if(boundingBox.min.z < box.min.z) {box.min.z = boundingBox.min.z;}
-				if(boundingBox.max.z > box.max.z) {box.max.z = boundingBox.max.z;}
+				if (boundingBox.min.x < box.min.x) {box.min.x = boundingBox.min.x;}
+				if (boundingBox.max.x > box.max.x) {box.max.x = boundingBox.max.x;}
+				if (boundingBox.min.y < box.min.y) {box.min.y = boundingBox.min.y;}
+				if (boundingBox.max.y > box.max.y) {box.max.y = boundingBox.max.y;}
+				if (boundingBox.min.z < box.min.z) {box.min.z = boundingBox.min.z;}
+				if (boundingBox.max.z > box.max.z) {box.max.z = boundingBox.max.z;}
 			}
 		}
 	});
@@ -130,7 +130,7 @@ ObjectUtils.centerGeometryOrigin = function(object)
 {
 	object.traverse(function(children)
 	{
-		if(children.geometry !== undefined)
+		if (children.geometry !== undefined)
 		{
 			children.geometry.computeBoundingBox();
 
@@ -157,7 +157,7 @@ ObjectUtils.convertToBufferGeometry = function(object)
 {
 	object.traverse(function(children)
 	{
-		if(children.geometry !== undefined && children.geometry.isGeometry === true)
+		if (children.geometry !== undefined && children.geometry.isGeometry === true)
 		{
 			children.geometry = new BufferGeometry().fromGeometry(children.geometry);
 		}

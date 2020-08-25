@@ -7,7 +7,7 @@ import {WebGLRenderer} from "three";
  * 
  * @class ARHandler
  */
-function ARHandler(){}
+function ARHandler() {}
 
 /**
  * Flag checking if there is support for XR immersive AR mode.
@@ -51,7 +51,7 @@ ARHandler.arAvailable = function()
  */
 ARHandler.enterAR = function(renderer, onSuccess)
 {
-	if(ARHandler.webXRAvailable)
+	if (ARHandler.webXRAvailable)
 	{
 		ARHandler.getWebXRSession().then(function(session)
 		{
@@ -61,7 +61,7 @@ ARHandler.enterAR = function(renderer, onSuccess)
 
 			ARHandler.webXRSession = session;
 
-			if(onSuccess !== undefined)
+			if (onSuccess !== undefined)
 			{
 				onSuccess();
 			}
@@ -81,7 +81,7 @@ ARHandler.enterAR = function(renderer, onSuccess)
  */
 ARHandler.exitAR = function(renderer)
 {
-	if(ARHandler.webXRAvailable && ARHandler.webXRSession !== null)
+	if (ARHandler.webXRAvailable && ARHandler.webXRSession !== null)
 	{
 		renderer.xr.enabled = false;
 		renderer.xr.setSession(null);
@@ -99,7 +99,7 @@ ARHandler.exitAR = function(renderer)
  */
 ARHandler.getWebXRSession = function()
 {
-	if(!ARHandler.webXRAvailable)
+	if (!ARHandler.webXRAvailable)
 	{
 		return Promise.reject("WebXR support is not available.");
 	}
@@ -108,7 +108,7 @@ ARHandler.getWebXRSession = function()
 };
 
 // Look into WebXR support with AR extensions (chrome, edge, ...)
-if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
+if (navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-ar").then(function(supported)
 	{

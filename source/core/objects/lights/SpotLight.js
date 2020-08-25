@@ -46,7 +46,7 @@ SpotLight.prototype = Object.create(TSpotLight.prototype);
 SpotLight.prototype.setTarget = function(target)
 {
 	this.target = target;
-}
+};
 
 /**
  * Update light shadow map atributtes at runtime.

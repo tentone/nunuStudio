@@ -1,6 +1,6 @@
+import {DefaultLoadingManager, FileLoader} from "three";
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Font} from "../resources/Font.js";
-import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * FontLoader can be used to load external font resources.
@@ -11,7 +11,7 @@ import {DefaultLoadingManager, FileLoader} from "three";
  */
 function FontLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 }
 
 /**
@@ -41,7 +41,7 @@ FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 FontLoader.prototype.parse = function(json)
 {
-	if(json.data !== undefined)
+	if (json.data !== undefined)
 	{
 		var font = new Font();
 
@@ -49,18 +49,18 @@ FontLoader.prototype.parse = function(json)
 		font.uuid = json.uuid;
 		font.encoding = json.encoding;
 		
-		if(json.reversed !== undefined)
+		if (json.reversed !== undefined)
 		{
 			font.reversed = json.reversed;
 		}
 		
-		if(json.format === "arraybuffer")
+		if (json.format === "arraybuffer")
 		{
 			font.format = json.format;
-			font.data = (json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data;
+			font.data = json.data.toArrayBuffer !== undefined ? json.data.toArrayBuffer() : json.data;
 			font.loadTTF();
 		}
-		else if(json.format === "base64")
+		else if (json.format === "base64")
 		{
 			font.format = "arraybuffer";
 			font.data = ArraybufferUtils.fromBase64(json.data);

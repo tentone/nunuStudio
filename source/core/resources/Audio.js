@@ -1,7 +1,7 @@
 import {Base64Utils} from "../utils/binary/Base64Utils.js";
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
-import {Resource} from "./Resource.js";
 import {FileSystem} from "../FileSystem.js";
+import {Resource} from "./Resource.js";
 
 /**
  * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API.
@@ -16,19 +16,19 @@ function Audio(url, encoding)
 {
 	Resource.call(this, "audio", "Audio");
 	
-	if(url !== undefined)
+	if (url !== undefined)
 	{
 		// Arraybuffer
-		if(url instanceof ArrayBuffer)
+		if (url instanceof ArrayBuffer)
 		{
 			this.data = url;
-			this.encoding = (encoding !== undefined) ? encoding : "";
+			this.encoding = encoding !== undefined ? encoding : "";
 			this.format = "arraybuffer";
 		}
 		// Base64
-		else if(Base64Utils.isBase64(url))
+		else if (Base64Utils.isBase64(url))
 		{
-			this.encoding = (encoding !== undefined) ? encoding : "";
+			this.encoding = encoding !== undefined ? encoding : "";
 			this.data = ArraybufferUtils.fromBase64(url);
 			this.format = "arraybuffer";
 		}
@@ -54,9 +54,9 @@ Audio.prototype = Object.create(Resource.prototype);
  */
 Audio.fileIsAudio = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file.type.startsWith("audio"))
+		if (file.type.startsWith("audio"))
 		{
 			return true;
 		}
@@ -94,7 +94,7 @@ Audio.prototype.getAudioBuffer = function(context, callback)
  */
 Audio.prototype.toJSON = function(meta)
 {
-	if(meta.audio[this.uuid] !== undefined)
+	if (meta.audio[this.uuid] !== undefined)
 	{
 		return meta.audio[this.uuid];
 	}

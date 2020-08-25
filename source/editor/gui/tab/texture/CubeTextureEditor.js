@@ -1,3 +1,4 @@
+import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
@@ -13,7 +14,6 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {Division} from "../../../components/Division.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
@@ -65,7 +65,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.texture !== null)
+		if (self.texture !== null)
 		{
 			self.texture.name = self.name.getText();
 			self.updateMaterial();
@@ -87,7 +87,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.minFilter.addValue(Locale.mipLinearLinear, LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
-		if(self.texture !== null)
+		if (self.texture !== null)
 		{
 			self.texture.minFilter = self.minFilter.getValue();
 			self.updateMaterial();
@@ -104,7 +104,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.magFilter.addValue(Locale.linear, LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
-		if(self.texture !== null)
+		if (self.texture !== null)
 		{
 			self.texture.magFilter = self.magFilter.getValue();
 			self.updateMaterial();
@@ -144,7 +144,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Size options
-	for(var i = 2; i < 12; i++)
+	for (var i = 2; i < 12; i++)
 	{
 		var size = Math.pow(2, i);
 		this.textureSize.addValue(size + "x" + size, size);
@@ -296,11 +296,11 @@ CubeTextureEditor.prototype.updateMode = function()
 {
 	var mode = this.mode.getValue();
 
-	if(mode === CubeTexture.CUBE)
+	if (mode === CubeTexture.CUBE)
 	{
 		this.image.visible = false;
 
-		for(var i = 0; i < this.cube.length; i++)
+		for (var i = 0; i < this.cube.length; i++)
 		{
 			this.cube[i].visible = true;
 			this.cube[i].updateInterface();
@@ -310,13 +310,13 @@ CubeTextureEditor.prototype.updateMode = function()
 	{
 		this.image.visible = true;
 	
-		for(var i = 0; i < this.cube.length; i++)
+		for (var i = 0; i < this.cube.length; i++)
 		{
 			this.cube[i].visible = false;
 			this.cube[i].updateInterface();
 		}
 
-		if(mode === CubeTexture.CROSS)
+		if (mode === CubeTexture.CROSS)
 		{
 			this.image.size.set(400, 300);
 		}
@@ -358,17 +358,17 @@ CubeTextureEditor.prototype.destroy = function()
 
 CubeTextureEditor.prototype.updateMetadata = function()
 {
-	if(this.texture !== null)
+	if (this.texture !== null)
 	{
 		// Set name
-		if(this.texture.name !== undefined)
+		if (this.texture.name !== undefined)
 		{
 			this.setName(this.texture.name);
 			this.name.setText(this.texture.name);
 		}
 
 		// If not found close tab
-		if(Editor.program.textures[this.texture.uuid] === undefined)
+		if (Editor.program.textures[this.texture.uuid] === undefined)
 		{
 			this.close();
 		}
@@ -390,7 +390,7 @@ CubeTextureEditor.prototype.attach = function(texture)
 	this.mode.setValue(texture.mode);
 	this.flipY.setValue(texture.flipY);
 
-	if(texture.mode === CubeTexture.CROSS || texture.mode === CubeTexture.EQUIRECTANGULAR)
+	if (texture.mode === CubeTexture.CROSS || texture.mode === CubeTexture.EQUIRECTANGULAR)
 	{
 		this.image.setValue(texture.images[0]);
 	}
@@ -411,7 +411,7 @@ CubeTextureEditor.prototype.update = function()
 {
 	this.mouse.update();
 	
-	if(this.mouse.buttonPressed(Mouse.LEFT))
+	if (this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.camera.rotation.y += this.mouse.delta.x * 0.004;
 	}

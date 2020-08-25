@@ -45,11 +45,11 @@ function ImageChooser(parent)
 	{
 		event.preventDefault();
 
-		if(event.dataTransfer.files.length > 0)
+		if (event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
 
-			if(Image.fileIsImage(file))
+			if (Image.fileIsImage(file))
 			{
 				readImageFile(file);
 			}
@@ -59,7 +59,7 @@ function ImageChooser(parent)
 			var uuid = event.dataTransfer.getData("uuid");
 			var value = DragBuffer.get(uuid);
 
-			if(value instanceof Image)
+			if (value instanceof Image)
 			{
 				self.setValue(value);
 				self.onChange(value);
@@ -74,11 +74,11 @@ function ImageChooser(parent)
 	// Onclick select image file
 	this.element.onclick = function()
 	{
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			FileSystem.chooseFile(function(files)
 			{
-				if(files.length > 0)
+				if (files.length > 0)
 				{
 					readImageFile(files[0]);
 				}

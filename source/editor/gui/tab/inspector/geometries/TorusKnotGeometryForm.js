@@ -1,9 +1,9 @@
+import {TorusKnotBufferGeometry, TorusKnotGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {TorusKnotBufferGeometry, TorusKnotGeometry, BufferGeometry} from "three";
 
 function TorusKnotGeometryForm(form, object)
 {

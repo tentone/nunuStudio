@@ -11,7 +11,7 @@ function PointsHelper(object, hex)
 {
 	Points.call(this, object.geometry, object.material.clone());
 
-	this.material.color = new Color((hex !== undefined) ? hex : 0xFFFF00);
+	this.material.color = new Color(hex !== undefined ? hex : 0xFFFF00);
 	this.material.size = object.material.size * 1.2;
 
 	/**

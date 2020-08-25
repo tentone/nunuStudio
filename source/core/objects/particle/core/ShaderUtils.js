@@ -35,7 +35,7 @@ var ShaderUtils =
 	 */
 	ensureTypedArg: function(arg, type, defaultValue)
 	{
-		if(typeof arg === type)
+		if (typeof arg === type)
 		{
 			return arg;
 		}
@@ -60,11 +60,11 @@ var ShaderUtils =
 	ensureArrayTypedArg: function(arg, type, defaultValue)
 	{
 		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
-		if(Array.isArray(arg))
+		if (Array.isArray(arg))
 		{
-			for(var i = arg.length - 1; i >= 0; --i)
+			for (var i = arg.length - 1; i >= 0; --i)
 			{
-				if(typeof arg[i] !== type)
+				if (typeof arg[i] !== type)
 				{
 					return defaultValue;
 				}
@@ -89,7 +89,8 @@ var ShaderUtils =
 	 */
 	ensureInstanceOf: function(arg, instance, defaultValue)
 	{
-		if(instance !== undefined && arg instanceof instance) {
+		if (instance !== undefined && arg instanceof instance) 
+		{
 			return arg;
 		}
 		else
@@ -113,11 +114,11 @@ var ShaderUtils =
 	ensureArrayInstanceOf: function(arg, instance, defaultValue)
 	{
 		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
-		if(Array.isArray(arg))
+		if (Array.isArray(arg))
 		{
-			for(var i = arg.length - 1; i >= 0; --i)
+			for (var i = arg.length - 1; i >= 0; --i)
 			{
-				if(instance !== undefined && arg[i] instanceof instance === false)
+				if (instance !== undefined && arg[i] instanceof instance === false)
 				{
 					return defaultValue;
 				}
@@ -148,12 +149,12 @@ var ShaderUtils =
 		maxLength = maxLength || 3;
 
 		// First, ensure both properties are arrays.
-		if(Array.isArray(property._value) === false)
+		if (Array.isArray(property._value) === false)
 		{
 			property._value = [property._value];
 		}
 
-		if(Array.isArray(property._spread) === false)
+		if (Array.isArray(property._spread) === false)
 		{
 			property._spread = [property._spread];
 		}
@@ -162,12 +163,12 @@ var ShaderUtils =
 			spreadLength = this.clamp(property._spread.length, minLength, maxLength),
 			desiredLength = Math.max(valueLength, spreadLength);
 
-		if(property._value.length !== desiredLength)
+		if (property._value.length !== desiredLength)
 		{
 			property._value = this.interpolateArray(property._value, desiredLength);
 		}
 
-		if(property._spread.length !== desiredLength)
+		if (property._spread.length !== desiredLength)
 		{
 			property._spread = this.interpolateArray(property._spread, desiredLength);
 		}
@@ -193,7 +194,7 @@ var ShaderUtils =
 			factor = (sourceLength - 1) / (newLength - 1);
 
 
-		for(var i = 1; i < newLength - 1; ++i)
+		for (var i = 1; i < newLength - 1; ++i)
 		{
 			var f = i * factor,
 				before = Math.floor(f),
@@ -205,8 +206,8 @@ var ShaderUtils =
 
 		newArray.push(
 			typeof srcArray[sourceLength - 1].clone === "function" ?
-			srcArray[sourceLength - 1].clone() :
-			srcArray[sourceLength - 1]
+				srcArray[sourceLength - 1].clone() :
+				srcArray[sourceLength - 1]
 	   );
 
 		return newArray;
@@ -245,7 +246,7 @@ var ShaderUtils =
 
 		result = randomise ? Math.random() * epsilon * 10 : epsilon;
 
-		if(value < 0 && value > -epsilon)
+		if (value < 0 && value > -epsilon)
 		{
 			result = -result;
 		}
@@ -268,18 +269,18 @@ var ShaderUtils =
 		var types = this.types,
 			out;
 
-		if(typeof start === types.NUMBER && typeof end === types.NUMBER)
+		if (typeof start === types.NUMBER && typeof end === types.NUMBER)
 		{
-			return start + ((end - start) * delta);
+			return start + (end - start) * delta;
 		}
-		else if(start instanceof Vector2 && end instanceof Vector2)
+		else if (start instanceof Vector2 && end instanceof Vector2)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
 			out.y = this.lerp(start.y, end.y, delta);
 			return out;
 		}
-		else if(start instanceof Vector3 && end instanceof Vector3)
+		else if (start instanceof Vector3 && end instanceof Vector3)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
@@ -287,7 +288,7 @@ var ShaderUtils =
 			out.z = this.lerp(start.z, end.z, delta);
 			return out;
 		}
-		else if(start instanceof Vector4 && end instanceof Vector4)
+		else if (start instanceof Vector4 && end instanceof Vector4)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
@@ -296,7 +297,7 @@ var ShaderUtils =
 			out.w = this.lerp(start.w, end.w, delta);
 			return out;
 		}
-		else if(start instanceof Color && end instanceof Color)
+		else if (start instanceof Color && end instanceof Color)
 		{
 			out = start.clone();
 			out.r = this.lerp(start.r, end.r, delta);
@@ -322,7 +323,7 @@ var ShaderUtils =
 	 */
 	lerp: function(start, end, delta)
 	{
-		return start + ((end - start) * delta);
+		return start + (end - start) * delta;
 	},
 
 	/**
@@ -338,19 +339,19 @@ var ShaderUtils =
 	{
 		var remainder = 0;
 
-		if(multiple === 0)
+		if (multiple === 0)
 		{
 			return n;
 		}
 
 		remainder = Math.abs(n) % multiple;
 
-		if(remainder === 0)
+		if (remainder === 0)
 		{
 			return n;
 		}
 
-		if(n < 0)
+		if (n < 0)
 		{
 			return -(Math.abs(n) - remainder);
 		}
@@ -368,9 +369,9 @@ var ShaderUtils =
 	 */
 	arrayValuesAreEqual: function(array)
 	{
-		for(var i = 0; i < array.length - 1; ++i)
+		for (var i = 0; i < array.length - 1; ++i)
 		{
-			if(array[i] !== array[i + 1])
+			if (array[i] !== array[i + 1])
 			{
 				return false;
 			}
@@ -406,11 +407,11 @@ var ShaderUtils =
 	 */
 	randomVector3: function(attribute, index, base, spread, spreadClamp)
 	{
-		var x = base.x + (Math.random() * spread.x - (spread.x * 0.5)),
-			y = base.y + (Math.random() * spread.y - (spread.y * 0.5)),
-			z = base.z + (Math.random() * spread.z - (spread.z * 0.5));
+		var x = base.x + (Math.random() * spread.x - spread.x * 0.5),
+			y = base.y + (Math.random() * spread.y - spread.y * 0.5),
+			z = base.z + (Math.random() * spread.z - spread.z * 0.5);
 
-		if(spreadClamp)
+		if (spreadClamp)
 		{
 			x = -spreadClamp.x * 0.5 + this.roundToNearestMultiple(x, spreadClamp.x);
 			y = -spreadClamp.y * 0.5 + this.roundToNearestMultiple(y, spreadClamp.y);
@@ -432,9 +433,9 @@ var ShaderUtils =
 	 */
 	randomColor: function(attribute, index, base, spread)
 	{
-		var r = base.r + (Math.random() * spread.x),
-			g = base.g + (Math.random() * spread.y),
-			b = base.b + (Math.random() * spread.z);
+		var r = base.r + Math.random() * spread.x,
+			g = base.g + Math.random() * spread.y,
+			b = base.b + Math.random() * spread.z;
 
 		r = this.clamp(r, 0, 1);
 		g = this.clamp(g, 0, 1);
@@ -464,14 +465,15 @@ var ShaderUtils =
 			var numItems = base.length,
 				colors = [];
 
-			for(var i = 0; i < numItems; ++i) {
+			for (var i = 0; i < numItems; ++i) 
+			{
 				var spreadVector = spread[i];
 
 				workingColor.copy(base[i]);
 
-				workingColor.r += (Math.random() * spreadVector.x) - (spreadVector.x * 0.5);
-				workingColor.g += (Math.random() * spreadVector.y) - (spreadVector.y * 0.5);
-				workingColor.b += (Math.random() * spreadVector.z) - (spreadVector.z * 0.5);
+				workingColor.r += Math.random() * spreadVector.x - spreadVector.x * 0.5;
+				workingColor.g += Math.random() * spreadVector.y - spreadVector.y * 0.5;
+				workingColor.b += Math.random() * spreadVector.z - spreadVector.z * 0.5;
 
 				workingColor.r = this.clamp(workingColor.r, 0, 1);
 				workingColor.g = this.clamp(workingColor.g, 0, 1);
@@ -508,7 +510,7 @@ var ShaderUtils =
 			z = 0;
 
 
-		if(radiusSpreadClamp)
+		if (radiusSpreadClamp)
 		{
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
@@ -559,7 +561,7 @@ var ShaderUtils =
 			y = 0,
 			z = 0;
 
-		if(radiusSpreadClamp)
+		if (radiusSpreadClamp)
 		{
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
@@ -668,9 +670,9 @@ var ShaderUtils =
 			v.copy(axis).normalize();
 			vSpread.copy(axisSpread).normalize();
 
-			v.x += (-axisSpread.x * 0.5) + (Math.random() * axisSpread.x);
-			v.y += (-axisSpread.y * 0.5) + (Math.random() * axisSpread.y);
-			v.z += (-axisSpread.z * 0.5) + (Math.random() * axisSpread.z);
+			v.x += -axisSpread.x * 0.5 + Math.random() * axisSpread.x;
+			v.y += -axisSpread.y * 0.5 + Math.random() * axisSpread.y;
+			v.z += -axisSpread.z * 0.5 + Math.random() * axisSpread.z;
 
 			v.normalize().add(addOne).multiplyScalar(0.5);
 

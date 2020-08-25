@@ -52,24 +52,25 @@ function OperationNode(operation)
 	this.add(this.text);
 }
 
-OperationNode.prototype = Object.create(BaseNode.prototype)
+OperationNode.prototype = Object.create(BaseNode.prototype);
 
 OperationNode.prototype.registerSockets = function()
 {
-	if(this.a === null)
+	if (this.a === null)
 	{
 		this.a = this.addInput("string", "a");
 	}
 
-	if(this.b === null)
+	if (this.b === null)
 	{
 		this.b = this.addInput("string", "b");
 	}
 
-	if(this.r === null)
+	if (this.r === null)
 	{
 		this.r = this.addOutput("string", "r");
-		this.r.getValue = () => {
+		this.r.getValue = () => 
+		{
 			return "(" + this.a.getValue() + this.operation + this.b.getValue() + ")";
 		};
 	}
@@ -100,17 +101,17 @@ OperationNode.prototype.parse = function(data, root)
 
 	this.operation = data.operation;
 
-	if(data.a !== null)
+	if (data.a !== null)
 	{
 		this.a = root.getChildByUUID(data.a);
 	}
 
-	if(data.b !== null)
+	if (data.b !== null)
 	{
 		this.b = root.getChildByUUID(data.b);
 	}
 
-	if(data.r !== null)
+	if (data.r !== null)
 	{
 		this.r = root.getChildByUUID(data.r);
 		this.r.getValue = () =>

@@ -22,7 +22,7 @@ function InstancedMesh(geometry, material, count)
 	this.castShadow = true;
 	
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * The number of instances. The count value represents the maximum number of instances of this mesh.
 		 *
@@ -31,13 +31,13 @@ function InstancedMesh(geometry, material, count)
 		 * @attribute url
 		 * @type {string}
 		 */
-		count:
+			count:
 		{
-			get: function(){return count;},
+			get: function() {return count;},
 			set: function(value)
 			{
 				// Resize the instanceMatrix to fit the number of instances
-				if(value > count)
+				if (value > count)
 				{
 					this.instanceMatrix = new BufferAttribute(new Float32Array(value * 16), 16);
 				}
@@ -45,18 +45,18 @@ function InstancedMesh(geometry, material, count)
 				count = value;
 			}
 		}
-	});
+		});
 }
 
 InstancedMesh.prototype = Object.create(TInstancedMesh.prototype);
 
 InstancedMesh.prototype.dispose = function()
 {
-	if(this.material !== null && this.material.dispose !== undefined)
+	if (this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
-	if(this.geometry !== null && this.geometry.dispose !== undefined)
+	if (this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}

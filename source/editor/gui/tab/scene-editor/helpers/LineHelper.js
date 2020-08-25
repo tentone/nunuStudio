@@ -11,7 +11,7 @@ function LineHelper(object, hex)
 {
 	Line.call(this, object.geometry, object.material.clone());
 
-	this.material.color = new Color((hex !== undefined) ? hex : 0xFFFF00);
+	this.material.color = new Color(hex !== undefined ? hex : 0xFFFF00);
 	
 	/**
 	 * Object attached to the helper

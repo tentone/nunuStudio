@@ -1,6 +1,6 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {ResourceInspector} from "./ResourceInspector.js";
 import {ImageChooser} from "../../../../components/input/ImageChooser.js";
+import {ResourceInspector} from "./ResourceInspector.js";
 
 function ImageInspector(parent, object)
 {

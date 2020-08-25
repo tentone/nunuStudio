@@ -50,7 +50,7 @@ ObjectIconHelper.MATERIALS = new Map();
  */
 ObjectIconHelper.getMaterial = function(icon)
 {
-	if(ObjectIconHelper.MATERIALS.has(icon))
+	if (ObjectIconHelper.MATERIALS.has(icon))
 	{
 		return ObjectIconHelper.MATERIALS.get(icon);
 	}
@@ -58,14 +58,14 @@ ObjectIconHelper.getMaterial = function(icon)
 	var element = document.createElement("img");
 	var texture = new Texture(element);
 	var material = new SpriteMaterial(
-	{
-		map: texture,
-		transparent: true,
-		depthTest: false,
-		depthWrite: false,
-		sizeAttenuation: false,
-		alphaTest: 0.2
-	});
+		{
+			map: texture,
+			transparent: true,
+			depthTest: false,
+			depthWrite: false,
+			sizeAttenuation: false,
+			alphaTest: 0.2
+		});
 	
 	material.ratio = 1.0;
 

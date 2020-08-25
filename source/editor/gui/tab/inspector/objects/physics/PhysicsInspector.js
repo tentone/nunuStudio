@@ -1,3 +1,4 @@
+import {Shape, Body} from "cannon";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
@@ -6,7 +7,6 @@ import {Editor} from "../../../../../Editor.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Shape, Body} from "cannon";
 
 function PhysicsInspector(parent, object)
 {
@@ -17,24 +17,24 @@ function PhysicsInspector(parent, object)
 	// Scale
 	this.scale.setOnChange(function()
 	{
-		if(self.object !== null)
+		if (self.object !== null)
 		{
 			var scale = self.scale.getValue();
 			self.object.scale.set(scale.x, scale.y, scale.z);
 
 			// Update physics objects
 			var shapes = self.object.body.shapes;
-			for(var i = 0; i < shapes.length; i++)
+			for (var i = 0; i < shapes.length; i++)
 			{
 				var shape = shapes[i];
 				
-				if(shape.type === Shape.types.BOX)
+				if (shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;
 					shape.halfExtents.y = scale.y / 2.0;
 					shape.halfExtents.z = scale.z / 2.0;
 				}
-				else if(shape.type === Shape.types.SPHERE)
+				else if (shape.type === Shape.types.SPHERE)
 				{
 					shape.radius = scale.x;
 				}
@@ -63,7 +63,7 @@ function PhysicsInspector(parent, object)
 	// Body Type
 	this.form.addText(Locale.type);
 	this.bodyType = new DropdownList(this.form);
-	this.bodyType.setAltText(Locale.hintPhysicsType)
+	this.bodyType.setAltText(Locale.hintPhysicsType);
 	this.bodyType.size.set(100, 18);
 	this.bodyType.addValue(Locale.static, Body.STATIC);
 	this.bodyType.addValue(Locale.dynamic, Body.DYNAMIC);

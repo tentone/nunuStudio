@@ -1,6 +1,6 @@
 import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon";
 import {Vector3, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
-import {ConvexHull} from "three/examples/jsm/math/ConvexHull"
+import {ConvexHull} from "three/examples/jsm/math/ConvexHull";
 
 /**
  * Physics generator is used to create Cannon.js shapes from three.js geometries.
@@ -14,7 +14,7 @@ import {ConvexHull} from "three/examples/jsm/math/ConvexHull"
  * @static
  * @module Physics
  */
-function PhysicsGenerator(){}
+function PhysicsGenerator() {}
 
 /**
  * Type is used to indentify the type of cannonjs:
@@ -44,21 +44,21 @@ PhysicsGenerator.Type =
  */
 PhysicsGenerator.createShape = function(object, type)
 {
-	if(type !== undefined)
+	if (type !== undefined)
 	{
-		if(type === PhysicsGenerator.Type.BOX)
+		if (type === PhysicsGenerator.Type.BOX)
 		{
 			return PhysicsGenerator.createBoundingBoxShape(object);
 		}
-		else if(type === PhysicsGenerator.Type.CYLINDER)
+		else if (type === PhysicsGenerator.Type.CYLINDER)
 		{
 			return PhysicsGenerator.createBoundingCylinderShape(object);
 		}
-		else if(type === PhysicsGenerator.Type.SPHERE)
+		else if (type === PhysicsGenerator.Type.SPHERE)
 		{
 			return PhysicsGenerator.createBoundingSphereShape(object);
 		}
-		else if(type === PhysicsGenerator.Type.HULL)
+		else if (type === PhysicsGenerator.Type.HULL)
 		{
 			return PhysicsGenerator.createConvexPolyhedron(object);
 		}
@@ -67,32 +67,32 @@ PhysicsGenerator.createShape = function(object, type)
 	}
 
 	var geometry = PhysicsGenerator.getGeometry(object);
-	if(!geometry)
+	if (!geometry)
 	{
 		return null;
 	}
 
-	switch(geometry.type)
+	switch (geometry.type)
 	{
-		case "BoxGeometry":
-		case "BoxBufferGeometry":
-			return PhysicsGenerator.createBoxShape(geometry);
-		case "CylinderGeometry":
-		case "CylinderBufferGeometry":
-			return PhysicsGenerator.createCylinderShape(geometry);
-		case "PlaneGeometry":
-		case "PlaneBufferGeometry":
-			return PhysicsGenerator.createPlaneShape(geometry);
-		case "SphereGeometry":
-		case "SphereBufferGeometry":
-			return PhysicsGenerator.createSphereShape(geometry);
-		case "TubeGeometry":
-			return PhysicsGenerator.createTubeShape(geometry);
-		case "Geometry":
-		case "BufferGeometry":
-			return PhysicsGenerator.createConvexPolyhedron(object);
-		default:
-			return PhysicsGenerator.createBoxShape(geometry);
+	case "BoxGeometry":
+	case "BoxBufferGeometry":
+		return PhysicsGenerator.createBoxShape(geometry);
+	case "CylinderGeometry":
+	case "CylinderBufferGeometry":
+		return PhysicsGenerator.createCylinderShape(geometry);
+	case "PlaneGeometry":
+	case "PlaneBufferGeometry":
+		return PhysicsGenerator.createPlaneShape(geometry);
+	case "SphereGeometry":
+	case "SphereBufferGeometry":
+		return PhysicsGenerator.createSphereShape(geometry);
+	case "TubeGeometry":
+		return PhysicsGenerator.createTubeShape(geometry);
+	case "Geometry":
+	case "BufferGeometry":
+		return PhysicsGenerator.createConvexPolyhedron(object);
+	default:
+		return PhysicsGenerator.createBoxShape(geometry);
 	}
 };
 
@@ -107,7 +107,7 @@ PhysicsGenerator.createBoxShape = function(geometry)
 {
 	var vertices = PhysicsGenerator.getVertices(geometry);
 
-	if(!vertices.length)
+	if (!vertices.length)
 	{
 		return null;
 	}
@@ -116,7 +116,7 @@ PhysicsGenerator.createBoxShape = function(geometry)
 	
 	var box = geometry.boundingBox;
 	
-	return new Box(new Vec3((box.max.x - box.min.x) / 2,(box.max.y - box.min.y) / 2,(box.max.z - box.min.z) / 2));
+	return new Box(new Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 };
 
 /**
@@ -131,7 +131,7 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
 	var box = new Box3();
 	box.setFromObject(object);
 
-	if(!isFinite(box.min.lengthSq()))
+	if (!isFinite(box.min.lengthSq()))
 	{
 		return null;
 	}
@@ -163,7 +163,7 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 	var normals = [];
 
 	// Generate vertices and normals
-	for(var i = 0; i < quickhull.faces.length; i++)
+	for (var i = 0; i < quickhull.faces.length; i++)
 	{
 		var face = quickhull.faces[i];
 		var edge = face.edge;
@@ -175,7 +175,7 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 			vertices.push(new Vec3(point.x, point.y, point.z));
 			edge = edge.next;
 		}
-		while(edge !== face.edge);
+		while (edge !== face.edge);
 
 		// The face always has 3 points
 		faces.push([vertices.length - 3, vertices.length - 2, vertices.length - 1]);
@@ -221,7 +221,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	geometry.computeBoundingSphere();
 	
 	var height = geometry.boundingBox.max.y - geometry.boundingBox.min.y;
-	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]],geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
+	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]], geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
 	// Create shape
 	var shape = new Cylinder(radius, radius, height, 12);
@@ -298,7 +298,7 @@ PhysicsGenerator.createTrimeshShape = function(geometry)
 {
 	var indices, vertices = PhysicsGenerator.getVertices(geometry);
 
-	if(!vertices.length)
+	if (!vertices.length)
 	{
 		return null;
 	}
@@ -320,7 +320,7 @@ PhysicsGenerator.getGeometry = function(object)
 {
 	var meshes = PhysicsGenerator.getMeshes(object);
 
-	if(meshes.length === 0)
+	if (meshes.length === 0)
 	{
 		return null;
 	}
@@ -328,7 +328,7 @@ PhysicsGenerator.getGeometry = function(object)
 	var tmp = new Geometry();
 	
 	// Apply scale (it can't easily be applied to a Shape later)
-	if(meshes.length === 1)
+	if (meshes.length === 1)
 	{
 		var position = new Vector3();
 		var quaternion = new TQuaternion();
@@ -347,11 +347,11 @@ PhysicsGenerator.getGeometry = function(object)
 		var mesh;
 
 		// Recursively merge geometry, preserving local transforms
-		while((mesh = meshes.pop()))
+		while (mesh = meshes.pop())
 		{
 			mesh.updateMatrixWorld();
 
-			if(mesh.geometry instanceof BufferGeometry)
+			if (mesh.geometry instanceof BufferGeometry)
 			{
 				tmp.fromBufferGeometry(mesh.geometry);
 				combined.merge(tmp, mesh.matrixWorld);
@@ -378,7 +378,7 @@ PhysicsGenerator.getGeometry = function(object)
  */
 PhysicsGenerator.getVertices = function(geometry)
 {
-	if(!geometry.attributes)
+	if (!geometry.attributes)
 	{
 		geometry = new BufferGeometry().fromGeometry(geometry);
 	}
@@ -400,7 +400,7 @@ PhysicsGenerator.getMeshes = function(object)
 
 	object.traverse(function(child)
 	{
-		if(child instanceof Mesh)
+		if (child instanceof Mesh)
 		{
 			meshes.push(child);
 		}

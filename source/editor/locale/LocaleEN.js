@@ -282,7 +282,7 @@ var LocaleEN = {
 	refraction: "Refraction",
 	morphTargets: "Morph Targets",
 	clearcoatMap: "Clear Coat Map",
-	clearcoatRoughnessMap:  "Clear Coat Roughness Map",
+	clearcoatRoughnessMap: "Clear Coat Roughness Map",
 	textureMap: "Texture Map",
 	gradientMap: "Gradient Map",
 	specularMap: "Specular Map",

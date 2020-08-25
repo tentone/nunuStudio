@@ -16,10 +16,10 @@ function DualContainer(parent)
 	this.element.style.backgroundColor = "var(--panel-color)";
 
 	// Container A
-	this.elementA = null
+	this.elementA = null;
 
 	// Container B
-	this.elementB = null
+	this.elementB = null;
 
 	// Resize tab
 	this.resizeTab = document.createElement("div");
@@ -47,21 +47,21 @@ function DualContainer(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.orientation === DualContainer.HORIZONTAL)
+		if (self.orientation === DualContainer.HORIZONTAL)
 		{	
 			self.tabPosition += event.movementX / self.size.x;
 		}
-		else if(self.orientation === DualContainer.VERTICAL)
+		else if (self.orientation === DualContainer.VERTICAL)
 		{
 			self.tabPosition += event.movementY / self.size.y;
 		}
 
 		// Limit tab position
-		if(self.tabPosition > self.tabPositionMax)
+		if (self.tabPosition > self.tabPositionMax)
 		{
 			self.tabPosition = self.tabPositionMax;
 		}
-		else if(self.tabPosition < self.tabPositionMin)
+		else if (self.tabPosition < self.tabPositionMin)
 		{
 			self.tabPosition = self.tabPositionMin;
 		}
@@ -82,13 +82,13 @@ DualContainer.prototype = Object.create(Component.prototype);
 
 DualContainer.prototype.attach = function(element)
 {
-	if(this.elementA === null)
+	if (this.elementA === null)
 	{
 		this.attachA(element);
 		return;
 	}
 	
-	if(this.elementB === null)
+	if (this.elementB === null)
 	{
 		this.attachB(element);
 		return;
@@ -113,13 +113,13 @@ DualContainer.prototype.updateSize = function()
 {
 	Component.prototype.updateSize.call(this);
 
-	if(this.elementA === null || this.elementB === null)
+	if (this.elementA === null || this.elementB === null)
 	{
 		console.log("nunuStudio: Dual container elements are null", this, this.elementA, this.elementB);
 		return;
 	}
 
-	if(this.orientation === DualContainer.HORIZONTAL)
+	if (this.orientation === DualContainer.HORIZONTAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.x;
 
@@ -137,7 +137,7 @@ DualContainer.prototype.updateSize = function()
 		this.resizeTab.style.width = this.tabSize + "px";
 		this.resizeTab.style.height = this.size.y + "px";
 	}
-	else if(this.orientation === DualContainer.VERTICAL)
+	else if (this.orientation === DualContainer.VERTICAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.y;
 		

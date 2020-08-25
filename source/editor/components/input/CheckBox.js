@@ -23,7 +23,7 @@ function CheckBox(parent)
 	{
 		self.setValue(!self.value);
 		
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange(self.value);
 		}
@@ -78,7 +78,7 @@ CheckBox.prototype.setDisabled = function(value)
 {
 	this.disabled = value;
 	
-	if(this.disabled === true)
+	if (this.disabled === true)
 	{
 		this.element.style.cursor = "initial";
 		this.element.style.pointerEvents = "none";

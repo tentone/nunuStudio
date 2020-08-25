@@ -23,16 +23,16 @@ function HTMLView(url)
 	var url, width, height;
 	
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * URL of the webpage to open in the view.
 		 *
 		 * @attribute url
 		 * @type {string}
 		 */
-		url:
+			url:
 		{
-			get: function(){return url;},
+			get: function() {return url;},
 			set: function(value)
 			{
 				url = value !== undefined ? HTMLView.processURL(value) : "";
@@ -40,15 +40,15 @@ function HTMLView(url)
 			}
 		},
 
-		/**
-		 * Width in pixels of the web view port.
-		 *
-		 * @attribute size
-		 * @type {number}
-		 */
-		width:
+			/**
+			 * Width in pixels of the web view port.
+			 *
+			 * @attribute size
+			 * @type {number}
+			 */
+			width:
 		{
-			get: function(){return width;},
+			get: function() {return width;},
 			set: function(value)
 			{
 				width = value;
@@ -56,22 +56,22 @@ function HTMLView(url)
 			}
 		},
 
-		/**
-		 * Height in pixels of the web view port.
-		 *
-		 * @attribute height
-		 * @type {number}
-		 */
-		height:
+			/**
+			 * Height in pixels of the web view port.
+			 *
+			 * @attribute height
+			 * @type {number}
+			 */
+			height:
 		{
-			get: function(){return height;},
+			get: function() {return height;},
 			set: function(value)
 			{
 				height = value;
 				self.element.style.height = height + "px";
 			}
 		}
-	});
+		});
 
 	this.width = 512;
 	this.height = 512;

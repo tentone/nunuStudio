@@ -1,7 +1,7 @@
+import {MeshBasicMaterial} from "three";
 import {TextMesh} from "../../../core/objects/text/TextMesh.js";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
-import {MeshBasicMaterial} from "three";
 
 /** 
  * The font renderer is used to generate preview thumbnails for fonts.
@@ -26,7 +26,7 @@ FontRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
 FontRenderer.render = function(font, onRender)
 {
-	if(FontRenderer.instance === undefined)
+	if (FontRenderer.instance === undefined)
 	{
 		FontRenderer.instance = new FontRenderer();
 	}

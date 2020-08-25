@@ -1,10 +1,11 @@
-import {Pass} from "../Pass.js";
 import {UniformsUtils, ShaderMaterial} from "three";
 import {DotScreenShader} from "three/examples/jsm/shaders/DotScreenShader";
+import {Pass} from "../Pass.js";
 
 /**
  * DotScreen pass generates a poster like effect on top of the scene.
  *  
+ *
  * @class DotScreenPass
  * @module Postprocessing
  * @author alteredq / http:// alteredqualia.com/
@@ -22,53 +23,53 @@ function DotScreenPass(center, angle, scale)
 	this.uniforms = UniformsUtils.clone(DotScreenShader.uniforms);
 
 	this.material = new ShaderMaterial(
-	{
-		uniforms: this.uniforms,
-		vertexShader: DotScreenShader.vertexShader,
-		fragmentShader: DotScreenShader.fragmentShader
-	});
+		{
+			uniforms: this.uniforms,
+			vertexShader: DotScreenShader.vertexShader,
+			fragmentShader: DotScreenShader.fragmentShader
+		});
 
 	var self = this;
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Center of rotation of the dot grid in normalized coordinates.
 		 *
 		 * @property center
 		 * @type {Vector2}
 		 */
-		center:
+			center:
 		{
 			get: function() {return this.uniforms["center"].value;},
 			set: function(value) {this.uniforms["center"].value = value;}
 		},
 
-		/**
-		 * Rotation of the dot grid.
-		 *
-		 * @property angle
-		 * @type {number}
-		 */
-		angle:
+			/**
+			 * Rotation of the dot grid.
+			 *
+			 * @property angle
+			 * @type {number}
+			 */
+			angle:
 		{
 			get: function() {return this.uniforms["angle"].value;},
 			set: function(value) {this.uniforms["angle"].value = value;}
 		},
 
-		/**
-		 * Scale of the dots used in the effect.
-		 *
-		 * @property scale
-		 * @type {number}
-		 */
-		scale:
+			/**
+			 * Scale of the dots used in the effect.
+			 *
+			 * @property scale
+			 * @type {number}
+			 */
+			scale:
 		{
 			get: function() {return this.uniforms["scale"].value;},
 			set: function(value) {this.uniforms["scale"].value = value;}
 		}
-	});
+		});
 
-	if(center !== undefined)
+	if (center !== undefined)
 	{
 		this.center.copy(center);
 	}
@@ -86,7 +87,7 @@ DotScreenPass.prototype.render = function(renderer, writeBuffer, readBuffer, del
 
 	this.quad.material = this.material;
 
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

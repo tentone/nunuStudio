@@ -86,7 +86,7 @@ ObjectIcons.icons = new Map([
  */
 ObjectIcons.get = function(type)
 {
-	if(ObjectIcons.icons.has(type))
+	if (ObjectIcons.icons.has(type))
 	{
 		return ObjectIcons.icons.get(type);
 	}

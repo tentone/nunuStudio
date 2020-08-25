@@ -41,14 +41,15 @@ ParametricBufferGeometry.prototype.compile = function(code)
 	{
 		return new Function("u, v, target", "target = target || new Vector3();\n" + code);
 	}
-	catch(e)
+	catch (e)
 	{
 		console.error("nunuStudio: Error occured while compiling ParametricBufferGeometry code.", e);
 	}
 
-	return function(u, v, target) {
+	return function(u, v, target) 
+	{
 		return target || new Vector3();
-	}
+	};
 };
 
 export {ParametricBufferGeometry};

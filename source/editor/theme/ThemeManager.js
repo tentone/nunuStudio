@@ -6,7 +6,7 @@
  * @static
  * @class ThemeManager
  */
-function ThemeManager(){}
+function ThemeManager() {}
 
 /**
  * Map of themes registered in the manager by their name.
@@ -39,6 +39,6 @@ ThemeManager.register = function(theme, name)
 ThemeManager.getList = function()
 {
 	return Object.keys(ThemeManager.themes);
-}
+};
 
 export {ThemeManager};

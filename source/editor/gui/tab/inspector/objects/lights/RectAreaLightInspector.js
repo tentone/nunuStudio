@@ -1,3 +1,4 @@
+import {Color} from "three";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ObjectInspector} from "../ObjectInspector.js";
@@ -5,7 +6,6 @@ import {Editor} from "../../../../../Editor.js";
 import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
 
 function RectAreaLightInspector(parent, object)
 {

@@ -1,9 +1,9 @@
+import {Camera, Object3D, Raycaster, Vector2, Vector3, Matrix4, Euler, Quaternion, PerspectiveCamera} from "three";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {TransformGizmoTranslate} from "./gizmo/TransformGizmoTranslate.js";
 import {TransformGizmoScale} from "./gizmo/TransformGizmoScale.js";
 import {TransformGizmoRotate} from "./gizmo/TransformGizmoRotate.js";
 import {TransformGizmo} from "./gizmo/TransformGizmo.js";
-import {Camera, Object3D, Raycaster, Vector2, Vector3, Matrix4, Euler, Quaternion, PerspectiveCamera} from "three";
 
 /*
  * TranformControls is used to manipulate object in 3D space. It can be used to manipulate multiple Object3D instances simultaneously.
@@ -273,21 +273,21 @@ TransformControls.prototype.attach = function(objects)
 {
 	this.objects = [];
 
-	for(var i = 0; i < objects.length; i++)
+	for (var i = 0; i < objects.length; i++)
 	{
-		if(objects[i].isObject3D && !objects[i].locked && objects[i].parent !== null)
+		if (objects[i].isObject3D && !objects[i].locked && objects[i].parent !== null)
 		{
 			this.objects.push(objects[i]);
 		}
 	}
 
 	// Add more temporary attributes if necessary
-	while(this.attributes.length < this.objects.length)
+	while (this.attributes.length < this.objects.length)
 	{
 		this.attributes.push(new TransformControlAtttributes());
 	}
 
-	if(this.objects.length > 0)
+	if (this.objects.length > 0)
 	{
 		this.updatePose();
 	}
@@ -328,7 +328,7 @@ TransformControls.prototype.setCanvas = function(canvas)
  */
 TransformControls.prototype.setMode = function(mode)
 {
-	if(this.mode === mode)
+	if (this.mode === mode)
 	{
 		return;
 	}
@@ -336,9 +336,9 @@ TransformControls.prototype.setMode = function(mode)
 	this.mode = mode;
 
 	// Remove old gizmo
-	if(this.gizmo !== null)
+	if (this.gizmo !== null)
 	{
-		if(this.gizmo.dismiss !== undefined)
+		if (this.gizmo.dismiss !== undefined)
 		{
 			this.gizmo.dismiss();
 		}
@@ -348,22 +348,22 @@ TransformControls.prototype.setMode = function(mode)
 	}
 
 	// Create gizmo for the mode selected
-	if(this.mode === TransformControls.TRANSLATE)
+	if (this.mode === TransformControls.TRANSLATE)
 	{
 		this.gizmo = new TransformGizmoTranslate();
 	}
-	else if(this.mode === TransformControls.ROTATE)
+	else if (this.mode === TransformControls.ROTATE)
 	{
 		this.gizmo = new TransformGizmoRotate();
 	}
-	else if(this.mode === TransformControls.SCALE)
+	else if (this.mode === TransformControls.SCALE)
 	{
 		// If scale mode force local space
 		this.space = TransformControls.LOCAL;
 		this.gizmo = new TransformGizmoScale();
 	}
 
-	if(this.gizmo !== null)
+	if (this.gizmo !== null)
 	{
 		this.add(this.gizmo);
 	}
@@ -381,17 +381,17 @@ TransformControls.prototype.setMode = function(mode)
  */
 TransformControls.prototype.update = function()
 {
-	if(this.mouse.buttonJustPressed(Mouse.LEFT))
+	if (this.mouse.buttonJustPressed(Mouse.LEFT))
 	{
 		this.onPointerDown();
 	}
 	
-	if(this.mouse.buttonJustReleased(Mouse.LEFT))
+	if (this.mouse.buttonJustReleased(Mouse.LEFT))
 	{
 		this.onPointerUp();
 	}
 
-	if(this.mouse.delta.x !== 0 || this.mouse.delta.y !== 0)
+	if (this.mouse.delta.x !== 0 || this.mouse.delta.y !== 0)
 	{
 		this.onPointerHover();
 		this.onPointerMove();
@@ -409,7 +409,7 @@ TransformControls.prototype.update = function()
  */
 TransformControls.prototype.updatePose = function()
 {
-	if(this.objects.length === 0 || this.gizmo === null)
+	if (this.objects.length === 0 || this.gizmo === null)
 	{
 		return;
 	}
@@ -418,14 +418,14 @@ TransformControls.prototype.updatePose = function()
 
 	// Calculate position from the avegare of all selected objects.
 	this.position.set(0, 0, 0);
-	for(var i = 0; i < this.objects.length; i++)
+	for (var i = 0; i < this.objects.length; i++)
 	{
 		this.attributes[i].worldPosition.setFromMatrixPosition(this.objects[i].matrixWorld);
 		this.attributes[i].worldRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.objects[i].matrixWorld));
 		this.position.add(this.attributes[i].worldPosition);
 	}
 
-	if(this.objects.length > 0)
+	if (this.objects.length > 0)
 	{
 		this.position.divideScalar(this.objects.length);
 	}
@@ -435,7 +435,7 @@ TransformControls.prototype.updatePose = function()
 	this.camRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.camera.matrixWorld));
 
 	// Set controls scale based of camera dsitance to object
-	if(this.camera instanceof PerspectiveCamera)
+	if (this.camera instanceof PerspectiveCamera)
 	{
 		this.toolScale = this.position.distanceTo(this.camPosition) / 6 * this.size;
 		this.scale.set(this.toolScale, this.toolScale, this.toolScale);
@@ -462,16 +462,16 @@ TransformControls.prototype.updatePose = function()
  */
 TransformControls.prototype.onPointerHover = function()
 {
-	if(this.objects.length === 0 || this.dragging === true || this.gizmo === null)
+	if (this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
 	}
 
 	var intersect = this.intersectObjects(this.gizmo.pickers.children);
-	if(intersect)
+	if (intersect)
 	{
 		var axis = intersect.object.name;
-		if(this.axis !== axis)
+		if (this.axis !== axis)
 		{
 			this.axis = axis;
 		}
@@ -484,13 +484,13 @@ TransformControls.prototype.onPointerHover = function()
 
 TransformControls.prototype.onPointerDown = function()
 {
-	if(this.objects.length === 0 || this.dragging === true || this.gizmo === null)
+	if (this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
 	}
 
 	var intersect = this.intersectObjects(this.gizmo.pickers.children);
-	if(intersect)
+	if (intersect)
 	{
 		this.editing = true;
 		this.axis = intersect.object.name;
@@ -501,9 +501,9 @@ TransformControls.prototype.onPointerDown = function()
 		this.gizmo.setActivePlane(this.axis, this.eye);
 
 		var planeIntersect = this.intersectObjects([this.gizmo.activePlane]);
-		if(planeIntersect)
+		if (planeIntersect)
 		{
-			for(var i = 0; i < this.objects.length; i++)
+			for (var i = 0; i < this.objects.length; i++)
 			{
 				this.attributes[i].oldPosition.copy(this.objects[i].position);
 				this.attributes[i].oldScale.copy(this.objects[i].scale);
@@ -532,12 +532,12 @@ TransformControls.prototype.onPointerDown = function()
  */
 TransformControls.prototype.onPointerMove = function()
 {
-	if(this.objects.length === 0 || this.axis === null || this.dragging === false || this.gizmo === null)
+	if (this.objects.length === 0 || this.axis === null || this.dragging === false || this.gizmo === null)
 	{
 		return;
 	}
 
-	this.gizmo.transformObject(this)
+	this.gizmo.transformObject(this);
 };
 
 /**
@@ -549,7 +549,7 @@ TransformControls.prototype.onPointerMove = function()
  */
 TransformControls.prototype.onPointerUp = function()
 {
-	if(this.editing)
+	if (this.editing)
 	{
 		this.gizmo.applyChanges(this);
 	}
@@ -571,7 +571,7 @@ TransformControls.prototype.intersectObjects = function(objects)
 	var x = this.mouse.position.x / rect.width;
 	var y = this.mouse.position.y / rect.height;
 
-	this.pointerVector.set((x * 2) - 1, - (y * 2) + 1);
+	this.pointerVector.set(x * 2 - 1, - (y * 2) + 1);
 	this.raycaster.setFromCamera(this.pointerVector, this.camera);
 
 	var intersections = this.raycaster.intersectObjects(objects, true);

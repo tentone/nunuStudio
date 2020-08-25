@@ -118,19 +118,19 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 
 		return "matrix3d(" +
 			elements[0] + "," +
-			(-elements[1]) + "," +
+			-elements[1] + "," +
 			elements[2] + "," +
 			elements[3] + "," +
 			elements[4] + "," +
-			(-elements[5]) + "," +
+			-elements[5] + "," +
 			elements[6] + "," +
 			elements[7] + "," +
 			elements[8] + "," +
-			(-elements[9]) + "," +
+			-elements[9] + "," +
 			elements[10] + "," +
 			elements[11] + "," +
 			elements[12] + "," +
-			(-elements[13]) + "," +
+			-elements[13] + "," +
 			elements[14] + "," +
 			elements[15] +
 		")";
@@ -146,10 +146,10 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 			elements[1] + "," +
 			elements[2] + "," +
 			elements[3] + "," +
-			(-elements[4]) + "," +
-			(-elements[5]) + "," +
-			(-elements[6]) + "," +
-			(-elements[7]) + "," +
+			-elements[4] + "," +
+			-elements[5] + "," +
+			-elements[6] + "," +
+			-elements[7] + "," +
 			elements[8] + "," +
 			elements[9] + "," +
 			elements[10] + "," +
@@ -167,13 +167,13 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	function renderObject(object, camera, cameraCSSMatrix)
 	{
 		// Render only CSS objects
-		if(object.isCSS3DObject === true)
+		if (object.isCSS3DObject === true)
 		{
 			// Store the css transformation style value
 			var style;
 
 			// Remove rotation from the transformation matrix for Sprites
-			if(object.isCSS3DSprite === true)
+			if (object.isCSS3DSprite === true)
 			{
 				matrix.copy(camera.matrixWorldInverse);
 				matrix.transpose();
@@ -196,7 +196,7 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 			var cachedObject = self.cache.objects.get(object);
 
 			// Add the DOM element to the cache
-			if(cachedObject === undefined || cachedObject.style !== style)
+			if (cachedObject === undefined || cachedObject.style !== style)
 			{
 				element.style.WebkitTransform = style;
 				element.style.transform = style;
@@ -204,14 +204,14 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 			}
 
 			// If the DOM element does not have a parend add to the cameraElement division
-			if(element.parentNode !== self.cameraElement)
+			if (element.parentNode !== self.cameraElement)
 			{
 				self.cameraElement.appendChild(element);
 			}
 		}
 
 		// Render children object
-		for(var i = 0, l = object.children.length; i < l; i++)
+		for (var i = 0, l = object.children.length; i < l; i++)
 		{
 			renderObject(object.children[i], camera, cameraCSSMatrix);
 		}
@@ -221,9 +221,9 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	var fov = camera.projectionMatrix.elements[5] * this.halfSize.y;
 
 	// If the camera fov is diferrent from the cached one ajust values.
-	if(this.cache.camera.fov !== fov)
+	if (this.cache.camera.fov !== fov)
 	{
-		if(camera.isPerspectiveCamera)
+		if (camera.isPerspectiveCamera)
 		{
 			this.domElement.style.WebkitPerspective = fov + "px";
 			this.domElement.style.perspective = fov + "px";
@@ -236,7 +236,7 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	scene.updateMatrixWorld();
 
 	// Update the camera world matrix
-	if(camera.parent === null)
+	if (camera.parent === null)
 	{
 		camera.updateMatrixWorld();
 	}
@@ -244,7 +244,7 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	var cameraCSSMatrix;
 
 	// Orthographic camera matrix
-	if(camera.isOrthographicCamera)
+	if (camera.isOrthographicCamera)
 	{
 		var tx = -(camera.right + camera.left) / 2;
 		var ty = (camera.top + camera.bottom) / 2;
@@ -260,7 +260,7 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	var style = cameraCSSMatrix + "translate(" + this.halfSize.x + "px," + this.halfSize.y + "px)";
 
 	// If the style is diferent from cache ajust style
-	if(this.cache.camera.style !== style)
+	if (this.cache.camera.style !== style)
 	{
 		this.cameraElement.style.WebkitTransform = style;
 		this.cameraElement.style.transform = style;

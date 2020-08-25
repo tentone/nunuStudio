@@ -13,11 +13,11 @@ function SkeletonHelper(object)
 	var color1 = new Color(0, 0, 1);
 	var color2 = new Color(0, 1, 0);
 
-	for(var i = 0; i < bones.length; i++)
+	for (var i = 0; i < bones.length; i++)
 	{
 		var bone = bones[i];
 
-		if(bone.parent && bone.parent.isBone)
+		if (bone.parent && bone.parent.isBone)
 		{
 			vertices.push(0, 0, 0);
 			vertices.push(0, 0, 0);
@@ -30,12 +30,12 @@ function SkeletonHelper(object)
 	geometry.setAttribute("color", new Float32BufferAttribute(colors, 3));
 
 	LineSegments.call(this, geometry, new LineBasicMaterial(
-	{
-		vertexColors: VertexColors,
-		depthTest: false,
-		depthWrite: false,
-		transparent: false
-	}));
+		{
+			vertexColors: VertexColors,
+			depthTest: false,
+			depthWrite: false,
+			transparent: false
+		}));
 
 	this.root = object;
 	this.bones = bones;
@@ -50,12 +50,12 @@ SkeletonHelper.getBoneList = function(object)
 {
 	var boneList = [];
 
-	if(object && object.isBone)
+	if (object && object.isBone)
 	{
 		boneList.push(object);
 	}
 
-	for(var i = 0; i < object.children.length; i++)
+	for (var i = 0; i < object.children.length; i++)
 	{
 		boneList.push.apply(boneList, SkeletonHelper.getBoneList(object.children[i]));
 	}
@@ -63,7 +63,7 @@ SkeletonHelper.getBoneList = function(object)
 	return boneList;
 };
 
-SkeletonHelper.prototype.update = function ()
+SkeletonHelper.prototype.update = function()
 {
 	var bones = this.bones;
 	var geometry = this.geometry;
@@ -75,10 +75,10 @@ SkeletonHelper.prototype.update = function ()
 	var boneMatrix = new Matrix4();
 	var vector = new Vector3();
 
-	for(var i = 0, j = 0; i < bones.length; i++)
+	for (var i = 0, j = 0; i < bones.length; i++)
 	{
 		var bone = bones[i];
-		if(bone.parent && bone.parent.isBone)
+		if (bone.parent && bone.parent.isBone)
 		{	
 			boneMatrix.multiplyMatrices(matrixWorldInv, bone.matrixWorld);
 			vector.setFromMatrixPosition(boneMatrix);

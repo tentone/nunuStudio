@@ -1,7 +1,7 @@
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {PassNode} from "./PassNode.js";
 import {Editor} from "../../../../Editor.js";
 import {Slider} from "../../../../components/input/Slider.js";
+import {PassNode} from "./PassNode.js";
 
 function AfterimagePassNode(parent)
 {

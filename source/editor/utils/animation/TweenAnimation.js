@@ -77,7 +77,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 	this.tween.easing(TWEEN.Easing.Cubic.InOut);
 	this.tween.onUpdate(function()
 	{
-		if(isVectorial)
+		if (isVectorial)
 		{
 			object[attribute].copy(self.initial);
 		}
@@ -86,7 +86,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 			object[attribute] = self.initial.x;
 		}
 
-		if(onUpdate !== undefined)
+		if (onUpdate !== undefined)
 		{
 			onUpdate();
 		}
@@ -106,12 +106,12 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
  */
 TweenAnimation.isVetorial = function(object)
 {
-	if(object === null || object === undefined)
+	if (object === null || object === undefined)
 	{
 		return false;
 	}
 	
-	return object.isVector3 === true || object.isEuler === true || (object instanceof Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
+	return object.isVector3 === true || object.isEuler === true || object instanceof Quaternion || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };
 
 

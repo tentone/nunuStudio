@@ -1,5 +1,5 @@
-import {Mouse} from "../../input/Mouse.js";
 import {Vector2, Vector4, WebGLRenderer} from "three";
+import {Mouse} from "../../input/Mouse.js";
 
 /**
  * The viewport object is used to handle virtual visualization windows for the WebGL renderer.
@@ -18,7 +18,7 @@ function Viewport(mode)
 	 * 
 	 * @property offset
 	 * @type {Vector2}
-	*/
+	 */
 	this.offset = new Vector2(0.0, 0.0);
 
 	/**
@@ -114,7 +114,7 @@ Viewport.prototype.update = function(container)
 	var width, height;
 	var x, y;
 
-	if(container === undefined)
+	if (container === undefined)
 	{
 		x = 0;
 		y = 0;
@@ -131,30 +131,30 @@ Viewport.prototype.update = function(container)
 
 	var offset, viewport;
 
-	if(this.mode === Viewport.RELATIVE)
+	if (this.mode === Viewport.RELATIVE)
 	{
 		offset = new Vector2(this.offset.x * width, this.offset.y * height);
 		viewport = new Vector2(this.size.x * width, this.size.y * height);
 	}
-	else if(this.mode === Viewport.ABSOLUTE)
+	else if (this.mode === Viewport.ABSOLUTE)
 	{
 		offset = this.offset;
 		viewport = this.size;
 	}
 
-	if(this.anchor === Viewport.BOTTOM_LEFT)
+	if (this.anchor === Viewport.BOTTOM_LEFT)
 	{
 		this.viewport.set(offset.x + x, offset.y + y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.BOTTOM_RIGHT)
+	else if (this.anchor === Viewport.BOTTOM_RIGHT)
 	{
 		this.viewport.set(width - viewport.x - offset.x + x, offset.y + y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.TOP_LEFT)
+	else if (this.anchor === Viewport.TOP_LEFT)
 	{
 		this.viewport.set(offset.x + x, height - viewport.y - offset.y + y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.TOP_RIGHT)
+	else if (this.anchor === Viewport.TOP_RIGHT)
 	{
 		this.viewport.set(width - viewport.x - offset.x + x, height - viewport.y - offset.y + y, viewport.x, viewport.y);
 	}
@@ -205,7 +205,7 @@ Viewport.prototype.getNormalized = function()
 		var x = mouse.position.x - this.viewport.z - this.viewport.x;
 		var y = mouse.position.y - (this.height - (this.viewport.y + this.viewport.w));
 
-		normalized.set((x / this.viewport.z) * 2 + 1, (-y / this.viewport.w) * 2 + 1);
+		normalized.set(x / this.viewport.z * 2 + 1, -y / this.viewport.w * 2 + 1);
 
 		return normalized;
 	};

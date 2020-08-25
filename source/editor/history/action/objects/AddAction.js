@@ -1,7 +1,7 @@
-import {RemoveAction} from "./RemoveAction.js";
+import {Object3D} from "three";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";
-import {Object3D} from "three";
+import {RemoveAction} from "./RemoveAction.js";
 
 /**
  * Add an object to the scene.
@@ -19,14 +19,14 @@ function AddAction(object, parent, index)
 	Action.call(this);
 	
 	this.object = object;
-	this.index = (index !== undefined) ? index : -1;
+	this.index = index !== undefined ? index : -1;
 
 	this.parent = parent;
 }
 
 AddAction.prototype.apply = function()
 {
-	if(this.index !== -1)
+	if (this.index !== -1)
 	{
 		this.parent.children.splice(this.index, 0, this.object);
 		this.object.parent = this.parent;

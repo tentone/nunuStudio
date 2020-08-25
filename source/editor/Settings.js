@@ -75,7 +75,7 @@ Settings.prototype.loadDefault = function()
 		showType: true,
 		immediateMode: false,
 		historySize: 20,
-		ignorePixelRatio: false,
+		ignorePixelRatio: false
 	};
 
 	// Units
@@ -164,9 +164,9 @@ Settings.prototype.loadDefault = function()
 		plusplus: false, // true: Prohibit use of `++` and `--`
 		undef: false, // true: Require all non-global variables to be declared (prevents global leaks)
 		unused: false, // Unused variables:
-						// true: all variables, last function parameter
-						// "vars": all variables only
-						// "strict": all variables, all function parameters
+		// true: all variables, last function parameter
+		// "vars": all variables only
+		// "strict": all variables, all function parameters
 		strict: false, // true: Requires all functions run in ES5 Strict Mode
 		maxparams: false, // {int} Max number of formal params allowed per function
 		maxdepth: false, // {int} Max depth of nested blocks (within functions)
@@ -217,8 +217,8 @@ Settings.prototype.loadDefault = function()
 		typed: false, // Globals for typed array constructions
 		worker: false, // Web Workers
 		wsh: false, // Windows Scripting Host
-		yui: false, // Yahoo User Interface
-	}
+		yui: false // Yahoo User Interface
+	};
 };
 
 /**
@@ -229,20 +229,20 @@ Settings.prototype.loadDefault = function()
 Settings.prototype.store = function()
 {
 	var data = JSON.stringify(
-	{
-		general: this.general,
-		editor: this.editor,
-		units: this.units,
-		render: this.render,
-		code: this.code,
-		jslint: this.jslint
-	}, null, "\t");
+		{
+			general: this.general,
+			editor: this.editor,
+			units: this.units,
+			render: this.render,
+			code: this.code,
+			jslint: this.jslint
+		}, null, "\t");
 
 	// Make json file human readable
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 	
 	// Store file
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		FileSystem.writeFile(Settings.CONFIG_FILE, data);
 	}
@@ -262,7 +262,7 @@ Settings.prototype.load = function()
 {
 	try
 	{
-		if(Nunu.runningOnDesktop())
+		if (Nunu.runningOnDesktop())
 		{
 			var data = JSON.parse(FileSystem.readFile(Settings.CONFIG_FILE));
 		}
@@ -271,20 +271,20 @@ Settings.prototype.load = function()
 			var data = LocalStorage.get("config");
 		}
 
-		for(var i in data)
+		for (var i in data)
 		{
-			if(this[i] === undefined)
+			if (this[i] === undefined)
 			{
 				this[i] = {};
 			}
 
-			for(var j in data[i])
+			for (var j in data[i])
 			{
 				this[i][j] = data[i][j];
 			}
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		console.warn("nunuStudio: Failed to load configuration file");
 	}

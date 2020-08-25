@@ -41,7 +41,7 @@ function Slider(parent)
 		self.text.style.width = "fit-content";
 		self.text.style.height = "fit-content";
 		self.text.style.left = event.clientX + "px";
-		self.text.style.top = (event.clientY - 30) + "px";
+		self.text.style.top = event.clientY - 30 + "px";
 	};
 
 	// Mouse out event
@@ -113,11 +113,11 @@ function Slider(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		var delta = (event.pageX - self.mouseStart) / (self.size.x);
+		var delta = (event.pageX - self.mouseStart) / self.size.x;
 		var value = self.valueStart + delta * (self.max - self.min);
 		self.setValue(value);
 
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange(self.value);
 		}
@@ -138,14 +138,14 @@ function Slider(parent)
 
 	this.track.onmousedown = function(event)
 	{
-		var percentage = (event.layerX / self.size.x);
+		var percentage = event.layerX / self.size.x;
 
 		self.setValue(percentage * (self.max - self.min) + self.min);
-		self.progress.style.width = (percentage * 100) + "%";
+		self.progress.style.width = percentage * 100 + "%";
 		self.scrubber.style.left = self.progress.style.width;
 		self.scrubber.onmousedown(event);
 
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange(self.value);
 		}
@@ -204,32 +204,32 @@ Slider.prototype.setOnChange = function(onChange)
  */
 Slider.prototype.setValue = function(value)
 {
-	if(value < this.min)
+	if (value < this.min)
 	{
 		value = this.min;
 	}
-	else if(value > this.max)
+	else if (value > this.max)
 	{
 		value = this.max;
 	}
 
-	if(this.step !== null)
+	if (this.step !== null)
 	{
 		var remainder = value % this.step;
 
 		value -= remainder;
-		if(remainder > this.step / 2)
+		if (remainder > this.step / 2)
 		{
 			value += this.step;
 		}
 
 		// Check for precision problems
 		var stepVal = String(this.step).split(".");
-		if(stepVal.length > 1)
+		if (stepVal.length > 1)
 		{
 			var precision = stepVal[1].length;
 			var values = String(value).split(".");
-			if(values.length > 1)
+			if (values.length > 1)
 			{
 				value = Number.parseFloat(values[0] + "." + values[1].substr(0, precision));
 			}
@@ -258,7 +258,7 @@ Slider.prototype.getValue = function()
  */
 Slider.prototype.updateValue = function()
 {
-	var progress = ((this.value - this.min) / (this.max - this.min)) * 100;
+	var progress = (this.value - this.min) / (this.max - this.min) * 100;
 
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
@@ -269,7 +269,7 @@ Slider.prototype.destroy = function()
 {
 	Component.prototype.destroy.call(this);
 	
-	if(document.body.contains(this.text))
+	if (document.body.contains(this.text))
 	{
 		document.body.removeChild(this.text);
 	}

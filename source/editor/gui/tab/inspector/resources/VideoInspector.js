@@ -1,5 +1,5 @@
-import {ResourceInspector} from "./ResourceInspector.js";
 import {VideoPlayer} from "../../../../components/media/VideoPlayer.js";
+import {ResourceInspector} from "./ResourceInspector.js";
 
 function VideoInspector(parent, object)
 {

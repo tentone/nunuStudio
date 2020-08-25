@@ -16,7 +16,6 @@ import {FXAAPass} from "../../../../core/postprocessing/pass/antialiasing/FXAAPa
 import {AfterimagePass} from "../../../../core/postprocessing/pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "../../../../core/postprocessing/pass/AdaptiveToneMappingPass.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {PassNode} from "./postprocessing/PassNode.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
@@ -25,6 +24,7 @@ import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {TextBox} from "../../../components/input/TextBox.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
+import {PassNode} from "./postprocessing/PassNode.js";
 
 function CameraEditor(parent, closeable, container, index)
 {
@@ -56,7 +56,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.camera !== null)
+		if (self.camera !== null)
 		{
 			Editor.addAction(new ChangeAction(self.camera, "name", self.name.getText()));
 			Editor.updateObjectsViewsGUI();
@@ -79,7 +79,7 @@ function CameraEditor(parent, closeable, container, index)
 
 			var composer = self.camera.composer;
 			pass.renderToScreen = true;
-			for(var i = 0; i < composer.passes.length; i++)
+			for (var i = 0; i < composer.passes.length; i++)
 			{
 				composer.passes[i].renderToScreen = false;
 			}
@@ -136,7 +136,7 @@ CameraEditor.prototype.updatePostNodes = function()
 	this.postNodes.removeAll();
 
 	var passes = this.camera.composer.passes;
-	for(var i = 0; i < passes.length; i++)
+	for (var i = 0; i < passes.length; i++)
 	{
 		var node = PassNode.createPass(this.postNodes.element, passes[i].type);
 		node.setPass(passes[i]);
@@ -162,7 +162,7 @@ CameraEditor.prototype.destroy = function()
 // Update tab state
 CameraEditor.prototype.update = function()
 {
-	if(this.camera !== null)
+	if (this.camera !== null)
 	{
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
@@ -174,13 +174,13 @@ CameraEditor.prototype.update = function()
 // Update tab metadata
 CameraEditor.prototype.updateMetadata = function()
 {
-	if(this.camera !== null)
+	if (this.camera !== null)
 	{
 		this.setName(this.camera.name);
 		this.name.setText(this.camera.name);
 
 		// Check if object has a parent
-		if(this.camera.parent === null)
+		if (this.camera.parent === null)
 		{
 			this.close();
 			return;
@@ -188,16 +188,16 @@ CameraEditor.prototype.updateMetadata = function()
 
 		// Check if object exists in parent
 		var children = this.camera.parent.children;
-		for(var i = 0; i < children.length; i++)
+		for (var i = 0; i < children.length; i++)
 		{
-			if(this.camera.uuid === children[i].uuid)
+			if (this.camera.uuid === children[i].uuid)
 			{
 				return;
 			}
 		}
 
 		// If not found close tab
-		if(i >= children.length)
+		if (i >= children.length)
 		{
 			this.close();
 		}

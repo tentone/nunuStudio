@@ -1,12 +1,12 @@
+import {MultiplyOperation, MixOperation, AddOperation} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
-import {MultiplyOperation, MixOperation, AddOperation} from "three";
+import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
 
 function MeshBasicMaterialEditor(parent, closeable, container, index)

@@ -1,4 +1,5 @@
-import {Locale} from "./locale/LocaleManager.js";
+import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
+import {StaticPair} from "@as-com/pson";
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";
 import {TextFile} from "../core/resources/TextFile.js";
@@ -14,6 +15,7 @@ import {Nunu} from "../core/Nunu.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
+import {Locale} from "./locale/LocaleManager.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
 import {Loaders} from "./Loaders.js";
@@ -33,15 +35,13 @@ import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
-import {StaticPair} from "@as-com/pson";
 
 /**
  * Main editor entry point. 
  *
  * @class Editor 
  */
-function Editor(){}
+function Editor() {}
 
 /**
  * Initialize the editor code, creates all GUI elements, loads configuration data, starts all the event lsiteners required.
@@ -54,7 +54,7 @@ function Editor(){}
 Editor.initialize = function()
 {
 	// Check WebGL Support
-	if(!Nunu.webGLAvailable())
+	if (!Nunu.webGLAvailable())
 	{
 		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();
@@ -88,7 +88,7 @@ Editor.initialize = function()
 		Editor.resize();
 	});
 
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		var gui = window.require("nw.gui");
 		Editor.clipboard = gui.Clipboard.get();
@@ -97,14 +97,14 @@ Editor.initialize = function()
 		// Handle window close event
 		gui.Window.get().on("close", function()
 		{
-			if(confirm(Locale.unsavedChangesExit))
+			if (confirm(Locale.unsavedChangesExit))
 			{
 				Editor.exit();
 			}
 		});
 
 		// Try to update the editor
-		if(Editor.settings.general.autoUpdate)
+		if (Editor.settings.general.autoUpdate)
 		{
 			Editor.updateNunu();
 		}
@@ -118,7 +118,7 @@ Editor.initialize = function()
 		Editor.args = [];
 
 		var parameters = Nunu.getQueryParameters();
-		for(var i in parameters)
+		for (var i in parameters)
 		{
 			Editor.args.push(parameters[i]);
 		}
@@ -128,7 +128,7 @@ Editor.initialize = function()
 		document.onkeydown = function(event)
 		{
 			// If F1-F11 or CTRL+Key prevent default action
-			if((event.keyCode > Keyboard.F1 && event.keyCode < Keyboard.F11) || (!event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
+			if (event.keyCode > Keyboard.F1 && event.keyCode < Keyboard.F11 || !event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1)
 			{
 				event.preventDefault();
 			}
@@ -150,15 +150,15 @@ Editor.initialize = function()
 	{
 		event.preventDefault();
 		
-		for(var i = 0; i < event.dataTransfer.files.length; i++)
+		for (var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
 			var extension = FileSystem.getFileExtension(file.name);
 
 			// Project file
-			if(extension === "isp" || extension === "nsp")
+			if (extension === "isp" || extension === "nsp")
 			{
-				if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
+				if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
 				{
 					Editor.loadProgram(file, extension === "nsp");
 					Editor.resetEditor();
@@ -166,12 +166,12 @@ Editor.initialize = function()
 				break;
 			}
 			// Text file
-			else if(TextFile.fileIsText(file))
+			else if (TextFile.fileIsText(file))
 			{
 				Loaders.loadText(file);
 			}
 		}
-	}
+	};
 
 	// Open file
 	Editor.openFile = null;
@@ -190,14 +190,14 @@ Editor.initialize = function()
 	Editor.gui.updateInterface();
 
 	// Check is some project file passed as argument
-	for(var i = 0; i < Editor.args.length; i++)
+	for (var i = 0; i < Editor.args.length; i++)
 	{
-		if(Editor.args[i].endsWith(".isp"))
+		if (Editor.args[i].endsWith(".isp"))
 		{
 			Editor.loadProgram(Editor.args[i], false);
 			break;
 		}
-		else if(Editor.args[i].endsWith(".nsp"))
+		else if (Editor.args[i].endsWith(".nsp"))
 		{
 			Editor.loadProgram(Editor.args[i], true);
 			break;
@@ -205,7 +205,7 @@ Editor.initialize = function()
 	}
 
 	// Create new program
-	if(Editor.program === null)
+	if (Editor.program === null)
 	{	
 		Editor.createNewProgram();
 	}
@@ -216,11 +216,11 @@ Editor.initialize = function()
 	{
 		var key = event.keyCode;
 
-		if(event.ctrlKey)
+		if (event.ctrlKey)
 		{
-			if(key === Keyboard.S)
+			if (key === Keyboard.S)
 			{
-				if(Editor.openFile === null)
+				if (Editor.openFile === null)
 				{
 					Editor.gui.saveProgram();
 				}
@@ -229,28 +229,28 @@ Editor.initialize = function()
 					Editor.saveProgram(undefined, true);
 				}
 			}
-			else if(key === Keyboard.L)
+			else if (key === Keyboard.L)
 			{
 				Editor.gui.loadProgram();
 			}
-			else if(key === Keyboard.W || key === Keyboard.F4)
+			else if (key === Keyboard.W || key === Keyboard.F4)
 			{
 				Editor.gui.tab.closeActual();
 			}
-			else if(key === Keyboard.TAB || key === Keyboard.PAGE_DOWN)
+			else if (key === Keyboard.TAB || key === Keyboard.PAGE_DOWN)
 			{
 				Editor.gui.tab.selectNextTab();
 			}
-			else if(key === Keyboard.PAGE_UP)
+			else if (key === Keyboard.PAGE_UP)
 			{
 				Editor.gui.tab.selectPreviousTab();
 			}
-			else if(key === Keyboard.Z)
+			else if (key === Keyboard.Z)
 			{
 				var tabs = Editor.gui.tab.getActiveTab();
-				for(var i = 0; i < tabs.length; i++)
+				for (var i = 0; i < tabs.length; i++)
 				{
-					if(tabs[i] instanceof CodeEditor)
+					if (tabs[i] instanceof CodeEditor)
 					{
 						return;
 					}
@@ -258,12 +258,12 @@ Editor.initialize = function()
 				
 				Editor.undo();
 			}
-			else if(key === Keyboard.Y)
+			else if (key === Keyboard.Y)
 			{
 				var tabs = Editor.gui.tab.getActiveTab();
-				for(var i = 0; i < tabs.length; i++)
+				for (var i = 0; i < tabs.length; i++)
 				{
-					if(tabs[i] instanceof CodeEditor)
+					if (tabs[i] instanceof CodeEditor)
 					{
 						return;
 					}
@@ -272,31 +272,31 @@ Editor.initialize = function()
 				Editor.redo();
 			}
 		}
-		else if(key === Keyboard.DEL)
+		else if (key === Keyboard.DEL)
 		{
 			var tabs = Editor.gui.tab.getActiveTab();
-			for(var i = 0; i < tabs.length; i++)
+			for (var i = 0; i < tabs.length; i++)
 			{
-				if(tabs[i] instanceof CodeEditor)
+				if (tabs[i] instanceof CodeEditor)
 				{
 					return;
 				}
 			}
 
-			if(Editor.hasObjectSelected())
+			if (Editor.hasObjectSelected())
 			{
 				var del = Editor.confirm(Locale.deleteObjects);
-				if(del)
+				if (del)
 				{
 					Editor.deleteObject();
 				}
 			}
 		}
-		else if(key === Keyboard.F2)
+		else if (key === Keyboard.F2)
 		{
 			Editor.renameObject();
 		}
-		else if(key === Keyboard.F5)
+		else if (key === Keyboard.F5)
 		{
 			Editor.runProject();
 		}
@@ -316,7 +316,7 @@ Editor.runProject = function()
 {
 	var tab = Editor.gui.tab.getTab(RunProject, Editor.program);
 
-	if(tab === null)
+	if (tab === null)
 	{
 		tab = Editor.gui.tab.addTab(RunProject, true);
 		tab.select();
@@ -337,9 +337,9 @@ Editor.runProject = function()
  */
 Editor.selectObject = function(object)
 {
-	for(var i = 0; i < Editor.selection.length; i++)
+	for (var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+		if (Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
 		{
 			Editor.selection[i].gui.node.setSelected(false);
 		}
@@ -347,13 +347,13 @@ Editor.selectObject = function(object)
 
 	Editor.selection = [object];
 
-	if(object.gui !== undefined && object.gui.node !== undefined)
+	if (object.gui !== undefined && object.gui.node !== undefined)
 	{
-		if(object.gui.node.setSelected !== undefined)
+		if (object.gui.node.setSelected !== undefined)
 		{
 			object.gui.node.setSelected(true);
 		}
-		if(object.gui.node.expandToRoot !== undefined)
+		if (object.gui.node.expandToRoot !== undefined)
 		{
 			object.gui.node.expandToRoot();
 		}
@@ -373,13 +373,13 @@ Editor.addToSelection = function(object)
 {
 	Editor.selection.push(object);
 
-	if(object.gui !== undefined && object.gui.node !== undefined)
+	if (object.gui !== undefined && object.gui.node !== undefined)
 	{
-		if(object.gui.node.setSelected !== undefined)
+		if (object.gui.node.setSelected !== undefined)
 		{
 			object.gui.node.setSelected(true);
 		}
-		if(object.gui.node.expandToRoot !== undefined)
+		if (object.gui.node.expandToRoot !== undefined)
 		{
 			object.gui.node.expandToRoot();
 		}
@@ -396,13 +396,13 @@ Editor.addToSelection = function(object)
  */
 Editor.unselectObject = function(object)
 {
-	for(var i = 0; i < Editor.selection.length; i++)
+	for (var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selection[i].uuid === object.uuid)
+		if (Editor.selection[i].uuid === object.uuid)
 		{
-			if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+			if (Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
 			{
-				if(Editor.selection[i].gui.node.setSelected !== undefined)
+				if (Editor.selection[i].gui.node.setSelected !== undefined)
 				{
 					Editor.selection[i].gui.node.setSelected(false);
 				}
@@ -435,9 +435,9 @@ Editor.getPixelRatio = function()
  */
 Editor.isSelected = function(object)
 {
-	for(var i = 0; i < Editor.selection.length; i++)
+	for (var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selection[i].uuid === object.uuid)
+		if (Editor.selection[i].uuid === object.uuid)
 		{
 			return true;
 		}
@@ -454,7 +454,7 @@ Editor.isSelected = function(object)
  */
 Editor.resize = function()
 {
-	if(!Nunu.isFullscreen())
+	if (!Nunu.isFullscreen())
 	{
 		Editor.gui.updateInterface();
 	}
@@ -479,11 +479,11 @@ Editor.hasObjectSelected = function()
  */
 Editor.clearSelection = function()
 {
-	for(var i = 0; i < Editor.selection.length; i++)
+	for (var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+		if (Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
 		{
-			if(Editor.selection[i].gui.node.setSelected !== undefined)
+			if (Editor.selection[i].gui.node.setSelected !== undefined)
 			{
 				Editor.selection[i].gui.node.setSelected(false);
 			}
@@ -515,7 +515,7 @@ Editor.addAction = function(action)
  */
 Editor.getScene = function()
 {
-	if(Editor.program.children.length > 0)
+	if (Editor.program.children.length > 0)
 	{
 		return Editor.program.children[0];
 	}
@@ -535,7 +535,7 @@ Editor.getScene = function()
  */
 Editor.addObject = function(object, parent)
 {
-	if(parent === undefined)
+	if (parent === undefined)
 	{
 		parent = Editor.getScene();
 	}
@@ -543,9 +543,9 @@ Editor.addObject = function(object, parent)
 	var actions = [new AddAction(object, parent)];
 	var resources = ResourceCrawler.searchObject(object, Editor.program);
 
-	for(var category in resources)
+	for (var category in resources)
 	{
-		for(var resource in resources[category])
+		for (var resource in resources[category])
 		{
 			actions.push(new AddResourceAction(resources[category][resource], Editor.program, category));
 		}
@@ -563,9 +563,9 @@ Editor.addObject = function(object, parent)
  */
 Editor.renameObject = function(object)
 {
-	if(object === undefined)
+	if (object === undefined)
 	{
-		if(Editor.hasObjectSelected())
+		if (Editor.hasObjectSelected())
 		{
 			object = Editor.selection[0];
 		}
@@ -575,10 +575,10 @@ Editor.renameObject = function(object)
 		}
 	}
 
-	if(!object.locked)
+	if (!object.locked)
 	{
 		var name = Editor.prompt(Locale.renameObject, object.name);
-		if(name !== null && name !== "")
+		if (name !== null && name !== "")
 		{
 			Editor.addAction(new ChangeAction(object, "name", name));
 		}
@@ -594,56 +594,56 @@ Editor.renameObject = function(object)
  */
 Editor.deleteObject = function(object)
 {
-	var selected = (object === undefined) ? Editor.selection : [object];
+	var selected = object === undefined ? Editor.selection : [object];
 	
 	// List of delete actions
 	var actions = [];
 
 	// Delect selection
-	for(var i = 0; i < selected.length; i++)
+	for (var i = 0; i < selected.length; i++)
 	{
 		// Object3D
-		if(selected[i].isObject3D && !selected[i].locked && !(selected[i] instanceof Program))
+		if (selected[i].isObject3D && !selected[i].locked && !(selected[i] instanceof Program))
 		{
 			actions.push(new RemoveAction(selected[i]));
 		}
 		// Material
-		else if(selected[i] instanceof Material)
+		else if (selected[i] instanceof Material)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "materials"));
 		}
 		// Texture
-		else if(selected[i] instanceof Texture)
+		else if (selected[i] instanceof Texture)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "textures"));
 		}
 		// Font
-		else if(selected[i] instanceof Font)
+		else if (selected[i] instanceof Font)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "fonts"));
 		}
 		// Audio
-		else if(selected[i] instanceof Audio)
+		else if (selected[i] instanceof Audio)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "audio"));
 		}
 		// Video
-		else if(selected[i] instanceof Video)
+		else if (selected[i] instanceof Video)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "videos"));
 		}
 		// Geometries
-		else if(selected[i] instanceof Geometry || selected[i] instanceof BufferGeometry)
+		else if (selected[i] instanceof Geometry || selected[i] instanceof BufferGeometry)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "geometries"));
 		}
 		// Shapes
-		else if(selected[i] instanceof Shape)
+		else if (selected[i] instanceof Shape)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "shapes"));
 		}
 		// Resources
-		else if(selected[i] instanceof Resource)
+		else if (selected[i] instanceof Resource)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "resources"));
 		}
@@ -655,7 +655,7 @@ Editor.deleteObject = function(object)
 	}
 
 	// Check if any action was added
-	if(actions.length > 0)
+	if (actions.length > 0)
 	{
 		Editor.addAction(new ActionBundle(actions));
 	}
@@ -673,9 +673,9 @@ Editor.deleteObject = function(object)
 Editor.copyObject = function(object)
 {
 	// If no object passed copy selected object
-	if(object === undefined)
+	if (object === undefined)
 	{
-		if(Editor.hasObjectSelected())
+		if (Editor.hasObjectSelected())
 		{
 			object = Editor.selection[0];
 		}
@@ -685,12 +685,12 @@ Editor.copyObject = function(object)
 		}
 	}
 
-	if(object instanceof Program || object instanceof Scene)
+	if (object instanceof Program || object instanceof Scene)
 	{
 		return;
 	}
 
-	if(!object.locked)
+	if (!object.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
 	}
@@ -707,9 +707,9 @@ Editor.copyObject = function(object)
  */
 Editor.cutObject = function(object)
 {
-	if(object === undefined)
+	if (object === undefined)
 	{
-		if(Editor.hasObjectSelected())
+		if (Editor.hasObjectSelected())
 		{
 			object = Editor.selection[0];
 		}
@@ -720,12 +720,12 @@ Editor.cutObject = function(object)
 	}
 
 	// Avoid cutting program or scene objects
-	if(object instanceof Program || object instanceof Scene)
+	if (object instanceof Program || object instanceof Scene)
 	{
 		return;
 	}
 
-	if(!object.locked)
+	if (!object.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
 		Editor.addAction(new RemoveAction(object));
@@ -754,7 +754,7 @@ Editor.pasteObject = function(target)
 		});
 
 		// Add object to target
-		if(target !== undefined && !target.locked)
+		if (target !== undefined && !target.locked)
 		{
 			Editor.addObject(obj, target);
 		}
@@ -763,7 +763,7 @@ Editor.pasteObject = function(target)
 			Editor.addObject(obj);
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		Editor.alert(Locale.errorPaste);
 	}
@@ -776,7 +776,7 @@ Editor.pasteObject = function(target)
  */
 Editor.redo = function()
 {
-	if(Editor.history.redo())
+	if (Editor.history.redo())
 	{
 		Editor.updateObjectsViewsGUI();
 	}
@@ -793,7 +793,7 @@ Editor.redo = function()
  */
 Editor.undo = function()
 {
-	if(Editor.history.undo())
+	if (Editor.history.undo())
 	{
 		Editor.updateObjectsViewsGUI();
 	}
@@ -834,7 +834,7 @@ Editor.createDefaultResouces = function()
 	Editor.defaultSpriteMaterial.name = "sprite";
 
 	Editor.defaultTextureLensFlare = [];
-	for(var i = 0; i < 4; i++)
+	for (var i = 0; i < 4; i++)
 	{
 		var texture = new Texture(new Image(Global.FILE_PATH + "lensflare/lensflare" + i + ".png"));
 		texture.name = "lensflare" + i;
@@ -911,7 +911,7 @@ Editor.createNewProgram = function()
  */
 Editor.addDefaultScene = function(material)
 {
-	if(material === undefined)
+	if (material === undefined)
 	{
 		material = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 		material.name = "default";
@@ -961,12 +961,12 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 {
 	try
 	{
-		if(fname === undefined && Editor.openFile !== null)
+		if (fname === undefined && Editor.openFile !== null)
 		{
 			fname = Editor.openFile;
 		}
 
-		if(binary === true)
+		if (binary === true)
 		{
 			fname = fname.replace(".isp", ".nsp");
 
@@ -982,17 +982,17 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 			FileSystem.writeFile(fname, json);
 		}
 
-		if(keepDirectory !== true && Editor.openFile !== fname)
+		if (keepDirectory !== true && Editor.openFile !== fname)
 		{
 			Editor.setOpenFile(fname);
 		}
 		
-		if(suppressMessage !== true)
+		if (suppressMessage !== true)
 		{
 			Editor.alert(Locale.projectSaved);
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		Editor.alert(Locale.errorSavingFile + "\n(" + e + ")");
 		console.error("nunuStudio: Error saving file", e);
@@ -1008,9 +1008,9 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
  */
 Editor.setProgram = function(program)
 {
-	if(Editor.program !== program)
+	if (Editor.program !== program)
 	{
-		if(Editor.program !== null)
+		if (Editor.program !== null)
 		{
 			Editor.program.dispose();
 		}
@@ -1031,7 +1031,7 @@ Editor.setProgram = function(program)
 		Editor.resetEditor();
 
 		// Add new scene tab to interface
-		if(program.children.length > 0)
+		if (program.children.length > 0)
 		{
 			var scene = Editor.gui.tab.addTab(SceneEditor, true);
 			scene.attach(program.children[0]);
@@ -1062,7 +1062,7 @@ Editor.loadProgram = function(file, binary)
 
 			var program;
 
-			if(binary === true)
+			if (binary === true)
 			{
 				var pson = new StaticPair();
 				var data = pson.decode(reader.result);
@@ -1078,7 +1078,7 @@ Editor.loadProgram = function(file, binary)
 
 			Editor.alert(Locale.projectLoaded);
 		}
-		catch(e)
+		catch (e)
 		{
 			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
@@ -1087,11 +1087,11 @@ Editor.loadProgram = function(file, binary)
 		modal.destroy();
 	};
 
-	if(file instanceof File)
+	if (file instanceof File)
 	{
 		var reader = new FileReader();
 		reader.onload = onload;
-		if(binary === true)
+		if (binary === true)
 		{
 			reader.readAsArrayBuffer(file);
 		}
@@ -1100,10 +1100,10 @@ Editor.loadProgram = function(file, binary)
 			reader.readAsText(file);
 		}
 	}
-	else if(typeof file === "string")
+	else if (typeof file === "string")
 	{
 		var reader = {};
-		if(binary === true)
+		if (binary === true)
 		{
 			reader.result = FileSystem.readFileArrayBuffer(file);
 		}
@@ -1126,11 +1126,11 @@ Editor.loadProgram = function(file, binary)
  */
 Editor.setOpenFile = function(file)
 {
-	if(file !== undefined && file !== null)
+	if (file !== undefined && file !== null)
 	{	
-		if(file instanceof window.File)
+		if (file instanceof window.File)
 		{
-			if(Nunu.runningOnDesktop())
+			if (Nunu.runningOnDesktop())
 			{
 				Editor.openFile = file.path;
 			}
@@ -1202,7 +1202,7 @@ Editor.prompt = function(message, defaultValue)
  */
 Editor.updateNunu = function(silent)
 {
-	if(silent === undefined)
+	if (silent === undefined)
 	{
 		silent = true;
 	}
@@ -1217,23 +1217,23 @@ Editor.updateNunu = function(silent)
 			var pos = data.search(token);
 			var timestamp = data.slice(pos + token.length + 2, pos + token.length + 14);
 
-			if(parseInt(timestamp) > parseInt(Editor.TIMESTAMP))
+			if (parseInt(timestamp) > parseInt(Editor.TIMESTAMP))
 			{
 				FileSystem.writeFile("nunu.min.js", data);
 				Editor.alert(Locale.updatedRestart);
 			}
 			else
 			{
-				if(!silent)
+				if (!silent)
 				{
 					Editor.alert(Locale.alreadyUpdated);
 				}
 			}
 		});
 	}
-	catch(e)
+	catch (e)
 	{
-		if(!silent)
+		if (!silent)
 		{
 			Editor.alert(Locale.updateFailed);
 		}
@@ -1261,7 +1261,7 @@ Editor.getRendererConfig = function()
  */
 Editor.exit = function()
 {
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		Editor.settings.store();
 		

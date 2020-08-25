@@ -1,6 +1,6 @@
+import {DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3} from "three";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
-import {DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3} from "three";
 
 /** 
  * The geometry renderer is used to generate preview thumbnails.
@@ -29,7 +29,7 @@ GeometryRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
 GeometryRenderer.render = function(material, onRender)
 {
-	if(GeometryRenderer.instance === undefined)
+	if (GeometryRenderer.instance === undefined)
 	{
 		GeometryRenderer.instance = new GeometryRenderer();
 	}

@@ -33,7 +33,7 @@ function PerspectiveCameraInspector(parent, object)
 	this.use.setOnChange(function()
 	{
 		var scene = self.object.getScene();
-		if(self.use.getValue() && scene !== null)
+		if (self.use.getValue() && scene !== null)
 		{
 			scene.addCamera(self.object);
 		}

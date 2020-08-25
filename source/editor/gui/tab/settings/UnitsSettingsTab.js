@@ -53,7 +53,7 @@ UnitsSettingsTab.prototype.activate = function()
 {
 	this.angle.setValue(Editor.settings.units.angle);
 	this.distance.setValue(Editor.settings.units.distance);
-}
+};
 
 UnitsSettingsTab.prototype.updateSize = function()
 {

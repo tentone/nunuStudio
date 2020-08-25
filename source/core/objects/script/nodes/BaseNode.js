@@ -25,11 +25,13 @@ function BaseNode()
 	this.destroyButton.serializable = false;
 	this.destroyButton.layer = 2;
 	this.destroyButton.radius = 8;
-	this.destroyButton.onButtonDown = () => {
+	this.destroyButton.onButtonDown = () => 
+	{
 		this.destroy();
 	};
 	
-	this.destroyButton.draw = function(context, viewport, canvas) {
+	this.destroyButton.draw = function(context, viewport, canvas) 
+	{
 		Circle.prototype.draw.call(this, context, viewport, canvas);
 
 		const size = this.radius * 0.5;

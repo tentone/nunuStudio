@@ -1,3 +1,4 @@
+import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 import {Locale} from "../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {CompressedTexture} from "../../../core/texture/CompressedTexture.js";
@@ -7,10 +8,9 @@ import {DragBuffer} from "../../gui/DragBuffer.js";
 import {Global} from "../../Global.js";
 import {Editor} from "../../Editor.js";
 import {TableForm} from "../TableForm.js";
+import {Component} from "../Component.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
-import {Component} from "../Component.js";
-import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 
 function CubeTextureBox(parent)
 {
@@ -51,7 +51,7 @@ function CubeTextureBox(parent)
 	this.preview.ondrop = function(event)
 	{
 		// File
-		if(event.dataTransfer.files.length > 0)
+		if (event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
 			var reader = new FileReader();
@@ -72,12 +72,12 @@ function CubeTextureBox(parent)
 			var texture = DragBuffer.get(uuid);
 
 			// Cube texture
-			if(texture instanceof Texture && texture.isCubeTexture)
+			if (texture instanceof Texture && texture.isCubeTexture)
 			{
 				self.setTexture(texture);
 			}
 			// Image
-			else if(texture instanceof Image)
+			else if (texture instanceof Image)
 			{
 				var texture = new CubeTexture([texture]);
 				texture.name = texture.name;
@@ -143,7 +143,7 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
  */
 CubeTextureBox.prototype.setValue = function(texture)
 {
-	if(texture !== null && texture.isCubeTexture)
+	if (texture !== null && texture.isCubeTexture)
 	{
 		this.texture = texture;
 
@@ -168,9 +168,9 @@ CubeTextureBox.prototype.setValue = function(texture)
  */
 CubeTextureBox.prototype.getValue = function()
 {
-	if(this.useTexture.getValue())
+	if (this.useTexture.getValue())
 	{
-		if(this.texture !== null)
+		if (this.texture !== null)
 		{
 			this.texture.mapping = this.mapping.getValue();
 			this.texture.needsUpdate = true;
@@ -187,7 +187,7 @@ CubeTextureBox.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
 
-	if(this.onChange !== null)
+	if (this.onChange !== null)
 	{
 		this.onChange();
 	}
@@ -196,11 +196,11 @@ CubeTextureBox.prototype.setTexture = function(texture)
 // Update texture preview
 CubeTextureBox.prototype.updatePreview = function()
 {
-	if(this.texture instanceof CubeTexture)
+	if (this.texture instanceof CubeTexture)
 	{
 		this.img.src = this.texture.images[0].data;
 	}
-	else if(this.texture instanceof CompressedTexture)
+	else if (this.texture instanceof CompressedTexture)
 	{
 		// TODO <ADD CODE HERE>
 		this.img.src = Global.FILE_PATH + "icon.png";
@@ -210,7 +210,7 @@ CubeTextureBox.prototype.updatePreview = function()
 // Update Interface
 CubeTextureBox.prototype.updateInterface = function()
 {
-	if(this.visible)
+	if (this.visible)
 	{
 		this.element.style.visibility = "visible";
 	
@@ -220,7 +220,7 @@ CubeTextureBox.prototype.updateInterface = function()
 
 		// Form
 		this.form.position.set(this.size.y + 5, 0);
-		this.form.size.set(this.size.x - this.form.position.x, this.size.y)
+		this.form.size.set(this.size.x - this.form.position.x, this.size.y);
 		this.form.visible = this.visible;
 		this.form.updateInterface();
 

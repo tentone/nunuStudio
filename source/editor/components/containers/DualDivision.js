@@ -50,21 +50,21 @@ function DualDivision(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.orientation === DualDivision.HORIZONTAL)
+		if (self.orientation === DualDivision.HORIZONTAL)
 		{	
 			self.tabPosition += event.movementX / self.size.x;
 		}
-		else if(self.orientation === DualDivision.VERTICAL)
+		else if (self.orientation === DualDivision.VERTICAL)
 		{
 			self.tabPosition += event.movementY / self.size.y;
 		}
 
 		// Limit tab position
-		if(self.tabPosition > self.tabPositionMax)
+		if (self.tabPosition > self.tabPositionMax)
 		{
 			self.tabPosition = self.tabPositionMax;
 		}
-		else if(self.tabPosition < self.tabPositionMin)
+		else if (self.tabPosition < self.tabPositionMin)
 		{
 			self.tabPosition = self.tabPositionMin;
 		}
@@ -99,7 +99,7 @@ DualDivision.prototype.updateSize = function()
 {
 	Component.prototype.updateSize.call(this);
 
-	if(this.orientation === DualDivision.HORIZONTAL)
+	if (this.orientation === DualDivision.HORIZONTAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.x;
 		
@@ -117,7 +117,7 @@ DualDivision.prototype.updateSize = function()
 		this.resizeTab.style.width = this.tabSize + "px";
 		this.resizeTab.style.height = this.size.y + "px";
 	}
-	else if(this.orientation === DualDivision.VERTICAL)
+	else if (this.orientation === DualDivision.VERTICAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.y;
 

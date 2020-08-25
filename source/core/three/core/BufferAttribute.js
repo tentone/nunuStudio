@@ -9,4 +9,4 @@ THREE.BufferAttribute.prototype.toJSON = function()
 		itemSize: this.itemSize,
 		normalized: this.normalized
 	};
-}
+};

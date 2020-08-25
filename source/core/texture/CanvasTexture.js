@@ -35,34 +35,34 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	this.format = RGBAFormat;
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Canvas width, internal resolution of the canvas texture.
 		 * 
 		 * @property width
 		 * @type {number}
 		 */
-		width:
+			width:
 		{
-			get: function(){return this.image.width;},
-			set: function(value){this.image.width = value;}
+			get: function() {return this.image.width;},
+			set: function(value) {this.image.width = value;}
 		},
 
-		/**
-		 * Canvas height, internal resolution of the canvas texture.
-		 * 
-		 * @property height
-		 * @type {number}
-		 */
-		height:
+			/**
+			 * Canvas height, internal resolution of the canvas texture.
+			 * 
+			 * @property height
+			 * @type {number}
+			 */
+			height:
 		{
-			get: function(){return this.image.height;},
-			set: function(value){this.image.height = value;}
+			get: function() {return this.image.height;},
+			set: function(value) {this.image.height = value;}
 		}
-	});
+		});
 
-	this.width = (width !== undefined) ? width : 1;
-	this.height = (height !== undefined) ? height : 1;
+	this.width = width !== undefined ? width : 1;
+	this.height = height !== undefined ? height : 1;
 
 	/**
 	 * Canvas context 2D, can be used to draw content do the canvas texture.
@@ -86,7 +86,7 @@ CanvasTexture.prototype.placeholder = function()
 {	
 	this.context.fillStyle = "#000000";
 	this.context.fillRect(0, 0, this.width, this.height);
-	this.context.font = "Normal " + Math.round(this.width / 12) +  "px Arial";
+	this.context.font = "Normal " + Math.round(this.width / 12) + "px Arial";
 	this.context.textAlign = "center";
 	this.context.fillStyle = "#FF0000";
 	this.context.fillText("Canvas Texture", this.width/2, this.height/2);
@@ -103,7 +103,7 @@ CanvasTexture.prototype.placeholder = function()
  */
 CanvasTexture.prototype.clear = function(color)
 {
-	if(color === undefined)
+	if (color === undefined)
 	{
 		this.context.clearRect(0, 0, width, height);
 	}

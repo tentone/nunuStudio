@@ -94,7 +94,7 @@ NodeScript.prototype.toJSON = function(meta)
 {
 	var data = Object3D.prototype.toJSON.call(this, meta);
 
-	data.object.graph =  this.graph.serialize();
+	data.object.graph = this.graph.serialize();
 
 	return data;
 };

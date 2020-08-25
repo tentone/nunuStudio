@@ -1,6 +1,6 @@
 import {Text} from "../Text.js";
-import {NumberBox} from "./NumberBox.js";
 import {Component} from "../Component.js";
+import {NumberBox} from "./NumberBox.js";
 
 /**
  * The vector array box represents multiple numeric variables as a vector.
@@ -43,7 +43,7 @@ NumberRow.prototype.setStep = function(value)
 {
 	var value = String(value);
 
-	for(var i = 0; i < this.values.length; i++)
+	for (var i = 0; i < this.values.length; i++)
 	{
 		this.values[i].input.setStep(value);
 	}
@@ -61,7 +61,7 @@ NumberRow.prototype.setRange = function(min, max)
  	var min = String(min);
  	var max = String(max);
 
-	for(var i = 0; i < this.values.length; i++)
+	for (var i = 0; i < this.values.length; i++)
 	{
 		this.values[i].input.setRange(min, max);
 	}
@@ -82,10 +82,10 @@ NumberRow.prototype.addValue = function(label)
 	text.setText(label);	
 
 	this.values.push(
-	{
-		label: text,
-		input: input
-	});
+		{
+			label: text,
+			input: input
+		});
 
 	return input;
 };
@@ -97,7 +97,7 @@ NumberRow.prototype.updateSize = function()
 	var width = Math.round((this.size.x - this.values.length * this.labelSize) / this.values.length);
 	var x = 0;
 	
-	for(var i = 0; i < this.values.length; i++)
+	for (var i = 0; i < this.values.length; i++)
 	{
 		var label = this.values[i].label;
 		label.position.set(x, 0);

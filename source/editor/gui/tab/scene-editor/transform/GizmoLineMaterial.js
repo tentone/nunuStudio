@@ -37,7 +37,7 @@ GizmoLineMaterial.grey = new GizmoLineMaterial({color: 0x787878});
  */
 GizmoLineMaterial.prototype.highlight = function(highlighted)
 {
-	if(highlighted)
+	if (highlighted)
 	{
 		this.color.setRGB(1.0, 1.0, 0);
 		this.opacity = 1.0;

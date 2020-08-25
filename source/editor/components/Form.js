@@ -18,7 +18,7 @@ function Form(parent)
 	this.element.action = "javascript:void(0)";
 	this.element.addEventListener("submit", function(event)
 	{
-		event.preventDefault()
+		event.preventDefault();
 		return false;
 	});
 }

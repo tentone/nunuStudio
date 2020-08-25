@@ -35,13 +35,13 @@ Model.extensions = ["gcode", "drc", "assimp", "assimp.json", "blend", "amf", "ba
  */
 Model.fileIsModel = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
 		file = file.name.toLocaleLowerCase();
 
-		for(var i = 0; i < Model.extensions.length; i++)
+		for (var i = 0; i < Model.extensions.length; i++)
 		{
-			if(file.endsWith(Model.extensions[i]))
+			if (file.endsWith(Model.extensions[i]))
 			{
 				return true;
 			}

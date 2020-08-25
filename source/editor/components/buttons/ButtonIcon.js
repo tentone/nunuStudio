@@ -48,10 +48,10 @@ ButtonIcon.prototype.setImage = function(image)
  */
 ButtonIcon.prototype.setImageScale = function(x, y)
 {
-	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
-	this.icon.style.left = ((1 - x) / 2 * 100) + "%";
-	this.icon.style.width = (x * 100) + "%";
-	this.icon.style.height = (y * 100) + "%";
+	this.icon.style.top = (1 - y) / 2 * 100 + "%";
+	this.icon.style.left = (1 - x) / 2 * 100 + "%";
+	this.icon.style.width = x * 100 + "%";
+	this.icon.style.height = y * 100 + "%";
 };
 
 export {ButtonIcon};

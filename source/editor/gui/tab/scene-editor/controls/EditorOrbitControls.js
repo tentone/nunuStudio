@@ -1,12 +1,12 @@
+import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math as TMath} from "three";
 import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../../core/input/Keyboard.js";
 import {OrientationCube} from "../utils/OrientationCube.js";
-import {EditorControls} from "./EditorControls.js";
 import {Editor} from "../../../../Editor.js";
-import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math as TMath} from "three";
+import {EditorControls} from "./EditorControls.js";
 
 /**
  * Orbit controls can be used to navigate the world using a imaginary central point as reference.
@@ -142,16 +142,16 @@ EditorOrbitControls.prototype.focusObject = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	
-	if(box !== null)
+	if (box !== null)
 	{
 		box.applyMatrix4(object.matrixWorld);
 		box.getCenter(this.center);
 
 		var size = box.getSize(this.tempVector).length();
 
-		if(this.camera instanceof PerspectiveCamera)
+		if (this.camera instanceof PerspectiveCamera)
 		{
-			this.distance = (size / 2) / Math.tan(TMath.DEG2RAD * 0.5 * this.camera.fov);
+			this.distance = size / 2 / Math.tan(TMath.DEG2RAD * 0.5 * this.camera.fov);
 		}
 		else
 		{
@@ -170,27 +170,27 @@ EditorOrbitControls.prototype.focusObject = function(object)
 
 EditorOrbitControls.prototype.setOrientation = function(code)
 {
-	if(code === OrientationCube.Z_POS)
+	if (code === OrientationCube.Z_POS)
 	{
 		this.orientation.set(Math.PI / 2, 0);
 	}
-	else if(code === OrientationCube.Z_NEG)
+	else if (code === OrientationCube.Z_NEG)
 	{
 		this.orientation.set(-Math.PI / 2, 0);
 	}
-	else if(code === OrientationCube.X_POS)
+	else if (code === OrientationCube.X_POS)
 	{
 		this.orientation.set(0, 0);
 	}
-	else if(code === OrientationCube.X_NEG)
+	else if (code === OrientationCube.X_NEG)
 	{
 		this.orientation.set(Math.PI, 0);
 	}
-	else if(code === OrientationCube.Y_POS)
+	else if (code === OrientationCube.Y_POS)
 	{
 		this.orientation.set(Math.PI, 1.57);
 	}
-	else if(code === OrientationCube.Y_NEG)
+	else if (code === OrientationCube.Y_NEG)
 	{
 		this.orientation.set(Math.PI, -1.57);
 	}
@@ -202,9 +202,9 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 {
 	this.needsUpdate = false;
 
-	if(mouse.buttonPressed(Mouse.LEFT))
+	if (mouse.buttonPressed(Mouse.LEFT))
 	{
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			this.speedOrientation.y += this.speed * Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
 			this.speedOrientation.x -= this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
@@ -218,9 +218,9 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	if(mouse.buttonPressed(Mouse.MIDDLE))
+	if (mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			this.speedCenter.y += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
 		}
@@ -232,18 +232,18 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	if(mouse.buttonPressed(Mouse.RIGHT))
+	if (mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		var up = direction.y > 0;
 		direction.y = 0;
 		direction.normalize();
 
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			var y = this.speed * mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-			this.speedCenter.x += up ? (-direction.x * y) : (direction.x * y);
-			this.speedCenter.z += up ? (-direction.z * y) : (direction.z * y);
+			this.speedCenter.x += up ? -direction.x * y : direction.x * y;
+			this.speedCenter.z += up ? -direction.z * y : direction.z * y;
 			
 			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
@@ -254,8 +254,8 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		else
 		{
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-			this.center.x += up ? (-direction.x * y) : (direction.x * y);
-			this.center.z += up ? (-direction.z * y) : (direction.z * y);
+			this.center.x += up ? -direction.x * y : direction.x * y;
+			this.center.z += up ? -direction.z * y : direction.z * y;
 			
 			direction.applyAxisAngle(EditorOrbitControls.UP, Math.PI/2);
 
@@ -267,9 +267,9 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	if(mouse.wheel !== 0)
+	if (mouse.wheel !== 0)
 	{
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			this.speedDistance += this.speed * mouse.wheel * this.distance * Editor.settings.editor.mouseWheelSensitivity;
 		}
@@ -282,13 +282,13 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	}
 	
 	// Keyboard movement
-	if(Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
+	if (Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
 	{
 		this.needsUpdate = true;
 	}
 
 	// If smooth always update 
-	if(this.smooth === true)
+	if (this.smooth === true)
 	{
 		this.distance += this.speedDistance;
 		this.center.add(this.speedCenter);
@@ -304,7 +304,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		return;
 	}
 
-	if(this.needsUpdate === true)
+	if (this.needsUpdate === true)
 	{
 		this.updateControls();
 	}
@@ -312,14 +312,14 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 OrbitControls.prototype.keyboardMovement = function(keyboard)
 {
-	if(keyboard === undefined)
+	if (keyboard === undefined)
 	{
 		return false;
 	}
 
 	var needsUpdate = false;
 
-	if(keyboard.keyPressed(Keyboard.S))
+	if (keyboard.keyPressed(Keyboard.S))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
@@ -329,7 +329,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 		this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		needsUpdate = true;
 	}
-	if(keyboard.keyPressed(Keyboard.W))
+	if (keyboard.keyPressed(Keyboard.W))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
@@ -339,7 +339,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 		this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		needsUpdate = true;
 	}
-	if(keyboard.keyPressed(Keyboard.A))
+	if (keyboard.keyPressed(Keyboard.A))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
@@ -350,7 +350,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 		this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		needsUpdate = true;
 	}
-	if(keyboard.keyPressed(Keyboard.D))
+	if (keyboard.keyPressed(Keyboard.D))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
@@ -363,24 +363,24 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 	}
 
 	return needsUpdate;
-}
+};
 
 EditorOrbitControls.prototype.applyLimits = function()
 {
-	if(this.orientation.y < this.limitDown)
+	if (this.orientation.y < this.limitDown)
 	{
 		this.orientation.y = this.limitDown;
 	}
-	else if(this.orientation.y > this.limitUp)
+	else if (this.orientation.y > this.limitUp)
 	{
 		this.orientation.y = this.limitUp;
 	}
 
-	if(this.distance < this.minDistance)
+	if (this.distance < this.minDistance)
 	{
 		this.distance = this.minDistance;
 	}
-	else if(this.distance > this.maxDistance)
+	else if (this.distance > this.maxDistance)
 	{
 		this.distance = this.maxDistance;
 	}
@@ -399,7 +399,7 @@ EditorOrbitControls.prototype.updateControls = function()
 
 	this.updateMatrixWorld(true);
 
-	if(this.camera instanceof OrthographicCamera)
+	if (this.camera instanceof OrthographicCamera)
 	{
 		this.camera.size = this.distance;
 		this.camera.updateProjectionMatrix();

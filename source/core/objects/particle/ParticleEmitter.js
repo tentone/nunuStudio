@@ -1,8 +1,8 @@
+import {Points, Clock, Vector4, Vector3, AdditiveBlending, Object3D, Vector2, Color} from "three";
 import {Texture} from "../../texture/Texture.js";
+import {ObjectLoader} from "../../loaders/ObjectLoader.js";
 import {ParticleGroup} from "./core/ParticleGroup.js";
 import {ParticleEmitterControl} from "./core/ParticleEmitterControl.js";
-import {ObjectLoader} from "../../loaders/ObjectLoader.js";
-import {Points, Clock, Vector4, Vector3, AdditiveBlending, Object3D, Vector2, Color} from "three";
 
 /**
  * Particle emitter is a wrapper for SPE particle system.
@@ -61,13 +61,13 @@ function ParticleEmitter(group, emitter)
 	 */
 	var self = this;
 	Object.defineProperties(this,
-	{
-		texture:
 		{
-			get: function(){return self.group.texture;},
-			set: function(value){self.group.texture = value;}
+			texture:
+		{
+			get: function() {return self.group.texture;},
+			set: function(value) {self.group.texture = value;}
 		}
-	});
+		});
 }
 
 /**
@@ -117,9 +117,7 @@ ParticleEmitter.defaultEmitter =
 ParticleEmitter.defaultGroup = 
 {
 	texture:
-	{
-		value: null
-	},
+	{value: null},
 	maxParticleCount: 200,
 	blending: AdditiveBlending,
 	fog: false,
@@ -162,7 +160,7 @@ ParticleEmitter.prototype.reload = function()
  */
 ParticleEmitter.prototype.updateMatrix = function()
 {
-	if(this.dynamicEmitter)
+	if (this.dynamicEmitter)
 	{
 		this.matrix.makeRotationFromQuaternion(this.quaternion);
 		this.matrix.scale(this.scale);
@@ -185,7 +183,7 @@ ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, ren
 	this.group.uniforms.scale.value = renderer.getCurrentViewport(this.temp).w;
 	this.group.tick(this.clock.getDelta());
 
-	if(this.dynamicEmitter === true)
+	if (this.dynamicEmitter === true)
 	{
 		this.emitter.position.value = this.position;	
 	}
@@ -237,14 +235,14 @@ ParticleEmitter.fromJSON = function(data, resources)
 		return Array.isArray(data) ? new Vector3().fromArray(data) : new Vector3(data.x, data.y, data.z);
 	}
 
-	if(data.group !== undefined)
+	if (data.group !== undefined)
 	{
 		var group = data.group;
 		group.texture.value = resources.getTexture(group.texture.value);
 		group.texture.frames = new Vector2().fromArray(group.texture.frames || [1, 1]);
 	}
 
-	if(data.emitter !== undefined)
+	if (data.emitter !== undefined)
 	{
 		var emitter = data.emitter;
 		emitter.position.value = loadVector3(emitter.position.value);
@@ -254,7 +252,7 @@ ParticleEmitter.fromJSON = function(data, resources)
 		emitter.acceleration.value = loadVector3(emitter.acceleration.value);
 		emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
 		
-		for(var i = 0; i < emitter.color.value.length; i++)
+		for (var i = 0; i < emitter.color.value.length; i++)
 		{
 			emitter.color.value[i] = new Color(emitter.color.value[i]);
 			emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);

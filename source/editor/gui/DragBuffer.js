@@ -24,7 +24,7 @@ DragBuffer.buffer = [];
  */
 DragBuffer.push = function(obj)
 {
-	if(DragBuffer.buffer.indexOf(obj) === -1)
+	if (DragBuffer.buffer.indexOf(obj) === -1)
 	{
 		DragBuffer.buffer.push(obj);
 	}
@@ -38,9 +38,9 @@ DragBuffer.push = function(obj)
  */
 DragBuffer.pop = function(uuid)
 {
-	for(var i = 0; i < DragBuffer.buffer.length; i++)
+	for (var i = 0; i < DragBuffer.buffer.length; i++)
 	{
-		if(DragBuffer.buffer[i].uuid === uuid)
+		if (DragBuffer.buffer[i].uuid === uuid)
 		{
 			var obj = DragBuffer.buffer[i];
 			DragBuffer.buffer.splice(i, 1);
@@ -59,9 +59,9 @@ DragBuffer.pop = function(uuid)
  */
 DragBuffer.get = function(uuid)
 {
-	for(var i = 0; i < DragBuffer.buffer.length; i++)
+	for (var i = 0; i < DragBuffer.buffer.length; i++)
 	{
-		if(DragBuffer.buffer[i].uuid === uuid)
+		if (DragBuffer.buffer[i].uuid === uuid)
 		{
 			return DragBuffer.buffer[i];
 		}

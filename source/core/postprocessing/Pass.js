@@ -139,7 +139,7 @@ Pass.prototype.createQuadScene = function()
  * @param {number} width
  * @param {number} height
  */
-Pass.prototype.setSize = function(width, height){};
+Pass.prototype.setSize = function(width, height) {};
 
 /**
  * Render the scene using this render pass.
@@ -152,14 +152,14 @@ Pass.prototype.setSize = function(width, height){};
  * @param {boolean} maskActive Not used in this pass.
  * @param {Scene} scene Scene to render.
  */
-Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera){};
+Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera) {};
 
 /**
  * Dispose this render pass.
  *
  * @method dispose
  */
-Pass.prototype.dispose = function(){};
+Pass.prototype.dispose = function() {};
 
 /**
  * Serialize pass to json.

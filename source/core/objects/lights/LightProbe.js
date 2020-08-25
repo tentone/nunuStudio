@@ -30,7 +30,7 @@ LightProbe.prototype = Object.create(TLightProbe.prototype);
 LightProbe.prototype.generate = function()
 {
 	var scene = this.getScene();
-	if(scene === null)
+	if (scene === null)
 	{
 		console.warn("nunuStudio: LightProbe cannot generate, no scene.", this);
 		return;
@@ -41,11 +41,11 @@ LightProbe.prototype.generate = function()
 	var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
 	
 	var cubeCamera = new TCubeCamera(1, 1000, 256,
-	{	
-		format: RGBAFormat,
-		magFilter: LinearFilter,
-		minFilter: LinearFilter
-	});
+		{	
+			format: RGBAFormat,
+			magFilter: LinearFilter,
+			minFilter: LinearFilter
+		});
 	cubeCamera.matrixAutoUpdate = false;
 	cubeCamera.matrix.copy(this.matrix);
 	cubeCamera.matrixWorld.copy(this.matrixWorld);

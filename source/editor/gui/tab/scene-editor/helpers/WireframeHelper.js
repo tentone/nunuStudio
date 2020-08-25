@@ -12,10 +12,10 @@ import {Object3D, Mesh, MeshBasicMaterial} from "three";
 function WireframeHelper(object, hex) 
 {
 	Mesh.call(this, object.geometry, new MeshBasicMaterial(
-	{
-		color: (hex !== undefined) ? hex : 0xFFFFFF,
-		wireframe: true
-	}));
+		{
+			color: hex !== undefined ? hex : 0xFFFFFF,
+			wireframe: true
+		}));
 
 	/**
 	 * Object attached to the helper

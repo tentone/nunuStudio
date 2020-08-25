@@ -4,6 +4,11 @@ import {Image} from "../../../../core/resources/Image.js";
 import {Font} from "../../../../core/resources/Font.js";
 import {Audio} from "../../../../core/resources/Audio.js";
 import {Loaders} from "../../../Loaders.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {SearchBox} from "../../../components/SearchBox.js";
+import {Component} from "../../../components/Component.js";
 import {AssetExplorerMenu} from "./AssetExplorerMenu.js";
 import {VideoAsset} from "./asset/VideoAsset.js";
 import {TextureAsset} from "./asset/TextureAsset.js";
@@ -14,11 +19,6 @@ import {FontAsset} from "./asset/FontAsset.js";
 import {FileAsset} from "./asset/FileAsset.js";
 import {AudioAsset} from "./asset/AudioAsset.js";
 import {Asset} from "./asset/Asset.js";
-import {Global} from "../../../Global.js";
-import {Editor} from "../../../Editor.js";
-import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {SearchBox} from "../../../components/SearchBox.js";
-import {Component} from "../../../components/Component.js";
 
 function AssetExplorer(parent, closeable, container, index)
 {
@@ -36,27 +36,27 @@ function AssetExplorer(parent, closeable, container, index)
 	this.element.ondrop = function(event)
 	{
 		// Dragged file into explorer
-		for(var i = 0; i < event.dataTransfer.files.length; i++)
+		for (var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
 
 			// Image
-			if(Image.fileIsImage(file))
+			if (Image.fileIsImage(file))
 			{
 				Loaders.loadTexture(file);
 			}
 			// Video
-			else if(Video.fileIsVideo(file))
+			else if (Video.fileIsVideo(file))
 			{
 				Loaders.loadVideoTexture(file);
 			}
 			// Audio
-			else if(Audio.fileIsAudio(file))
+			else if (Audio.fileIsAudio(file))
 			{
 				Loaders.loadAudio(file);
 			}
 			// Font
-			else if(Font.fileIsFont(file))
+			else if (Font.fileIsFont(file))
 			{
 				Loaders.loadFont(file);
 			}
@@ -113,7 +113,7 @@ AssetExplorer.prototype.filterByName = function(search)
 {
 	search = search.toLowerCase();
 
-	for(var i = 0; i < this.files.length; i++)
+	for (var i = 0; i < this.files.length; i++)
 	{
 		var text = this.files[i].name.data.toLowerCase();
 		this.files[i].setVisibility(text.search(search) !== -1);
@@ -122,7 +122,7 @@ AssetExplorer.prototype.filterByName = function(search)
 
 AssetExplorer.prototype.updateSettings = function()
 {
-	for(var i = 0; i < this.files.length; i++)
+	for (var i = 0; i < this.files.length; i++)
 	{
 		this.files[i].setSize(Editor.settings.general.filePreviewSize);
 	}
@@ -136,7 +136,7 @@ AssetExplorer.prototype.updateSettings = function()
  */
 AssetExplorer.prototype.attach = function(manager)
 {
-	if(this.manager !== manager)
+	if (this.manager !== manager)
 	{	
 		this.manager = manager;
 		this.updateObjectsView();
@@ -170,7 +170,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Materials
 	var materials = this.manager.materials;
-	for(var i in materials)
+	for (var i in materials)
 	{
 		var file = new MaterialAsset(this.assets);
 		file.attach(materials[i]);
@@ -179,7 +179,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Geometries
 	var geometries = this.manager.geometries;
-	for(var i in geometries)
+	for (var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
 		file.attach(geometries[i]);
@@ -188,7 +188,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Textures
 	var textures = this.manager.textures;
-	for(var i in textures)
+	for (var i in textures)
 	{
 		var file = new TextureAsset(this.assets);
 		file.attach(textures[i]);
@@ -197,7 +197,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Fonts
 	var fonts = this.manager.fonts;
-	for(var i in fonts)
+	for (var i in fonts)
 	{
 		var file = new FontAsset(this.assets);
 		file.attach(fonts[i]);
@@ -205,7 +205,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	}
 
 	var images = this.manager.images;
-	for(var i in images)
+	for (var i in images)
 	{
 		var file = new ImageAsset(this.assets);
 		file.attach(images[i]);
@@ -213,7 +213,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	}
 
 	var videos = this.manager.videos;
-	for(var i in videos)
+	for (var i in videos)
 	{
 		var file = new VideoAsset(this.assets);
 		file.attach(videos[i]);
@@ -222,7 +222,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Audio
 	var audio = this.manager.audio;
-	for(var i in audio)
+	for (var i in audio)
 	{
 		var file = new AudioAsset(this.assets);
 		file.attach(audio[i]);
@@ -231,7 +231,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 
 	// Resources
 	var resources = this.manager.resources;
-	for(var i in resources)
+	for (var i in resources)
 	{
 		var resource = resources[i];
 
@@ -248,7 +248,7 @@ AssetExplorer.prototype.updateObjectsView = function()
  */
 AssetExplorer.prototype.clear = function()
 {
-	while(this.files.length > 0)
+	while (this.files.length > 0)
 	{
 		this.files.pop().destroy();
 	}

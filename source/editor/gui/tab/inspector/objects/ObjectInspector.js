@@ -28,7 +28,7 @@ function ObjectInspector(parent, object)
 	this.form.nextRow();
 
 	// UUID
-	if(Editor.settings.general.showUUID)
+	if (Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
@@ -36,7 +36,7 @@ function ObjectInspector(parent, object)
 	}
 	
 	// Type
-	if(Editor.settings.general.showType)
+	if (Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
 		this.type = this.form.addText("");
@@ -54,11 +54,11 @@ function ObjectInspector(parent, object)
 		var object = self.object.position;
 
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(object, "x", position.x),
-			new ChangeAction(object, "y", position.y),
-			new ChangeAction(object, "z", position.z)
-		]));
+			[
+				new ChangeAction(object, "x", position.x),
+				new ChangeAction(object, "y", position.y),
+				new ChangeAction(object, "z", position.z)
+			]));
 	});
 	this.form.add(this.position);
 	this.form.nextRow();
@@ -81,21 +81,21 @@ function ObjectInspector(parent, object)
 		var scale = self.scale.getValue();
 		var object = self.object.scale;
 		
-		if(self.scaleRatioLock.getValue())
+		if (self.scaleRatioLock.getValue())
 		{
-			if(scale.x !== object.x)
+			if (scale.x !== object.x)
 			{
 				var ratio = scale.x / object.x;
 				scale.y *= ratio;
 				scale.z *= ratio;
 			}
-			else if(scale.y !== object.y)
+			else if (scale.y !== object.y)
 			{
 				var ratio = scale.y / object.y;
 				scale.x *= ratio;
 				scale.z *= ratio;
 			}
-			else if(scale.z !== object.z)
+			else if (scale.z !== object.z)
 			{
 				var ratio = scale.z / object.z;
 				scale.x *= ratio;
@@ -106,11 +106,11 @@ function ObjectInspector(parent, object)
 		}
 
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(object, "x", scale.x),
-			new ChangeAction(object, "y", scale.y),
-			new ChangeAction(object, "z", scale.z)
-		]));
+			[
+				new ChangeAction(object, "x", scale.x),
+				new ChangeAction(object, "y", scale.y),
+				new ChangeAction(object, "z", scale.z)
+			]));
 	});
 	this.form.add(this.scale);
 	this.form.nextRow();
@@ -127,11 +127,11 @@ function ObjectInspector(parent, object)
 		var object = self.object.rotation;
 
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(object, "x", rotation.x),
-			new ChangeAction(object, "y", rotation.y),
-			new ChangeAction(object, "z", rotation.z)
-		]));
+			[
+				new ChangeAction(object, "x", rotation.x),
+				new ChangeAction(object, "y", rotation.y),
+				new ChangeAction(object, "z", rotation.z)
+			]));
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();
@@ -178,12 +178,12 @@ ObjectInspector.prototype.updateInspector = function()
 {
 	this.name.setText(this.object.name);
 		
-	if(this.uuid !== undefined)
+	if (this.uuid !== undefined)
 	{
 		this.uuid.setText(this.object.uuid);
 	}
 	
-	if(this.type !== undefined)
+	if (this.type !== undefined)
 	{
 		this.type.setText(this.object.type);
 	}

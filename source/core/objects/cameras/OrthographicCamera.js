@@ -1,8 +1,8 @@
+import {OrthographicCamera as TOrthographicCamera, Object3D} from "three";
 import {RenderPass} from "../../postprocessing/RenderPass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
-import {OrthographicCamera as TOrthographicCamera, Object3D} from "three";
 
 /**
  * Orthographic Camera is used for 2D like image projection.
@@ -30,8 +30,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property size
 	 * @default 10.0
 	 * @type {number}
-	*/
-	this.size = (size != undefined) ? size : 10.0;
+	 */
+	this.size = size != undefined ? size : 10.0;
 
 	/**
 	 * Aspect ratio X/Y.
@@ -39,8 +39,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property aspect
 	 * @default 1.0
 	 * @type {number}
-	*/
-	this.aspect = (aspect != undefined) ? aspect : 1.0;
+	 */
+	this.aspect = aspect != undefined ? aspect : 1.0;
 
 	/**
 	 * Camera resize mode.
@@ -48,15 +48,15 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property mode
 	 * @default RESIZE_HORIZONTAL
 	 * @type {number}
-	*/
-	this.mode = (mode !== undefined) ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
+	 */
+	this.mode = mode !== undefined ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
 
 	/**
 	 * Camera viewport indicates where the image is drawn on the screen.
 	 * 
 	 * @property viewport
 	 * @type {Viewport}
-	*/
+	 */
 	this.viewport = new Viewport();
 
 	/**
@@ -65,7 +65,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property clearColor
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearColor = true;
 
 	/**
@@ -74,7 +74,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property clearDepth
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearDepth = true;
 
 	/**
@@ -83,7 +83,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property clearDepth
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearStencil = true;
 
 	/**
@@ -94,7 +94,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @property order
 	 * @default 0
 	 * @type {number}
-	*/
+	 */
 	this.order = 0;
 
 	this.updateProjectionMatrix();
@@ -118,6 +118,7 @@ OrthographicCamera.prototype = Object.create(TOrthographicCamera.prototype);
 
 /**
  * Used to set camera to resize horizontally 
+ *
  * @attribute RESIZE_HORIZONTAL
  * @type {number}
  */
@@ -126,6 +127,7 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
 /**
  * Used to set camera to resize vertically.
  *  
+ *
  * @attribute RESIZE_VERTICAL
  * @type {number}
  */
@@ -187,7 +189,7 @@ OrthographicCamera.prototype.render = function(renderer, scene)
 OrthographicCamera.prototype.destroy = function()
 {
 	var scene = this.getScene();
-	if(scene !== null)
+	if (scene !== null)
 	{
 		scene.removeCamera(this);
 	}
@@ -206,14 +208,14 @@ OrthographicCamera.prototype.destroy = function()
  */
 OrthographicCamera.prototype.updateProjectionMatrix = function()
 {
-	if(this.mode === OrthographicCamera.RESIZE_HORIZONTAL)
+	if (this.mode === OrthographicCamera.RESIZE_HORIZONTAL)
 	{
 		this.top = this.size / 2;
 		this.bottom = -this.top;
 		this.right = this.top * this.aspect;
 		this.left = -this.right;
 	}
-	else if(this.mode === OrthographicCamera.RESIZE_VERTICAL)
+	else if (this.mode === OrthographicCamera.RESIZE_VERTICAL)
 	{
 		this.right = this.size / 2;
 		this.left = -this.right;

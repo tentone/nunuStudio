@@ -30,11 +30,11 @@ Mesh.prototype = Object.create(TMesh.prototype);
  */
 Mesh.prototype.dispose = function()
 {
-	if(this.material !== null && this.material.dispose !== undefined)
+	if (this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
-	if(this.geometry !== null && this.geometry.dispose !== undefined)
+	if (this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}

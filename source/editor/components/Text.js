@@ -1,5 +1,5 @@
-import {Component} from "./Component.js";
 import {Vector2} from "three";
+import {Component} from "./Component.js";
 
 /**
  * Text element without background.
@@ -20,7 +20,7 @@ function Text(parent)
 	 *
 	 * @attribute span
 	 * @type {Element}
- 	 */
+	 */
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);
@@ -70,12 +70,12 @@ Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 {
 	this.span.style.fontFamily = fontFamily;
 
-	if(fontWeight !== undefined)
+	if (fontWeight !== undefined)
 	{
 		this.span.style.fontWeight = fontWeight;
 	}
 
-	if(fontStyle !== undefined)
+	if (fontStyle !== undefined)
 	{
 		this.span.style.fontStyle = fontStyle;
 	}
@@ -89,7 +89,7 @@ Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  */
 Text.prototype.allowWordBreak = function(value)
 {
-	if(value === true)
+	if (value === true)
 	{
 		this.span.style.whiteSpace = "normal";
 		this.span.style.wordBreak = "break-word";
@@ -154,7 +154,7 @@ Text.prototype.setTextColor = function(color)
  */
 Text.prototype.setOverflow = function(overflow)
 {
-	if(overflow === Text.ELLIPSIS)
+	if (overflow === Text.ELLIPSIS)
 	{
 		this.span.style.whiteSpace = "nowrap";
 		this.span.style.textOverflow = "ellipsis";
@@ -177,17 +177,17 @@ Text.prototype.setOverflow = function(overflow)
  */
 Text.prototype.setAlignment = function(align)
 {
-	if(align === Text.CENTER)
+	if (align === Text.CENTER)
 	{
 		this.element.style.justifyContent = "center";
 		this.element.style.textAlign = "center";
 	}
-	else if(align === Text.LEFT)
+	else if (align === Text.LEFT)
 	{
 		this.element.style.justifyContent = "flex-start";
 		this.element.style.textAlign = "left";
 	}
-	else if(align === Text.RIGHT)
+	else if (align === Text.RIGHT)
 	{
 		this.element.style.justifyContent = "flex-end";
 		this.element.style.textAlign = "right";
@@ -205,15 +205,15 @@ Text.prototype.setAlignment = function(align)
  */
 Text.prototype.setVerticalAlignment = function(align)
 {
-	if(align === Text.CENTER)
+	if (align === Text.CENTER)
 	{
 		this.element.style.alignItems = "center";
 	}
-	else if(align === Text.TOP)
+	else if (align === Text.TOP)
 	{
  		this.element.style.alignItems = "flex-start";
 	}
-	else if(align === Text.BOTTOM)
+	else if (align === Text.BOTTOM)
 	{
 		this.element.style.alignItems = "flex-end";
 	}
@@ -248,7 +248,7 @@ Text.prototype.updateVisibility = function()
 
 Text.prototype.updateSize = function()
 {
-	if(this.fitContent)
+	if (this.fitContent)
 	{
 		this.size.x = this.span.clientWidth;
 		this.size.y = this.span.clientHeight;

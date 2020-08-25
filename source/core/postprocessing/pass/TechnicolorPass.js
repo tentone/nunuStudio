@@ -1,5 +1,5 @@
-import {ShaderPass} from "../ShaderPass.js";
 import {TechnicolorShader} from "three/examples/jsm/shaders/TechnicolorShader";
+import {ShaderPass} from "../ShaderPass.js";
 
 /**
  * Simulate technicolor television colors.

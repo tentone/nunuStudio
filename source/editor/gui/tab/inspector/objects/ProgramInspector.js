@@ -1,11 +1,11 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {ObjectInspector} from "./ObjectInspector.js";
 import {RendererConfigurationFormSnippet} from "../../../form-snippet/RendererConfigurationFormSnippet.js";
 import {Editor} from "../../../../Editor.js";
 import {TextBox} from "../../../../components/input/TextBox.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {ObjectInspector} from "./ObjectInspector.js";
 
 function ProgramInspector(parent, object)
 {
@@ -61,7 +61,7 @@ function ProgramInspector(parent, object)
 		Editor.addAction(new ChangeAction(self.object, "handlePixelRatio", self.handlePixelRatio.getValue()));
 	});
 	this.form.add(this.handlePixelRatio);
-	this.form.nextRow()
+	this.form.nextRow();
 
 	// AR
 	this.form.addText(Locale.augmentedReality);

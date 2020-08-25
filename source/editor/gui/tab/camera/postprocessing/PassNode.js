@@ -96,7 +96,7 @@ PassNode.passes = {};
 
 PassNode.createPass = function(element, type)
 {
-	if(PassNode.passes[type] !== undefined)
+	if (PassNode.passes[type] !== undefined)
 	{
 		return new PassNode.passes[type](element);
 	}

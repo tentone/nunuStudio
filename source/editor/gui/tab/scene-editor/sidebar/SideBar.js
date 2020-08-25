@@ -1,3 +1,5 @@
+import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon";
+import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {TextSprite} from "../../../../../core/objects/text/TextSprite.js";
@@ -11,7 +13,7 @@ import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmit
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
 import {HTMLView} from "../../../../../core/objects/misc/HTMLView.js";
-import {Group} from"../../../../../core/objects/misc/Group.js";
+import {Group} from "../../../../../core/objects/misc/Group.js";
 import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {SpotLight} from "../../../../../core/objects/lights/SpotLight.js";
 import {RectAreaLight} from "../../../../../core/objects/lights/RectAreaLight.js";
@@ -39,8 +41,6 @@ import {Editor} from "../../../../Editor.js";
 import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonDrawer} from "../../../../components/buttons/ButtonDrawer.js";
-import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon";
-import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 
 /**
  * Side bar is presented in the editor to add more objects to the scene.
@@ -102,7 +102,7 @@ SideBar.prototype.updateSize = function()
 	var y = 30, i = 0;
 
 	// Update buttons size
-	while(y < this.size.y - 2 * size && i < this.buttons.length)
+	while (y < this.size.y - 2 * size && i < this.buttons.length)
 	{
 		this.buttons[i].attachTo(this);
 		this.buttons[i].size.set(size, size);
@@ -115,13 +115,13 @@ SideBar.prototype.updateSize = function()
 		y += size;
 	}
 
-	if(this.size.y < 250)
+	if (this.size.y < 250)
 	{
 		this.more.setVisibility(false);
 	}
 	else
 	{
-		if(i < this.buttons.length)
+		if (i < this.buttons.length)
 		{
 			this.more.clear();
 			this.more.optionsSize.set(size, size);
@@ -129,7 +129,7 @@ SideBar.prototype.updateSize = function()
 			this.more.position.set(0, y);
 			this.more.visible = true;
 
-			while(i < this.buttons.length)
+			while (i < this.buttons.length)
 			{
 				this.more.insertOption(this.buttons[i]);
 				i++;
@@ -391,14 +391,14 @@ return target.set(x, y, z);`;
 	{
 		var texture = new Texture(Global.FILE_PATH + "sdf/roboto-bold.png");
 		var object = new TextBitmap(
-		{
-			font: JSON.parse(FileSystem.readFile(Global.FILE_PATH + "sdf/roboto-bold.json")),
-			text: "text",
-			width: 500,
-			align: TextBitmap.CENTER,
-			letterSpacing: 3,
-			color: 0xFFFFFF
-		}, texture, TextBitmap.SDF);
+			{
+				font: JSON.parse(FileSystem.readFile(Global.FILE_PATH + "sdf/roboto-bold.json")),
+				text: "text",
+				width: 500,
+				align: TextBitmap.CENTER,
+				letterSpacing: 3,
+				color: 0xFFFFFF
+			}, texture, TextBitmap.SDF);
 
 		Editor.addObject(object, self.editor.scene);
 	}, Locale.textBitmap);
@@ -517,7 +517,7 @@ return target.set(x, y, z);`;
 	// Particle emitter
 	effects.addOption(Global.FILE_PATH + "icons/misc/particles.png", function()
 	{
-		var particle = new ParticleEmitter()
+		var particle = new ParticleEmitter();
 		particle.texture = Editor.defaultTextureParticle;
 		particle.reload();
 		Editor.addObject(particle, self.editor.scene);
@@ -533,7 +533,7 @@ return target.set(x, y, z);`;
 	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
 		Editor.addObject(new CubeCamera(), self.editor.scene);
-	}, Locale.cubeCamera)
+	}, Locale.cubeCamera);
 
 	// Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio.png", function()
@@ -564,7 +564,7 @@ return target.set(x, y, z);`;
 		Editor.addObject(lensFlare, self.editor.scene);
 	}, Locale.lensFlare);
 
-	if(DEVELOPMENT)
+	if (DEVELOPMENT)
 	{
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{

@@ -7,7 +7,7 @@
  * @module BinaryUtils
  * @static
  */
-function ByteArrayUtils(){}
+function ByteArrayUtils() {}
 
 /**
  * Create byte array from base64 string data.
@@ -24,21 +24,21 @@ ByteArrayUtils.fromBase64 = function(str)
 
 	var a, b, c, d;
 
-	for(var i = 0, j = 0; i < length; i += 3)
+	for (var i = 0, j = 0; i < length; i += 3)
 	{
 		a = encoding.indexOf(str.charAt(j++));
 		b = encoding.indexOf(str.charAt(j++));
 		c = encoding.indexOf(str.charAt(j++));
 		d = encoding.indexOf(str.charAt(j++));
 
-		array[i] = (a << 2) | (b >> 4);
-		if(c !== 64)
+		array[i] = a << 2 | b >> 4;
+		if (c !== 64)
 		{
-			array[i+1] = ((b & 15) << 4) | (c >> 2);
+			array[i+1] = (b & 15) << 4 | c >> 2;
 		}
-		if(d !== 64)
+		if (d !== 64)
 		{
-			array[i+2] = ((c & 3) << 6) | d;
+			array[i+2] = (c & 3) << 6 | d;
 		}
 	}
 

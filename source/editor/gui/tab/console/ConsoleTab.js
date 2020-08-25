@@ -1,3 +1,4 @@
+import {Texture, Material, Matrix4, Matrix3} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Image} from "../../../../core/resources/Image.js";
 import {TextureRenderer} from "../../preview/TextureRenderer.js";
@@ -9,7 +10,6 @@ import {SearchBox} from "../../../components/SearchBox.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {Texture, Material, Matrix4, Matrix3} from "three";
 
 /**
  * Console tab is used for the user to access the system console output (that can be also accessed from the dev tools console).
@@ -168,21 +168,21 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @type {CodeMirror.TernServer}
 	 */
 	this.server = new CodeMirror.TernServer(
-	{
-		caseInsensitive: false,
-		defs: Editor.ternDefinitions
-	});
+		{
+			caseInsensitive: false,
+			defs: Editor.ternDefinitions
+		});
 
 	this.code.on("keypress", function(cm, event)
 	{
 		var typed = String.fromCharCode(event.charCode);
 
-		if(/[\w\.]/.exec(typed))
+		if (/[\w\.]/.exec(typed))
 		{
 			self.server.complete(cm);
 
 			// If there is no tern sugestion suggest known words
-			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			if (cm.state.completionActive == null || cm.state.completionActive.widget === null)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
 			}
@@ -190,20 +190,20 @@ function ConsoleTab(parent, closeable, container, index)
 	});
 
 	this.code.setOption("extraKeys",
-	{
-		"Enter": function()
 		{
-			self.runCommand(self.code.getValue());
-			self.code.setValue("");
-		},
-		"Up": function()
-		{
-			if(self.history.length > 0 && self.historyPointer > 0)
+			"Enter": function()
 			{
-				self.setText(self.history[self.historyPointer--]);
+				self.runCommand(self.code.getValue());
+				self.code.setValue("");
+			},
+			"Up": function()
+			{
+				if (self.history.length > 0 && self.historyPointer > 0)
+				{
+					self.setText(self.history[self.historyPointer--]);
+				}
 			}
-		}
-	})
+		});
 
 	this.input.oncontextmenu = function(event)
 	{
@@ -214,7 +214,7 @@ function ConsoleTab(parent, closeable, container, index)
 		context.addOption(Locale.copy, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 			}
@@ -222,7 +222,7 @@ function ConsoleTab(parent, closeable, container, index)
 		context.addOption(Locale.cut, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 				self.code.replaceSelection("");
@@ -257,7 +257,7 @@ ConsoleTab.prototype.runCommand = function(code)
 	CodeMirror.runMode(code, "javascript", container, {
 		mode: "javascript",
 		tabSize: Editor.settings.code.tabSize,
-		theme: Editor.settings.code.theme,
+		theme: Editor.settings.code.theme
 	});
 	this.content.appendChild(container);
 	
@@ -265,11 +265,12 @@ ConsoleTab.prototype.runCommand = function(code)
 	{
 		window.program = Editor.program;
 		var result = eval.call(window, code);
-		if(result !== undefined) {
+		if (result !== undefined) 
+		{
 			console.log(result);
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		console.error(e);
 	}
@@ -296,7 +297,7 @@ ConsoleTab.getStackTrace = function()
 	{
 		throw new Error("");
 	}
-	catch(error)
+	catch (error)
 	{
 		stack = error.stack || "";
 		stack = stack.split("\n").map(function(line)
@@ -323,7 +324,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 
 	this.enabled = enabled;
 
-	if(this.enabled)
+	if (this.enabled)
 	{
 		window.console.log = function()
 		{
@@ -369,7 +370,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
  */
 ConsoleTab.prototype.log = function(args)
 {
-	for(var i = 0; i < args.length; i++)
+	for (var i = 0; i < args.length; i++)
 	{
 		this.content.appendChild(ConsoleTab.createMessage(args[i]));
 	}
@@ -390,7 +391,7 @@ ConsoleTab.prototype.log = function(args)
  */
 ConsoleTab.prototype.warn = function(args)
 {
-	for(var i = 0; i < args.length; i++)
+	for (var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "var(--color-console-warn)";
@@ -409,7 +410,7 @@ ConsoleTab.prototype.warn = function(args)
  */
 ConsoleTab.prototype.error = function(args)
 {
-	for(var i = 0; i < args.length; i++)
+	for (var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "var(--color-console-error)";
@@ -430,7 +431,7 @@ ConsoleTab.prototype.clear = function()
 {
 	this.history = [];
 
-	while(this.content.hasChildNodes())
+	while (this.content.hasChildNodes())
 	{
     	this.content.removeChild(this.content.lastChild);
 	}
@@ -442,7 +443,7 @@ ConsoleTab.prototype.updateSize = function()
 {
 	TabComponent.prototype.updateSize.call(this);
 
-	this.content.style.height = (this.size.y - 30) + "px";
+	this.content.style.height = this.size.y - 30 + "px";
 	this.content.style.width = this.size.x + "px";
 
 	this.input.style.height = "30px";
@@ -466,7 +467,7 @@ ConsoleTab.createMessage = function(object)
 	log.style.width = "100%";
 	log.style.color = "var(--color-light)";
 
-	if(object === undefined)
+	if (object === undefined)
 	{
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
@@ -475,7 +476,7 @@ ConsoleTab.createMessage = function(object)
 		container.appendChild(document.createTextNode("undefined"));
 		log.appendChild(container);
 	}
-	else if(object === null)
+	else if (object === null)
 	{
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
@@ -484,7 +485,7 @@ ConsoleTab.createMessage = function(object)
 		container.appendChild(document.createTextNode("null"));
 		log.appendChild(container);
 	}
-	else if(object instanceof Image)
+	else if (object instanceof Image)
 	{
 		var preview = document.createElement("img");
 		preview.src = object.data;
@@ -515,7 +516,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof Texture)
+	else if (object instanceof Texture)
 	{
 		var preview = TextureRenderer.generateElement(object);
 		preview.height = 70;
@@ -538,7 +539,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof Material)
+	else if (object instanceof Material)
 	{
 		var preview = MaterialRenderer.generateElement(object);
 		preview.height = 60;
@@ -561,7 +562,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object.isVector2)
+	else if (object.isVector2)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -576,7 +577,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object.isVector3)
+	else if (object.isVector3)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -593,7 +594,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object.isVector4 || object.isQuaternion)
+	else if (object.isVector4 || object.isQuaternion)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -612,12 +613,12 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof Matrix4)
+	else if (object instanceof Matrix4)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
 
-		for(var i = 0, j = 0; i < 16; i += 4, j++)
+		for (var i = 0, j = 0; i < 16; i += 4, j++)
 		{
 			var row = table.insertRow(j);
 			row.insertCell(0).appendChild(document.createTextNode(object.elements[i]));
@@ -628,12 +629,12 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof Matrix3)
+	else if (object instanceof Matrix3)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
 
-		for(var i = 0, j = 0; i < 9; i += 3, j++)
+		for (var i = 0, j = 0; i < 9; i += 3, j++)
 		{
 			var row = table.insertRow(j);
 			row.insertCell(0).appendChild(document.createTextNode(object.elements[i]));
@@ -643,7 +644,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof Error)
+	else if (object instanceof Error)
 	{
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
@@ -652,7 +653,7 @@ ConsoleTab.createMessage = function(object)
 		container.appendChild(document.createTextNode(object = object.message));
 		log.appendChild(container);
 	}
-	else if(object instanceof Object)
+	else if (object instanceof Object)
 	{
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
@@ -663,7 +664,7 @@ ConsoleTab.createMessage = function(object)
 		{
 			container.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
 		}
-		catch(e)
+		catch (e)
 		{
 			container.appendChild(document.createTextNode(object));
 		}

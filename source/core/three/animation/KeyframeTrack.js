@@ -7,11 +7,11 @@ THREE.KeyframeTrack.prototype.setColor = function(color)
 
 THREE.KeyframeTrack.prototype.sort = function()
 {
-	for(var i = 0; i < this.times.length; i++)
+	for (var i = 0; i < this.times.length; i++)
 	{
-		for(var j = i + 1; j < this.times.length; j++)
+		for (var j = i + 1; j < this.times.length; j++)
 		{
-			if(this.times[i] > this.times[j])
+			if (this.times[i] > this.times[j])
 			{
 				var temp = this.times[j];
 				this.times[j] = this.times[i];
@@ -21,7 +21,7 @@ THREE.KeyframeTrack.prototype.sort = function()
 				var k = j * valueSize;
 				var l = i * valueSize;
 
-				for(var m = 0; m < valueSize; m++)
+				for (var m = 0; m < valueSize; m++)
 				{
 					var temp = this.values[k + m];
 					this.values[k + m] = this.values[l + m];
@@ -47,7 +47,7 @@ THREE.KeyframeTrack.parse = function(json)
 {
 	var track = THREE.KeyframeTrack._parse.call(this, json);
 
-	if(json.color !== undefined)
+	if (json.color !== undefined)
 	{
 		track.color = json.color;
 	}

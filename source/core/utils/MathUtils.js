@@ -7,7 +7,7 @@
  * @class MathUtils
  * @module Utils
  */
-function MathUtils(){}
+function MathUtils() {}
 
 /**
  * Value of PI*2. 360 degrees.
@@ -46,7 +46,7 @@ MathUtils.randomColor = function()
 	var letters = "0123456789ABCDEF";
 	var color = "#";
 
-	for(var i = 0; i < 6; i++)
+	for (var i = 0; i < 6; i++)
 	{
 		color += letters[Math.floor(Math.random() * 16)];
 	}

@@ -3,12 +3,12 @@ import {Nunu} from "../../../../../core/Nunu.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Asset} from "./Asset.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
+import {Asset} from "./Asset.js";
 
 
 function ImageAsset(parent)
@@ -38,7 +38,7 @@ function ImageAsset(parent)
 		
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename + " " + Locale.image, self.asset.name)));
 			}
@@ -46,7 +46,7 @@ function ImageAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(Editor.confirm(Locale.delete + " " + Locale.image))
+			if (Editor.confirm(Locale.delete + " " + Locale.image))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
 			}
@@ -54,11 +54,11 @@ function ImageAsset(parent)
 
 		context.addOption(Locale.export, function()
 		{
-			if(Nunu.runningOnDesktop())
+			if (Nunu.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{
-					if(files.length > 0)
+					if (files.length > 0)
 					{
 						self.asset.export(files[0].path);
 					}
@@ -91,7 +91,7 @@ function ImageAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		// Insert into drag buffer
-		if(self.asset !== null)
+		if (self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);

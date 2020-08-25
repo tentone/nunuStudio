@@ -1,8 +1,8 @@
+import {Vector3, Quaternion, Object3D} from "three";
 import {Model} from "../../resources/Model.js";
 import {Audio} from "../../resources/Audio.js";
 import {Scene} from "../Scene.js";
 import {AudioEmitter} from "./AudioEmitter.js";
-import {Vector3, Quaternion, Object3D} from "three";
 
 /**
  * PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.
@@ -83,9 +83,9 @@ PositionalAudio.prototype.initialize = function()
 	AudioEmitter.prototype.initialize.call(this);
 	
 	var node = this.parent;
-	while(node !== null)
+	while (node !== null)
 	{
-		if(node instanceof Scene)
+		if (node instanceof Scene)
 		{
 			this.scene = node;
 			break;
@@ -102,7 +102,7 @@ PositionalAudio.prototype.initialize = function()
  */
 PositionalAudio.prototype.update = function(delta)
 {
-	if(this.scene.cameras.length > 0)
+	if (this.scene.cameras.length > 0)
 	{
 		var camera = this.scene.cameras[0];
 

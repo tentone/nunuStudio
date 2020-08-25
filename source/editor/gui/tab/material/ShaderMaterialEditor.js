@@ -1,8 +1,8 @@
+import {PerspectiveCamera, Scene, Object3D, PointLight, AmbientLight, Mesh, FrontSide, BackSide, DoubleSide, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {MaterialEditor} from "./MaterialEditor.js";
 import {CodeEditor} from "../code/CodeEditor.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
@@ -15,7 +15,7 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {PerspectiveCamera, Scene, Object3D, PointLight, AmbientLight, Mesh, FrontSide, BackSide, DoubleSide, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending} from "three";
+import {MaterialEditor} from "./MaterialEditor.js";
 
 
 function ShaderMaterialEditor(parent, closeable, container, index)
@@ -103,7 +103,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
-	for(var i = 0; i < MaterialEditor.geometries.length; i++)
+	for (var i = 0; i < MaterialEditor.geometries.length; i++)
 	{
 		this.testModel.addValue(MaterialEditor.geometries[i][0], i);
 	}
@@ -279,7 +279,7 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 {
 	this.mesh.material = material;
 
-	if(asset !== undefined)
+	if (asset !== undefined)
 	{
 		this.asset = asset;
 	}

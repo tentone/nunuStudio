@@ -1,8 +1,8 @@
+import {Math} from "three";
+import {Component} from "../Component.js";
 import {TabGroup} from "./TabGroup.js";
 import {TabButton} from "./TabButton.js";
 import {TabContainer} from "./splittable/TabContainer.js";
-import {Component} from "../Component.js";
-import {Math} from "three";
 
 /**
  * Tab element is used to create tabbed elements.
@@ -84,7 +84,7 @@ TabComponent.prototype = Object.create(Component.prototype);
  *
  * @method updateMetadata
  */
-TabComponent.prototype.updateMetadata = function(){};
+TabComponent.prototype.updateMetadata = function() {};
 
 /**
  * Update tab settings.
@@ -95,7 +95,7 @@ TabComponent.prototype.updateMetadata = function(){};
  *
  * @method updateSettings
  */
-TabComponent.prototype.updateSettings = function(){};
+TabComponent.prototype.updateSettings = function() {};
 
 /**
  * Update tab values of the gui for the object attached.
@@ -106,7 +106,7 @@ TabComponent.prototype.updateSettings = function(){};
  *
  * @method updateValues
  */
-TabComponent.prototype.updateValues = function(){};
+TabComponent.prototype.updateValues = function() {};
 
 /**
  * Update tab object view.
@@ -117,7 +117,7 @@ TabComponent.prototype.updateValues = function(){};
  *
  * @method updateObjectsView
  */
-TabComponent.prototype.updateObjectsView = function(){};
+TabComponent.prototype.updateObjectsView = function() {};
 
 /**
  * Update tab after object selection changed.
@@ -128,7 +128,7 @@ TabComponent.prototype.updateObjectsView = function(){};
  *
  * @method updateSelection
  */
-TabComponent.prototype.updateSelection = function(){};
+TabComponent.prototype.updateSelection = function() {};
 
 /**
  * Activate tab.
@@ -139,13 +139,13 @@ TabComponent.prototype.updateSelection = function(){};
  */
 TabComponent.prototype.activate = function()
 {
-	if(this.active === true)
+	if (this.active === true)
 	{
 		this.deactivate();
 	}
 	
 	// TODO <IF TAB NEEDS UPDATE IT SHOULD TAKE CARE OF IT>
-	if(this.update !== undefined)
+	if (this.update !== undefined)
 	{
 		var self = this;
 
@@ -153,7 +153,7 @@ TabComponent.prototype.activate = function()
 		{
 			self.update();
 
-			if(self.active === true)
+			if (self.active === true)
 			{
 				requestAnimationFrame(update);
 			}
@@ -185,7 +185,7 @@ TabComponent.prototype.deactivate = function()
  * @method attach
  * @param {Object} object
  */
-TabComponent.prototype.attach = function(){};
+TabComponent.prototype.attach = function() {};
 
 /**
  * Check if an object or resource is attached to the tab.
@@ -262,7 +262,7 @@ TabComponent.prototype.destroy = function()
 {
 	Component.prototype.destroy.call(this);
 	
-	if(this.button !== null)
+	if (this.button !== null)
 	{
 		this.button.destroy();
 	}

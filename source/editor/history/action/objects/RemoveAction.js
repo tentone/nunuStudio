@@ -1,7 +1,7 @@
-import {AddAction} from "./AddAction.js";
+import {Object3D, Camera} from "three";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";
-import {Object3D, Camera} from "three";
+import {AddAction} from "./AddAction.js";
 
 /**
  * Remove object from the scene.
@@ -17,16 +17,16 @@ function RemoveAction(object, parent)
 	
 	this.object = object;
 
-	this.parent = (parent !== undefined) ? parent : object.parent;
+	this.parent = parent !== undefined ? parent : object.parent;
 	this.index = -1;
 }
 
 RemoveAction.prototype.apply = function()
 {
-	if(this.object instanceof Camera)
+	if (this.object instanceof Camera)
 	{
 		var scene = this.object.getScene();
-		if(scene !== null)
+		if (scene !== null)
 		{
 			scene.removeCamera(this.object);
 		}
@@ -40,7 +40,7 @@ RemoveAction.prototype.apply = function()
 
 RemoveAction.prototype.revert = function()
 {
-	if(this.index === -1)
+	if (this.index === -1)
 	{
 		this.parent.add(this.object);
 	}
@@ -55,7 +55,7 @@ RemoveAction.prototype.revert = function()
 
 RemoveAction.updateGUI = function(object, parent)
 {
-	if(Editor.isSelected(object))
+	if (Editor.isSelected(object))
 	{
 		Editor.unselectObject(object);
 	}

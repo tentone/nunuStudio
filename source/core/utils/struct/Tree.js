@@ -14,7 +14,7 @@ import {Math} from "three";
  */
 function Tree(value)
 {
-	this.value = (value !== undefined) ? value : null;
+	this.value = value !== undefined ? value : null;
 	
 	this.uuid = Math.generateUUID();
 	this.parent = null;
@@ -29,7 +29,7 @@ function Tree(value)
  */
 Tree.prototype.add = function(tree)
 {
-	if(tree instanceof Tree)
+	if (tree instanceof Tree)
 	{
 		this.children.push(tree);
 		tree.parent = this;
@@ -54,9 +54,9 @@ Tree.prototype.remove = function(tree)
 {
 	var uuid = tree.uuid;
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].uuid === uuid)
+		if (this.children[i].uuid === uuid)
 		{
 			this.children.splice(i, 1);
 			return;
@@ -78,7 +78,7 @@ Tree.prototype.clone = function()
 	tree.uuid = this.uuid;
 	tree.value = this.value;
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		tree.add(this.children[i].clone());
 	}
@@ -94,19 +94,19 @@ Tree.prototype.clone = function()
  */
 Tree.prototype.print = function(level)
 {
-	if(level === undefined)
+	if (level === undefined)
 	{
 		level = 1;
 	}
 
 	var space = "";
-	for(var i = level - 1; i > 0; i--)
+	for (var i = level - 1; i > 0; i--)
 	{
 		space += "----";
 	}
 	space += "--->";
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		console.log(space + this.children[i].value + "(" + this.children[i].uuid + ")");
 		this.children[i].print(level + 1);

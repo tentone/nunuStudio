@@ -1,3 +1,4 @@
+import {Color, PointLight, AmbientLight, Mesh} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
@@ -7,7 +8,6 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Color, PointLight, AmbientLight, Mesh} from "three";
 
 function MeshMaterialEditor(parent, closeable, container, index)
 {
@@ -103,7 +103,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.flatShading.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
-			self.material.needsUpdate = true;
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.flatShading);
 	this.form.nextRow();
@@ -115,7 +115,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.color.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "color", new Color(self.color.getValueHex())));
-			self.material.needsUpdate = true;
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -141,7 +141,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
-	for(var i = 0; i < MaterialEditor.geometries.length; i++)
+	for (var i = 0; i < MaterialEditor.geometries.length; i++)
 	{
 		this.testModel.addValue(MaterialEditor.geometries[i][0], i);
 	}
@@ -216,7 +216,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 }
 
-MeshMaterialEditor.prototype = Object.create(MaterialEditor.prototype)
+MeshMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
 MeshMaterialEditor.prototype.attach = function(material, asset)
 {

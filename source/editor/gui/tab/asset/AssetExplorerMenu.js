@@ -1,3 +1,4 @@
+import {MeshStandardMaterial, MeshPhysicalMaterial, MeshPhongMaterial, MeshBasicMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, SpriteMaterial, PointsMaterial, LineBasicMaterial, LineDashedMaterial, ShaderMaterial, RawShaderMaterial, MeshNormalMaterial, MeshDepthMaterial, MeshDistanceMaterial, ShadowMaterial} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {WebcamTexture} from "../../../../core/texture/WebcamTexture.js";
 import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
@@ -13,7 +14,6 @@ import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {DropdownMenu} from "../../../components/dropdown/DropdownMenu.js";
 import {Component} from "../../../components/Component.js";
-import {MeshStandardMaterial, MeshPhysicalMaterial, MeshPhongMaterial, MeshBasicMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, SpriteMaterial, PointsMaterial, LineBasicMaterial, LineDashedMaterial, ShaderMaterial, RawShaderMaterial, MeshNormalMaterial, MeshDepthMaterial, MeshDistanceMaterial, ShadowMaterial} from "three";
 
 
 function AssetExplorerMenu(parent)
@@ -29,12 +29,12 @@ function AssetExplorerMenu(parent)
 	menu.size.set(100, 25);
 	menu.position.set(0, 0);
 
-	//3D Models Loader
+	// 3D Models Loader
 	menu.addOption(Locale.models3D, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{	
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadModel(files[i]);
 			}
@@ -46,7 +46,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadFont(files[i]);
 			}
@@ -58,7 +58,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadText(files[i]);
 			}
@@ -70,7 +70,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadAudio(files[i]);
 			}
@@ -78,13 +78,13 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/audio.png");
 	
 	// Spine Animation
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		menu.addOption(Locale.spineAnimation, function()
 		{
 			FileSystem.chooseFile(function(files)
 			{
-				for(var i = 0; i < files.length; i++)
+				for (var i = 0; i < files.length; i++)
 				{
 					Loaders.loadSpineAnimation(files[i]);
 				}
@@ -105,7 +105,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadTexture(files[i]);
 			}
@@ -117,7 +117,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				var file = files[i];
 				var name = FileSystem.getFileName(file.name);
@@ -127,7 +127,7 @@ function AssetExplorerMenu(parent)
 
 				reader.onload = function()
 				{
-					var texture = new SpriteSheetTexture(new Image(reader.result, extension), 1, 1 ,1);
+					var texture = new SpriteSheetTexture(new Image(reader.result, extension), 1, 1, 1);
 					texture.name = name;
 					Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 				};
@@ -159,7 +159,7 @@ function AssetExplorerMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadVideoTexture(files[i]);
 			}
@@ -262,10 +262,10 @@ function AssetExplorerMenu(parent)
 	material.addOption(Locale.shaderMaterial, function()
 	{
 		var material = new ShaderMaterial(
-		{
-			vertexShader: "void main()\n{\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}",
-			fragmentShader: "void main()\n{\n\tgl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n}"
-		});
+			{
+				vertexShader: "void main()\n{\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}",
+				fragmentShader: "void main()\n{\n\tgl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n}"
+			});
 		material.name = "shader";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/script/script.png");

@@ -1,3 +1,4 @@
+import {Scene, RepeatWrapping, NearestFilter, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Texture} from "../../../../core/texture/Texture.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
@@ -13,7 +14,6 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Scene, RepeatWrapping, NearestFilter, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 
 function TextureEditor(parent, closeable, container, index)
 {
@@ -28,7 +28,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
-		self.camera.mode = (self.camera.aspect > 1) ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
+		self.camera.mode = self.camera.aspect > 1 ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
 		self.camera.updateProjectionMatrix();
 	});
 
@@ -77,7 +77,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.texture !== null)
+		if (self.texture !== null)
 		{
 			Editor.addAction(new ChangeAction(self.texture, "name", self.name.getText()));
 			self.updatePreview();
@@ -268,33 +268,33 @@ TextureEditor.prototype.updatePreview = function()
 {
 	this.sprite.material.map.needsUpdate = true;
 	this.sprite.material.needsUpdate = true;
-}
+};
 
 // Check if texture is attached to tab
 TextureEditor.prototype.isAttached = function(texture)
 {
 	return this.texture === texture;
-}
+};
 
 // Update object data
 TextureEditor.prototype.updateMetadata = function()
 {
-	if(this.texture !== null)
+	if (this.texture !== null)
 	{
 		// Set name
-		if(this.texture.name !== undefined)
+		if (this.texture.name !== undefined)
 		{
 			this.setName(this.texture.name);
 			this.name.setText(this.texture.name);
 		}
 
 		// If not found close tab
-		if(Editor.program.textures[this.texture.uuid] === undefined)
+		if (Editor.program.textures[this.texture.uuid] === undefined)
 		{
 			this.close();
 		}
 	}
-}
+};
 
 // Attach texure
 TextureEditor.prototype.attach = function(texture)

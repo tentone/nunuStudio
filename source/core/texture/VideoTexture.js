@@ -1,5 +1,5 @@
-import {Video} from "../resources/Video.js";
 import {Texture, LinearFilter, RGBFormat} from "three";
+import {Video} from "../resources/Video.js";
 
 /**
  * Video texture, uses a video DOM element instead of a img element.
@@ -87,9 +87,9 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	var self = this;
 	function update()
 	{
-		if(!self.disposed)
+		if (!self.disposed)
 		{
-			if(self.image.readyState >= self.image.HAVE_CURRENT_DATA)
+			if (self.image.readyState >= self.image.HAVE_CURRENT_DATA)
 			{
 				self.needsUpdate = true;
 			}
@@ -114,14 +114,14 @@ VideoTexture.isVideoTexture = true;
  */
 VideoTexture.prototype.setVideo = function(video)
 {
-	if(video === null || video === undefined)
+	if (video === null || video === undefined)
 	{
 		this.video = null;
 		this.image.src = null;
 		return;
 	}
 
-	this.video = (typeof video === "string") ? new Video(video) : video;
+	this.video = typeof video === "string" ? new Video(video) : video;
 	this.image.src = this.video.data;
 };
 
@@ -134,7 +134,7 @@ VideoTexture.prototype.setVideo = function(video)
 VideoTexture.prototype.setTime = function(time)
 {
 	this.image.currentTime = time;
-}
+};
 
 /**
  * Set loop mode.
@@ -156,7 +156,7 @@ VideoTexture.prototype.setLoop = function(loop)
  */
 VideoTexture.prototype.setVolume = function(volume)
 {
-	this.volume = (volume >= 0 && volume <= 1) ? volume : (volume >= 0) ? 1.0 : 0.0;
+	this.volume = volume >= 0 && volume <= 1 ? volume : volume >= 0 ? 1.0 : 0.0;
 	this.image.volume = this.volume;
 };
 
@@ -172,7 +172,7 @@ VideoTexture.prototype.setAutoPlay = function(value)
 {
 	this.autoplay = value;
 	this.image.autoplay = this.autoplay;
-}
+};
 
 /**
  * Set video playback speed.
@@ -193,7 +193,7 @@ VideoTexture.prototype.setPlaybackRate = function(playbackRate)
  */
 VideoTexture.prototype.pause = function()
 {
-	if(!this.image.paused)
+	if (!this.image.paused)
 	{
 		this.image.pause();
 	}
@@ -206,7 +206,7 @@ VideoTexture.prototype.pause = function()
  */
 VideoTexture.prototype.play = function()
 {
-	if(this.image.paused)
+	if (this.image.paused)
 	{
 		this.image.play();
 	}

@@ -64,7 +64,7 @@ function TwistModifier(angle, start, end)
 TwistModifier.prototype.modify = function(geometry)
 {
 	// Convert the geometry from buffer geometry to regular geometry
-	if(geometry instanceof BufferGeometry)
+	if (geometry instanceof BufferGeometry)
 	{
 		geometry = new Geometry();
 		geometry.fromBufferGeometry(Editor.selection[0].geometry);
@@ -78,11 +78,11 @@ TwistModifier.prototype.modify = function(geometry)
 	// Apply transformation to all vertices in the geometry.
 	var quaternion = new Quaternion();
 
-	for(var i = 0; i < geometry.vertices.length; i++)
+	for (var i = 0; i < geometry.vertices.length; i++)
 	{
 		var y = geometry.vertices[i].y;
 
-		if(y >= this.start && y <= this.end)
+		if (y >= this.start && y <= this.end)
 		{
 			// Calculate angle to apply interpolated from start to end
 			var interpolate = (y - this.start) / (this.end - this.start);
@@ -90,7 +90,7 @@ TwistModifier.prototype.modify = function(geometry)
 			quaternion.setFromAxisAngle(this.direction, this.angle * interpolate);
 			geometry.vertices[i].applyQuaternion(quaternion);
 		}
-		else if(y > this.end)
+		else if (y > this.end)
 		{
 			quaternion.setFromAxisAngle(this.direction, this.angle);
 			geometry.vertices[i].applyQuaternion(quaternion);
@@ -101,7 +101,7 @@ TwistModifier.prototype.modify = function(geometry)
 	geometry.verticesNeedUpdate = true;
 
 	// Convert to buffer geometry if necessary
-	if(this.bufferGeometry)
+	if (this.bufferGeometry)
 	{
 		var bufferGeometry = new BufferGeometry();
 		bufferGeometry.fromGeometry(geometry);

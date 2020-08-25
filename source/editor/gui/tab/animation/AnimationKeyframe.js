@@ -42,21 +42,21 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(!Editor.confirm("Delete keyframe?"))
+			if (!Editor.confirm("Delete keyframe?"))
 			{
 				return;
 			}
 
-			if(self.track.times.length === 1)
+			if (self.track.times.length === 1)
 			{
 				Editor.alert("Track needs to have at least one keyframe!");
 				return;
 			}
 			
 			var times = [];
-			for(var i = 0; i < self.track.times.length; i++)
+			for (var i = 0; i < self.track.times.length; i++)
 			{
-				if(i !== self.index)
+				if (i !== self.index)
 				{
 					times.push(self.track.times[i]);
 				}
@@ -67,9 +67,9 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 			var min = self.index * valueSize;
 			var max = min + valueSize - 1;
 
-			for(var i = 0; i < self.track.values.length; i++)
+			for (var i = 0; i < self.track.values.length; i++)
 			{
-				if(i < min || i > max)
+				if (i < min || i > max)
 				{
 					values.push(self.track.values[i]);
 				}
@@ -86,7 +86,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 		{
 			var time = Number.parseFloat(Editor.prompt("Keyframe time"));
 
-			if(isNaN(time))
+			if (isNaN(time))
 			{
 				Editor.alert("Invalid time value!");
 				return;

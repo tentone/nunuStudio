@@ -1,11 +1,11 @@
-import {TreeNode} from "./TreeNode.js";
+import {Object3D} from "three";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabGroup} from "../../../components/tabs/TabGroup.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {SearchBox} from "../../../components/SearchBox.js";
 import {Component} from "../../../components/Component.js";
-import {Object3D} from "three";
+import {TreeNode} from "./TreeNode.js";
 
 /**
  * TreeView component is used to represent a object tree.
@@ -58,12 +58,12 @@ TreeView.prototype.selectByName = function(search)
 	function filterRecursive(node)
 	{
 		var text = node.object.name.toLowerCase();
-		if(text.search(search) !== -1)
+		if (text.search(search) !== -1)
 		{
 			Editor.addToSelection(node.object);
 		}
 
-		for(var i = 0; i < node.children.length; i++)
+		for (var i = 0; i < node.children.length; i++)
 		{
 			filterRecursive(node.children[i]);
 		}
@@ -80,7 +80,7 @@ TreeView.prototype.selectByName = function(search)
  */
 TreeView.prototype.attach = function(program)
 {	
-	if(this.program === program)
+	if (this.program === program)
 	{
 		return;
 	}
@@ -88,7 +88,7 @@ TreeView.prototype.attach = function(program)
 	this.program = program;
 
 	// Destroy old root object
-	if(this.root !== null)
+	if (this.root !== null)
 	{
 		this.root.destroy();
 		this.root = null;
@@ -113,7 +113,7 @@ TreeView.prototype.traverse = function(callback)
 	{
 		callback(node);
 
-		for(var i = 0; i < node.children.length; i++)
+		for (var i = 0; i < node.children.length; i++)
 		{
 			traverse(node.children[i]);
 		}
@@ -135,7 +135,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 	var parentNode = null;
 	this.traverse(function(node)
 	{
-		if(node.uuid === parent.uuid)
+		if (node.uuid === parent.uuid)
 		{
 			parentNode = node;
 		}
@@ -143,7 +143,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 
 	// Create object and children
 	var element = parentNode.insertObject(object, index);
-	for(var k = 0; k < object.children.length; k++)
+	for (var k = 0; k < object.children.length; k++)
 	{
 		insertObject(element, object.children[k]);
 	}
@@ -155,7 +155,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 	{
 		var element = parent.addObject(object);
 
-		for(var k = 0; k < object.children.length; k++)
+		for (var k = 0; k < object.children.length; k++)
 		{
 			insertObject(element, object.children[k]);
 		}
@@ -174,7 +174,7 @@ TreeView.prototype.removeObject = function(object, parent)
 	var parentNode = null;
 	this.traverse(function(node)
 	{
-		if(node.uuid === parent.uuid)
+		if (node.uuid === parent.uuid)
 		{
 			parentNode = node;
 		}
@@ -182,7 +182,7 @@ TreeView.prototype.removeObject = function(object, parent)
 
 	var node = parentNode.removeElementUUID(object.uuid);
 
-	if(node !== null)
+	if (node !== null)
 	{
 		node.destroy();	
 	}
@@ -221,13 +221,13 @@ TreeView.prototype.buildTree = function()
 	{
 		var element = root.addObject(object);
 
-		for(var i = 0; i < object.children.length; i++)
+		for (var i = 0; i < object.children.length; i++)
 		{
 			fillTree(element, object.children[i]);
 		}
 	}
 
-	if(this.root !== null)
+	if (this.root !== null)
 	{
 		this.root.destroy();
 		this.root = null;
@@ -237,7 +237,7 @@ TreeView.prototype.buildTree = function()
 	this.root.attach(this.program);
 	this.root.updateInterface();
 
-	for(var i = 0; i < this.program.children.length; i++)
+	for (var i = 0; i < this.program.children.length; i++)
 	{
 		fillTree(this.root, this.program.children[i]);
 	}
@@ -253,12 +253,12 @@ TreeView.prototype.updateChildPosition = function()
 	// Check if parent if folded (recursive)
 	function checkParentFolded(element)
 	{
-		if(element.parent === null)
+		if (element.parent === null)
 		{
 			return false;
 		}
 
-		if(element.folded === true)
+		if (element.folded === true)
 		{
 			return true;
 		}
@@ -272,11 +272,11 @@ TreeView.prototype.updateChildPosition = function()
 		var children = parent.children;
 		var length = parent.children.length;
 
-		for(var i = 0; i < length; i++)
+		for (var i = 0; i < length; i++)
 		{
 			var element = children[i];
 
-			if(folded || checkParentFolded(parent))
+			if (folded || checkParentFolded(parent))
 			{
 				element.setVisibility(false);
 				folded = true;
@@ -292,7 +292,7 @@ TreeView.prototype.updateChildPosition = function()
 				position += 20;
 			}
 
-			if(element.children.length > 0)
+			if (element.children.length > 0)
 			{
 				position = updateChildPosition(children[i], position, level + 1, folded);
 			}
@@ -301,7 +301,7 @@ TreeView.prototype.updateChildPosition = function()
 		return position;
 	}
 
-	if(this.root !== null)
+	if (this.root !== null)
 	{
 		this.root.position.set(0, this.search.size.y);
 		this.root.updateInterface();

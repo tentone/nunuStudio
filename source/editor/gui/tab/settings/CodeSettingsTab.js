@@ -35,7 +35,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeTheme);
 	this.form.nextRow();
 	
-	for(var i = 0; i < CodemirrorThemes.length; i++)
+	for (var i = 0; i < CodemirrorThemes.length; i++)
 	{
 		this.codeTheme.addValue(CodemirrorThemes[i], CodemirrorThemes[i]);
 	}

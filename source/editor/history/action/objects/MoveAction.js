@@ -1,6 +1,6 @@
+import {Object3D, Matrix4} from "three";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";
-import {Object3D, Matrix4} from "three";
 
 /**
  * Action to represent a object move in the children tree.
@@ -34,12 +34,12 @@ MoveAction.prototype.apply = function()
 {
 	this.oldParent.remove(this.object);
 	
-	if(this.keepGlobalPose)
+	if (this.keepGlobalPose)
 	{
 		this.inverseTransform(this.oldParent, this.newParent);
 	}
 
-	if(this.newIndex === undefined)
+	if (this.newIndex === undefined)
 	{
 		this.newParent.add(this.object);
 		this.newIndex = this.newParent.children.indexOf(this.object);
@@ -58,7 +58,7 @@ MoveAction.prototype.revert = function()
 {
 	this.newParent.remove(this.object);
 
-	if(this.keepGlobalPose)
+	if (this.keepGlobalPose)
 	{
 		this.inverseTransform(this.newParent, this.oldParent);
 	}
@@ -90,14 +90,13 @@ MoveAction.prototype.inverseTransform = function(oldParent, newParent)
 
 MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
-	if(this.keepGlobalPose)
+	if (this.keepGlobalPose)
 	{
 		Editor.gui.inspector.updateValues();
 	}
 	
 	Editor.gui.tree.moveObject(object, oldParent, newParent, newIndex);
 };
-
 
 
 export {MoveAction};

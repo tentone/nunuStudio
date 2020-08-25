@@ -1,8 +1,8 @@
+import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math as TMath} from "three";
 import {RenderPass} from "../../postprocessing/RenderPass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
-import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math as TMath} from "three";
 
 /**
  * Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.
@@ -45,7 +45,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * 
 	 * @property viewport
 	 * @type {Viewport}
-	*/
+	 */
 	this.viewport = new Viewport();
 	
 	TPerspectiveCamera.call(this, fov, aspect, near, far);
@@ -58,7 +58,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * @property clearColor
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearColor = true;
 
 	/**
@@ -67,7 +67,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * @property clearDepth
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearDepth = true;
 
 	/**
@@ -76,7 +76,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * @property clearDepth
 	 * @default false
 	 * @type {boolean}
-	*/
+	 */
 	this.clearStencil = true;
 
 	/**
@@ -87,7 +87,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * @property order
 	 * @default 0
 	 * @type {number}
-	*/
+	 */
 	this.order = 0;
 
 	/**
@@ -164,7 +164,7 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 PerspectiveCamera.prototype.destroy = function()
 {
 	var scene = this.getScene();
-	if(scene !== null)
+	if (scene !== null)
 	{
 		scene.removeCamera(this);
 	}
@@ -186,7 +186,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 	var width = this.aspect * height;
 	var left = -0.5 * width;
 
-	if(this.filmOffset !== 0)
+	if (this.filmOffset !== 0)
 	{
 		left += this.near * this.filmOffset / this.getFilmWidth();
 	}

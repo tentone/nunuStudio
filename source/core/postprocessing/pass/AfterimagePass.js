@@ -1,12 +1,13 @@
-import {Pass} from "../Pass.js";
 import {UniformsUtils, WebGLRenderTarget, LinearFilter, NearestFilter, RGBAFormat, ShaderMaterial, MeshBasicMaterial} from "three";
 import {AfterimageShader} from "three/examples/jsm/shaders/AfterimageShader";
+import {Pass} from "../Pass.js";
 
 /**
  * After image render pass blends the current frame with the previous frame.
  *
  * A dampening value is applied in the blend, that is performed additively.
  *  
+ *
  * @class AfterimagePass
  * @module Postprocessing
  */
@@ -19,25 +20,25 @@ function AfterimagePass(damp)
 	this.uniforms = UniformsUtils.clone(AfterimageShader.uniforms);
 
 	this.textureComp = new WebGLRenderTarget(1, 1,
-	{
-		minFilter: LinearFilter,
-		magFilter: NearestFilter,
-		format: RGBAFormat
-	});
+		{
+			minFilter: LinearFilter,
+			magFilter: NearestFilter,
+			format: RGBAFormat
+		});
 
 	this.textureOld = new WebGLRenderTarget(1, 1,
-	{
-		minFilter: LinearFilter,
-		magFilter: NearestFilter,
-		format: RGBAFormat
-	});
+		{
+			minFilter: LinearFilter,
+			magFilter: NearestFilter,
+			format: RGBAFormat
+		});
 
 	this.shaderMaterial = new ShaderMaterial(
-	{
-		uniforms: this.uniforms,
-		vertexShader: AfterimageShader.vertexShader,
-		fragmentShader: AfterimageShader.fragmentShader
-	});
+		{
+			uniforms: this.uniforms,
+			vertexShader: AfterimageShader.vertexShader,
+			fragmentShader: AfterimageShader.fragmentShader
+		});
 
 	this.basicMaterial = new MeshBasicMaterial();
 
@@ -45,19 +46,19 @@ function AfterimagePass(damp)
 
 	var self = this;
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Dampening applied to the previous frame.
 		 *
 		 * @property damp
 		 * @type {number}
 		 */
-		damp:
+			damp:
 		{
 			get: function() {return this.uniforms["damp"].value;},
 			set: function(value) {this.uniforms["damp"].value = value;}
 		}
-	});
+		});
 
 	this.damp = damp !== undefined ? damp : 0.96;
 };
@@ -85,7 +86,7 @@ AfterimagePass.prototype.render = function(renderer, writeBuffer, readBuffer, de
 	this.basicMaterial.map = this.textureComp.texture;
 
 	// Clear configuration
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

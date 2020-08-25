@@ -35,25 +35,23 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 	];
 
 	var material = new ShaderMaterial(
-	{
-		vertexShader: CubemapFlatVertex,
-		fragmentShader: CubemapFlatFragment,
-		uniforms:
 		{
-			envMap: {type: "t", value: envMap}
-		}
-	});
+			vertexShader: CubemapFlatVertex,
+			fragmentShader: CubemapFlatFragment,
+			uniforms:
+		{envMap: {type: "t", value: envMap}}
+		});
 	
 	this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene  = new Scene();
+	this.scene = new Scene();
 
 	this.faces = [];
-	for(var i = 0; i < 6; i++)
+	for (var i = 0; i < 6; i++)
 	{
 		var geometry = new PlaneBufferGeometry(faceSize, faceSize);
 		var envLookupArray = new Float32Array(12);
 		geometry.setAttribute("envLookup", new BufferAttribute(envLookupArray, 3));
-		for(var j = 0; j < 4; j++)
+		for (var j = 0; j < 4; j++)
 		{
 			setEnvLookupVector(j, geometryEnvLookupVectors[i][j], envLookupArray);
 		}
@@ -95,7 +93,7 @@ CubemapFlatRenderer.prototype.setSize = function(width, height)
 	var offsetX = -halfWidth + this.paddingLeft + this.faceSize / 2;
 	var offsetY = halfHeight - this.paddingRight - this.faceSize / 2;
 
-	for(var i = 0; i < this.faces.length; i += 1)
+	for (var i = 0; i < this.faces.length; i += 1)
 	{
 		this.faces[i].position.set(offsetX + this.faceOffsets[i][0], offsetY - this.faceOffsets[i][1], 0);
 	}

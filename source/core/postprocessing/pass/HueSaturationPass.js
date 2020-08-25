@@ -1,6 +1,6 @@
+import {HueSaturationShader} from "three/examples/jsm/shaders/HueSaturationShader";
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {HueSaturationShader} from "three/examples/jsm/shaders/HueSaturationShader";
 
 /**
  * Hue and saturation pass.
@@ -18,19 +18,19 @@ function HueSaturationPass(hue, saturation)
 
 	var self = this;
 	Object.defineProperties(this,
-	{
-		hue:
 		{
-			get: function(){return this.uniforms["hue"].value;},
-			set: function(value){this.uniforms["hue"].value = value;}
+			hue:
+		{
+			get: function() {return this.uniforms["hue"].value;},
+			set: function(value) {this.uniforms["hue"].value = value;}
 		},
 
-		saturation:
+			saturation:
 		{
-			get: function(){return this.uniforms["saturation"].value;},
-			set: function(value){this.uniforms["saturation"].value = value;}
+			get: function() {return this.uniforms["saturation"].value;},
+			set: function(value) {this.uniforms["saturation"].value = value;}
 		}
-	});
+		});
 
 	this.hue = hue !== undefined ? hue : 0;
 	this.saturation = saturation !== undefined ? saturation : 0;

@@ -1,8 +1,8 @@
-import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
-import {Resource} from "./Resource.js";
-import {FileSystem} from "../FileSystem.js";
 import {ShapePath, ShapeUtils} from "three";
 import {TTFLoader} from "three/examples/jsm/loaders/TTFLoader";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {FileSystem} from "../FileSystem.js";
+import {Resource} from "./Resource.js";
 
 /**
  * Font class stores font data, font data can be stored as an  json or as a TTF file (stored in Base64).
@@ -36,17 +36,17 @@ function Font(url)
 	 */
 	this.font = null;
 
-	if(url !== undefined)
+	if (url !== undefined)
 	{	
 		// Arraybuffer
-		if(url instanceof ArrayBuffer)
+		if (url instanceof ArrayBuffer)
 		{
 			this.data = url;
 			this.format = "arraybuffer";
 			this.loadTTF();
 		}
 		// Opentype JSON
-		else if(typeof url === "object")
+		else if (typeof url === "object")
 		{
 			this.data = url;
 			this.font = url;
@@ -59,13 +59,13 @@ function Font(url)
 			this.encoding = FileSystem.getFileExtension(url);
 			this.name = FileSystem.getFileName(url);
 
-			if(this.encoding === "json")
+			if (this.encoding === "json")
 			{
 				this.data = JSON.parse(FileSystem.readFile(url));
 				this.format = "json";
 				this.font = this.data;
 			}
-			else if(this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")
+			else if (this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")
 			{
 				this.data = FileSystem.readFileArrayBuffer(url);
 				this.format = "arraybuffer";
@@ -87,7 +87,7 @@ Font.prototype = Object.create(Resource.prototype);
  */
 Font.fileIsFont = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
 		file = file.name.toLocaleLowerCase();
 
@@ -136,7 +136,7 @@ Font.prototype.loadTTF = function()
  */
 Font.prototype.toJSON = function(meta)
 {
-	if(meta.fonts[this.uuid] !== undefined)
+	if (meta.fonts[this.uuid] !== undefined)
 	{
 		return meta.fonts[this.uuid];
 	}
@@ -146,12 +146,12 @@ Font.prototype.toJSON = function(meta)
 	data.encoding = this.encoding;
 	data.reversed = this.reversed;
 	
-	if(this.format === "arraybuffer")
+	if (this.format === "arraybuffer")
 	{
 		data.data = this.data;
 		data.format = this.format;
 	}
-	else if(this.format === "base64")
+	else if (this.format === "base64")
 	{
 		data.data = ArraybufferUtils.fromBase64(this.data);
 		data.format = "arraybuffer";
@@ -180,12 +180,12 @@ Font.prototype.toJSON = function(meta)
  */
 Font.prototype.generateShapes = function(text, size, divisions)
 {
-	if(size === undefined)
+	if (size === undefined)
 	{
 		size = 100;
 	}
 
-	if(divisions === undefined)
+	if (divisions === undefined)
 	{
 		divisions = 10;
 	}
@@ -194,7 +194,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	var paths = createPaths(text);
 	var shapes = [];
 
-	for(var p = 0; p < paths.length; p++)
+	for (var p = 0; p < paths.length; p++)
 	{
 		Array.prototype.push.apply(shapes, paths[p].toShapes());
 	}
@@ -211,11 +211,11 @@ Font.prototype.generateShapes = function(text, size, divisions)
 		var offsetX = 0, offsetY = 0;
 		var paths = [];
 
-		for(var i = 0; i < chars.length; i++)
+		for (var i = 0; i < chars.length; i++)
 		{
 			var char = chars[i];
 
-			if(char === "\n")
+			if (char === "\n")
 			{
 				offsetY -= lineHeight;
 				offsetX = 0;
@@ -237,7 +237,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	{
 		var glyph = data.glyphs[c] || data.glyphs["?"];
 		
-		if(!glyph)
+		if (!glyph)
 		{
 			return;
 		}
@@ -248,30 +248,30 @@ Font.prototype.generateShapes = function(text, size, divisions)
 		var pts = [], b2 = ShapeUtils.b2, b3 = ShapeUtils.b3;
 		var x, y, cpx, cpy, cpx0, cpy0, cpx1, cpy1, cpx2, cpy2, laste;
 
-		if(glyph.o)
+		if (glyph.o)
 		{
 			var outline = glyph._cachedOutline || (glyph._cachedOutline = glyph.o.split(" "));
 
-			for(var i = 0, l = outline.length; i < l;)
+			for (var i = 0, l = outline.length; i < l;)
 			{
 				var action = outline[i++];
 
 				// Move to
-				if(action === "m")
+				if (action === "m")
 				{
 					x = outline[i++] * scale + offsetX;
 					y = outline[i++] * scale + offsetY;
 					path.moveTo(x, y);
 				}
 				// Line to
-				if(action === "l")
+				if (action === "l")
 				{
 					x = outline[i++] * scale + offsetX;
 					y = outline[i++] * scale + offsetY;
 					path.lineTo(x, y);
 				}
 				// Quadratic curve to
-				else if(action === "q")
+				else if (action === "q")
 				{
 					cpx = outline[i++] * scale + offsetX;
 					cpy = outline[i++] * scale + offsetY;
@@ -281,12 +281,12 @@ Font.prototype.generateShapes = function(text, size, divisions)
 					path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
 					laste = pts[pts.length - 1];
 
-					if(laste)
+					if (laste)
 					{
 						cpx0 = laste.x;
 						cpy0 = laste.y;
 
-						for(var i2 = 1; i2 <= divisions; i2++)
+						for (var i2 = 1; i2 <= divisions; i2++)
 						{
 							var t = i2 / divisions;
 							b2(t, cpx0, cpx1, cpx);
@@ -295,7 +295,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 					}
 				}
 				// Bezier curve to
-				else if(action === "b")
+				else if (action === "b")
 				{
 					cpx = outline[i++] * scale + offsetX;
 					cpy = outline[i++] * scale + offsetY;
@@ -307,12 +307,12 @@ Font.prototype.generateShapes = function(text, size, divisions)
 					path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
 					laste = pts[pts.length - 1];
 
-					if(laste)
+					if (laste)
 					{
 						cpx0 = laste.x;
 						cpy0 = laste.y;
 
-						for(var i2 = 1; i2 <= divisions; i2++)
+						for (var i2 = 1; i2 <= divisions; i2++)
 						{
 							var t = i2 / divisions;
 							b3(t, cpx0, cpx1, cpx2, cpx);

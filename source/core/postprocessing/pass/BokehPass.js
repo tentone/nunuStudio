@@ -1,6 +1,6 @@
-import {Pass} from "../Pass.js";
 import {WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoBlending, UniformsUtils, ShaderMaterial} from "three";
 import {BokehShader} from "three/examples/jsm/shaders/BokehShader";
+import {Pass} from "../Pass.js";
 
 /**
  * Depth-of-field post-process with bokeh shader.
@@ -32,12 +32,12 @@ function BokehPass(focus, aperture, maxblur)
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
 
 	this.materialBokeh = new ShaderMaterial(
-	{
-		defines: BokehShader.defines,
-		uniforms: this.uniforms,
-		vertexShader: BokehShader.vertexShader,
-		fragmentShader: BokehShader.fragmentShader
-	});
+		{
+			defines: BokehShader.defines,
+			uniforms: this.uniforms,
+			vertexShader: BokehShader.vertexShader,
+			fragmentShader: BokehShader.fragmentShader
+		});
 
 	// Scene
 	this.createQuadScene();
@@ -46,47 +46,47 @@ function BokehPass(focus, aperture, maxblur)
 	// Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Camera aperture.
 		 *
 		 * @property aperture
 		 * @type {number}
 		 */
-		aperture:
+			aperture:
 		{
 			get: function() {return self.uniforms["aperture"].value;},
 			set: function(value) {self.uniforms["aperture"].value = value;}
 		},
 
-		/**
-		 * Focus point distance.
-		 *
-		 * @property focus
-		 * @type {number}
-		 */
-		focus:
+			/**
+			 * Focus point distance.
+			 *
+			 * @property focus
+			 * @type {number}
+			 */
+			focus:
 		{
 			get: function() {return self.uniforms["focus"].value;},
 			set: function(value) {self.uniforms["focus"].value = value;}
 		},
 		
-		/**
-		 * Maximum level of blur that can be applied to more distant objects.
-		 *
-		 * @property enabled
-		 * @type {maxblur}
-		 */
-		maxblur:
+			/**
+			 * Maximum level of blur that can be applied to more distant objects.
+			 *
+			 * @property enabled
+			 * @type {maxblur}
+			 */
+			maxblur:
 		{
 			get: function() {return self.uniforms["maxblur"].value;},
 			set: function(value) {self.uniforms["maxblur"].value = value;}
-		},
-	});
+		}
+		});
 
-	this.focus = (focus !== undefined) ? focus : 1.0;
-	this.aperture = (aperture !== undefined) ? aperture : 1.0;
-	this.maxblur = (maxblur !== undefined) ? maxblur : 0.2;
+	this.focus = focus !== undefined ? focus : 1.0;
+	this.aperture = aperture !== undefined ? aperture : 1.0;
+	this.maxblur = maxblur !== undefined ? maxblur : 0.2;
 };
 
 BokehPass.prototype = Object.create(Pass.prototype);
@@ -109,7 +109,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	this.uniforms["farClip"].value = camera.far;
 	this.uniforms["aspect"].value = camera.aspect;
 
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

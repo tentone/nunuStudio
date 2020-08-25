@@ -23,15 +23,15 @@ function CodeInput(parent)
 	 * @type {CodeMirror}
 	 */
 	this.code = new CodeMirror(this.element,
-	{
-		value: "",
-		hintOptions:
+		{
+			value: "",
+			hintOptions:
 		{
 			hint: CodeMirror.hint.anyword,
 			completeSingle: false
 		},
-		gutters: ["CodeMirror-lint-markers"]
-	});
+			gutters: ["CodeMirror-lint-markers"]
+		});
 	
 	this.code.setOption("theme", Editor.settings.code.theme);
 	this.code.setOption("indentWithTabs", Editor.settings.code.indentWithTabs);
@@ -81,7 +81,7 @@ function CodeInput(parent)
 		context.addOption(Locale.copy, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 			}
@@ -89,7 +89,7 @@ function CodeInput(parent)
 		context.addOption(Locale.cut, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 				self.code.replaceSelection("");
@@ -129,7 +129,7 @@ CodeInput.prototype = Object.create(Component.prototype);
  */
 CodeInput.prototype.setFontSize = function(size)
 {
-	if(size < 5)
+	if (size < 5)
 	{
 		size = 5;
 	}

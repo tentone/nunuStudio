@@ -39,7 +39,7 @@ BabylonLoader.prototype =
 		{
 			var materials = {};
 
-			for(var i = 0, l = json.materials.length; i < l; i ++)
+			for (var i = 0, l = json.materials.length; i < l; i ++)
 			{
 				var data = json.materials[i];
 
@@ -54,9 +54,9 @@ BabylonLoader.prototype =
 				materials[data.id] = material;
 			}
 
-			if(json.multiMaterials)
+			if (json.multiMaterials)
 			{
-				for(var i = 0, l = json.multiMaterials.length; i < l; i ++)
+				for (var i = 0, l = json.multiMaterials.length; i < l; i ++)
 				{
 					console.warn("nunuStudio: BabylonLoader Multi materials not supported.");
 					var data = json.multiMaterials[i];
@@ -82,7 +82,7 @@ BabylonLoader.prototype =
 			geometry.setIndex(indices);
 
 			// positions
-			for(var j = 2, jl = positions.length; j < jl; j += 3)
+			for (var j = 2, jl = positions.length; j < jl; j += 3)
 			{
 				positions[j] = - positions[j];
 			}
@@ -90,9 +90,9 @@ BabylonLoader.prototype =
 			geometry.addAttribute("position", new Float32BufferAttribute(positions, 3));
 
 			// normals
-			if(normals)
+			if (normals)
 			{
-				for(var j = 2, jl = normals.length; j < jl; j += 3)
+				for (var j = 2, jl = normals.length; j < jl; j += 3)
 				{
 					normals[j] = - normals[j];
 				}
@@ -101,7 +101,7 @@ BabylonLoader.prototype =
 			}
 
 			// uvs
-			if(uvs)
+			if (uvs)
 			{
 				geometry.addAttribute("uv", new Float32BufferAttribute(uvs, 2));
 			}
@@ -109,9 +109,9 @@ BabylonLoader.prototype =
 			// offsets
 			var subMeshes = json.subMeshes;
 
-			if(subMeshes)
+			if (subMeshes)
 			{
-				for(var j = 0, jl = subMeshes.length; j < jl; j ++)
+				for (var j = 0, jl = subMeshes.length; j < jl; j ++)
 				{
 					var subMesh = subMeshes[j];
 					geometry.addGroup(subMesh.indexStart, subMesh.indexCount);
@@ -128,22 +128,22 @@ BabylonLoader.prototype =
 
 			var cameras = json.cameras;
 
-			for(var i = 0, l = cameras.length; i < l; i ++)
+			for (var i = 0, l = cameras.length; i < l; i ++)
 			{
 				var data = cameras[i];
 
-				var camera = new PerspectiveCamera((data.fov / Math.PI) * 180, 1.33, data.minZ, data.maxZ);
+				var camera = new PerspectiveCamera(data.fov / Math.PI * 180, 1.33, data.minZ, data.maxZ);
 				camera.name = data.name;
 				camera.position.fromArray(data.position);
 
-				if(data.rotation){camera.rotation.fromArray(data.rotation);}
+				if (data.rotation) {camera.rotation.fromArray(data.rotation);}
 
 				objects[data.id] = camera;
 			}
 
 			var lights = json.lights;
 
-			for(var i = 0, l = lights.length; i < l; i ++)
+			for (var i = 0, l = lights.length; i < l; i ++)
 			{
 				var data = lights[i];
 
@@ -151,25 +151,25 @@ BabylonLoader.prototype =
 
 				switch (data.type)
 				{
-					case 0:
-						light = new PointLight();
-						break;
-					case 1:
-						light = new DirectionalLight();
-						break;
-					case 2:
-						light = new SpotLight();
-						break;
-					case 3:
-						light = new HemisphereLight();
-						break;
+				case 0:
+					light = new PointLight();
+					break;
+				case 1:
+					light = new DirectionalLight();
+					break;
+				case 2:
+					light = new SpotLight();
+					break;
+				case 3:
+					light = new HemisphereLight();
+					break;
 				}
 
 				light.name = data.name;
-				if(data.position) light.position.set(data.position[0], data.position[1], - data.position[2]);
+				if (data.position) {light.position.set(data.position[0], data.position[1], - data.position[2]);}
 				light.color.fromArray(data.diffuse);
-				if(data.groundColor) light.groundColor.fromArray(data.groundColor);
-				if(data.intensity) light.intensity = data.intensity;
+				if (data.groundColor) {light.groundColor.fromArray(data.groundColor);}
+				if (data.intensity) {light.intensity = data.intensity;}
 
 				objects[data.id] = light;
 
@@ -178,12 +178,12 @@ BabylonLoader.prototype =
 
 			var meshes = json.meshes;
 
-			for(var i = 0, l = meshes.length; i < l; i ++)
+			for (var i = 0, l = meshes.length; i < l; i ++)
 			{
 				var data = meshes[i];
 				var object;
 
-				if(data.indices)
+				if (data.indices)
 				{
 					var geometry = parseGeometry(data);
 					object = new Mesh(geometry, materials[data.materialId]);
@@ -196,10 +196,10 @@ BabylonLoader.prototype =
 				object.name = data.name;
 				object.position.set(data.position[0], data.position[1], - data.position[2]);
 				object.rotation.fromArray(data.rotation);
-				if(data.rotationQuaternion) object.quaternion.fromArray(data.rotationQuaternion);
+				if (data.rotationQuaternion) {object.quaternion.fromArray(data.rotationQuaternion);}
 				object.scale.fromArray(data.scaling);
 
-				if(data.parentId)
+				if (data.parentId)
 				{
 					objects[data.parentId].add(object);
 				}

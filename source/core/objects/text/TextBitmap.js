@@ -25,16 +25,16 @@ import TextBitmapShaderVertex from "./text_bitmap_vertex.glsl";
  */
 function TextBitmap(config, texture, shader, color)
 {
-	if(config.font === undefined)
+	if (config.font === undefined)
 	{
 		throw new Error("TextBitmap configuration font is required.");
 	}
 
-	if(config.width === undefined){config.width = 500;}
-	if(config.align === undefined){config.align = TextBitmap.CENTER;}
-	if(config.lineHeight === undefined){config.lineHeight = config.font.common.lineHeight;}
-	if(config.letterSpacing === undefined){config.letterSpacing = 5;}
-	if(config.text === undefined){config.text = "";}
+	if (config.width === undefined) {config.width = 500;}
+	if (config.align === undefined) {config.align = TextBitmap.CENTER;}
+	if (config.lineHeight === undefined) {config.lineHeight = config.font.common.lineHeight;}
+	if (config.letterSpacing === undefined) {config.letterSpacing = 5;}
+	if (config.text === undefined) {config.text = "";}
 
 	/**
 	 * BMFont text configuration object.
@@ -82,76 +82,76 @@ function TextBitmap(config, texture, shader, color)
 	var fontScale = 0.01;
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Scale applied to the generated text geometry.
 		 *
 		 * @attribute fontScale
 		 * @type {number}
 		 */
-		fontScale:
+			fontScale:
 		{
-			get: function(){return fontScale;},
-			set: function(value){fontScale = value; this.updateGeometry();}
+			get: function() {return fontScale;},
+			set: function(value) {fontScale = value; this.updateGeometry();}
 		},
 
-		/**
-		 * Text bitmap rendering shader, can be:
-		 *    - TextBitmap.BITMAP 
-		 *    - TextBitmap.SDF 
-		 *    - TextBitmap.MSDF 
-		 *
-		 * @attribute shader
-		 * @type {number}
-		 */
-		shader:
+			/**
+			 * Text bitmap rendering shader, can be:
+			 *    - TextBitmap.BITMAP 
+			 *    - TextBitmap.SDF 
+			 *    - TextBitmap.MSDF 
+			 *
+			 * @attribute shader
+			 * @type {number}
+			 */
+			shader:
 		{
-			get: function(){return shader;},
-			set: function(value){shader = value; this.updateShader();}
+			get: function() {return shader;},
+			set: function(value) {shader = value; this.updateShader();}
 		},
 
-		/**
-		 * Texture containing the bitmap characters.
-		 *
-		 * Data specifiyng the position of each character in the texture should be placed in the font.
-		 *
-		 * @attribute texture
-		 * @type {Texture}
-		 */
-		texture:
+			/**
+			 * Texture containing the bitmap characters.
+			 *
+			 * Data specifiyng the position of each character in the texture should be placed in the font.
+			 *
+			 * @attribute texture
+			 * @type {Texture}
+			 */
+			texture:
 		{
-			get: function(){return this.uniforms.map.value;},
-			set: function(value){this.uniforms.map.value = value; this.material.needsUpdate = true;}
+			get: function() {return this.uniforms.map.value;},
+			set: function(value) {this.uniforms.map.value = value; this.material.needsUpdate = true;}
 		},
 
-		/**
-		 * BMFont text font data, contains the data about all characters available, and their position in the atlas.
-		 *
-		 * Font data should be parsed from (.json, .fnt, etc) file.
-		 *
-		 * Passed to the BMFont text geometry generator.
-		 *
-		 * @attribute font
-		 * @type {Object}
-		 */
-		font: 
+			/**
+			 * BMFont text font data, contains the data about all characters available, and their position in the atlas.
+			 *
+			 * Font data should be parsed from (.json, .fnt, etc) file.
+			 *
+			 * Passed to the BMFont text geometry generator.
+			 *
+			 * @attribute font
+			 * @type {Object}
+			 */
+			font: 
 		{
-			get: function(){return this.config.font;},
-			set: function(value){this.config.font = value; this.updateGeometry();}
+			get: function() {return this.config.font;},
+			set: function(value) {this.config.font = value; this.updateGeometry();}
 		},
 
-		/** 
-		 * Text displayed on the object.
-		 *
-		 * @attribute text
-		 * @type {string}
-		 */
-		text:
+			/** 
+			 * Text displayed on the object.
+			 *
+			 * @attribute text
+			 * @type {string}
+			 */
+			text:
 		{
-			get: function(){return this.config.text;},
+			get: function() {return this.config.text;},
 			set: function(value)
 			{
-				if(this.config.text !== value)
+				if (this.config.text !== value)
 				{					
 					this.config.text = value;
 					this.updateGeometry();
@@ -159,93 +159,93 @@ function TextBitmap(config, texture, shader, color)
 			}
 		},
 
-		/**
-		 * Space between each text line.
-		 *
-		 * @attribute lineHeight
-		 * @type {number}
-		 */
-		lineHeight:
+			/**
+			 * Space between each text line.
+			 *
+			 * @attribute lineHeight
+			 * @type {number}
+			 */
+			lineHeight:
 		{
-			get: function(){return this.config.lineHeight;},
-			set: function(value){this.config.lineHeight = value; this.updateGeometry();}
+			get: function() {return this.config.lineHeight;},
+			set: function(value) {this.config.lineHeight = value; this.updateGeometry();}
 		},
 		
-		/**
-		 * Spacing between each letter.
-		 *
-		 * @attribute letterSpacing
-		 * @type {number}
-		 */
-		letterSpacing:
+			/**
+			 * Spacing between each letter.
+			 *
+			 * @attribute letterSpacing
+			 * @type {number}
+			 */
+			letterSpacing:
 		{
-			get: function(){return this.config.letterSpacing;},
-			set: function(value){this.config.letterSpacing = value; this.updateGeometry();}
+			get: function() {return this.config.letterSpacing;},
+			set: function(value) {this.config.letterSpacing = value; this.updateGeometry();}
 		},
 
-		/**
-		 * Horizontal text alignment can be
-		 *    - TextBitmap.LEFT
-		 *    - TextBitmap.RIGHT
-		 *    - TextBitmap.CENTER
-		 *
-		 * @attribute align
-		 * @type {string}
-		 */
-		align:
+			/**
+			 * Horizontal text alignment can be
+			 *    - TextBitmap.LEFT
+			 *    - TextBitmap.RIGHT
+			 *    - TextBitmap.CENTER
+			 *
+			 * @attribute align
+			 * @type {string}
+			 */
+			align:
 		{
-			get: function(){return this.config.align;},
-			set: function(value){this.config.align = value; this.updateGeometry();}
+			get: function() {return this.config.align;},
+			set: function(value) {this.config.align = value; this.updateGeometry();}
 		},
 
-		/** 
-		 * Width of the text box.
-		 *
-		 * @attribute width
-		 * @type {number}
-		 */
-		width:
+			/** 
+			 * Width of the text box.
+			 *
+			 * @attribute width
+			 * @type {number}
+			 */
+			width:
 		{
-			get: function(){return this.config.width;},
-			set: function(value){this.config.width = value; this.updateGeometry();}
+			get: function() {return this.config.width;},
+			set: function(value) {this.config.width = value; this.updateGeometry();}
 		},
 
-		/** 
-		 * Color of the text, only applied for SDF and MSDF modes.
-		 *
-		 * @attribute color
-		 * @type {Color}
-		 */
-		color:
+			/** 
+			 * Color of the text, only applied for SDF and MSDF modes.
+			 *
+			 * @attribute color
+			 * @type {Color}
+			 */
+			color:
 		{
-			get: function(){return this.uniforms.color.value;},
-			set: function(value){this.uniforms.color.value = value;}
+			get: function() {return this.uniforms.color.value;},
+			set: function(value) {this.uniforms.color.value = value;}
 		},
 
-		/** 
-		 * SDF distance alpha threshold.
-		 *
-		 * @attribute threshold
-		 * @type {number}
-		 */
-		threshold: 
+			/** 
+			 * SDF distance alpha threshold.
+			 *
+			 * @attribute threshold
+			 * @type {number}
+			 */
+			threshold: 
 		{
-			get: function(){return this.uniforms.threshold.value;},
-			set: function(value){this.uniforms.threshold.value = value;}
+			get: function() {return this.uniforms.threshold.value;},
+			set: function(value) {this.uniforms.threshold.value = value;}
 		},
 
-		/** 
-		 * Smoothing of the text borders.
-		 *
-		 * @attribute smoothing
-		 * @type {number}
-		 */
-		smoothing:
+			/** 
+			 * Smoothing of the text borders.
+			 *
+			 * @attribute smoothing
+			 * @type {number}
+			 */
+			smoothing:
 		{
-			get: function(){return this.uniforms.smoothing.value;},
-			set: function(value){this.uniforms.smoothing.value = value;}
+			get: function() {return this.uniforms.smoothing.value;},
+			set: function(value) {this.uniforms.smoothing.value = value;}
 		}
-	});
+		});
 
 	this.updateGeometry();
 	this.updateShader(texture);
@@ -328,11 +328,11 @@ TextBitmap.prototype.updateShader = function()
 {
 	var fragmentShader;
 
-	if(this.shader === TextBitmap.SDF)
+	if (this.shader === TextBitmap.SDF)
 	{
 		fragmentShader = TextBitmapShaderSDF;
 	}
-	else if(this.shader === TextBitmap.MSDF)
+	else if (this.shader === TextBitmap.MSDF)
 	{
 		fragmentShader = TextBitmapShaderMSDF;
 	}
@@ -342,14 +342,14 @@ TextBitmap.prototype.updateShader = function()
 	}
 
 	this.material = new ShaderMaterial(
-	{
-		uniforms: this.uniforms,
-		fragmentShader: fragmentShader,
-		vertexShader: TextBitmapShaderVertex,
-		side: DoubleSide,
-		transparent: true,
-		depthTest: true
-	});
+		{
+			uniforms: this.uniforms,
+			fragmentShader: fragmentShader,
+			vertexShader: TextBitmapShaderVertex,
+			side: DoubleSide,
+			transparent: true,
+			depthTest: true
+		});
 
 	this.material.extensions.derivatives = this.shader === TextBitmap.MSDF;
 };
@@ -366,10 +366,10 @@ TextBitmap.prototype.updateGeometry = function()
 {
 	this.geometry.update(this.config);
 
-	if(this.fontScale !== 1.0)
+	if (this.fontScale !== 1.0)
 	{
 		var position = this.geometry.attributes.position.array;
-		for(var i = 0; i < position.length; i++)
+		for (var i = 0; i < position.length; i++)
 		{
 			position[i] *= this.fontScale;
 		}

@@ -2,8 +2,8 @@ import {Renderer, Viewport, ViewportControls} from "escher.js/build/escher.modul
 import {Canvas} from "../../../components/Canvas.js";
 import {Global} from "../../../Global.js";
 import {Locale} from "../../../locale/LocaleManager.js";
-import {SideBar} from "./SideBar.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {SideBar} from "./SideBar.js";
 
 function NodeEditor(parent, closeable, container, index)
 {
@@ -65,11 +65,11 @@ NodeEditor.prototype = Object.create(TabComponent.prototype);
 
 NodeEditor.prototype.updateMetadata = function()
 {
-	if(this.node !== null)
+	if (this.node !== null)
 	{
 		this.setName(this.node.name);
 	}	
-}
+};
 
 NodeEditor.prototype.attach = function(node)
 {
@@ -84,9 +84,9 @@ NodeEditor.prototype.isAttached = function(node)
 
 NodeEditor.prototype.update = function()
 {
-	if(this.node !== null && this.node.graph !== null)
+	if (this.node !== null && this.node.graph !== null)
 	{
-		if(this.canvas.pointerInside)
+		if (this.canvas.pointerInside)
 		{
 			this.controls.update(this.renderer.pointer);
 		}

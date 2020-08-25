@@ -16,7 +16,7 @@ function ThreeBSP(geometry)
 
 	if (geometry instanceof Geometry)
 	{
-		this.matrix = new Matrix4;
+		this.matrix = new Matrix4();
 	}
 	else if (geometry instanceof Mesh)
 	{
@@ -28,7 +28,7 @@ function ThreeBSP(geometry)
 	else if (geometry instanceof ThreeBSP.Node)
 	{
 		this.tree = geometry;
-		this.matrix = new Matrix4;
+		this.matrix = new Matrix4();
 		return this;
 	}
 	else
@@ -40,7 +40,7 @@ function ThreeBSP(geometry)
 	{
 		face = geometry.faces[i];
 		faceVertexUvs = geometry.faceVertexUvs[0][i];
-		polygon = new ThreeBSP.Polygon;
+		polygon = new ThreeBSP.Polygon();
 
 		if (face instanceof Face3)
 		{
@@ -272,7 +272,7 @@ ThreeBSP.Polygon.prototype.calculateProperties = function()
 ThreeBSP.Polygon.prototype.clone = function()
 {
 	var i, vertice_count,
-		polygon = new ThreeBSP.Polygon;
+		polygon = new ThreeBSP.Polygon();
 
 	for (i = 0, vertice_count = this.vertices.length; i < vertice_count; i++)
 	{
@@ -393,8 +393,8 @@ ThreeBSP.Polygon.prototype.splitPolygon = function(polygon, coplanar_front, copl
 			ti = this.classifyVertex(vi);
 			tj = this.classifyVertex(vj);
 
-			if (ti != BACK) f.push(vi);
-			if (ti != FRONT) b.push(vi);
+			if (ti != BACK) {f.push(vi);}
+			if (ti != FRONT) {b.push(vi);}
 			if ((ti | tj) === SPANNING)
 			{
 				t = (this.w - this.normal.dot(vi)) / this.normal.dot(vj.clone().subtract(vi));
@@ -405,8 +405,8 @@ ThreeBSP.Polygon.prototype.splitPolygon = function(polygon, coplanar_front, copl
 		}
 
 
-		if (f.length >= 3) front.push(new ThreeBSP.Polygon(f).calculateProperties());
-		if (b.length >= 3) back.push(new ThreeBSP.Polygon(b).calculateProperties());
+		if (f.length >= 3) {front.push(new ThreeBSP.Polygon(f).calculateProperties());}
+		if (b.length >= 3) {back.push(new ThreeBSP.Polygon(b).calculateProperties());}
 	}
 };
 
@@ -415,8 +415,8 @@ ThreeBSP.Vertex = function(x, y, z, normal, uv)
 	this.x = x;
 	this.y = y;
 	this.z = z;
-	this.normal = normal || new Vector3;
-	this.uv = uv || new Vector2;
+	this.normal = normal || new Vector3();
+	this.uv = uv || new Vector2();
 };
 ThreeBSP.Vertex.prototype.clone = function()
 {
@@ -506,7 +506,7 @@ ThreeBSP.Vertex.prototype.applyMatrix4 = function(m)
 
 	return this;
 
-}
+};
 
 
 ThreeBSP.Node = function(polygons)
@@ -518,7 +518,7 @@ ThreeBSP.Node = function(polygons)
 	this.polygons = [];
 	this.front = this.back = undefined;
 
-	if (!(polygons instanceof Array) || polygons.length === 0) return;
+	if (!(polygons instanceof Array) || polygons.length === 0) {return;}
 
 	this.divider = polygons[0].clone();
 
@@ -570,21 +570,21 @@ ThreeBSP.Node.prototype.build = function(polygons)
 
 	if (front.length > 0)
 	{
-		if (!this.front) this.front = new ThreeBSP.Node();
+		if (!this.front) {this.front = new ThreeBSP.Node();}
 		this.front.build(front);
 	}
 
 	if (back.length > 0)
 	{
-		if (!this.back) this.back = new ThreeBSP.Node();
+		if (!this.back) {this.back = new ThreeBSP.Node();}
 		this.back.build(back);
 	}
 };
 ThreeBSP.Node.prototype.allPolygons = function()
 {
 	var polygons = this.polygons.slice();
-	if (this.front) polygons = polygons.concat(this.front.allPolygons());
-	if (this.back) polygons = polygons.concat(this.back.allPolygons());
+	if (this.front) {polygons = polygons.concat(this.front.allPolygons());}
+	if (this.back) {polygons = polygons.concat(this.back.allPolygons());}
 	return polygons;
 };
 ThreeBSP.Node.prototype.clone = function()
@@ -611,8 +611,8 @@ ThreeBSP.Node.prototype.invert = function()
 	}
 
 	this.divider.flip();
-	if (this.front) this.front.invert();
-	if (this.back) this.back.invert();
+	if (this.front) {this.front.invert();}
+	if (this.back) {this.back.invert();}
 
 	temp = this.front;
 	this.front = this.back;
@@ -625,7 +625,7 @@ ThreeBSP.Node.prototype.clipPolygons = function(polygons)
 	var i, polygon_count,
 		front, back;
 
-	if (!this.divider) return polygons.slice();
+	if (!this.divider) {return polygons.slice();}
 
 	front = [], back = [];
 
@@ -634,9 +634,9 @@ ThreeBSP.Node.prototype.clipPolygons = function(polygons)
 		this.divider.splitPolygon(polygons[i], front, back, front, back);
 	}
 
-	if (this.front) front = this.front.clipPolygons(front);
-	if (this.back) back = this.back.clipPolygons(back);
-	else back = [];
+	if (this.front) {front = this.front.clipPolygons(front);}
+	if (this.back) {back = this.back.clipPolygons(back);}
+	else {back = [];}
 
 	return front.concat(back);
 };
@@ -644,8 +644,8 @@ ThreeBSP.Node.prototype.clipPolygons = function(polygons)
 ThreeBSP.Node.prototype.clipTo = function(node)
 {
 	this.polygons = node.clipPolygons(this.polygons);
-	if (this.front) this.front.clipTo(node);
-	if (this.back) this.back.clipTo(node);
+	if (this.front) {this.front.clipTo(node);}
+	if (this.back) {this.back.clipTo(node);}
 };
 
 

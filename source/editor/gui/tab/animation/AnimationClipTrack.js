@@ -1,10 +1,10 @@
 import {EventManager} from "../../../../core/utils/EventManager.js";
+import {Editor} from "../../../Editor.js";
+import {Component} from "../../../components/Component.js";
 import {AnimationTrackButton} from "./AnimationTrackButton.js";
 import {AnimationTrack} from "./AnimationTrack.js";
 import {AnimationClipMenuBar} from "./AnimationClipMenuBar.js";
 import {AnimationClipButton} from "./AnimationClipButton.js";
-import {Editor} from "../../../Editor.js";
-import {Component} from "../../../components/Component.js";
 
 /**
  * Animation clip track contains all the elements of an animation track.
@@ -46,7 +46,7 @@ function AnimationClipTrack(editor, animation)
 	this.timeline.style.overflowY = "hidden";
 	this.timeline.style.position = "relative";
 	this.timeline.style.width = "100%";
-	this.timeline.style.height = (height + 1) + "px";
+	this.timeline.style.height = height + 1 + "px";
 	this.editor.tracks.element.appendChild(this.timeline);
 
 	/**
@@ -62,11 +62,11 @@ function AnimationClipTrack(editor, animation)
 
 	var context = this.timegrid.getContext("2d");
 	context.fillStyle = "#222222";
-	for(var l = 0; l <= height; l += 30)
+	for (var l = 0; l <= height; l += 30)
 	{
 		context.fillRect(0, l, width, 1);
 	}
-	for(var l = 0, step = this.editor.zoom / 10; l <= width; l += step)
+	for (var l = 0, step = this.editor.zoom / 10; l <= width; l += step)
 	{
 		context.fillRect(l, 0, 1, height);
 	}
@@ -99,11 +99,11 @@ function AnimationClipTrack(editor, animation)
 	{
 		var time = initial + (event.clientX - mouse) / self.editor.zoom;
 
-		if(time < 0)
+		if (time < 0)
 		{
 			time = 0;
 		}
-		else if(time > self.animation.duration)
+		else if (time > self.animation.duration)
 		{
 			time = self.animation.duration;
 		}
@@ -118,7 +118,7 @@ function AnimationClipTrack(editor, animation)
 	});
 
 	// Tracks
-	for(var j = 0; j < tracks.length; j++)
+	for (var j = 0; j < tracks.length; j++)
 	{
 		var track = new AnimationTrack(this.timeline, this.editor, tracks[j]);
 		track.position.set(0, j * 30);

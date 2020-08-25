@@ -1,7 +1,7 @@
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Settings} from "../../../../Settings.js";
-import {EditorOrbitControls} from "./EditorOrbitControls.js";
 import {Editor} from "../../../../Editor.js";
+import {EditorOrbitControls} from "./EditorOrbitControls.js";
 
 /**
  * The planar controls are used to control 2D movement, fixed to one camera orientation.
@@ -19,33 +19,33 @@ function EditorPlanarControls(mode)
 
 EditorPlanarControls.prototype = Object.create(EditorOrbitControls.prototype);
 
-EditorPlanarControls.prototype.setOrientation = function(){};
+EditorPlanarControls.prototype.setOrientation = function() {};
 
 EditorPlanarControls.prototype.setMode = function(mode)
 {
 	this.mode = mode;
 
-	if(mode === Settings.PLANAR_FRONT)
+	if (mode === Settings.PLANAR_FRONT)
 	{
 		this.orientation.set(Math.PI / 2, 0);
 	}
-	else if(mode === Settings.PLANAR_BACK)
+	else if (mode === Settings.PLANAR_BACK)
 	{
 		this.orientation.set(-Math.PI / 2, 0);
 	}
-	else if(mode === Settings.PLANAR_LEFT)
+	else if (mode === Settings.PLANAR_LEFT)
 	{
 		this.orientation.set(0, 0);
 	}
-	else if(mode === Settings.PLANAR_RIGHT)
+	else if (mode === Settings.PLANAR_RIGHT)
 	{
 		this.orientation.set(Math.PI, 0);
 	}
-	else if(mode === Settings.PLANAR_TOP)
+	else if (mode === Settings.PLANAR_TOP)
 	{
 		this.orientation.set(Math.PI, 1.57);
 	}
-	else if(mode === Settings.PLANAR_BOTTOM)
+	else if (mode === Settings.PLANAR_BOTTOM)
 	{
 		this.orientation.set(Math.PI, -1.57);
 	}
@@ -64,18 +64,18 @@ EditorPlanarControls.prototype.update = function(mouse)
 {
 	var needsUpdate = false;
 
-	if(mouse.buttonPressed(Mouse.RIGHT))
+	if (mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		var up = direction.y > 0;
 		direction.y = 0;
 		direction.normalize();
 
-		if(this.mode === Settings.PLANAR_TOP || this.mode === Settings.PLANAR_BOTTOM)
+		if (this.mode === Settings.PLANAR_TOP || this.mode === Settings.PLANAR_BOTTOM)
 		{
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-			this.center.x += up ? (-direction.x * y) : (direction.x * y);
-			this.center.z += up ? (-direction.z * y) : (direction.z * y);
+			this.center.x += up ? -direction.x * y : direction.x * y;
+			this.center.z += up ? -direction.z * y : direction.z * y;
 		}
 		else
 		{
@@ -91,7 +91,7 @@ EditorPlanarControls.prototype.update = function(mouse)
 		needsUpdate = true;
 	}
 
-	if(mouse.wheel !== 0)
+	if (mouse.wheel !== 0)
 	{
 		this.distance += mouse.wheel * Editor.settings.editor.mouseWheelSensitivity * this.distance;
 		needsUpdate = true;
@@ -146,7 +146,7 @@ EditorPlanarControls.prototype.update = function(mouse)
 	}
 	*/
 
-	if(needsUpdate === true)
+	if (needsUpdate === true)
 	{
 		this.updateControls();
 	}

@@ -1,7 +1,7 @@
+import {MeshDepthMaterial, RGBADepthPacking, NoBlending, WebGLRenderTarget, LinearFilter} from "three";
 import {SSAOShader} from "../shaders/SSAOShader.js";
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {MeshDepthMaterial, RGBADepthPacking, NoBlending, WebGLRenderTarget, LinearFilter} from "three";
 
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
@@ -36,55 +36,55 @@ function SSAOPass()
 	// Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Ambient occlusion shadow radius.
 		 *
 		 * @property radius
 		 * @type {number}
 		 */
-		radius:
+			radius:
 		{
 			get: function() {return this.uniforms["radius"].value;},
 			set: function(value) {this.uniforms["radius"].value = value;}
 		},
 
-		/**
-		 * Display only ambient occlusion result.
-		 *
-		 * @property onlyAO
-		 * @type {boolean}
-		 */
-		onlyAO:
+			/**
+			 * Display only ambient occlusion result.
+			 *
+			 * @property onlyAO
+			 * @type {boolean}
+			 */
+			onlyAO:
 		{
 			get: function() {return this.uniforms["onlyAO"].value;},
 			set: function(value) {this.uniforms["onlyAO"].value = value;}
 		},
 
-		/**
-		 * Ambient occlusion clamp.
-		 *
-		 * @property aoClamp
-		 * @type {number}
-		 */
-		aoClamp:
+			/**
+			 * Ambient occlusion clamp.
+			 *
+			 * @property aoClamp
+			 * @type {number}
+			 */
+			aoClamp:
 		{
 			get: function() {return this.uniforms["aoClamp"].value;},
 			set: function(value) {this.uniforms["aoClamp"].value = value;}
 		},
 
-		/**
-		 * Pixel luminosity influence in AO calculation.
-		 *
-		 * @property lumInfluence
-		 * @type {number}
-		 */
-		lumInfluence:
+			/**
+			 * Pixel luminosity influence in AO calculation.
+			 *
+			 * @property lumInfluence
+			 * @type {number}
+			 */
+			lumInfluence:
 		{
 			get: function() {return this.uniforms["lumInfluence"].value;},
 			set: function(value) {this.uniforms["lumInfluence"].value = value;}
-		},
-	});
+		}
+		});
 
 	this.radius = 4;
 	this.onlyAO = false;

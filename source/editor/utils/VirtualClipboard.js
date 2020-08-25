@@ -61,7 +61,7 @@ VirtualClipboard.copy = function(text)
 	{
 		var success = document.execCommand("copy");
 	}
-	catch(e){}
+	catch (e) {}
 
 	document.body.removeChild(textArea);
 };

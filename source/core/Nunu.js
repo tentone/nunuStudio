@@ -16,13 +16,13 @@ import "./three/textures/Texture.js";
 
 /**
  * nunuStudio core main file.
- *   
+ *
  * Store development version, timestamp and contains global method to check browser feature support.
  * 
  * @class Nunu
  * @module Runtime
  */
-function Nunu(){}
+function Nunu() {}
 
 /**
  * Aplication name (might be usefull if getting the module as a unnamed export)
@@ -110,14 +110,14 @@ Nunu.CORDOVA = 202;
  */
 Nunu.copyNamespace = function(namespace, target)
 {
-	if(target === undefined)
+	if (target === undefined)
 	{
 		target = window;
 	}
 
-	for(var i in namespace)
+	for (var i in namespace)
 	{
-		if(!(i in target))
+		if (!(i in target))
 		{
 			target[i] = namespace[i];
 		}
@@ -134,10 +134,10 @@ Nunu.getQueryParameters = function()
 {
 	var values = location.search.substring(1).split("&");
 	var parameters = {};
-	for(var i = 0; i < values.length; i++)
+	for (var i = 0; i < values.length; i++)
 	{
 		var pair = values[i].split("=");
-		if(pair.length > 1)
+		if (pair.length > 1)
 		{
 			var name = unescape(pair[0]).replace(new RegExp("\"", "g"), "");
 			var value = unescape(pair[1]).replace(new RegExp("\"", "g"), "");
@@ -164,7 +164,7 @@ Nunu.createWorker = function(code, onMessage)
 	var blob = new Blob([code], {type: "application/javascript"});
 	var worker = new Worker(URL.createObjectURL(blob));
 
-	if(onMessage !== undefined)
+	if (onMessage !== undefined)
 	{
 		worker.onmessage = onMessage;
 	}
@@ -199,7 +199,7 @@ Nunu.webGLAvailable = function()
 
 		return true;
 	}
-	catch(e){}
+	catch (e) {}
 
 	return false;
 };
@@ -208,20 +208,20 @@ Nunu.webGLAvailable = function()
  * Check in wich platform the enviroment is running.
  *
  * Possible return values are:
- *    - Nunu.NWJS
- *    - Nunu.BROWSER
- *    - Nunu.CORDOVA
+ * - Nunu.NWJS
+ * - Nunu.BROWSER
+ * - Nunu.CORDOVA
  *
  * @method getPlatform
  * @return {number} Indicates the platform type.
  */
 Nunu.getPlatform = function()
 {
-	if(window.nw !== undefined)
+	if (window.nw !== undefined)
 	{
 		return Nunu.NWJS;
 	}
-	else if(window.cordova !== undefined)
+	else if (window.cordova !== undefined)
 	{
 		return Nunu.CORDOVA;
 	}
@@ -251,7 +251,7 @@ Nunu.runningOnDesktop = function()
  */
 Nunu.openWebpage = function(url)
 {
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		window.require("nw.gui").Shell.openExternal(url);
 	}
@@ -287,23 +287,23 @@ Nunu.setFullscreen = function(fullscreen, element)
 {
 	var isFullscreen = Nunu.isFullscreen();
 	
-	if(fullscreen === undefined)
+	if (fullscreen === undefined)
 	{
 		fullscreen = !isFullscreen;	
 	}
 
-	if(fullscreen === true)
+	if (fullscreen === true)
 	{
-		if(element === undefined)
+		if (element === undefined)
 		{
 			element = document.body;
 		}
 
-		if(isFullscreen === false)
+		if (isFullscreen === false)
 		{
 			element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
 			
-			if(element.requestFullscreen !== undefined)
+			if (element.requestFullscreen !== undefined)
 			{
 				element.requestFullscreen();
 			}
@@ -311,11 +311,11 @@ Nunu.setFullscreen = function(fullscreen, element)
 	}
 	else
 	{
-		if(isFullscreen === true)
+		if (isFullscreen === true)
 		{		
 			document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
 			
-			if(document.exitFullscreen !== undefined)
+			if (document.exitFullscreen !== undefined)
 			{
 				document.exitFullscreen();
 			}

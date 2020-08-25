@@ -56,7 +56,7 @@ function TabButtonSplit(parent, tab)
 	this.close.draggable = false;
 	this.close.style.position = "absolute";
 	this.close.style.opacity = 0.5;
-	this.close.style.display = (tab.closeable) ? "block" : "none";
+	this.close.style.display = tab.closeable ? "block" : "none";
 	this.close.src = Global.FILE_PATH + "icons/misc/close.png";
 	this.element.appendChild(this.close);
 
@@ -100,23 +100,23 @@ function TabButtonSplit(parent, tab)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabComponent)
+		if (tab instanceof TabComponent)
 		{
 			// In the same container
-			if(tab.container === self.tab.container)
+			if (tab.container === self.tab.container)
 			{
 				var index = event.dataTransfer.getData("tab");
 				index = parseInt(index);
 
-				if(index !== self.tab.index)
+				if (index !== self.tab.index)
 				{	
 					// Before
-					if(dragState === TabButtonSplit.PREVIOUS)
+					if (dragState === TabButtonSplit.PREVIOUS)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 					}
 					// After
-					else if(dragState === TabButtonSplit.NEXT)
+					else if (dragState === TabButtonSplit.NEXT)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 					}
@@ -128,12 +128,12 @@ function TabButtonSplit(parent, tab)
 			else
 			{
 				// Before
-				if(dragState === TabButtonSplit.PREVIOUS)
+				if (dragState === TabButtonSplit.PREVIOUS)
 				{
 					self.tab.container.attachTab(tab, self.tab.index);
 				}
 				// After
-				else if(dragState === TabButtonSplit.NEXT)
+				else if (dragState === TabButtonSplit.NEXT)
 				{
 					self.tab.container.attachTab(tab, self.tab.index + 1);
 				}
@@ -146,20 +146,20 @@ function TabButtonSplit(parent, tab)
 	// Drag over
 	this.element.ondragover = function(event)
 	{
-		if(self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
+		if (self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
 		{	
-			if(event.layerX > self.size.x * 0.8 || event.target !== this)
+			if (event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
-				if(dragState !== TabButtonSplit.NEXT)
+				if (dragState !== TabButtonSplit.NEXT)
 				{
 					dragState = TabButtonSplit.NEXT;
 					this.style.borderLeft = null;
 					this.style.borderRight = "thick solid #999999";
 				}
 			}
-			else if(event.layerX < self.size.x * 0.2)
+			else if (event.layerX < self.size.x * 0.2)
 			{
-				if(dragState !== TabButtonSplit.PREVIOUS)
+				if (dragState !== TabButtonSplit.PREVIOUS)
 				{
 					dragState = TabButtonSplit.PREVIOUS;
 					this.style.borderRight = null;
@@ -168,7 +168,7 @@ function TabButtonSplit(parent, tab)
 			}
 			else
 			{
-				if(dragState !== TabButtonSplit.NONE)
+				if (dragState !== TabButtonSplit.NONE)
 				{
 					dragState = TabButtonSplit.NONE;
 					this.style.borderLeft = null;
@@ -178,18 +178,18 @@ function TabButtonSplit(parent, tab)
 		}
 		else
 		{
-			if(event.layerY > self.size.y * 0.7 || event.target !== this)
+			if (event.layerY > self.size.y * 0.7 || event.target !== this)
 			{
-				if(dragState !== TabButtonSplit.NEXT)
+				if (dragState !== TabButtonSplit.NEXT)
 				{
 					dragState = TabButtonSplit.NEXT;
 					this.style.borderTop = null;
 					this.style.borderBottom = "solid #999999";
 				}
 			}
-			else if(event.layerY < self.size.y * 0.3)
+			else if (event.layerY < self.size.y * 0.3)
 			{
-				if(dragState !== TabButtonSplit.PREVIOUS)
+				if (dragState !== TabButtonSplit.PREVIOUS)
 				{
 					dragState = TabButtonSplit.PREVIOUS;
 					this.style.borderBottom = null;
@@ -198,7 +198,7 @@ function TabButtonSplit(parent, tab)
 			}
 			else
 			{
-				if(dragState !== TabButtonSplit.NONE)
+				if (dragState !== TabButtonSplit.NONE)
 				{
 					dragState = TabButtonSplit.NONE;
 					this.style.borderBottom = null;
@@ -240,12 +240,12 @@ function TabButtonSplit(parent, tab)
 		var button = event.which - 1;
 
 		// Select tab
-		if(button === Mouse.LEFT)
+		if (button === Mouse.LEFT)
 		{
 			self.tab.container.selectTab(self.tab);
 		}
 		// Close tab
-		else if(tab.closeable && button === Mouse.MIDDLE)
+		else if (tab.closeable && button === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}
@@ -260,7 +260,7 @@ function TabButtonSplit(parent, tab)
 	// Mouse leave
 	this.element.onmouseleave = function()
 	{
-		if(tab.isSelected())
+		if (tab.isSelected())
 		{
 			this.style.backgroundColor = "var(--button-over-color)";
 		}
@@ -311,24 +311,24 @@ TabButtonSplit.prototype.updateSize = function()
 	Component.prototype.updateSize.call(this);
 	
 	// Icon
-	this.icon.style.top = (this.size.y * 0.2) + "px";
-	this.icon.style.left = (this.size.y * 0.2) + "px"
-	this.icon.style.width = (this.size.y * 0.6) + "px";
-	this.icon.style.height = (this.size.y * 0.6) + "px";
+	this.icon.style.top = this.size.y * 0.2 + "px";
+	this.icon.style.left = this.size.y * 0.2 + "px";
+	this.icon.style.width = this.size.y * 0.6 + "px";
+	this.icon.style.height = this.size.y * 0.6 + "px";
 
 	// Text
 	this.text.style.left = this.size.y + "px";
-	this.text.style.top = ((this.size.y - 12) / 2) + "px";
-	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
+	this.text.style.top = (this.size.y - 12) / 2 + "px";
+	this.text.style.width = this.size.x - 2 * this.size.y + "px";
 	this.text.style.height = this.size.y + "px";
 
 	// Close
-	if(this.tab.closeable === true)
+	if (this.tab.closeable === true)
 	{
-		this.close.style.width = (this.size.y * 0.4) + "px";
-		this.close.style.height = (this.size.y * 0.4) + "px";
-		this.close.style.top = (this.size.y * 0.3) + "px";
-		this.close.style.right = (this.size.y * 0.3) + "px";
+		this.close.style.width = this.size.y * 0.4 + "px";
+		this.close.style.height = this.size.y * 0.4 + "px";
+		this.close.style.top = this.size.y * 0.3 + "px";
+		this.close.style.right = this.size.y * 0.3 + "px";
 		this.close.style.display = "block";
 	}
 	else

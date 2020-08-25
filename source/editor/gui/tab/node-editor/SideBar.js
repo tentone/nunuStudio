@@ -19,7 +19,7 @@ function SideBar(parent)
 	this.preventDragEvents();
 
 	this.setStyle("overflow", "visible");
-    this.setStyle("backgroundColor", "var(--bar-color)");
+	this.setStyle("backgroundColor", "var(--bar-color)");
     
 	/**
 	 * List of object placing buttons.
@@ -68,19 +68,19 @@ SideBar.prototype.createObject = function()
 	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		// TODO <ADD CODE HERE>
-    }, Locale.initialization);
+	}, Locale.initialization);
     
-    // Update
+	// Update
 	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		// TODO <ADD CODE HERE>
 	}, Locale.update);
     
-    // Resize
+	// Resize
 	events.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		// TODO <ADD CODE HERE>
-    }, Locale.resize);
+	}, Locale.resize);
 	
 	events.updateOptions();
 
@@ -121,7 +121,7 @@ SideBar.prototype.updateSize = function()
 	var y = 30, i = 0;
 
 	// Update buttons size
-	while(y < this.size.y - 2 * size && i < this.buttons.length)
+	while (y < this.size.y - 2 * size && i < this.buttons.length)
 	{
 		this.buttons[i].attachTo(this);
 		this.buttons[i].size.set(size, size);
@@ -134,13 +134,13 @@ SideBar.prototype.updateSize = function()
 		y += size;
 	}
 
-	if(this.size.y < 250)
+	if (this.size.y < 250)
 	{
 		this.more.setVisibility(false);
 	}
 	else
 	{
-		if(i < this.buttons.length)
+		if (i < this.buttons.length)
 		{
 			this.more.clear();
 			this.more.optionsSize.set(size, size);
@@ -148,7 +148,7 @@ SideBar.prototype.updateSize = function()
 			this.more.position.set(0, y);
 			this.more.visible = true;
 
-			while(i < this.buttons.length)
+			while (i < this.buttons.length)
 			{
 				this.more.insertOption(this.buttons[i]);
 				i++;

@@ -886,11 +886,11 @@ var AWDLoader = (function()
 			},
 
 			/**
-		 * Converts a UTF-8 byte array to JavaScript's 16-bit Unicode.
-		 * 
-		 * @param {Array.<number>} bytes UTF-8 byte array.
-		 * @return {string} 16-bit Unicode string.
-		 */
+			 * Converts a UTF-8 byte array to JavaScript's 16-bit Unicode.
+			 * 
+			 * @param {Array.<number>} bytes UTF-8 byte array.
+			 * @return {string} 16-bit Unicode string.
+			 */
 			readUTF: function()
 			{
 				var len = this.readU16();
@@ -898,11 +898,11 @@ var AWDLoader = (function()
 			},
 
 			/**
-		 * Converts a UTF-8 byte array to JavaScript's 16-bit Unicode.
-		 * 
-		 * @param {Array.<number>} bytes UTF-8 byte array.
-		 * @return {string} 16-bit Unicode string.
-		 */
+			 * Converts a UTF-8 byte array to JavaScript's 16-bit Unicode.
+			 * 
+			 * @param {Array.<number>} bytes UTF-8 byte array.
+			 * @return {string} 16-bit Unicode string.
+			 */
 			readUTFBytes: function(len)
 			{
 				var out = [],

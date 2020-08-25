@@ -1,5 +1,5 @@
-import {EventManager} from "../utils/EventManager.js";
 import {Math as TMath, Euler, Quaternion, Vector3} from "three";
+import {EventManager} from "../utils/EventManager.js";
 
 /**
  * Gyroscope object can be used to get the orientation from the device.
@@ -11,6 +11,7 @@ function Gyroscope()
 {
 	/**
 	 * Alpha rotation.
+	 *
 	 * @property alpha
 	 * @type {number}
 	 */
@@ -18,6 +19,7 @@ function Gyroscope()
 	
 	/**
 	 * Beta rotation.
+	 *
 	 * @property beta
 	 * @type {number}
 	 */
@@ -25,6 +27,7 @@ function Gyroscope()
 
 	/**
 	 * Gamma rotation.
+	 *
 	 * @property gamma
 	 * @type {number}
 	 */
@@ -32,6 +35,7 @@ function Gyroscope()
 
 	/**
 	 * Device orientation.
+	 *
 	 * @property orientation
 	 * @type {number}
 	 */
@@ -72,11 +76,11 @@ Gyroscope.prototype.setObjectQuaternion = function()
 	var euler = new Euler();
 	var quaternion = new Quaternion();
 	var zee = new Vector3(0, 0, 1);
-	var offset = new Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); //-PI/2 around the x-axis
+	var offset = new Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); // -PI/2 around the x-axis
 
 	return function(object)
 	{
-		euler.set(this.beta, this.alpha, -this.gamma, "YXZ"); //"ZXY" for the device, but "YXZ" for us
+		euler.set(this.beta, this.alpha, -this.gamma, "YXZ"); // "ZXY" for the device, but "YXZ" for us
 		object.quaternion.setFromEuler(euler); // Orient the device
 		object.quaternion.multiply(offset); // Camera looks out the back of the device, not the top
 		object.quaternion.multiply(quaternion.setFromAxisAngle(zee, -this.orientation)); // Adjust for screen orientation

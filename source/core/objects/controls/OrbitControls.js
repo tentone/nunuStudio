@@ -1,6 +1,6 @@
+import {Group, Vector3, Vector2, Object3D, Matrix4} from "three";
 import {Program} from "../Program.js";
 import {Mouse} from "../../input/Mouse.js";
-import {Group, Vector3, Vector2, Object3D, Matrix4} from "three";
 
 /**
  * Orbit controls object can be controlled using the mouse.
@@ -175,11 +175,11 @@ OrbitControls.prototype = Object.create(Group.prototype);
 OrbitControls.prototype.initialize = function()
 {
 	var node = this;
-	while(node.parent !== null)
+	while (node.parent !== null)
 	{
 		node = node.parent;
 
-		if(node instanceof Program)
+		if (node instanceof Program)
 		{
 			this.mouse = node.mouse;
 			this.keyboard = node.keyboard;
@@ -196,9 +196,9 @@ OrbitControls.prototype.update = function(delta)
 {
 	var needsUpdate = false;
 
-	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
+	if (!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			this.speedOrientation.y += this.speed * this.sensitivity * (this.invertNavigation ? this.mouse.delta.y : -this.mouse.delta.y);
 			this.speedOrientation.x -= this.speed * this.sensitivity * this.mouse.delta.x;
@@ -211,11 +211,11 @@ OrbitControls.prototype.update = function(delta)
 		needsUpdate = true;
 	}
 
-	if(this.zoomEnabled)
+	if (this.zoomEnabled)
 	{
-		if(this.mouse.buttonPressed(Mouse.MIDDLE))
+		if (this.mouse.buttonPressed(Mouse.MIDDLE))
 		{
-			if(this.smooth === true)
+			if (this.smooth === true)
 			{
 				this.speedCenter.y += this.speed * this.sensitivity * this.mouse.delta.y * this.distance;
 			}
@@ -227,9 +227,9 @@ OrbitControls.prototype.update = function(delta)
 			needsUpdate = true;
 		}
 
-		if(this.mouse.wheel !== 0)
+		if (this.mouse.wheel !== 0)
 		{
-			if(this.smooth === true)
+			if (this.smooth === true)
 			{
 				this.speedDistance += this.speed * this.mouse.wheel * this.position.distanceTo(this.center) * this.sensitivity;
 			}
@@ -244,17 +244,17 @@ OrbitControls.prototype.update = function(delta)
 
 	var up = true;
 	
-	if(this.movementEnabled && this.mouse.buttonPressed(Mouse.RIGHT))
+	if (this.movementEnabled && this.mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
 		direction.normalize();
 
-		if(this.smooth === true)
+		if (this.smooth === true)
 		{
 			var y = this.speed * this.mouse.delta.y * this.sensitivity * this.distance;
-			this.speedCenter.x += up ? (-direction.x * y) : (direction.x * y);
-			this.speedCenter.z += up ? (-direction.z * y) : (direction.z * y);
+			this.speedCenter.x += up ? -direction.x * y : direction.x * y;
+			this.speedCenter.z += up ? -direction.z * y : direction.z * y;
 			
 			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
@@ -265,8 +265,8 @@ OrbitControls.prototype.update = function(delta)
 		else
 		{
 			var y = this.mouse.delta.y * this.sensitivity * this.distance;
-			this.center.x += up ? (-direction.x * y) : (direction.x * y);
-			this.center.z += up ? (-direction.z * y) : (direction.z * y);
+			this.center.x += up ? -direction.x * y : direction.x * y;
+			this.center.z += up ? -direction.z * y : direction.z * y;
 			
 			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
@@ -278,7 +278,7 @@ OrbitControls.prototype.update = function(delta)
 		needsUpdate = true;
 	}
 
-	if(this.smooth === true)
+	if (this.smooth === true)
 	{
 		this.distance += this.speedDistance;
 		this.center.add(this.speedCenter);
@@ -292,7 +292,7 @@ OrbitControls.prototype.update = function(delta)
 		return;
 	}
 
-	if(needsUpdate === true)
+	if (needsUpdate === true)
 	{
 		this.updateControls();
 	}
@@ -309,20 +309,20 @@ OrbitControls.prototype.update = function(delta)
  */
 OrbitControls.prototype.updateControls = function()
 {
-	if(this.vector.y < this.limitDown)
+	if (this.vector.y < this.limitDown)
 	{
 		this.vector.y = this.limitDown;
 	}
-	else if(this.vector.y > this.limitUp)
+	else if (this.vector.y > this.limitUp)
 	{
 		this.vector.y = this.limitUp;
 	}
 
-	if(this.distance < this.minDistance)
+	if (this.distance < this.minDistance)
 	{
 		this.distance = this.minDistance;
 	}
-	else if(this.distance > this.maxDistance)
+	else if (this.distance > this.maxDistance)
 	{
 		this.distance = this.maxDistance;
 	}

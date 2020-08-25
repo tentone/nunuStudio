@@ -19,7 +19,7 @@ Action._id = 1;
  *
  * @method apply
  */
-Action.prototype.apply = function(){};
+Action.prototype.apply = function() {};
 
 /** 
  * Revert the action.
@@ -28,6 +28,6 @@ Action.prototype.apply = function(){};
  *
  * @method revert
  */
-Action.prototype.revert = function(){};
+Action.prototype.revert = function() {};
 
 export {Action};

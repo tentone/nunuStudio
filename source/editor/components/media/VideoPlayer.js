@@ -1,5 +1,5 @@
-import {Media} from "./Media.js";
 import {Component} from "../Component.js";
+import {Media} from "./Media.js";
 
 /**
  * Video player element, based on the video tag.

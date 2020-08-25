@@ -1,7 +1,7 @@
 import {TabGroup} from "../TabGroup.js";
 import {TabComponent} from "../TabComponent.js";
-import {TabGroupSplit} from "./TabGroupSplit.js";
 import {Component} from "../../Component.js";
+import {TabGroupSplit} from "./TabGroupSplit.js";
 
 /**
  * Tab container is the root for a tree of tab groups.
@@ -42,7 +42,7 @@ TabContainer.prototype.updateSize = function()
 {
 	Component.prototype.updateSize.call(this);
 
-	if(this.group !== null)
+	if (this.group !== null)
 	{
 		this.group.position.set(0, 0);
 		this.group.size.copy(this.size);
@@ -104,10 +104,10 @@ TabContainer.prototype.getActiveTab = function()
 {
 	var active = [];
 
-	if(this.group instanceof TabGroup)
+	if (this.group instanceof TabGroup)
 	{
 		var tab = this.group.getActiveTab();
-		if(tab !== null)
+		if (tab !== null)
 		{
 			active.push(tab);
 		}

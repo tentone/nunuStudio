@@ -11,7 +11,7 @@ import {Video} from "../resources/Video.js";
  */
 function VideoLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 }
 
 /**
@@ -43,7 +43,7 @@ VideoLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 VideoLoader.prototype.parse = function(json)
 {
-	var video = new Video((json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data, json.encoding);
+	var video = new Video(json.data.toArrayBuffer !== undefined ? json.data.toArrayBuffer() : json.data, json.encoding);
 	
 	video.name = json.name;
 	video.uuid = json.uuid;

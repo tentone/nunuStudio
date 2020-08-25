@@ -1,5 +1,5 @@
-import {Image} from "../resources/Image.js";
 import {Texture as TTexture, RGBAFormat, RGBFormat, LinearFilter} from "three";
+import {Image} from "../resources/Image.js";
 
 /**
  * Basic image texture object wraps a texture from a img DOM element
@@ -28,11 +28,11 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	 * @property source
 	 * @type {Image}
 	 */
-	if(typeof source === "string")
+	if (typeof source === "string")
 	{
 		this.source = new Image(source);
 	}
-	else if(source === undefined)
+	else if (source === undefined)
 	{
 		this.source = new Image();
 	}
@@ -47,6 +47,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 
 	/**
 	 * Name of the texture (doesn't need to be unique).
+	 *
 	 * @property name
 	 * @type {string}
 	 */
@@ -69,7 +70,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	this.updateSource();
 
 	// Check if image is animated format and start an update cycle
-	if(this.source.encoding === "gif")
+	if (this.source.encoding === "gif")
 	{
 		this.generateMipmaps = false;
 		this.magFilter = LinearFilter;
@@ -77,7 +78,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 
 		function update()
 		{
-			if(!self.disposed)
+			if (!self.disposed)
 			{
 				self.needsUpdate = true;
 				requestAnimationFrame(update);
@@ -99,7 +100,7 @@ Texture.isTexture = true;
  */
 Texture.prototype.updateSource = function()
 {
-	if(this.source !== null)
+	if (this.source !== null)
 	{
 		var self = this;
 
@@ -158,6 +159,7 @@ Texture.prototype.toJSON = function(meta)
 
 /**
  * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
+ *
  * @property uuid
  * @type {string}
  */

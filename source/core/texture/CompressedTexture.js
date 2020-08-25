@@ -51,11 +51,11 @@ CompressedTexture.prototype.toJSON = function(meta)
 
 	data.isCubeTexture = this.isCubeTexture;
 
-	if(this.isCubeTexture)
+	if (this.isCubeTexture)
 	{
 		data.image = [];
 
-		for(var j = 0; j < this.image.length; j++)
+		for (var j = 0; j < this.image.length; j++)
 		{	
 			var image = 
 			{
@@ -65,14 +65,14 @@ CompressedTexture.prototype.toJSON = function(meta)
 				height: this.image[j].height
 			};
 
-			for(var i = 0; i < this.image[j].mipmaps.length; i++)
+			for (var i = 0; i < this.image[j].mipmaps.length; i++)
 			{
 				image.mipmaps.push(
-				{
-					width: this.image[j].mipmaps[i].width,
-					height: this.image[j].mipmaps[i].height,
-					data: this.image[j].mipmaps[i].data
-				});
+					{
+						width: this.image[j].mipmaps[i].width,
+						height: this.image[j].mipmaps[i].height,
+						data: this.image[j].mipmaps[i].data
+					});
 			}
 			
 			data.image.push(image);
@@ -83,14 +83,14 @@ CompressedTexture.prototype.toJSON = function(meta)
 		data.mipmaps = [];
 		data.width = this.image.width;
 		data.height = this.image.height;
-		for(var i = 0; i < this.mipmaps.length; i++)
+		for (var i = 0; i < this.mipmaps.length; i++)
 		{
 			data.mipmaps.push(
-			{
-				width: this.mipmaps[i].width,
-				height: this.mipmaps[i].height,
-				data: this.mipmaps[i].data
-			});
+				{
+					width: this.mipmaps[i].width,
+					height: this.mipmaps[i].height,
+					data: this.mipmaps[i].data
+				});
 		}
 	}
 

@@ -1,6 +1,6 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {ResourceInspector} from "./ResourceInspector.js";
 import {AudioPlayer} from "../../../../components/media/AudioPlayer.js";
+import {ResourceInspector} from "./ResourceInspector.js";
 
 function AudioInspector(parent, object)
 {

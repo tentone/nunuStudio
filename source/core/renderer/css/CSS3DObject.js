@@ -28,7 +28,7 @@ function CSS3DObject(element)
 	
 	this.addEventListener("removed", function()
 	{
-		if(this.element.parentNode !== null)
+		if (this.element.parentNode !== null)
 		{
 			this.element.parentNode.removeChild(this.element);
 		}
@@ -37,8 +37,8 @@ function CSS3DObject(element)
 	var self = this;
 	var visible = true;
 	Object.defineProperties(this,
-	{
-		visible:
+		{
+			visible:
 		{
 			get: function()
 			{
@@ -51,7 +51,7 @@ function CSS3DObject(element)
 				self.element.style.display = value ? "block" :"none";
 			}
 		}
-	});
+		});
 };
 
 CSS3DObject.prototype = Object.create(Object3D.prototype);

@@ -75,10 +75,10 @@ TabDualContainer.prototype.getActiveTab = function()
 {
 	var active = [];
 
-	if(this.elementA instanceof TabGroup)
+	if (this.elementA instanceof TabGroup)
 	{
 		var tab = this.elementA.getActiveTab();
-		if(tab !== null)
+		if (tab !== null)
 		{
 			active.push(tab);
 		}
@@ -88,10 +88,10 @@ TabDualContainer.prototype.getActiveTab = function()
 		active = active.concat(this.elementA.getActiveTab());
 	}
 
-	if(this.elementB instanceof TabGroup)
+	if (this.elementB instanceof TabGroup)
 	{
 		var tab = this.elementB.getActiveTab();
-		if(tab !== null)
+		if (tab !== null)
 		{
 			active.push(tab);
 		}
@@ -112,12 +112,12 @@ TabDualContainer.prototype.getActiveTab = function()
  */
 TabDualContainer.prototype.closeActual = function()
 {
-	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.closeActual();
 	}
 
-	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	if (!(this.elementB instanceof TabGroup) || this.elementB.focused)
 	{
 		this.elementB.closeActual();
 	}
@@ -142,12 +142,12 @@ TabDualContainer.prototype.selectTab = function(tab)
  */
 TabDualContainer.prototype.selectNextTab = function()
 {
-	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.selectNextTab();
 	}
 
-	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	if (!(this.elementB instanceof TabGroup) || this.elementB.focused)
 	{
 		this.elementB.selectNextTab();
 	}
@@ -160,12 +160,12 @@ TabDualContainer.prototype.selectNextTab = function()
  */
 TabDualContainer.prototype.selectPreviousTab = function()
 {
-	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.selectPreviousTab();
 	}
 
-	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	if (!(this.elementB instanceof TabGroup) || this.elementB.focused)
 	{
 		this.elementB.selectPreviousTab();
 	}
@@ -183,7 +183,7 @@ TabDualContainer.prototype.selectPreviousTab = function()
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = this.elementA.addTab(TabConstructor, closeable);
-	if(tab === null)
+	if (tab === null)
 	{
 		tab = this.elementB.addTab(TabConstructor, closeable);
 	}
@@ -202,7 +202,7 @@ TabDualContainer.prototype.getTab = function(type, object)
 {
 	var tab = this.elementA.getTab(type, object);
 	
-	if(tab === null)
+	if (tab === null)
 	{
 		tab = this.elementB.getTab(type, object);
 	}

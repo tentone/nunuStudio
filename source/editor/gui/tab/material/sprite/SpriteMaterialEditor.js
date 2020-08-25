@@ -1,3 +1,4 @@
+import {Sprite, Color} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
@@ -7,7 +8,6 @@ import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Sprite, Color} from "three";
 
 function SpriteMaterialEditor(parent, closeable, container, index)
 {

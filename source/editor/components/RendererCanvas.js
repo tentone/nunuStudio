@@ -1,9 +1,9 @@
+import {Vector2, WebGlRenderer} from "three";
 import {RendererConfiguration} from "../../core/renderer/RendererConfiguration.js";
 import {CSS3DRenderer} from "../../core/renderer/css/CSS3DRenderer.js";
 import {CSS3DObject} from "../../core/renderer/css/CSS3DObject.js";
 import {Editor} from "../Editor.js";
 import {Component} from "./Component.js";
-import {Vector2, WebGlRenderer} from "three";
 
 /**
  * A canvas element that also contains a thee.js webgl renderer object.
@@ -122,7 +122,7 @@ RendererCanvas.prototype.setOnResize = function(callback)
  */
 RendererCanvas.prototype.resetCanvas = function()
 {
-	if(this.element.contains(this.canvas))
+	if (this.element.contains(this.canvas))
 	{
 		this.element.removeChild(this.canvas);
 	}
@@ -133,7 +133,7 @@ RendererCanvas.prototype.resetCanvas = function()
 	this.canvas.style.top = "0px";
 	this.canvas.style.left = "0px";
 
-	if(this.element.children.length === 0)
+	if (this.element.children.length === 0)
 	{
 		this.element.appendChild(this.canvas);
 	}
@@ -142,12 +142,12 @@ RendererCanvas.prototype.resetCanvas = function()
 		this.element.insertBefore(this.canvas, this.element.firstChild);
 	}
 
-	if(this.element.contains(this.cssDivision))
+	if (this.element.contains(this.cssDivision))
 	{
 		this.element.removeChild(this.cssDivision);
 	}
 
-	if(this.useCSSRenderer)
+	if (this.useCSSRenderer)
 	{
 		this.cssDivision = document.createElement("div");
 		this.cssDivision.style.position = "absolute";
@@ -159,7 +159,7 @@ RendererCanvas.prototype.resetCanvas = function()
 
 	this.resizeCanvas();
 
-	if(this.onCanvasReset !== null)
+	if (this.onCanvasReset !== null)
 	{
 		this.onCanvasReset(this);
 	}
@@ -180,7 +180,7 @@ RendererCanvas.prototype.createRenderer = function()
 	this.renderer = this.options.createRenderer(this.canvas);
 
 	// CSS Renderer
-	if(this.useCSSRenderer)
+	if (this.useCSSRenderer)
 	{
 		this.cssRenderer = new CSS3DRenderer(this.cssDivision);
 	}
@@ -229,19 +229,19 @@ RendererCanvas.prototype.forceContextLoss = function()
 {
 	try
 	{
-		if(this.renderer !== null)
+		if (this.renderer !== null)
 		{
 			this.renderer.dispose();
 			this.renderer.forceContextLoss();
 			this.renderer = null;
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		this.renderer = null;
 		console.log("nunuStudio: Failed to destroy WebGL context.");
 	}
-}
+};
 
 /**
  * Resize the canvas to match the parent size and consider the device pixel ratio.
@@ -258,13 +258,13 @@ RendererCanvas.prototype.resizeCanvas = function()
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 
-	if(this.useCSSRenderer)
+	if (this.useCSSRenderer)
 	{
 		this.cssDivision.style.width = this.size.x + "px";
 		this.cssDivision.style.height = this.size.y + "px";
 	}
 
-	if(this.onResize !== null)
+	if (this.onResize !== null)
 	{
 		this.onResize(this.resolution.x, this.resolution.y);
 	}
@@ -283,12 +283,12 @@ RendererCanvas.prototype.updateSize = function()
 
 	this.resizeCanvas();
 
-	if(this.renderer !== null)
+	if (this.renderer !== null)
 	{
 		this.renderer.setSize(this.resolution.x, this.resolution.y, false);
 	}
 
-	if(this.useCSSRenderer)
+	if (this.useCSSRenderer)
 	{
 		this.cssRenderer.setSize(this.size.x, this.size.y);
 	}

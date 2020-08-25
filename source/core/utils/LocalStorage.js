@@ -5,7 +5,7 @@
  * @static
  * @class LocalStorage
  */
-function LocalStorage(){}
+function LocalStorage() {}
 
 /**
  * Store value in the local storage.
@@ -17,7 +17,7 @@ function LocalStorage(){}
  */
 LocalStorage.set = function(key, value)
 {
-	if(typeof value === "object")
+	if (typeof value === "object")
 	{
 		window.localStorage.setItem(key, JSON.stringify(value));
 	}
@@ -43,7 +43,7 @@ LocalStorage.get = function(key)
 	{
 		return JSON.parse(value);
 	}
-	catch(e)
+	catch (e)
 	{
 		return value;
 	}

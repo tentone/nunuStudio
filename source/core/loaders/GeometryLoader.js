@@ -1,9 +1,9 @@
-import {LegacyGeometryLoader} from "./LegacyGeometryLoader.js";
+import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
 import {TerrainBufferGeometry} from "../geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../geometries/RoundedBoxBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../geometries/CapsuleBufferGeometry.js";
 import {ParametricBufferGeometry} from "../geometries/ParametricBufferGeometry.js";
-import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
+import {LegacyGeometryLoader} from "./LegacyGeometryLoader.js";
 
 /**
  * Geometry loader can be used to load geometry files.
@@ -14,7 +14,7 @@ import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
  */
 function GeometryLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 
 	this.shapes = {};
 
@@ -75,23 +75,23 @@ GeometryLoader.prototype.parse = function(data)
 {
 	var geometry = null;
 	
-	if(data.type === "CapsuleBufferGeometry")
+	if (data.type === "CapsuleBufferGeometry")
 	{
 		geometry = new CapsuleBufferGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.capsTopSegments, data.capsBottomSegments, data.thetaStart, data.thetaLength);
 	}
-	else if(data.type === "RoundedBoxBufferGeometry")
+	else if (data.type === "RoundedBoxBufferGeometry")
 	{
 		geometry = new RoundedBoxBufferGeometry(data.width, data.height, data.depth, data.radius, data.radiusSegments);
 	}
-	else if(data.type === "TerrainBufferGeometry")
+	else if (data.type === "TerrainBufferGeometry")
 	{
 		geometry = new TerrainBufferGeometry(data.width, data.height, data.widthSegments, data.heightSegments, data.scale, this.images[data.image]);
 	}
-	else if(data.type === "ParametricBufferGeometry")
+	else if (data.type === "ParametricBufferGeometry")
 	{
 		geometry = new ParametricBufferGeometry(data.code, data.slices, data.stacks);
 	}
-	else if(data.type === "Geometry")
+	else if (data.type === "Geometry")
 	{
 		var loader = new LegacyGeometryLoader();
 		geometry = loader.parse(data.data).geometry;
@@ -100,7 +100,7 @@ GeometryLoader.prototype.parse = function(data)
 	else
 	{
 		var geometries = ObjectLoader.prototype.parseGeometries([data], this.shapes);
-		for(var i in geometries)
+		for (var i in geometries)
 		{
 			geometry = geometries[i];
 			break;

@@ -53,7 +53,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	// Fill theme dropdown
 	var list = ThemeManager.getList();
-	for(var i = 0; i < list.length; i++)
+	for (var i = 0; i < list.length; i++)
 	{
 		var theme = list[i];
 		this.theme.addValue(theme, theme);
@@ -79,7 +79,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.resetDefault.size.set(120, 18);
 	this.resetDefault.setOnClick(function()
 	{
-		if(Editor.confirm("Reset back to default settings?"))
+		if (Editor.confirm("Reset back to default settings?"))
 		{
 			Editor.settings.loadDefault();
 			Editor.settings.store();
@@ -89,7 +89,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Auto update
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		this.form.addText(Locale.autoUpdate).setAltText("If checked the editor will auto-update to the latest version.");
 		this.autoUpdate = new CheckBox(this.form);
@@ -98,7 +98,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		{
 			Editor.settings.general.autoUpdate = self.autoUpdate.getValue();
 
-			if(Editor.settings.general.autoUpdate)
+			if (Editor.settings.general.autoUpdate)
 			{
 				Editor.updateNunu();
 			}
@@ -132,7 +132,7 @@ GeneralSettingsTab.prototype = Object.create(TabComponent.prototype);
 GeneralSettingsTab.prototype.activate = function()
 {
 	this.theme.setValue(Editor.settings.general.theme);
-	if(this.autoUpdate !== undefined)
+	if (this.autoUpdate !== undefined)
 	{
 		this.autoUpdate.setValue(Editor.settings.general.autoUpdate);
 	}

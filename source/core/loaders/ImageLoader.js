@@ -1,5 +1,5 @@
-import {Image} from "../resources/Image.js";
 import {DefaultLoadingManager, FileLoader} from "three";
+import {Image} from "../resources/Image.js";
 
 /**
  * ImageLoader can be used to load external image resources.
@@ -10,7 +10,7 @@ import {DefaultLoadingManager, FileLoader} from "three";
  */
 function ImageLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 
 	this.path = "";
 	this.crossOrigin = "Anonymous";
@@ -71,12 +71,12 @@ ImageLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
  */
 ImageLoader.prototype.parse = function(json)
 {
-	var image = new Image((json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data, json.encoding);
+	var image = new Image(json.data.toArrayBuffer !== undefined ? json.data.toArrayBuffer() : json.data, json.encoding);
 	
 	image.name = json.name;
 	image.uuid = json.uuid;
 
-	if(json.width !== undefined)
+	if (json.width !== undefined)
 	{
 		image.width = json.width;
 		image.height = json.height;

@@ -36,16 +36,16 @@ TypedArrayHelper.prototype.setSize = function(size, noComponentMultiply)
 {
 	var currentArraySize = this.array.length;
 
-	if(!noComponentMultiply)
+	if (!noComponentMultiply)
 	{
 		size = size * this.componentSize;
 	}
 
-	if(size < currentArraySize)
+	if (size < currentArraySize)
 	{
 		return this.shrink(size);
 	}
-	else if(size > currentArraySize)
+	else if (size > currentArraySize)
 	{
 		return this.grow(size);
 	}
@@ -102,9 +102,9 @@ TypedArrayHelper.prototype.splice = function(start, end)
 		array = this.array,
 		size = array.length;
 
-	for(var i = 0; i < size; ++i)
+	for (var i = 0; i < size; ++i)
 	{
-		if(i < start || i >= end)
+		if (i < start || i >= end)
 		{
 			data.push(array[i]);
 		}
@@ -131,11 +131,11 @@ TypedArrayHelper.prototype.setFromArray = function(index, array)
 	var sourceArraySize = array.length,
 		newSize = index + sourceArraySize;
 
-	if(newSize > this.array.length)
+	if (newSize > this.array.length)
 	{
 		this.grow(newSize);
 	}
-	else if(newSize < this.array.length)
+	else if (newSize < this.array.length)
 	{
 		this.shrink(newSize);
 	}
@@ -170,7 +170,7 @@ TypedArrayHelper.prototype.setVec2 = function(index, vec2)
 TypedArrayHelper.prototype.setVec2Components = function(index, x, y)
 {
 	var array = this.array,
-		i = this.indexOffset + (index * this.componentSize);
+		i = this.indexOffset + index * this.componentSize;
 
 	array[i] = x;
 	array[i + 1] = y;
@@ -203,7 +203,7 @@ TypedArrayHelper.prototype.setVec3 = function(index, vec3)
 TypedArrayHelper.prototype.setVec3Components = function(index, x, y, z)
 {
 	var array = this.array,
-		i = this.indexOffset + (index * this.componentSize);
+		i = this.indexOffset + index * this.componentSize;
 
 	array[i] = x;
 	array[i + 1] = y;
@@ -238,7 +238,7 @@ TypedArrayHelper.prototype.setVec4 = function(index, vec4)
 TypedArrayHelper.prototype.setVec4Components = function(index, x, y, z, w)
 {
 	var array = this.array,
-		i = this.indexOffset + (index * this.componentSize);
+		i = this.indexOffset + index * this.componentSize;
 
 	array[i] = x;
 	array[i + 1] = y;
@@ -257,7 +257,7 @@ TypedArrayHelper.prototype.setVec4Components = function(index, x, y, z, w)
  */
 TypedArrayHelper.prototype.setMat3 = function(index, mat3)
 {
-	return this.setFromArray(this.indexOffset + (index * this.componentSize), mat3.elements);
+	return this.setFromArray(this.indexOffset + index * this.componentSize, mat3.elements);
 };
 
 /**
@@ -270,7 +270,7 @@ TypedArrayHelper.prototype.setMat3 = function(index, mat3)
  */
 TypedArrayHelper.prototype.setMat4 = function(index, mat4)
 {
-	return this.setFromArray(this.indexOffset + (index * this.componentSize), mat4.elements);
+	return this.setFromArray(this.indexOffset + index * this.componentSize, mat4.elements);
 };
 
 /**
@@ -296,7 +296,7 @@ TypedArrayHelper.prototype.setColor = function(index, color)
  */
 TypedArrayHelper.prototype.setNumber = function(index, numericValue)
 {
-	this.array[this.indexOffset + (index * this.componentSize)] = numericValue;
+	this.array[this.indexOffset + index * this.componentSize] = numericValue;
 	return this;
 };
 
@@ -325,6 +325,6 @@ TypedArrayHelper.prototype.getValueAtIndex = function(index)
  */
 TypedArrayHelper.prototype.getComponentValueAtIndex = function(index)
 {
-	return this.array.subarray(this.indexOffset + (index * this.componentSize));
+	return this.array.subarray(this.indexOffset + index * this.componentSize);
 };
 export {TypedArrayHelper};

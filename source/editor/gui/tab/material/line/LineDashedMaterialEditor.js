@@ -1,7 +1,7 @@
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {LineBasicMaterialEditor} from "./LineBasicMaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {LineBasicMaterialEditor} from "./LineBasicMaterialEditor.js";
 
 function LineDashedMaterialEditor(parent, closeable, container, index)
 {

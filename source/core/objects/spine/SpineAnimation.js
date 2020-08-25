@@ -1,8 +1,8 @@
+import {Clock, Object3D} from "three";
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js";
 import {Texture} from "../../texture/Texture.js";
 import {Image} from "../../resources/Image.js";
 import {SpineTexture} from "./SpineTexture.js";
-import {Clock, Object3D} from "three";
-import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
 
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
@@ -21,23 +21,23 @@ import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
  */
 function SpineAnimation(json, atlas, path, textures)
 {
-	if(textures === undefined)
+	if (textures === undefined)
 	{
 		textures = [];
 	}
 	
 	var textureAtlas = new spine.TextureAtlas(atlas, function(file)
 	{
-		for(var i = 0; i < textures.length; i++)
+		for (var i = 0; i < textures.length; i++)
 		{
-			if(textures[i].name === file)
+			if (textures[i].name === file)
 			{
 				var texture = new SpineTexture(textures[i].texture);
 				break;
 			}
 		}
 
-		if(i === textures.length)
+		if (i === textures.length)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
 			textures.push({name: file, texture: texture.texture});
@@ -46,12 +46,12 @@ function SpineAnimation(json, atlas, path, textures)
 		var element = texture.texture.image;
 		var image = texture.texture.source;
 
-		if(image.width > 0 && image.height > 0)
+		if (image.width > 0 && image.height > 0)
 		{
 			element.width = image.width;
 			element.height = image.height;
 		}
-		else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
+		else if (element.naturalWidth !== 0 && element.naturalHeight !== 0)
 		{
 			element.width = element.naturalWidth;
 			element.height = element.naturalHeight;
@@ -111,7 +111,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @attribute skin
 	 * @type {Object}
 	 */
-	this.skin = (this.getSkins().length > 0) ? this.getSkins()[0].name : null;
+	this.skin = this.getSkins().length > 0 ? this.getSkins()[0].name : null;
 	
 	/**
 	 * Animation currently playing, animations are split into tracks.
@@ -121,7 +121,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @attribute animation
 	 * @type {Object}
 	 */
-	this.animation = (this.getAnimations().length > 0) ? this.getAnimations()[0].name : null;
+	this.animation = this.getAnimations().length > 0 ? this.getAnimations()[0].name : null;
 		
 	/** 
 	 * Index of the animation track playing.
@@ -172,12 +172,12 @@ SpineAnimation.prototype.onBeforeRender = function()
  */
 SpineAnimation.prototype.play = function()
 {
-	if(this.animation !== null)
+	if (this.animation !== null)
 	{
 		this.setAnimation(this.track, this.animation, this.loop);
 	}
 
-	if(this.skin !== null)
+	if (this.skin !== null)
 	{
 		this.setSkin(this.skin);
 	}
@@ -192,7 +192,7 @@ SpineAnimation.prototype.play = function()
 SpineAnimation.prototype.getAnimations = function()
 {
 	return this.state.data.skeletonData.animations;
-}
+};
 
 /**
  * Set animation from track number and name.
@@ -206,13 +206,13 @@ SpineAnimation.prototype.setAnimation = function(track, animation, loop)
 {
 	try
 	{
-		if(track !== undefined){this.track = track;}
-		if(animation !== undefined){this.animation = animation;}
-		if(loop !== undefined){this.loop = loop;}
+		if (track !== undefined) {this.track = track;}
+		if (animation !== undefined) {this.animation = animation;}
+		if (loop !== undefined) {this.loop = loop;}
 
 		this.state.setAnimation(this.track, this.animation, this.loop);
 	}
-	catch(e)
+	catch (e)
 	{
 		this.animation = null;
 
@@ -244,7 +244,7 @@ SpineAnimation.prototype.setSkin = function(name)
 		this.skeleton.setSkinByName(name);
 		this.skin = name;
 	}
-	catch(e)
+	catch (e)
 	{
 		this.skin = null;
 		console.warn("nunuStudio: Error setting spine skin " + name);
@@ -258,7 +258,7 @@ SpineAnimation.prototype.toJSON = function(meta)
 	var self = this;
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
-		for(var i = 0; i < self.textures.length; i++)
+		for (var i = 0; i < self.textures.length; i++)
 		{
 			var texture = self.textures[i].texture.toJSON(meta);
 			textures.push({name: self.textures[i].name, texture: texture.uuid});
@@ -271,13 +271,13 @@ SpineAnimation.prototype.toJSON = function(meta)
 	data.object.textures = textures;
 
 	// Default animation and skin
-	if(this.animation !== null)
+	if (this.animation !== null)
 	{
 		data.object.animation = this.animation;
 		data.object.track = this.track;
 		data.object.loop = this.loop;
 	}
-	if(this.skin !== null)
+	if (this.skin !== null)
 	{
 		data.object.skin = this.skin;	
 	}

@@ -38,9 +38,9 @@ function ButtonToggle(parent)
 
 	this.replaceEvent("mouseleave", function()
 	{
-		if(!self.disabled)
+		if (!self.disabled)
 		{
-			if(self.selected)
+			if (self.selected)
 			{
 				self.setStyles(self.styleSelected !== null ? self.styleSelected : self.stylePointerOver);
 			}
@@ -63,7 +63,7 @@ ButtonToggle.prototype.setSelected = function(value)
 {
 	this.selected = value;
 
-	if(this.selected)
+	if (this.selected)
 	{
 		this.setStyles(this.styleSelected !== null ? this.styleSelected : this.stylePointerOver);	
 	}

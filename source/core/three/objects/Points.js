@@ -2,7 +2,7 @@ import {Box3, Vector3} from "three";
 
 THREE.Points.prototype.raycast = function(raycaster, intersects)
 {
-	if(this.geometry.boundingBox === null)
+	if (this.geometry.boundingBox === null)
 	{
 		this.geometry.computeBoundingBox();
 	}
@@ -13,8 +13,8 @@ THREE.Points.prototype.raycast = function(raycaster, intersects)
 
 	var point = raycaster.ray.intersectBox(box, new Vector3());
 
-	if(point !== null)
+	if (point !== null)
 	{
-		intersects.push({object:this})
+		intersects.push({object: this});
 	}
 };

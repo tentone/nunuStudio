@@ -21,24 +21,24 @@ var parseBufferAttribute = function(json)
 		var contructor = json.isInstancedBufferAttribute ? InstancedBufferAttribute : BufferAttribute;
 		var bufferAttribute = new contructor(typedArray, json.itemSize, json.normalized);
 
-		if (json.name !== undefined) bufferAttribute.name = json.name;
+		if (json.name !== undefined) {bufferAttribute.name = json.name;}
 
 		return bufferAttribute;
 	}
 
 	var bufferAttribute;
 
-	if(json.type === "BufferAttribute")
+	if (json.type === "BufferAttribute")
 	{
 		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
 		bufferAttribute = new BufferAttribute(typedArray, json.itemSize, json.normalized);
 	}
-	else if(json.type === "InstancedBufferAttribute")
+	else if (json.type === "InstancedBufferAttribute")
 	{
 		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
 		bufferAttribute = new InstancedBufferAttribute(typedArray, json.itemSize, json.normalized, json.meshPerAttribute);
 	}
-	else if(json.type === "InterleavedBufferAttribute")
+	else if (json.type === "InterleavedBufferAttribute")
 	{
 		// Interleaved buffer
 		var typedArray = new TYPED_ARRAYS[json.data.typedArray.type](json.data.typedArray.array);
@@ -49,7 +49,7 @@ var parseBufferAttribute = function(json)
 		bufferAttribute = new InterleavedBufferAttribute(interleavedBuffer, json.itemSize, json.offset, json.normalized);
 	}
 
-	if (json.name !== undefined) bufferAttribute.name = json.name;
+	if (json.name !== undefined) {bufferAttribute.name = json.name;}
 
 	return bufferAttribute;
 };
@@ -73,14 +73,15 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	}
 
 	var morphAttributes = json.data.morphAttributes;
-	if(morphAttributes)
+	if (morphAttributes)
 	{
-		for(var key in morphAttributes)
+		for (var key in morphAttributes)
 		{
 			var attributeArray = morphAttributes[key];
 			var array = [];
 
-			for (var i = 0, il = attributeArray.length; i < il; i ++) {
+			for (var i = 0, il = attributeArray.length; i < il; i ++) 
+			{
 
 				array.push(parseBufferAttribute(attributeArray[i]));
 			}
@@ -92,7 +93,7 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	}
 
 	var morphTargetsRelative = json.data.morphTargetsRelative;
-	if(morphTargetsRelative)
+	if (morphTargetsRelative)
 	{
 		geometry.morphTargetsRelative = true;
 	}
@@ -108,7 +109,7 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	}
 
 	var boundingSphere = json.data.boundingSphere;
-	if(boundingSphere !== undefined)
+	if (boundingSphere !== undefined)
 	{
 		var center = new Vector3();
 		if (boundingSphere.center !== undefined)
@@ -119,8 +120,8 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 		geometry.boundingSphere = new Sphere(center, boundingSphere.radius);
 	}
 
-	if (json.name) geometry.name = json.name;
-	if (json.userData) geometry.userData = json.userData;
+	if (json.name) {geometry.name = json.name;}
+	if (json.userData) {geometry.userData = json.userData;}
 
 	return geometry;
 };

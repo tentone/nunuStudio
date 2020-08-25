@@ -1,13 +1,13 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Asset} from "./Asset.js";
 import {FontRenderer} from "../../../preview/FontRenderer.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
+import {Asset} from "./Asset.js";
 
 
 function FontAsset(parent)
@@ -44,11 +44,11 @@ function FontAsset(parent)
 			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
 		});
 
-		if(self.asset.format === "arraybuffer")
+		if (self.asset.format === "arraybuffer")
 		{
 			context.addOption(Locale.reverse, function()
 			{
-				if(Editor.confirm("Reverse font glyphs?"))
+				if (Editor.confirm("Reverse font glyphs?"))
 				{
 					self.asset.reverseGlyphs();
 					self.updateMetadata();
@@ -74,7 +74,7 @@ function FontAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		// Insert into drag buffer
-		if(self.asset !== null)
+		if (self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);

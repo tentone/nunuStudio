@@ -51,7 +51,7 @@ DataTexture.prototype.toJSON = function(meta)
 		height: this.image.height,
 		width: this.image.width,
 		data: Array.from(this.image.data)
-	}
+	};
 
 	return data;
 };

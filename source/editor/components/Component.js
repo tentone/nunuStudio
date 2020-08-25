@@ -1,6 +1,6 @@
-import {EventManager} from "../../core/utils/EventManager.js";
-import {Group} from"../../core/objects/misc/Group.js";
 import {Vector2} from "three";
+import {EventManager} from "../../core/utils/EventManager.js";
+import {Group} from "../../core/objects/misc/Group.js";
 
 /**
  * Component is the base object for all GUI elements.
@@ -46,7 +46,7 @@ function Component(parent, type)
 	 * @type {Component}
 	 */
 	this.parent = null;
-	if(parent !== undefined)
+	if (parent !== undefined)
 	{
 		this.attachTo(parent);
 	}
@@ -184,7 +184,7 @@ Component.prototype.addClass = function(name)
  */
 Component.prototype.removeClass = function(name)
 {
-	if(this.element.classList.contains(name))
+	if (this.element.classList.contains(name))
 	{
 		this.element.classList.remove(name);
 	}
@@ -218,7 +218,7 @@ Component.prototype.setStyle = function(attribute, value)
  */
 Component.prototype.setStyles = function(styles)
 {
-	for(var i in styles)
+	for (var i in styles)
 	{
 		this.element.style[i] = styles[i];
 	}
@@ -268,7 +268,7 @@ Component.prototype.setAltText = function(altText)
 	{	
 		destroyFunction.call(this);
 
-		if(document.body.contains(element))
+		if (document.body.contains(element))
 		{
 			document.body.removeChild(element);
 		}
@@ -279,8 +279,8 @@ Component.prototype.setAltText = function(altText)
 	this.addEvent("mousemove", function(event)
 	{
 		element.style.display = "flex";
-		element.style.left = (event.clientX + 8) + "px";
-		element.style.top = (event.clientY - 20) + "px";
+		element.style.left = event.clientX + 8 + "px";
+		element.style.top = event.clientY - 20 + "px";
 	});
 
 	this.addEvent("mouseout", function()
@@ -311,7 +311,7 @@ Component.prototype.setOnClick = function(callback)
  */
 Component.prototype.removeAllChildren = function()
 {
-	while(this.element.firstChild)
+	while (this.element.firstChild)
 	{
 		this.element.removeChild(this.element.firstChild);
 	}
@@ -327,25 +327,25 @@ Component.prototype.removeAllChildren = function()
  */
 Component.prototype.attachTo = function(parent)
 {
-	if(this.parent === parent || parent === undefined)
+	if (this.parent === parent || parent === undefined)
 	{
 		return;
 	}
 
-	if(this.parent !== null)
+	if (this.parent !== null)
 	{
 		Component.prototype.destroy.call(this);
 	}
 
 	this.parent = parent;
 
-	if(parent.isComponent === true)
+	if (parent.isComponent === true)
 	{
 		parent.element.appendChild(this.element);
 	}
 	else
 	{
-		console.warn("nunuStudio: Parent is not a Component." , this);
+		console.warn("nunuStudio: Parent is not a Component.", this);
 		this.parent.appendChild(this.element);
 	}
 };
@@ -383,11 +383,11 @@ Component.prototype.watchPointer = function()
  */
 Component.prototype.destroy = function()
 {
-	if(this.parent !== null)
+	if (this.parent !== null)
 	{
-		if(this.parent.isComponent === true)
+		if (this.parent.isComponent === true)
 		{
-			if(this.parent.element.contains(this.element))
+			if (this.parent.element.contains(this.element))
 			{
 				this.parent.element.removeChild(this.element);
 				this.parent = null;
@@ -396,7 +396,7 @@ Component.prototype.destroy = function()
 		else
 		{
 			console.warn("nunuStudio: Parent is not a Component.", this);
-			if(this.parent.contains(this.element))
+			if (this.parent.contains(this.element))
 			{
 				this.parent.removeChild(this.element);
 				this.parent = null;
@@ -460,12 +460,12 @@ Component.prototype.updateVisibility = function()
  */
 Component.prototype.updatePosition = function(mode)
 {
-	if(mode !== undefined)
+	if (mode !== undefined)
 	{
 		this._mode = mode;
 	}
 
-	if(this._mode === Component.TOP_LEFT || this._mode === Component.TOP_RIGHT)
+	if (this._mode === Component.TOP_LEFT || this._mode === Component.TOP_RIGHT)
 	{
 		this.element.style.top = this.position.y + "px";
 	}
@@ -474,7 +474,7 @@ Component.prototype.updatePosition = function(mode)
 		this.element.style.bottom = this.position.y + "px";
 	}
 
-	if(this._mode === Component.TOP_LEFT || this._mode === Component.BOTTOM_LEFT)
+	if (this._mode === Component.TOP_LEFT || this._mode === Component.BOTTOM_LEFT)
 	{
 		this.element.style.left = this.position.x + "px";
 	}
@@ -508,7 +508,7 @@ Component.prototype.updateInterface = function()
 {
 	this.updateVisibility();
 
-	if(this.visible)
+	if (this.visible)
 	{
 		this.updateSize();
 		this.updatePosition();

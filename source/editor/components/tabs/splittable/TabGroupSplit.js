@@ -2,11 +2,11 @@ import {DOMUtils} from "../../../utils/DOMUtils.js";
 import {DragBuffer} from "../../../gui/DragBuffer.js";
 import {TabGroup} from "../TabGroup.js";
 import {TabComponent} from "../TabComponent.js";
+import {DualContainer} from "../../containers/DualContainer.js";
+import {Component} from "../../Component.js";
 import {TabDualContainer} from "./TabDualContainer.js";
 import {TabContainer} from "./TabContainer.js";
 import {TabButtonSplit} from "./TabButtonSplit.js";
-import {DualContainer} from "../../containers/DualContainer.js";
-import {Component} from "../../Component.js";
 
 /**
  * A tab group contains and manages tab elements.
@@ -67,29 +67,29 @@ function TabGroupSplit(parent, placement)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabComponent)
+		if (tab instanceof TabComponent)
 		{
 			var position = DOMUtils.getPosition(self.element);
 			var x = event.clientX - position.x;
 			var y = event.clientY - position.y;
 
 			// Left
-			if(x < self.size.x * self.dragBorder)
+			if (x < self.size.x * self.dragBorder)
 			{
 				self.split(TabGroup.LEFT).attachTab(tab);
 			}
 			// Right
-			else if(x > self.size.x * (1 - self.dragBorder))
+			else if (x > self.size.x * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.RIGHT).attachTab(tab);
 			}
 			// Top
-			else if(y < self.size.y * self.dragBorder)
+			else if (y < self.size.y * self.dragBorder)
 			{
 				self.split(TabGroup.TOP).attachTab(tab);
 			}
 			// Bottom
-			else if(y > self.size.y * (1 - self.dragBorder))
+			else if (y > self.size.y * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.BOTTOM).attachTab(tab);
 			}
@@ -101,7 +101,7 @@ function TabGroupSplit(parent, placement)
 			DragBuffer.pop(uuid);
 		}
 
-		if(self.tab.element.contains(self.tabArea))
+		if (self.tab.element.contains(self.tabArea))
 		{
 			self.tab.element.removeChild(self.tabArea);
 		}
@@ -112,7 +112,7 @@ function TabGroupSplit(parent, placement)
 	{
 		event.preventDefault();
 
-		if(!(DragBuffer.buffer[0] instanceof TabComponent))
+		if (!(DragBuffer.buffer[0] instanceof TabComponent))
 		{
 			return;
 		}
@@ -122,7 +122,7 @@ function TabGroupSplit(parent, placement)
 		var y = event.clientY - position.y;
 
 		// Left
-		if(x < self.size.x * self.dragBorder)
+		if (x < self.size.x * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
 			self.tabArea.style.bottom = null;
@@ -131,13 +131,13 @@ function TabGroupSplit(parent, placement)
 			self.tabArea.style.width = "50%";
 			self.tabArea.style.height = "100%";
 
-			if(!self.tab.element.contains(self.tabArea))
+			if (!self.tab.element.contains(self.tabArea))
 			{
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
 		// Right
-		else if(x > self.size.x * (1 - self.dragBorder))
+		else if (x > self.size.x * (1 - self.dragBorder))
 		{
 			self.tabArea.style.left = null;
 			self.tabArea.style.bottom = null;
@@ -146,13 +146,13 @@ function TabGroupSplit(parent, placement)
 			self.tabArea.style.width = "50%";
 			self.tabArea.style.height = "100%";
 
-			if(!self.tab.element.contains(self.tabArea))
+			if (!self.tab.element.contains(self.tabArea))
 			{
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
 		// Top
-		else if(y < self.size.y * self.dragBorder)
+		else if (y < self.size.y * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
 			self.tabArea.style.bottom = null;
@@ -161,13 +161,13 @@ function TabGroupSplit(parent, placement)
 			self.tabArea.style.width = "100%";
 			self.tabArea.style.height = "50%";
 
-			if(!self.tab.element.contains(self.tabArea))
+			if (!self.tab.element.contains(self.tabArea))
 			{
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
 		// Bottom
-		else if(y > self.size.y * (1 - self.dragBorder))
+		else if (y > self.size.y * (1 - self.dragBorder))
 		{
 			self.tabArea.style.top = null;
 			self.tabArea.style.right = null;
@@ -176,14 +176,14 @@ function TabGroupSplit(parent, placement)
 			self.tabArea.style.width = "100%";
 			self.tabArea.style.height = "50%";
 
-			if(!self.tab.element.contains(self.tabArea))
+			if (!self.tab.element.contains(self.tabArea))
 			{
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
 		else
 		{
-			if(self.tab.element.contains(self.tabArea))
+			if (self.tab.element.contains(self.tabArea))
 			{
 				self.tab.element.removeChild(self.tabArea);
 			}
@@ -195,7 +195,7 @@ function TabGroupSplit(parent, placement)
 	{
 		event.preventDefault();
 
-		if(self.tab.element.contains(self.tabArea))
+		if (self.tab.element.contains(self.tabArea))
 		{
 			self.tab.element.removeChild(self.tabArea);
 		}
@@ -213,9 +213,9 @@ TabGroupSplit.prototype = Object.create(TabGroup.prototype);
  */
 TabGroupSplit.prototype.split = function(direction)
 {
-	if(this.canSplit)
+	if (this.canSplit)
 	{
-		if(direction === undefined)
+		if (direction === undefined)
 		{
 			direction = TabGroup.RIGHT;
 		}
@@ -224,44 +224,44 @@ TabGroupSplit.prototype.split = function(direction)
 		var parent = this.parent;
 		var group = new TabGroupSplit(container, this.placement);
 
-		if(direction === TabGroup.RIGHT)
+		if (direction === TabGroup.RIGHT)
 		{
 			container.orientation = DualContainer.HORIZONTAL;
 			container.attach(this);
 			container.attach(group);
 		}
-		else if(direction === TabGroup.LEFT)
+		else if (direction === TabGroup.LEFT)
 		{
 			container.orientation = DualContainer.HORIZONTAL;
 			container.attach(group);
 			container.attach(this);
 		}
-		else if(direction === TabGroup.BOTTOM)
+		else if (direction === TabGroup.BOTTOM)
 		{
 			container.orientation = DualContainer.VERTICAL;
 			container.attach(this);
 			container.attach(group);
 		}
-		else if(direction === TabGroup.TOP)
+		else if (direction === TabGroup.TOP)
 		{
 			container.orientation = DualContainer.VERTICAL;
 			container.attach(group);
 			container.attach(this);
 		}
 		
-		if(parent instanceof TabContainer)
+		if (parent instanceof TabContainer)
 		{
 			parent.attach(container);
 			parent.updateSize();
 		}
-		else if(parent instanceof DualContainer)
+		else if (parent instanceof DualContainer)
 		{
-			if(parent.elementA === this)
+			if (parent.elementA === this)
 			{
 				parent.attachA(container);
 				parent.updateSize();
 			}
-			else if(parent.elementB === this)
+			else if (parent.elementB === this)
 			{
 				parent.attachB(container);
 				parent.updateSize();
@@ -283,23 +283,23 @@ TabGroupSplit.prototype.split = function(direction)
  */ 
 TabGroupSplit.prototype.collapse = function()
 {
-	if(this.canCollapse)
+	if (this.canCollapse)
 	{
-		if(this.parent instanceof DualContainer)
+		if (this.parent instanceof DualContainer)
 		{
 			var parent = this.parent.parent;
 			var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
 
 			// Dual container
-			if(parent instanceof DualContainer)
+			if (parent instanceof DualContainer)
 			{
-				if(parent.elementA === this.parent)
+				if (parent.elementA === this.parent)
 				{
 					this.parent.destroy();
 					this.destroy();
 					parent.attachA(group);
 				}
-				else if(parent.elementB === this.parent)
+				else if (parent.elementB === this.parent)
 				{
 					this.parent.destroy();
 					this.destroy();
@@ -339,7 +339,7 @@ TabGroupSplit.prototype.attachTab = function(tab, insertIndex)
 	var container = tab.container;
 	var tab = TabGroup.prototype.attachTab.call(this, tab, insertIndex);
 
-	if(container.options.length === 0)
+	if (container.options.length === 0)
 	{
 		container.collapse();
 	}
@@ -351,7 +351,7 @@ TabGroupSplit.prototype.removeTab = function(index, dontDestroy)
 {
 	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
 
-	if(this.options.length === 0 && dontDestroy !== true)
+	if (this.options.length === 0 && dontDestroy !== true)
 	{
 		this.collapse();
 	}
@@ -365,7 +365,7 @@ TabGroupSplit.prototype.addTab = function(TabConstructor, closeable)
 
 	this.options.push(tab);
 
-	if(this.selected === null || this.options.length === 1)
+	if (this.selected === null || this.options.length === 1)
 	{
 		this.selectTab(tab);
 	}

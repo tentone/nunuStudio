@@ -1,12 +1,12 @@
+import {Shape} from "cannon";
+import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
 import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
 import {GizmoLineMaterial} from "../GizmoLineMaterial.js";
-import {TransformGizmo} from "./TransformGizmo.js";
 import {Editor} from "../../../../../Editor.js";
-import {Shape} from "cannon";
-import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
+import {TransformGizmo} from "./TransformGizmo.js";
 
 /**
  * Gizmo used to change scale of an object. Can be used with Object3D objects.
@@ -24,19 +24,19 @@ function TransformGizmoScale()
 	arrowGeometry.merge(mesh.geometry, mesh.matrix);
 
 	var x = new BufferGeometry();
-	x.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
+	x.setAttribute("position", new Float32BufferAttribute([0, 0, 0, 1, 0, 0], 3));
 
 	var y = new BufferGeometry();
-	y.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
+	y.setAttribute("position", new Float32BufferAttribute([0, 0, 0, 0, 1, 0], 3));
 
 	var z = new BufferGeometry();
-	z.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
+	z.setAttribute("position", new Float32BufferAttribute([0, 0, 0, 0, 0, 1], 3));
 
 	this.handleGizmos =
 	{
-		X: [[new Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new Line(x, GizmoLineMaterial.red)]],
-		Y: [[new Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]],[new Line(y, GizmoLineMaterial.green)]],
-		Z: [[new Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new Line(z, GizmoLineMaterial.blue)]],
+		X: [[new Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]], [new Line(x, GizmoLineMaterial.red)]],
+		Y: [[new Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]], [new Line(y, GizmoLineMaterial.green)]],
+		Z: [[new Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new Line(z, GizmoLineMaterial.blue)]],
 		XYZ: [[new Mesh(new BoxBufferGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
 	};
 
@@ -58,31 +58,31 @@ TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
 	var tempMatrix = new Matrix4();
 	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
 
-	if(axis === "X")
+	if (axis === "X")
 	{
 		this.activePlane = this.planes["XY"];
-		if(Math.abs(eye.y) > Math.abs(eye.z))
+		if (Math.abs(eye.y) > Math.abs(eye.z))
 		{
 			this.activePlane = this.planes["XZ"];
 		}
 	}
-	else if(axis === "Y")
+	else if (axis === "Y")
 	{
 		this.activePlane = this.planes["XY"];
-		if(Math.abs(eye.x) > Math.abs(eye.z))
+		if (Math.abs(eye.x) > Math.abs(eye.z))
 		{
 			this.activePlane = this.planes["YZ"];
 		}
 	}
-	else if(axis === "Z")
+	else if (axis === "Z")
 	{
 		this.activePlane = this.planes["XZ"];
-		if(Math.abs(eye.x) > Math.abs(eye.y))
+		if (Math.abs(eye.x) > Math.abs(eye.y))
 		{
 			this.activePlane = this.planes["YZ"];
 		}
 	}
-	else if(axis === "XYZ") 
+	else if (axis === "XYZ") 
 	{
 		this.activePlane = this.planes["XYZE"];
 	}
@@ -98,7 +98,7 @@ TransformGizmoScale.prototype.applyChanges = function(controls)
 {
 	var actions = [];
 
-	for(var i = 0; i < controls.objects.length; i++)
+	for (var i = 0; i < controls.objects.length; i++)
 	{
 		var object = controls.objects[i].scale;
 		actions.push(new ChangeAction(object, "x", object.x, controls.attributes[i].oldScale.x));
@@ -112,18 +112,18 @@ TransformGizmoScale.prototype.applyChanges = function(controls)
 TransformGizmoScale.prototype.transformObject = function(controls)
 {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
-	if(planeIntersect === false) 
+	if (planeIntersect === false) 
 	{
 		return;
 	}
 	
-	for(var i = 0; i < controls.objects.length; i++)
+	for (var i = 0; i < controls.objects.length; i++)
 	{
 		controls.point.copy(planeIntersect.point);
 		controls.point.sub(controls.offset);
 		controls.point.multiply(controls.attributes[i].parentScale);
 
-		if(controls.axis === "XYZ")
+		if (controls.axis === "XYZ")
 		{
 			controls.toolScale = 1 + controls.point.y;
 
@@ -134,37 +134,37 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 		{
 			controls.point.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].worldRotationMatrix));
 
-			if(controls.axis === "X")
+			if (controls.axis === "X")
 			{
 				controls.objects[i].scale.x = controls.attributes[i].oldScale.x * (1 + controls.point.x);
 			}
-			else if(controls.axis === "Y")
+			else if (controls.axis === "Y")
 			{
 				controls.objects[i].scale.y = controls.attributes[i].oldScale.y * (1 + controls.point.y);
 			}
-			else if(controls.axis === "Z")
+			else if (controls.axis === "Z")
 			{
 				controls.objects[i].scale.z = controls.attributes[i].oldScale.z * (1 + controls.point.z);
 			}
 		}
 
 		// Update physics objects
-		if(controls.objects[i] instanceof PhysicsObject)
+		if (controls.objects[i] instanceof PhysicsObject)
 		{
 			var shapes = controls.objects[i].body.shapes;
 			var scale = controls.objects[i].scale;
 
-			for(var i = 0; i < shapes.length; i++)
+			for (var i = 0; i < shapes.length; i++)
 			{
 				var shape = shapes[i];
 				
-				if(shape.type === Shape.types.BOX)
+				if (shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;
 					shape.halfExtents.y = scale.y / 2.0;
 					shape.halfExtents.z = scale.z / 2.0;
 				}
-				else if(shape.type === Shape.types.SPHERE)
+				else if (shape.type === Shape.types.SPHERE)
 				{
 					shape.radius = scale.x;
 				}

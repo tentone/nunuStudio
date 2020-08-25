@@ -1,3 +1,4 @@
+import {Color} from "three";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ObjectInspector} from "../ObjectInspector.js";
@@ -5,7 +6,6 @@ import {LightShadowFormSnippet} from "../../../../form-snippet/LightShadowFormSn
 import {Editor} from "../../../../../Editor.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Color} from "three";
 
 function DirectionalLightInspector(parent, object)
 {

@@ -1,6 +1,6 @@
+import {Object3D, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide, Mesh, Matrix4, Euler, Eurler, Vector3} from "three";
 import {TransformControls} from "../TransformControls.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
-import {Object3D, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide, Mesh, Matrix4, Euler, Eurler, Vector3} from "three";
 
 /**
  * A transform gizmo is a object used to transform a property of an entity.
@@ -37,7 +37,7 @@ function TransformGizmo()
 	planes["YZ"].rotation.set(0, Math.PI / 2, 0);
 	planes["XZ"].rotation.set(-Math.PI / 2, 0, 0);
 
-	for(var i in planes)
+	for (var i in planes)
 	{
 		planes[i].name = i;
 		this.planes.add(planes[i]);
@@ -47,9 +47,9 @@ function TransformGizmo()
 	// Handlers and pickers
 	function setupGizmos(gizmoMap, parent)
 	{
-		for(var name in gizmoMap)
+		for (var name in gizmoMap)
 		{
-			for(i = gizmoMap[name].length; i--;)
+			for (i = gizmoMap[name].length; i--;)
 			{
 				var object = gizmoMap[name][i][0];
 				var position = gizmoMap[name][i][1];
@@ -57,12 +57,12 @@ function TransformGizmo()
 
 				object.name = name;
 
-				if(position)
+				if (position)
 				{
 					object.position.set(position[0], position[1], position[2]);
 				}
 				
-				if(rotation)
+				if (rotation)
 				{
 					object.rotation.set(rotation[0], rotation[1], rotation[2]);
 				}
@@ -78,7 +78,7 @@ function TransformGizmo()
 	// Reset transformations
 	this.traverse(function(child)
 	{
-		if(child.geometry !== undefined)
+		if (child.geometry !== undefined)
 		{
 			child.updateMatrix();
 
@@ -117,7 +117,7 @@ TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: 
  * @param {string} axis Axis stored as text. (e.g X, Y, XY, XZ).
  * @param {Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
-TransformGizmo.prototype.setActivePlane = function(axis, eye){};
+TransformGizmo.prototype.setActivePlane = function(axis, eye) {};
 
 /**
  * Called when the controls button is released and there was object being edited.
@@ -127,7 +127,7 @@ TransformGizmo.prototype.setActivePlane = function(axis, eye){};
  * @method onPointerUp
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.applyChanges = function(controls){};
+TransformGizmo.prototype.applyChanges = function(controls) {};
 
 /**
  * Called while the pointer is moving around the canvas.
@@ -137,7 +137,7 @@ TransformGizmo.prototype.applyChanges = function(controls){};
  * @method transformObject
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.transformObject = function(controls){};
+TransformGizmo.prototype.transformObject = function(controls) {};
 
 /**
  * Called everytime that the controls button is pressed to start transforming the object.
@@ -145,7 +145,7 @@ TransformGizmo.prototype.transformObject = function(controls){};
  * @method startTransform
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.startTransform = function(controls){};
+TransformGizmo.prototype.startTransform = function(controls) {};
 
 /**
  * Update transform of the gizmo, called everytime on update to calculate size of the gizmo on screen.
@@ -155,11 +155,11 @@ TransformGizmo.prototype.startTransform = function(controls){};
  */
 TransformGizmo.prototype.updatePose = function(controls)
 {
-	if(controls.space === TransformControls.LOCAL)
+	if (controls.space === TransformControls.LOCAL)
 	{
 		controls.gizmo.update(controls.attributes[0].worldRotation, controls.eye);
 	}
-	else if(controls.space === TransformControls.WORLD)
+	else if (controls.space === TransformControls.WORLD)
 	{
 		controls.gizmo.update(new Euler(), controls.eye);
 	}
@@ -183,11 +183,11 @@ TransformGizmo.prototype.update = function(rotation, eye)
 
 	this.traverse(function(child)
 	{
-		if(child.name.search("E") !== - 1)
+		if (child.name.search("E") !== - 1)
 		{
 			child.quaternion.setFromRotationMatrix(lookAtMatrix.lookAt(eye, vec1, vec2));
 		}
-		else if(child.name.search("X") !== - 1 || child.name.search("Y") !== - 1 || child.name.search("Z") !== - 1)
+		else if (child.name.search("X") !== - 1 || child.name.search("Y") !== - 1 || child.name.search("Z") !== - 1)
 		{
 			child.quaternion.setFromEuler(rotation);
 		}
@@ -204,7 +204,7 @@ TransformGizmo.prototype.highlight = function(axis)
 {
 	this.traverse(function(child)
 	{
-		if(child.material && child.material.highlight)
+		if (child.material && child.material.highlight)
 		{
 			child.material.highlight(child.name === axis);
 		}

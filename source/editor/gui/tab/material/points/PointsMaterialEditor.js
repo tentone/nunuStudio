@@ -1,3 +1,4 @@
+import {Points, Color} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {MaterialEditor} from "../MaterialEditor.js";
@@ -7,7 +8,6 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Points, Color} from "three";
 
 function PointsMaterialEditor(parent, closeable, container, index)
 {
@@ -21,7 +21,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
-	for(var i = 0; i < MaterialEditor.geometries.length; i++)
+	for (var i = 0; i < MaterialEditor.geometries.length; i++)
 	{
 		this.testModel.addValue(MaterialEditor.geometries[i][0], i);
 	}

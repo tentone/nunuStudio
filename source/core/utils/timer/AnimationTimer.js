@@ -41,7 +41,7 @@ function AnimationTimer(callback)
  */
 AnimationTimer.prototype.start = function()
 {
-	if(this.running)
+	if (this.running)
 	{
 		return;
 	}
@@ -53,7 +53,7 @@ AnimationTimer.prototype.start = function()
 	{
 		self.callback();
 
-		if(self.running)
+		if (self.running)
 		{
 			self.id = requestAnimationFrame(loop);
 		}

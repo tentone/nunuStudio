@@ -1,5 +1,5 @@
-import {Pass} from "./Pass.js";
 import {ShaderMaterial, UniformsUtils} from "three";
+import {Pass} from "./Pass.js";
 
 /**
  * Shader pass is used to apply a post processing effect over an already rendered scene.
@@ -13,23 +13,23 @@ function ShaderPass(shader, textureID)
 	Pass.call(this);
 
 	this.type = "Shader";
-	this.textureID = (textureID !== undefined ) ? textureID : "tDiffuse";
+	this.textureID = textureID !== undefined ? textureID : "tDiffuse";
 
-	if(shader instanceof ShaderMaterial)
+	if (shader instanceof ShaderMaterial)
 	{
 		this.uniforms = shader.uniforms;
 		this.material = shader;
 	}
-	else if(shader)
+	else if (shader)
 	{
 		this.uniforms = UniformsUtils.clone(shader.uniforms);
 		this.material = new ShaderMaterial(
-		{
-			defines: Object.assign({}, shader.defines),
-			uniforms: this.uniforms,
-			vertexShader: shader.vertexShader,
-			fragmentShader: shader.fragmentShader
-		});
+			{
+				defines: Object.assign({}, shader.defines),
+				uniforms: this.uniforms,
+				vertexShader: shader.vertexShader,
+				fragmentShader: shader.fragmentShader
+			});
 	}
 
 	this.createQuadScene();
@@ -39,7 +39,7 @@ ShaderPass.prototype = Object.create(Pass.prototype);
 
 ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	if(this.uniforms[this.textureID])
+	if (this.uniforms[this.textureID])
 	{
 		this.uniforms[this.textureID].value = readBuffer.texture;
 	}
@@ -48,7 +48,7 @@ ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.clear();
 	}

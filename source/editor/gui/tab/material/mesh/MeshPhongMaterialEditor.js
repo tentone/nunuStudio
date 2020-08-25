@@ -1,6 +1,6 @@
+import {TangentSpaceNormalMap, ObjectSpaceNormalMap, MultiplyOperation, MixOperation, AddOperation} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
@@ -9,7 +9,7 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
-import {TangentSpaceNormalMap, ObjectSpaceNormalMap, MultiplyOperation, MixOperation, AddOperation} from "three";
+import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
 
 function MeshPhongMaterialEditor(parent, closeable, container, index)

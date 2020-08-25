@@ -1,7 +1,7 @@
+import {MeshBasicMaterial, Mesh, PlaneBufferGeometry, Texture} from "three";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
 import {CubemapFlatRenderer} from "./CubemapFlatRenderer.js";
-import {MeshBasicMaterial, Mesh, PlaneBufferGeometry, Texture} from "three";
 
 /** 
  * The texture renderer is used to generate preview thumbnails.
@@ -47,7 +47,7 @@ TextureRenderer.generateElement = function(texture)
 
 TextureRenderer.render = function(texture, onRender)
 {
-	if(TextureRenderer.instance === undefined)
+	if (TextureRenderer.instance === undefined)
 	{
 		TextureRenderer.instance = new TextureRenderer();
 	}
@@ -57,7 +57,7 @@ TextureRenderer.render = function(texture, onRender)
 
 TextureRenderer.prototype.render = function(texture, onRender)
 {
-	if(texture.isCubeTexture)
+	if (texture.isCubeTexture)
 	{
 		var cube = new CubemapFlatRenderer(texture, 64/4, 0, 64/8);
 		cube.setSize(64, 64);

@@ -1,7 +1,7 @@
-import {Program} from "./Program.js";
 import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon";
 import {Color, Texture, Camera, Raycaster, Vector2, Scene as TScene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
 import {PointOctree} from "sparse-octree";
+import {Program} from "./Program.js";
 
 /**
  * Scenes allow you to set up what and where is to be rendered by the engine.
@@ -167,7 +167,7 @@ Scene.prototype.initialize = function()
 
 	Object3D.prototype.initialize.call(this);
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
 		{
@@ -190,17 +190,17 @@ Scene.prototype.update = function(delta)
 
 	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
 	
-	if(this.cameras.length > 0)
+	if (this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
 	}
 	
-	if(this.usePhysics)
+	if (this.usePhysics)
 	{
 		this.world.step(delta < 0.05 ? delta : 0.05);
 	}
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
 		{
@@ -211,18 +211,18 @@ Scene.prototype.update = function(delta)
 
 Scene.prototype.resize = function(x, y)
 {
-	if(this.defaultCamera !== null)
+	if (this.defaultCamera !== null)
 	{
 		this.defaultCamera.resize(x, y);
 	}
 
-	for(var i = 0; i < this.cameras.length; i++)
+	for (var i = 0; i < this.cameras.length; i++)
 	{
 
 		this.cameras[i].resize(x, y);
 	}
 
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
 		{
@@ -233,7 +233,7 @@ Scene.prototype.resize = function(x, y)
 
 Scene.prototype.dispose = function()
 {
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
 		{
@@ -252,11 +252,11 @@ Scene.prototype.render = function(renderer)
 {
 	renderer.setClearColor(this.background);
 
-	if(this.cameras.length > 0)
+	if (this.cameras.length > 0)
 	{
-		if(this.program.xrEnabled)
+		if (this.program.xrEnabled)
 		{
-			for(var i = 0; i < this.cameras.length; i++)
+			for (var i = 0; i < this.cameras.length; i++)
 			{
 				this.cameras[i].render(renderer, this);
 			}
@@ -265,7 +265,7 @@ Scene.prototype.render = function(renderer)
 		{
 			renderer.setScissorTest(true);
 
-			for(var i = 0; i < this.cameras.length; i++)
+			for (var i = 0; i < this.cameras.length; i++)
 			{
 				this.cameras[i].setupRenderer(renderer);
 				this.cameras[i].render(renderer, this);
@@ -276,7 +276,7 @@ Scene.prototype.render = function(renderer)
 
 	}
 	
-	else if(this.defaultCamera !== null)
+	else if (this.defaultCamera !== null)
 	{
 		this.defaultCamera.render(renderer, this);
 	}
@@ -291,21 +291,21 @@ Scene.prototype.render = function(renderer)
  */
 Scene.prototype.getCamera = function(uuid, object)
 {
-	if(object === undefined)
+	if (object === undefined)
 	{
 		object = this;
 	}
 
-	if(uuid === object.uuid)
+	if (uuid === object.uuid)
 	{
 		return object;
 	}
 
 	var children = object.children;
-	for(var i = 0; i < children.length; i++)
+	for (var i = 0; i < children.length; i++)
 	{
 		var camera = this.getCamera(uuid, children[i]);
-		if(camera !== null)
+		if (camera !== null)
 		{
 			return camera;
 		}
@@ -322,7 +322,7 @@ Scene.prototype.getCamera = function(uuid, object)
  */
 Scene.prototype.addCamera = function(camera)
 {
-	if(this.cameras.indexOf(camera) === -1)
+	if (this.cameras.indexOf(camera) === -1)
 	{
 		this.cameras.push(camera);
 		this.updateCameraOrder();
@@ -334,6 +334,7 @@ Scene.prototype.addCamera = function(camera)
  *
  * This method should be called after changing order value for an active camera.
  *  
+ *
  * @method updateCameraOrder
  */
 Scene.prototype.updateCameraOrder = function()
@@ -353,7 +354,7 @@ Scene.prototype.updateCameraOrder = function()
 Scene.prototype.removeCamera = function(camera)
 {
 	var index = this.cameras.indexOf(camera);
-	if(index > -1)
+	if (index > -1)
 	{
 		this.cameras.splice(index, 1);
 	}
@@ -381,17 +382,17 @@ Scene.prototype.isCameraActive = function(camera)
  */
 Scene.prototype.setFogMode = function(mode)
 {	
-	var color = (this.fog !== null) ? this.fog.color.getHex() : "#FFFFFF";
+	var color = this.fog !== null ? this.fog.color.getHex() : "#FFFFFF";
 
-	if(mode === Fog.LINEAR)
+	if (mode === Fog.LINEAR)
 	{	
 		this.fog = new Fog(color, 5, 20);
 	}
-	else if(mode === Fog.EXPONENTIAL)
+	else if (mode === Fog.EXPONENTIAL)
 	{
 		this.fog = new FogExp2(color, 0.01);
 	}
-	else if(mode === Fog.NONE)
+	else if (mode === Fog.NONE)
 	{
 		this.fog = null;
 	}
@@ -399,7 +400,7 @@ Scene.prototype.setFogMode = function(mode)
 
 Scene.prototype.toJSON = function(meta)
 {
-	if(this.parent == null || this.parent.type !== "Program")
+	if (this.parent == null || this.parent.type !== "Program")
 	{
 		console.warn("nunuStudio: Scene is not on top level serializing as Group.");
 
@@ -412,23 +413,23 @@ Scene.prototype.toJSON = function(meta)
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		// Background
-		if(self.background instanceof Color)
+		if (self.background instanceof Color)
 		{
 			object.background = self.background.toJSON(meta);
 		}
-		else if(self.background instanceof Texture)
+		else if (self.background instanceof Texture)
 		{
 			object.background = self.background.toJSON(meta).uuid;
 		}
 
 		// Environment
-		if(self.environment instanceof Texture)
+		if (self.environment instanceof Texture)
 		{
 			object.environment = self.environment.toJSON(meta).uuid;
 		}
 	});
 
-	if(this.defaultCamera !== null)
+	if (this.defaultCamera !== null)
 	{
 		var position = new Vector3();
 		var quaternion = new Quaternion();
@@ -443,7 +444,7 @@ Scene.prototype.toJSON = function(meta)
 		data.object.defaultCamera = defaultCamera;
 	}
 
-	if(this.fog !== null)
+	if (this.fog !== null)
 	{
 		data.object.fog = this.fog.toJSON();
 	}
@@ -451,7 +452,7 @@ Scene.prototype.toJSON = function(meta)
 	data.object.usePhysics = this.usePhysics;
 	
 	data.object.cameras = [];
-	for(var i = 0; i < this.cameras.length; i++)
+	for (var i = 0; i < this.cameras.length; i++)
 	{
 		data.object.cameras.push(this.cameras[i].uuid);
 	}

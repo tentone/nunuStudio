@@ -1,3 +1,4 @@
+import {Math} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {VideoTexture} from "../../../../../core/texture/VideoTexture.js";
 import {SpriteSheetTexture} from "../../../../../core/texture/SpriteSheetTexture.js";
@@ -13,14 +14,13 @@ import {TextureEditor} from "../../texture/TextureEditor.js";
 import {SpriteSheetTextureEditor} from "../../texture/SpriteSheetTextureEditor.js";
 import {CubeTextureEditor} from "../../texture/CubeTextureEditor.js";
 import {CanvasTextureEditor} from "../../texture/CanvasTextureEditor.js";
-import {Asset} from "./Asset.js";
 import {TextureRenderer} from "../../../preview/TextureRenderer.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
-import {Math} from "three";
+import {Asset} from "./Asset.js";
 
 
 function TextureAsset(parent)
@@ -35,33 +35,33 @@ function TextureAsset(parent)
 	{
 		var Constructor = TextureEditor;
 
-		if(self.asset instanceof VideoTexture)
+		if (self.asset instanceof VideoTexture)
 		{
 			Constructor = VideoTextureEditor;
 		}
-		else if(self.asset instanceof CanvasTexture)
+		else if (self.asset instanceof CanvasTexture)
 		{
 			Constructor = CanvasTextureEditor;
 		}
-		else if(self.asset instanceof CubeTexture)
+		else if (self.asset instanceof CubeTexture)
 		{
 			Constructor = CubeTextureEditor;
 		}
-		else if(self.asset instanceof SpriteSheetTexture)
+		else if (self.asset instanceof SpriteSheetTexture)
 		{
 			Constructor = SpriteSheetTextureEditor;
 		}
 
 		var tab = Editor.gui.tab.getTab(Constructor, self.asset);
 		
-		if(tab === null)
+		if (tab === null)
 		{
 			tab = Editor.gui.tab.addTab(Constructor, true);
 			tab.attach(self.asset);
 		}
 
 		tab.select();
-	}
+	};
 
 	// Context menu event
 	this.element.oncontextmenu = function(event)
@@ -72,7 +72,7 @@ function TextureAsset(parent)
 		
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.renameTexture, self.asset.name)));
 			}
@@ -80,7 +80,7 @@ function TextureAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && Editor.confirm(Locale.deleteTexture))
+			if (self.asset !== null && Editor.confirm(Locale.deleteTexture))
 			{
 				self.asset.dispose();
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
@@ -89,7 +89,7 @@ function TextureAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 			}
@@ -97,7 +97,7 @@ function TextureAsset(parent)
 		
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
+			if (self.asset !== null)
 			{
 				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
@@ -133,7 +133,7 @@ function TextureAsset(parent)
 				
 				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 			}
-			catch(e)
+			catch (e)
 			{
 				Editor.alert("Texture duplication failed.\n" + e.stack);
 			}
@@ -145,7 +145,7 @@ function TextureAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		// Insert into drag buffer
-		if(self.asset !== null)
+		if (self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);
@@ -167,7 +167,7 @@ TextureAsset.prototype.attach = function(asset)
 
 	this.preview = TextureRenderer.generateElement(asset);
 
-	if(this.preview !== null)
+	if (this.preview !== null)
 	{
 		this.preview.draggable = true;
 		this.preview.style.position = "absolute";

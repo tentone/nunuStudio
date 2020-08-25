@@ -1,7 +1,7 @@
+import {AudioContext} from "three";
 import {EventManager} from "../../../core/utils/EventManager.js";
 import {Global} from "../../Global.js";
 import {Component} from "../Component.js";
-import {AudioContext} from "three";
 
 function AudioPlayer(parent)
 {
@@ -95,19 +95,19 @@ function AudioPlayer(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		self.seekProgress = (event.pageX - self.seekStart) / (self.track.offsetWidth);
+		self.seekProgress = (event.pageX - self.seekStart) / self.track.offsetWidth;
 		self.seekProgress += self.seekTime / self.buffer.duration;
 
-		if(self.seekProgress < 0)
+		if (self.seekProgress < 0)
 		{
 			self.seekProgress = 0;
 		}
-		else if(self.seekProgress > 1)
+		else if (self.seekProgress > 1)
 		{
 			self.seekProgress = 1;
 		}
 
-		self.progress.style.width = (self.seekProgress * 100) + "%";
+		self.progress.style.width = self.seekProgress * 100 + "%";
 		self.scrubber.style.left = self.progress.style.width;
 	});
 
@@ -116,7 +116,7 @@ function AudioPlayer(parent)
 		self.dragging = false;
 		self.time = self.seekProgress * self.buffer.duration;
 
-		if(self.playing)
+		if (self.playing)
 		{
 			self.play(self.time);
 		}
@@ -141,10 +141,10 @@ function AudioPlayer(parent)
 		self.seekProgress = progress;
 		self.time = progress * self.buffer.duration;
 
-		self.progress.style.width = (self.seekProgress * 100) + "%";
+		self.progress.style.width = self.seekProgress * 100 + "%";
 		self.scrubber.style.left = self.progress.style.width;
 
-		if(self.playing)
+		if (self.playing)
 		{
 			self.play(self.time);
 		}
@@ -155,34 +155,34 @@ function AudioPlayer(parent)
 	// Update elements
 	function draw()
 	{
-		if(self.playing)
+		if (self.playing)
 		{
 			self.time = self.context.currentTime - self.startTime;
 
 			var seconds = Math.round(self.time % 60);
-			if(seconds < 10)
+			if (seconds < 10)
 			{
 				seconds = "0" + seconds;
 			}
 
 			var minutes = Math.round(self.time / 60);
-			if(minutes < 10)
+			if (minutes < 10)
 			{
 				minutes = "0" + minutes;
 			}
 			
 			self.timerText.data = minutes + ":" + seconds;
 
-			if(self.buffer !== null)
+			if (self.buffer !== null)
 			{
-				if(self.time >= self.buffer.duration)
+				if (self.time >= self.buffer.duration)
 				{
 					self.stop();
 				}
 
-				var progress = (self.time / self.buffer.duration) * 100;
+				var progress = self.time / self.buffer.duration * 100;
 
-				if(!self.dragging)
+				if (!self.dragging)
 				{
 					self.progress.style.width = progress + "%";
 					self.scrubber.style.left = progress + "%";
@@ -190,7 +190,7 @@ function AudioPlayer(parent)
 			}
 		}
 
-		if(self.parent !== null)
+		if (self.parent !== null)
 		{
 			requestAnimationFrame(draw);
 		}
@@ -209,7 +209,7 @@ AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 	{
 		self.buffer = buffer;
 
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			onLoad(buffer);
 		}
@@ -219,7 +219,7 @@ AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 // Connect audio source
 AudioPlayer.prototype.connect = function()
 {
-	if(this.playing)
+	if (this.playing)
 	{
 		this.pause();
 	}
@@ -240,7 +240,7 @@ AudioPlayer.prototype.play = function(time)
 {
 	this.connect();
 
-	if(time !== undefined)
+	if (time !== undefined)
 	{
 		this.time = time;
 	}
@@ -256,7 +256,7 @@ AudioPlayer.prototype.play = function(time)
 // Pause audio
 AudioPlayer.prototype.pause = function()
 {
-	if(this.playing)
+	if (this.playing)
 	{
 		this.playing = false;
 		this.source.stop();
@@ -269,7 +269,7 @@ AudioPlayer.prototype.pause = function()
 // Stop audio playback
 AudioPlayer.prototype.stop = function()
 {	
-	if(this.playing)
+	if (this.playing)
 	{
 		this.source.stop();
 		this.time = 0;
@@ -282,7 +282,7 @@ AudioPlayer.prototype.stop = function()
 // Seek time
 AudioPlayer.prototype.seek = function(time)
 {
-	if(this.playing)
+	if (this.playing)
 	{
 		this.play(time);
 	}
@@ -295,7 +295,7 @@ AudioPlayer.prototype.seek = function(time)
 // Toggle play/pause
 AudioPlayer.prototype.toggle = function()
 {
-	if(!this.playing)
+	if (!this.playing)
 	{
 		this.play();
 	}
@@ -312,7 +312,7 @@ AudioPlayer.prototype.destroy = function()
 		this.disconnect();
 		this.stop();
 	}
-	catch(e){}
+	catch (e) {}
 
 	Component.prototype.destroy.call(this);
 };
@@ -326,14 +326,14 @@ AudioPlayer.prototype.updateSize = function()
 	this.button.style.height = this.element.style.height;
 
 	// Track
-	this.track.style.top = (this.size.y * 0.25) + "px";
-	this.track.style.left = (this.size.y * 1.05) + "px";
-	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
-	this.track.style.height = (this.size.y * 0.5) + "px";
+	this.track.style.top = this.size.y * 0.25 + "px";
+	this.track.style.left = this.size.y * 1.05 + "px";
+	this.track.style.width = this.size.x - this.size.y * 1.5 - 35 + "px";
+	this.track.style.height = this.size.y * 0.5 + "px";
 
 	// Scrubber
-	this.scrubber.style.height = (this.size.y * 0.8) + "px";
-	this.scrubber.style.top = (-this.size.y * 0.15) + "px";
+	this.scrubber.style.height = this.size.y * 0.8 + "px";
+	this.scrubber.style.top = -this.size.y * 0.15 + "px";
 };
 
 export {AudioPlayer};

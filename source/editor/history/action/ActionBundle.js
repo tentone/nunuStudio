@@ -18,7 +18,7 @@ function ActionBundle(actions)
 
 ActionBundle.prototype.apply = function()
 {
-	for(var i = 0; i < this.actions.length; i++)
+	for (var i = 0; i < this.actions.length; i++)
 	{
 		this.actions[i].apply();
 	}
@@ -26,7 +26,7 @@ ActionBundle.prototype.apply = function()
 
 ActionBundle.prototype.revert = function()
 {
-	for(var i = 0; i < this.actions.length; i++)
+	for (var i = 0; i < this.actions.length; i++)
 	{
 		this.actions[i].revert();
 	}

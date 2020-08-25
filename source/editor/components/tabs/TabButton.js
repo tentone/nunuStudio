@@ -1,8 +1,8 @@
 import {Mouse} from "../../../core/input/Mouse.js";
 import {Global} from "../../Global.js";
+import {Component} from "../Component.js";
 import {TabGroup} from "./TabGroup.js";
 import {TabComponent} from "./TabComponent.js";
-import {Component} from "../Component.js";
 
 /**
  * Tab button is used to navigate trough tabs.
@@ -58,7 +58,7 @@ function TabButton(parent, tab)
 	this.close.draggable = false;
 	this.close.style.position = "absolute";
 	this.close.style.opacity = 0.5;
-	this.close.style.display = (tab.closeable) ? "block" : "none";
+	this.close.style.display = tab.closeable ? "block" : "none";
 	this.close.src = Global.FILE_PATH + "icons/misc/close.png";
 	this.element.appendChild(this.close);
 
@@ -98,19 +98,19 @@ function TabButton(parent, tab)
 		this.style.borderTop = null;
 
 		var index = event.dataTransfer.getData("tab");
-		if(index !== "")
+		if (index !== "")
 		{
 			index = parseInt(index);
 
-			if(index !== self.tab.index)
+			if (index !== self.tab.index)
 			{	
 				// Before
-				if(dragState === TabButton.PREVIOUS)
+				if (dragState === TabButton.PREVIOUS)
 				{
 					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 				}
 				// After
-				else if(dragState === TabButton.NEXT)
+				else if (dragState === TabButton.NEXT)
 				{
 					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 				}
@@ -121,20 +121,20 @@ function TabButton(parent, tab)
 	// Drag over
 	this.element.ondragover = function(event)
 	{
-		if(self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
+		if (self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
 		{
-			if(event.layerX > self.size.x * 0.8 || event.target !== this)
+			if (event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
-				if(dragState !== TabButton.NEXT)
+				if (dragState !== TabButton.NEXT)
 				{
 					dragState = TabButton.NEXT;
 					this.style.borderLeft = null;
 					this.style.borderRight = "thick solid #999999";
 				}
 			}
-			else if(event.layerX < self.size.x * 0.2)
+			else if (event.layerX < self.size.x * 0.2)
 			{
-				if(dragState !== TabButton.PREVIOUS)
+				if (dragState !== TabButton.PREVIOUS)
 				{
 					dragState = TabButton.PREVIOUS;
 					this.style.borderRight = null;
@@ -143,7 +143,7 @@ function TabButton(parent, tab)
 			}
 			else
 			{
-				if(dragState !== TabButton.NONE	)
+				if (dragState !== TabButton.NONE	)
 				{
 					dragState = TabButton.NONE;
 					this.style.borderLeft = null;
@@ -153,18 +153,18 @@ function TabButton(parent, tab)
 		}
 		else
 		{
-			if(event.layerY > self.size.y * 0.7 || event.target !== this)
+			if (event.layerY > self.size.y * 0.7 || event.target !== this)
 			{
-				if(dragState !== TabButton.NEXT)
+				if (dragState !== TabButton.NEXT)
 				{
 					dragState = TabButton.NEXT;
 					this.style.borderTop = null;
 					this.style.borderBottom = "solid #999999";
 				}
 			}
-			else if(event.layerY < self.size.y * 0.3)
+			else if (event.layerY < self.size.y * 0.3)
 			{
-				if(dragState !== TabButton.PREVIOUS)
+				if (dragState !== TabButton.PREVIOUS)
 				{
 					dragState = TabButton.PREVIOUS;
 					this.style.borderBottom = null;
@@ -173,7 +173,7 @@ function TabButton(parent, tab)
 			}
 			else
 			{
-				if(dragState !== TabButton.NONE	)
+				if (dragState !== TabButton.NONE	)
 				{
 					dragState = TabButton.NONE;
 					this.style.borderBottom = null;
@@ -212,12 +212,12 @@ function TabButton(parent, tab)
 		var button = event.which - 1;
 
 		// Select tab
-		if(button === Mouse.LEFT)
+		if (button === Mouse.LEFT)
 		{
 			self.tab.container.selectTab(self.tab);
 		}
 		// Close tab
-		else if(tab.closeable && button === Mouse.MIDDLE)
+		else if (tab.closeable && button === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}
@@ -230,7 +230,7 @@ function TabButton(parent, tab)
 
 	this.element.onmouseleave = function()
 	{
-		if(tab.isSelected())
+		if (tab.isSelected())
 		{
 			this.style.backgroundColor = "var(--button-over-color)";
 		}
@@ -282,24 +282,24 @@ TabButton.prototype.updateSize = function()
 	Component.prototype.updateSize.call(this);
 	
 	// Icon
-	this.icon.style.top = (this.size.y * 0.2) + "px";
-	this.icon.style.left = (this.size.y * 0.2) + "px"
-	this.icon.style.width = (this.size.y * 0.6) + "px";
-	this.icon.style.height = (this.size.y * 0.6) + "px";
+	this.icon.style.top = this.size.y * 0.2 + "px";
+	this.icon.style.left = this.size.y * 0.2 + "px";
+	this.icon.style.width = this.size.y * 0.6 + "px";
+	this.icon.style.height = this.size.y * 0.6 + "px";
 
 	// Text
 	this.text.style.left = this.size.y + "px";
-	this.text.style.top = ((this.size.y - 12) / 2) + "px";
-	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
+	this.text.style.top = (this.size.y - 12) / 2 + "px";
+	this.text.style.width = this.size.x - 2 * this.size.y + "px";
 	this.text.style.height = this.size.y + "px";
 
 	// Close
-	if(this.tab.closeable === true)
+	if (this.tab.closeable === true)
 	{
-		this.close.style.width = (this.size.y * 0.4) + "px";
-		this.close.style.height = (this.size.y * 0.4) + "px";
-		this.close.style.top = (this.size.y * 0.3) + "px";
-		this.close.style.right = (this.size.y * 0.3) + "px";
+		this.close.style.width = this.size.y * 0.4 + "px";
+		this.close.style.height = this.size.y * 0.4 + "px";
+		this.close.style.top = this.size.y * 0.3 + "px";
+		this.close.style.right = this.size.y * 0.3 + "px";
 		this.close.style.display = "block";
 	}
 	else

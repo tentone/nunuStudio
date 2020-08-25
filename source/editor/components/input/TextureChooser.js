@@ -1,3 +1,4 @@
+import {Texture} from "three";
 import {WebcamTexture} from "../../../core/texture/WebcamTexture.js";
 import {VideoTexture} from "../../../core/texture/VideoTexture.js";
 import {SpriteSheetTexture} from "../../../core/texture/SpriteSheetTexture.js";
@@ -11,7 +12,6 @@ import {DragBuffer} from "../../gui/DragBuffer.js";
 import {Global} from "../../Global.js";
 import {Editor} from "../../Editor.js";
 import {Component} from "../Component.js";
-import {Texture} from "three";
 
 function TextureChooser(parent)
 {
@@ -58,7 +58,7 @@ function TextureChooser(parent)
 	this.preview.ondrop = function(event)
 	{
 		// File
-		if(event.dataTransfer.files.length > 0)
+		if (event.dataTransfer.files.length > 0)
 		{
 			self.loadTexture(event.dataTransfer.files[0]);
 		}
@@ -69,17 +69,17 @@ function TextureChooser(parent)
 			var value = DragBuffer.get(uuid);
 
 			// Texture
-			if(value instanceof Texture && (self.acceptAll || !value.isCubeTexture))
+			if (value instanceof Texture && (self.acceptAll || !value.isCubeTexture))
 			{
 				self.setTexture(value);
 			}
 			// Image
-			else if(value instanceof Image)
+			else if (value instanceof Image)
 			{
 				self.setTexture(new Texture(value));
 			}
 			// Video
-			else if(value instanceof Video)
+			else if (value instanceof Video)
 			{
 				self.setTexture(new VideoTexture(value));
 			}
@@ -95,11 +95,11 @@ function TextureChooser(parent)
 	// Onclick select image or video file
 	this.preview.onclick = function()
 	{
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			FileSystem.chooseFile(function(files)
 			{
-				if(files.length > 0)
+				if (files.length > 0)
 				{
 					self.loadTexture(files[0]);
 				}
@@ -142,7 +142,7 @@ TextureChooser.prototype.setOnChange = function(onChange)
 // Set texture value
 TextureChooser.prototype.setValue = function(texture)
 {
-	if(texture instanceof Texture)
+	if (texture instanceof Texture)
 	{
 		this.texture = texture;
 		this.updatePreview();
@@ -169,7 +169,7 @@ TextureChooser.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
 
-	if(this.onChange !== null)
+	if (this.onChange !== null)
 	{
 		this.onChange();
 	}
@@ -184,17 +184,17 @@ TextureChooser.prototype.loadTexture = function(file)
 		self.texture = texture;
 		self.updatePreview();
 
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange();
 		}
 	};
 
-	if(Image.fileIsImage(file))
+	if (Image.fileIsImage(file))
 	{
 		Loaders.loadTexture(file, onLoad);
 	}
-	else if(Video.fileIsVideo(file))
+	else if (Video.fileIsVideo(file))
 	{
 		Loaders.loadVideoTexture(file, onLoad);
 	}
@@ -205,25 +205,25 @@ TextureChooser.prototype.updatePreview = function()
 {
 	var texture = this.texture;
 
-	if(texture instanceof CanvasTexture)
+	if (texture instanceof CanvasTexture)
 	{
 		this.video.style.display = "none";
 		this.img.style.display = "block";
 		this.img.src = texture.image.toDataURL();
 	}
-	else if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
+	else if (texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
 		this.img.style.display = "none";
 		this.video.style.display = "block";
 		this.video.src = texture.image.src;
 	}
-	else if(texture instanceof CubeTexture)
+	else if (texture instanceof CubeTexture)
 	{
 		this.video.style.display = "none";
 		this.img.style.display = "block";
 		this.img.src = texture.image[0].toDataURL();
 	}
-	else if(texture instanceof Texture || texture instanceof SpriteSheetTexture)
+	else if (texture instanceof Texture || texture instanceof SpriteSheetTexture)
 	{
 		this.video.style.display = "none";
 		this.img.style.display = "block";

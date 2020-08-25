@@ -1,7 +1,7 @@
 import {Base64Utils} from "../utils/binary/Base64Utils.js";
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
-import {Resource} from "./Resource.js";
 import {FileSystem} from "../FileSystem.js";
+import {Resource} from "./Resource.js";
 
 /**
  * Video resources are used to store video.
@@ -18,15 +18,15 @@ function Video(url, encoding)
 {
 	Resource.call(this, "video", "Video");
 
-	if(url !== undefined)
+	if (url !== undefined)
 	{	
 		// ArrayBuffer
-		if(url instanceof ArrayBuffer)
+		if (url instanceof ArrayBuffer)
 		{
 			this.loadArrayBufferData(url, encoding);
 		}
 		// Base64
-		else if(Base64Utils.isBase64(url))
+		else if (Base64Utils.isBase64(url))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
@@ -52,9 +52,9 @@ Video.prototype = Object.create(Resource.prototype);
  */
 Video.fileIsVideo = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file.type.startsWith("video"))
+		if (file.type.startsWith("video"))
 		{
 			return true;
 		}
@@ -94,7 +94,7 @@ Video.prototype.loadArrayBufferData = function(data, encoding)
  */
 Video.prototype.toJSON = function(meta)
 {
-	if(meta.videos[this.uuid] !== undefined)
+	if (meta.videos[this.uuid] !== undefined)
 	{
 		return meta.videos[this.uuid];
 	}
@@ -103,12 +103,12 @@ Video.prototype.toJSON = function(meta)
 	
 	data.encoding = this.encoding;
 
-	if(this.format === "arraybuffer")
+	if (this.format === "arraybuffer")
 	{
 		data.format = this.format;
 		data.data = this.arraybuffer;
 	}
-	else if(this.format === "base64")
+	else if (this.format === "base64")
 	{
 		data.format = "arraybuffer";
 		data.data = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(this.data));

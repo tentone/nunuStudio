@@ -37,7 +37,7 @@ ButtonMenu.prototype = Object.create(ButtonText.prototype);
  */
 ButtonMenu.prototype.setIcon = function(icon)
 {
-	if(this.icon === null)
+	if (this.icon === null)
 	{
 		this.icon = document.createElement("img");
 		this.icon.style.position = "absolute";

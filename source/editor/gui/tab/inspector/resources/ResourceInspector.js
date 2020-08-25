@@ -23,7 +23,7 @@ function ResourceInspector(parent, object)
 	this.form.nextRow();
 
 	// UUID
-	if(Editor.settings.general.showUUID)
+	if (Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
@@ -31,7 +31,7 @@ function ResourceInspector(parent, object)
 	}
 	
 	// Type
-	if(Editor.settings.general.showType)
+	if (Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
 		this.type = this.form.addText("");
@@ -45,12 +45,12 @@ ResourceInspector.prototype.updateInspector = function()
 {
 	this.name.setText(this.object.name);
 		
-	if(this.uuid !== undefined)
+	if (this.uuid !== undefined)
 	{
 		this.uuid.setText(this.object.uuid);
 	}
 	
-	if(this.type !== undefined)
+	if (this.type !== undefined)
 	{
 		this.type.setText(this.object.type);
 	}

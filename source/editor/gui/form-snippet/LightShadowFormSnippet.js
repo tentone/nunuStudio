@@ -1,9 +1,9 @@
 import {Locale} from "../../locale/LocaleManager.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
-import {FormSnippet} from "./FormSnippet.js";
 import {Editor} from "../../Editor.js";
 import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
+import {FormSnippet} from "./FormSnippet.js";
 
 /** 
  * Shadow map configuration form for light objects that emitt shadows.
@@ -38,7 +38,7 @@ function LightShadowFormSnippet(form, object)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	for(var i = 5; i < 14; i++)
+	for (var i = 5; i < 14; i++)
 	{
 		var size = Math.pow(2, i);
 		this.width.addValue(size.toString(), size);

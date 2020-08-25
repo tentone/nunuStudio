@@ -1,3 +1,4 @@
+import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Inspector} from "../Inspector.js";
@@ -7,7 +8,6 @@ import {TextBox} from "../../../../components/input/TextBox.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 
 function TextureInspector(parent, object)
 {
@@ -28,7 +28,7 @@ function TextureInspector(parent, object)
 	this.form.nextRow();
 
 	// UUID
-	if(Editor.settings.general.showUUID)
+	if (Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
@@ -176,7 +176,7 @@ TextureInspector.prototype.updateInspector = function()
 {
 	this.name.setText(this.object.name);
 		
-	if(this.uuid !== undefined)
+	if (this.uuid !== undefined)
 	{
 		this.uuid.setText(this.object.uuid);
 	}

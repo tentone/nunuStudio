@@ -1,7 +1,7 @@
-import {ToolBarToogleButton} from "./ToolBarToogleButton.js";
-import {ToolBarButton} from "./ToolBarButton.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
+import {ToolBarToogleButton} from "./ToolBarToogleButton.js";
+import {ToolBarButton} from "./ToolBarButton.js";
 
 /**
  * Group of tools contained inside of the ToolBar object.

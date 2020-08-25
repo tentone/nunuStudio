@@ -8,4 +8,4 @@ THREE.InstancedBufferAttribute.prototype.toJSON = function()
 	data.meshPerAttribute = this.meshPerAttribute;
 
 	return data;
-}
+};

@@ -1,5 +1,5 @@
-import {TypedArrayHelper} from "./TypedArrayHelper.js";
 import {BufferAttribute, DynamicDrawUsage, StaticDrawUsage} from "three";
+import {TypedArrayHelper} from "./TypedArrayHelper.js";
 
 /**
  * A helper to handle creating and updating a BufferAttribute instance.
@@ -18,7 +18,7 @@ function ShaderAttribute(type, dynamicBuffer, arrayType)
 	this.arrayType = arrayType || Float32Array;
 	this.typedArray = null;
 	this.bufferAttribute = null;
-	this.dynamicBuffer = !!dynamicBuffer;
+	this.dynamicBuffer = Boolean(dynamicBuffer);
 
 	this.updateMin = 0;
 	this.updateMax = 0;
@@ -65,7 +65,7 @@ ShaderAttribute.prototype.flagUpdate = function()
 {
 	var range = this.bufferAttribute.updateRange;
 	range.offset = this.updateMin;
-	range.count = Math.min((this.updateMax - this.updateMin) + this.componentSize, this.typedArray.array.length);
+	range.count = Math.min(this.updateMax - this.updateMin + this.componentSize, this.typedArray.array.length);
 
 	this.bufferAttribute.needsUpdate = true;
 };
@@ -123,19 +123,19 @@ ShaderAttribute.prototype.forceUpdateAll = function()
 ShaderAttribute.prototype._ensureTypedArray = function(size)
 {
 	// Condition that's most likely to be true at the top: no change.
-	if(this.typedArray !== null && this.typedArray.size === size * this.componentSize)
+	if (this.typedArray !== null && this.typedArray.size === size * this.componentSize)
 	{
 		return;
 	}
 
 	// Resize the array if we need to, telling the TypedArrayHelper to ignore it's component size when evaluating size.
-	else if(this.typedArray !== null && this.typedArray.size !== size)
+	else if (this.typedArray !== null && this.typedArray.size !== size)
 	{
 		this.typedArray.setSize(size);
 	}
 
 	// This condition should only occur once in an attribute"s lifecycle.
-	else if(this.typedArray === null)
+	else if (this.typedArray === null)
 	{
 		this.typedArray = new TypedArrayHelper(this.arrayType, size, this.componentSize);
 	}
@@ -158,7 +158,7 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
 	this._ensureTypedArray(size);
 
 	// Don't create it if it already exists, but do flag that it needs updating on the next render cycle.
-	if(this.bufferAttribute !== null)
+	if (this.bufferAttribute !== null)
 	{
 		this.bufferAttribute.array = this.typedArray.array;
 		this.bufferAttribute.count = this.bufferAttribute.array.length / this.bufferAttribute.itemSize;
@@ -178,7 +178,7 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
  */
 ShaderAttribute.prototype.getLength = function()
 {
-	if(this.typedArray === null)
+	if (this.typedArray === null)
 	{
 		return 0;
 	}

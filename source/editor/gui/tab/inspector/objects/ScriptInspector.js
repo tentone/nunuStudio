@@ -1,9 +1,9 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Script} from "../../../../../core/objects/script/Script.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {ObjectInspector} from "./ObjectInspector.js";
 import {Editor} from "../../../../Editor.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {ObjectInspector} from "./ObjectInspector.js";
 
 function ScriptInspector(parent, object)
 {

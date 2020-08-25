@@ -1,5 +1,5 @@
-import {Component} from "./Component.js";
 import {Vector2} from "three";
+import {Component} from "./Component.js";
 
 /**
  * Body to represent the document.body 
@@ -18,19 +18,19 @@ var DocumentBody =
 	visible: true,
 	position: new Vector2(0, 0),
 	_size: new Vector2(0, 0)
-}
+};
 
 Object.defineProperties(DocumentBody,
-{
-	size:
+	{
+		size:
 	{
 		get: function()
 		{
 			this._size.set(window.innerWidth, window.innerHeight);
 			return this._size;
 		},
-		set: function(){}
+		set: function() {}
 	}
-});
+	});
 
 export {DocumentBody};

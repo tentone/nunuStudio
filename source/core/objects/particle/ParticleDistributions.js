@@ -28,7 +28,7 @@ var ParticleDistributions = {
 	 * @attribute DISC
 	 * @type {number}
 	 */
-	DISC: 3,
+	DISC: 3
 };
 
 export {ParticleDistributions};

@@ -125,7 +125,7 @@ export {ParticleShaders} from "./objects/particle/shaders/ParticleShaders.js";
 export {ParticleEmitter} from "./objects/particle/ParticleEmitter.js";
 
 export {Sky} from "./objects/misc/Sky.js";
-export {Group} from"./objects/misc/Group.js";
+export {Group} from "./objects/misc/Group.js";
 export {LensFlare} from "./objects/misc/LensFlare.js";
 export {HTMLView} from "./objects/misc/HTMLView.js";
 

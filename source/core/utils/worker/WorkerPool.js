@@ -69,7 +69,7 @@ function WorkerPool(file, size)
  */
 WorkerPool.prototype.createWorkers = function()
 {
-	for(var i = 0; i < this.workers.length; i++)
+	for (var i = 0; i < this.workers.length; i++)
 	{
 		this.workers[i].terminate();
 	}
@@ -80,7 +80,7 @@ WorkerPool.prototype.createWorkers = function()
 	{
 		var uuid = event.data.uuid;
 
-		if(self.tasks[uuid] !== undefined)
+		if (self.tasks[uuid] !== undefined)
 		{
 			var task = self.tasks[uuid];
 			task.callback(event.data.data);
@@ -95,7 +95,7 @@ WorkerPool.prototype.createWorkers = function()
 	this.workers = [];
 	this.next = 0;
 
-	for(var i = 0; i < this.size; i++)
+	for (var i = 0; i < this.size; i++)
 	{
 		var worker = new Worker(this.file);
 		worker.onmessage = onmessage;
@@ -115,16 +115,16 @@ WorkerPool.prototype.runTask = function(data, callback)
 	var task = new WorkerTask(data, callback);
 	this.tasks[task.uuid] = task;
 
-	//Post task to worker
+	// Post task to worker
 	this.workers[this.next].postMessage(
-	{
-		data: task.data,
-		uuid: task.uuid
-	});
+		{
+			data: task.data,
+			uuid: task.uuid
+		});
 
-	//Update worker pointer
+	// Update worker pointer
 	this.next++;
-	if(this.next >= this.workers.length)
+	if (this.next >= this.workers.length)
 	{
 		this.next = 0;
 	}

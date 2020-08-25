@@ -1,11 +1,11 @@
+import {Vector2, Vector3} from "three";
 import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
 import {MathUtils} from "../../../../../core/utils/MathUtils.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../../core/input/Keyboard.js";
 import {OrientationCube} from "../utils/OrientationCube.js";
-import {EditorControls} from "./EditorControls.js";
 import {Editor} from "../../../../Editor.js";
-import {Vector2, Vector3} from "three";
+import {EditorControls} from "./EditorControls.js";
 
 /**
  * Free controls can be used to navigate the world in a first person like way.
@@ -77,27 +77,27 @@ EditorFreeControls.prototype.focusObject = function(object)
 
 EditorFreeControls.prototype.setOrientation = function(code)
 {
-	if(code === OrientationCube.Z_POS)
+	if (code === OrientationCube.Z_POS)
 	{
 		this.orientation.set(0, 0);
 	}
-	else if(code === OrientationCube.Z_NEG)
+	else if (code === OrientationCube.Z_NEG)
 	{
 		this.orientation.set(Math.PI, 0);
 	}
-	else if(code === OrientationCube.X_POS)
+	else if (code === OrientationCube.X_POS)
 	{
 		this.orientation.set(Math.PI / 2, 0);
 	}
-	else if(code === OrientationCube.X_NEG)
+	else if (code === OrientationCube.X_NEG)
 	{
 		this.orientation.set(-Math.PI / 2, 0);
 	}
-	else if(code === OrientationCube.Y_POS)
+	else if (code === OrientationCube.Y_POS)
 	{
 		this.orientation.set(Math.PI, +1.57);
 	}
-	else if(code === OrientationCube.Y_NEG)
+	else if (code === OrientationCube.Y_NEG)
 	{
 		this.orientation.set(Math.PI, -1.57);
 	}
@@ -110,17 +110,17 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	this.needsUpdate = false;
 
 	// Look camera
-	if(mouse.buttonPressed(Mouse.LEFT))
+	if (mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.orientation.y -= Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
 		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
 
 		// Limit Vertical Rotation to 90 degrees
-		if(this.orientation.y < -1.57)
+		if (this.orientation.y < -1.57)
 		{
 			this.orientation.y = -1.57;
 		}
-		else if(this.orientation.y > 1.57)
+		else if (this.orientation.y > 1.57)
 		{
 			this.orientation.y = 1.57;
 		}
@@ -129,11 +129,11 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	}
 
 	// Move Camera on X and Z
-	if(mouse.buttonPressed(Mouse.RIGHT))
+	if (mouse.buttonPressed(Mouse.RIGHT))
 	{
 		// Move speed
 		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseMoveSpeed;
-		if(speed < 0.01)
+		if (speed < 0.01)
 		{
 			speed = 0.01;
 		}
@@ -154,7 +154,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	}
 	
 	// Move Camera on Y
-	if(mouse.buttonPressed(Mouse.MIDDLE))
+	if (mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.position.y += mouse.delta.y * Editor.settings.editor.mouseMoveSpeed * 100;
 
@@ -162,17 +162,17 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	}
 
 	// Move in camera direction using mouse scroll
-	if(mouse.wheel !== 0)
+	if (mouse.wheel !== 0)
 	{
 		// Move speed
 		var speed = mouse.wheel * this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseWheelSensitivity;
 
 		// Limit zoom speed
-		if(speed < 0 && speed > -0.02)
+		if (speed < 0 && speed > -0.02)
 		{
 			speed = -0.02;
 		}
-		else if(speed > 0 && speed < 0.02)
+		else if (speed > 0 && speed < 0.02)
 		{
 			speed = 0.02;
 		}
@@ -186,23 +186,23 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	}
 
 	// WASD movement
-	if(Editor.settings.editor.keyboardNavigation)
+	if (Editor.settings.editor.keyboardNavigation)
 	{
-		if(keyboard.keyPressed(Keyboard.S))
+		if (keyboard.keyPressed(Keyboard.S))
 		{
 			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.add(direction);
 			this.needsUpdate = true;
 		}
-		if(keyboard.keyPressed(Keyboard.W))
+		if (keyboard.keyPressed(Keyboard.W))
 		{
 			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(direction);
 			this.needsUpdate = true;
 		}
-		if(keyboard.keyPressed(Keyboard.D))
+		if (keyboard.keyPressed(Keyboard.D))
 		{
 			this.temp.set(Math.sin(this.orientation.x - 1.57), 0, Math.cos(this.orientation.x - 1.57));
 			this.temp.normalize();
@@ -210,7 +210,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			this.position.sub(this.temp);
 			this.needsUpdate = true;
 		}
-		if(keyboard.keyPressed(Keyboard.A))
+		if (keyboard.keyPressed(Keyboard.A))
 		{
 			this.temp.set(Math.sin(this.orientation.x + 1.57), 0, Math.cos(this.orientation.x + 1.57));
 			this.temp.normalize();
@@ -220,7 +220,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		}
 	}
 
-	if(this.needsUpdate)
+	if (this.needsUpdate)
 	{
 		this.updateControls();
 	}

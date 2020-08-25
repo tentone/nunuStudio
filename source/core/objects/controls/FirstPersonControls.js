@@ -1,7 +1,7 @@
+import {Group, Vector2, Vector3, Object3D, Matrix4} from "three";
 import {Program} from "../Program.js";
 import {Mouse} from "../../input/Mouse.js";
 import {Keyboard} from "../../input/Keyboard.js";
-import {Group, Vector2, Vector3, Object3D, Matrix4} from "three";
 
 /**
  * First person controls can be controlled using the mouse and keyboard.
@@ -100,11 +100,11 @@ FirstPersonControls.prototype = Object.create(Group.prototype);
 FirstPersonControls.prototype.initialize = function()
 {
 	var node = this;
-	while(node.parent !== null)
+	while (node.parent !== null)
 	{
 		node = node.parent;
 
-		if(node instanceof Program)
+		if (node instanceof Program)
 		{
 			this.mouse = node.mouse;
 			this.keyboard = node.keyboard;
@@ -118,16 +118,16 @@ FirstPersonControls.prototype.initialize = function()
 
 FirstPersonControls.prototype.update = function(delta)
 {
-	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
+	if (!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
 
-		if(this.vector.y < -1.57)
+		if (this.vector.y < -1.57)
 		{
 			this.vector.y = -1.57;
 		}
-		else if(this.vector.y > 1.57)
+		else if (this.vector.y > 1.57)
 		{
 			this.vector.y = 1.57;
 		}
@@ -135,12 +135,12 @@ FirstPersonControls.prototype.update = function(delta)
 		this.updateControls();
 	}
 
-	if(this.movementEnabled)
+	if (this.movementEnabled)
 	{
-		if(this.keyboard.keyPressed(this.moveKeys[0]))
+		if (this.keyboard.keyPressed(this.moveKeys[0]))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
-			if(this.moveOnPlane)
+			if (this.moveOnPlane)
 			{
 				direction.y = 0;
 			}
@@ -148,10 +148,10 @@ FirstPersonControls.prototype.update = function(delta)
 			direction.multiplyScalar(this.moveSpeed);
 			this.position.sub(direction);
 		}
-		if(this.keyboard.keyPressed(this.moveKeys[1]))
+		if (this.keyboard.keyPressed(this.moveKeys[1]))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
-			if(this.moveOnPlane)
+			if (this.moveOnPlane)
 			{
 				direction.y = 0;
 			}
@@ -159,14 +159,14 @@ FirstPersonControls.prototype.update = function(delta)
 			direction.multiplyScalar(this.moveSpeed);
 			this.position.add(direction);
 		}
-		if(this.keyboard.keyPressed(this.moveKeys[2]))
+		if (this.keyboard.keyPressed(this.moveKeys[2]))
 		{
 			var direction = new Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
 			direction.normalize();
 			direction.multiplyScalar(this.moveSpeed);
 			this.position.sub(direction);
 		}
-		if(this.keyboard.keyPressed(this.moveKeys[3]))
+		if (this.keyboard.keyPressed(this.moveKeys[3]))
 		{
 			var direction = new Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
 			direction.normalize();

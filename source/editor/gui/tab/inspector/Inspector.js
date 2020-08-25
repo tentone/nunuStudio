@@ -56,7 +56,7 @@ Inspector.prototype.attach = function(object)
  *
  * @method updateInspector
  */
-Inspector.prototype.updateInspector = function(){};
+Inspector.prototype.updateInspector = function() {};
 
 Inspector.prototype.updateSize = function()
 {

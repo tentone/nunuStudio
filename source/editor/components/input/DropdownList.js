@@ -48,7 +48,7 @@ DropdownList.prototype = Object.create(Component.prototype);
 DropdownList.prototype.setDisabled = function(value)
 {
 	this.select.disabled = value;
-}
+};
 
 /**
  * Set onchange callback, called after changes.
@@ -59,7 +59,7 @@ DropdownList.prototype.setDisabled = function(value)
 DropdownList.prototype.setOnChange = function(onChange)
 {
 	this.select.onchange = onChange;
-}
+};
 
 /**
  * Add option to the dropdown list.
@@ -74,7 +74,7 @@ DropdownList.prototype.addValue = function(text, value)
 	option.appendChild(document.createTextNode(text));
 	this.values.push(value);
 	this.select.appendChild(option);
-}
+};
 
 /**
  * Remove all element from dropdown
@@ -84,7 +84,7 @@ DropdownList.prototype.addValue = function(text, value)
 DropdownList.prototype.clearValues = function()
 {
 	this.values = [];
-	for(var i = 0; i < this.select.children.length; i++)
+	for (var i = 0; i < this.select.children.length; i++)
 	{
 		this.select.removeChild(this.select.children[i]);
 	}
@@ -98,12 +98,12 @@ DropdownList.prototype.clearValues = function()
  */
 DropdownList.prototype.getValue = function()
 {
-	if(this.select.selectedIndex > -1)
+	if (this.select.selectedIndex > -1)
 	{
 		return this.values[this.select.selectedIndex];
 	}
 	return null;
-}
+};
 
 /**
  * Set value stored in the input element.
@@ -114,9 +114,9 @@ DropdownList.prototype.getValue = function()
 DropdownList.prototype.setValue = function(value)
 {
 	// Get value index
-	for(var i = 0; i < this.values.length; i++)
+	for (var i = 0; i < this.values.length; i++)
 	{
-		if(this.values[i] === value)
+		if (this.values[i] === value)
 		{
 			this.select.selectedIndex = i;
 			break;
@@ -124,23 +124,23 @@ DropdownList.prototype.setValue = function(value)
 	}
 
 	// If value not found set selectedIndex to -1
-	if(i === this.values.length)
+	if (i === this.values.length)
 	{
 		this.select.selectedIndex = -1;
 	}
-}
+};
 
 // Get dropdownlist selected index
 DropdownList.prototype.getSelectedIndex = function()
 {
 	return this.select.selectedIndex;
-}
+};
 
 // Set dropdownlist selected index
 DropdownList.prototype.setSelectedIndex = function(index)
 {
 	this.select.selectedIndex = index;
-}
+};
 
 DropdownList.prototype.updateVisibility = function()
 {
@@ -154,7 +154,7 @@ DropdownList.prototype.updateSize = function()
 	this.select.style.width = this.size.x + "px";
 	this.select.style.height = this.size.y + "px";
 
-	this.arrow.style.top = ((this.size.y - 10) / 2) + "px";
+	this.arrow.style.top = (this.size.y - 10) / 2 + "px";
 };
 
 export {DropdownList};

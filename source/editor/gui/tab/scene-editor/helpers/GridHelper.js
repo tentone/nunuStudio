@@ -12,16 +12,16 @@ import {LineSegments, BufferGeometry, LineBasicMaterial, Float32BufferAttribute}
  */
 function GridHelper(size, spacing, color)
 {
-	this.size = (size !== undefined) ? size : 100;
-	this.spacing = (spacing !== undefined) ? spacing : 1;
+	this.size = size !== undefined ? size : 100;
+	this.spacing = spacing !== undefined ? spacing : 1;
 
 	LineSegments.call(this, new BufferGeometry(), new LineBasicMaterial(
-	{
-		color: (color !== undefined) ? color : 0x888888,
-		depthWrite: false,
-		transparent: true,
-		opacity: 0.5
-	}));
+		{
+			color: color !== undefined ? color : 0x888888,
+			depthWrite: false,
+			transparent: true,
+			opacity: 0.5
+		}));
 
 	this.update();
 };
@@ -54,7 +54,7 @@ GridHelper.prototype.update = function()
 	var vertices = [];
 	var colors = [];
 
-	for(var i = 0, j = 0, k = -this.size; i <= divisions; i ++, k += step)
+	for (var i = 0, j = 0, k = -this.size; i <= divisions; i ++, k += step)
 	{
 		vertices.push(-this.size, 0, k, this.size, 0, k);
 		vertices.push(k, 0, -this.size, k, 0, this.size);

@@ -8,7 +8,7 @@ import {LocaleEN} from "./LocaleEN.js";
  * @class LocaleManager
  * @static
  */
-function LocaleManager(){}
+function LocaleManager() {}
 
 /**
  * List of all registered locale configurations.
@@ -40,7 +40,7 @@ var Locale = null;
  */
 LocaleManager.register = function(locale)
 {
-	if(LocaleManager.list.length === 0)
+	if (LocaleManager.list.length === 0)
 	{
 		Locale = locale;
 	}
@@ -59,11 +59,11 @@ LocaleManager.register = function(locale)
 LocaleManager.setLocale = function(locale)
 {
 	// Set locale by id
-	if(typeof locale === "string")
+	if (typeof locale === "string")
 	{
-		for(var i = 0; i < LocaleManager.list.length; i++)
+		for (var i = 0; i < LocaleManager.list.length; i++)
 		{
-			if(LocaleManager.list[i].meta.language === locale)
+			if (LocaleManager.list[i].meta.language === locale)
 			{
 				Locale = LocaleManager.list[i];
 				return;
@@ -74,7 +74,7 @@ LocaleManager.setLocale = function(locale)
 	else
 	{
 		var index = LocaleManager.list.indexOf(locale);
-		if(index < 0)
+		if (index < 0)
 		{
 			LocaleManager.register(locale);
 		}

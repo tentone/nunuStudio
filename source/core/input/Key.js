@@ -3,11 +3,12 @@
  *
  * @class Key
  * @module Input
-*/
+ */
 function Key()
 {
 	/**
 	 * Indicates if this key is currently pressed.
+	 *
 	 * @property pressed
 	 * @default false
 	 * @type {boolean}
@@ -16,6 +17,7 @@ function Key()
 
 	/**
 	 * Indicates if this key was just pressed.
+	 *
 	 * @property justPressed
 	 * @default false
 	 * @type {boolean}
@@ -24,6 +26,7 @@ function Key()
 	
 	/**
 	 * Indicates if this key was just released.
+	 *
 	 * @property justReleased
 	 * @default false
 	 * @type {boolean}
@@ -33,6 +36,7 @@ function Key()
 
 /**
  * Down
+ *
  * @attribute DOWN
  * @type {number}
  */
@@ -40,6 +44,7 @@ Key.DOWN = -1;
 
 /**
  * Up
+ *
  * @attribute UP
  * @type {number}
  */
@@ -47,6 +52,7 @@ Key.UP = 1;
 
 /**
  * Reset
+ *
  * @attribute RESET
  * @type {number}
  */
@@ -64,23 +70,23 @@ Key.prototype.update = function(action)
 	this.justPressed = false;
 	this.justReleased = false;
 
-	if(action === Key.DOWN)
+	if (action === Key.DOWN)
 	{
-		if(this.pressed === false)
+		if (this.pressed === false)
 		{
 			this.justPressed = true;
 		}
 		this.pressed = true;
 	}
-	else if(action === Key.UP)
+	else if (action === Key.UP)
 	{
-		if(this.pressed)
+		if (this.pressed)
 		{
 			this.justReleased = true;
 		}
 		this.pressed = false;
 	}
-	else if(action === Key.RESET)
+	else if (action === Key.RESET)
 	{
 		this.justReleased = false;
 		this.justPressed = false;
@@ -103,7 +109,7 @@ Key.prototype.set = function(justPressed, pressed, justReleased)
  * Reset key to default values.
  * 
  * @method reset
-*/
+ */
 Key.prototype.reset = function()
 {
 	this.justPressed = false;

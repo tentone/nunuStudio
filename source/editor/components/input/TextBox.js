@@ -47,7 +47,7 @@ function TextBox(parent)
 		{
 			var value = self.element.value;
 			var paste = Editor.clipboard.get("text");
-			if(paste !== undefined)
+			if (paste !== undefined)
 			{
 				self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
 			}
@@ -76,12 +76,12 @@ TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 {
 	this.element.style.fontFamily = fontFamily;
 
-	if(fontWeight !== undefined)
+	if (fontWeight !== undefined)
 	{
 		this.element.style.fontWeight = fontWeight;
 	}
 
-	if(fontStyle !== undefined)
+	if (fontStyle !== undefined)
 	{
 		this.element.style.fontStyle = fontStyle;
 	}
@@ -109,13 +109,13 @@ TextBox.prototype.setDisabled = function(value)
  */
 TextBox.prototype.setOnInput = function(onInput, timeout)
 {
-	if(timeout !== undefined)
+	if (timeout !== undefined)
 	{
 		var timer = null;
 
 		this.element.oninput = function()
 		{
-			if(timer !== null)
+			if (timer !== null)
 			{
 				clearTimeout(timer);
 				timer = null;
@@ -125,7 +125,7 @@ TextBox.prototype.setOnInput = function(onInput, timeout)
 			{
 				onInput();
 				timer = null;
-			}, timeout)
+			}, timeout);
 		};
 	}
 	else

@@ -89,7 +89,7 @@ LoadingModal.prototype.show = function()
 {	
 	this.counter++;
 
-	if(this.counter === 1)
+	if (this.counter === 1)
 	{
 		this.timer.start();
 		this.manager.create();
@@ -108,7 +108,7 @@ LoadingModal.prototype.hide = function(force)
 {
 	this.counter--;
 
-	if(this.counter < 1 || force === true)
+	if (this.counter < 1 || force === true)
 	{
 		this.counter = 0;
 		this.timer.stop();

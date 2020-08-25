@@ -1,7 +1,7 @@
-import {Pass} from "../Pass.js";
 import {WebGLRenderTarget, UniformsUtils, ShaderMaterial, AdditiveBlending, Vector2} from "three";
 import {ConvolutionShader} from "three/examples/jsm/shaders/ConvolutionShader";
 import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {Pass} from "../Pass.js";
 
 /**
  * Simple bloom effect pass.
@@ -23,10 +23,10 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 
 	this.createQuadScene();
 
-	strength = (strength !== undefined) ? strength : 1;
-	kernelSize = (kernelSize !== undefined) ? kernelSize : 25;
-	sigma = (sigma !== undefined) ? sigma : 4.0;
-	resolution = (resolution !== undefined) ? resolution : 256;
+	strength = strength !== undefined ? strength : 1;
+	kernelSize = kernelSize !== undefined ? kernelSize : 25;
+	sigma = sigma !== undefined ? sigma : 4.0;
+	resolution = resolution !== undefined ? resolution : 256;
 
 	// Render targets
 	this.renderTargetX = new WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
@@ -40,29 +40,29 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 
 	// Copy material
 	this.materialCopy = new ShaderMaterial(
-	{
-		uniforms: this.copyUniforms,
-		vertexShader: CopyShader.vertexShader,
-		fragmentShader: CopyShader.fragmentShader,
-		blending: AdditiveBlending,
-		transparent: true
-	});
+		{
+			uniforms: this.copyUniforms,
+			vertexShader: CopyShader.vertexShader,
+			fragmentShader: CopyShader.fragmentShader,
+			blending: AdditiveBlending,
+			transparent: true
+		});
 
 	// Convolution material
 	this.convolutionUniforms = UniformsUtils.clone(ConvolutionShader.uniforms);
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurX;
 	this.convolutionUniforms["cKernel"].value = ConvolutionShader.buildKernel(sigma);
 	this.materialConvolution = new ShaderMaterial(
-	{
-		uniforms: this.convolutionUniforms,
-		vertexShader:  ConvolutionShader.vertexShader,
-		fragmentShader: ConvolutionShader.fragmentShader,
-		defines:
+		{
+			uniforms: this.convolutionUniforms,
+			vertexShader: ConvolutionShader.vertexShader,
+			fragmentShader: ConvolutionShader.fragmentShader,
+			defines:
 		{
 			"KERNEL_SIZE_FLOAT": kernelSize.toFixed(1),
 			"KERNEL_SIZE_INT": kernelSize.toFixed(0)
 		}
-	});
+		});
 	
 }
 
@@ -73,7 +73,7 @@ BloomPass.prototype = Object.create(Pass.prototype);
 
 BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	if(maskActive)
+	if (maskActive)
 	{
 		renderer.context.disable(renderer.context.STENCIL_TEST);
 	}
@@ -97,7 +97,7 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	this.quad.material = this.materialCopy;
 	this.copyUniforms["tDiffuse"].value = this.renderTargetY.texture;
 
-	if(maskActive)
+	if (maskActive)
 	{
 		renderer.context.enable(renderer.context.STENCIL_TEST);
 	}

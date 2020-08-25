@@ -1,6 +1,6 @@
-import {Action} from "./Action.js";
-import {Editor} from "../../Editor.js";
 import {Material, Texture, Quaternion} from "three";
+import {Editor} from "../../Editor.js";
+import {Action} from "./Action.js";
 
 /**
  * Stores change to one object attribute.
@@ -19,14 +19,14 @@ function ChangeAction(object, attribute, newValue, oldValue)
 	this.object = object;
 	this.attribute = attribute;
 	this.newValue = newValue;
-	this.oldValue = oldValue !== undefined ? oldValue : (ChangeAction.isVetorial(object[attribute]) ? object[attribute].clone() : object[attribute]);
+	this.oldValue = oldValue !== undefined ? oldValue : ChangeAction.isVetorial(object[attribute]) ? object[attribute].clone() : object[attribute];
 }
 
 ChangeAction.prototype.apply = function()
 {
-	if(ChangeAction.isVetorial(this.object[this.attribute]))
+	if (ChangeAction.isVetorial(this.object[this.attribute]))
 	{
-		this.object[this.attribute].copy(this.newValue)
+		this.object[this.attribute].copy(this.newValue);
 	}
 	else
 	{
@@ -38,9 +38,9 @@ ChangeAction.prototype.apply = function()
 
 ChangeAction.prototype.revert = function()
 {
-	if(ChangeAction.isVetorial(this.object[this.attribute]))
+	if (ChangeAction.isVetorial(this.object[this.attribute]))
 	{
-		this.object[this.attribute].copy(this.oldValue)
+		this.object[this.attribute].copy(this.oldValue);
 	}
 	else
 	{
@@ -52,18 +52,18 @@ ChangeAction.prototype.revert = function()
 
 ChangeAction.updateGUI = function(object, attribute, newValue)
 {
-	if(object instanceof Material)
+	if (object instanceof Material)
 	{
 		object.needsUpdate = true;
 	}
-	else if(object instanceof Texture)
+	else if (object instanceof Texture)
 	{
 		object.needsUpdate = true;
 	}
 
 	Editor.updateObjectsViewsGUI();
 
-	if(Editor.isSelected(object))
+	if (Editor.isSelected(object))
 	{
 		Editor.gui.inspector.updateValues();
 	}
@@ -82,12 +82,12 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
  */
 ChangeAction.isVetorial = function(object)
 {
-	if(object === null || object === undefined)
+	if (object === null || object === undefined)
 	{
 		return false;
 	}
 
-	return object.isVector3 === true || object.isEuler === true || (object instanceof Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
+	return object.isVector3 === true || object.isEuler === true || object instanceof Quaternion || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };
 
 export {ChangeAction};

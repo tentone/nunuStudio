@@ -1,3 +1,4 @@
+import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, Geometry, BufferGeometry, Material, Texture} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Video} from "../../../../core/resources/Video.js";
 import {Resource} from "../../../../core/resources/Resource.js";
@@ -18,6 +19,10 @@ import {FirstPersonControls} from "../../../../core/objects/controls/FirstPerson
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TextureInspector} from "./textures/TextureInspector.js";
 import {VideoInspector} from "./resources/VideoInspector.js";
 import {ResourceInspector} from "./resources/ResourceInspector.js";
@@ -52,11 +57,6 @@ import {PerspectiveCameraInspector} from "./objects/cameras/PerspectiveCameraIns
 import {OrthographicCameraInspector} from "./objects/cameras/OrthographicCameraInspector.js";
 import {AudioEmitterInspector} from "./objects/audio/AudioEmitterInspector.js";
 import {MaterialInspector} from "./materials/MaterialInspector.js";
-import {Global} from "../../../Global.js";
-import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
-import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, Geometry, BufferGeometry, Material, Texture} from "three";
 
 /**
  * Inspector container is used to display object inspector panels.
@@ -92,7 +92,7 @@ InspectorContainer.prototype = Object.create(TabComponent.prototype);
 
 InspectorContainer.prototype.destroyInspector = function()
 {
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		this.panel.destroy();
 		this.panel = null;
@@ -103,7 +103,7 @@ InspectorContainer.prototype.destroyInspector = function()
 
 InspectorContainer.prototype.attach = function(object)
 {
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		this.panel.attach(object);
 		this.panel.updateInspector();
@@ -112,7 +112,7 @@ InspectorContainer.prototype.attach = function(object)
 
 InspectorContainer.prototype.isAttached = function(object)
 {
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		return this.panel.object === object;
 	}
@@ -122,13 +122,13 @@ InspectorContainer.prototype.isAttached = function(object)
 
 InspectorContainer.prototype.updateObjectsView = function()
 {
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{	
 		var object = this.panel.object;
 
-		if(object.isObject3D === true && object.parent === null)
+		if (object.isObject3D === true && object.parent === null)
 		{
-			if(!(object instanceof Program))
+			if (!(object instanceof Program))
 			{
 				this.destroyInspector();
 			}
@@ -140,74 +140,74 @@ InspectorContainer.prototype.updateSelection = function()
 {	
 	var object = Editor.hasObjectSelected() ? Editor.selection[0] : null;
 	
-	if(this.panel !== null && this.panel.object === object)
+	if (this.panel !== null && this.panel.object === object)
 	{
 		return;
 	}
 
 	this.destroyInspector();
 
-	if(object instanceof Object3D)
+	if (object instanceof Object3D)
 	{
-		if(object.locked)
+		if (object.locked)
 		{
 			this.panel = new LockedInspector(this, object);
 		}
-		else if(object instanceof ParticleEmitter)
+		else if (object instanceof ParticleEmitter)
 		{
 			this.panel = new ParticleEmitterInspector(this, object);
 		}
-		else if(object instanceof SpineAnimation)
+		else if (object instanceof SpineAnimation)
 		{
 			this.panel = new SpineInspector(this, object);
 		}
-		else if(object instanceof InstancedMesh)
+		else if (object instanceof InstancedMesh)
 		{
 			this.panel = new InstancedMeshInspector(this, object);
 		}
-		else if(object instanceof SkinnedMesh)
+		else if (object instanceof SkinnedMesh)
 		{
 			this.panel = new MeshInspector(this, object);
 		}
-		else if(object instanceof TextSprite)
+		else if (object instanceof TextSprite)
 		{
 			this.panel = new TextSpriteInspector(this, object);
 		}
-		else if(object instanceof TextBitmap)
+		else if (object instanceof TextBitmap)
 		{
 			this.panel = new TextBitmapInspector(this, object);
 		}
-		else if(object instanceof TextMesh)
+		else if (object instanceof TextMesh)
 		{
 			this.panel = new TextMeshInspector(this, object);
 		}
-		else if(object instanceof Mesh || object instanceof Points || object instanceof Line)
+		else if (object instanceof Mesh || object instanceof Points || object instanceof Line)
 		{
 			this.panel = new MeshInspector(this, object);
 		}
-		else if(object instanceof Light)
+		else if (object instanceof Light)
 		{
-			if(object instanceof PointLight)
+			if (object instanceof PointLight)
 			{
 				this.panel = new PointLightInspector(this, object);
 			}
-			else if(object instanceof RectAreaLight)
+			else if (object instanceof RectAreaLight)
 			{
 				this.panel = new RectAreaLightInspector(this, object);
 			}
-			else if(object instanceof SpotLight)
+			else if (object instanceof SpotLight)
 			{
 				this.panel = new SpotLightInspector(this, object);
 			}
-			else if(object instanceof DirectionalLight)
+			else if (object instanceof DirectionalLight)
 			{
 				this.panel = new DirectionalLightInspector(this, object);
 			}
-			else if(object instanceof HemisphereLight)
+			else if (object instanceof HemisphereLight)
 			{
 				this.panel = new HemisphereLightInspector(this, object);
 			}
-			else if(object instanceof LightProbe)
+			else if (object instanceof LightProbe)
 			{
 				this.panel = new LightProbeInspector(this, object);
 			}
@@ -216,47 +216,47 @@ InspectorContainer.prototype.updateSelection = function()
 				this.panel = new AmbientLightInspector(this, object);
 			}
 		}
-		else if(object instanceof Sky)
+		else if (object instanceof Sky)
 		{
 			this.panel = new SkyInspector(this, object);
 		}
-		else if(object instanceof PerspectiveCamera)
+		else if (object instanceof PerspectiveCamera)
 		{
 			this.panel = new PerspectiveCameraInspector(this, object);
 		}
-		else if(object instanceof OrthographicCamera)
+		else if (object instanceof OrthographicCamera)
 		{
 			this.panel = new OrthographicCameraInspector(this, object);
 		}
-		else if(object instanceof CubeCamera)
+		else if (object instanceof CubeCamera)
 		{
 			this.panel = new CubeCameraInspector(this, object);
 		}
-		else if(object instanceof Audio)
+		else if (object instanceof Audio)
 		{
 			this.panel = new AudioEmitterInspector(this, object);
 		}
-		else if(object instanceof Scene)
+		else if (object instanceof Scene)
 		{
 			this.panel = new SceneInspector(this, object);
 		}
-		else if(object instanceof Script)
+		else if (object instanceof Script)
 		{
 			this.panel = new ScriptInspector(this, object);
 		}
-		else if(object instanceof Program)
+		else if (object instanceof Program)
 		{
 			this.panel = new ProgramInspector(this, object);
 		}
-		else if(object instanceof PhysicsObject)
+		else if (object instanceof PhysicsObject)
 		{
 			this.panel = new PhysicsInspector(this, object);
 		}
-		else if(object instanceof OrbitControls)
+		else if (object instanceof OrbitControls)
 		{
 			this.panel = new OrbitControlsInspector(this, object);
 		}
-		else if(object instanceof FirstPersonControls)
+		else if (object instanceof FirstPersonControls)
 		{
 			this.panel = new FirstPersonControlsInspector(this, object);
 		}
@@ -265,21 +265,21 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ObjectInspector(this, object);
 		}
 	}
-	else if(object instanceof Geometry || object instanceof BufferGeometry)
+	else if (object instanceof Geometry || object instanceof BufferGeometry)
 	{
 		this.panel = new GeometryInspector(this, object);
 	}
-	else if(object instanceof Resource)
+	else if (object instanceof Resource)
 	{
-		if(object instanceof Audio)
+		if (object instanceof Audio)
 		{
 			this.panel = new AudioInspector(this, object);
 		}
-		else if(object instanceof Image)
+		else if (object instanceof Image)
 		{
 			this.panel = new ImageInspector(this, object);
 		}
-		else if(object instanceof Video)
+		else if (object instanceof Video)
 		{
 			this.panel = new VideoInspector(this, object);
 		}
@@ -288,16 +288,16 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ResourceInspector(this, object);
 		}
 	}
-	else if(object instanceof Material)
+	else if (object instanceof Material)
 	{
 		this.panel = new MaterialInspector(this, object);
 	}
-	else if(object instanceof Texture)
+	else if (object instanceof Texture)
 	{
 		this.panel = new TextureInspector(this, object);
 	}
 
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		this.emptyText.setVisibility(false);
 		
@@ -309,7 +309,7 @@ InspectorContainer.prototype.updateSelection = function()
 
 InspectorContainer.prototype.updateValues = function()
 {	
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		this.panel.updateInspector();
 	}
@@ -319,11 +319,11 @@ InspectorContainer.prototype.updateSize = function()
 {	
 	TabComponent.prototype.updateSize.call(this);
 
-	this.emptyText.position.x = (this.size.x * 0.1);
+	this.emptyText.position.x = this.size.x * 0.1;
 	this.emptyText.size.set(this.size.x * 0.8, this.size.y);
 	this.emptyText.updateInterface();
 
-	if(this.panel !== null)
+	if (this.panel !== null)
 	{
 		this.panel.size.copy(this.size);
 		this.panel.updateInterface();

@@ -1,8 +1,8 @@
 import {Locale} from "../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {TextureEditor} from "./TextureEditor.js";
 import {Editor} from "../../../Editor.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
+import {TextureEditor} from "./TextureEditor.js";
 
 function CanvasTextureEditor(parent, closeable, container, index)
 {
@@ -37,7 +37,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Size options
-	for(var i = 3; i < 13; i++)
+	for (var i = 3; i < 13; i++)
 	{
 		var size = Math.pow(2, i);
 		this.width.addValue(size, size);

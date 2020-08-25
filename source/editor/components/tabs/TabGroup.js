@@ -1,10 +1,10 @@
+import {Vector2} from "three";
 import {Locale} from "../../locale/LocaleManager.js";
 import {DragBuffer} from "../../gui/DragBuffer.js";
-import {TabComponent} from "./TabComponent.js";
-import {TabButton} from "./TabButton.js";
 import {Division} from "../Division.js";
 import {Component} from "../Component.js";
-import {Vector2} from "three";
+import {TabComponent} from "./TabComponent.js";
+import {TabButton} from "./TabButton.js";
 
 /**
  * A tab group contains and manages tab elements.
@@ -36,7 +36,7 @@ function TabGroup(parent, placement)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabComponent)
+		if (tab instanceof TabComponent)
 		{
 			self.attachTab(tab);
 			DragBuffer.pop(uuid);
@@ -130,7 +130,7 @@ TabGroup.prototype = Object.create(Component.prototype);
  */
 TabGroup.prototype.updateMetadata = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateMetadata();
 	}
@@ -143,7 +143,7 @@ TabGroup.prototype.updateMetadata = function()
  */
 TabGroup.prototype.updateObjectsView = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateObjectsView();
 	}
@@ -167,7 +167,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 	tab.attachTo(this.tab);
 	
 	// Add to options
-	if(insertIndex !== undefined)
+	if (insertIndex !== undefined)
 	{
 		tab.index = insertIndex;
 		this.options.splice(insertIndex, 0, tab);
@@ -179,7 +179,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 	}
 
 	// Select the tab if none selected
-	if(this.selected === null)
+	if (this.selected === null)
 	{
 		this.selectTab(tab);
 	}
@@ -210,7 +210,7 @@ TabGroup.prototype.moveTabIndex = function(origin, destination)
 
 TabGroup.prototype.updateSelection = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateSelection();
 	}
@@ -218,7 +218,7 @@ TabGroup.prototype.updateSelection = function()
 
 TabGroup.prototype.updateSettings = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateSettings();
 	}
@@ -231,7 +231,7 @@ TabGroup.prototype.updateSettings = function()
  */
 TabGroup.prototype.getActiveTab = function()
 {
-	if(this.selected !== null)
+	if (this.selected !== null)
 	{
 		return this.selected;
 	}
@@ -246,7 +246,7 @@ TabGroup.prototype.getActiveTab = function()
  */
 TabGroup.prototype.closeActual = function()
 {
-	if(this.selected !== null && this.selected.closeable)
+	if (this.selected !== null && this.selected.closeable)
 	{
 		this.selected.deactivate();
 		this.removeTab(this.selected);
@@ -263,19 +263,19 @@ TabGroup.prototype.closeActual = function()
  */
 TabGroup.prototype.selectTab = function(tab)
 {
-	if(this.selected !== null)
+	if (this.selected !== null)
 	{
 		this.selected.deactivate();
 	}
 
 	// Tab as a TabComponent object
-	if(tab instanceof TabComponent)
+	if (tab instanceof TabComponent)
 	{
 		this.selected = tab;
 		this.selected.activate();
 	}
 	// Tab as a index
-	else if(typeof tab === "number" && tab > -1 && tab < this.options.length)
+	else if (typeof tab === "number" && tab > -1 && tab < this.options.length)
 	{
 		this.selected = this.options[tab];
 		this.selected.activate();
@@ -296,7 +296,7 @@ TabGroup.prototype.selectTab = function(tab)
  */
 TabGroup.prototype.selectNextTab = function()
 {
-	if(this.options.length > 0)
+	if (this.options.length > 0)
 	{
 		this.selectTab((this.selected.index + 1) % this.options.length);
 	}
@@ -309,9 +309,9 @@ TabGroup.prototype.selectNextTab = function()
  */
 TabGroup.prototype.selectPreviousTab = function()
 {
-	if(this.options.length > 0)
+	if (this.options.length > 0)
 	{
-		if(this.selected.index === 0)
+		if (this.selected.index === 0)
 		{
 			this.selectTab(this.options.length - 1);
 		}
@@ -333,7 +333,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	tab.button = new TabButton(this.buttons, tab);
 	this.options.push(tab);
 	
-	if(this.selected === null || this.options.length === 1)
+	if (this.selected === null || this.options.length === 1)
 	{
 		this.selectTab(tab);
 	}
@@ -354,11 +354,11 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
  */
 TabGroup.prototype.getTab = function(type, object)
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
-		if(this.options[i] instanceof type)
+		if (this.options[i] instanceof type)
 		{
-			if(object === undefined || this.options[i].isAttached(object))
+			if (object === undefined || this.options[i].isAttached(object))
 			{
 				return this.options[i];
 			}
@@ -378,17 +378,17 @@ TabGroup.prototype.getTab = function(type, object)
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
 	// If index is an object get the actual index
-	if(typeof index === "object")
+	if (typeof index === "object")
 	{
 		index = this.options.indexOf(index);
 	}
 
 	// Check if the index is in range
-	if(index > -1 && index < this.options.length)
+	if (index > -1 && index < this.options.length)
 	{
 		var tab = this.options[index];
 
-		if(dontDestroy !== true)
+		if (dontDestroy !== true)
 		{
 			tab.destroy();
 		}
@@ -397,9 +397,9 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 		this.updateOptionIndex();
 
 		// Select option
-		if(this.selected === tab)
+		if (this.selected === tab)
 		{
-			if(this.options.length > 0)
+			if (this.options.length > 0)
 			{
 				this.selectTab(index !== 0 ? index - 1 : 0);
 			}
@@ -427,9 +427,9 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
  */
 TabGroup.prototype.clear = function(forceAll)
 {
-	if(forceAll === true)
+	if (forceAll === true)
 	{
-		while(this.options.length > 0)
+		while (this.options.length > 0)
 		{
 			this.options.pop().destroy();
 		}
@@ -439,9 +439,9 @@ TabGroup.prototype.clear = function(forceAll)
 	else
 	{
 		var i = 0;
-		while(i < this.options.length)
+		while (i < this.options.length)
 		{
-			if(this.options[i].closeable)
+			if (this.options[i].closeable)
 			{
 				this.options[i].destroy();
 				this.options.splice(i, 1);
@@ -454,7 +454,7 @@ TabGroup.prototype.clear = function(forceAll)
 
 		// Check is selected tab is still available
 		var index = this.options.indexOf(this.selected);
-		if(index === -1 && this.options.length > 0)
+		if (index === -1 && this.options.length > 0)
 		{
 			this.selectTab(0);
 		}
@@ -468,7 +468,7 @@ TabGroup.prototype.clear = function(forceAll)
  */
 TabGroup.prototype.updateOptionIndex = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].index = i;
 	}
@@ -494,9 +494,9 @@ TabGroup.prototype.updateSize = function()
 	var offset = this.buttonSize.clone();
 
 	// Calculate size of the buttons and offset
-	if(this.placement === TabGroup.TOP || this.placement === TabGroup.BOTTOM)
+	if (this.placement === TabGroup.TOP || this.placement === TabGroup.BOTTOM)
 	{
-		if(buttonSize.x * this.options.length > this.size.x)
+		if (buttonSize.x * this.options.length > this.size.x)
 		{
 			buttonSize.x = this.size.x / this.options.length;
 			offset.x = buttonSize.x;
@@ -504,9 +504,9 @@ TabGroup.prototype.updateSize = function()
 		tabSize.y -= this.buttonSize.y;
 		offset.y = 0;
 	}
-	else if(this.placement === TabGroup.LEFT || this.placement === TabGroup.RIGHT)
+	else if (this.placement === TabGroup.LEFT || this.placement === TabGroup.RIGHT)
 	{
-		if(buttonSize.y * this.options.length > this.size.y)
+		if (buttonSize.y * this.options.length > this.size.y)
 		{
 			buttonSize.y = this.size.y / this.options.length;
 			offset.y = buttonSize.y;
@@ -516,7 +516,7 @@ TabGroup.prototype.updateSize = function()
 	}
 	
 	// Update tab and buttons
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
 		tab.visible = this.selected === tab;
@@ -534,7 +534,7 @@ TabGroup.prototype.updateSize = function()
 	this.tab.updateSize();
 
 	// Position buttons and tab division
-	if(this.placement === TabGroup.TOP)
+	if (this.placement === TabGroup.TOP)
 	{	
 		this.buttons.position.set(0, 0);
 		this.buttons.updatePosition();
@@ -544,7 +544,7 @@ TabGroup.prototype.updateSize = function()
 		this.tab.position.set(0, this.buttonSize.y);
 		this.tab.updatePosition();
 	}
-	else if(this.placement === TabGroup.BOTTOM)
+	else if (this.placement === TabGroup.BOTTOM)
 	{
 		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
 		this.buttons.updatePosition();
@@ -554,7 +554,7 @@ TabGroup.prototype.updateSize = function()
 		this.tab.position.set(0, 0);
 		this.tab.updatePosition();
 	}
-	else if(this.placement === TabGroup.LEFT)
+	else if (this.placement === TabGroup.LEFT)
 	{
 		this.buttons.position.set(0, 0);
 		this.buttons.updatePosition();
@@ -564,7 +564,7 @@ TabGroup.prototype.updateSize = function()
 		this.tab.position.set(this.buttonSize.x, 0);
 		this.tab.updatePosition();
 	}
-	else if(this.placement === TabGroup.RIGHT)
+	else if (this.placement === TabGroup.RIGHT)
 	{
 		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
 		this.buttons.updatePosition();

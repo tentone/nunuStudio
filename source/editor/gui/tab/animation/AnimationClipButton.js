@@ -1,3 +1,4 @@
+import {VectorKeyframeTrack, InterpolateLinear, Color, ColorKeyframeTrack, QuaternionKeyframeTrack, StringKeyframeTrack, InterpolateDiscrete, BooleanKeyframeTrack, NumberKeyframeTrack} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {MathUtils} from "../../../../core/utils/MathUtils.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
@@ -5,7 +6,6 @@ import {Editor} from "../../../Editor.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {VectorKeyframeTrack, InterpolateLinear, Color, ColorKeyframeTrack, QuaternionKeyframeTrack, StringKeyframeTrack, InterpolateDiscrete, BooleanKeyframeTrack, NumberKeyframeTrack} from "three";
 
 /**
  * Button displyed on the left side that contains the name of the animation track.
@@ -39,7 +39,7 @@ function AnimationClipButton(parent, editor, animation)
 		context.addOption(Locale.rename, function()
 		{
 			var value = Editor.prompt("Rename animation", animation.name);
-			if(value !== null && value !== "")
+			if (value !== null && value !== "")
 			{
 				Editor.addAction(new ChangeAction(animation, "name", value));
 				self.updateAnimation();
@@ -48,7 +48,7 @@ function AnimationClipButton(parent, editor, animation)
 		context.addOption("Add track", function()
 		{
 			var attribute = Editor.prompt(Locale.attribute);
-			if(!attribute.startsWith("."))
+			if (!attribute.startsWith("."))
 			{
 				attribute = "." + attribute;
 			}
@@ -56,50 +56,50 @@ function AnimationClipButton(parent, editor, animation)
 			var attributes = attribute.split(".");
 			var value = object;
 
-			for(var i = 0; i < attributes.length; i++)
+			for (var i = 0; i < attributes.length; i++)
 			{
-				if(attributes !== "")
+				if (attributes !== "")
 				{
 					var newValue = value[attributes[i]];
 					
-					if(newValue !== undefined)
+					if (newValue !== undefined)
 					{
 						value = newValue;
 					}
 				}
 			}
 
-			if(value === object)
+			if (value === object)
 			{
 				Editor.alert("Attribute not found");
 			}
 
-			if(value.isVector3)
+			if (value.isVector3)
 			{
 				var track = new VectorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(InterpolateLinear);
 			}
-			else if(value instanceof Color)
+			else if (value instanceof Color)
 			{
 				var track = new ColorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(InterpolateLinear);
 			}
-			else if(value.isQuaternion)
+			else if (value.isQuaternion)
 			{
 				var track = new QuaternionKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(InterpolateLinear);
 			}
-			else if(typeof value === "string")
+			else if (typeof value === "string")
 			{
 				var track = new StringKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(InterpolateDiscrete);
 			}
-			else if(typeof value === "boolean")
+			else if (typeof value === "boolean")
 			{
 				var track = new BooleanKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(InterpolateDiscrete);
 			}
-			else if(typeof value === "number")
+			else if (typeof value === "number")
 			{
 				var track = new NumberKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(InterpolateLinear);
@@ -118,13 +118,13 @@ function AnimationClipButton(parent, editor, animation)
 		});
 		context.addOption(Locale.delete, function()
 		{
-			if(!Editor.confirm("Delete animation?"))
+			if (!Editor.confirm("Delete animation?"))
 			{
 				return;
 			}
 
 			var index = object.animations.indexOf(animation);
-			if(index !== -1)
+			if (index !== -1)
 			{
 				object.animations.splice(index, 1);
 			}
@@ -168,5 +168,5 @@ AnimationClipButton.prototype.updateAnimation = function()
 	this.name.appendChild(document.createTextNode(this.animation.name));
 };
 
-AnimationClipButton.prototype.updateInterface = function(){};
+AnimationClipButton.prototype.updateInterface = function() {};
 export {AnimationClipButton};

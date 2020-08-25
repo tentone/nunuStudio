@@ -50,13 +50,13 @@ EventManager.prototype.addAndCreate = function(target, event, callback)
  */
 EventManager.prototype.remove = function(target, event)
 {
-	for(var i = this.events.length - 1; i >= 0; i--)
+	for (var i = this.events.length - 1; i >= 0; i--)
 	{
 		// Check if the target and event matches
-		if(this.events[i][0] === target && this.events[i][1] === event)
+		if (this.events[i][0] === target && this.events[i][1] === event)
 		{
 			// Destroy event if it is active
-			if(this.events[i][3])
+			if (this.events[i][3])
 			{
 				this.events[i][0].removeEventListener(this.events[i][1], this.events[i][2]);
 				this.events[i][3] = false;
@@ -101,7 +101,7 @@ EventManager.prototype.clear = function()
  */
 EventManager.prototype.create = function()
 {
-	for(var i = 0; i < this.events.length; i++)
+	for (var i = 0; i < this.events.length; i++)
 	{
 		var event = this.events[i];
 		event[0].addEventListener(event[1], event[2]);
@@ -120,7 +120,7 @@ EventManager.prototype.create = function()
  */
 EventManager.prototype.destroy = function()
 {
-	for(var i = 0; i < this.events.length; i++)
+	for (var i = 0; i < this.events.length; i++)
 	{
 		var event = this.events[i];
 		event[0].removeEventListener(event[1], event[2]);
@@ -137,11 +137,11 @@ EventManager.prototype.destroy = function()
  */
 EventManager.prototype.addScrollEvent = function(target, callback)
 {
-	if(window.onmousewheel !== undefined)
+	if (window.onmousewheel !== undefined)
 	{
 		this.add(target, "mousewheel", callback);
 	}
-	else if(window.addEventListener !== undefined)
+	else if (window.addEventListener !== undefined)
 	{
 		this.add(target, "DOMMouseScroll", function(event)
 		{

@@ -1,3 +1,4 @@
+import {Color} from "three";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {TextBitmap} from "../../../../../../core/objects/text/TextBitmap.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
@@ -8,7 +9,6 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
 
 function TextBitmapInspector(parent, object)
 {

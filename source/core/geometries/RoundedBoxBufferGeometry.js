@@ -39,7 +39,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 	// Calculate vertices count
 	var rs1 = radiusSegments + 1; // Radius segments + 1 
-	var totalVertexCount = (rs1 * radiusSegments + 1) << 3;
+	var totalVertexCount = rs1 * radiusSegments + 1 << 3;
 
 	// Make buffers
 	var positions = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
@@ -62,10 +62,11 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	doCorners();
 	doHeightEdges();
 	doWidthEdges();
-	doDepthEdges()
+	doDepthEdges();
 
 	// Calculate vert positions
-	function doVertices() {
+	function doVertices() 
+	{
 
 		// Corner offsets
 		var cornerLayout = [
@@ -80,7 +81,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		];
 
 		// Corner holder 
-		for(var j = 0; j < 8; j++)
+		for (var j = 0; j < 8; j++)
 		{
 			cornerVerts.push([]);
 			cornerNormals.push([]);
@@ -90,7 +91,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		var PIhalf = Math.PI / 2;
 		var cornerOffset = new Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
 
-		for(var y = 0; y <= radiusSegments; y++)
+		for (var y = 0; y <= radiusSegments; y++)
 		{
 			var v = y / radiusSegments;
 			var va = v * PIhalf; // Arrange in 90 deg
@@ -98,7 +99,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 			var cosVa = Math.cos(va); // Scale of vertical angle 
 			var sinVa = Math.sin(va);
 
-			if(y == radiusSegments)
+			if (y === radiusSegments)
 			{
 				vertex.set(0, 1, 0);
 
@@ -113,7 +114,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 				continue; // Skip row loop
 			}
 
-			for(var x = 0; x <= radiusSegments; x++)
+			for (var x = 0; x <= radiusSegments; x++)
 			{
 				var u = x / radiusSegments;
 				var ha = u * PIhalf;
@@ -136,9 +137,9 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		}
 
 		// Distribute corner verts
-		for(var i = 1; i < 8; i++)
+		for (var i = 1; i < 8; i++)
 		{
-			for(var j = 0; j < cornerVerts[0].length; j++)
+			for (var j = 0; j < cornerVerts[0].length; j++)
 			{
 				var vert = cornerVerts[0][j].clone().multiply(cornerLayout[i]);
 				cornerVerts[i].push(vert);
@@ -158,16 +159,16 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		var flips = [true, false, true, false, false, true, false, true];
 
 		var lastRowOffset = rs1 * (radiusSegments - 1);
-		for(var i = 0; i < 8; i++)
+		for (var i = 0; i < 8; i++)
 		{
 			var cornerOffset = cornerVertNumber * i;
 
-			for(var v = 0; v < radiusSegments - 1; v++)
+			for (var v = 0; v < radiusSegments - 1; v++)
 			{
 				var r1 = v * rs1; // Row offset
 				var r2 = (v + 1) * rs1; // Next row
 
-				for(var u = 0; u < radiusSegments; u++)
+				for (var u = 0; u < radiusSegments; u++)
 				{
 					var u1 = u + 1;
 					var a = cornerOffset + r1 + u;
@@ -175,7 +176,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 					var c = cornerOffset + r2 + u;
 					var d = cornerOffset + r2 + u1;
 
-					if(!flips[i])
+					if (!flips[i])
 					{
 						indices.push(a, b, c, b, d, c);
 					}
@@ -187,13 +188,13 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 			}
 
-			for(var u = 0; u < radiusSegments; u++)
+			for (var u = 0; u < radiusSegments; u++)
 			{
 				var a = cornerOffset + lastRowOffset + u;
 				var b = cornerOffset + lastRowOffset + u + 1;
 				var c = cornerOffset + lastVertex;
 
-				if(!flips[i])
+				if (!flips[i])
 				{
 					indices.push(a, b, c);
 				}
@@ -255,13 +256,13 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	// Weave edges
 	function doHeightEdges()
 	{
-		for(var i = 0; i < 4; i++)
+		for (var i = 0; i < 4; i++)
 		{
 			var cOffset = i * cornerVertNumber;
 			var cRowOffset = 4 * cornerVertNumber + cOffset;
 			var needsFlip = i & 1 === 1;
 
-			for(var u = 0; u < radiusSegments; u++)
+			for (var u = 0; u < radiusSegments; u++)
 			{
 				var u1 = u + 1;
 				var a = cOffset + u;
@@ -269,7 +270,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 				var c = cRowOffset + u;
 				var d = cRowOffset + u1;
 
-				if(!needsFlip)
+				if (!needsFlip)
 				{
 					indices.push(a, b, c, b, d, c);
 				}
@@ -286,22 +287,22 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		var cStarts = [0, 2, 4, 6];
 		var cEnds = [1, 3, 5, 7];
 
-		for(var i = 0; i < 4; i++)
+		for (var i = 0; i < 4; i++)
 		{
 			var cStart = cornerVertNumber * cStarts[i];
 			var cEnd = cornerVertNumber * cEnds[i];
 			var needsFlip = 1 >= i;
 
-			for(var u = 0; u < radiusSegments; u++)
+			for (var u = 0; u < radiusSegments; u++)
 			{
 				var urs1 = u * rs1;
 				var u1rs1 = (u + 1) * rs1;
 				var a = cStart + urs1;
 				var b = cStart + u1rs1;
 				var c = cEnd + urs1;
-				var d = cEnd + u1rs1
+				var d = cEnd + u1rs1;
 
-				if(needsFlip)
+				if (needsFlip)
 				{
 					indices.push(a, c, b, b, c, d);
 				}
@@ -320,20 +321,20 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		var cEnds = [3, 2, 7, 6];
 		var needsFlip = [0, 1, 1, 0];
 
-		for(var i = 0; i < 4; i++)
+		for (var i = 0; i < 4; i++)
 		{
 			var cStart = cStarts[i] * cornerVertNumber;
 			var cEnd = cEnds[i] * cornerVertNumber;
 
-			for(var u = 0; u <= end; u++)
+			for (var u = 0; u <= end; u++)
 			{
 				var a = cStart + radiusSegments + u * rs1;
-				var b = cStart + (u != end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
+				var b = cStart + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
 
 				var c = cEnd + radiusSegments + u * rs1;
-				var d = cEnd + (u != end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
+				var d = cEnd + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
 
-				if(!needsFlip[i])
+				if (!needsFlip[i])
 				{
 					indices.push(a, b, c, b, d, c);
 				}
@@ -348,7 +349,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 	// Fill buffers
 	var index = 0;
-	for(var i = 0; i < vertexPool.length; i++)
+	for (var i = 0; i < vertexPool.length; i++)
 	{
 		positions.setXYZ(index, vertexPool[i].x, vertexPool[i].y, vertexPool[i].z);
 		normals.setXYZ(index, normalPool[i].x, normalPool[i].y, normalPool[i].z);

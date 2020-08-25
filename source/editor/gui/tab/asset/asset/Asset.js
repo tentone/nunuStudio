@@ -1,7 +1,7 @@
+import {Vector2} from "three";
 import {Resource} from "../../../../../core/resources/Resource.js";
 import {Editor} from "../../../../Editor.js";
 import {Component} from "../../../../components/Component.js";
-import {Vector2} from "three";
 
 
 /**
@@ -70,7 +70,7 @@ function Asset(parent)
 
 	this.element.onmouseleave = function()
 	{
-		if(!Editor.isSelected(self.asset))
+		if (!Editor.isSelected(self.asset))
 		{
 			this.style.backgroundColor = null;
 		}
@@ -78,9 +78,9 @@ function Asset(parent)
 
 	this.element.onclick = function(event)
 	{
-		if(event.ctrlKey)
+		if (event.ctrlKey)
 		{
-			if(Editor.isSelected(self.asset))
+			if (Editor.isSelected(self.asset))
 			{
 				Editor.unselectObject(self.asset);
 			}
@@ -164,5 +164,5 @@ Asset.prototype.updateMetadata = function()
 	this.setText(this.asset.name);
 };
 
-Asset.prototype.updateInterface = function(){};
+Asset.prototype.updateInterface = function() {};
 export {Asset};

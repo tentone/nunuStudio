@@ -1,5 +1,5 @@
-import {CodeEditor} from "./CodeEditor.js";
 import {Editor} from "../../../Editor.js";
+import {CodeEditor} from "./CodeEditor.js";
 
 /**
  * The text editor is used to edit text files.
@@ -18,7 +18,7 @@ function TextEditor(parent, closeable, container, index)
 	// Change
 	this.code.on("change", function(cm)
 	{
-		if(!cm.state.focused)
+		if (!cm.state.focused)
 		{
 			return;
 		}
@@ -31,10 +31,10 @@ function TextEditor(parent, closeable, container, index)
 	{
 		var typed = String.fromCharCode(event.charCode);
 
-		if(/[\w\.]/.exec(typed))
+		if (/[\w\.]/.exec(typed))
 		{
 			// If there is no tern sugestion suggest known words
-			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			if (cm.state.completionActive == null || cm.state.completionActive.widget === null)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
 			}
@@ -51,7 +51,7 @@ TextEditor.prototype.updateMetadata = function()
 	this.setName(this.resource.name);
 
 	// If not found close tab
-	if(Editor.program.resources[this.resource.uuid] === undefined)
+	if (Editor.program.resources[this.resource.uuid] === undefined)
 	{
 		this.close();
 	}
@@ -74,15 +74,15 @@ TextEditor.prototype.attach = function(resource)
 	this.resource = resource;
 	this.setText(resource.data);
 
-	if(resource.encoding == "js")
+	if (resource.encoding == "js")
 	{
 		this.setLanguage("javascript");
 	}
-	else if(resource.encoding == "html")
+	else if (resource.encoding == "html")
 	{
 		this.setLanguage("htmlmixed");
 	}
-	else if(resource.encoding == "css")
+	else if (resource.encoding == "css")
 	{
 		this.setLanguage("css");
 	}
@@ -98,7 +98,7 @@ TextEditor.prototype.attach = function(resource)
 // Update attached script
 TextEditor.prototype.updateCode = function()
 {
-	if(this.resource !== null)
+	if (this.resource !== null)
 	{
 		this.resource.data = this.code.getValue();
 	}

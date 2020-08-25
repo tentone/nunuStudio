@@ -48,12 +48,12 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	// Webcam video update loop
 	function update()
 	{
-		if(video.readyState >= video.HAVE_CURRENT_DATA)
+		if (video.readyState >= video.HAVE_CURRENT_DATA)
 		{
 			self.needsUpdate = true;
 		}
 
-		if(!self.disposed)
+		if (!self.disposed)
 		{
 			requestAnimationFrame(update);
 		}
@@ -90,33 +90,31 @@ WebcamTexture.isTexture = true;
  */
 WebcamTexture.prototype.connect = function()
 {
-	var constrains = {
-		facingMode: (this.mode === WebcamTexture.USER) ?  "user" : {exact: "environment"}
-	};
+	var constrains = {facingMode: this.mode === WebcamTexture.USER ? "user" : {exact: "environment"}};
 
 	var self = this;
 	
-	if(navigator.webkitGetUserMedia !== undefined)
+	if (navigator.webkitGetUserMedia !== undefined)
 	{
 		navigator.getUserMedia = navigator.webkitGetUserMedia;
 	}
 	
-	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 	{
-		navigator.mediaDevices.getUserMedia({video:constrains}).then(function(stream)
+		navigator.mediaDevices.getUserMedia({video: constrains}).then(function(stream)
 		{
 			self.stream = stream;
 			self.image.srcObject = stream;
 			self.image.play();
 		})
-		.catch(function(error)
-		{
-			console.warn("nunuStudio: No webcam available");
-		});				
+			.catch(function(error)
+			{
+				console.warn("nunuStudio: No webcam available");
+			});				
 	}
-	else if(navigator.getUserMedia)
+	else if (navigator.getUserMedia)
 	{
-		navigator.getUserMedia({video:true}, function(stream)
+		navigator.getUserMedia({video: true}, function(stream)
 		{
 			self.stream = stream;
 			self.image.src = URL.createObjectURL(stream);
@@ -135,10 +133,10 @@ WebcamTexture.prototype.connect = function()
  */
 WebcamTexture.prototype.disconnect = function()
 {
-	if(this.stream !== null)
+	if (this.stream !== null)
 	{
 		var tracks = this.stream.getTracks();
-		for(var i = 0; i < tracks.length; i++)
+		for (var i = 0; i < tracks.length; i++)
 		{
 			tracks[i].stop();
 		}
@@ -157,7 +155,7 @@ WebcamTexture.prototype.dispose = function()
 	this.disconnect();
 	this.disposed = true;
 
-	if(!this.image.paused)
+	if (!this.image.paused)
 	{
 		this.image.pause();
 	}

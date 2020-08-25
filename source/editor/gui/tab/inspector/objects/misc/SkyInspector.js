@@ -106,7 +106,7 @@ function SkyInspector(parent, object)
 	{
 		// Check and set day time
 		var dayTime = self.dayTime.getValue();
-		if(dayTime < 0)
+		if (dayTime < 0)
 		{
 			dayTime = 0;
 			self.dayTime.setValue(dayTime);
@@ -114,7 +114,7 @@ function SkyInspector(parent, object)
 		Editor.addAction(new ChangeAction(self.object, "dayTime", dayTime));
 
 		// Check actual time
-		if(self.object.time > dayTime)
+		if (self.object.time > dayTime)
 		{
 			Editor.addAction(new ChangeAction(self.object, "time", dayTime));
 			self.time.setValue(dayTime);
@@ -136,12 +136,12 @@ function SkyInspector(parent, object)
 	{
 		var time = self.time.getValue();
 
-		if(time < 0)
+		if (time < 0)
 		{
 			time = 0;
 			self.time.setValue(time);
 		}
-		else if(time > self.object.dayTime)
+		else if (time > self.object.dayTime)
 		{
 			time = self.object.dayTime;
 			self.time.setValue(time);
@@ -204,7 +204,7 @@ function SkyInspector(parent, object)
 	this.form.add(this.shadowHeight);
 	this.form.nextRow();
 
-	for(var i = 5; i < 13; i++)
+	for (var i = 5; i < 13; i++)
 	{
 		var size = Math.pow(2, i);
 		this.shadowWidth.addValue(size.toString(), size);

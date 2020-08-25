@@ -1,3 +1,4 @@
+import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereBufferGeometry, TorusBufferGeometry, BoxBufferGeometry, TorusKnotBufferGeometry, ConeBufferGeometry, Quaternion, Euler} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
@@ -13,7 +14,6 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereBufferGeometry, TorusBufferGeometry, BoxBufferGeometry, TorusKnotBufferGeometry, ConeBufferGeometry, Quaternion, Euler} from "three";
 
 function MaterialEditor(parent, closeable, container, index)
 {
@@ -316,7 +316,7 @@ MaterialEditor.prototype = Object.create(TabComponent.prototype);
 MaterialEditor.prototype.attach = function(material, asset)
 {
 	// Material asset
-	if(asset !== undefined)
+	if (asset !== undefined)
 	{
 		this.asset = asset;
 	}
@@ -376,10 +376,10 @@ MaterialEditor.prototype.destroy = function()
 // Update object data
 MaterialEditor.prototype.updateMetadata = function()
 {
-	if(this.material !== null)
+	if (this.material !== null)
 	{
 		// Set name
-		if(this.material.name !== undefined)
+		if (this.material.name !== undefined)
 		{
 			this.setName(this.material.name);
 			this.name.setText(this.material.name);
@@ -388,7 +388,7 @@ MaterialEditor.prototype.updateMetadata = function()
 		this.scene.background = this.material.envMap !== null ? this.material.envMap : null;
 
 		// If not found close tab
-		if(Editor.program.materials[this.material.uuid] === undefined)
+		if (Editor.program.materials[this.material.uuid] === undefined)
 		{
 			this.close();
 		}
@@ -401,10 +401,10 @@ MaterialEditor.prototype.update = function()
 	this.mouse.update();
 
 	// Render Material
-	if(this.material !== null)
+	if (this.material !== null)
 	{
 		// If needs update file metadata
-		if(this.material.needsUpdate)
+		if (this.material.needsUpdate)
 		{
 			Editor.updateObjectsViewsGUI();
 			
@@ -418,13 +418,13 @@ MaterialEditor.prototype.update = function()
 	}
 
 	// Move material view
-	if(this.mouse.insideCanvas())
+	if (this.mouse.insideCanvas())
 	{
 		// Zoom
 		this.camera.position.z += this.camera.position.z * this.mouse.wheel * 0.001;
 
 		// Rotate object
-		if(this.mouse.buttonPressed(Mouse.LEFT))
+		if (this.mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new Quaternion();
 			delta.setFromEuler(new Euler(this.mouse.delta.y * 0.005, this.mouse.delta.x * 0.005, 0, 'XYZ'));

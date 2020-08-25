@@ -1,4 +1,8 @@
+import {Math as TMath, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass";
 import {RendererState} from "../renderer/RendererState.js";
+import {Scene} from "../objects/Scene.js";
 import {ShaderPass} from "./ShaderPass.js";
 import {RenderPass} from "./RenderPass.js";
 import {Pass} from "./Pass.js";
@@ -17,10 +21,6 @@ import {BloomPass} from "./pass/BloomPass.js";
 import {FXAAPass} from "./pass/antialiasing/FXAAPass.js";
 import {AfterimagePass} from "./pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
-import {Scene} from "../objects/Scene.js";
-import {Math as TMath, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
-import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
-import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass";
 
 /**
  * The effect composer is used to organize multiple post-processing passes.
@@ -127,9 +127,9 @@ EffectComposer.prototype.moveBack = function(pass)
 {
 	var index = this.passes.indexOf(pass);
 
-	if(index > 0)
+	if (index > 0)
 	{
-		for(var k = index; k !== index - 1 ; k -= 1)
+		for (var k = index; k !== index - 1 ; k -= 1)
 		{
 			this.passes[k] = this.passes[k - 1];
 		}
@@ -154,9 +154,9 @@ EffectComposer.prototype.moveForward = function(pass)
 {
 	var index = this.passes.indexOf(pass);
 
-	if(index !== -1 && index < this.passes.length - 1)
+	if (index !== -1 && index < this.passes.length - 1)
 	{
-		for(var k = index; k !== index + 1 ; k += 1)
+		for (var k = index; k !== index + 1 ; k += 1)
 		{
 			this.passes[k] = this.passes[k + 1];
 		}
@@ -177,7 +177,7 @@ EffectComposer.prototype.moveForward = function(pass)
 EffectComposer.prototype.removePass = function(pass)
 {
 	var index = this.passes.indexOf(pass);
-	if(index !== -1)
+	if (index !== -1)
 	{
 		this.passes.splice(index, 1);
 	}
@@ -209,20 +209,20 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 
 	this.rendererState.backup(renderer);
 
-	for(var i = 0; i < this.passes.length; i++)
+	for (var i = 0; i < this.passes.length; i++)
 	{
 		var pass = this.passes[i];
 
 		// Render pass if its enabled
-		if(pass.enabled)
+		if (pass.enabled)
 		{
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
 			// If rendered to screen stop here
-			if(pass.renderToScreen)
+			if (pass.renderToScreen)
 			{
 				// Copy writeBuffer to screen
-				if(pass.copyToScreen)
+				if (pass.copyToScreen)
 				{
 					this.copyPass.renderToScreen = true;
 					this.copyPass.render(renderer, this.readBuffer, this.writeBuffer, delta);
@@ -232,9 +232,9 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 
 			// Swap read and write buffers
-			if(pass.needsSwap)
+			if (pass.needsSwap)
 			{
-				if(maskActive)
+				if (maskActive)
 				{
 					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xFFFFFFff);
 					this.copyPass.renderToScreen = false;
@@ -246,13 +246,13 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 
 			// Check mask passes
-			if(MaskPass !== undefined)
+			if (MaskPass !== undefined)
 			{
-				if(pass instanceof MaskPass)
+				if (pass instanceof MaskPass)
 				{
 					maskActive = true;
 				}
-				else if(pass instanceof ClearMaskPass)
+				else if (pass instanceof ClearMaskPass)
 				{
 					maskActive = false;
 				}
@@ -283,7 +283,7 @@ EffectComposer.prototype.setSize = function(width, height)
 	this.writeBuffer.setSize(width, height);
 	this.readBuffer.setSize(width, height);
 
-	for(var i = 0; i < this.passes.length; i++)
+	for (var i = 0; i < this.passes.length; i++)
 	{
 		this.passes[i].setSize(width, height);
 	}
@@ -329,7 +329,7 @@ EffectComposer.prototype.toJSON = function()
 	data.uuid = this.uuid;
 	data.passes = [];
 	
-	for(var i = 0; i < this.passes.length; i++)
+	for (var i = 0; i < this.passes.length; i++)
 	{
 		data.passes.push(this.passes[i].toJSON());
 	}
@@ -350,16 +350,16 @@ EffectComposer.fromJSON = function(json)
 	var composer = new EffectComposer();
 	composer.uuid = json.uuid;
 
-	for(var i = 0; i < json.passes.length; i++)
+	for (var i = 0; i < json.passes.length; i++)
 	{	
 		var data = json.passes[i];
 		var pass = null;
 
-		if(data.type === "Render")
+		if (data.type === "Render")
 		{
 			pass = new RenderPass();
 		}
-		else if(data.type === "UnrealBloom")
+		else if (data.type === "UnrealBloom")
 		{
 			pass = new UnrealBloomPass();
 			pass.strength = data.strength;
@@ -367,16 +367,16 @@ EffectComposer.fromJSON = function(json)
 			pass.threshold = data.threshold;
 			pass.bloomFactors = data.bloomFactors;
 
-			for(var i = 0; i < pass.bloomTintColors.length; i++)
+			for (var i = 0; i < pass.bloomTintColors.length; i++)
 			{
 				pass.bloomTintColors[i].fromArray(data.bloomTintColors[i]);
 			}
 		}
-		else if(data.type === "Bloom")
+		else if (data.type === "Bloom")
 		{
 			pass = new BloomPass(data.strength, data.kernelSize, data.sigma, data.resolution);
 		}
-		else if(data.type === "SSAONOH")
+		else if (data.type === "SSAONOH")
 		{
 			pass = new SSAONOHPass();
 			pass.kernelRadius = data.kernelRadius;
@@ -384,7 +384,7 @@ EffectComposer.fromJSON = function(json)
 			pass.maxDistance = data.maxDistance;
 			pass.kernelSize = data.kernelSize;
 		}
-		else if(data.type === "SSAO")
+		else if (data.type === "SSAO")
 		{
 			pass = new SSAOPass();
 			pass.onlyAO = data.onlyAO;
@@ -392,19 +392,19 @@ EffectComposer.fromJSON = function(json)
 			pass.aoClamp = data.aoClamp;
 			pass.lumInfluence = data.lumInfluence;
 		}
-		else if(data.type === "Bokeh")
+		else if (data.type === "Bokeh")
 		{
 			pass = new BokehPass(data.focus, data.aperture, data.maxblur);
 		}
-		else if(data.type === "FXAA")
+		else if (data.type === "FXAA")
 		{
 			pass = new FXAAPass();
 		}
-		else if(data.type === "Copy")
+		else if (data.type === "Copy")
 		{
 			pass = new CopyPass();
 		}
-		else if(data.type === "Film")
+		else if (data.type === "Film")
 		{
 			pass = new FilmPass();
 			pass.grayscale = data.grayscale;
@@ -412,39 +412,39 @@ EffectComposer.fromJSON = function(json)
 			pass.scanlinesIntensity = data.scanlinesIntensity;
 			pass.scanlinesCount = data.scanlinesCount;
 		}
-		else if(data.type === "DotScreen")
+		else if (data.type === "DotScreen")
 		{
 			pass = new DotScreenPass();
 			pass.center.fromArray(data.center);
 			pass.angle = data.angle;
 			pass.scale = data.scale;
 		}
-		else if(data.type === "Colorify")
+		else if (data.type === "Colorify")
 		{
 			pass = new ColorifyPass();
 			pass.color.setHex(data.color);
 		}
-		else if(data.type === "Sobel")
+		else if (data.type === "Sobel")
 		{
 			pass = new SobelPass();
 		}
-		else if(data.type === "Technicolor")
+		else if (data.type === "Technicolor")
 		{
 			pass = new TechnicolorPass();
 		}
-		else if(data.type === "HueSaturation")
+		else if (data.type === "HueSaturation")
 		{
 			pass = new HueSaturationPass();
 			pass.hue = data.hue;
 			pass.saturation = data.saturation;
 		}
-		else if(data.type === "AdaptiveToneMapping")
+		else if (data.type === "AdaptiveToneMapping")
 		{
 			pass = new AdaptiveToneMappingPass(data.adaptive);
 			pass.tau = data.tau;
 			pass.minLuminance = data.minLuminance;
 		}
-		else if(data.type === "Afterimage")
+		else if (data.type === "Afterimage")
 		{
 			pass = new AfterimagePass();
 			pass.damp = data.damp;

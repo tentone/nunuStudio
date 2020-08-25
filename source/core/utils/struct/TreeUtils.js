@@ -10,7 +10,7 @@ import {Tree} from "./Tree.js";
  * @static
  * @class TreeUtils
  */
-function TreeUtils(){}
+function TreeUtils() {}
 
 /**
  * Flag used to indicate ADDED diff.
@@ -57,17 +57,17 @@ TreeUtils.DIFF_MOVED = 2;
 TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 {
 	// Differences array
-	if(diffs === undefined)
+	if (diffs === undefined)
 	{
 		diffs = [];
 	}
 
 	// Path to this tree point in positions
-	if(pathOldTree === undefined)
+	if (pathOldTree === undefined)
 	{
 		pathOldTree = [];
 	}
-	if(pathNewTree === undefined)
+	if (pathNewTree === undefined)
 	{
 		pathNewTree = [];
 	}
@@ -80,10 +80,10 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 
 	var i = 0, j = 0;
 	
-	while(i < oldLength && j < newLength)
+	while (i < oldLength && j < newLength)
 	{
 		// Different element
-		if(oldChildren[i].uuid !== newChildren[j].uuid)
+		if (oldChildren[i].uuid !== newChildren[j].uuid)
 		{
 			/*
 			// Check if elements were removed
@@ -123,7 +123,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 			}
 			*/
 			// Element removed
-			if((i + 1) < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
+			if (i + 1 < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
 			{
 				var from = pathOldTree.slice(0);
 				from.push(i);
@@ -132,7 +132,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				i++;
 			}
 			// Element added
-			else if((j + 1) < newLength && oldChildren[i].uuid === newChildren[j + 1].uuid)
+			else if (j + 1 < newLength && oldChildren[i].uuid === newChildren[j + 1].uuid)
 			{
 				var to = pathNewTree.slice(0);
 				to.push(j);
@@ -143,7 +143,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 		}
 
 		// If element is the same compare its children
-		if(oldChildren[i].uuid === newChildren[j].uuid)
+		if (oldChildren[i].uuid === newChildren[j].uuid)
 		{
 			var from = pathOldTree.slice(0);
 			from.push(i);
@@ -159,7 +159,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	// Remaining elements missing in A
-	while(i < oldLength)
+	while (i < oldLength)
 	{
 		var from = pathOldTree.slice(0);
 		from.push(i);
@@ -169,7 +169,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	// Extra elements added in B
-	while(j < newLength)
+	while (j < newLength)
 	{
 		var to = pathNewTree.slice(0);
 		to.push(j);
@@ -179,19 +179,19 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	// Check if some elements have removed and added status at same time
-	for(var i = 0; i < diffs.length; i++)
+	for (var i = 0; i < diffs.length; i++)
 	{
-		for(var j = 0; j < diffs.length; j++)
+		for (var j = 0; j < diffs.length; j++)
 		{
-			if(diffs[i].uuid === diffs[j].uuid)
+			if (diffs[i].uuid === diffs[j].uuid)
 			{
-				if(diffs[i].status === TreeUtils.DIFF_REMOVED && diffs[j].status === TreeUtils.DIFF_ADDED)
+				if (diffs[i].status === TreeUtils.DIFF_REMOVED && diffs[j].status === TreeUtils.DIFF_ADDED)
 				{
 					diffs[i].status = TreeUtils.DIFF_MOVED;
 					diffs[i].to = diffs[j].to;
 					diffs.splice(j, 1);
 				}
-				else if(diffs[j].status === TreeUtils.DIFF_REMOVED && diffs[i].status === TreeUtils.DIFF_ADDED)
+				else if (diffs[j].status === TreeUtils.DIFF_REMOVED && diffs[i].status === TreeUtils.DIFF_ADDED)
 				{
 					diffs[i].status = TreeUtils.DIFF_MOVED;
 					diffs[i].from = diffs[j].from;
@@ -215,19 +215,19 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
  */
 TreeUtils.print = function(tree, level)
 {
-	if(level === undefined)
+	if (level === undefined)
 	{
 		level = 1;
 	}
 
 	var space = "";
-	for(var i = level - 1; i > 0; i--)
+	for (var i = level - 1; i > 0; i--)
 	{
 		space += "----";
 	}
 	space += "--->";
 
-	for(var i = 0; i < tree.children.length; i++)
+	for (var i = 0; i < tree.children.length; i++)
 	{
 		console.log(space + tree.children[i].uuid);
 		TreeUtils.print(tree.children[i], level + 1);

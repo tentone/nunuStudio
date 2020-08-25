@@ -9,7 +9,8 @@ import {BufferGeometry, BufferAttribute, Vector3, Vector2} from "three";
  * @class CapsuleBufferGeometry
  * @constructor
  */
-function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, capsTopSegments, capsBottomSegments, thetaStart, thetaLength) {
+function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, capsTopSegments, capsBottomSegments, thetaStart, thetaLength) 
+{
 
 	BufferGeometry.call(this);
 
@@ -43,7 +44,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 	// Alpha is the angle such that Math.PI/2 - alpha is the cone part angle.
 	var alpha = Math.acos((radiusBottom-radiusTop)/height);
-	var eqRadii = (radiusTop-radiusBottom === 0);
+	var eqRadii = radiusTop-radiusBottom === 0;
 
 	var vertexCount = calculateVertexCount();
 	var indexCount = calculateIndexCount();
@@ -91,16 +92,16 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 		var cosAlpha = Math.cos(alpha);
 		var sinAlpha = Math.sin(alpha);
 
-		var cone_length = new Vector2(radiusTop * sinAlpha, halfHeight + radiusTop * cosAlpha).sub(new Vector2(radiusBottom * sinAlpha, -halfHeight + radiusBottom * cosAlpha)).length();
+		var coneLength = new Vector2(radiusTop * sinAlpha, halfHeight + radiusTop * cosAlpha).sub(new Vector2(radiusBottom * sinAlpha, -halfHeight + radiusBottom * cosAlpha)).length();
 
 		// Total length forv texture coord
-		var vl = radiusTop*alpha + cone_length + radiusBottom*(Math.PI/2-alpha);
+		var vl = radiusTop*alpha + coneLength + radiusBottom*(Math.PI/2-alpha);
 
 		var groupCount = 0;
 
 		// generate vertices, normals and uvs
 		var v = 0;
-		for(y = 0; y <= capsTopSegments; y++)
+		for (y = 0; y <= capsTopSegments; y++)
 		{
 			var indexRow = [];
 
@@ -114,7 +115,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 			// calculate the radius of the current row
 			var radius = cosA*radiusTop;
 
-			for(x = 0; x <= radialSegments; x++)
+			for (x = 0; x <= radialSegments; x++)
 			{
 				var u = x / radialSegments;
 
@@ -151,16 +152,18 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 		var cone_height = height + cosAlpha*radiusTop - cosAlpha*radiusBottom;
 		var slope = sinAlpha * (radiusBottom - radiusTop) / cone_height;
-		for(y = 1; y <= heightSegments; y++) {
+		for (y = 1; y <= heightSegments; y++) 
+		{
 
 			var indexRow = [];
 
-			v += cone_length/heightSegments;
+			v += coneLength/heightSegments;
 
 			// calculate the radius of the current row
 			var radius = sinAlpha * (y * (radiusBottom - radiusTop) / heightSegments + radiusTop);
 
-			for(x = 0; x <= radialSegments; x++) {
+			for (x = 0; x <= radialSegments; x++) 
+			{
 
 				var u = x / radialSegments;
 
@@ -195,11 +198,12 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 		}
 
-		for(y = 1; y <= capsBottomSegments; y++) {
+		for (y = 1; y <= capsBottomSegments; y++) 
+		{
 
 			var indexRow = [];
 
-			var a = (Math.PI/2 - alpha) - (Math.PI - alpha)*(y / capsBottomSegments);
+			var a = Math.PI/2 - alpha - (Math.PI - alpha)*(y / capsBottomSegments);
 
 			v += radiusBottom*alpha/capsBottomSegments;
 
@@ -209,7 +213,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 			// calculate the radius of the current row
 			var radius = cosA*radiusBottom;
 
-			for(x = 0; x <= radialSegments; x++)
+			for (x = 0; x <= radialSegments; x++)
 			{
 				var u = x / radialSegments;
 
@@ -243,16 +247,16 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 		}
 
 		// Generate indices
-		for(x = 0; x < radialSegments; x++)
+		for (x = 0; x < radialSegments; x++)
 		{
-			for(y = 0; y < capsTopSegments + heightSegments + capsBottomSegments; y++)
+			for (y = 0; y < capsTopSegments + heightSegments + capsBottomSegments; y++)
 			{
 
 				// We use the index array to access the correct indices
-				var i1 = indexArray[ y ][ x ];
-				var i2 = indexArray[ y + 1 ][ x ];
-				var i3 = indexArray[ y + 1 ][ x + 1 ];
-				var i4 = indexArray[ y ][ x + 1 ];
+				var i1 = indexArray[y][x];
+				var i2 = indexArray[y + 1][x];
+				var i3 = indexArray[y + 1][x + 1];
+				var i4 = indexArray[y][x + 1];
 
 				// Face one
 				indices.setX(indexOffset, i1); indexOffset++;

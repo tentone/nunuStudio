@@ -1,9 +1,9 @@
+import {Color} from "three";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ObjectInspector} from "../ObjectInspector.js";
 import {Editor} from "../../../../../Editor.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
 
 function HemisphereLightInspector(parent, object)
 {

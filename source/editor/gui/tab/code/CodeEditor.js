@@ -25,15 +25,15 @@ function CodeEditor(parent, closeable, container, index)
 	 * @type {CodeMirror}
 	 */
 	this.code = new CodeMirror(this.element,
-	{
-		value: "",
-		hintOptions:
+		{
+			value: "",
+			hintOptions:
 		{
 			hint: CodeMirror.hint.anyword,
 			completeSingle: false
 		},
-		gutters: ["CodeMirror-lint-markers"]
-	});
+			gutters: ["CodeMirror-lint-markers"]
+		});
 	
 	this.element.oncontextmenu = function(event)
 	{
@@ -75,7 +75,7 @@ function CodeEditor(parent, closeable, container, index)
 		context.addOption(Locale.copy, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 			}
@@ -83,7 +83,7 @@ function CodeEditor(parent, closeable, container, index)
 		context.addOption(Locale.cut, function()
 		{
 			var text = self.code.getSelection();
-			if(text !== "")
+			if (text !== "")
 			{
 				Editor.clipboard.set(text, "text");
 				self.code.replaceSelection("");
@@ -121,7 +121,7 @@ function CodeEditor(parent, closeable, container, index)
 	this.manager = new EventManager();
 	this.manager.addScrollEvent(this.element, function(event)
 	{
-		if(event.ctrlKey && event.deltaY !== 0)
+		if (event.ctrlKey && event.deltaY !== 0)
 		{
 			event.preventDefault();
 			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
@@ -168,7 +168,7 @@ CodeEditor.prototype.updateSettings = function()
  */
 CodeEditor.prototype.setFontSize = function(size)
 {
-	if(size < 5)
+	if (size < 5)
 	{
 		size = 5;
 	}

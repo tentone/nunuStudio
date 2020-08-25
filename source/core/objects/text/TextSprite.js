@@ -1,5 +1,5 @@
-import {CanvasSprite} from "../sprite/CanvasSprite.js";
 import {Math, Object3D} from "three";
+import {CanvasSprite} from "../sprite/CanvasSprite.js";
 
 /**
  * Text sprite is used to represent text as a sprite.
@@ -28,58 +28,58 @@ function TextSprite()
 	var font = "arial";
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * CSS Font style to be used.
 		 * 
 		 * @attribute font
 		 * @type {string}
 		 */
-		font:
+			font:
 		{
-			get: function(){return font;},
-			set: function(value){font = value; this.drawText();}
+			get: function() {return font;},
+			set: function(value) {font = value; this.drawText();}
 		},
 
-		/**
-		 * Horizontal text alignment can be
-		 *    - TextSprite.LEFT
-		 *    - TextSprite.RIGHT
-		 *    - TextSprite.CENTER
-		 *
-		 * @attribute align
-		 * @type {string}
-		 */
-		align:
+			/**
+			 * Horizontal text alignment can be
+			 *    - TextSprite.LEFT
+			 *    - TextSprite.RIGHT
+			 *    - TextSprite.CENTER
+			 *
+			 * @attribute align
+			 * @type {string}
+			 */
+			align:
 		{
-			get: function(){return align;},
-			set: function(value){align = value; this.drawText();}
+			get: function() {return align;},
+			set: function(value) {align = value; this.drawText();}
 		},
 
-		/**
-		 * CSS color of the text.
-		 * 
-		 * @attribute color
-		 * @type {string}
-		 */
-		color:
+			/**
+			 * CSS color of the text.
+			 * 
+			 * @attribute color
+			 * @type {string}
+			 */
+			color:
 		{
-			get: function(){return color;},
-			set: function(value){color = value; this.drawText();}
+			get: function() {return color;},
+			set: function(value) {color = value; this.drawText();}
 		},
 
-		/**
-		 * Text of this object.
-		 * 
-		 * @attribute text
-		 * @type {string}
-		 */
-		text:
+			/**
+			 * Text of this object.
+			 * 
+			 * @attribute text
+			 * @type {string}
+			 */
+			text:
 		{
-			get: function(){return text;},
+			get: function() {return text;},
 			set: function(value)
 			{
-				if(value !== text)
+				if (value !== text)
 				{
 					text = value;
 					this.drawText();
@@ -87,56 +87,56 @@ function TextSprite()
 			}
 		},
 
-		/**
-		 * Indicates if the text has an outline border.
-		 * 
-		 * @attribute outline
-		 * @type {boolean}
-		 */
-		outline:
+			/**
+			 * Indicates if the text has an outline border.
+			 * 
+			 * @attribute outline
+			 * @type {boolean}
+			 */
+			outline:
 		{
-			get: function(){return outline;},
-			set: function(value){outline = value; this.drawText();}
+			get: function() {return outline;},
+			set: function(value) {outline = value; this.drawText();}
 		},
 
-		/**
-		 * CSS color of the outline.
-		 * 
-		 * @attribute outlineColor
-		 * @type {string}
-		 */
-		outlineColor:
+			/**
+			 * CSS color of the outline.
+			 * 
+			 * @attribute outlineColor
+			 * @type {string}
+			 */
+			outlineColor:
 		{
-			get: function(){return outlineColor;},
-			set: function(value){outlineColor = value; this.drawText();}
+			get: function() {return outlineColor;},
+			set: function(value) {outlineColor = value; this.drawText();}
 		},
 
-		/**
-		 * Width of the text outline.
-		 * 
-		 * @attribute outlineWidth
-		 * @type {number}
-		 */
-		outlineWidth:
+			/**
+			 * Width of the text outline.
+			 * 
+			 * @attribute outlineWidth
+			 * @type {number}
+			 */
+			outlineWidth:
 		{
-			get: function(){return outlineWidth;},
-			set: function(value){outlineWidth = value; this.drawText();}
+			get: function() {return outlineWidth;},
+			set: function(value) {outlineWidth = value; this.drawText();}
 		},
 
-		/**
-		 * Vertical resolution of the texture created from canvas used.
-		 * 
-		 * Should always be a npot of 2.
-		 *
-		 * @attribute resolution
-		 * @type {number}
-		 */
-		resolution:
+			/**
+			 * Vertical resolution of the texture created from canvas used.
+			 * 
+			 * Should always be a npot of 2.
+			 *
+			 * @attribute resolution
+			 * @type {number}
+			 */
+			resolution:
 		{
-			get: function(){return resolution;},
-			set: function(value){resolution = value; this.drawText();}
+			get: function() {return resolution;},
+			set: function(value) {resolution = value; this.drawText();}
 		}
-	});
+		});
 
 	this.text = "text";
 }
@@ -192,7 +192,7 @@ TextSprite.prototype.drawText = function()
 
 	context.clearRect(0, 0, width, height);
 	
-	if(this.text.length === 0)
+	if (this.text.length === 0)
 	{
 		return;
 	}
@@ -203,7 +203,7 @@ TextSprite.prototype.drawText = function()
 	context.fillStyle = this.color;
 	context.fillText(this.text, width / 2, height / 2);
 	
-	if(this.outline === true)
+	if (this.outline === true)
 	{
 		context.lineWidth = this.outlineWidth;
 		context.strokeStyle = this.outlineColor;

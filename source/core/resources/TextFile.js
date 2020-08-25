@@ -14,8 +14,8 @@ function TextFile(data, encoding)
 	Resource.call(this, "text", "TextFile");
 
 	this.format = "string";
-	this.encoding = (encoding !== undefined) ? encoding : "txt";
-	this.data = (data !== undefined) ? data : "";
+	this.encoding = encoding !== undefined ? encoding : "txt";
+	this.data = data !== undefined ? data : "";
 }
 
 TextFile.prototype = Object.create(Resource.prototype);
@@ -34,9 +34,9 @@ TextFile.fileIsText = function(file)
 {
 	file = file.name.toLocaleLowerCase();
 
-	for(var i = 0; i < TextFile.extensions.length; i++)
+	for (var i = 0; i < TextFile.extensions.length; i++)
 	{
-		if(file.endsWith(TextFile.extensions[i]))
+		if (file.endsWith(TextFile.extensions[i]))
 		{
 			return true;
 		}
@@ -54,7 +54,7 @@ TextFile.fileIsText = function(file)
  */
 TextFile.prototype.toJSON = function(meta)
 {
-	if(meta.resources[this.uuid] !== undefined)
+	if (meta.resources[this.uuid] !== undefined)
 	{
 		return meta.resources[this.uuid];
 	}

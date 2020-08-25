@@ -21,10 +21,10 @@ function Button(parent)
 	 */
 	var disabled = false;
 	Object.defineProperty(this, "disabled",
-	{
-		get: function(){return disabled;},
-		set: function(value){this.setDisabled(value);}
-	});
+		{
+			get: function() {return disabled;},
+			set: function(value) {this.setDisabled(value);}
+		});
 
 	/**
 	 * Base style of the button shown normally.
@@ -57,7 +57,7 @@ function Button(parent)
 
 	this.addEvent("mouseenter", function()
 	{
-		if(!self.disabled)
+		if (!self.disabled)
 		{
 			self.setStyles(self.stylePointerOver);
 		}
@@ -65,7 +65,7 @@ function Button(parent)
 
 	this.addEvent("mouseleave", function()
 	{
-		if(!self.disabled)
+		if (!self.disabled)
 		{
 			self.setStyles(self.styleBase);
 		}
@@ -84,7 +84,7 @@ Button.prototype = Object.create(Component.prototype);
  */
 Button.prototype.updateDisabled = function()
 {
-	if(this.disabled)
+	if (this.disabled)
 	{
 		this.setStyles(this.styleDisabled);
 	}
@@ -104,17 +104,17 @@ Button.prototype.updateDisabled = function()
  */
 Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabled)
 {
-	if(styleBase !== undefined)
+	if (styleBase !== undefined)
 	{
 		this.styleBase = styleBase;
 	}
 
-	if(stylePointerOver !== undefined)
+	if (stylePointerOver !== undefined)
 	{
 		this.stylePointerOver = stylePointerOver;
 	}
 
-	if(styleDisabled !== undefined)
+	if (styleDisabled !== undefined)
 	{
 		this.styleDisabled = styleDisabled;
 	}

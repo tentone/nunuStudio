@@ -195,11 +195,11 @@ function OrbitControlsInspector(parent, object)
 		var object = self.object.center;
 
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(object, "x", center.x),
-			new ChangeAction(object, "y", center.y),
-			new ChangeAction(object, "z", center.z)
-		]));
+			[
+				new ChangeAction(object, "x", center.x),
+				new ChangeAction(object, "y", center.y),
+				new ChangeAction(object, "z", center.z)
+			]));
 	});
 	this.form.add(this.center);
 	this.form.nextRow();
@@ -215,10 +215,10 @@ function OrbitControlsInspector(parent, object)
 		var object = self.object.vector;
 
 		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(object, "x", vector.x),
-			new ChangeAction(object, "y", vector.y)
-		]));
+			[
+				new ChangeAction(object, "x", vector.x),
+				new ChangeAction(object, "y", vector.y)
+			]));
 	});
 	this.form.add(this.vector);
 	this.form.nextRow();

@@ -1,6 +1,6 @@
+import {ColorifyShader} from "three/examples/jsm/shaders/ColorifyShader";
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {ColorifyShader} from "three/examples/jsm/shaders/ColorifyShader";
 
 /**
  * Colorify pass can be used to colorify the scene.
@@ -16,13 +16,13 @@ function ColorifyPass()
 
 	var self = this;
 	Object.defineProperties(this,
-	{
-		color:
+		{
+			color:
 		{
 			get: function() {return this.uniforms["color"].value;},
 			set: function(value) {this.uniforms["color"].value = value;}
 		}
-	});
+		});
 }
 
 ColorifyPass.prototype = Object.create(ShaderPass.prototype);

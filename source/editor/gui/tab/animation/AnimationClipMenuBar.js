@@ -1,10 +1,10 @@
+import {LoopOnce, LoopRepeat, LoopPingPong} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Text} from "../../../components/Text.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {Component} from "../../../components/Component.js";
-import {LoopOnce, LoopRepeat, LoopPingPong} from "three";
 
 /**
  * Animation tab menu bar with options to set the properties of the animation clip.
@@ -107,5 +107,5 @@ AnimationClipMenuBar.prototype.updateAnimation = function()
 	this.enabled.setValue(this.animation.enabled);
 };
 
-AnimationClipMenuBar.prototype.updateInterface = function(){};
+AnimationClipMenuBar.prototype.updateInterface = function() {};
 export {AnimationClipMenuBar};

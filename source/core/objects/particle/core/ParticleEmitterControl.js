@@ -1,7 +1,7 @@
-import {ParticleEmitter} from "../ParticleEmitter.js";
-import {ShaderUtils} from "./ShaderUtils.js";
 import {Vector3, Color, Math as TMath} from "three";
+import {ParticleEmitter} from "../ParticleEmitter.js";
 import {ParticleDistributions} from "../ParticleDistributions.js";
+import {ShaderUtils} from "./ShaderUtils.js";
 
 /**
  * A map of options to configure an ParticleEmitterControl instance.
@@ -92,7 +92,7 @@ function ParticleEmitterControl(options)
 	options.wiggle = ShaderUtils.ensureTypedArg(options.wiggle, ShaderUtils.types.OBJECT, {});
 	options.maxAge = ShaderUtils.ensureTypedArg(options.maxAge, ShaderUtils.types.OBJECT, {});
 
-	if(options.onParticleSpawn)
+	if (options.onParticleSpawn)
 	{
 		console.warn("nunuStudio: onParticleSpawn has been removed. Please set properties directly to alter values at runtime.");
 	}
@@ -110,7 +110,7 @@ function ParticleEmitterControl(options)
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false),
 		_radius: ShaderUtils.ensureTypedArg(options.position.radius, ShaderUtils.types.NUMBER, 10),
 		_radiusScale: ShaderUtils.ensureInstanceOf(options.position.radiusScale, Vector3, new Vector3(1, 1, 1)),
-		_distributionClamp: ShaderUtils.ensureTypedArg(options.position.distributionClamp, ShaderUtils.types.NUMBER, 0),
+		_distributionClamp: ShaderUtils.ensureTypedArg(options.position.distributionClamp, ShaderUtils.types.NUMBER, 0)
 	};
 
 	this.velocity =
@@ -265,9 +265,9 @@ function ParticleEmitterControl(options)
 		angle: "angle"
 	};
 
-	for(var i in this.updateMap)
+	for (var i in this.updateMap)
 	{
-		if(this.updateMap.hasOwnProperty(i))
+		if (this.updateMap.hasOwnProperty(i))
 		{
 		  this.updateCounts[this.updateMap[i]] = 0.0;
 		  this.updateFlags[this.updateMap[i]] = false;
@@ -295,9 +295,9 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 {
 	var self = this;
 
-	for(var i in propObj)
+	for (var i in propObj)
 	{
-		if(propObj.hasOwnProperty(i))
+		if (propObj.hasOwnProperty(i))
 		{
 		  var name = i.replace("_", "");
 
@@ -305,10 +305,10 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 		  {
 			  get: (function(prop)
 			  {
-				return function()
-				{
-					return this[prop];
-				};
+						return function()
+						{
+							return this[prop];
+						};
 			  }(i)),
 
 			  set: (function(prop)
@@ -319,19 +319,19 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 						 prevValue = this[prop],
 						 length = ParticleEmitter.valueOverLifetimeLength;
 
-					 if(prop === "_rotationCenter")
+					 if (prop === "_rotationCenter")
 					 {
-						self.updateFlags.rotationCenter = true;
-						self.updateCounts.rotationCenter = 0.0;
+								self.updateFlags.rotationCenter = true;
+								self.updateCounts.rotationCenter = 0.0;
 					 }
-					 else if(prop === "_randomise")
+					 else if (prop === "_randomise")
 					 {
-						self.resetFlags[mapName] = value;
+								self.resetFlags[mapName] = value;
 					 }
 					 else
 					 {
-						self.updateFlags[mapName] = true;
-						self.updateCounts[mapName] = 0.0;
+								self.updateFlags[mapName] = true;
+								self.updateCounts[mapName] = 0.0;
 					 }
 
 					 self.group._updateDefines();
@@ -339,7 +339,7 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 					 this[prop] = value;
 
 					 // If the previous value was an array, then make sure the provided value is interpolated correctly.
-					 if(Array.isArray(prevValue))
+					 if (Array.isArray(prevValue))
 					 {
 						 ShaderUtils.ensureValueOverLifetimeCompliance(self[propName], length, length);
 					 }
@@ -355,7 +355,7 @@ ParticleEmitterControl.prototype._setBufferUpdateRanges = function(keys)
 	this.attributeKeys = keys;
 	this.attributeCount = keys.length;
 
-	for(var i = this.attributeCount - 1; i >= 0; --i)
+	for (var i = this.attributeCount - 1; i >= 0; --i)
 	{
 		this.bufferUpdateRanges[keys[i]] =
 		{
@@ -371,7 +371,7 @@ ParticleEmitterControl.prototype._calculatePPSValue = function(groupMaxAge)
 
 	// Calculate the particlesPerSecond value for this emitter.
 	// It's used when determining which particles should die and which should live.
-	if(this.duration)
+	if (this.duration)
 	{
 		this.particlesPerSecond = particleCount / (groupMaxAge < this.duration ? groupMaxAge : this.duration);
 	}
@@ -393,35 +393,35 @@ ParticleEmitterControl.prototype._assignValue = function(prop, index)
 {
 	switch (prop)
 	{
-		case "position":
-			this._assignPositionValue(index);
-			break;
+	case "position":
+		this._assignPositionValue(index);
+		break;
 
-		case "velocity":
-		case "acceleration":
-			this._assignForceValue(index, prop);
-			break;
+	case "velocity":
+	case "acceleration":
+		this._assignForceValue(index, prop);
+		break;
 
-		case "size":
-		case "opacity":
-			this._assignAbsLifetimeValue(index, prop);
-			break;
+	case "size":
+	case "opacity":
+		this._assignAbsLifetimeValue(index, prop);
+		break;
 
-		case "angle":
-			this._assignAngleValue(index);
-			break;
+	case "angle":
+		this._assignAngleValue(index);
+		break;
 
-		case "params":
-			this._assignParamsValue(index);
-			break;
+	case "params":
+		this._assignParamsValue(index);
+		break;
 
-		case "rotation":
-			this._assignRotationValue(index);
-			break;
+	case "rotation":
+		this._assignRotationValue(index);
+		break;
 
-		case "color":
-			this._assignColorValue(index);
-			break;
+	case "color":
+		this._assignColorValue(index);
+		break;
 	}
 };
 
@@ -436,15 +436,15 @@ ParticleEmitterControl.prototype._assignPositionValue = function(index)
 
 	switch (distribution)
 	{
-		case ParticleDistributions.BOX:
-			ShaderUtils.randomVector3(attr, index, value, spread, prop._spreadClamp);
-			break;
-		case ParticleDistributions.SPHERE:
-			ShaderUtils.randomVector3OnSphere(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x, prop._distributionClamp || this.particleCount);
-			break;
-		case ParticleDistributions.DISC:
-			ShaderUtils.randomVector3OnDisc(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x);
-			break;
+	case ParticleDistributions.BOX:
+		ShaderUtils.randomVector3(attr, index, value, spread, prop._spreadClamp);
+		break;
+	case ParticleDistributions.SPHERE:
+		ShaderUtils.randomVector3OnSphere(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x, prop._distributionClamp || this.particleCount);
+		break;
+	case ParticleDistributions.DISC:
+		ShaderUtils.randomVector3OnDisc(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x);
+		break;
 	}
 };
 
@@ -463,48 +463,48 @@ ParticleEmitterControl.prototype._assignForceValue = function(index, attrName)
 
 	switch (distribution)
 	{
-		case ParticleDistributions.BOX:
-			ShaderUtils.randomVector3(this.attributes[attrName], index, value, spread);
-			break;
+	case ParticleDistributions.BOX:
+		ShaderUtils.randomVector3(this.attributes[attrName], index, value, spread);
+		break;
 
-		case ParticleDistributions.SPHERE:
-			pos = this.attributes.position.typedArray.array;
-			i = index * 3;
+	case ParticleDistributions.SPHERE:
+		pos = this.attributes.position.typedArray.array;
+		i = index * 3;
 
-			// Ensure position values aren't zero, otherwise no force will be applied.
-			positionX = pos[i];
-			positionY = pos[i + 1];
-			positionZ = pos[i + 2];
+		// Ensure position values aren't zero, otherwise no force will be applied.
+		positionX = pos[i];
+		positionY = pos[i + 1];
+		positionZ = pos[i + 2];
 
-			ShaderUtils.randomDirectionVector3OnSphere(
-				this.attributes[attrName], index,
-				positionX, positionY, positionZ,
-				this.position._value,
-				prop._value.x,
-				prop._spread.x
-			);
-			break;
+		ShaderUtils.randomDirectionVector3OnSphere(
+			this.attributes[attrName], index,
+			positionX, positionY, positionZ,
+			this.position._value,
+			prop._value.x,
+			prop._spread.x
+		);
+		break;
 
-		case ParticleDistributions.DISC:
-			pos = this.attributes.position.typedArray.array;
-			i = index * 3;
+	case ParticleDistributions.DISC:
+		pos = this.attributes.position.typedArray.array;
+		i = index * 3;
 
-			// Ensure position values aren't zero, otherwise no force will be applied.
-			positionX = pos[i];
-			positionY = pos[i + 1];
-			positionZ = pos[i + 2];
+		// Ensure position values aren't zero, otherwise no force will be applied.
+		positionX = pos[i];
+		positionY = pos[i + 1];
+		positionZ = pos[i + 2];
 
-			ShaderUtils.randomDirectionVector3OnDisc(
-				this.attributes[attrName], index,
-				positionX, positionY, positionZ,
-				this.position._value,
-				prop._value.x,
-				prop._spread.x
-			);
-			break;
+		ShaderUtils.randomDirectionVector3OnDisc(
+			this.attributes[attrName], index,
+			positionX, positionY, positionZ,
+			this.position._value,
+			prop._value.x,
+			prop._spread.x
+		);
+		break;
 	}
 
-	if(attrName === "acceleration")
+	if (attrName === "acceleration")
 	{
 		var drag = ShaderUtils.clamp(ShaderUtils.randomFloat(this.drag._value, this.drag._spread), 0, 1);
 		this.attributes.acceleration.typedArray.array[index * 4 + 3] = drag;
@@ -518,7 +518,7 @@ ParticleEmitterControl.prototype._assignAbsLifetimeValue = function(index, propN
 	var utils = utils;
 	var value;
 
-	if(ShaderUtils.arrayValuesAreEqual(prop._value) && ShaderUtils.arrayValuesAreEqual(prop._spread))
+	if (ShaderUtils.arrayValuesAreEqual(prop._value) && ShaderUtils.arrayValuesAreEqual(prop._spread))
 	{
 		value = Math.abs(ShaderUtils.randomFloat(prop._value[0], prop._spread[0]));
 		array.setVec4Components(index, value, value, value, value);
@@ -541,7 +541,7 @@ ParticleEmitterControl.prototype._assignAngleValue = function(index)
 	var utils = utils;
 	var value;
 
-	if(ShaderUtils.arrayValuesAreEqual(prop._value) && ShaderUtils.arrayValuesAreEqual(prop._spread))
+	if (ShaderUtils.arrayValuesAreEqual(prop._value) && ShaderUtils.arrayValuesAreEqual(prop._spread))
 	{
 		value = ShaderUtils.randomFloat(prop._value[0], prop._spread[0]);
 		array.setVec4Components(index, value, value, value, value);
@@ -592,22 +592,22 @@ ParticleEmitterControl.prototype._resetParticle = function(index)
 	var key;
 	var updateFlag;
 
-	for(var i = this.attributeCount - 1; i >= 0; --i)
+	for (var i = this.attributeCount - 1; i >= 0; --i)
 	{
 		key = keys[i];
 		updateFlag = updateFlags[key];
 
-		if(resetFlags[key] === true || updateFlag === true)
+		if (resetFlags[key] === true || updateFlag === true)
 		{
 		  this._assignValue(key, index);
 		  this._updateAttributeUpdateRange(key, index);
 
-		  if(updateFlag === true && updateCounts[key] === this.particleCount)
+		  if (updateFlag === true && updateCounts[key] === this.particleCount)
 		  {
 			  updateFlags[key] = false;
 			  updateCounts[key] = 0.0;
 		  }
-		  else if(updateFlag == true)
+		  else if (updateFlag === true)
 		  {
 			  ++updateCounts[key];
 		  }
@@ -615,7 +615,8 @@ ParticleEmitterControl.prototype._resetParticle = function(index)
 	}
 };
 
-ParticleEmitterControl.prototype._updateAttributeUpdateRange = function(attr, i) {
+ParticleEmitterControl.prototype._updateAttributeUpdateRange = function(attr, i) 
+{
 	var ranges = this.bufferUpdateRanges[attr];
 
 	ranges.min = Math.min(i, ranges.min);
@@ -627,7 +628,7 @@ ParticleEmitterControl.prototype._resetBufferRanges = function()
 	var ranges = this.bufferUpdateRanges;
 	var keys = this.bufferUpdateKeys;
 
-	for(var i = this.bufferUpdateCount - 1; i >= 0; --i)
+	for (var i = this.bufferUpdateCount - 1; i >= 0; --i)
 	{
 		var key = keys[i];
 		ranges[key].min = Number.POSITIVE_INFINITY;
@@ -660,12 +661,12 @@ ParticleEmitterControl.prototype._incrementParticleCount = function()
 
 ParticleEmitterControl.prototype._checkParticleAges = function(start, end, params, dt)
 {
-	for(var i = end - 1, index, maxAge, age, alive; i >= start; --i)
+	for (var i = end - 1, index, maxAge, age, alive; i >= start; --i)
 	{
 		index = i * 4;
 		alive = params[index];
 
-		if(alive === 0.0)
+		if (alive === 0.0)
 		{
 		  continue;
 		}
@@ -674,11 +675,11 @@ ParticleEmitterControl.prototype._checkParticleAges = function(start, end, param
 		age = params[index + 1];
 		maxAge = params[index + 2];
 
-		if(this.direction === 1)
+		if (this.direction === 1)
 		{
 			age += dt;
 
-			if(age >= maxAge)
+			if (age >= maxAge)
 			{
 				age = 0.0;
 				alive = 0.0;
@@ -689,7 +690,7 @@ ParticleEmitterControl.prototype._checkParticleAges = function(start, end, param
 		{
 			age -= dt;
 
-			if(age <= 0.0)
+			if (age <= 0.0)
 			{
 				age = maxAge;
 				alive = 0.0;
@@ -708,12 +709,14 @@ ParticleEmitterControl.prototype._activateParticles = function(activationStart, 
 {
 	var direction = this.direction;
 
-	for(var i = activationStart, index, dtValue; i < activationEnd; ++i) {
+	for (var i = activationStart, index, dtValue; i < activationEnd; ++i) 
+	{
 		index = i * 4;
 
 		// Don't re-activate particles that aren't dead yet.
-		if(params[index] != 0.0 && this.particleCount !== 1) {
-		  continue;
+		if (params[index] !== 0.0 && this.particleCount !== 1) 
+		{
+			continue;
 		}
 
 		// Increment the active particle count.
@@ -728,7 +731,7 @@ ParticleEmitterControl.prototype._activateParticles = function(activationStart, 
 		// Move each particle being activated to its actual position in time.
 		//
 		// This stops particles being "clumped" together when frame rates are on the lower side of 60fps or not constant (a very real possibility!)
-		dtValue = dtPerParticle * (i - activationStart)
+		dtValue = dtPerParticle * (i - activationStart);
 		params[index + 1] = direction === -1 ? params[index + 2] - dtValue : dtValue;
 
 		this._updateAttributeUpdateRange("params", i);
@@ -745,12 +748,12 @@ ParticleEmitterControl.prototype._activateParticles = function(activationStart, 
  */
 ParticleEmitterControl.prototype.tick = function(dt)
 {
-	if(this.isStatic)
+	if (this.isStatic)
 	{
 		return;
 	}
 
-	if(this.paramsArray === null)
+	if (this.paramsArray === null)
 	{
 		this.paramsArray = this.attributes.params.typedArray.array;
 	}
@@ -768,14 +771,14 @@ ParticleEmitterControl.prototype.tick = function(dt)
 	this._checkParticleAges(start, end, params, dt);
 
 	// If the emitter is dead, reset the age of the emitter to zero, ready to go again if required
-	if(this.alive === false)
+	if (this.alive === false)
 	{
 		this.age = 0.0;
 		return;
 	}
 
 	// If the emitter has a specified lifetime and we"ve exceeded it, mark the emitter as dead.
-	if(this.duration !== null && this.age > this.duration)
+	if (this.duration !== null && this.age > this.duration)
 	{
 		this.alive = false;
 		this.age = 0.0;
@@ -783,7 +786,7 @@ ParticleEmitterControl.prototype.tick = function(dt)
 	}
 
 
-	var activationStart = this.particleCount === 1 ? activationIndex : (activationIndex | 0),
+	var activationStart = this.particleCount === 1 ? activationIndex : activationIndex | 0,
 		activationEnd = Math.min(activationStart + ppsDt, this.activationEnd),
 		activationCount = activationEnd - this.activationIndex | 0,
 		dtPerParticle = activationCount > 0 ? dt / activationCount : 0;
@@ -793,7 +796,7 @@ ParticleEmitterControl.prototype.tick = function(dt)
 	// Move the activation window forward, soldier.
 	this.activationIndex += ppsDt;
 
-	if(this.activationIndex > end)
+	if (this.activationIndex > end)
 	{
 		this.activationIndex = start;
 	}
@@ -814,14 +817,14 @@ ParticleEmitterControl.prototype.reset = function(force)
 	this.age = 0.0;
 	this.alive = false;
 
-	if(force === true)
+	if (force === true)
 	{
 		var start = this.attributeOffset,
 		  end = start + this.particleCount,
 		  array = this.paramsArray,
 		  attr = this.attributes.params.bufferAttribute;
 
-		for(var i = end - 1, index; i >= start; --i)
+		for (var i = end - 1, index; i >= start; --i)
 		{
 		  index = i * 4;
 
@@ -875,7 +878,7 @@ ParticleEmitterControl.prototype.disable = function()
  */
 ParticleEmitterControl.prototype.remove = function()
 {
-	if(this.group !== null)
+	if (this.group !== null)
 	{
 		this.group.removeEmitter(this);
 	}
@@ -943,13 +946,13 @@ ParticleEmitterControl.prototype.toJSON = function(meta)
 	// Color
 	data.color = {};
 	data.color.value = [];
-	for(var i = 0; i < this.color.value.length; i++)
+	for (var i = 0; i < this.color.value.length; i++)
 	{
 		data.color.value.push(this.color.value[i].getHex());
 	}
 
 	data.color.spread = [];
-	for(var i = 0; i < this.color.spread.length; i++)
+	for (var i = 0; i < this.color.spread.length; i++)
 	{
 		data.color.spread.push(this.color.spread[i].toArray());
 	}

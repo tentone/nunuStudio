@@ -1,9 +1,9 @@
+import {Vector2} from "three";
 import {DOMUtils} from "../../utils/DOMUtils.js";
 import {Text} from "../Text.js";
+import {Component} from "../Component.js";
 import {DropdownMenu} from "./DropdownMenu.js";
 import {ButtonMenu} from "./ButtonMenu.js";
-import {Component} from "../Component.js";
-import {Vector2} from "three";
 
 /**
  * Context menu element.
@@ -57,7 +57,7 @@ ContextMenu.prototype.setText = function(text)
  */
 ContextMenu.prototype.removeOption = function(index)
 {
-	if(index >= 0 && index < this.options.length)
+	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
@@ -117,7 +117,7 @@ ContextMenu.prototype.addMenu = function(name)
  */
 ContextMenu.prototype.updateOptions = function()
 {
-	for(var i = 0; i < this.options.length; i++)
+	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.copy(this.size);
 		this.options[i].position.set(0, this.size.y * i);
@@ -128,25 +128,25 @@ ContextMenu.prototype.updateOptions = function()
 ContextMenu.prototype.updateSize = function()
 {
 	this.element.style.width = this.size.x + "px";
-	this.element.style.height = (this.size.y * this.options.length) + "px";
+	this.element.style.height = this.size.y * this.options.length + "px";
 
 	this.updateOptions();
 };
 
 ContextMenu.prototype.updatePosition = function()
 {
-	this.element.style.top = (this.position.y - this.offset.y) + "px";
-	this.element.style.left = (this.position.x - this.offset.x) + "px";
+	this.element.style.top = this.position.y - this.offset.y + "px";
+	this.element.style.left = this.position.x - this.offset.x + "px";
 
 	// Check if its inside window
 	var out = DOMUtils.checkBorder(this.element);
-	if(out.x !== 0)
+	if (out.x !== 0)
 	{
-		this.element.style.left = (this.position.x + this.offset.x - this.size.x) + "px"; 
+		this.element.style.left = this.position.x + this.offset.x - this.size.x + "px"; 
 	}
-	if(out.y !== 0)
+	if (out.y !== 0)
 	{
-		this.element.style.top = (this.position.y - this.offset.y - out.y) + "px";
+		this.element.style.top = this.position.y - this.offset.y - out.y + "px";
 	}
 };
 

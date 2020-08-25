@@ -1,5 +1,5 @@
-import {Mesh} from "../mesh/Mesh.js";
 import {Geometry, Font, ExtrudeBufferGeometry, ShapeBufferGeometry, Object3D} from "three";
+import {Mesh} from "../mesh/Mesh.js";
 
 /**
  * Special mesh type used to draw 3D text.
@@ -97,19 +97,20 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 */
 	var text = text !== undefined ? text : "text";
 	Object.defineProperties(this,
-	{
-		text:
 		{
-			get: function(){return text;},
+			text:
+		{
+			get: function() {return text;},
 			set: function(value)
 			{
-				if(text !== value)
+				if (text !== value)
 				{
 					text = value;
 					this.updateGeometry();
-				}}
+				}
 			}
-	});
+		}
+		});
 	
 	this.updateGeometry();
 }
@@ -126,7 +127,7 @@ TextMesh.EMPTY_GEOMETRY = new Geometry();
  */
 TextMesh.prototype.setFont = function(font)
 {
-	if(this.font !== font)
+	if (this.font !== font)
 	{
 		this.font = font;
 		this.updateGeometry();
@@ -153,14 +154,14 @@ TextMesh.prototype.setText = function(text)
  */
 TextMesh.prototype.updateGeometry = function()
 {
-	if(this.font !== null)
+	if (this.font !== null)
 	{
-		if(this.geometry !== undefined)
+		if (this.geometry !== undefined)
 		{
 			this.geometry.dispose();
 		}
 
-		if(this.font.isFont !== true)
+		if (this.font.isFont !== true)
 		{
 			console.warn("nunuStudio: Font parameter is not an instance of Font.");
 			this.geometry = TextMesh.EMPTY_GEOMETRY;
@@ -169,16 +170,16 @@ TextMesh.prototype.updateGeometry = function()
 
 		var shapes = this.font.generateShapes(this.text, this.size);
 
-		if(this.extruded)
+		if (this.extruded)
 		{		
 			this.geometry = new ExtrudeBufferGeometry(shapes,
-			{
-				curveSegments: this.curveSegments,
-				depth: this.height,
-				bevelEnabled: this.bevel,
-				bevelSize: this.bevelSize,
-				bevelThickness: this.bevelThickness
-			});
+				{
+					curveSegments: this.curveSegments,
+					depth: this.height,
+					bevelEnabled: this.bevel,
+					bevelSize: this.bevelSize,
+					bevelThickness: this.bevelThickness
+				});
 			this.geometry.computeVertexNormals();
 		}
 		else

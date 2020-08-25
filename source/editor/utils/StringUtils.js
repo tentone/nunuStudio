@@ -3,7 +3,7 @@
  *
  * @class StringUtils
  */
-function StringUtils(){}
+function StringUtils() {}
 
 /** 
  * Change accents in strings to use non accented chars. Only works for lowercase strings.
@@ -19,16 +19,16 @@ StringUtils.accentFolding = function(str)
 {
 	return str.replace(/([àáâãäå])|([ç])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g, function(str, a, c, e, i, n, o, s, u, y, ae)
 	{
-		if(a){return "a";}
-		if(c){return "c";}
-		if(e){return "e";}
-		if(i){return "i";}
-		if(n){return "n";}
-		if(o){return "o";}
-		if(s){return "s";}
-		if(u){return "u";}
-		if(y){return "y";}
-		if(ae){return "ae";}
+		if (a) {return "a";}
+		if (c) {return "c";}
+		if (e) {return "e";}
+		if (i) {return "i";}
+		if (n) {return "n";}
+		if (o) {return "o";}
+		if (s) {return "s";}
+		if (u) {return "u";}
+		if (y) {return "y";}
+		if (ae) {return "ae";}
 	});
 };
 
@@ -44,7 +44,7 @@ StringUtils.accentFolding = function(str)
  */
 StringUtils.removePunctuation = function(str)
 {
-	return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g,"");
+	return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g, "");
 };
 
 export {StringUtils};

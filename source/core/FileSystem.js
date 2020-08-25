@@ -14,13 +14,13 @@ import {Nunu} from "./Nunu.js";
  * @class FileSystem
  * @static
  */
-function FileSystem(){}
+function FileSystem() {}
 
 try
 {
 	FileSystem.fs = window.require("fs");
 }
-catch(e){}
+catch (e) {}
 
 /**
  * Check if a file corresponds to a remote location.
@@ -48,19 +48,19 @@ FileSystem.isLocalFile = function(url)
  */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 {
-	if(sync === undefined)
+	if (sync === undefined)
 	{
 		sync = true;
 	}
 
 	// NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
-		if(sync === true)
+		if (sync === true)
 		{
 			var data = FileSystem.fs.readFileSync(fname, "utf8");
 
-			if(onLoad !== undefined)
+			if (onLoad !== undefined)
 			{
 				onLoad(data);
 			}
@@ -71,14 +71,14 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(error, data)
 			{
-				if(error !== null)
+				if (error !== null)
 				{
-					if(onError !== undefined)
+					if (onError !== undefined)
 					{
 						onError(error);
 					}
 				}
-				else if(onLoad !== undefined)
+				else if (onLoad !== undefined)
 				{
 					onLoad(data);
 				}
@@ -94,7 +94,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		file.overrideMimeType("text/plain");
 		file.open("GET", fname, !sync);
 		
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			file.onload = function()
 			{
@@ -102,11 +102,11 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 			};
 		}
 
-		if(onProgress !== undefined)
+		if (onProgress !== undefined)
 		{
 			file.onprogress = onProgress;
 		}
-		if(onError !== undefined)
+		if (onError !== undefined)
 		{
 			file.onerror = onError;
 		}
@@ -132,15 +132,15 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
  */
 FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onError)
 {
-	if(sync === undefined)
+	if (sync === undefined)
 	{
 		sync = true;
 	}
 
 	// NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
-		if(sync === true)
+		if (sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
 			return ArraybufferUtils.fromBuffer(buffer);
@@ -149,14 +149,14 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(error !== null)
+				if (error !== null)
 				{
-					if(onError !== undefined)
+					if (onError !== undefined)
 					{
 						onError(error);
 					}
 				}
-				else if(onLoad !== undefined)
+				else if (onLoad !== undefined)
 				{
 					onLoad(ArraybufferUtils.fromBuffer(buffer));
 				}
@@ -172,7 +172,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
 
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			file.onload = function()
 			{
@@ -180,11 +180,11 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 			};
 		}
 
-		if(onProgress !== undefined)
+		if (onProgress !== undefined)
 		{
 			file.onprogress = onProgress;
 		}
-		if(onError !== undefined)
+		if (onError !== undefined)
 		{
 			file.onerror = onError;
 		}
@@ -210,15 +210,15 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
  */
 FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 {
-	if(sync === undefined)
+	if (sync === undefined)
 	{
 		sync = true;
 	}
 	
 	// NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
-		if(sync === true)
+		if (sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
 			return new Buffer(buffer).toString("base64");
@@ -227,14 +227,14 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(error !== null)
+				if (error !== null)
 				{
-					if(onError !== undefined)
+					if (onError !== undefined)
 					{
 						onError(error);
 					}
 				}
-				else if(onLoad !== undefined)
+				else if (onLoad !== undefined)
 				{
 					onLoad(new Buffer(buffer).toString("base64"));
 				}
@@ -250,18 +250,18 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
 		
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{		
 			file.onload = function()
 			{
 				onLoad(Base64Utils.fromBinaryString(file.response));
 			};
 		}
-		if(onProgress !== undefined)
+		if (onProgress !== undefined)
 		{
 			file.onprogress = onProgress;
 		}
-		if(onError !== undefined)
+		if (onError !== undefined)
 		{
 			file.onerror = onError;
 		}
@@ -285,14 +285,14 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
  */
 FileSystem.writeFile = function(fname, data, sync, onFinish)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
-		if(FileSystem.fs.writeFileSync !== undefined)
+		if (FileSystem.fs.writeFileSync !== undefined)
 		{
-			if(sync !== false)
+			if (sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, data, "utf8");
-				if(onFinish !== undefined)
+				if (onFinish !== undefined)
 				{
 					onFinish();
 				}
@@ -311,7 +311,7 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
 	}
 	else
 	{
-		var blob = new Blob([data], {type:"octet/stream"});
+		var blob = new Blob([data], {type: "octet/stream"});
 
 		var download = document.createElement("a");
 		download.download = fname;
@@ -324,7 +324,7 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
 		document.body.appendChild(download);
 		download.click();
 
-		if(onFinish !== undefined)
+		if (onFinish !== undefined)
 		{
 			onFinish();
 		}
@@ -344,17 +344,17 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
  */
 FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		var buffer = Buffer.from(Base64Utils.removeHeader(data), "base64");
 
-		if(FileSystem.fs.writeFile !== undefined)
+		if (FileSystem.fs.writeFile !== undefined)
 		{
-			if(sync !== false)
+			if (sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, buffer);
 
-				if(onFinish !== undefined)
+				if (onFinish !== undefined)
 				{
 					onFinish();
 				}
@@ -387,7 +387,7 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 		document.body.appendChild(download);
 		download.click();
 
-		if(onFinish !== undefined)
+		if (onFinish !== undefined)
 		{
 			onFinish();
 		}
@@ -407,17 +407,17 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
  */
 FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 {	
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		var buffer = BufferUtils.fromArrayBuffer(data);
 
-		if(FileSystem.fs.writeFileSync !== undefined)
+		if (FileSystem.fs.writeFileSync !== undefined)
 		{
-			if(sync !== false)
+			if (sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, buffer);
 
-				if(onFinish !== undefined)
+				if (onFinish !== undefined)
 				{
 					onFinish();
 				}
@@ -449,7 +449,7 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 		document.body.appendChild(download);
 		download.click();
 		
-		if(onFinish !== undefined)
+		if (onFinish !== undefined)
 		{
 			onFinish();
 		}
@@ -467,11 +467,11 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
  */
 FileSystem.chooseFileWrite = function(onLoad, filter)
 {
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			if (files.length > 0)
 			{
 				onLoad(files[0].path);
 			}
@@ -504,19 +504,19 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 	chooser.style.display = "none";
 	document.body.appendChild(chooser);
 
-	if(filter !== undefined)
+	if (filter !== undefined)
 	{
 		chooser.accept = filter;
 	}
 
-	if(multiFile === true)
+	if (multiFile === true)
 	{
 		chooser.multiple = true;
 	}
 
 	chooser.onchange = function()
 	{	
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			onLoad(chooser.files);
 		}
@@ -524,9 +524,9 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 		document.body.removeChild(chooser);
 	};
 
-	if(saveas !== undefined)
+	if (saveas !== undefined)
 	{
-		chooser.nwsaveas = (saveas !== true) ? saveas : "file";
+		chooser.nwsaveas = saveas !== true ? saveas : "file";
 	}
 	
 	chooser.click();
@@ -545,14 +545,14 @@ FileSystem.chooseFileName = function(onLoad, saveas, name)
 {
 	var fname = prompt("Save As", name !== undefined ? name : "file");
 	
-	if(fname !== null)
+	if (fname !== null)
 	{
-		if(saveas !== undefined && !fname.endsWith(saveas))
+		if (saveas !== undefined && !fname.endsWith(saveas))
 		{
 			fname += saveas;
 		}
 		
-		if(onLoad !== undefined)
+		if (onLoad !== undefined)
 		{
 			onLoad(fname);
 		}
@@ -570,9 +570,9 @@ FileSystem.chooseFileName = function(onLoad, saveas, name)
  */
 FileSystem.copyFile = function(src, dst)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
-		if(FileSystem.fs.copyFileSync !== undefined)
+		if (FileSystem.fs.copyFileSync !== undefined)
 		{
 			FileSystem.fs.copyFileSync(src, dst);
 		}
@@ -596,7 +596,7 @@ FileSystem.copyFile = function(src, dst)
  */
 FileSystem.makeDirectory = function(dir)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		dir.replace(new RegExp("/", 'g'), "\\");
 		FileSystem.fs.mkdirSync(dir, {recursive: true});
@@ -613,14 +613,14 @@ FileSystem.makeDirectory = function(dir)
  */
 FileSystem.getFilesDirectory = function(dir)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		try
 		{
 			dir.replace(new RegExp("/", 'g'), "\\");
 			return FileSystem.fs.readdirSync(dir);
 		}
-		catch(e)
+		catch (e)
 		{
 			return [];
 		}
@@ -639,15 +639,15 @@ FileSystem.getFilesDirectory = function(dir)
  */
 FileSystem.deleteFolder = function(path)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
-		if(FileSystem.fs.existsSync(path))
+		if (FileSystem.fs.existsSync(path))
 		{
 			FileSystem.fs.readdirSync(path).forEach(function(file)
 			{
 				var curPath = path + "/" + file;
 
-				if(FileSystem.fs.lstatSync(curPath).isDirectory())
+				if (FileSystem.fs.lstatSync(curPath).isDirectory())
 				{
 					FileSystem.deleteFolder(curPath);
 				}
@@ -673,7 +673,7 @@ FileSystem.deleteFolder = function(path)
  */
 FileSystem.copyFolder = function(src, dst)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		src.replace(new RegExp("/", 'g'), "\\");
 		dst.replace(new RegExp("/", 'g'), "\\");
@@ -681,19 +681,19 @@ FileSystem.copyFolder = function(src, dst)
 		FileSystem.makeDirectory(dst);
 		var files = FileSystem.fs.readdirSync(src);
 
-		for(var i = 0; i < files.length; i++)
+		for (var i = 0; i < files.length; i++)
 		{
 			var source = src + "\\" + files[i];
 			var destiny = dst + "\\" + files[i];
 			var current = FileSystem.fs.statSync(source);
 			
 			// Directory
-			if(current.isDirectory())
+			if (current.isDirectory())
 			{
 				FileSystem.copyFolder(source, destiny);
 			}
 			// Symbolic link
-			else if(current.isSymbolicLink())
+			else if (current.isSymbolicLink())
 			{
 				FileSystem.fs.symlinkSync(FileSystem.fs.readlinkSync(source), destiny);
 			}
@@ -717,7 +717,7 @@ FileSystem.copyFolder = function(src, dst)
  */
 FileSystem.fileExists = function(file)
 {
-	if(FileSystem.fs !== undefined)
+	if (FileSystem.fs !== undefined)
 	{
 		file.replace(new RegExp("/", 'g'), "\\");
 
@@ -738,9 +738,9 @@ FileSystem.fileExists = function(file)
  */
 FileSystem.getFileName = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file instanceof File)
+		if (file instanceof File)
 		{
 			file = file.name;
 		}
@@ -748,7 +748,7 @@ FileSystem.getFileName = function(file)
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
-		return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
+		return file.substring(a > b ? a + 1 : b + 1, file.lastIndexOf("."));
 	}
 	
 	return "";
@@ -765,9 +765,9 @@ FileSystem.getFileName = function(file)
  */
 FileSystem.getFileNameWithExtension = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file instanceof File)
+		if (file instanceof File)
 		{
 			file = file.name;
 		}
@@ -775,7 +775,7 @@ FileSystem.getFileNameWithExtension = function(file)
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
-		return file.substring((a > b) ? (a + 1) : (b + 1), file.length);
+		return file.substring(a > b ? a + 1 : b + 1, file.length);
 	}
 	
 	return "";
@@ -792,9 +792,9 @@ FileSystem.getFileNameWithExtension = function(file)
  */
 FileSystem.getNameWithoutExtension = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file instanceof File)
+		if (file instanceof File)
 		{
 			file = file.name;
 		}
@@ -816,9 +816,9 @@ FileSystem.getNameWithoutExtension = function(file)
  */
 FileSystem.getFilePath = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file instanceof File)
+		if (file instanceof File)
 		{
 			file = file.name;
 		}
@@ -826,7 +826,7 @@ FileSystem.getFilePath = function(file)
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
-		return file.substring(0, (a > b) ? (a + 1) : (b + 1));
+		return file.substring(0, a > b ? a + 1 : b + 1);
 	}
 
 	return "";
@@ -843,9 +843,9 @@ FileSystem.getFilePath = function(file)
  */
 FileSystem.getFileExtension = function(file)
 {	
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file instanceof File)
+		if (file instanceof File)
 		{
 			file = file.name;
 		}

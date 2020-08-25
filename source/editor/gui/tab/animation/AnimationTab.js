@@ -1,7 +1,7 @@
+import {Clock, VectorKeyframeTrack, AnimationClip, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {EventManager} from "../../../../core/utils/EventManager.js";
 import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
-import {AnimationClipTrack} from "./AnimationClipTrack.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {Text} from "../../../components/Text.js";
@@ -10,7 +10,7 @@ import {Slider} from "../../../components/input/Slider.js";
 import {Division} from "../../../components/Division.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
-import {Clock, VectorKeyframeTrack, AnimationClip, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
+import {AnimationClipTrack} from "./AnimationClipTrack.js";
 
 /**
  * The animation tab is used to display and edit object animations timelines.
@@ -58,13 +58,13 @@ function AnimationTab(parent, closeable, container, index)
 	this.add = new ButtonText(this.bar);
 	this.add.position.set(0, 0);
 	this.add.size.set(100, this.bar.size.y);
-	this.add.setText(Locale.add)
+	this.add.setText(Locale.add);
 	this.add.updateInterface();
 	this.add.setOnClick(function()
 	{
-		if(self.object !== null)
+		if (self.object !== null)
 		{
-			if(self.object.animations === undefined)
+			if (self.object.animations === undefined)
 			{
 				self.object.animations = [];
 			}
@@ -72,7 +72,7 @@ function AnimationTab(parent, closeable, container, index)
 			var clip = new AnimationClip(Locale.animation + self.object.animations.length, 3, []);
 			
 			// Object 3D
-			if(self.object.isObject3D)
+			if (self.object.isObject3D)
 			{
 				var position = new VectorKeyframeTrack(".position", [0], self.object.position.toArray());
 				position.setInterpolation(InterpolateLinear);
@@ -95,9 +95,9 @@ function AnimationTab(parent, closeable, container, index)
 				clip.tracks.push(visible);
 			}
 			// Material
-			else if(self.object.isMaterial)
+			else if (self.object.isMaterial)
 			{
-				if(self.object.color !== undefined)
+				if (self.object.color !== undefined)
 				{
 					var color = new ColorKeyframeTrack(".color", [0], [self.object.color]);
 					color.setInterpolation(InterpolateLinear);
@@ -123,17 +123,17 @@ function AnimationTab(parent, closeable, container, index)
 	this.play = new ButtonText(this.bar);
 	this.play.position.set(100, 0);
 	this.play.size.set(100, this.bar.size.y);
-	this.play.setText(Locale.play)
+	this.play.setText(Locale.play);
 	this.play.updateInterface();
 	this.play.setOnClick(function()
 	{
-		if(self.mixer == null)
+		if (self.mixer == null)
 		{
 			Editor.alert("No animation found!");
 			return;
 		}
 
-		if(self.mixer.playing)
+		if (self.mixer.playing)
 		{
 			self.mixer.pause();
 			self.play.setText(Locale.play);
@@ -152,7 +152,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setOnClick(function()
 	{
-		if(self.mixer == null)
+		if (self.mixer == null)
 		{
 			Editor.alert("No animation playing!");
 			return;
@@ -274,7 +274,7 @@ AnimationTab.prototype.attach = function(object)
 {
 	this.object = object;
 
-	if(this.object !== null)
+	if (this.object !== null)
 	{
 		this.createAnimationMixer();
 		this.createTimeline();
@@ -299,7 +299,7 @@ AnimationTab.prototype.deactivate = function()
 {
 	TabComponent.prototype.deactivate.call(this);
 
-	if(this.mixer !== null && this.mixer.playing)
+	if (this.mixer !== null && this.mixer.playing)
 	{
 		this.play.setText(Locale.play);
 		this.mixer.stop();
@@ -318,7 +318,7 @@ AnimationTab.prototype.updateSelection = function()
  */
 AnimationTab.prototype.clearAnimationMixer = function()
 {
-	if(this.mixer !== null)
+	if (this.mixer !== null)
 	{
 		this.play.setText(Locale.play);
 		this.mixer.stop();
@@ -339,9 +339,9 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 	var time = 0;
 
 	// Remove old mixer
-	if(this.mixer !== null)
+	if (this.mixer !== null)
 	{
-		if(keepTime)
+		if (keepTime)
 		{
 			time = this.mixer.time;
 		}
@@ -350,7 +350,7 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 	}
 
 	// Check if the object has animations
-	if(this.object !== null && this.object.animations !== undefined)
+	if (this.object !== null && this.object.animations !== undefined)
 	{
 		this.mixer = new AnimationMixer(this.object);
 		this.mixer.createActions(this.object.animations);
@@ -360,17 +360,17 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 
 AnimationTab.prototype.update = function()
 {
-	if(this.mixer !== null)
+	if (this.mixer !== null)
 	{
-		for(var i = 0; i < this.mixer._actions.length; i++)
+		for (var i = 0; i < this.mixer._actions.length; i++)
 		{
-			this.animations[i].seek.style.left = (this.mixer._actions[i].time * this.zoom) + "px";
+			this.animations[i].seek.style.left = this.mixer._actions[i].time * this.zoom + "px";
 		}
 
 		this.mixer.update(this.clock.getDelta());
 
 		// Update object panel when playing
-		if(this.mixer.playing)
+		if (this.mixer.playing)
 		{
 			Editor.gui.inspector.updateValues();
 		}
@@ -398,11 +398,11 @@ AnimationTab.prototype.createTimeline = function()
 	this.clearTimeline();
 	this.animations = [];
 
-	if(this.object !== null && this.object.animations !== undefined)
+	if (this.object !== null && this.object.animations !== undefined)
 	{
 		var animations = this.object.animations;
 
-		for(var i = 0; i < animations.length; i++)
+		for (var i = 0; i < animations.length; i++)
 		{
 			this.animations.push(new AnimationClipTrack(this, animations[i]));
 		}
@@ -422,37 +422,37 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 {
 	var attributes = track.name.split(".");
 
-	for(var i = 0; i < attributes.length; i++)
+	for (var i = 0; i < attributes.length; i++)
 	{
-		if(attributes !== "")
+		if (attributes !== "")
 		{
 			var newValue = value[attributes[i]];
 			
-			if(newValue !== undefined)
+			if (newValue !== undefined)
 			{
 				value = newValue;
 			}
 		}
 	}
 
-	value = (value.toArray !== undefined) ? value.toArray() : [value];
+	value = value.toArray !== undefined ? value.toArray() : [value];
 
 	// Check if there is already a keyframe with same time
-	for(var i = 0; i < track.times.length; i++)
+	for (var i = 0; i < track.times.length; i++)
 	{
-		if(track.times[i] === this.mixer.time)
+		if (track.times[i] === this.mixer.time)
 		{
 			break;
 		}
 	}
 
 	// If there is already a keyframe with time update values
-	if(i < track.times.length)
+	if (i < track.times.length)
 	{
 		var valueSize = track.getValueSize();
 		var index = i * valueSize;
 
-		for(var i = 0; i < valueSize; i++)
+		for (var i = 0; i < valueSize; i++)
 		{
 			track.values[index] = value[i];
 			index++;
@@ -462,14 +462,14 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 	else
 	{
 		var times = [];
-		for(var i = 0; i < track.times.length; i++)
+		for (var i = 0; i < track.times.length; i++)
 		{
 			times.push(track.times[i]);
 		}
 		times.push(this.mixer.time);
 
 		var values = [];
-		for(var i = 0; i < track.values.length; i++)
+		for (var i = 0; i < track.values.length; i++)
 		{
 			values.push(track.values[i]);
 		}
@@ -484,7 +484,7 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 
 AnimationTab.prototype.updateInterface = function()
 {
-	if(this.visible)
+	if (this.visible)
 	{
 		// Timeline
 		this.timeline.position.set(0, this.bar.size.y);

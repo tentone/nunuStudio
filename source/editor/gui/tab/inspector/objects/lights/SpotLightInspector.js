@@ -1,3 +1,4 @@
+import {Color} from "three";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ObjectInspector} from "../ObjectInspector.js";
@@ -6,7 +7,6 @@ import {Editor} from "../../../../../Editor.js";
 import {Slider} from "../../../../../components/input/Slider.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Color} from "three";
 
 function SpotLightInspector(parent, object)
 {

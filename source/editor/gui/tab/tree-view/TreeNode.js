@@ -1,3 +1,4 @@
+import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {PhysicsGenerator} from "../../../../core/utils/PhysicsGenerator.js";
 import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
@@ -7,7 +8,7 @@ import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
-import {Group} from"../../../../core/objects/misc/Group.js";
+import {Group} from "../../../../core/objects/misc/Group.js";
 import {LightProbe} from "../../../../core/objects/lights/LightProbe.js";
 import {ObjectLoader} from "../../../../core/loaders/ObjectLoader.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
@@ -28,7 +29,6 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
 import {NodeScript} from "../../../../core/Main.js";
 import {NodeEditor} from "../node-editor/NodeEditor.js";
 
@@ -129,7 +129,7 @@ function TreeNode(container)
 
 	this.element.onmouseenter = function()
 	{
-		if(!self.selected)
+		if (!self.selected)
 		{
 			self.styleMouseOver();
 		}
@@ -137,7 +137,7 @@ function TreeNode(container)
 
 	this.element.onmouseleave = function()
 	{
-		if(!self.selected)
+		if (!self.selected)
 		{
 			self.styleNormal();
 		}
@@ -145,7 +145,7 @@ function TreeNode(container)
 
 	this.element.ondragstart = function(event)
 	{
-		if(!self.object.locked)
+		if (!self.object.locked)
 		{
 			event.dataTransfer.setData("uuid", self.object.uuid);
 			DragBuffer.push(self.object);
@@ -159,7 +159,7 @@ function TreeNode(container)
 		dragState = TreeNode.NONE;
 		self.clearBorder();
 
-		if(!self.object.locked)
+		if (!self.object.locked)
 		{
 			DragBuffer.pop(self.object.uuid);
 		}
@@ -175,7 +175,7 @@ function TreeNode(container)
 
 	this.element.oncontextmenu = function(event)
 	{
-		if(!self.object.locked)
+		if (!self.object.locked)
 		{
 			// Scene and program flags
 			var isProgram = self.object instanceof Program;
@@ -187,32 +187,32 @@ function TreeNode(container)
 			context.position.set(event.clientX, event.clientY);
 			
 			// Open editor
-			if(isScene)
+			if (isScene)
 			{
 				context.addOption(Locale.sceneEditor, openSceneTab);
 			}
-			else if(isProgram)
+			else if (isProgram)
 			{
 				context.addOption(Locale.createScene, function()
 				{
 					Editor.addDefaultScene();
 				});			
 			}
-			else if(self.object.isObject3D === true)
+			else if (self.object.isObject3D === true)
 			{
 				context.addOption(Locale.objectEditor, openSceneTab);
 
-				if(self.object instanceof Script)
+				if (self.object instanceof Script)
 				{
 					context.addOption(Locale.scriptEditor, openScriptTab);
 				}
-				else if(self.object instanceof ParticleEmitter)
+				else if (self.object instanceof ParticleEmitter)
 				{
 					context.addOption(Locale.particleEditor, openParticleTab);
 				}
 			}
 	
-			if(self.object instanceof LightProbe)
+			if (self.object instanceof LightProbe)
 			{
 				context.addOption(Locale.calculateProbe, function()
 				{
@@ -230,21 +230,21 @@ function TreeNode(container)
 				var parent = self.object.parent;
 				var found = false;
 
-				for(var i = 0; i < Editor.selection.length; i++)
+				for (var i = 0; i < Editor.selection.length; i++)
 				{
-					if(Editor.selection[i] instanceof Object3D)
+					if (Editor.selection[i] instanceof Object3D)
 					{
 						actions.push(new RemoveAction(Editor.selection[i]));
 						group.add(Editor.selection[i]);
 
-						if(Editor.selection[i] === self.object)
+						if (Editor.selection[i] === self.object)
 						{
 							found = true;
 						}
 					}
 				}
 
-				if(!found)
+				if (!found)
 				{
 					actions.push(new RemoveAction(self.object));
 					group.add(self.object);
@@ -267,7 +267,7 @@ function TreeNode(container)
 			});
 
 			// Delete
-			if(!isProgram)
+			if (!isProgram)
 			{
 				context.addOption(Locale.delete, function()
 				{
@@ -276,10 +276,10 @@ function TreeNode(container)
 			}
 
 			// Mesh specific stuff
-			if(self.object instanceof Mesh || self.object instanceof SkinnedMesh || self.object instanceof InstancedMesh)
+			if (self.object instanceof Mesh || self.object instanceof SkinnedMesh || self.object instanceof InstancedMesh)
 			{
 				// If mesh has a geometry attached
-				if(self.object.geometry !== undefined)
+				if (self.object.geometry !== undefined)
 				{
 					// Generate normals for the attached geometry
 					context.addOption(Locale.computeNormals, function()
@@ -306,7 +306,7 @@ function TreeNode(container)
 			}
 
 			// Convert mesh to instanced mesh
-			if(self.object instanceof Mesh && self.object.geometry !== undefined)
+			if (self.object instanceof Mesh && self.object.geometry !== undefined)
 			{
 				context.addOption(Locale.toInstancedMesh, function()
 				{
@@ -320,7 +320,7 @@ function TreeNode(container)
 			}
 
 			// Add physics to object
-			if(self.object instanceof Mesh || self.object instanceof SkinnedMesh)
+			if (self.object instanceof Mesh || self.object instanceof SkinnedMesh)
 			{
 				// Add physics object
 				function createPhysics(object, mode)
@@ -368,7 +368,7 @@ function TreeNode(container)
 			{
 				var actions = [];
 
-				if(object[attribute] !== undefined)
+				if (object[attribute] !== undefined)
 				{
 					actions.push(new ChangeAction(object, attribute, value));
 				}
@@ -381,7 +381,7 @@ function TreeNode(container)
 				return actions;
 			};
 
-			if(!isScene && !isProgram)
+			if (!isScene && !isProgram)
 			{
 				var autoUpdate = context.addMenu(Locale.static);
 
@@ -441,7 +441,7 @@ function TreeNode(container)
 				});
 			}
 			
-			if(!isProgram)
+			if (!isProgram)
 			{
 				// Paste object form clipboard
 				context.addOption(Locale.paste, function()
@@ -458,21 +458,21 @@ function TreeNode(container)
 	{
 		event.preventDefault();
 
-		if(DragBuffer.buffer[0] instanceof TabComponent)
+		if (DragBuffer.buffer[0] instanceof TabComponent)
 		{
 			return;
 		}
 
-		if(!self.object.locked)
+		if (!self.object.locked)
 		{
 			// Object drag
-			if(DragBuffer.buffer[0] instanceof Object3D)
+			if (DragBuffer.buffer[0] instanceof Object3D)
 			{
-				if(event.layerY < 5)
+				if (event.layerY < 5)
 				{
 					dragState = TreeNode.ABOVE;
 				}
-				else if(event.layerY > 15)
+				else if (event.layerY > 15)
 				{
 					dragState = TreeNode.BELLOW;
 				}
@@ -498,7 +498,7 @@ function TreeNode(container)
 		event.preventDefault();
 		self.clearBorder();
 
-		if(self.object.locked)
+		if (self.object.locked)
 		{
 			return;
 		}
@@ -508,14 +508,14 @@ function TreeNode(container)
 		var object = DragBuffer.get(uuid);
 
 		// Object 3D
-		if(object instanceof Object3D)
+		if (object instanceof Object3D)
 		{
-			if(object === self.object)
+			if (object === self.object)
 			{
 				Editor.alert(Locale.cannotAddItself);
 				return;
 			}
-			else if(object.contains(self.object))
+			else if (object.contains(self.object))
 			{
 				Editor.alert(Locale.cannotAddToChildren);
 				return;
@@ -527,18 +527,18 @@ function TreeNode(container)
 				var dragIsScene = object instanceof Scene;
 
 				// Above
-				if(dragState === TreeNode.ABOVE)
+				if (dragState === TreeNode.ABOVE)
 				{
-					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
+					if (dragIsScene && selfIsScene || !dragIsScene && !selfIsProgram && !selfIsScene)
 					{
 						var index = self.object.parent.children.indexOf(self.object);
 						Editor.addAction(new MoveAction(object, self.object.parent, index));
 					}
 				}
 				// Bellow
-				else if(dragState === TreeNode.BELLOW)
+				else if (dragState === TreeNode.BELLOW)
 				{
-					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
+					if (dragIsScene && selfIsScene || !dragIsScene && !selfIsProgram && !selfIsScene)
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
 						Editor.addAction(new MoveAction(object, self.object.parent, index));
@@ -547,7 +547,7 @@ function TreeNode(container)
 				// Inside
 				else // if(dragState === TreeNode.INSIDE)
 				{	
-					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
+					if (selfIsScene && !dragIsScene || dragIsScene && selfIsProgram || !selfIsScene && !selfIsProgram && !dragIsScene)
 					{
 						Editor.addAction(new MoveAction(object, self.object));	
 					}
@@ -555,31 +555,31 @@ function TreeNode(container)
 			}
 		}
 		// Material
-		else if(object instanceof Material)
+		else if (object instanceof Material)
 		{
 			var actions = [];
 			self.object.traverse(function(children)
 			{
-				if(children.material !== undefined)
+				if (children.material !== undefined)
 				{
 					actions.push(new ChangeAction(children, "material", object));
 				}
 			});
 
-			if(actions.length > 0)
+			if (actions.length > 0)
 			{
 				Editor.addAction(new ActionBundle(actions));
 			}
 		}
 		// Dragged file
-		else if(event.dataTransfer.files.length > 0)
+		else if (event.dataTransfer.files.length > 0)
 		{
 			var files = event.dataTransfer.files;
-			for(var i = 0; i < files.length; i++)
+			for (var i = 0; i < files.length; i++)
 			{
 				var file = files[i];
 
-				if(Model.fileIsModel(file))
+				if (Model.fileIsModel(file))
 				{
 					Loaders.loadModel(file, self.object);
 				}
@@ -589,7 +589,7 @@ function TreeNode(container)
 
 	this.element.onclick = function(event)
 	{
-		if(event.shiftKey && Editor.selection.length > 0 && Editor.selection[Editor.selection.length - 1].isObject3D === true)
+		if (event.shiftKey && Editor.selection.length > 0 && Editor.selection[Editor.selection.length - 1].isObject3D === true)
 		{
 			var object = Editor.selection[Editor.selection.length - 1];
 
@@ -598,16 +598,16 @@ function TreeNode(container)
 			
 			Editor.program.traverse(function(child)
 			{
-				if(done === true)
+				if (done === true)
 				{
 					return;
 				}
 
-				if(selecting === false)
+				if (selecting === false)
 				{
-					if(child === object || child === self.object)
+					if (child === object || child === self.object)
 					{
-						if(!Editor.isSelected(child))
+						if (!Editor.isSelected(child))
 						{
 							Editor.addToSelection(child);
 						}
@@ -616,9 +616,9 @@ function TreeNode(container)
 				}
 				else
 				{
-					if(child === object || child === self.object)
+					if (child === object || child === self.object)
 					{
-						if(!Editor.isSelected(child))
+						if (!Editor.isSelected(child))
 						{
 							Editor.addToSelection(child);
 						}
@@ -633,9 +633,9 @@ function TreeNode(container)
 				}
 			});
 		}
-		else if(event.ctrlKey)
+		else if (event.ctrlKey)
 		{
-			if(Editor.isSelected(self.object))
+			if (Editor.isSelected(self.object))
 			{
 				Editor.unselectObject(self.object);
 			}
@@ -652,25 +652,25 @@ function TreeNode(container)
 
 	this.element.ondblclick = function()
 	{
-		if(!self.object.locked)
+		if (!self.object.locked)
 		{
-			if(self.object instanceof Script)
+			if (self.object instanceof Script)
 			{
 				openTab(ScriptEditor, self.object);
 			}
-			else if(self.object instanceof Scene)
+			else if (self.object instanceof Scene)
 			{
 				openTab(SceneEditor, self.object);
 			}
-			else if(self.object instanceof ParticleEmitter)
+			else if (self.object instanceof ParticleEmitter)
 			{
 				openTab(ParticleEditor, self.object);
 			}
-			else if(self.object instanceof Camera)
+			else if (self.object instanceof Camera)
 			{
 				openTab(CameraEditor, self.object);
 			}
-			else if(self.object instanceof NodeScript)
+			else if (self.object instanceof NodeScript)
 			{
 				openTab(NodeEditor, self.object);
 			}
@@ -685,7 +685,7 @@ function TreeNode(container)
 	function openTab(Constructor, object)
 	{
 		var tab = Editor.gui.tab.getTab(Constructor, object);
-		if(tab === null)
+		if (tab === null)
 		{
 			tab = Editor.gui.tab.addTab(Constructor, true);
 			tab.attach(self.object);
@@ -799,7 +799,7 @@ TreeNode.prototype.setSelected = function(selected)
 {
 	this.selected = selected;
 
-	if(this.selected === true)
+	if (this.selected === true)
 	{
 		this.styleSelected();
 	}
@@ -819,11 +819,11 @@ TreeNode.prototype.setBorder = function(place)
 {
 	this.clearBorder();
 
-	if(place === TreeNode.ABOVE)
+	if (place === TreeNode.ABOVE)
 	{
 		this.element.style.borderTop = "1px solid #999999";
 	}
-	else if(place === TreeNode.BELLOW)
+	else if (place === TreeNode.BELLOW)
 	{
 		this.element.style.borderBottom = "1px solid #999999";
 	}
@@ -892,15 +892,15 @@ TreeNode.prototype.insertObject = function(object, index)
  */
 TreeNode.prototype.removeElementUUID = function(uuid)
 {	
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].uuid === uuid)
+		if (this.children[i].uuid === uuid)
 		{
 			break;
 		}
 	}
 
-	if(i < this.children.length)
+	if (i < this.children.length)
 	{
 		var element = this.children[i];
 		this.children.splice(i, 1);
@@ -918,7 +918,7 @@ TreeNode.prototype.removeElementUUID = function(uuid)
  */
 TreeNode.prototype.updateFoldedState = function(folded)
 {
-	if(folded !== undefined)
+	if (folded !== undefined)
 	{
 		this.folded = folded;
 	}
@@ -937,7 +937,7 @@ TreeNode.prototype.expandToRoot = function()
 {
 	var parent = this.parent;
 
-	while(parent !== null)
+	while (parent !== null)
 	{
 		parent.updateFoldedState(false);
 		parent.setVisibility(true);
@@ -949,12 +949,12 @@ TreeNode.prototype.expandToRoot = function()
 
 TreeNode.prototype.destroy = function()
 {
-	if(this.container.element.contains(this.element))
+	if (this.container.element.contains(this.element))
 	{
 		this.container.element.removeChild(this.element);
 	}
 	
-	for(var i = 0; i < this.children.length; i++)
+	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].destroy();
 	}
@@ -962,29 +962,29 @@ TreeNode.prototype.destroy = function()
 
 TreeNode.prototype.updateInterface = function()
 {
-	if(this.visible)
+	if (this.visible)
 	{
 		var offset = this.level * 20;
 
 		// Arrow
-		if(this.object.isEmpty())
+		if (this.object.isEmpty())
 		{
 			this.arrow.style.display = "none";
 		}
 		else
 		{
 			this.arrow.style.display = "block";
-			this.arrow.style.left = (5 + offset) + "px";
+			this.arrow.style.left = 5 + offset + "px";
 		}
 
-		this.icon.style.left = (25 + offset) + "px";
-		this.label.style.left = (45 + offset) + "px";
+		this.icon.style.left = 25 + offset + "px";
+		this.label.style.left = 45 + offset + "px";
 		this.labelText.data = this.object.name;
 
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 
-		for(var i = 0; i < this.children.length; i++)
+		for (var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].updateInterface();
 		}

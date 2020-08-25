@@ -3,11 +3,11 @@ import {SkinnedMesh, MeshBasicMaterial} from "three";
 function SkinnedWireframeHelper(object, hex) 
 {
 	SkinnedMesh.call(this, object.geometry, new MeshBasicMaterial(
-	{
-		color: (hex !== undefined) ? hex : 0xFFFFFF,
-		wireframe: true,
-		skinning: true
-	}));
+		{
+			color: hex !== undefined ? hex : 0xFFFFFF,
+			wireframe: true,
+			skinning: true
+		}));
 
 	this.object = object;
 	

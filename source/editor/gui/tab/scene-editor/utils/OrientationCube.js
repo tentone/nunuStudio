@@ -1,7 +1,7 @@
+import {PerspectiveCamera, Raycaster, Vector2, Scene, PlaneBufferGeometry, RGBFormat, Mesh, MeshBasicMaterial} from "three";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
 import {Global} from "../../../../Global.js";
-import {PerspectiveCamera, Raycaster, Vector2, Scene, PlaneBufferGeometry, RGBFormat, Mesh, MeshBasicMaterial} from "three";
 
 /** 
  * Orietantion cube can be used to preview and change the rotation of an object.
@@ -120,16 +120,16 @@ OrientationCube.Z_NEG = 5;
  */
 OrientationCube.prototype.raycast = function(mouse, canvas)
 {
-	if(this.viewport.isInside(canvas, mouse))
+	if (this.viewport.isInside(canvas, mouse))
 	{
 		this.raycaster.setFromCamera(this.viewport.getNormalized(canvas, mouse), this.camera);
 
 		var intersects = this.raycaster.intersectObjects(this.scene.children, true);
-		if(intersects.length > 0)
+		if (intersects.length > 0)
 		{
 			this.selected = intersects[0].object;
 			this.selected.material.color.set(0xFFFF00);
-			return intersects[0].object.code
+			return intersects[0].object.code;
 		}
 	}
 
@@ -158,7 +158,7 @@ OrientationCube.prototype.render = function(renderer, canvas)
 
 	renderer.render(this.scene, this.camera);
 
-	if(this.selected !== null)
+	if (this.selected !== null)
 	{
 		this.selected.material.color.set(0xFFFFFF);
 		this.selected = null;

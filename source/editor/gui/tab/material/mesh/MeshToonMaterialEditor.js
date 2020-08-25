@@ -1,6 +1,6 @@
+import {TangentSpaceNormalMap, ObjectSpaceNormalMap} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
@@ -8,7 +8,7 @@ import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
-import {TangentSpaceNormalMap, ObjectSpaceNormalMap} from "three";
+import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
 function MeshToonMaterialEditor(parent, closeable, container, index)
 {

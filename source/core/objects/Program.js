@@ -1,16 +1,16 @@
+import {Scene, Camera, Clock, Object3D} from "three";
 import {EventManager} from "../utils/EventManager.js";
 import {ResourceManager} from "../resources/ResourceManager.js";
 import {ResourceContainer} from "../resources/ResourceContainer.js";
 import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
 import {TargetConfig} from "../platform/TargetConfig.js";
-import {Script} from "./script/Script.js";
 import {App} from "../App.js";
 import {VRHandler} from "../VRHandler.js";
 import {ARHandler} from "../ARHandler.js";
 import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
 import {Keyboard} from "../input/Keyboard.js";
-import {Scene, Camera, Clock, Object3D} from "three";
+import {Script} from "./script/Script.js";
 
 /**
  * Program class contains all the data of a nunuStudio program.
@@ -255,14 +255,14 @@ Program.prototype = Object.create(ResourceManager.prototype);
  */
 Program.prototype.initialize = function()
 {
-	if(this.mouse === null)
+	if (this.mouse === null)
 	{
 		this.mouse = new Mouse();
 		this.mouse.setCanvas(this.canvas);
 		this.mouse.create();
 	}
 
-	if(this.keyboard === null)
+	if (this.keyboard === null)
 	{
 		this.keyboard = new Keyboard();
 		this.keyboard.create();
@@ -272,24 +272,24 @@ Program.prototype.initialize = function()
 	this.manager.create();
 
 	// Get default scene from children
-	if(this.defaultScene !== null)
+	if (this.defaultScene !== null)
 	{
-		for(var i = 0; i < this.children.length; i++)
+		for (var i = 0; i < this.children.length; i++)
 		{
-			if(this.children[i].uuid === this.defaultScene)
+			if (this.children[i].uuid === this.defaultScene)
 			{
 				this.setScene(this.children[i]);
 				break;
 			}
 		}
 	}
-	else if(this.children.length > 0)
+	else if (this.children.length > 0)
 	{
 		this.setScene(this.children[0]);
 	}
 	
 	// Lock mouse pointer
-	if(this.lockPointer && this.mouse !== null)
+	if (this.lockPointer && this.mouse !== null)
 	{
 		this.mouse.setLock(true);
 	}
@@ -308,9 +308,9 @@ Program.prototype.initialize = function()
  */
 Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 {
-	if(this.mouse !== mouse)
+	if (this.mouse !== mouse)
 	{
-		if(this.mouse !== null)
+		if (this.mouse !== null)
 		{
 			this.mouse.dispose();
 		}
@@ -318,9 +318,9 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 		this.mouse = mouse;
 	}
 
-	if(this.keyboard !== keyboard)
+	if (this.keyboard !== keyboard)
 	{
-		if(this.keyboard !== null)
+		if (this.keyboard !== null)
 		{
 			this.keyboard.dispose();
 		}
@@ -346,7 +346,7 @@ Program.prototype.setRenderer = function(renderer, configure)
 	this.canvas = renderer.domElement;
 	this.division = this.canvas.parentElement;
 
-	if(configure)
+	if (configure)
 	{
 		this.updateRenderer();
 	}
@@ -392,7 +392,7 @@ Program.prototype.render = function(renderer)
 Program.prototype.resize = function(x, y)
 {
 	// Resize the default camera
-	if(this.defaultCamera !== null)
+	if (this.defaultCamera !== null)
 	{
 		this.defaultCamera.resize(x, y);
 	}
@@ -409,7 +409,7 @@ Program.prototype.resize = function(x, y)
  */
 Program.prototype.updateRenderer = function()
 {
-	if(this.renderer !== null)
+	if (this.renderer !== null)
 	{
 		this.rendererConfig.apply(this.renderer);
 	}
@@ -434,7 +434,7 @@ Program.prototype.arAvailable = function()
  */
 Program.prototype.enterAR = function()
 {
-	if(this.arAvailable() && !self.xrEnabled)
+	if (this.arAvailable() && !self.xrEnabled)
 	{
 		var self = this;
 		VRHandler.enterAR(this.renderer, function()
@@ -451,7 +451,7 @@ Program.prototype.enterAR = function()
  */
 Program.prototype.exitAR = function()
 {
-	if(self.xrEnabled)
+	if (self.xrEnabled)
 	{
 		ARHandler.exitAR(this.renderer);
 		this.xrEnabled = false;
@@ -475,7 +475,7 @@ Program.prototype.vrAvailable = function()
  */
 Program.prototype.enterVR = function()
 {
-	if(this.vr)
+	if (this.vr)
 	{
 		var self = this;
 		VRHandler.enterVR(this.renderer, function()
@@ -492,7 +492,7 @@ Program.prototype.enterVR = function()
  */
 Program.prototype.exitVR = function()
 {
-	if(this.vr)
+	if (this.vr)
 	{
 		VRHandler.exitVR(this.renderer);
 		this.xrEnabled = false;
@@ -510,13 +510,13 @@ Program.prototype.exitVR = function()
 Program.prototype.setScene = function(scene)
 {
 	// Try to get scene by UUID
-	if(typeof scene === "string")
+	if (typeof scene === "string")
 	{
 		scene = this.getObjectByName(scene);
 	}
 
 	// Dispose old scene to free up resources
-	if(this.scene !== null)
+	if (this.scene !== null)
 	{
 		this.scene.dispose();
 	}
@@ -524,16 +524,16 @@ Program.prototype.setScene = function(scene)
 	// Set new scene and inialize its resources
 	this.scene = scene;
 
-	if(this.scene !== null)
+	if (this.scene !== null)
 	{
-		if(this.scene.defaultCamera === null)
+		if (this.scene.defaultCamera === null)
 		{
 			this.scene.defaultCamera = this.defaultCamera;
 		}
 
 		this.scene.initialize();
 
-		if(this.canvas !== null) 
+		if (this.canvas !== null) 
 		{
 			this.scene.resize(this.canvas.width, this.canvas.height);
 		}
@@ -552,25 +552,25 @@ Program.prototype.setScene = function(scene)
  */
 Program.prototype.remove = function(scene)
 {
-	if(scene instanceof Scene)
+	if (scene instanceof Scene)
 	{
 		// Remove scene from the children list
 		var index = this.children.indexOf(scene);
-		if(index > -1)
+		if (index > -1)
 		{
 			this.children.splice(index, 1);
 			scene.parent = null;
 		}
 
 		// If the scene remove was in use, dispose it
-		if(scene === this.scene)
+		if (scene === this.scene)
 		{
 			this.scene.dispose();
 			this.scene = null;
 		}
 		
 		// If there are no scenes on program set actual scene to null
-		if(this.children.length === 0)
+		if (this.children.length === 0)
 		{
 			this.scene = null;
 		}
@@ -591,7 +591,7 @@ Program.prototype.remove = function(scene)
  */
 Program.prototype.add = function(scene)
 {
-	if(scene instanceof Scene)
+	if (scene instanceof Scene)
 	{
 		scene.parent = this;
 		this.children.push(scene);
@@ -637,9 +637,9 @@ Program.prototype.setInitialScene = function(scene)
  */
 Program.prototype.dispose = function()
 {
-	if(this.mouse !== null)
+	if (this.mouse !== null)
 	{
-		if(this.lockPointer)
+		if (this.lockPointer)
 		{
 			this.mouse.setLock(false);
 		}
@@ -647,14 +647,14 @@ Program.prototype.dispose = function()
 		this.mouse.dispose();
 	}
 
-	if(this.keyboard !== null)
+	if (this.keyboard !== null)
 	{
 		this.keyboard.dispose();
 	}
 
 	this.manager.destroy();
 
-	if(this.scene !== null)
+	if (this.scene !== null)
 	{
 		this.scene.dispose();
 	}
@@ -680,7 +680,7 @@ Program.prototype.receiveDataApp = function(data)
 	// Check if there is a script with onAppData method available
 	this.traverse(function(child)
 	{
-		if(child instanceof Script)
+		if (child instanceof Script)
 		{
 			child.appData(data);
 			found = true;
@@ -688,7 +688,7 @@ Program.prototype.receiveDataApp = function(data)
 	});
 
 	// Show warning message
-	if(!found)
+	if (!found)
 	{
 		console.warn("nunuStudio: No script with onAppData found", data);
 	}
@@ -702,9 +702,9 @@ Program.prototype.receiveDataApp = function(data)
  */
 Program.prototype.sendDataApp = function(data)
 {
-	if(this.app !== null)
+	if (this.app !== null)
 	{
-		if(this.app.onDataReceived !== undefined)
+		if (this.app.onDataReceived !== undefined)
 		{
 			this.app.onDataReceived(data);
 		}
@@ -733,15 +733,15 @@ Program.prototype.toJSON = function(meta, exportResources)
 
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
-		if(exportResources !== false)
+		if (exportResources !== false)
 		{
-			for(var k = 0; k < ResourceContainer.libraries.length; k++)
+			for (var k = 0; k < ResourceContainer.libraries.length; k++)
 			{
 				var lib = self[ResourceContainer.libraries[k]];
-				for(var i in lib)
+				for (var i in lib)
 				{
 					var resource = lib[i];
-					if(meta[ResourceContainer.libraries[k]][resource.uuid] === undefined)
+					if (meta[ResourceContainer.libraries[k]][resource.uuid] === undefined)
 					{
 						meta[ResourceContainer.libraries[k]][resource.uuid] = resource.toJSON(meta);
 					}
@@ -751,7 +751,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 	});
 
 	// Initial scene
-	if(this.defaultScene !== null)
+	if (this.defaultScene !== null)
 	{
 		data.object.defaultScene = this.defaultScene;
 	}

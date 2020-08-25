@@ -1,9 +1,9 @@
+import {Object2D, Viewport, Renderer, ViewportControls, Box, Circle} from "escher.js/build/escher.module.js";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {Canvas} from "../../../components/Canvas.js";
-import {Object2D, Viewport, Renderer, ViewportControls, Box, Circle} from "escher.js/build/escher.module.js";
 
 /**
  * Profiling tab is used to measure the performance of the application booth in the editor and while it is running.
@@ -55,18 +55,18 @@ ProfilingTab.prototype.update = function()
 {
 	// Renderer info
 	var tabs = Editor.gui.tab.getActiveTab();
-	for(var i = 0; i < tabs.length; i++)
+	for (var i = 0; i < tabs.length; i++)
 	{
 		var tab = tabs[i];
 		var renderer = tab.renderer || (tab.canvas ? tab.canvas.renderer : undefined);
-		if(renderer !== undefined)
+		if (renderer !== undefined)
 		{
 			// TODO <CHANGE THIS>
-			//console.log(renderer.info);
+			// console.log(renderer.info);
 		}
 	}
 
-	if(this.canvas.pointerInside)
+	if (this.canvas.pointerInside)
 	{
 		this.controls.update(this.renderer.pointer);
 	}

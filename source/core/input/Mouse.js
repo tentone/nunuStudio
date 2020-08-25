@@ -71,7 +71,7 @@ function Mouse(domElement, dontInitialize)
 	 * @property domElement
 	 * @type {Element}
 	 */
-	this.domElement = (domElement !== undefined) ? domElement : window;
+	this.domElement = domElement !== undefined ? domElement : window;
 
 	/**
 	 * Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.
@@ -94,7 +94,7 @@ function Mouse(domElement, dontInitialize)
 	this.events = new EventManager();
 
 	// Initialize key instances
-	for(var i = 0; i < 5; i++)
+	for (var i = 0; i < 5; i++)
 	{
 		this._doubleClicked[i] = false;
 		this.doubleClicked[i] = false;
@@ -106,7 +106,7 @@ function Mouse(domElement, dontInitialize)
 	var self = this;
 
 	// Scroll wheel
-	if(window.onmousewheel !== undefined)
+	if (window.onmousewheel !== undefined)
 	{
 		// Chrome, edge
 		this.events.add(this.domElement, "mousewheel", function(event)
@@ -115,7 +115,7 @@ function Mouse(domElement, dontInitialize)
 			self._wheelUpdated = true;
 		});
 	}
-	else if(window.addEventListener !== undefined)
+	else if (window.addEventListener !== undefined)
 	{
 		// Firefox
 		this.events.add(this.domElement, "DOMMouseScroll", function(event)
@@ -134,7 +134,7 @@ function Mouse(domElement, dontInitialize)
 	}
 
 	// Touchscreen input events
-	if(window.ontouchstart !== undefined || navigator.msMaxTouchPoints > 0)
+	if (window.ontouchstart !== undefined || navigator.msMaxTouchPoints > 0)
 	{
 		// Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);
@@ -201,7 +201,7 @@ function Mouse(domElement, dontInitialize)
 		self._doubleClicked[event.which - 1] = true;
 	});
 
-	if(dontInitialize !== true)
+	if (dontInitialize !== true)
 	{
 		this.create();
 	}
@@ -292,27 +292,27 @@ Mouse.insideCanvas = function()
  */
 Mouse.setLock = function(value)
 {
-	if(this.canvas !== null)
+	if (this.canvas !== null)
 	{
-		if(value)
+		if (value)
 		{
 			this.canvas.requestPointerLock = this.canvas.requestPointerLock || this.canvas.mozRequestPointerLock || this.canvas.webkitRequestPointerLock;
-			if(this.canvas.requestPointerLock !== undefined)
+			if (this.canvas.requestPointerLock !== undefined)
 			{
 				this.canvas.requestPointerLock();
 			}
 		}
 		else
 		{
-			if(document.exitPointerLock !== undefined)
+			if (document.exitPointerLock !== undefined)
 			{
 				document.exitPointerLock();
 			}
-			else if(document.mozExitPointerLock !== undefined)
+			else if (document.mozExitPointerLock !== undefined)
 			{
 				document.mozExitPointerLock();
 			}
-			else if(document.webkitExitPointerLock !== undefined)
+			else if (document.webkitExitPointerLock !== undefined)
 			{
 				document.webkitExitPointerLock();
 			}
@@ -379,7 +379,7 @@ Mouse.buttonJustReleased = function(button)
  */
 Mouse.updatePosition = function(x, y, xDiff, yDiff)
 {
-	if(this.canvas !== null)
+	if (this.canvas !== null)
 	{
 		var rect = this.canvas.getBoundingClientRect();
 		x -= rect.left;
@@ -401,7 +401,7 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
  */
 Mouse.updateKey = function(button, action)
 {
-	if(button > -1)
+	if (button > -1)
 	{
 		this._keys[button].update(action);
 	}
@@ -415,13 +415,13 @@ Mouse.updateKey = function(button, action)
 Mouse.update = function()
 {
 	// Update mouse keys state
-	for(var i = 0; i < 5; i++)
+	for (var i = 0; i < 5; i++)
 	{
-		if(this._keys[i].justPressed && this.keys[i].justPressed)
+		if (this._keys[i].justPressed && this.keys[i].justPressed)
 		{
 			this._keys[i].justPressed = false;
 		}
-		if(this._keys[i].justReleased && this.keys[i].justReleased)
+		if (this._keys[i].justReleased && this.keys[i].justReleased)
 		{
 			this._keys[i].justReleased = false;
 		}
@@ -429,7 +429,7 @@ Mouse.update = function()
 		this.keys[i].set(this._keys[i].justPressed, this._keys[i].pressed, this._keys[i].justReleased);
 
 		// Update mouse double click
-		if(this._doubleClicked[i] === true)
+		if (this._doubleClicked[i] === true)
 		{
 			this.doubleClicked[i] = true;
 			this._doubleClicked[i] = false;
@@ -441,7 +441,7 @@ Mouse.update = function()
 	}
 
 	// Update mouse wheel
-	if(this._wheelUpdated)
+	if (this._wheelUpdated)
 	{
 		this.wheel = this._wheel;
 		this._wheelUpdated = false;
@@ -452,12 +452,12 @@ Mouse.update = function()
 	}
 
 	// Update mouse Position if needed
-	if(this._positionUpdated)
+	if (this._positionUpdated)
 	{
 		this.delta.copy(this._delta);
 		this.position.copy(this._position);
 
-		this._delta.set(0,0);
+		this._delta.set(0, 0);
 		this._positionUpdated = false;
 	}
 	else

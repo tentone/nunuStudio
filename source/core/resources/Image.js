@@ -1,8 +1,8 @@
 import {MathUtils} from "../utils/MathUtils.js";
 import {Base64Utils} from "../utils/binary/Base64Utils.js";
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
-import {Resource} from "./Resource.js";
 import {FileSystem} from "../FileSystem.js";
+import {Resource} from "./Resource.js";
 
 /**
  * Image class is used to store image data that is used to create Textures.
@@ -41,22 +41,22 @@ function Image(url, encoding)
 	 */
 	this.height = -1;
 
-	if(url !== undefined)
+	if (url !== undefined)
 	{
 		// ArrayBuffer
-		if(url instanceof ArrayBuffer)
+		if (url instanceof ArrayBuffer)
 		{
 			this.loadArrayBufferData(url, encoding);
 		}
 		// Base64
-		else if(Base64Utils.isBase64(url))
+		else if (Base64Utils.isBase64(url))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
 		}
 		// Blob (Need to be read immediatly might be revoked to clean space).
-		else if(url.startsWith("blob"))
+		else if (url.startsWith("blob"))
 		{
 			var arraybuffer = FileSystem.readFileArrayBuffer(url, true);
 			this.loadArrayBufferData(arraybuffer);
@@ -87,9 +87,9 @@ Image.prototype = Object.create(Resource.prototype);
  */
 Image.fileIsImage = function(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
-		if(file.type.startsWith("image"))
+		if (file.type.startsWith("image"))
 		{
 			return true;
 		}
@@ -110,7 +110,7 @@ Image.fileIsImage = function(file)
  */
 Image.prototype.getImageSize = function(onLoad)
 {
-	if(this.width > -1 && this.height > -1)
+	if (this.width > -1 && this.height > -1)
 	{
 		onLoad(this.width, this.height);
 	}
@@ -156,7 +156,7 @@ Image.prototype.getImageData = function(onLoad)
 		var context = canvas.getContext("2d");
 		context.drawImage(image, 0, 0, image.width, image.height);
 
-		onLoad(context.getImageData(0, 0, image.width, image.height),self.width, self.height);
+		onLoad(context.getImageData(0, 0, image.width, image.height), self.width, self.height);
 	};
 
 };
@@ -176,7 +176,7 @@ Image.prototype.createSolidColor = function(color)
 	canvas.height = 1;
 
 	var context = canvas.getContext("2d");
-	context.fillStyle = (color !== undefined) ? color : MathUtils.randomColor();
+	context.fillStyle = color !== undefined ? color : MathUtils.randomColor();
 	context.fillRect(0, 0, 1, 1);
 
 	this.data = canvas.toDataURL("image/png");
@@ -215,7 +215,7 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
  */
 Image.prototype.hasTransparency = function(perPixel)
 {
-	if(perPixel === true && this.width > -1 && this.height > -1)
+	if (perPixel === true && this.width > -1 && this.height > -1)
 	{
 		var image = document.createElement("img");
 
@@ -228,9 +228,9 @@ Image.prototype.hasTransparency = function(perPixel)
 
 		var data = context.getImageData(0, 0, image.width, image.height).data;
 
-		for(var i = 3; i < data.length; i += 4)
+		for (var i = 3; i < data.length; i += 4)
 		{
-			if(data[i] !== 255)
+			if (data[i] !== 255)
 			{
 				return true;
 			}
@@ -284,7 +284,7 @@ Image.prototype.compressJPEG = function(quality)
 
 Image.prototype.dispose = function()
 {
-	if(this.format === "arraybuffer")
+	if (this.format === "arraybuffer")
 	{
 		URL.revokeObjectURL(this.data);
 	}
@@ -301,14 +301,14 @@ Image.prototype.dispose = function()
  */
 Image.prototype.toJSON = function(meta)
 {
-	if(meta.images[this.uuid] !== undefined)
+	if (meta.images[this.uuid] !== undefined)
 	{
 		return meta.images[this.uuid];
 	}
 
 	var data = Resource.prototype.toJSON.call(this, meta);
 
-	if(this.format === "url")
+	if (this.format === "url")
 	{
 		this.loadArrayBufferData(FileSystem.readFileArrayBuffer(this.data), this.encoding);
 	}
@@ -317,12 +317,12 @@ Image.prototype.toJSON = function(meta)
 	data.height = this.height;
 	data.encoding = this.encoding;
 
-	if(this.format === "arraybuffer")
+	if (this.format === "arraybuffer")
 	{
 		data.format = this.format;
 		data.data = this.arraybuffer;
 	}
-	else if(this.format === "base64")
+	else if (this.format === "base64")
 	{
 		data.format = "arraybuffer";
 		data.data = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(this.data));

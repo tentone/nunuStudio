@@ -1,9 +1,9 @@
+import {PlaneBufferGeometry, PlaneGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberRow} from "../../../../components/input/NumberRow.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {PlaneBufferGeometry, PlaneGeometry, BufferGeometry} from "three";
 
 function PlaneGeometryForm(form, object)
 {

@@ -36,7 +36,7 @@ function CubeCameraInspector(parent, object)
 	this.form.add(this.resolution);
 	this.form.nextRow();
 	
-	for(var i = 4; i < 13; i++)
+	for (var i = 4; i < 13; i++)
 	{
 		var size = Math.pow(2, i);
 		this.resolution.addValue(size.toString(), size);

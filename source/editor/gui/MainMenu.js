@@ -1,3 +1,13 @@
+import {StaticPair} from "@as-com/pson";
+import {BufferGeometry, Geometry} from "three";
+import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
+import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
+import {OBJExporter} from "three/examples/jsm/exporters/OBJExporter";
+import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
+import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
+import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
+import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
+import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
 import {Locale} from "../locale/LocaleManager.js";
 import {UnitConverter} from "../../core/utils/UnitConverter.js";
 import {Mesh} from "../../core/objects/mesh/Mesh.js";
@@ -17,16 +27,6 @@ import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
-import {StaticPair} from "@as-com/pson";
-import {BufferGeometry, Geometry} from "three";
-import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
-import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
-import {OBJExporter} from "three/examples/jsm/exporters/OBJExporter";
-import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
-import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
-import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
-import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
-import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
 import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
 
 /**
@@ -79,7 +79,7 @@ function MainMenu(parent)
 	// Save project
 	fileMenu.addOption(Locale.save, function()
 	{
-		if(Editor.openFile !== null)
+		if (Editor.openFile !== null)
 		{
 			Editor.saveProgram(undefined, true);
 		}
@@ -96,7 +96,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
 	// Save readable legacy format
-	if(DEVELOPMENT && Nunu.runningOnDesktop())
+	if (DEVELOPMENT && Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption("Save ISP", function()
 		{
@@ -117,7 +117,7 @@ function MainMenu(parent)
 	fileMenu.addOption(Locale.settings, function()
 	{
 		var tab = Editor.gui.tab.getTab(SettingsTab);
-		if(tab === null)
+		if (tab === null)
 		{
 			tab = Editor.gui.tab.addTab(SettingsTab, true);
 		}
@@ -127,7 +127,7 @@ function MainMenu(parent)
 	// Publish
 	var publish = fileMenu.addMenu(Locale.publish, Global.FILE_PATH + "icons/misc/publish.png");
 
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		// Publish web
 		publish.addOption("Web", function()
@@ -139,7 +139,7 @@ function MainMenu(parent)
 					ProjectExporters.exportWebProject(files[0].path);
 					Editor.alert(Locale.projectExported);
 				}
-				catch(e)
+				catch (e)
 				{
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
@@ -147,7 +147,7 @@ function MainMenu(parent)
 		}, Global.FILE_PATH + "icons/platform/web.png");
 
 		// Android
-		if(DEVELOPMENT)
+		if (DEVELOPMENT)
 		{
 			var android = publish.addMenu("Android", Global.FILE_PATH + "icons/platform/android.png");
 
@@ -157,7 +157,7 @@ function MainMenu(parent)
 				{
 					ProjectExporters.exportAndroid(ProjectExporters.ANDROID_RUN);
 				}
-				catch(e)
+				catch (e)
 				{
 					console.error("nunuStudio: Error exporting android project.", e);
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -172,7 +172,7 @@ function MainMenu(parent)
 					{
 						ProjectExporters.exportAndroid(ProjectExporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
 					}
-					catch(e)
+					catch (e)
 					{
 						console.error("nunuStudio: Error exporting android project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -181,7 +181,7 @@ function MainMenu(parent)
 			});
 		}
 
-		if(Nunu.runningOnDesktop())
+		if (Nunu.runningOnDesktop())
 		{
 			// Publish windows
 			publish.addOption("Windows", function()
@@ -193,7 +193,7 @@ function MainMenu(parent)
 						ProjectExporters.exportWindows(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
-					catch(e)
+					catch (e)
 					{
 						console.error("nunuStudio: Error exporting windows project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -211,7 +211,7 @@ function MainMenu(parent)
 						ProjectExporters.exportLinux(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
-					catch(e)
+					catch (e)
 					{
 						console.error("nunuStudio: Error exporting linux project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -230,7 +230,7 @@ function MainMenu(parent)
 						ProjectExporters.exportMacOS(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
-					catch(e)
+					catch (e)
 					{
 						console.error("nunuStudio: Error exporting macOS project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -251,7 +251,7 @@ function MainMenu(parent)
 					ProjectExporters.exportWebProjectZip(fname);
 					Editor.alert(Locale.projectExported);
 				}
-				catch(e)
+				catch (e)
 				{
 					console.error("nunuStudio: Error exporting web project.", e);
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
@@ -265,7 +265,7 @@ function MainMenu(parent)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			if (files.length > 0)
 			{
 				var file = files[0];
 				var binary = FileSystem.getFileExtension(file.name) !== "isp";
@@ -275,7 +275,7 @@ function MainMenu(parent)
 
 				reader.onload = function()
 				{
-					if(binary)
+					if (binary)
 					{
 						var pson = new StaticPair();
 						var data = pson.decode(reader.result);
@@ -288,7 +288,7 @@ function MainMenu(parent)
 
 					var actions = [];
 
-					for(var i = 0; i < program.children.length; i++)
+					for (var i = 0; i < program.children.length; i++)
 					{
 						actions.push(new AddAction(program.children[i], Editor.program));
 					}
@@ -296,7 +296,7 @@ function MainMenu(parent)
 					Editor.addAction(new ActionBundle(actions));
 				};
 
-				if(binary)
+				if (binary)
 				{
 					reader.readAsArrayBuffer(file);
 				}
@@ -375,7 +375,7 @@ function MainMenu(parent)
 	// Export Google Draco
 	exportMenu.addOption("Draco", function()
 	{
-		if(Editor.selection.length === 0 || Editor.selection[0].geometry === undefined)
+		if (Editor.selection.length === 0 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert(Locale.needsObjectGeometry);
 			return;
@@ -399,7 +399,7 @@ function MainMenu(parent)
 		var exporter = new ColladaExporter();
 		exporter.parse(Editor.program, function(result)
 		{
-			for(var i = 0; i < result.textures.length; i++)
+			for (var i = 0; i < result.textures.length; i++)
 			{
 				var texture = result.textures[i];
 				FileSystem.writeFileArrayBuffer(path + texture.name + "." + texture.ext, texture.data.buffer);
@@ -500,11 +500,11 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Exit
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption(Locale.exit, function()
 		{
-			if(Editor.confirm(Locale.unsavedChangesExit))
+			if (Editor.confirm(Locale.unsavedChangesExit))
 			{
 				Editor.exit();
 			}
@@ -516,7 +516,7 @@ function MainMenu(parent)
 	// Editor
 	var editMenu = new DropdownMenu(this); editMenu.setText("Edit");
 	editMenu.size.set(100, this.size.y);
-	editMenu.position.set(120,0);
+	editMenu.position.set(120, 0);
 
 	editMenu.addOption(Locale.undo, function()
 	{
@@ -545,10 +545,10 @@ function MainMenu(parent)
 
 	editMenu.addOption(Locale.delete, function()
 	{
-		if(Editor.hasObjectSelected())
+		if (Editor.hasObjectSelected())
 		{
 			var del = Editor.confirm(Locale.deleteObjects);
-			if(del)
+			if (del)
 			{
 				Editor.deleteObject();
 			}
@@ -562,7 +562,7 @@ function MainMenu(parent)
 	{
 		var geometry = object.geometry;
 
-		if(geometry instanceof BufferGeometry)
+		if (geometry instanceof BufferGeometry)
 		{
 			geometry = new Geometry().fromBufferGeometry(geometry);
 		}
@@ -579,15 +579,15 @@ function MainMenu(parent)
 	// Verify is CSG operation is possible
 	function verifyCSG()
 	{
-		if(Editor.selection.length < 2)
+		if (Editor.selection.length < 2)
 		{
 			Editor.alert(Locale.needsTwoObjects);
 			return false;
 		}
 
-		for(var i = 0; i < 2; i++)
+		for (var i = 0; i < 2; i++)
 		{
-			if(Editor.selection[i].geometry === undefined)
+			if (Editor.selection[i].geometry === undefined)
 			{
 				Editor.alert(Locale.needsTwoObjectGeometry);
 				return false;
@@ -613,7 +613,7 @@ function MainMenu(parent)
 
 	csg.addOption(Locale.intersect, function()
 	{
-		if(verifyCSG())
+		if (verifyCSG())
 		{
 			var a = createBSP(Editor.selection[0]);
 			var b = createBSP(Editor.selection[1]);
@@ -624,7 +624,7 @@ function MainMenu(parent)
 
 	csg.addOption(Locale.subtract, function()
 	{
-		if(verifyCSG())
+		if (verifyCSG())
 		{
 			var a = createBSP(Editor.selection[0]);
 			var b = createBSP(Editor.selection[1]);
@@ -635,7 +635,7 @@ function MainMenu(parent)
 
 	csg.addOption(Locale.union, function()
 	{
-		if(verifyCSG())
+		if (verifyCSG())
 		{
 			var a = createBSP(Editor.selection[0]);
 			var b = createBSP(Editor.selection[1]);
@@ -648,7 +648,7 @@ function MainMenu(parent)
 
 	modifiers.addOption(Locale.simplify, function()
 	{
-		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
+		if (Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert(Locale.needsObjectGeometry);
 			return;
@@ -657,7 +657,7 @@ function MainMenu(parent)
 		var simplifier = new SimplifyModifier();
 
 		var level = parseFloat(Editor.prompt("Simplification level in %")) / 100;
-		if(isNaN(level) || level > 100 || level < 0)
+		if (isNaN(level) || level > 100 || level < 0)
 		{
 			Editor.alert("Level has to be a numeric value");
 			return;
@@ -665,7 +665,7 @@ function MainMenu(parent)
 
 		var original = Editor.selection[0].geometry;
 
-		if(original instanceof BufferGeometry)
+		if (original instanceof BufferGeometry)
 		{
 			var vertices = original.getAttribute("position").array.length / 3;
 		}
@@ -684,7 +684,7 @@ function MainMenu(parent)
 
 	modifiers.addOption(Locale.subdivide, function()
 	{
-		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
+		if (Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert(Locale.needsObjectGeometry);
 			return;
@@ -698,14 +698,14 @@ function MainMenu(parent)
 
 	modifiers.addOption(Locale.twist, function()
 	{
-		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
+		if (Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert(Locale.needsObjectGeometry);
 			return;
 		}
 
 		var angle = parseFloat(Editor.prompt("Twist angle", UnitConverter.convert(Math.PI / 2, "r", Editor.settings.units.angle)));
-		if(isNaN(angle) || angle < 0)
+		if (isNaN(angle) || angle < 0)
 		{
 			Editor.alert("Twist amount has to be a numeric value");
 			return;
@@ -717,7 +717,7 @@ function MainMenu(parent)
 
 		var start = parseFloat(Editor.prompt("Start Point", 0));
 		var end = parseFloat(Editor.prompt("End Point", 1));
-		if(isNaN(start) || isNaN(end))
+		if (isNaN(start) || isNaN(end))
 		{
 			Editor.alert("Start and end has to be a numeric value");
 			return;
@@ -732,7 +732,7 @@ function MainMenu(parent)
 	// Compute mesh normals
 	editMenu.addOption(Locale.computeNormals, function()
 	{
-		if(Editor.selection.length < 1)
+		if (Editor.selection.length < 1)
 		{
 			Editor.alert(Locale.needsObjectMesh);
 			return;
@@ -746,7 +746,7 @@ function MainMenu(parent)
 	// Apply tranformation
 	editMenu.addOption(Locale.applyTransformation, function()
 	{
-		if(Editor.selection.length < 1)
+		if (Editor.selection.length < 1)
 		{
 			Editor.alert(Locale.needsObjectMesh);
 			return;
@@ -763,7 +763,7 @@ function MainMenu(parent)
 	// Merge geometries
 	editMenu.addOption(Locale.mergeGeometries, function()
 	{
-		if(Editor.selection.length < 2)
+		if (Editor.selection.length < 2)
 		{
 			Editor.alert(Locale.needsTwoObjectMesh);
 			return;
@@ -771,22 +771,22 @@ function MainMenu(parent)
 
 		var geometry = new Geometry();
 
-		for(var i = 0; i < Editor.selection.length; i++)
+		for (var i = 0; i < Editor.selection.length; i++)
 		{	
 			var obj = Editor.selection[i];
-			if(obj.geometry !== undefined)
+			if (obj.geometry !== undefined)
 			{
 				// Convert to geometry and merge
-				if(obj.geometry instanceof BufferGeometry)
+				if (obj.geometry instanceof BufferGeometry)
 				{
 					var converted = new Geometry();
 					converted.fromBufferGeometry(obj.geometry);
-					geometry.merge(converted, obj.matrixWorld)
+					geometry.merge(converted, obj.matrixWorld);
 				}
 				// Merge geometry
 				else
 				{
-					geometry.merge(obj.geometry, obj.matrixWorld)
+					geometry.merge(obj.geometry, obj.matrixWorld);
 				}
 			}
 		}
@@ -803,7 +803,7 @@ function MainMenu(parent)
 	var projectMenu = new DropdownMenu(this);
 	projectMenu.setText(Locale.project);
 	projectMenu.size.set(100, this.size.y);
-	projectMenu.position.set(220,0);
+	projectMenu.position.set(220, 0);
 
 	projectMenu.addOption(Locale.createScene, function()
 	{
@@ -816,14 +816,14 @@ function MainMenu(parent)
 		{
 			try
 			{
-				if(files.length > 0)
+				if (files.length > 0)
 				{
 					var code = FileSystem.readFile(files[0].path);
 					var func = Function(code);
 					func();
 				}
 			}
-			catch(error)
+			catch (error)
 			{
 				Editor.alert("Error: " + error);
 			}
@@ -841,7 +841,7 @@ function MainMenu(parent)
 	about.setOnClick(function()
 	{
 		var tab = Editor.gui.tab.getTab(AboutTab);
-		if(tab === null)
+		if (tab === null)
 		{
 			tab = Editor.gui.tab.addTab(AboutTab, true);
 		}

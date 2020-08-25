@@ -1,5 +1,5 @@
-import {Component} from "../Component.js";
 import {Color} from "three";
+import {Component} from "../Component.js";
 
 /**
  * Color gradient chooser is used to select and preview a gradient of colors store in an array.
@@ -77,18 +77,18 @@ ColorGradientChooser.prototype.updateButtons = function()
 		self.values[this.index].setRGB(color.r, color.g, color.b);
 		self.updateValues();
 
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange(self.values[this.index], this.index);
 		}
 	}
 
-	while(this.buttons.length > this.values.length)
+	while (this.buttons.length > this.values.length)
 	{
 		this.element.removeChild(this.buttons.shift());
 	}
 
-	while(this.buttons.length < this.values.length)
+	while (this.buttons.length < this.values.length)
 	{
 		var button = document.createElement("input");
 		button.type = "color";
@@ -109,7 +109,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 		this.buttons.push(button);
 	}
 
-	for(var i = 0; i < this.buttons.length; i++)
+	for (var i = 0; i < this.buttons.length; i++)
 	{
 		this.buttons[i].index = i;
 	}
@@ -131,7 +131,7 @@ ColorGradientChooser.prototype.updateValues = function()
 	var buttonSpacing = (this.size.x - 15) / (this.buttons.length - 1);
 	var buttonPosition = 0;
 
-	for(var i = 0; i < this.values.length; i++)
+	for (var i = 0; i < this.values.length; i++)
 	{
 		gradient.addColorStop(colorPercentage, this.values[i].getStyle());
 
@@ -168,7 +168,7 @@ ColorGradientChooser.prototype.setValue = function(values)
 {
 	this.values = [];
 
-	for(var i = 0; i < values.length; i++)
+	for (var i = 0; i < values.length; i++)
 	{
 		var color = new Color();
 		color.copy(values[i]);

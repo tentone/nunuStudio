@@ -5,7 +5,7 @@ import {Vector2} from "three";
  *
  * @class DOMUtils
  */
-function DOMUtils(){}
+function DOMUtils() {}
 
 /**
  * Get CSS variable value from the DOM tree.
@@ -30,7 +30,7 @@ DOMUtils.getCSSVariable = function(variable)
  */
 DOMUtils.isVisible = function(element)
 {
-	if(element.isElement === true)
+	if (element.isElement === true)
 	{
 		element = element.element;
 	}
@@ -40,14 +40,14 @@ DOMUtils.isVisible = function(element)
 	var width = element.offsetWidth;
 	var height = element.offsetHeight;
 
-	while(element.offsetParent)
+	while (element.offsetParent)
 	{
 		element = element.offsetParent;
 		top += element.offsetTop;
 		left += element.offsetLeft;
 	}
 
-	return value = top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
+	return value = top >= window.pageYOffset && left >= window.pageXOffset && top + height <= window.pageYOffset + window.innerHeight && left + width <= window.pageXOffset + window.innerWidth;
 };
 
 /**
@@ -60,7 +60,7 @@ DOMUtils.isVisible = function(element)
  */
 DOMUtils.getPosition = function(element)
 {
-	if(element.isElement === true)
+	if (element.isElement === true)
 	{
 		element = element.element;
 	}
@@ -81,7 +81,7 @@ DOMUtils.getPosition = function(element)
  */
 DOMUtils.checkBorder = function(element)
 {
-	if(element.isElement === true)
+	if (element.isElement === true)
 	{
 		element = element.element;
 	}
@@ -91,7 +91,7 @@ DOMUtils.checkBorder = function(element)
 	var width = element.offsetWidth;
 	var height = element.offsetHeight;
 
-	while(element.offsetParent)
+	while (element.offsetParent)
 	{
 		element = element.offsetParent;
 		top += element.offsetTop;
@@ -101,25 +101,25 @@ DOMUtils.checkBorder = function(element)
 	var result = {x: 0, y: 0};
 
 	// Over the top of the window
-	if(top < window.pageYOffset)
+	if (top < window.pageYOffset)
 	{
 		result.y = top - window.pageYOffset;
 	}
 	// Bellow the window
-	else if((top + height) > (window.pageYOffset + window.innerHeight))
+	else if (top + height > window.pageYOffset + window.innerHeight)
 	{
-		result.y = (top + height) - (window.pageYOffset + window.innerHeight);
+		result.y = top + height - (window.pageYOffset + window.innerHeight);
 	}
 
 	// Left to the window
-	if(left < window.pageXOffset)
+	if (left < window.pageXOffset)
 	{
 		result.x = left - window.pageXOffset;
 	}
 	// Right to the window
-	else if((left + width) > (window.pageXOffset + window.innerWidth))
+	else if (left + width > window.pageXOffset + window.innerWidth)
 	{
-		result.x = (left + width) - (window.pageXOffset + window.innerWidth);
+		result.x = left + width - (window.pageXOffset + window.innerWidth);
 	}
 
 	return result;

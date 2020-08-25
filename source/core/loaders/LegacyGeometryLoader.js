@@ -11,30 +11,30 @@ import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry, DefaultLoa
  */
 function LegacyGeometryLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 	this.withCredentials = false;
 }
 
 LegacyGeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
-	var path = (this.path === undefined) ? LoaderUtils.extractUrlBase(url) : this.path;
+	var path = this.path === undefined ? LoaderUtils.extractUrlBase(url) : this.path;
 
 	var loader = new FileLoader(this.manager);
 	loader.setPath(this.path);
 	loader.setWithCredentials(this.withCredentials);
-	loader.load(url, function (text)
+	loader.load(url, function(text)
 	{
 		var json = JSON.parse(text);
 		var metadata = json.metadata;
 
-		if(metadata !== undefined)
+		if (metadata !== undefined)
 		{
 			var type = metadata.type;
 
-			if(type !== undefined)
+			if (type !== undefined)
 			{
-				if(type.toLowerCase() === "object")
+				if (type.toLowerCase() === "object")
 				{
 					console.error("nunuStudio: LegacyGeometryLoader: " + url + " should be loaded with ObjectLoader instead.");
 					return;
@@ -72,44 +72,44 @@ LegacyGeometryLoader.prototype.parse = (function()
 	{
 		function isBitSet(value, position)
 		{
-			return value & (1 << position);
+			return value & 1 << position;
 		}
 
 		var i, j, fi,
 
-		offset, zLength,
+			offset, zLength,
 
-		colorIndex, normalIndex, uvIndex, materialIndex,
+			colorIndex, normalIndex, uvIndex, materialIndex,
 
-		type,
-		isQuad,
-		hasMaterial,
-		hasFaceVertexUv,
-		hasFaceNormal, hasFaceVertexNormal,
-		hasFaceColor, hasFaceVertexColor,
+			type,
+			isQuad,
+			hasMaterial,
+			hasFaceVertexUv,
+			hasFaceNormal, hasFaceVertexNormal,
+			hasFaceColor, hasFaceVertexColor,
 
-		vertex, face, faceA, faceB, hex, normal,
+			vertex, face, faceA, faceB, hex, normal,
 
-		uvLayer, uv, u, v,
+			uvLayer, uv, u, v,
 
-		faces = json.faces,
-		vertices = json.vertices,
-		normals = json.normals,
-		colors = json.colors,
+			faces = json.faces,
+			vertices = json.vertices,
+			normals = json.normals,
+			colors = json.colors,
 
-		scale = json.scale,
+			scale = json.scale,
 
-		nUvLayers = 0;
+			nUvLayers = 0;
 
-		if(json.uvs !== undefined)
+		if (json.uvs !== undefined)
 		{
 			// disregard empty arrays
-			for(i = 0; i < json.uvs.length; i++)
+			for (i = 0; i < json.uvs.length; i++)
 			{
-				if(json.uvs[i].length) nUvLayers++;
+				if (json.uvs[i].length) {nUvLayers++;}
 			}
 
-			for(i = 0; i < nUvLayers; i++)
+			for (i = 0; i < nUvLayers; i++)
 			{
 				geometry.faceVertexUvs[i] = [];
 			}
@@ -118,7 +118,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 		offset = 0;
 		zLength = vertices.length;
 
-		while(offset < zLength)
+		while (offset < zLength)
 		{
 			vertex = new Vector3();
 			vertex.x = vertices[offset++] * scale;
@@ -131,7 +131,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 		offset = 0;
 		zLength = faces.length;
 
-		while(offset < zLength)
+		while (offset < zLength)
 		{
 			type = faces[offset++];
 			isQuad = isBitSet(type, 0);
@@ -142,7 +142,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 			hasFaceColor = isBitSet(type, 6);
 			hasFaceVertexColor = isBitSet(type, 7);
 
-			if(isQuad)
+			if (isQuad)
 			{
 
 				faceA = new Face3();
@@ -157,7 +157,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 				offset += 4;
 
-				if(hasMaterial)
+				if (hasMaterial)
 				{
 					materialIndex = faces[offset++];
 					faceA.materialIndex = materialIndex;
@@ -167,16 +167,16 @@ LegacyGeometryLoader.prototype.parse = (function()
 				// to get face <=> uv index correspondence
 				fi = geometry.faces.length;
 
-				if(hasFaceVertexUv)
+				if (hasFaceVertexUv)
 				{
-					for(i = 0; i < nUvLayers; i++)
+					for (i = 0; i < nUvLayers; i++)
 					{
 						uvLayer = json.uvs[i];
 
 						geometry.faceVertexUvs[i][fi] = [];
 						geometry.faceVertexUvs[i][fi + 1] = [];
 
-						for(j = 0; j < 4; j++)
+						for (j = 0; j < 4; j++)
 						{
 							uvIndex = faces[offset++];
 
@@ -185,11 +185,11 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 							uv = new Vector2(u, v);
 
-							if(j !== 2)
+							if (j !== 2)
 							{
 								geometry.faceVertexUvs[i][fi].push(uv);
 							}
-							if(j !== 0)
+							if (j !== 0)
 							{
 								geometry.faceVertexUvs[i][fi + 1].push(uv);
 							}
@@ -197,7 +197,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					}
 				}
 
-				if(hasFaceNormal)
+				if (hasFaceNormal)
 				{
 					normalIndex = faces[offset++] * 3;
 
@@ -210,9 +210,9 @@ LegacyGeometryLoader.prototype.parse = (function()
 					faceB.normal.copy(faceA.normal);
 				}
 
-				if(hasFaceVertexNormal)
+				if (hasFaceVertexNormal)
 				{
-					for(i = 0; i < 4; i++)
+					for (i = 0; i < 4; i++)
 					{
 						normalIndex = faces[offset++] * 3;
 
@@ -222,12 +222,12 @@ LegacyGeometryLoader.prototype.parse = (function()
 							normals[normalIndex]
 						);
 
-						if(i !== 2) faceA.vertexNormals.push(normal);
-						if(i !== 0) faceB.vertexNormals.push(normal);
+						if (i !== 2) {faceA.vertexNormals.push(normal);}
+						if (i !== 0) {faceB.vertexNormals.push(normal);}
 					}
 				}
 
-				if(hasFaceColor)
+				if (hasFaceColor)
 				{
 					colorIndex = faces[offset++];
 					hex = colors[colorIndex];
@@ -236,15 +236,15 @@ LegacyGeometryLoader.prototype.parse = (function()
 					faceB.color.setHex(hex);
 				}
 
-				if(hasFaceVertexColor)
+				if (hasFaceVertexColor)
 				{
-					for(i = 0; i < 4; i++)
+					for (i = 0; i < 4; i++)
 					{
 						colorIndex = faces[offset++];
 						hex = colors[colorIndex];
 
-						if(i !== 2) faceA.vertexColors.push(new Color(hex));
-						if(i !== 0) faceB.vertexColors.push(new Color(hex));
+						if (i !== 2) {faceA.vertexColors.push(new Color(hex));}
+						if (i !== 0) {faceB.vertexColors.push(new Color(hex));}
 					}
 				}
 
@@ -259,7 +259,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 				face.b = faces[offset++];
 				face.c = faces[offset++];
 
-				if(hasMaterial)
+				if (hasMaterial)
 				{
 					materialIndex = faces[offset++];
 					face.materialIndex = materialIndex;
@@ -268,14 +268,14 @@ LegacyGeometryLoader.prototype.parse = (function()
 				// to get face <=> uv index correspondence
 				fi = geometry.faces.length;
 
-				if(hasFaceVertexUv)
+				if (hasFaceVertexUv)
 				{
-					for(i = 0; i < nUvLayers; i++)
+					for (i = 0; i < nUvLayers; i++)
 					{
 						uvLayer = json.uvs[i];
 						geometry.faceVertexUvs[i][fi] = [];
 
-						for(j = 0; j < 3; j++)
+						for (j = 0; j < 3; j++)
 						{
 							uvIndex = faces[offset++];
 
@@ -289,7 +289,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					}
 				}
 
-				if(hasFaceNormal)
+				if (hasFaceNormal)
 				{
 					normalIndex = faces[offset++] * 3;
 
@@ -300,9 +300,9 @@ LegacyGeometryLoader.prototype.parse = (function()
 					);
 				}
 
-				if(hasFaceVertexNormal)
+				if (hasFaceVertexNormal)
 				{
-					for(i = 0; i < 3; i++)
+					for (i = 0; i < 3; i++)
 					{
 						normalIndex = faces[offset++] * 3;
 
@@ -316,15 +316,15 @@ LegacyGeometryLoader.prototype.parse = (function()
 					}
 				}
 
-				if(hasFaceColor)
+				if (hasFaceColor)
 				{
 					colorIndex = faces[offset++];
 					face.color.setHex(colors[colorIndex]);
 				}
 
-				if(hasFaceVertexColor)
+				if (hasFaceVertexColor)
 				{
-					for(i = 0; i < 3; i++)
+					for (i = 0; i < 3; i++)
 					{
 						colorIndex = faces[offset++];
 						face.vertexColors.push(new Color(colors[colorIndex]));
@@ -338,29 +338,29 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 	function parseSkin(json, geometry)
 	{
-		var influencesPerVertex = (json.influencesPerVertex !== undefined) ? json.influencesPerVertex : 2;
+		var influencesPerVertex = json.influencesPerVertex !== undefined ? json.influencesPerVertex : 2;
 
-		if(json.skinWeights)
+		if (json.skinWeights)
 		{
-			for(var i = 0, l = json.skinWeights.length; i < l; i += influencesPerVertex)
+			for (var i = 0, l = json.skinWeights.length; i < l; i += influencesPerVertex)
 			{
 				var x = json.skinWeights[i];
-				var y = (influencesPerVertex > 1) ? json.skinWeights[i + 1] : 0;
-				var z = (influencesPerVertex > 2) ? json.skinWeights[i + 2] : 0;
-				var w = (influencesPerVertex > 3) ? json.skinWeights[i + 3] : 0;
+				var y = influencesPerVertex > 1 ? json.skinWeights[i + 1] : 0;
+				var z = influencesPerVertex > 2 ? json.skinWeights[i + 2] : 0;
+				var w = influencesPerVertex > 3 ? json.skinWeights[i + 3] : 0;
 
 				geometry.skinWeights.push(new Vector4(x, y, z, w));
 			}
 		}
 
-		if(json.skinIndices)
+		if (json.skinIndices)
 		{
-			for(var i = 0, l = json.skinIndices.length; i < l; i += influencesPerVertex)
+			for (var i = 0, l = json.skinIndices.length; i < l; i += influencesPerVertex)
 			{
 				var a = json.skinIndices[i];
-				var b = (influencesPerVertex > 1) ? json.skinIndices[i + 1] : 0;
-				var c = (influencesPerVertex > 2) ? json.skinIndices[i + 2] : 0;
-				var d = (influencesPerVertex > 3) ? json.skinIndices[i + 3] : 0;
+				var b = influencesPerVertex > 1 ? json.skinIndices[i + 1] : 0;
+				var c = influencesPerVertex > 2 ? json.skinIndices[i + 2] : 0;
+				var d = influencesPerVertex > 3 ? json.skinIndices[i + 3] : 0;
 
 				geometry.skinIndices.push(new Vector4(a, b, c, d));
 			}
@@ -368,7 +368,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		geometry.bones = json.bones;
 
-		if(geometry.bones && geometry.bones.length > 0 && (geometry.skinWeights.length !== geometry.skinIndices.length || geometry.skinIndices.length !== geometry.vertices.length))
+		if (geometry.bones && geometry.bones.length > 0 && (geometry.skinWeights.length !== geometry.skinIndices.length || geometry.skinIndices.length !== geometry.vertices.length))
 		{
 			console.warn("nunuStudio: When skinning, number of vertices (" + geometry.vertices.length + "), skinIndices (" + geometry.skinIndices.length + "), and skinWeights (" + geometry.skinWeights.length + ") should match.");
 		}
@@ -378,9 +378,9 @@ LegacyGeometryLoader.prototype.parse = (function()
 	{
 		var scale = json.scale;
 
-		if(json.morphTargets !== undefined)
+		if (json.morphTargets !== undefined)
 		{
-			for(var i = 0, l = json.morphTargets.length; i < l; i++)
+			for (var i = 0, l = json.morphTargets.length; i < l; i++)
 			{
 				geometry.morphTargets[i] = {};
 				geometry.morphTargets[i].name = json.morphTargets[i].name;
@@ -389,7 +389,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 				var dstVertices = geometry.morphTargets[i].vertices;
 				var srcVertices = json.morphTargets[i].vertices;
 
-				for(var v = 0, vl = srcVertices.length; v < vl; v += 3)
+				for (var v = 0, vl = srcVertices.length; v < vl; v += 3)
 				{
 					var vertex = new Vector3();
 					vertex.x = srcVertices[v] * scale;
@@ -401,12 +401,12 @@ LegacyGeometryLoader.prototype.parse = (function()
 			}
 		}
 
-		if(json.morphColors !== undefined && json.morphColors.length > 0)
+		if (json.morphColors !== undefined && json.morphColors.length > 0)
 		{
 			var faces = geometry.faces;
 			var morphColors = json.morphColors[0].colors;
 
-			for(var i = 0, l = faces.length; i < l; i++)
+			for (var i = 0, l = faces.length; i < l; i++)
 			{
 				faces[i].color.fromArray(morphColors, i * 3);
 			}
@@ -419,14 +419,14 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		// parse old style Bone/Hierarchy animations
 		var animations = [];
-		if(json.animation !== undefined)
+		if (json.animation !== undefined)
 		{
 			animations.push(json.animation);
 		}
 
-		if(json.animations !== undefined)
+		if (json.animations !== undefined)
 		{
-			if(json.animations.length)
+			if (json.animations.length)
 			{
 				animations = animations.concat(json.animations);
 			}
@@ -436,23 +436,23 @@ LegacyGeometryLoader.prototype.parse = (function()
 			}
 		}
 
-		for(var i = 0; i < animations.length; i++)
+		for (var i = 0; i < animations.length; i++)
 		{
 			var clip = AnimationClip.parseAnimation(animations[i], geometry.bones);
-			if(clip)
+			if (clip)
 			{
 				outputAnimations.push(clip);
 			}
 		}
 
 		// parse implicit morph animations
-		if(geometry.morphTargets)
+		if (geometry.morphTargets)
 		{
 			var morphAnimationClips = AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
 			outputAnimations = outputAnimations.concat(morphAnimationClips);
 		}
 
-		if(outputAnimations.length > 0)
+		if (outputAnimations.length > 0)
 		{
 			geometry.animations = outputAnimations;
 		}
@@ -460,12 +460,12 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 	return function parse(json, path)
 	{
-		if(json.data !== undefined)
+		if (json.data !== undefined)
 		{
 			json = json.data;
 		}
 
-		if(json.scale !== undefined)
+		if (json.scale !== undefined)
 		{
 			json.scale = 1.0 / json.scale;
 		}
@@ -483,7 +483,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 		geometry.computeFaceNormals();
 		geometry.computeBoundingSphere();
 
-		if(json.materials === undefined || json.materials.length === 0)
+		if (json.materials === undefined || json.materials.length === 0)
 		{
 			return {geometry: geometry};
 		}

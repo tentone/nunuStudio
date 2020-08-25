@@ -1,6 +1,6 @@
-import {Pass} from "../Pass.js";
 import {UniformsUtils, ShaderMaterial} from "three";
 import {FilmShader} from "three/examples/jsm/shaders/FilmShader";
+import {Pass} from "../Pass.js";
 
 /**
  * Film pass is used to simulate a film/TV like effect.
@@ -18,69 +18,69 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 
 	this.uniforms = UniformsUtils.clone(FilmShader.uniforms);
 	this.material = new ShaderMaterial(
-	{
-		uniforms: this.uniforms,
-		vertexShader: FilmShader.vertexShader,
-		fragmentShader: FilmShader.fragmentShader
-	});
+		{
+			uniforms: this.uniforms,
+			vertexShader: FilmShader.vertexShader,
+			fragmentShader: FilmShader.fragmentShader
+		});
 
 	var self = this;
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * If set true a grascale effect will be applied.
 		 *
 		 * @property grayscale
 		 * @type {boolean}
 		 */
-		grayscale:
+			grayscale:
 		{
-			get: function(){return self.uniforms["grayscale"].value;},
-			set: function(value){self.uniforms["grayscale"].value = value;}
+			get: function() {return self.uniforms["grayscale"].value;},
+			set: function(value) {self.uniforms["grayscale"].value = value;}
 		},
 
-		/**
-		 * Ammout of noise to be applied to the image.
-		 *
-		 * @property noiseIntensity
-		 * @type {number}
-		 */
-		noiseIntensity:
+			/**
+			 * Ammout of noise to be applied to the image.
+			 *
+			 * @property noiseIntensity
+			 * @type {number}
+			 */
+			noiseIntensity:
 		{
-			get: function(){return self.uniforms["nIntensity"].value;},
-			set: function(value){self.uniforms["nIntensity"].value = value;}
+			get: function() {return self.uniforms["nIntensity"].value;},
+			set: function(value) {self.uniforms["nIntensity"].value = value;}
 		},
 
-		/**
-		 * Scanline intensity.
-		 *
-		 * @property scanlinesIntensity
-		 * @type {number}
-		 */
-		scanlinesIntensity:
+			/**
+			 * Scanline intensity.
+			 *
+			 * @property scanlinesIntensity
+			 * @type {number}
+			 */
+			scanlinesIntensity:
 		{
 			get: function() {return self.uniforms["sIntensity"].value;},
 			set: function(value) {self.uniforms["sIntensity"].value = value;}
 		},
 
-		/**
-		 * Number of scanline to be displayed.
-		 *
-		 * @property scanlinesCount
-		 * @type {number}
-		 */
-		scanlinesCount:
+			/**
+			 * Number of scanline to be displayed.
+			 *
+			 * @property scanlinesCount
+			 * @type {number}
+			 */
+			scanlinesCount:
 		{
-			get: function(){return self.uniforms["sCount"].value;},
-			set: function(value){self.uniforms["sCount"].value = value;}
+			get: function() {return self.uniforms["sCount"].value;},
+			set: function(value) {self.uniforms["sCount"].value = value;}
 		}
-	});
+		});
 
-	this.grayscale = (grayscale !== undefined) ? grayscale : false;
-	this.noiseIntensity = (noiseIntensity !== undefined) ? noiseIntensity : 0.35;
-	this.scanlinesIntensity = (scanlinesIntensity !== undefined) ? scanlinesIntensity : 0.5;
-	this.scanlinesCount = (scanlinesCount !== undefined) ? scanlinesCount : 512;
+	this.grayscale = grayscale !== undefined ? grayscale : false;
+	this.noiseIntensity = noiseIntensity !== undefined ? noiseIntensity : 0.35;
+	this.scanlinesIntensity = scanlinesIntensity !== undefined ? scanlinesIntensity : 0.5;
+	this.scanlinesCount = scanlinesCount !== undefined ? scanlinesCount : 512;
 };
 
 FilmPass.prototype = Object.create(Pass.prototype);
@@ -92,7 +92,7 @@ FilmPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	this.quad.material = this.material;
 
-	if(this.clear)
+	if (this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

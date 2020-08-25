@@ -23,7 +23,7 @@ THREE.AnimationClip.parse = function(json)
 {
 	var clip = THREE.AnimationClip._parse.call(this, json);
 
-	if(json.enabled !== undefined)
+	if (json.enabled !== undefined)
 	{
 		clip.enabled = json.enabled;
 		clip.loop = json.loop;

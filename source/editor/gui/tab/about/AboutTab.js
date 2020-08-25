@@ -1,10 +1,10 @@
+import {REVISION} from "three";
+import * as CANNON from "cannon";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {Global} from "../../../Global.js";
 import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {REVISION} from "three";
-import * as CANNON from "cannon";
 
 function AboutTab(parent, closeable, container, index)
 {
@@ -34,21 +34,20 @@ function AboutTab(parent, closeable, container, index)
 	this.name.setText(Nunu.NAME + " " + VERSION + " Build " + TIMESTAMP);
 
 
-
 	// Libraries
 	var libs = [];
 	libs.push("three.js R" + REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);
 	libs.push("CannonJS V" + CANNON.version);
 	libs.push("TernJS V" + tern.version);
-	if(Nunu.runningOnDesktop())
+	if (Nunu.runningOnDesktop())
 	{
 		libs.push("NWJS V" + process.versions['node-webkit']);
 	}
 
 	var top = 50;
 
-	for(var i = 0; i < libs.length; i++)
+	for (var i = 0; i < libs.length; i++)
 	{
 		var text = new Text(this);
 		text.element.style.top = top + "%";

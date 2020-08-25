@@ -9,7 +9,7 @@ import {DefaultLoadingManager, MaterialLoader as TMaterialLoader} from "three";
  */
 function MaterialLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
 	this.textures = {};
 }
 
@@ -56,7 +56,7 @@ MaterialLoader.prototype.parse = function(json)
 	var material = TMaterialLoader.prototype.parse.call(this, json);
 
 	// Legacy multi-material
-	if(json.materials !== undefined)
+	if (json.materials !== undefined)
 	{
 		for (var i = 0, l = json.materials.length; i < l; i ++)
 		{

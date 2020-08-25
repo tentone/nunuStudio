@@ -1,8 +1,8 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {ToolBarGroup} from "./ToolBarGroup.js";
 import {SceneEditor} from "../SceneEditor.js";
 import {Global} from "../../../../Global.js";
 import {Component} from "../../../../components/Component.js";
+import {ToolBarGroup} from "./ToolBarGroup.js";
 
 /**
  * The tool bar is used to store tool groups.
@@ -101,14 +101,14 @@ ToolBar.prototype.updateGroups = function()
 {
 	this.size.x = 0;
 
-	for(var i = 0; i < this.groups.length; i++)
+	for (var i = 0; i < this.groups.length; i++)
 	{
 		this.groups[i].position.x = this.size.x;
 		this.groups[i].updateInterface();
 
 		this.size.x += this.groups[i].size.x;
 	
-		if(i + 1 < this.groups.length)
+		if (i + 1 < this.groups.length)
 		{
 			this.size.x += this.spacing;
 		}

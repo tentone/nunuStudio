@@ -1,9 +1,9 @@
-import {Scene} from "../Scene.js";
-import {Program} from "../Program.js";
-import {FileSystem} from "../../FileSystem.js";
 import {Group, Object3D} from "three";
 import * as THREE from "three";
 import * as CANNON from "cannon";
+import {Scene} from "../Scene.js";
+import {Program} from "../Program.js";
+import {FileSystem} from "../../FileSystem.js";
 import * as NUNU from "../../Main.js";
 
 /**
@@ -59,7 +59,7 @@ function Script(code, mode)
 	 * @property code
 	 * @type {string}
 	 */
-	this.code = (code !== undefined) ? code : Script.DEFAULT;
+	this.code = code !== undefined ? code : Script.DEFAULT;
 
 	/**
 	 * Mode indicates how to include external javascripts files into the script.
@@ -75,7 +75,7 @@ function Script(code, mode)
 	 * @property mode
 	 * @type {number}
 	 */
-	this.mode = (mode !== undefined) ? mode : Script.APPEND;
+	this.mode = mode !== undefined ? mode : Script.APPEND;
 
 	/**
 	 * Compiled function used during runtime.
@@ -195,10 +195,10 @@ Script.getIncludes = function(code)
 	// Regex object is statefull and iterates on each exec() call
 	var includeRegex = new RegExp(Script.includeRegex, 'gi');
 
-	while(true)
+	while (true)
 	{
 		var match = includeRegex.exec(code);
-		if(match === null)
+		if (match === null)
 		{
 			break;
 		}
@@ -225,7 +225,7 @@ Script.getIncludes = function(code)
 Script.removeIncludes = function(code)
 {
 	return code.replace(Script.includeRegex, "");
-}
+};
 
 /**
  * Initialize script, code automatically called by the runtime on program initialization.
@@ -237,14 +237,14 @@ Script.removeIncludes = function(code)
 Script.prototype.initialize = function()
 {
 	var node = this;
-	while(node.parent !== null)
+	while (node.parent !== null)
 	{
 		node = node.parent;
-		if(node instanceof Scene)
+		if (node instanceof Scene)
 		{
 			this.scene = node;
 		}
-		else if(node instanceof Program)
+		else if (node instanceof Program)
 		{
 			this.program = node;
 		}
@@ -256,7 +256,7 @@ Script.prototype.initialize = function()
 
 	this.compileCode(this.code, function()
 	{
-		if(self.script.initialize !== undefined)
+		if (self.script.initialize !== undefined)
 		{
 			self.script.initialize.call(self);
 		}
@@ -272,16 +272,16 @@ Script.prototype.initialize = function()
  */
 Script.prototype.update = function(delta)
 {
-	if(this.script.onMouseOver !== undefined)
+	if (this.script.onMouseOver !== undefined)
 	{
 		var intersections = this.scene.raycaster.intersectObjects(this.children, true);
-		if(intersections.length > 0)
+		if (intersections.length > 0)
 		{
 			this.script.onMouseOver.call(this, intersections);
 		}
 	}
 
-	if(this.script.update !== undefined)
+	if (this.script.update !== undefined)
 	{
 		this.script.update.call(this, delta);
 	}
@@ -298,13 +298,13 @@ Script.prototype.update = function(delta)
  */
 Script.prototype.dispose = function()
 {
-	if(this.script.dispose !== undefined)
+	if (this.script.dispose !== undefined)
 	{
 		this.script.dispose.call(this);
 	}
 
 	Object3D.prototype.dispose.call(this);
-}
+};
 
 /**
  * Call resize method if available.
@@ -315,7 +315,7 @@ Script.prototype.dispose = function()
  */
 Script.prototype.resize = function(x, y)
 {
-	if(this.script.onResize !== undefined)
+	if (this.script.onResize !== undefined)
 	{
 		this.script.onResize.call(this, x, y);
 	}
@@ -331,7 +331,7 @@ Script.prototype.resize = function(x, y)
  */
 Script.prototype.appData = function(data)
 {
-	if(this.script.onAppData !== undefined)
+	if (this.script.onAppData !== undefined)
 	{
 		this.script.onAppData.call(this, data);
 	}
@@ -348,7 +348,7 @@ Script.prototype.appData = function(data)
  */
 Script.prototype.compileCode = function(code, onReady)
 {
-	if(code !== undefined)
+	if (code !== undefined)
 	{
 		this.code = code;
 	}
@@ -357,25 +357,25 @@ Script.prototype.compileCode = function(code, onReady)
 	{
 		// Public method declaration
 		var code = this.code;
-		for(var i = 0; i < Script.METHODS.length; i++)
+		for (var i = 0; i < Script.METHODS.length; i++)
 		{
 			var method = Script.METHODS[i];
 			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
 		}
 
 		// Append libraries to code
-		if(this.mode === Script.APPEND)
+		if (this.mode === Script.APPEND)
 		{
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
 
-			for(var i = 0; i < libs.length; i++)
+			for (var i = 0; i < libs.length; i++)
 			{
 				var libCode = this.program.getResourceByName(libs[i]);
-				if(libCode === null)
+				if (libCode === null)
 				{
 					libCode = FileSystem.readFile(libs[i], true);
-					if(libCode !== null)
+					if (libCode !== null)
 					{
 						code = libCode + "\n" + code;
 					}
@@ -396,7 +396,7 @@ Script.prototype.compileCode = function(code, onReady)
 			}";
 		}
 		// Declare include method
-		else if(this.mode === Script.EVALUATE)
+		else if (this.mode === Script.EVALUATE)
 		{
 			code += "\nfunction include(name)\
 			{\
@@ -420,7 +420,7 @@ Script.prototype.compileCode = function(code, onReady)
 			}";
 		}
 		// Include
-		else if(this.mode === Script.INCLUDE)
+		else if (this.mode === Script.INCLUDE)
 		{
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
@@ -428,21 +428,21 @@ Script.prototype.compileCode = function(code, onReady)
 			var libsLoaded = 0;
 			var urls = [];
 
-			for(var i = 0; i < libs.length; i++)
+			for (var i = 0; i < libs.length; i++)
 			{
 				var resource = this.program.getResourceByName(libs[i]);
-				if(resource !== null)
+				if (resource !== null)
 				{
-					var blob = new Blob([resource.data], {type:"text/plain"});
+					var blob = new Blob([resource.data], {type: "text/plain"});
 					urls.push(URL.createObjectURL(blob));
 				}
 				else
 				{
 					// Read file content and loade locally to overcome CORS JS script issues.
 					var text = FileSystem.readFile(libs[i], true);
-					if(text !== null)
+					if (text !== null)
 					{
-						var blob = new Blob([text], {type:"text/plain"});
+						var blob = new Blob([text], {type: "text/plain"});
 						urls.push(URL.createObjectURL(blob));
 					}
 					else
@@ -452,9 +452,9 @@ Script.prototype.compileCode = function(code, onReady)
 				}
 			}
 
-			if(urls.length > 0)
+			if (urls.length > 0)
 			{
-				for(var i = 0; i < urls.length; i++)
+				for (var i = 0; i < urls.length; i++)
 				{
 					var js = document.createElement("script");
 					js.type = "text/javascript";
@@ -464,7 +464,7 @@ Script.prototype.compileCode = function(code, onReady)
 					{
 						libsLoaded++;
 
-						if(libsLoaded === urls.length)
+						if (libsLoaded === urls.length)
 						{
 							onReady();
 						}
@@ -480,7 +480,7 @@ Script.prototype.compileCode = function(code, onReady)
 		}
 
 		// Code used to import context data to the scope of the script
-		var contextCode = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}"
+		var contextCode = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}";
 
 		// Evaluate code and create constructor
 		var Constructor = new Function("__context__", contextCode + code);
@@ -494,41 +494,41 @@ Script.prototype.compileCode = function(code, onReady)
 			Object.assign(context, THREE);
 			Object.assign(context, NUNU);
 			
-			var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc", ];
+			var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc"];
 			var math = {};
-			for(var i of mathProps)
+			for (var i of mathProps)
 			{
 				math[i] = window.Math[i];
 			}
 			Object.assign(math, THREE.Math);
 
 			Object.assign(context,
-			{	
-				program: this.program, 
-				scene: this.scene, 
-				self: this,
-				THREE: THREE,
-				CANNON: CANNON,
-				Math: math,
-				Keyboard: this.program.keyboard,
-				Mouse: this.program.mouse
-			});
+				{	
+					program: this.program, 
+					scene: this.scene, 
+					self: this,
+					THREE: THREE,
+					CANNON: CANNON,
+					Math: math,
+					Keyboard: this.program.keyboard,
+					Mouse: this.program.mouse
+				});
 
 			this.script = new Constructor(context);
 		}
-		catch(e)
+		catch (e)
 		{
 			this.script = {};
 			console.warn("nunuStudio: Error initializing script code", e);
 			throw "Error initializing script code";
 		}
 
-		if(this.mode !== Script.INCLUDE)
+		if (this.mode !== Script.INCLUDE)
 		{
 			onReady();
 		}
 	}
-	catch(e)
+	catch (e)
 	{
 		this.script = {};
 		console.warn("nunuStudio: Error compiling script code", e);

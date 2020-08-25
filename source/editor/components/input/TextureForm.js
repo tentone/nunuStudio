@@ -1,3 +1,4 @@
+import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, Texture} from "three";
 import {Locale} from "../../locale/LocaleManager.js";
 import {Video} from "../../../core/resources/Video.js";
 import {Image} from "../../../core/resources/Image.js";
@@ -7,7 +8,6 @@ import {VectorBox} from "./VectorBox.js";
 import {TextureChooser} from "./TextureChooser.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
-import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, Texture} from "three";
 
 function TextureForm(parent)
 {
@@ -80,7 +80,7 @@ TextureForm.prototype.setOnChange = function(onChange)
  */
 TextureForm.prototype.setValue = function(texture)
 {
-	if(texture instanceof Texture && !texture.isCubeTexture)
+	if (texture instanceof Texture && !texture.isCubeTexture)
 	{
 		this.texture = texture;
 
@@ -105,9 +105,9 @@ TextureForm.prototype.setValue = function(texture)
  */
 TextureForm.prototype.getValue = function()
 {
-	if(this.useTexture.getValue())
+	if (this.useTexture.getValue())
 	{
-		if(this.texture !== null)
+		if (this.texture !== null)
 		{
 			this.texture.wrapS = this.wrapS.getValue();
 			this.texture.wrapT = this.wrapT.getValue();
@@ -131,17 +131,17 @@ TextureForm.prototype.loadTexture = function(file)
 		self.useTexture.setValue(true);
 		self.updatePreview();
 
-		if(self.onChange !== null)
+		if (self.onChange !== null)
 		{
 			self.onChange();
 		}
 	};
 
-	if(Image.fileIsImage(file))
+	if (Image.fileIsImage(file))
 	{
 		Loaders.loadTexture(file, onLoad);
 	}
-	else if(Video.fileIsVideo(file))
+	else if (Video.fileIsVideo(file))
 	{
 		Loaders.loadVideoTexture(file, onLoad);
 	}
@@ -152,7 +152,7 @@ TextureForm.prototype.updateSize = function()
 	TextureChooser.prototype.updateSize.call(this);
 
 	this.form.position.set(this.size.y + 5, 0);
-	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
+	this.form.size.set(this.size.x - this.form.position.x, this.size.y);
 	this.form.updateInterface();
 };
 

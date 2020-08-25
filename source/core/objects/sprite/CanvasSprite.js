@@ -1,5 +1,5 @@
-import {CanvasTexture} from "../../texture/CanvasTexture.js";
 import {Sprite, SpriteMaterial} from "three";
+import {CanvasTexture} from "../../texture/CanvasTexture.js";
 
 /**
  * Canvas sprite is used to render canvas based elements in a 2D canvas.
@@ -28,15 +28,15 @@ function CanvasSprite()
 	this.canvas = this.texture.image;
 
 	var material = new SpriteMaterial(
-	{
-		map: this.texture,
-		color: 0xFFFFFF,
-		transparent: true,
-		alphaTest: 0.4,
-		depthTest: true,
-		depthWrite: true,
-		sizeAttenuation: true
-	});
+		{
+			map: this.texture,
+			color: 0xFFFFFF,
+			transparent: true,
+			alphaTest: 0.4,
+			depthTest: true,
+			depthWrite: true,
+			sizeAttenuation: true
+		});
 
 	Sprite.call(this, material);
 
@@ -44,23 +44,23 @@ function CanvasSprite()
 	this.type = "CanvasSprite";
 
 	Object.defineProperties(this,
-	{
+		{
 		/**
 		 * Size attenuation indicates how the sprite should be scaled relative to the camera.
 		 *
 		 * @attribute sizeAttenuation
 		 * @type {number}
 		 */
-		sizeAttenuation:
+			sizeAttenuation:
 		{
-			get: function(){return this.material.sizeAttenuation;},
+			get: function() {return this.material.sizeAttenuation;},
 			set: function(value)
 			{
 				this.material.sizeAttenuation = value;
 				this.material.needsUpdate = true;
 			}
 		}
-	});
+		});
 }	
 
 CanvasSprite.prototype = Object.create(Sprite.prototype);
