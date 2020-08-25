@@ -306,8 +306,6 @@ ConsoleTab.getStackTrace = function()
 		});
 		return stack.splice(stack[0] == "Error" ? 2 : 1);
 	}
-
-	return "";
 };
 
 /**

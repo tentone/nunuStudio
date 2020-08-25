@@ -74,15 +74,15 @@ TextEditor.prototype.attach = function(resource)
 	this.resource = resource;
 	this.setText(resource.data);
 
-	if (resource.encoding == "js")
+	if (resource.encoding === "js")
 	{
 		this.setLanguage("javascript");
 	}
-	else if (resource.encoding == "html")
+	else if (resource.encoding === "html")
 	{
 		this.setLanguage("htmlmixed");
 	}
-	else if (resource.encoding == "css")
+	else if (resource.encoding === "css")
 	{
 		this.setLanguage("css");
 	}

@@ -76,7 +76,7 @@ var AWDLoader = (function()
 		this.materialFactory = undefined;
 		this._url = '';
 		this._baseDir = '';
-		this._data = undefined;
+		this.data = undefined;
 		this._ptr = 0;
 		this._version = [];
 		this._streaming = false;
@@ -108,7 +108,7 @@ var AWDLoader = (function()
 			{
 				var blen = data.byteLength;
 				this._ptr = 0;
-				this._data = new DataView(data);
+				this.data = new DataView(data);
 				this._parseHeader();
 				if (this._compression != 0)
 				{
@@ -405,18 +405,18 @@ var AWDLoader = (function()
 				var jointsParsed = 0;
 				while (jointsParsed < numJoints)
 				{
-					var has_transform; // :uint;
-					var mtx_data;
-					has_transform = this.readU8();
-					if (has_transform === 1)
+					var hasTransform; // :uint;
+					var mtxData;
+					hasTransform = this.readU8();
+					if (hasTransform === 1)
 					{
-						mtx_data = this.parseMatrix4();
+						mtxData = this.parseMatrix4();
 					}
 					else
 					{
-						mtx_data = new Matrix4();
+						mtxData = new Matrix4();
 					}
-					pose[jointsParsed] = mtx_data;
+					pose[jointsParsed] = mtxData;
 					jointsParsed++;
 				}
 				// Skip attributes for now
@@ -549,11 +549,11 @@ var AWDLoader = (function()
 					while (this._ptr < smEnd)
 					{
 						var idx = 0,
-							str_type = this.readU8(),
-							str_ftype = this.readU8(),
+							strType = this.readU8(),
+							strFtype = this.readU8(),
 							strLen = this.readU32(),
 							strEnd = strLen + this._ptr;
-						if (str_type === 1)
+						if (strType === 1)
 						{
 						// VERTICES
 							buffer = new Float32Array(strLen / 12 * 3);
@@ -568,7 +568,7 @@ var AWDLoader = (function()
 								idx += 3;
 							}
 						}
-						else if (str_type === 2)
+						else if (strType === 2)
 						{
 						// INDICES
 							buffer = new Uint16Array(strLen / 2);
@@ -583,7 +583,7 @@ var AWDLoader = (function()
 								idx += 3;
 							}
 						}
-						else if (str_type === 3)
+						else if (strType === 3)
 						{
 						// UVS
 							buffer = new Float32Array(strLen / 8 * 2);
@@ -597,7 +597,7 @@ var AWDLoader = (function()
 								idx += 2;
 							}
 						}
-						else if (str_type === 4)
+						else if (strType === 4)
 						{
 						// NORMALS
 							buffer = new Float32Array(strLen / 12 * 3);
@@ -842,45 +842,45 @@ var AWDLoader = (function()
 			},
 			readU8: function()
 			{
-				return this._data.getUint8(this._ptr++);
+				return this.data.getUint8(this._ptr++);
 			},
 			readI8: function()
 			{
-				return this._data.getInt8(this._ptr++);
+				return this.data.getInt8(this._ptr++);
 			},
 			readU16: function()
 			{
-				var a = this._data.getUint16(this._ptr, littleEndian);
+				var a = this.data.getUint16(this._ptr, littleEndian);
 				this._ptr += 2;
 				return a;
 			},
 			readI16: function()
 			{
-				var a = this._data.getInt16(this._ptr, littleEndian);
+				var a = this.data.getInt16(this._ptr, littleEndian);
 				this._ptr += 2;
 				return a;
 			},
 			readU32: function()
 			{
-				var a = this._data.getUint32(this._ptr, littleEndian);
+				var a = this.data.getUint32(this._ptr, littleEndian);
 				this._ptr += 4;
 				return a;
 			},
 			readI32: function()
 			{
-				var a = this._data.getInt32(this._ptr, littleEndian);
+				var a = this.data.getInt32(this._ptr, littleEndian);
 				this._ptr += 4;
 				return a;
 			},
 			readF32: function()
 			{
-				var a = this._data.getFloat32(this._ptr, littleEndian);
+				var a = this.data.getFloat32(this._ptr, littleEndian);
 				this._ptr += 4;
 				return a;
 			},
 			readF64: function()
 			{
-				var a = this._data.getFloat64(this._ptr, littleEndian);
+				var a = this.data.getFloat64(this._ptr, littleEndian);
 				this._ptr += 8;
 				return a;
 			},
@@ -909,20 +909,20 @@ var AWDLoader = (function()
 					c = 0;
 				while (out.length < len)
 				{
-					var c1 = this._data.getUint8(this._ptr++, littleEndian);
+					var c1 = this.data.getUint8(this._ptr++, littleEndian);
 					if (c1 < 128)
 					{
 						out[c++] = String.fromCharCode(c1);
 					}
 					else if (c1 > 191 && c1 < 224)
 					{
-						var c2 = this._data.getUint8(this._ptr++, littleEndian);
+						var c2 = this.data.getUint8(this._ptr++, littleEndian);
 						out[c++] = String.fromCharCode((c1 & 31) << 6 | c2 & 63);
 					}
 					else
 					{
-						var c2 = this._data.getUint8(this._ptr++, littleEndian);
-						var c3 = this._data.getUint8(this._ptr++, littleEndian);
+						var c2 = this.data.getUint8(this._ptr++, littleEndian);
+						var c3 = this.data.getUint8(this._ptr++, littleEndian);
 						out[c++] = String.fromCharCode((c1 & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
 					}
 				}
