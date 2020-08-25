@@ -1,4 +1,40 @@
+/* eslint-disable camelcase */
 import {Loader, Object3D, FileLoader, Mesh, MeshPhongMaterial, Texture, ImageLoader, Bone, Matrix4, BufferGeometry, BufferAttribute} from "three";
+
+var UNCOMPRESSED = 0,
+	DEFLATE = 1,
+	LZMA = 2,
+	AWD_FIELD_INT8 = 1,
+	AWD_FIELD_INT16 = 2,
+	AWD_FIELD_INT32 = 3,
+	AWD_FIELD_UINT8 = 4,
+	AWD_FIELD_UINT16 = 5,
+	AWD_FIELD_UINT32 = 6,
+	AWD_FIELD_FLOAT32 = 7,
+	AWD_FIELD_FLOAT64 = 8,
+	AWD_FIELD_BOOL = 21,
+	AWD_FIELD_COLOR = 22,
+	AWD_FIELD_BADDR = 23,
+	AWD_FIELD_STRING = 31,
+	AWD_FIELD_BYTEARRAY = 32,
+	AWD_FIELD_VECTOR2x1 = 41,
+	AWD_FIELD_VECTOR3x1 = 42,
+	AWD_FIELD_VECTOR4x1 = 43,
+	AWD_FIELD_MTX3x2 = 44,
+	AWD_FIELD_MTX3x3 = 45,
+	AWD_FIELD_MTX4x3 = 46,
+	AWD_FIELD_MTX4x4 = 47,
+	BOOL = 21,
+	COLOR = 22,
+	BADDR = 23,
+	INT8 = 1,
+	INT16 = 2,
+	INT32 = 3,
+	UINT8 = 4,
+	UINT16 = 5,
+	UINT32 = 6,
+	FLOAT32 = 7,
+	FLOAT64 = 8;
 
 /**
  * Author: Pierre Lepers
@@ -6,40 +42,6 @@ import {Loader, Object3D, FileLoader, Mesh, MeshPhongMaterial, Texture, ImageLoa
  */
 var AWDLoader = (function()
 {
-	var // UNCOMPRESSED = 0,
-		// DEFLATE = 1,
-		// LZMA = 2,
-		AWD_FIELD_INT8 = 1,
-		AWD_FIELD_INT16 = 2,
-		AWD_FIELD_INT32 = 3,
-		AWD_FIELD_UINT8 = 4,
-		AWD_FIELD_UINT16 = 5,
-		AWD_FIELD_UINT32 = 6,
-		AWD_FIELD_FLOAT32 = 7,
-		AWD_FIELD_FLOAT64 = 8,
-		AWD_FIELD_BOOL = 21,
-		// AWD_FIELD_COLOR = 22,
-		AWD_FIELD_BADDR = 23,
-		// AWD_FIELD_STRING = 31,
-		// AWD_FIELD_BYTEARRAY = 32,
-		AWD_FIELD_VECTOR2x1 = 41,
-		AWD_FIELD_VECTOR3x1 = 42,
-		AWD_FIELD_VECTOR4x1 = 43,
-		AWD_FIELD_MTX3x2 = 44,
-		AWD_FIELD_MTX3x3 = 45,
-		AWD_FIELD_MTX4x3 = 46,
-		AWD_FIELD_MTX4x4 = 47,
-		BOOL = 21,
-		// COLOR = 22,
-		BADDR = 23,
-		// INT8 = 1,
-		// INT16 = 2,
-		// INT32 = 3,
-		UINT8 = 4,
-		UINT16 = 5,
-		// UINT32 = 6,
-		FLOAT32 = 7,
-		FLOAT64 = 8;
 	var littleEndian = true;
 
 	function Block()

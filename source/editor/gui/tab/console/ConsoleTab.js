@@ -182,7 +182,7 @@ function ConsoleTab(parent, closeable, container, index)
 			self.server.complete(cm);
 
 			// If there is no tern sugestion suggest known words
-			if (cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			if (!cm.state.completionActive || !cm.state.completionActive.widget)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
 			}
@@ -304,7 +304,7 @@ ConsoleTab.getStackTrace = function()
 		{
 			return line.trim();
 		});
-		return stack.splice(stack[0] == "Error" ? 2 : 1);
+		return stack.splice(stack[0] === "Error" ? 2 : 1);
 	}
 };
 

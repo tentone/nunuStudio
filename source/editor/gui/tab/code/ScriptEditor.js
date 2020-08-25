@@ -59,7 +59,7 @@ function ScriptEditor(parent, closeable, container, index)
 			self.server.complete(cm);
 
 			// If there is no tern sugestion suggest known words
-			if (cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			if (!cm.state.completionActive || !cm.state.completionActive.widget)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
 			}

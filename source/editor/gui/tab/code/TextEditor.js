@@ -34,7 +34,7 @@ function TextEditor(parent, closeable, container, index)
 		if (/[\w\.]/.exec(typed))
 		{
 			// If there is no tern sugestion suggest known words
-			if (cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			if (!cm.state.completionActive || !cm.state.completionActive.widget)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
 			}

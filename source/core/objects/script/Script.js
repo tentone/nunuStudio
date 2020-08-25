@@ -1,4 +1,5 @@
 import {Group, Object3D} from "three";
+// eslint-disable-next-line no-duplicate-imports
 import * as THREE from "three";
 import * as CANNON from "cannon";
 import {Scene} from "../Scene.js";
@@ -29,7 +30,7 @@ function Script(code, mode)
 	 * Javascript code attached to the script.
 	 *
 	 * It can access and change every object in the program and supports some events
-	 *  - initialize
+	 * - initialize
 	 *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
 	 *  - update(delta)
 	 *    - Called on every frame after rendering
@@ -520,7 +521,7 @@ Script.prototype.compileCode = function(code, onReady)
 		{
 			this.script = {};
 			console.warn("nunuStudio: Error initializing script code", e);
-			throw "Error initializing script code";
+			throw new Error("Error initializing script code");
 		}
 
 		if (this.mode !== Script.INCLUDE)
@@ -532,7 +533,7 @@ Script.prototype.compileCode = function(code, onReady)
 	{
 		this.script = {};
 		console.warn("nunuStudio: Error compiling script code", e);
-		throw "Error compiling script code";
+		throw new Error("Error compiling script code");
 	}
 };
 
