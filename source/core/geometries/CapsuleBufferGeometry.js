@@ -150,8 +150,8 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 		}
 
-		var cone_height = height + cosAlpha*radiusTop - cosAlpha*radiusBottom;
-		var slope = sinAlpha * (radiusBottom - radiusTop) / cone_height;
+		var coneHeight = height + cosAlpha*radiusTop - cosAlpha * radiusBottom;
+		var slope = sinAlpha * (radiusBottom - radiusTop) / coneHeight;
 		for (y = 1; y <= heightSegments; y++) 
 		{
 
@@ -174,7 +174,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 				// Vertex
 				vertex.x = radius * sinTheta;
-				vertex.y = halfHeight + cosAlpha*radiusTop - y * cone_height / heightSegments;
+				vertex.y = halfHeight + cosAlpha*radiusTop - y * coneHeight / heightSegments;
 				vertex.z = radius * cosTheta;
 				vertices.setXYZ(index, vertex.x, vertex.y, vertex.z);
 

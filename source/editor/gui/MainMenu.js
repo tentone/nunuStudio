@@ -19,8 +19,6 @@ import {RemoveAction} from "../history/action/objects/RemoveAction.js";
 import {AddAction} from "../history/action/objects/AddAction.js";
 import {ChangeAction} from "../history/action/ChangeAction.js";
 import {ActionBundle} from "../history/action/ActionBundle.js";
-import {SettingsTab} from "./tab/settings/SettingsTab.js";
-import {AboutTab} from "./tab/about/AboutTab.js";
 import {Global} from "../Global.js";
 import {ProjectExporters} from "../ProjectExporters.js";
 import {Editor} from "../Editor.js";
@@ -28,6 +26,8 @@ import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
 import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
+import {AboutTab} from "./tab/about/AboutTab.js";
+import {SettingsTab} from "./tab/settings/SettingsTab.js";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.

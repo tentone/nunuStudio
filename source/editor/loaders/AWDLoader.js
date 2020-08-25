@@ -110,11 +110,11 @@ var AWDLoader = (function()
 				this._ptr = 0;
 				this.data = new DataView(data);
 				this._parseHeader();
-				if (this._compression != 0)
+				if (this._compression !== 0)
 				{
 					console.error('compressed AWD not supported');
 				}
-				if (!this._streaming && this._bodylen != data.byteLength - this._ptr)
+				if (!this._streaming && this._bodylen !== data.byteLength - this._ptr)
 				{
 					console.error('AWDLoader: body len does not match file length', this._bodylen, blen - this._ptr);
 				}

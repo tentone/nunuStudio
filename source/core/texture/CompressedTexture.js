@@ -6,9 +6,9 @@ import {Texture} from "three";
  * The advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.
  *
  * The problem with compressed textures is that its hardware dependent (they dont work everywhere)
- *  - DXT: supported on desktop and some Android smartphones
- *  - PVR: supported on iOS and some Android smartphones
- *  - ETC1: supported by most Android smartphones
+ * - DXT: supported on desktop and some Android smartphones
+ * - PVR: supported on iOS and some Android smartphones
+ * - ETC1: supported by most Android smartphones
  *
  * The usage of these format can free a lot of video memory and is a must for mobile devices.
  * 

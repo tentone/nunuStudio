@@ -18,10 +18,10 @@ function PhysicsGenerator() {}
 
 /**
  * Type is used to indentify the type of cannonjs:
- *  - BOX
- *  - CYLINDER
- *  - SPHERE
- *  - HULL
+ * - BOX
+ * - CYLINDER
+ * - SPHERE
+ * - HULL
  * 
  * @attribute Type
  * @type {Object}
@@ -344,10 +344,10 @@ PhysicsGenerator.getGeometry = function(object)
 	else
 	{
 		var combined = new Geometry();
-		var mesh;
+		var mesh = meshes.pop();
 
 		// Recursively merge geometry, preserving local transforms
-		while (mesh = meshes.pop())
+		while (mesh !== undefined)
 		{
 			mesh.updateMatrixWorld();
 
@@ -360,6 +360,8 @@ PhysicsGenerator.getGeometry = function(object)
 			{
 				combined.merge(mesh.geometry, mesh.matrixWorld);
 			}
+
+			mesh = meshes.pop();
 		}
 
 		var matrix = new Matrix4();

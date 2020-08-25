@@ -320,52 +320,52 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 			{
 				var material = child.material;
 				
-				if (material.map != null && material.map.uuid === texture.uuid)
+				if (material.map && material.map.uuid === texture.uuid)
 				{
 					material.map = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
+				if (material.bumpMap && material.bumpMap.uuid === texture.uuid)
 				{
 					material.bumpMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.normalMap != null && material.normalMap.uuid === texture.uuid)
+				if (material.normalMap && material.normalMap.uuid === texture.uuid)
 				{
 					material.normalMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
+				if (material.displacementMap && material.displacementMap.uuid === texture.uuid)
 				{
 					material.displacementMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.specularMap != null && material.specularMap.uuid === texture.uuid)
+				if (material.specularMap && material.specularMap.uuid === texture.uuid)
 				{
 					material.specularMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
+				if (material.emissiveMap && material.emissiveMap.uuid === texture.uuid)
 				{
 					material.emissiveMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
+				if (material.alphaMap && material.alphaMap.uuid === texture.uuid)
 				{
 					material.alphaMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
+				if (material.roughnessMap && material.roughnessMap.uuid === texture.uuid)
 				{
 					material.roughnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
+				if (material.metalnessMap && material.metalnessMap.uuid === texture.uuid)
 				{
 					material.metalnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
-				if (material.envMap != null && material.envMap.uuid === texture.uuid)
+				if (material.envMap && material.envMap.uuid === texture.uuid)
 				{
 					material.envMap = null;
 					material.needsUpdate = true;

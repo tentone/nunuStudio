@@ -61,9 +61,9 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 
 	/**
 	 * Faces layout offsets.
-	 *   2
+	 * --2
 	 * 1 4 0 5
-	 *   3
+	 * --3
 	 *
 	 * @attribute faceOffsets
 	 * @type {Array}

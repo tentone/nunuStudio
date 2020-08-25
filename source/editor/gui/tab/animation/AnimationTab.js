@@ -127,7 +127,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setOnClick(function()
 	{
-		if (self.mixer == null)
+		if (self.mixer === null)
 		{
 			Editor.alert("No animation found!");
 			return;
@@ -152,7 +152,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setOnClick(function()
 	{
-		if (self.mixer == null)
+		if (self.mixer === null)
 		{
 			Editor.alert("No animation playing!");
 			return;

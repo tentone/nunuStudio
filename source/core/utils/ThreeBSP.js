@@ -9,7 +9,7 @@ var SPANNING = 3;
 function ThreeBSP(geometry)
 {
 	// Convert Geometry to ThreeBSP
-	var i, _length_i,
+	var i, LengthI,
 		face, vertex, faceVertexUvs, uvs,
 		polygon,
 		polygons = [];
@@ -33,10 +33,10 @@ function ThreeBSP(geometry)
 	}
 	else
 	{
-		throw 'ThreeBSP: Given geometry is unsupported';
+		throw new Error('ThreeBSP: Given geometry is unsupported');
 	}
 
-	for (i = 0, _length_i = geometry.faces.length; i < _length_i; i++)
+	for (i = 0, LengthI = geometry.faces.length; i < LengthI; i++)
 	{
 		face = geometry.faces[i];
 		faceVertexUvs = geometry.faceVertexUvs[0][i];
@@ -90,7 +90,7 @@ function ThreeBSP(geometry)
 		}
 		else
 		{
-			throw 'Invalid face type at index ' + i;
+			throw new Error('Invalid face type at index ' + i);
 		}
 
 		polygon.calculateProperties();
@@ -99,10 +99,10 @@ function ThreeBSP(geometry)
 
 	this.tree = new ThreeBSP.Node(polygons);
 };
-ThreeBSP.prototype.subtract = function(other_tree)
+ThreeBSP.prototype.subtract = function(otherTree)
 {
 	var a = this.tree.clone(),
-		b = other_tree.tree.clone();
+		b = otherTree.tree.clone();
 
 	a.invert();
 	a.clipTo(b);
@@ -116,10 +116,10 @@ ThreeBSP.prototype.subtract = function(other_tree)
 	a.matrix = this.matrix;
 	return a;
 };
-ThreeBSP.prototype.union = function(other_tree)
+ThreeBSP.prototype.union = function(otherTree)
 {
 	var a = this.tree.clone(),
-		b = other_tree.tree.clone();
+		b = otherTree.tree.clone();
 
 	a.clipTo(b);
 	b.clipTo(a);
@@ -131,10 +131,10 @@ ThreeBSP.prototype.union = function(other_tree)
 	a.matrix = this.matrix;
 	return a;
 };
-ThreeBSP.prototype.intersect = function(other_tree)
+ThreeBSP.prototype.intersect = function(otherTree)
 {
 	var a = this.tree.clone(),
-		b = other_tree.tree.clone();
+		b = otherTree.tree.clone();
 
 	a.invert();
 	b.clipTo(a);
@@ -153,19 +153,19 @@ ThreeBSP.prototype.toGeometry = function()
 		matrix = new Matrix4().getInverse(this.matrix),
 		geometry = new Geometry(),
 		polygons = this.tree.allPolygons(),
-		polygon_count = polygons.length,
-		polygon, polygon_vertice_count,
-		vertice_dict = {},
-		vertex_idx_a, vertex_idx_b, vertex_idx_c,
+		polygonCount = polygons.length,
+		polygon, polygonVerticeCount,
+		verticeDict = {},
+		vertexIdxA, vertexIdxB, vertexIdxC,
 		vertex, face,
 		verticeUvs;
 
-	for (i = 0; i < polygon_count; i++)
+	for (i = 0; i < polygonCount; i++)
 	{
 		polygon = polygons[i];
-		polygon_vertice_count = polygon.vertices.length;
+		polygonVerticeCount = polygon.vertices.length;
 
-		for (j = 2; j < polygon_vertice_count; j++)
+		for (j = 2; j < polygonVerticeCount; j++)
 		{
 			verticeUvs = [];
 
@@ -174,48 +174,48 @@ ThreeBSP.prototype.toGeometry = function()
 			vertex = new Vector3(vertex.x, vertex.y, vertex.z);
 			vertex.applyMatrix4(matrix);
 
-			if (typeof vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
+			if (typeof verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
 			{
-				vertex_idx_a = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z];
+				vertexIdxA = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z];
 			}
 			else
 			{
 				geometry.vertices.push(vertex);
-				vertex_idx_a = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
+				vertexIdxA = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
 			}
 
 			vertex = polygon.vertices[j - 1];
 			verticeUvs.push(new Vector2(vertex.uv.x, vertex.uv.y));
 			vertex = new Vector3(vertex.x, vertex.y, vertex.z);
 			vertex.applyMatrix4(matrix);
-			if (typeof vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
+			if (typeof verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
 			{
-				vertex_idx_b = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z];
+				vertexIdxB = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z];
 			}
 			else
 			{
 				geometry.vertices.push(vertex);
-				vertex_idx_b = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
+				vertexIdxB = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
 			}
 
 			vertex = polygon.vertices[j];
 			verticeUvs.push(new Vector2(vertex.uv.x, vertex.uv.y));
 			vertex = new Vector3(vertex.x, vertex.y, vertex.z);
 			vertex.applyMatrix4(matrix);
-			if (typeof vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
+			if (typeof verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] !== 'undefined')
 			{
-				vertex_idx_c = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z];
+				vertexIdxC = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z];
 			}
 			else
 			{
 				geometry.vertices.push(vertex);
-				vertex_idx_c = vertice_dict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
+				vertexIdxC = verticeDict[vertex.x + ',' + vertex.y + ',' + vertex.z] = geometry.vertices.length - 1;
 			}
 
 			face = new Face3(
-				vertex_idx_a,
-				vertex_idx_b,
-				vertex_idx_c,
+				vertexIdxA,
+				vertexIdxB,
+				vertexIdxC,
 				new Vector3(polygon.normal.x, polygon.normal.y, polygon.normal.z)
 			);
 
@@ -271,10 +271,10 @@ ThreeBSP.Polygon.prototype.calculateProperties = function()
 };
 ThreeBSP.Polygon.prototype.clone = function()
 {
-	var i, vertice_count,
+	var i, verticeCount,
 		polygon = new ThreeBSP.Polygon();
 
-	for (i = 0, vertice_count = this.vertices.length; i < vertice_count; i++)
+	for (i = 0, verticeCount = this.vertices.length; i < verticeCount; i++)
 	{
 		polygon.vertices.push(this.vertices[i].clone());
 	};
@@ -300,13 +300,13 @@ ThreeBSP.Polygon.prototype.flip = function()
 };
 ThreeBSP.Polygon.prototype.classifyVertex = function(vertex)
 {
-	var side_value = this.normal.dot(vertex) - this.w;
+	var sideValue = this.normal.dot(vertex) - this.w;
 
-	if (side_value < -EPSILON)
+	if (sideValue < -EPSILON)
 	{
 		return BACK;
 	}
-	else if (side_value > EPSILON)
+	else if (sideValue > EPSILON)
 	{
 		return FRONT;
 	}
@@ -318,33 +318,33 @@ ThreeBSP.Polygon.prototype.classifyVertex = function(vertex)
 ThreeBSP.Polygon.prototype.classifySide = function(polygon)
 {
 	var i, vertex, classification,
-		num_positive = 0,
-		num_negative = 0,
-		vertice_count = polygon.vertices.length;
+		numPositive = 0,
+		numNegative = 0,
+		verticeCount = polygon.vertices.length;
 
-	for (i = 0; i < vertice_count; i++)
+	for (i = 0; i < verticeCount; i++)
 	{
 		vertex = polygon.vertices[i];
 		classification = this.classifyVertex(vertex);
 		if (classification === FRONT)
 		{
-			num_positive++;
+			numPositive++;
 		}
 		else if (classification === BACK)
 		{
-			num_negative++;
+			numNegative++;
 		}
 	}
 
-	if (num_positive > 0 && num_negative === 0)
+	if (numPositive > 0 && numNegative === 0)
 	{
 		return FRONT;
 	}
-	else if (num_positive === 0 && num_negative > 0)
+	else if (numPositive === 0 && numNegative > 0)
 	{
 		return BACK;
 	}
-	else if (num_positive === 0 && num_negative === 0)
+	else if (numPositive === 0 && numNegative === 0)
 	{
 		return COPLANAR;
 	}
@@ -353,14 +353,14 @@ ThreeBSP.Polygon.prototype.classifySide = function(polygon)
 		return SPANNING;
 	}
 };
-ThreeBSP.Polygon.prototype.splitPolygon = function(polygon, coplanar_front, coplanar_back, front, back)
+ThreeBSP.Polygon.prototype.splitPolygon = function(polygon, coplanarFront, coplanarBack, front, back)
 {
 	var classification = this.classifySide(polygon);
 
 	if (classification === COPLANAR)
 	{
 
-		(this.normal.dot(polygon.normal) > 0 ? coplanar_front : coplanar_back).push(polygon);
+		(this.normal.dot(polygon.normal) > 0 ? coplanarFront : coplanarBack).push(polygon);
 
 	}
 	else if (classification === FRONT)
@@ -378,23 +378,23 @@ ThreeBSP.Polygon.prototype.splitPolygon = function(polygon, coplanar_front, copl
 	else
 	{
 
-		var vertice_count,
+		var verticeCount,
 			i, j, ti, tj, vi, vj,
 			t, v,
 			f = [],
 			b = [];
 
-		for (i = 0, vertice_count = polygon.vertices.length; i < vertice_count; i++)
+		for (i = 0, verticeCount = polygon.vertices.length; i < verticeCount; i++)
 		{
 
-			j = (i + 1) % vertice_count;
+			j = (i + 1) % verticeCount;
 			vi = polygon.vertices[i];
 			vj = polygon.vertices[j];
 			ti = this.classifyVertex(vi);
 			tj = this.classifyVertex(vj);
 
-			if (ti != BACK) {f.push(vi);}
-			if (ti != FRONT) {b.push(vi);}
+			if (ti !== BACK) {f.push(vi);}
+			if (ti !== FRONT) {b.push(vi);}
 			if ((ti | tj) === SPANNING)
 			{
 				t = (this.w - this.normal.dot(vi)) / this.normal.dot(vj.clone().subtract(vi));
@@ -511,7 +511,7 @@ ThreeBSP.Vertex.prototype.applyMatrix4 = function(m)
 
 ThreeBSP.Node = function(polygons)
 {
-	var i, polygon_count,
+	var i, polygonCount,
 		front = [],
 		back = [];
 
@@ -522,7 +522,7 @@ ThreeBSP.Node = function(polygons)
 
 	this.divider = polygons[0].clone();
 
-	for (i = 0, polygon_count = polygons.length; i < polygon_count; i++)
+	for (i = 0, polygonCount = polygons.length; i < polygonCount; i++)
 	{
 		this.divider.splitPolygon(polygons[i], this.polygons, this.polygons, front, back);
 	}
@@ -554,7 +554,7 @@ ThreeBSP.Node.isConvex = function(polygons)
 };
 ThreeBSP.Node.prototype.build = function(polygons)
 {
-	var i, polygon_count,
+	var i, polygonCount,
 		front = [],
 		back = [];
 
@@ -563,7 +563,7 @@ ThreeBSP.Node.prototype.build = function(polygons)
 		this.divider = polygons[0].clone();
 	}
 
-	for (i = 0, polygon_count = polygons.length; i < polygon_count; i++)
+	for (i = 0, polygonCount = polygons.length; i < polygonCount; i++)
 	{
 		this.divider.splitPolygon(polygons[i], this.polygons, this.polygons, front, back);
 	}
@@ -603,9 +603,9 @@ ThreeBSP.Node.prototype.clone = function()
 };
 ThreeBSP.Node.prototype.invert = function()
 {
-	var i, polygon_count, temp;
+	var i, polygonCount, temp;
 
-	for (i = 0, polygon_count = this.polygons.length; i < polygon_count; i++)
+	for (i = 0, polygonCount = this.polygons.length; i < polygonCount; i++)
 	{
 		this.polygons[i].flip();
 	}
@@ -622,14 +622,14 @@ ThreeBSP.Node.prototype.invert = function()
 };
 ThreeBSP.Node.prototype.clipPolygons = function(polygons)
 {
-	var i, polygon_count,
-		front, back;
+	var i, polygonCount;
 
 	if (!this.divider) {return polygons.slice();}
 
-	front = [], back = [];
+	var front = [];
+	var back = [];
 
-	for (i = 0, polygon_count = polygons.length; i < polygon_count; i++)
+	for (i = 0, polygonCount = polygons.length; i < polygonCount; i++)
 	{
 		this.divider.splitPolygon(polygons[i], front, back, front, back);
 	}

@@ -31,7 +31,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @default 10.0
 	 * @type {number}
 	 */
-	this.size = size != undefined ? size : 10.0;
+	this.size = size !== undefined ? size : 10.0;
 
 	/**
 	 * Aspect ratio X/Y.
@@ -40,7 +40,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @default 1.0
 	 * @type {number}
 	 */
-	this.aspect = aspect != undefined ? aspect : 1.0;
+	this.aspect = aspect !== undefined ? aspect : 1.0;
 
 	/**
 	 * Camera resize mode.
@@ -126,7 +126,6 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
 
 /**
  * Used to set camera to resize vertically.
- *  
  *
  * @attribute RESIZE_VERTICAL
  * @type {number}
