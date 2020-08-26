@@ -1,4 +1,5 @@
-import {NodeSocket, Object2D, Text, Vector2} from "escher.js/build/escher.module.js";
+import {NodeSocket, Object2D, Text, Vector2, ColorStyle} from "escher.js/build/escher.module.js";
+import {DOMUtils} from "../../../../editor/utils/DOMUtils.js";
 import {BaseNode} from "./BaseNode.js";
 
 /**
@@ -46,6 +47,7 @@ function OperationNode(operation)
 	this.r = null;
 	
 	this.text = new Text();
+	this.text.strokeStyle = new ColorStyle(DOMUtils.getCSSVariable("--color-light"));
 	this.text.serializable = false;
 	this.text.font = "25px Arial";
 	this.text.layer = 2;

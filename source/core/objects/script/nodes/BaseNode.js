@@ -1,4 +1,5 @@
-import {Circle, Node} from "escher.js/build/escher.module.js";
+import {Circle, Node, ColorStyle} from "escher.js/build/escher.module.js";
+import {DOMUtils} from "../../../../editor/utils/DOMUtils.js";
 
 /**
  * Base node are used as a basis for all other nodes, they implement the necessary common functionality for all nodes.
@@ -14,6 +15,23 @@ import {Circle, Node} from "escher.js/build/escher.module.js";
 function BaseNode()
 {
 	Node.call(this);
+
+	this.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
+
+	this.strokeStyle = new ColorStyle(DOMUtils.getCSSVariable("--color-light"));
+
+	var self = this;
+
+	this.onPointerEnter = function(pointer, viewport)
+	{
+		self.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--panel-color"));
+	};
+	
+	this.onPointerLeave = function(pointer, viewport)
+	{
+		self.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
+	};
+	
 
 	/**
 	 * Button used to destroy the node and remove it from the graph.
