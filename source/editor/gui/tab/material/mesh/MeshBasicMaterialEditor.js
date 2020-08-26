@@ -199,4 +199,5 @@ MeshBasicMaterialEditor.prototype.attach = function(material, asset)
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };
+
 export {MeshBasicMaterialEditor};
