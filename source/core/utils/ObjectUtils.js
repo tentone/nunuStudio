@@ -163,4 +163,5 @@ ObjectUtils.convertToBufferGeometry = function(object)
 		}
 	});
 };
+
 export {ObjectUtils};

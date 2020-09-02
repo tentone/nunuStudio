@@ -26,6 +26,7 @@ import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
 import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
+import {Exporters} from "../Exporters.js";
 import {AboutTab} from "./tab/about/AboutTab.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
 
@@ -315,61 +316,19 @@ function MainMenu(parent)
 	// Export OBJ
 	exportMenu.addOption("OBJ", function()
 	{	
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new OBJExporter();
-			var data = exporter.parse(Editor.getScene());
-			FileSystem.writeFile(fname, data);
-		}, ".obj");
-
+		Exporters.exportOBJ(Editor.getScene());
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export GLTF
 	exportMenu.addOption("GLTF", function()
 	{
-		var onlyVisible = Editor.confirm(Locale.exportOnlyVisibleObjects);
-
-		var config = 
-		{
-			onlyVisible: onlyVisible,
-			binary: false,
-			forceIndices: true,
-			embedImages: true,
-			forcePowerOfTwoTextures: false
-		};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new GLTFExporter();
-			exporter.parse(Editor.getScene(), function(result)
-			{
-				FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
-			}, config);
-		}, ".gltf");
+		Exporters.exportGLTF(Editor.getScene(), false);
 	}, Global.FILE_PATH + "icons/gltf.png");
 
 	// Export GLB
 	exportMenu.addOption("GLB", function()
 	{	
-		var onlyVisible = Editor.confirm(Locale.exportOnlyVisibleObjects);
-
-		var config = 
-		{
-			onlyVisible: onlyVisible,
-			binary: true,
-			forceIndices: true,
-			embedImages: true,
-			forcePowerOfTwoTextures: false
-		};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new GLTFExporter();
-			exporter.parse(Editor.getScene(), function(result)
-			{
-				FileSystem.writeFileArrayBuffer(fname, result);
-			}, config);
-		}, ".glb");
+		Exporters.exportGLTF(Editor.getScene(), true);
 	}, Global.FILE_PATH + "icons/gltf.png");
 
 	// Export Google Draco
@@ -381,122 +340,43 @@ function MainMenu(parent)
 			return;
 		}
 
-		var geometry = Editor.selection[0].geometry;
-		var exporter = new DRACOExporter();
+		Exporters.exportDraco(Editor.selection[0]);
 
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var arraybuffer = exporter.parse(geometry);
-			FileSystem.writeFileArrayBuffer(fname, arraybuffer);
-		}, ".drc");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Auxiliar method to export collada files
-	function exportCollada(fname, config)
-	{
-		var path = FileSystem.getFilePath(fname);
-
-		var exporter = new ColladaExporter();
-		exporter.parse(Editor.program, function(result)
-		{
-			for (var i = 0; i < result.textures.length; i++)
-			{
-				var texture = result.textures[i];
-				FileSystem.writeFileArrayBuffer(path + texture.name + "." + texture.ext, texture.data.buffer);
-			}
-
-			FileSystem.writeFile(fname, result.data);
-		}, config);
-	}
 
 	// Export Collada
 	exportMenu.addOption("Collada V1.4.1", function()
 	{
-		var config =
-		{
-			version: "1.4.1",
-			binary: true,
-			textureDirectory: ""
-		};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			exportCollada(fname, config);
-		}, ".dae");
-
+		Exporters.exportCollada(Editor.program, "1.4.1");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	exportMenu.addOption("Collada V1.5", function()
 	{
-		var config =
-		{
-			version: "1.5.0",
-			binary: true,
-			textureDirectory: ""
-		};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			exportCollada(fname, config);
-		}, ".dae");
+		Exporters.exportCollada(Editor.program, "1.5.0");
 
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export PLY
 	exportMenu.addOption("PLY", function()
 	{
-		var config = {binary: false};
-		
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new PLYExporter();
-			exporter.parse(Editor.getScene(), function(result)
-			{
-				FileSystem.writeFile(fname, result);
-			}, config);
-		}, ".ply");
+		Exporters.exportPLY(Editor.getScene(), false);
 	}, Global.FILE_PATH + "icons/misc/scene.png");
-
 
 	exportMenu.addOption("PLY (" + Locale.binary + ")", function()
 	{
-		var config = {binary: true};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new PLYExporter();
-			exporter.parse(Editor.getScene(), function(result)
-			{
-				FileSystem.writeFileArrayBuffer(fname, result);
-			}, config);
-		}, ".ply");
+		Exporters.exportPLY(Editor.getScene(), true);
 	}, Global.FILE_PATH + "icons/misc/scene.png");
-
 
 	// Export STL
 	exportMenu.addOption("STL", function()
 	{
-		var config = {binary: false};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new STLExporter();
-			var data = exporter.parse(Editor.program, config);
-			FileSystem.writeFile(fname, data);
-		}, ".stl");
+		Exporters.exportSTL(Editor.program, false);
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export Binary STL
 	exportMenu.addOption("STL (" + Locale.binary + ")", function()
 	{	
-		var config = {binary: true};
-
-		FileSystem.chooseFileWrite(function(fname)
-		{
-			var exporter = new STLExporter();
-			var data = exporter.parse(Editor.program, config);
-			FileSystem.writeFileArrayBuffer(fname, data.buffer);
-		}, ".stl");
+		Exporters.exportSTL(Editor.program, true);
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Exit
