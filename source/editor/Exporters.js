@@ -1,34 +1,12 @@
-import {StaticPair} from "@as-com/pson";
-import {BufferGeometry, Geometry} from "three";
-import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
-import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
 import {OBJExporter} from "three/examples/jsm/exporters/OBJExporter";
 import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
 import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
 import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
 import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
 import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
-import {Locale} from "../locale/LocaleManager.js";
-import {UnitConverter} from "../../core/utils/UnitConverter.js";
-import {Mesh} from "../../core/objects/mesh/Mesh.js";
-import {Nunu} from "../../core/Nunu.js";
-import {ObjectLoader} from "../../core/loaders/ObjectLoader.js";
-import {TwistModifier} from "../../core/geometries/modifiers/TwistModifier.js";
-import {FileSystem} from "../../core/FileSystem.js";
-import {RemoveAction} from "../history/action/objects/RemoveAction.js";
-import {AddAction} from "../history/action/objects/AddAction.js";
-import {ChangeAction} from "../history/action/ChangeAction.js";
-import {ActionBundle} from "../history/action/ActionBundle.js";
-import {Global} from "../Global.js";
-import {ProjectExporters} from "../ProjectExporters.js";
-import {Editor} from "../Editor.js";
-import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
-import {Component} from "../components/Component.js";
-import {ButtonText} from "../components/buttons/ButtonText.js";
-import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
-import {ObjectUtils} from "../core/Main.js";
-import {AboutTab} from "./tab/about/AboutTab.js";
-import {SettingsTab} from "./tab/settings/SettingsTab.js";
+import {FileSystem} from "../core/FileSystem.js";
+import {Locale} from "./locale/LocaleManager.js";
+import {Editor} from "./Editor.js";
 
 /**
  * Exporters contains methods and utils to export objects in multiple formats used by other applications.
