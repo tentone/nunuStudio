@@ -90,6 +90,21 @@ function MainMenu(parent)
 		Editor.gui.saveProgram();
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
+	// Save project to folder
+	if (DEVELOPMENT)
+	{
+		fileMenu.addOption(Locale.saveTo, function()
+		{
+			FileSystem.chooseDirectory(function(path)
+			{
+				// TODO <REMOVE THIS>
+				console.log(path);
+
+				Editor.saveProgramDirectory(path);
+			}, "directory");
+		}, Global.FILE_PATH + "icons/misc/save.png");
+	}
+
 	// Save readable legacy format
 	if (DEVELOPMENT && Nunu.runningOnDesktop())
 	{

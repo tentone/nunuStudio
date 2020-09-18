@@ -46,7 +46,7 @@ ProjectExporters.exportCordovaProject = function(dir)
 };
 
 /**
- * Export web project to a folder.
+ * Export web project to a directory.
  *
  * Saves the project and exports the runtime to run the project.
  *

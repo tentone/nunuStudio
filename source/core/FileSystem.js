@@ -487,13 +487,39 @@ FileSystem.chooseFileWrite = function(onLoad, filter)
 };
 
 /**
+ * Open file chooser dialog window for the user to select a directory
+ *
+ * @method chooseDirectory
+ * @param {Function} onLoad onLoad callback that receives array of files as parameter.
+ */
+FileSystem.chooseDirectory = function(onLoad)
+{
+	var chooser = document.createElement("input");
+	chooser.type = "file";
+	chooser.style.display = "none";
+	chooser.webkitdirectory = true; 
+	document.body.appendChild(chooser);
+	chooser.onchange = function()
+	{	
+		if (onLoad !== undefined)
+		{
+			onLoad(chooser.path);
+		}
+
+		document.body.removeChild(chooser);
+	};
+	
+	chooser.click();
+};
+
+/**
  * Open file chooser dialog window for the user to select files stored in the system.
  *
  * The files selected are retrieved using the onLoad callback that receives a array of File objects.
  *
  * @method chooseFile
  * @param {Function} onLoad onLoad callback that receives array of files as parameter.
- * @param {string} filter File type filter (e.g. ".zip,.rar, etc)
+ * @param {string} filter File type filter (e.g. .zip, .rar).
  * @param {string} saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
  * @param {boolean} multiFile If true the chooser will accept multiple files.
  */

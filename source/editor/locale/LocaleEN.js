@@ -475,6 +475,7 @@ var LocaleEN = {
 	new: "New",
 	save: "Save",
 	saveAs: "Save as",
+	saveTo: "Save to",
 	load: "Load",
 	settings: "Settings",
 	publish: "Publish",

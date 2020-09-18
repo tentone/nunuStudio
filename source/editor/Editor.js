@@ -948,7 +948,21 @@ Editor.addDefaultScene = function(material)
 };
 
 /**
- * Save program to file.
+ * Save the program into a project directory, with all resources split across multiple files.
+ *
+ * @static
+ * @method saveProgramDirectory
+ * @param {string} directory Target directory to export the files into.
+ */
+Editor.saveProgramDirectory = function(directory)
+{
+	var data = Editor.program.toJSON();
+	
+	// TODO <ADD CODE HERE>
+};
+
+/**
+ * Save program to file (.nsp or .isp).
  *
  * @static
  * @method saveProgram
