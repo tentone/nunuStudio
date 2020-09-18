@@ -95,13 +95,10 @@ function MainMenu(parent)
 	{
 		fileMenu.addOption(Locale.saveTo, function()
 		{
-			FileSystem.chooseDirectory(function(path)
+			FileSystem.chooseDirectory().then(function(result)
 			{
-				// TODO <REMOVE THIS>
-				console.log(path);
-
-				Editor.saveProgramDirectory(path);
-			}, "directory");
+				Editor.saveProgramDirectory(result.path);
+			});
 		}, Global.FILE_PATH + "icons/misc/save.png");
 	}
 

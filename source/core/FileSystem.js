@@ -490,26 +490,30 @@ FileSystem.chooseFileWrite = function(onLoad, filter)
  * Open file chooser dialog window for the user to select a directory
  *
  * @method chooseDirectory
- * @param {Function} onLoad onLoad callback that receives array of files as parameter.
+ * @return {Promise} Promise that resolves with the selected path and the files in the path in a object {path: ..., files: ...}.
  */
-FileSystem.chooseDirectory = function(onLoad)
+FileSystem.chooseDirectory = function()
 {
-	var chooser = document.createElement("input");
-	chooser.type = "file";
-	chooser.style.display = "none";
-	chooser.webkitdirectory = true; 
-	document.body.appendChild(chooser);
-	chooser.onchange = function()
-	{	
-		if (onLoad !== undefined)
-		{
-			onLoad(chooser.path);
-		}
-
-		document.body.removeChild(chooser);
-	};
+	return new Promise(function(resolve, reject)
+	{
+		var chooser = document.createElement("input");
+		chooser.type = "file";
+		chooser.style.display = "none";
+		chooser.webkitdirectory = true; 
+		document.body.appendChild(chooser);
 	
-	chooser.click();
+		chooser.onchange = function()
+		{
+			resolve({path: path.value, files: path.files});
+			document.body.removeChild(chooser);
+		};
+		
+		chooser.onerror = reject;
+		chooser.onabort = reject;
+
+		chooser.click();
+	});
+
 };
 
 /**
