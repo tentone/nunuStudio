@@ -463,7 +463,7 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
  *
  * @method chooseFileWrite
  * @param {Function} onLoad onLoad callback that receives the path select to write the file.
- * @param {string} filter File type filter (e.g. ".zip,.rar, etc).
+ * @param {string} filter File type filter (e.g. ".zip,.rar").
  */
 FileSystem.chooseFileWrite = function(onLoad, filter)
 {
@@ -487,10 +487,12 @@ FileSystem.chooseFileWrite = function(onLoad, filter)
 };
 
 /**
- * Open file chooser dialog window for the user to select a directory
+ * Open file chooser dialog window for the user to select a directory.
+ * 
+ * Only works while using NWJS.
  *
  * @method chooseDirectory
- * @return {Promise} Promise that resolves with the selected path and the files in the path in a object {path: ..., files: ...}.
+ * @return {Promise<string>} Promise that resolves with the selected path.
  */
 FileSystem.chooseDirectory = function()
 {
@@ -504,10 +506,7 @@ FileSystem.chooseDirectory = function()
 	
 		chooser.onchange = function()
 		{
-			// TODO
-			console.log(chooser);
-			
-			resolve({path: path.value, files: path.files});
+			resolve(chooser.value);
 			document.body.removeChild(chooser);
 		};
 		
