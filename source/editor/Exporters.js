@@ -206,3 +206,5 @@ Exporters.exportSTL = function(object, binary)
 		}, ".stl");
 	}
 };
+
+export {Exporters};

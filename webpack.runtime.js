@@ -10,9 +10,7 @@ const config = {
 	target: "web",
 	devtool: "none",
 	mode: "production",
-	optimization: {
-		minimize: true
-	},
+	optimization: {minimize: true},
 	plugins: [
 		new Webpack.ProvidePlugin({
 			THREE: "three",
@@ -23,7 +21,7 @@ const config = {
 		rules: [
 			{
 				test: /\.glsl$/i,
-				use: "raw-loader",
+				use: "raw-loader"
 			},
 			{
 				test: /.*spine-threejs.*/,
@@ -50,5 +48,5 @@ module.exports = [
 			path: output,
 			libraryTarget: "umd"	
 		}
-	}, config),
+	}, config)
 ];

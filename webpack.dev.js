@@ -7,9 +7,7 @@ module.exports = [
 	Merge(common[0], {
 		devtool: "inline-source-map",
 		mode: "development",
-		optimization: {
-			minimize: false
-		},
+		optimization: {minimize: false},
 		devServer: {
 			contentBase: common[0].output.path,
 			compress: false,
