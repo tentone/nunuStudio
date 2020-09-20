@@ -499,11 +499,14 @@ FileSystem.chooseDirectory = function()
 		var chooser = document.createElement("input");
 		chooser.type = "file";
 		chooser.style.display = "none";
-		chooser.webkitdirectory = true; 
+		chooser.nwdirectory = true; 
 		document.body.appendChild(chooser);
 	
 		chooser.onchange = function()
 		{
+			// TODO
+			console.log(chooser);
+			
 			resolve({path: path.value, files: path.files});
 			document.body.removeChild(chooser);
 		};
@@ -885,4 +888,5 @@ FileSystem.getFileExtension = function(file)
 	
 	return "";
 };
+
 export {FileSystem};
