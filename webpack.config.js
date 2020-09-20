@@ -29,6 +29,13 @@ module.exports = [
 					test: /.*spine-threejs.*/,
 					loader: "@shoutem/webpack-prepend-append",
 					query: "{\"append\": \"export {spine};\"}"
+				},
+				{
+					test: /\.js$/i,
+					use: {
+						loader: "babel-loader",
+						options: {presets: ["@babel/preset-env"]}
+					}
 				}
 			]
 		},
