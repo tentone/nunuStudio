@@ -8,7 +8,7 @@ const GitRevisionPlugin = require("git-revision-webpack-plugin");
 const git = new GitRevisionPlugin();
 
 const source = Path.resolve(__dirname, "source");
-const output = Path.resolve(__dirname, "build/editor");
+const output = Path.resolve(__dirname, "temp/build/editor");
 
 const Merge = require("webpack-merge");
 const runtime = require("./webpack.runtime.js");
@@ -23,7 +23,7 @@ module.exports = [
 			rules: [
 				{
 					test: /\.glsl$/i,
-					use: "raw-loader",
+					use: "raw-loader"
 				},
 				{
 					test: /.*spine-threejs.*/,
@@ -52,9 +52,7 @@ module.exports = [
 						force: true
 					}
 				],
-				options: {
-					concurrency: 100,
-				}
+				options: {concurrency: 100}
 			}),
 			new HtmlWebpackPlugin({template: source + "/editor/index.html", filename: "index.html"}),
 			new Webpack.ProgressPlugin(),
@@ -69,7 +67,7 @@ module.exports = [
 					],
 					"styles.css": [
 						"source/editor/style.css",
-						"source/editor/theme/dark.css",
+						"source/editor/theme/dark.css"
 					],
 					"draco_encoder.js": [
 						"source/lib/draco_encoder.js"
@@ -117,7 +115,7 @@ module.exports = [
 						"node_modules/codemirror/addon/lint/javascript-lint.js",
 						"node_modules/codemirror/addon/tern/tern.js",
 						"node_modules/codemirror/addon/runmode/colorize.js",
-						"node_modules/codemirror/addon/runmode/runmode.js",
+						"node_modules/codemirror/addon/runmode/runmode.js"
 					],
 					"codemirror.css": [
 						"node_modules/codemirror/lib/codemirror.css",
@@ -126,10 +124,10 @@ module.exports = [
 						"node_modules/codemirror/addon/tern/tern.css",
 						"node_modules/codemirror/addon/dialog/dialog.css",
 						"node_modules/codemirror/addon/lint/lint.css",
-						"node_modules/codemirror/addon/hint/show-hint.css",
+						"node_modules/codemirror/addon/hint/show-hint.css"
 					]
 				}
-			}),
+			})
 		]
 	},
 	Merge(runtime[0], {
