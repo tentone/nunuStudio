@@ -186,8 +186,6 @@ Scene.prototype.initialize = function()
  */
 Scene.prototype.update = function(delta)
 {
-	// TODO <USE THE VIEWPORT OBJECT>
-
 	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
 	
 	if (this.cameras.length > 0)
