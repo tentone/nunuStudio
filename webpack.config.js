@@ -22,6 +22,11 @@ module.exports = [
 		module: {
 			rules: [
 				{
+					test: /\.js$/i,
+					loader: "babel-loader",
+					query: {presets: ["@babel/preset-env"]}
+				},
+				{
 					test: /\.glsl$/i,
 					use: "raw-loader"
 				},
@@ -29,16 +34,6 @@ module.exports = [
 					test: /.*spine-threejs.*/,
 					loader: "@shoutem/webpack-prepend-append",
 					query: "{\"append\": \"export {spine};\"}"
-				},
-				{
-					test: /\.js$/i,
-					use: {
-						loader: "babel-loader",
-						options: {
-							presets: ["@babel/preset-env"],
-							plugins: ["@babel/plugin-transform-classes"]
-						}
-					}
 				}
 			]
 		},
