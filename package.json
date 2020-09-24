@@ -46,7 +46,7 @@
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
 		"tern": "^0.24.3",
 		"escher.js": "^0.1.15",
-		"three": "^0.120.1",
+		"three": "^0.119.0",
 		"sparse-octree": "^6.0.2",
 		"iterator-result": "^1.0.0",
 		"math-ds": "^1.2.1",
