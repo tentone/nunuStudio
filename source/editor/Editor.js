@@ -960,9 +960,6 @@ Editor.saveProgramPath = function(path)
 	var pson = new StaticPair();
 	var data = Editor.program.toJSON();
 	
-	// TODO <REMOVE THIS>
-	console.log(path, data, ResourceContainer.libraries);
-	
 	for (var i = 0; i < ResourceContainer.libraries.length; i++)
 	{
 		var lib = ResourceContainer.libraries[i];
