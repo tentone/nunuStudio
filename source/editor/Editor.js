@@ -15,6 +15,7 @@ import {Nunu} from "../core/Nunu.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
+import {ResourceContainer} from "../core/resources/ResourceContainer.js";
 import {Locale} from "./locale/LocaleManager.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
@@ -951,14 +952,36 @@ Editor.addDefaultScene = function(material)
  * Save the program into a project directory, with all resources split across multiple files.
  *
  * @static
- * @method saveProgramDirectory
- * @param {string} directory Target directory to export the files into.
+ * @method saveProgramPath
+ * @param {string} path Target directory to export the files into.
  */
-Editor.saveProgramDirectory = function(directory)
+Editor.saveProgramPath = function(path)
 {
+	var pson = new StaticPair();
 	var data = Editor.program.toJSON();
 	
-	// TODO <ADD CODE HERE>
+	// TODO <REMOVE THIS>
+	console.log(path, data, ResourceContainer.libraries);
+	
+	for (var i = 0; i < ResourceContainer.libraries.length; i++)
+	{
+		var lib = ResourceContainer.libraries[i];
+		var resources = data[lib];
+
+		if (resources.length > 0)
+		{
+			FileSystem.makeDirectory(path + "\\" + lib);
+
+			for (var j = 0; j < resources.length; j++)
+			{
+				FileSystem.writeFileArrayBuffer(path + "\\" + lib + "\\" + data[lib][j].uuid, pson.toArrayBuffer(data[lib][j]));
+			}
+		}
+		
+		delete data[lib];
+	}
+
+	FileSystem.writeFileArrayBuffer(path + "\\app.nsp", pson.toArrayBuffer(data));
 };
 
 /**

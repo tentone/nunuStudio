@@ -95,9 +95,9 @@ function MainMenu(parent)
 	{
 		fileMenu.addOption(Locale.saveTo, function()
 		{
-			FileSystem.chooseDirectory().then(function(result)
+			FileSystem.chooseDirectory().then(function(path)
 			{
-				Editor.saveProgramDirectory(result.path);
+				Editor.saveProgramPath(path);
 			});
 		}, Global.FILE_PATH + "icons/misc/save.png");
 	}
