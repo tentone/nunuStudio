@@ -38,7 +38,7 @@ function Resource(name, type)
 	this.type = type;
 
 	/**
-	 * Data format (base64, arraybuffer, blob, url, ...).
+	 * Data format (base64, arraybuffer, blob, url, chunk, ...).
 	 * 
 	 * Indicates the format used to store the data.
 	 * 

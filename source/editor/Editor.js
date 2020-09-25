@@ -964,18 +964,25 @@ Editor.saveProgramPath = function(path)
 	{
 		var lib = ResourceContainer.libraries[i];
 		var resources = data[lib];
-
+		data[lib] = [];
+		
 		if (resources.length > 0)
 		{
 			FileSystem.makeDirectory(path + "\\" + lib);
 
 			for (var j = 0; j < resources.length; j++)
 			{
-				FileSystem.writeFileArrayBuffer(path + "\\" + lib + "\\" + data[lib][j].uuid, pson.toArrayBuffer(data[lib][j]));
+				var fname = path + "\\" + lib + "\\" + resources[j].uuid;
+
+				data[lib].push({
+					uuid: resources[j].uuid,
+					format: "chunk",
+					path: fname
+				});
+
+				FileSystem.writeFileArrayBuffer(fname, pson.toArrayBuffer(resources[j]));
 			}
 		}
-		
-		delete data[lib];
 	}
 
 	FileSystem.writeFileArrayBuffer(path + "\\app.nsp", pson.toArrayBuffer(data));
