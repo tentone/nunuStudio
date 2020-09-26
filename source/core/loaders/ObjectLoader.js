@@ -1,5 +1,4 @@
 import {AnimationClip, Bone, BufferAttribute, Color, DefaultLoadingManager, FileLoader, Fog, FogExp2, LOD, Line, LineLoop, LineSegments, Points, Skeleton} from "three";
-
 import {AmbientLight} from "../objects/lights/AmbientLight.js";
 import {AudioEmitter} from "../objects/audio/AudioEmitter.js";
 import {CubeCamera} from "../objects/cameras/CubeCamera.js";
@@ -1016,4 +1015,5 @@ ObjectLoader.prototype.parseObject = function(data)
 
 	return object;
 };
+
 export {ObjectLoader};
