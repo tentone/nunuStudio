@@ -1,5 +1,3 @@
-
-
 /**
  * MathUtils contains auxiliar values and function to help with mathematical operations.
  *

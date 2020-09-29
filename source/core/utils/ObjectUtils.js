@@ -1,7 +1,4 @@
 import {Vector3, Object3D, Box3, Matrix4, BufferGeometry} from "three";
-import {Sprite} from "../objects/sprite/Sprite.js";
-import {Mesh} from "../objects/mesh/Mesh.js";
-
 
 /**
  * Object utils is a collection of methods to apply operations to Object3D instances.

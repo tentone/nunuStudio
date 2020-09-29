@@ -19,7 +19,7 @@ import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
-import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
+import {BSP} from "../../core/bsp/BSP.js";
 import {Exporters} from "../Exporters.js";
 import {AboutTab} from "./tab/about/AboutTab.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
@@ -459,7 +459,7 @@ function MainMenu(parent)
 		
 		geometry.applyMatrix4(object.matrixWorld);
 
-		return new ThreeBSP(geometry);
+		return new BSP(geometry);
 	}
 
 	// Verify is CSG operation is possible
