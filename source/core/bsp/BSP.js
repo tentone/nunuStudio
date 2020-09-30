@@ -6,10 +6,10 @@ import {BSPVertex} from "./BSPVertex.js";
 function BSP(geometry)
 {
 	// Convert Geometry to BSP
-	var i, LengthI,
-		face, vertex, faceVertexUvs, uvs,
-		polygon,
-		polygons = [];
+	var length;
+	var face, vertex, faceVertexUvs, uvs;
+	var polygon;
+	var polygons = [];
 
 	if (geometry instanceof Geometry)
 	{
@@ -33,7 +33,7 @@ function BSP(geometry)
 		throw new Error("nunuStudio: Given geometry is unsupported");
 	}
 
-	for (i = 0, LengthI = geometry.faces.length; i < LengthI; i++)
+	for (var i = 0, length = geometry.faces.length; i < length; i++)
 	{
 		face = geometry.faces[i];
 		faceVertexUvs = geometry.faceVertexUvs[0][i];
@@ -99,8 +99,8 @@ function BSP(geometry)
 
 BSP.prototype.subtract = function(otherTree)
 {
-	var a = this.tree.clone(),
-		b = otherTree.tree.clone();
+	var a = this.tree.clone();
+	var b = otherTree.tree.clone();
 
 	a.invert();
 	a.clipTo(b);
@@ -117,8 +117,8 @@ BSP.prototype.subtract = function(otherTree)
 
 BSP.prototype.union = function(otherTree)
 {
-	var a = this.tree.clone(),
-		b = otherTree.tree.clone();
+	var a = this.tree.clone();
+	var b = otherTree.tree.clone();
 
 	a.clipTo(b);
 	b.clipTo(a);
@@ -133,8 +133,8 @@ BSP.prototype.union = function(otherTree)
 
 BSP.prototype.intersect = function(otherTree)
 {
-	var a = this.tree.clone(),
-		b = otherTree.tree.clone();
+	var a = this.tree.clone();
+	var b = otherTree.tree.clone();
 
 	a.invert();
 	b.clipTo(a);
@@ -150,23 +150,22 @@ BSP.prototype.intersect = function(otherTree)
 
 BSP.prototype.toGeometry = function()
 {
-	var i, j,
-		matrix = new Matrix4().getInverse(this.matrix),
-		geometry = new Geometry(),
-		polygons = this.tree.allPolygons(),
-		polygonCount = polygons.length,
-		polygon, polygonVerticeCount,
-		verticeDict = {},
-		vertexIdxA, vertexIdxB, vertexIdxC,
-		vertex, face,
-		verticeUvs;
+	var matrix = new Matrix4().getInverse(this.matrix);
+	var geometry = new Geometry();
+	var polygons = this.tree.allPolygons();
+	var polygonCount = polygons.length;
+	var polygon, polygonVerticeCount;
+	var verticeDict = {};
+	var vertexIdxA, vertexIdxB, vertexIdxC;
+	var vertex, face;
+	var verticeUvs;
 
-	for (i = 0; i < polygonCount; i++)
+	for (var i = 0; i < polygonCount; i++)
 	{
 		polygon = polygons[i];
 		polygonVerticeCount = polygon.vertices.length;
 
-		for (j = 2; j < polygonVerticeCount; j++)
+		for (var j = 2; j < polygonVerticeCount; j++)
 		{
 			verticeUvs = [];
 
@@ -186,7 +185,9 @@ BSP.prototype.toGeometry = function()
 			}
 
 			vertex = polygon.vertices[j - 1];
+
 			verticeUvs.push(new Vector2(vertex.uv.x, vertex.uv.y));
+
 			vertex = new Vector3(vertex.x, vertex.y, vertex.z);
 			vertex.applyMatrix4(matrix);
 			if (typeof verticeDict[vertex.x + "," + vertex.y + "," + vertex.z] !== "undefined")
@@ -213,12 +214,7 @@ BSP.prototype.toGeometry = function()
 				vertexIdxC = verticeDict[vertex.x + "," + vertex.y + "," + vertex.z] = geometry.vertices.length - 1;
 			}
 
-			face = new Face3(
-				vertexIdxA,
-				vertexIdxB,
-				vertexIdxC,
-				new Vector3(polygon.normal.x, polygon.normal.y, polygon.normal.z)
-			);
+			face = new Face3(vertexIdxA, vertexIdxB, vertexIdxC, new Vector3(polygon.normal.x, polygon.normal.y, polygon.normal.z));
 
 			geometry.faces.push(face);
 			geometry.faceVertexUvs[0].push(verticeUvs);
@@ -230,8 +226,8 @@ BSP.prototype.toGeometry = function()
 
 BSP.prototype.toMesh = function(material)
 {
-	var geometry = this.toGeometry(),
-		mesh = new Mesh(geometry, material);
+	var geometry = this.toGeometry();
+	var mesh = new Mesh(geometry, material);
 
 	mesh.position.setFromMatrixPosition(this.matrix);
 	mesh.rotation.setFromRotationMatrix(this.matrix);
