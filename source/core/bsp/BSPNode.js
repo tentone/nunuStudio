@@ -1,8 +1,8 @@
 function BSPNode(polygons)
 {
-	var i, polygonCount,
-		front = [],
-		back = [];
+	var polygonCount;
+	var front = [];
+	var back = [];
 
 	this.polygons = [];
 	this.front = this.back = undefined;
@@ -11,7 +11,7 @@ function BSPNode(polygons)
 
 	this.divider = polygons[0].clone();
 
-	for (i = 0, polygonCount = polygons.length; i < polygonCount; i++)
+	for (var i = 0, polygonCount = polygons.length; i < polygonCount; i++)
 	{
 		this.divider.splitPolygon(polygons[i], this.polygons, this.polygons, front, back);
 	}
