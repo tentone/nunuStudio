@@ -28,9 +28,7 @@ BSPPolygon.prototype.calculateProperties = function()
 		b = this.vertices[1],
 		c = this.vertices[2];
 
-	this.normal = b.clone().subtract(a).cross(
-		c.clone().subtract(a)
-	).normalize();
+	this.normal = b.clone().subtract(a).cross(c.clone().subtract(a)).normalize();
 
 	this.w = this.normal.clone().dot(a);
 
@@ -39,10 +37,10 @@ BSPPolygon.prototype.calculateProperties = function()
 
 BSPPolygon.prototype.clone = function()
 {
-	var i, verticeCount,
-		polygon = new BSPPolygon();
+	var verticeCount;
+	var polygon = new BSPPolygon();
 
-	for (i = 0, verticeCount = this.vertices.length; i < verticeCount; i++)
+	for (var i = 0, verticeCount = this.vertices.length; i < verticeCount; i++)
 	{
 		polygon.vertices.push(this.vertices[i].clone());
 	};
@@ -53,12 +51,12 @@ BSPPolygon.prototype.clone = function()
 
 BSPPolygon.prototype.flip = function()
 {
-	var i, vertices = [];
+	var vertices = [];
 
 	this.normal.multiplyScalar(-1);
 	this.w *= -1;
 
-	for (i = this.vertices.length - 1; i >= 0; i--)
+	for (var i = this.vertices.length - 1; i >= 0; i--)
 	{
 		vertices.push(this.vertices[i]);
 	};
@@ -71,31 +69,19 @@ BSPPolygon.prototype.classifyVertex = function(vertex)
 {
 	var sideValue = this.normal.dot(vertex) - this.w;
 
-	if (sideValue < -EPSILON)
-	{
-		return BACK;
-	}
-	else if (sideValue > EPSILON)
-	{
-		return FRONT;
-	}
-	else
-	{
-		return COPLANAR;
-	}
+
+	return sideValue < -EPSILON ? BACK : sideValue > EPSILON ? FRONT : COPLANAR;
 };
 
 BSPPolygon.prototype.classifySide = function(polygon)
 {
-	var i, vertex, classification,
-		numPositive = 0,
-		numNegative = 0,
-		verticeCount = polygon.vertices.length;
+	var numPositive = 0;
+	var numNegative = 0;
+	var verticeCount = polygon.vertices.length;
 
-	for (i = 0; i < verticeCount; i++)
+	for (var i = 0; i < verticeCount; i++)
 	{
-		vertex = polygon.vertices[i];
-		classification = this.classifyVertex(vertex);
+		var classification = this.classifyVertex(polygon.vertices[i]);
 		if (classification === FRONT)
 		{
 			numPositive++;
