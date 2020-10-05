@@ -24,9 +24,9 @@ function BSPPolygon(vertices)
 
 BSPPolygon.prototype.calculateProperties = function()
 {
-	var a = this.vertices[0],
-		b = this.vertices[1],
-		c = this.vertices[2];
+	var a = this.vertices[0];
+	var b = this.vertices[1];
+	var c = this.vertices[2];
 
 	this.normal = b.clone().subtract(a).cross(c.clone().subtract(a)).normalize();
 
@@ -68,8 +68,6 @@ BSPPolygon.prototype.flip = function()
 BSPPolygon.prototype.classifyVertex = function(vertex)
 {
 	var sideValue = this.normal.dot(vertex) - this.w;
-
-
 	return sideValue < -EPSILON ? BACK : sideValue > EPSILON ? FRONT : COPLANAR;
 };
 
@@ -135,27 +133,26 @@ BSPPolygon.prototype.splitPolygon = function(polygon, coplanarFront, coplanarBac
 	else
 	{
 
-		var verticeCount,
-			i, j, ti, tj, vi, vj,
-			t, v,
-			f = [],
-			b = [];
+		var verticeCount;
+		var f = [];
+		var b = [];
 
-		for (i = 0, verticeCount = polygon.vertices.length; i < verticeCount; i++)
+		for (var i = 0, verticeCount = polygon.vertices.length; i < verticeCount; i++)
 		{
 
-			j = (i + 1) % verticeCount;
-			vi = polygon.vertices[i];
-			vj = polygon.vertices[j];
-			ti = this.classifyVertex(vi);
-			tj = this.classifyVertex(vj);
+			var j = (i + 1) % verticeCount;
+			var vi = polygon.vertices[i];
+			var vj = polygon.vertices[j];
+			var ti = this.classifyVertex(vi);
+			var tj = this.classifyVertex(vj);
 
 			if (ti !== BACK) {f.push(vi);}
 			if (ti !== FRONT) {b.push(vi);}
+
 			if ((ti | tj) === SPANNING)
 			{
-				t = (this.w - this.normal.dot(vi)) / this.normal.dot(vj.clone().subtract(vi));
-				v = vi.interpolate(vj, t);
+				var t = (this.w - this.normal.dot(vi)) / this.normal.dot(vj.clone().subtract(vi));
+				var v = vi.interpolate(vj, t);
 				f.push(v);
 				b.push(v);
 			}

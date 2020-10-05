@@ -40,9 +40,9 @@ BSPVertex.prototype.multiplyScalar = function(scalar)
 
 BSPVertex.prototype.cross = function(vertex)
 {
-	var x = this.x,
-		y = this.y,
-		z = this.z;
+	var x = this.x;
+	var y = this.y;
+	var z = this.z;
 
 	this.x = y * vertex.z - z * vertex.y;
 	this.y = z * vertex.x - x * vertex.z;
