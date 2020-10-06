@@ -7,7 +7,7 @@ function BSPNode(polygons)
 	this.polygons = [];
 	this.front = this.back = undefined;
 
-	if (!(polygons instanceof Array) || polygons.length === 0) {return;}
+	if (!(polygons instanceof Array) || polygons.length === 0)) {return;}
 
 	this.divider = polygons[0].clone();
 
@@ -29,10 +29,9 @@ function BSPNode(polygons)
 
 BSPNode.isConvex = function(polygons)
 {
-	var i, j;
-	for (i = 0; i < polygons.length; i++)
+	for (var i = 0; i < polygons.length; i++)
 	{
-		for (j = 0; j < polygons.length; j++)
+		for (var j = 0; j < polygons.length; j++)
 		{
 			if (i !== j && polygons[i].classifySide(polygons[j]) !== BACK)
 			{
@@ -40,21 +39,21 @@ BSPNode.isConvex = function(polygons)
 			}
 		}
 	}
+
 	return true;
 };
 
 BSPNode.prototype.build = function(polygons)
 {
-	var i, polygonCount,
-		front = [],
-		back = [];
+	var front = [];
+	var back = [];
 
 	if (!this.divider)
 	{
 		this.divider = polygons[0].clone();
 	}
 
-	for (i = 0, polygonCount = polygons.length; i < polygonCount; i++)
+	for (var i = 0, polygonCount = polygons.length; i < polygonCount; i++)
 	{
 		this.divider.splitPolygon(polygons[i], this.polygons, this.polygons, front, back);
 	}
@@ -75,8 +74,10 @@ BSPNode.prototype.build = function(polygons)
 BSPNode.prototype.allPolygons = function()
 {
 	var polygons = this.polygons.slice();
+
 	if (this.front) {polygons = polygons.concat(this.front.allPolygons());}
 	if (this.back) {polygons = polygons.concat(this.back.allPolygons());}
+
 	return polygons;
 };
 
