@@ -7,7 +7,7 @@ function BSPNode(polygons)
 	this.polygons = [];
 	this.front = this.back = undefined;
 
-	if (!(polygons instanceof Array) || polygons.length === 0)) {return;}
+	if (!(polygons instanceof Array) || polygons.length === 0) {return;}
 
 	this.divider = polygons[0].clone();
 
