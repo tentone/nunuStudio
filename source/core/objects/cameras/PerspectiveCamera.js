@@ -99,7 +99,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * @type {EffectComposer}
 	 */
 	this.composer = new EffectComposer();
-
+	
 	var renderPass = new RenderPass();
 	renderPass.renderToScreen = true;
 	this.composer.addPass(renderPass);
@@ -128,7 +128,6 @@ PerspectiveCamera.prototype.resize = function(x, y, viewport)
 
 	this.composer.setSize(this.viewport.viewport.z, this.viewport.viewport.w);
 };
-
 
 /**
  * Prepare the renderer to render the frame using the camera settings.

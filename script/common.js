@@ -43,10 +43,10 @@ function testCalculateRelativePath()
 		["/c", "/c/d", "./d"]
 	];
 
-	for(var i = 0; i < tests.length; i++)
+	for (var i = 0; i < tests.length; i++)
 	{
 		var a = calculateRelativePath(tests[i][0], tests[i][1]);
-		console.log(a ===  tests[i][2], a);
+		console.log(a === tests[i][2], a);
 	}
 }
 
@@ -64,20 +64,20 @@ function calculateRelativePath(a, b)
 	a = a.split("/");
 	b = b.split("/");
 
-	while(a.length > 0 && a[0].length === 0)
+	while (a.length > 0 && a[0].length === 0)
 	{
 		a.shift();
 	}
 
-	while(b.length > 0 && b[0].length === 0)
+	while (b.length > 0 && b[0].length === 0)
 	{
 		b.shift();
 	}
 
 	// Remove the portions of the path that are equal
-	while(a.length > 0 && b.length > 0)
+	while (a.length > 0 && b.length > 0)
 	{
-		if(a[0] === b[0])
+		if (a[0] === b[0])
 		{
 			a.shift();
 			b.shift();
@@ -91,15 +91,15 @@ function calculateRelativePath(a, b)
 	var c = [];
 
 	// Check steps to take backwards
-	while(a.length > 1)
+	while (a.length > 1)
 	{
 		a.shift();
-		b.unshift("..")
+		b.unshift("..");
 	}
 
 	var res = b.join("/");
 
-	if(!res.startsWith(".."))
+	if (!res.startsWith(".."))
 	{
 		res = "./" + res;
 	}
@@ -146,7 +146,7 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 
 	require("child_process").execSync(command, function(error, stdout, stderr)
 	{
-		if(stdout !== "")
+		if (stdout !== "")
 		{
 			console.log("Error compiling with google closure, check if java is installed and try again.");
 		}
@@ -162,13 +162,13 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
  */
 function formatNumber(number, places)
 {
-	if(places === undefined)
+	if (places === undefined)
 	{
 		places = 2;
 	}
 
 	let str = number.toString();
-	while(str.length < places)
+	while (str.length < places)
 	{
 		str = "0" + str;
 	}
@@ -246,22 +246,22 @@ function join(path, main)
 	const includes = getIncludes(code);
 	let js = "", css = "";
 
-	for(let i = 0; i < includes.length; i++)
+	for (let i = 0; i < includes.length; i++)
 	{
-		if(includes[i].endsWith(".js"))
+		if (includes[i].endsWith(".js"))
 		{
 			js += "\n" + readFile(path + includes[i]);
 		}
-		else if(includes[i].endsWith(".css"))
+		else if (includes[i].endsWith(".css"))
 		{
 			css += "\n" + readFile(path + includes[i]);
 		}
-		else if(includes[i].endsWith("*"))
+		else if (includes[i].endsWith("*"))
 		{
 			const directory = includes[i].replace("*", "");
 			const files = fs.readdirSync(path + directory);
 
-			for(let j = 0; j < files.length; j++)
+			for (let j = 0; j < files.length; j++)
 			{
 				includes.push(directory + files[j]);
 			}
@@ -282,22 +282,22 @@ function join(path, main)
  */
 function getIncludes(code, regex)
 {
-	if(regex === undefined)
+	if (regex === undefined)
 	{
 		regex = /include\([\"\'].+?[\"\']\);/g;
 	}
 
 	const results = [];
 	let match = regex.exec(code);
-	while(match !== null)
+	while (match !== null)
 	{
 		let files = /\(\s*([^)]+?)\s*\)/.exec(match[0]);
-		if(files[1])
+		if (files[1])
 		{
 			files = files[1].split(/\s*,\s*/);
 		}
 
-		for(let i = 0; i < files.length; i++)
+		for (let i = 0; i < files.length; i++)
 		{
 			results.push(files[i].replace(/[\"\']/gi, ""));
 		}
@@ -330,7 +330,7 @@ function writeFile(fname, text)
 	function checkDirectory(pathName)
 	{
 		const dirname = path.dirname(pathName);
-		if(fs.existsSync(dirname))
+		if (fs.existsSync(dirname))
 		{
 			return true;
 		}
@@ -353,23 +353,23 @@ function copyFolder(src, dst)
 	makeDirectory(dst);
 	const files = fs.readdirSync(src);
 
-	for(let i = 0; i < files.length; i++)
+	for (let i = 0; i < files.length; i++)
 	{
 		const source = src + "/" + files[i];
 		const destiny = dst + "/" + files[i];
 		const current = fs.statSync(source);
 
-		//Directory
-		if(current.isDirectory())
+		// Directory
+		if (current.isDirectory())
 		{
 			copyFolder(source, destiny);
 		}
-		//Symbolic link
-		else if(current.isSymbolicLink())
+		// Symbolic link
+		else if (current.isSymbolicLink())
 		{
 			fs.symlinkSync(fs.readlinkSync(source), destiny);
 		}
-		//File
+		// File
 		else
 		{
 			copyFile(source, destiny);
@@ -389,7 +389,7 @@ function renameFile(oldPath, newPath)
 
 function makeDirectory(dir)
 {
-	if(!fs.existsSync(dir))
+	if (!fs.existsSync(dir))
 	{
 		fs.mkdirSync(dir);
 	}
@@ -402,13 +402,13 @@ function makeDirectory(dir)
  */
 function deleteFolder(path)
 {
-	if(fs.existsSync(path))
+	if (fs.existsSync(path))
 	{
 		fs.readdirSync(path).forEach(function(file, index)
 		{
 			const curPath = path + "/" + file;
 
-			if(fs.lstatSync(curPath).isDirectory())
+			if (fs.lstatSync(curPath).isDirectory())
 			{
 				deleteFolder(curPath);
 			}
@@ -438,7 +438,7 @@ function deleteFile(fname)
 function downloadFolder(basePath, baseURL, ignoreRootFiles)
 {
 	const files = listFiles(basePath + "/", ignoreRootFiles, "");
-	for(let i = 0; i < files.length; i++)
+	for (let i = 0; i < files.length; i++)
 	{
 		download(basePath + files[i], baseURL + files[i]);
 	}
@@ -460,11 +460,11 @@ function listFiles(path, ignoreRootFiles, virtualPath)
 		const currentPath = path + "/" + file;
 		const currentVirtualPath = virtualPath + "/" + file;
 
-		if(fs.lstatSync(currentPath).isDirectory())
+		if (fs.lstatSync(currentPath).isDirectory())
 		{
 			files = files.concat(listFiles(currentPath, false, currentVirtualPath));
 		}
-		else if(ignoreRootFiles === false)
+		else if (ignoreRootFiles === false)
 		{
 			files.push(currentVirtualPath);
 		}
@@ -483,12 +483,12 @@ function listFiles(path, ignoreRootFiles, virtualPath)
  */
 function getFileName(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
-		return file.substring((a > b) ? (a + 1) : (b + 1), file.length);
+		return file.substring(a > b ? a + 1 : b + 1, file.length);
 	}
 	
 	return "";
@@ -504,12 +504,12 @@ function getFileName(file)
  */
 function getFileNameNoExt(file)
 {
-	if(file !== undefined)
+	if (file !== undefined)
 	{
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
-		return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
+		return file.substring(a > b ? a + 1 : b + 1, file.lastIndexOf("."));
 	}
 	
 	return "";
@@ -526,14 +526,16 @@ function download(fname, url)
 	const http = require("https");
 	let data = "";
 
-	const request = http.get(url, function (response) {
-		response.on("data", function (chunk) {
+	const request = http.get(url, function(response) 
+	{
+		response.on("data", function(chunk) 
+		{
 			data += chunk;
 		});
 
-		response.on("end", function (event)
+		response.on("end", function(event)
 		{
-			if(data.search("404: Not Found") === -1)
+			if (data.search("404: Not Found") === -1)
 			{
 				writeFile(fname, data);
 				console.log("Updated: " + fname);
@@ -544,7 +546,7 @@ function download(fname, url)
 			}
 
 		});
-	}).on("error", function (error)
+	}).on("error", function(error)
 	{
 		console.log("Error: " + fname + ", " + error);
 	});
