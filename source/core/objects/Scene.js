@@ -216,7 +216,6 @@ Scene.prototype.resize = function(x, y)
 
 	for (var i = 0; i < this.cameras.length; i++)
 	{
-
 		this.cameras[i].resize(x, y);
 	}
 

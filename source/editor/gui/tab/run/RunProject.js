@@ -30,6 +30,13 @@ function RunProject(parent, closeable, container, index)
 	 * @type {RendererCanvas}
 	 */
 	this.canvas = new RendererCanvas(this, Editor.program.rendererConfig);
+	this.canvas.onResize = function(width, height)
+	{
+		if (self.program !== null)
+		{
+			self.program.resize(width, height);
+		}
+	};
 
 	/**
 	 * Program being run on this tab.
@@ -341,11 +348,6 @@ RunProject.prototype.updateSize = function()
 
 	this.canvas.size.copy(this.size);
 	this.canvas.updateSize();
-
-	if (this.program !== null)
-	{
-		this.program.resize(this.canvas.size.x, this.canvas.size.y);
-	}
 };
 
 export {RunProject};

@@ -73,6 +73,13 @@ function SceneEditor(parent, closeable, container, index)
 	 * @type {RendererCanvas}
 	 */
 	this.canvas = new RendererCanvas(this, Editor.getRendererConfig());
+	this.canvas.onResize = function(width, height)
+	{
+		if (self.scene !== null)
+		{
+			self.scene.resize(width, height);
+		}
+	};
 	this.canvas.resetCanvas = function()
 	{
 		RendererCanvas.prototype.resetCanvas.call(this);
