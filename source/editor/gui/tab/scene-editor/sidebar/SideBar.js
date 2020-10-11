@@ -41,6 +41,7 @@ import {Editor} from "../../../../Editor.js";
 import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonDrawer} from "../../../../components/buttons/ButtonDrawer.js";
+import { PythonScript } from "../../../../../core/objects/script/PythonScript.js";
 
 /**
  * Side bar is presented in the editor to add more objects to the scene.
@@ -494,6 +495,12 @@ return target.set(x, y, z);`;
 	{
 		Editor.addObject(new Script(), self.editor.scene);
 	}, Locale.javascript);
+
+	// Python script
+	scripts.addOption(Global.FILE_PATH + "icons/script/python.png", function()
+	{
+		Editor.addObject(new PythonScript(), self.editor.scene);
+	}, Locale.python);
 
 	// Node Graph script
 	scripts.addOption(Global.FILE_PATH + "icons/script/workflow.png", function()

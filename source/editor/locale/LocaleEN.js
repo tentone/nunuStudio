@@ -150,6 +150,7 @@ var LocaleEN = {
 	postProcessing: "Post-Processing",
 	html: "HTML",
 	javascript: "JavaScript",
+	python: "Python",
 	nodeGraph: "Node Graph",
 	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",
