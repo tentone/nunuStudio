@@ -103,7 +103,7 @@ function MainMenu(parent)
 	}
 
 	// Save readable legacy format
-	if (DEVELOPMENT && Nunu.runningOnDesktop())
+	if (DEVELOPMENT)
 	{
 		fileMenu.addOption("Save ISP", function()
 		{

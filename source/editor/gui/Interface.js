@@ -49,7 +49,10 @@ function Interface()
 
 	this.animation = leftBottom.addTab(AnimationTab, false);
 
-	this.profiling = leftBottom.addTab(ProfilingTab, false);
+	if (DEVELOPMENT)
+	{
+		leftBottom.addTab(ProfilingTab, false);
+	}
 
 	this.tree = rightTop.addTab(TreeView, false);
 
