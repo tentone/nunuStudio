@@ -784,6 +784,11 @@ ObjectLoader.prototype.parseObject = function(data)
 			object = new Script(data.code, data.mode);
 			break;
 			
+
+		case "PythonScript":
+			object = new PythonScript(data.code);
+			break;
+
 		case "NodeScript":
 			object = new NodeScript();
 			object.graph = Object2D.parse(data.graph);
