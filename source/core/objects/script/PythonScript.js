@@ -3,8 +3,6 @@ import Brython from "brython";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 
-console.log(Brython);
-
 /**
  * Python scripts are similar to Script object by are written using the Python programming language.
  * 
