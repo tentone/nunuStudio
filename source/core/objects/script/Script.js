@@ -215,6 +215,18 @@ Script.getIncludes = function(code)
 };
 
 /**
+ * Remove comments from javascript code using regex.
+ *
+ * @param {string} code Input javascript code.
+ * @return {string} The processed javascript code. 
+ */
+Script.removeComments = function(code)
+{
+	return code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, "");
+};
+
+
+/**
  * Remove includes from code.
  *
  * Used to remove include statements when initializing code in APPEND mode.
@@ -367,6 +379,7 @@ Script.prototype.compileCode = function(code, onReady)
 		// Append libraries to code
 		if (this.mode === Script.APPEND)
 		{
+			code = Script.removeComments(code);
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
 
