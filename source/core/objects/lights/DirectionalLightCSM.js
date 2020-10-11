@@ -1,6 +1,5 @@
 import {CSM} from "three/examples/jsm/csm/CSM";
-import {DirectionalLight, Object3D} from "three";
-import { runInThisContext } from "vm";
+import {Object3D} from "three";
 
 /**
  * A light that gets emitted in a specific direction and has a cascaded shadow map set.
@@ -43,7 +42,7 @@ function DirectionalLightCSM()
 
 DirectionalLightCSM.prototype = Object.create(Object3D.prototype);
 
-DirectionalLight.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+DirectionalLightCSM.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
 {
 	if (this.csm.camera !== camera) 
 	{
