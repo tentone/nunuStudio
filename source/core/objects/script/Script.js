@@ -478,7 +478,7 @@ Script.prototype.compileCode = function(code, onReady)
 					{
 						libsLoaded++;
 
-						if (libsLoaded === urls.length)
+						if (libsLoaded === urls.length && onReady !== undefined)
 						{
 							onReady();
 						}
@@ -487,7 +487,7 @@ Script.prototype.compileCode = function(code, onReady)
 					document.body.appendChild(js);
 				}
 			}
-			else
+			else if (onReady !== undefined)
 			{
 				onReady();
 			}
