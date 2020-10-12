@@ -96,7 +96,6 @@ function Scene()
 	 */
 	this.raycaster = new Raycaster();
 
-	// TODO <OCTREE CODE>
 	/**
 	 * Indicates if the scene is using octree indexation for raycasting.
 	 *
@@ -104,6 +103,8 @@ function Scene()
 	 * @type {boolean}
 	 */
  	this.useOctree = false;
+
+	// TODO <ADD OCTREE CODE>
 
 	/**
 	 * Octree used to index all the unoObject in the scene being visualized.
@@ -191,6 +192,10 @@ Scene.prototype.update = function(delta)
 	if (this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
+	}
+	else if (this.defaultCamera !== null)
+	{
+		this.raycaster.setFromCamera(this.mouse, this.defaultCamera);
 	}
 	
 	if (this.usePhysics)
