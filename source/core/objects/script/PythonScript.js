@@ -1,5 +1,4 @@
 import {Group, Object3D} from "three";
-import Brython from "brython";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 

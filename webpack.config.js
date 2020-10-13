@@ -34,11 +34,6 @@ module.exports = [
 					test: /.*spine-threejs.*/,
 					loader: "@shoutem/webpack-prepend-append",
 					query: "{\"append\": \"export {spine};\"}"
-				},
-				{
-					test: /.*brython.*/,
-					loader: "@shoutem/webpack-prepend-append",
-					query: "{\"append\": \"var process = {release: {name: ''}};\"}"
 				}
 			]
 		},
@@ -81,6 +76,10 @@ module.exports = [
 					],
 					"draco_encoder.js": [
 						"source/lib/draco_encoder.js"
+					],
+					"brython.js": [
+						"node_modules/brython/brython.js",
+						"node_modules/brython/brython_stdlib.js"
 					],
 					"jshint.js": [
 						"node_modules/jshint/dist/jshint.js"
