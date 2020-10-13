@@ -1,4 +1,5 @@
 import {Group, Object3D} from "three";
+import {brython} from "brython";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 
@@ -20,6 +21,8 @@ function PythonScript(code)
 	
 	this.type = "PythonScript";
 	this.name = "script";
+
+	console.log(brython);
 
 	/*
 	 * Python code attached to the script.

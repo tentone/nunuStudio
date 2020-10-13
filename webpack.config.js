@@ -33,7 +33,22 @@ module.exports = [
 				{
 					test: /.*spine-threejs.*/,
 					loader: "@shoutem/webpack-prepend-append",
-					query: "{\"append\": \"export {spine};\"}"
+					query: JSON.stringify({append: "export {spine};"})
+				},
+				{
+					test: /.*brython.*/,
+					loader: "@shoutem/webpack-prepend-append",
+					query: JSON.stringify({
+						prepend: `(function (root, factory) {
+						if (typeof define === 'function' && define.amd) { define([], factory); }  // AMD loader
+						else if (typeof module === 'object' && module.exports) { module.exports = factory(); }  // CommonJS loader
+						else { root.brython = factory(); }  // Script tag
+						}(typeof self !== 'undefined' ? self : this, function () {
+						var process = {release: {name: ''}};`,
+						append: `window.__BRYTHON__ = __BRYTHON__;
+						return brython;
+						}));`
+					})
 				}
 			]
 		},
@@ -76,10 +91,6 @@ module.exports = [
 					],
 					"draco_encoder.js": [
 						"source/lib/draco_encoder.js"
-					],
-					"brython.js": [
-						"node_modules/brython/brython.js",
-						"node_modules/brython/brython_stdlib.js"
 					],
 					"jshint.js": [
 						"node_modules/jshint/dist/jshint.js"
