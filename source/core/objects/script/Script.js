@@ -27,7 +27,7 @@ function Script(code, mode)
 	this.name = "script";
 
 	/**
-	 * Javascript code attached to the script.
+	 * Source code attached to the script, by default it is a Javacript source but other languages can be implemented.
 	 *
 	 * It can access and change every object in the program and supports some events
 	 * - initialize
@@ -361,11 +361,6 @@ Script.prototype.appData = function(data)
  */
 Script.prototype.compileCode = function(code, onReady)
 {
-	if (code !== undefined)
-	{
-		this.code = code;
-	}
-
 	try
 	{
 		// Public method declaration

@@ -29,6 +29,7 @@ import {Sky} from "../objects/misc/Sky.js";
 import {SpineAnimation} from "../objects/spine/SpineAnimation.js";
 import {SpotLight} from "../objects/lights/SpotLight.js";
 import {Sprite} from "../objects/sprite/Sprite.js";
+import {PythonScript} from "../objects/script/PythonScript.js";
 import {TextBitmap} from "../objects/text/TextBitmap.js";
 import {TextFile} from "../resources/TextFile.js";
 import {TextMesh} from "../objects/text/TextMesh.js";

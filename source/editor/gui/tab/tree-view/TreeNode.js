@@ -4,6 +4,7 @@ import {PhysicsGenerator} from "../../../../core/utils/PhysicsGenerator.js";
 import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Script} from "../../../../core/objects/script/Script.js";
+import {PythonScript} from "../../../../core/objects/script/PythonScript.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
@@ -22,6 +23,7 @@ import {ActionBundle} from "../../../history/action/ActionBundle.js";
 import {SceneEditor} from "../scene-editor/SceneEditor.js";
 import {ParticleEditor} from "../particle-editor/ParticleEditor.js";
 import {ScriptEditor} from "../code/ScriptEditor.js";
+import {PythonScriptEditor} from "../code/PythonScriptEditor.js";
 import {CameraEditor} from "../camera/CameraEditor.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {Editor} from "../../../Editor.js";
@@ -657,6 +659,10 @@ function TreeNode(container)
 			if (self.object instanceof Script)
 			{
 				openTab(ScriptEditor, self.object);
+			}
+			else if (self.object instanceof PythonScript)
+			{
+				openTab(PythonScriptEditor, self.object);
 			}
 			else if (self.object instanceof Scene)
 			{

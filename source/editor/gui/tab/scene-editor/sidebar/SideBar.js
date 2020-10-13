@@ -491,7 +491,7 @@ return target.set(x, y, z);`;
 	this.buttons.push(scripts);
 
 	// Javascript script
-	scripts.addOption(Global.FILE_PATH + "icons/script/script.png", function()
+	scripts.addOption(Global.FILE_PATH + "icons/script/javascript.png", function()
 	{
 		Editor.addObject(new Script(), self.editor.scene);
 	}, Locale.javascript);

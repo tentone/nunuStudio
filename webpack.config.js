@@ -46,7 +46,7 @@ module.exports = [
 						}(typeof self !== 'undefined' ? self : this, function () {
 						var process = {release: {name: ''}};`,
 						append: `window.__BRYTHON__ = __BRYTHON__;
-						return brython;
+						return __BRYTHON__;
 						}));`
 					})
 				}
@@ -113,6 +113,7 @@ module.exports = [
 						"node_modules/codemirror/keymap/sublime.js",
 						"node_modules/codemirror/keymap/emacs.js",
 						"node_modules/codemirror/keymap/vim.js",
+						"node_modules/codemirror/mode/python/python.js",
 						"node_modules/codemirror/mode/javascript/javascript.js",
 						"node_modules/codemirror/mode/css/css.js",
 						"node_modules/codemirror/mode/xml/xml.js",
