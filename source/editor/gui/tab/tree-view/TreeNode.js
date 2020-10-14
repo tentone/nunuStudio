@@ -656,13 +656,13 @@ function TreeNode(container)
 	{
 		if (!self.object.locked)
 		{
-			if (self.object instanceof Script)
-			{
-				openTab(ScriptEditor, self.object);
-			}
-			else if (self.object instanceof PythonScript)
+			if (self.object instanceof PythonScript)
 			{
 				openTab(PythonScriptEditor, self.object);
+			}
+			else if (self.object instanceof Script)
+			{
+				openTab(ScriptEditor, self.object);
 			}
 			else if (self.object instanceof Scene)
 			{

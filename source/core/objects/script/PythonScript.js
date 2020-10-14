@@ -24,9 +24,6 @@ function PythonScript(code)
 	
 	this.type = "PythonScript";
 	this.name = "script";
-
-	// TODO <REMOVE THIS CODE>
-	console.log(Brython);
 }
 
 PythonScript.prototype = Object.create(Script.prototype);
@@ -38,23 +35,6 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @type {string}
  */
 PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
-
-
-/**
- * Call onAppData() from the script if available.
- *
- * This method is called everytime that external data is passed to the runtime.
- * 
- * @method appData
- * @param {Object} data
- */
-PythonScript.prototype.appData = function(data)
-{
-	if (this.script.onAppData !== undefined)
-	{
-		this.script.onAppData.call(this, data);
-	}
-};
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
@@ -71,17 +51,29 @@ PythonScript.prototype.compileCode = function(code, onReady)
 	try
 	{
 		compiled = Brython.python_to_js(code);
+		compiled = compiled.substring(compiled.indexOf("\n") + 1, compiled.lastIndexOf("\n"));
 		
 		// TODO <REMOVE THIS>
-		console.log(code, compiled);
+		console.log({brython: Brython, code: code, compiled: compiled});
 	}
 	catch (e)
 	{
 		throw new Error("Failed to transpile python into javascript code.", e);
 	}
 
-	
-	Script.prototype.compileCode.call(this, compiled, onReady);
+	// Public method declaration
+	/*
+	var code = this.code;
+	for (var i = 0; i < Script.METHODS.length; i++)
+	{
+		var method = Script.METHODS[i];
+		code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
+	}
+	*/
+
+	var Constructor = new Function(compiled);
+
+	this.script = new Constructor();
 };
 
 export {PythonScript};
