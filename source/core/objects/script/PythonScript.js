@@ -74,6 +74,9 @@ PythonScript.prototype.compileCode = function(code, onReady)
 	var Constructor = new Function(compiled);
 
 	this.script = new Constructor();
+
+	// TODO <REMOVE THIS>
+	console.log(this.script);
 };
 
 export {PythonScript};
