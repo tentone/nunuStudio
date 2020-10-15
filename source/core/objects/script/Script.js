@@ -496,33 +496,8 @@ Script.prototype.compileCode = function(code, onReady)
 
 		// Create script object
 		try
-		{
-			var context = {};
-
-			Object.assign(context, CANNON);
-			Object.assign(context, THREE);
-			Object.assign(context, NUNU);
-			
-			var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc"];
-			var math = {};
-			for (var i of mathProps)
-			{
-				math[i] = window.Math[i];
-			}
-			Object.assign(math, THREE.Math);
-
-			Object.assign(context,
-				{	
-					program: this.program, 
-					scene: this.scene, 
-					self: this,
-					THREE: THREE,
-					CANNON: CANNON,
-					Math: math,
-					Keyboard: this.program.keyboard,
-					Mouse: this.program.mouse
-				});
-
+		{	
+			var context = Script.createContextObject();
 			this.script = new Constructor(context);
 		}
 		catch (e)
@@ -543,6 +518,45 @@ Script.prototype.compileCode = function(code, onReady)
 		console.warn("nunuStudio: Error compiling script code", e);
 		throw new Error("Error compiling script code");
 	}
+};
+
+/**
+ * Create a object to access the context of this script.
+ * 
+ * Also includes the access to three cannon and nunu methods.
+ * 
+ * @method createContextObject
+ * @return {Object} Context object for the script to access data.
+ */
+Script.prototype.createContextObject = function()
+{
+	var context = {};
+
+	Object.assign(context, CANNON);
+	Object.assign(context, THREE);
+	Object.assign(context, NUNU);
+	
+	var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc"];
+	var math = {};
+	for (var i of mathProps)
+	{
+		math[i] = window.Math[i];
+	}
+	Object.assign(math, THREE.Math);
+
+	Object.assign(context,
+		{	
+			self: this,
+			program: this.program, 
+			scene: this.scene, 
+			THREE: THREE,
+			CANNON: CANNON,
+			Math: math,
+			Keyboard: this.program.keyboard,
+			Mouse: this.program.mouse
+		});
+
+	return context;
 };
 
 Script.prototype.toJSON = function(meta)

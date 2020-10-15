@@ -34,7 +34,7 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @attribute DEFAULT
  * @type {string}
  */
-PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
+PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update(delta):\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
@@ -50,33 +50,41 @@ PythonScript.prototype.compileCode = function(code, onReady)
 
 	try
 	{
+		// Compile code to JS
 		compiled = Brython.python_to_js(code);
+
+		// Remove scope wrapper from the compiled code
 		compiled = compiled.substring(compiled.indexOf("\n") + 1, compiled.lastIndexOf("\n"));
-		
-		// TODO <REMOVE THIS>
-		console.log({brython: Brython, code: code, compiled: compiled});
 	}
 	catch (e)
 	{
 		throw new Error("Failed to transpile python into javascript code.", e);
 	}
+	
+	// Context code
+	compiled = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}\n" + compiled;
 
 	// Public method declaration
-	/*
-	var code = this.code;
 	for (var i = 0; i < Script.METHODS.length; i++)
 	{
 		var method = Script.METHODS[i];
-		code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
+		compiled += "\nif(this." + method + " == undefined && typeof $locals___main__[\"" + method + "\"] !== 'undefined'){this." + method + " = $locals___main__[\"" + method + "\"];}";
 	}
-	*/
 
-	var Constructor = new Function(compiled);
+	var Constructor = new Function("__context__", compiled);
 
-	this.script = new Constructor();
-
-	// TODO <REMOVE THIS>
-	console.log(this.script);
+	// Create script object
+	try
+	{	
+		var context = Script.createContextObject();
+		this.script = new Constructor(context);
+	}
+	catch (e)
+	{
+		this.script = {};
+		console.warn("nunuStudio: Error initializing script code", e);
+		throw new Error("Error initializing script code");
+	}
 };
 
 export {PythonScript};
