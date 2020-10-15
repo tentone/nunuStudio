@@ -76,7 +76,7 @@ PythonScript.prototype.compileCode = function(code, onReady)
 	// Create script object
 	try
 	{	
-		var context = Script.createContextObject();
+		var context = this.createContextObject();
 		this.script = new Constructor(context);
 	}
 	catch (e)
@@ -85,6 +85,9 @@ PythonScript.prototype.compileCode = function(code, onReady)
 		console.warn("nunuStudio: Error initializing script code", e);
 		throw new Error("Error initializing script code");
 	}
+
+	// TODO <REMOVE THIS>
+	console.log(this.script, code, compiled);
 };
 
 export {PythonScript};

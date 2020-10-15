@@ -497,7 +497,7 @@ Script.prototype.compileCode = function(code, onReady)
 		// Create script object
 		try
 		{	
-			var context = Script.createContextObject();
+			var context = this.createContextObject();
 			this.script = new Constructor(context);
 		}
 		catch (e)
