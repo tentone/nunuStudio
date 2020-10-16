@@ -34,7 +34,19 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @attribute DEFAULT
  * @type {string}
  */
-PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update(delta):\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
+// PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update(delta):\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
+PythonScript.DEFAULT = `class foo(A):
+	def __init__(self, x):
+		self.x = x
+
+	def initialize():
+		# TODO <ADD CODE HERE>
+		print("Initialize")
+
+	def update(delta):
+		# TODO <ADD CODE HERE>
+		print("Update")
+`;
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
@@ -62,22 +74,22 @@ PythonScript.prototype.compileCode = function(code, onReady)
 	}
 	
 	// Context code
-	compiled = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}\n" + compiled;
+	// compiled = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}\n" + compiled;
 
 	// Public method declaration
 	for (var i = 0; i < Script.METHODS.length; i++)
 	{
-		var method = Script.METHODS[i];
-		compiled += "\nif(this." + method + " == undefined && typeof $locals___main__[\"" + method + "\"] !== 'undefined'){this." + method + " = $locals___main__[\"" + method + "\"];}";
+		// var method = Script.METHODS[i];
+		// compiled += "\nif(this." + method + " == undefined && typeof $locals___main__[\"" + method + "\"] !== 'undefined'){this." + method + " = $locals___main__[\"" + method + "\"];}";
 	}
 
-	var Constructor = new Function("__context__", compiled);
+	var Constructor = new Function(compiled);
 
 	// Create script object
 	try
 	{	
-		var context = this.createContextObject();
-		this.script = new Constructor(context);
+		// var context = this.createContextObject();
+		this.script = new Constructor();
 	}
 	catch (e)
 	{

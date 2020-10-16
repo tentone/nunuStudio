@@ -17,18 +17,6 @@ function PythonScriptEditor(parent, closeable, container, index)
 	this.setLanguage("python");
 	this.updateSettings();
 
-	/**
-	 * Tern server used to provide code analysis.
-	 *
-	 * @attribute server
-	 * @type {CodeMirror.TernServer}
-	 */
-	this.server = new CodeMirror.TernServer(
-		{
-			caseInsensitive: false,
-			defs: Editor.ternDefinitions
-		});
-
 	this.code.setOption("extraKeys", {"Ctrl-Space": function(cm) {self.server.complete(cm);}});
 
 	// Change
@@ -55,8 +43,6 @@ function PythonScriptEditor(parent, closeable, container, index)
 
 		if (/[\w\.]/.exec(typed))
 		{
-			self.server.complete(cm);
-
 			// If there is no tern sugestion suggest known words
 			if (!cm.state.completionActive || !cm.state.completionActive.widget)
 			{
