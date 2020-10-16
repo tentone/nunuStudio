@@ -26,6 +26,72 @@ function PerspectiveCameraInspector(parent, object)
 	this.form.add(this.fov);
 	this.form.nextRow();
 
+	
+	// Fov
+	this.form.addText(Locale.fov);
+	this.fov = new Slider(this.form);
+	this.fov.size.set(160, 18);
+	this.fov.setRange(30, 160);
+	this.fov.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "fov", self.fov.getValue()));
+		self.object.updateProjectionMatrix();
+	});
+	this.form.add(this.fov);
+	this.form.nextRow();
+	
+	// Film Gauge
+	this.form.addText(Locale.filmGauge);
+	this.filmGauge = new Slider(this.form);
+	this.filmGauge.size.set(160, 18);
+	this.filmGauge.setRange(30, 160);
+	this.filmGauge.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "filmGauge", self.filmGauge.getValue()));
+		self.object.updateProjectionMatrix();
+	});
+	this.form.add(this.filmGauge);
+	this.form.nextRow();
+
+	// Film Offset
+	this.form.addText(Locale.filmOffset);
+	this.filmOffset = new Slider(this.form);
+	this.filmOffset.size.set(160, 18);
+	this.filmOffset.setRange(30, 160);
+	this.filmOffset.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "filmOffset", self.filmOffset.getValue()));
+		self.object.updateProjectionMatrix();
+	});
+	this.form.add(this.filmOffset);
+	this.form.nextRow();
+
+	// Zoom
+	this.form.addText(Locale.zoom);
+	this.zoom = new Slider(this.form);
+	this.zoom.size.set(160, 18);
+	this.zoom.setRange(30, 160);
+	this.zoom.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "zoom", self.zoom.getValue()));
+		self.object.updateProjectionMatrix();
+	});
+	this.form.add(this.zoom);
+	this.form.nextRow();
+
+	// Focus
+	this.form.addText(Locale.focus);
+	this.focus = new Slider(this.form);
+	this.focus.size.set(160, 18);
+	this.focus.setRange(30, 160);
+	this.focus.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "focus", self.focus.getValue()));
+		self.object.updateProjectionMatrix();
+	});
+	this.form.add(this.focus);
+	this.form.nextRow();
+
 	// Camera used
 	this.use = new CheckBox(this.form);
 	this.form.addText(Locale.useCamera);

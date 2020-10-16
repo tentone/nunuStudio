@@ -265,6 +265,8 @@ var LocaleEN = {
 	useCamera: "Use camera",
 	renderOrder: "Render order",
 	fov: "FOV",
+	filmGauge: "Film Gauge",
+	filmOffset: "Film Offset",
 	shininess: "Shininess",
 	specular: "Specular",
 	clippingPlanes: "Clipping planes",
