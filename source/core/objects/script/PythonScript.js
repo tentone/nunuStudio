@@ -35,15 +35,15 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @type {string}
  */
 // PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update(delta):\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
-PythonScript.DEFAULT = `class foo(A):
+PythonScript.DEFAULT = `class Script:
 	def __init__(self, x):
 		self.x = x
 
-	def initialize():
+	def initialize(self):
 		# TODO <ADD CODE HERE>
 		print("Initialize")
 
-	def update(delta):
+	def update(self, delta):
 		# TODO <ADD CODE HERE>
 		print("Update")
 `;
@@ -73,6 +73,8 @@ PythonScript.prototype.compileCode = function(code, onReady)
 		throw new Error("Failed to transpile python into javascript code.", e);
 	}
 	
+	compiled += "\nreturn $locals___main__[\"Script\"];";
+
 	// Context code
 	// compiled = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}\n" + compiled;
 

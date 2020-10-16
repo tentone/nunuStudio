@@ -1,5 +1,4 @@
 import {Script} from "../../../../core/objects/script/Script.js";
-import {Editor} from "../../../Editor.js";
 import {CodeEditor} from "./CodeEditor.js";
 
 /**
@@ -17,8 +16,6 @@ function PythonScriptEditor(parent, closeable, container, index)
 	this.setLanguage("python");
 	this.updateSettings();
 
-	this.code.setOption("extraKeys", {"Ctrl-Space": function(cm) {self.server.complete(cm);}});
-
 	// Change
 	this.code.on("change", function(cm)
 	{
@@ -28,12 +25,6 @@ function PythonScriptEditor(parent, closeable, container, index)
 		}
 
 		self.updateCode();
-	});
-
-	// Cursor activity event
-	this.code.on("cursorActivity", function(cm)
-	{
-		self.server.updateArgHints(cm);
 	});
 
 	// Key pressed event
