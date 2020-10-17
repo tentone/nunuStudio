@@ -1,5 +1,5 @@
 import * as Brython from "brython";
-import {Object3D} from "three";
+import {Group, Object3D} from "three";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 import {Script} from "./Script.js";
@@ -18,15 +18,68 @@ import {Script} from "./Script.js";
  */
 function PythonScript(code)
 {
-	code = code !== undefined ? code : PythonScript.DEFAULT;
 
-	Script.call(this, code);
+	Group.call(this);
 	
 	this.type = "PythonScript";
 	this.name = "script";
+
+	/**
+	 * Python code attached to the script.
+	 * 
+	 * It only has acess to the data provided as parameter in each method.
+	 * - initialize(obj, scene, program, keyboard, mouse) 
+	 *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
+	 *  - update(delta, obj, scene, program, keyboard, mouse)
+	 *    - Called on every frame after rendering
+	 *  - dispose(obj, scene, program, keyboard, mouse)
+	 *    - Called when disposing the program
+	 *  - onMouseOver(intersections, obj, scene, program, keyboard, mouse)
+	 *    - Called on every frame if mouse is on top of one of the script children
+	 *    - Receives an intersections array as argument.
+	 *  - onResize(x, y, obj, scene, program, keyboard, mouse)
+	 *    - Called every time the window is resized
+	 *    - Receives width and height as parameters
+	 *  - onAppData(data, obj, scene, program, keyboard, mouse)
+	 *    - Called when receiving data sent by the host website
+	 * 
+	 * @property code
+	 * @type {string}
+	 */
+	this.code = code !== undefined ? code : PythonScript.DEFAULT;
+
+	/**
+	 * Compiled function used during runtime.
+	 *
+	 * This varible gets created using the compileCode() function called automatically on initalization.
+	 *
+	 * @attribute script
+	 * @type {Function}
+	 */
+	this.script = {};
+
+	/**
+	 * Reference to the program object.
+	 *
+	 * Can be used to access other scenes, get resources and objects.
+	 *
+	 * @property program
+	 * @type {Program}
+	 */
+	this.program = null;
+
+	/**
+	 * Reference to the scene where the script is placed.
+	 *
+	 * Can be used to interact with other objects.
+	 *
+	 * @property scene
+	 * @type {Scene}
+	 */
+	this.scene = null;
 }
 
-PythonScript.prototype = Object.create(Script.prototype);
+PythonScript.prototype = Object.create(Group.prototype);
 
 /**
  * Default script code used when creating a new Script.
@@ -34,11 +87,13 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @attribute DEFAULT
  * @type {string}
  */
-PythonScript.DEFAULT = `def initialize(obj, scene, program):
-	print(\"Initialize\")
+PythonScript.DEFAULT = `def initialize(obj, scene, program, keyboard, mouse):
+	# TODO <ADD CODE HERE>
+	pass
 
-def update(delta):
-	print(\"Update\")`;
+def update(delta, obj, scene, program, keyboard, mouse):
+	# TODO <ADD CODE HERE>
+	pass`;
 
 PythonScript.prototype.initialize = function()
 {
@@ -58,15 +113,86 @@ PythonScript.prototype.initialize = function()
 
 	Object3D.prototype.initialize.call(this);
 
-	var self = this;
+	this.compileCode(this.code);
 
-	this.compileCode(this.code, function()
+	if (this.script.initialize !== undefined)
 	{
-		if (self.script.initialize !== undefined)
+		this.script.initialize.call(this, this, this.scene, this.program, this.program.keyboard, this.program.mouse);
+	}
+};
+
+/**
+ * Update script state automatically calls for mouse events if they are defined and for the script update method.
+ * 
+ * This method is executed every frame, script logic should not relly on the frame time, use the "delta" value provided.
+ * 
+ * @method update
+ */
+PythonScript.prototype.update = function(delta)
+{
+	if (this.script.onMouseOver !== undefined)
+	{
+		var intersections = this.scene.raycaster.intersectObjects(this.children, true);
+		if (intersections.length > 0)
 		{
-			self.script.initialize.call(self, self, self.scene, self.program);
+			this.script.onMouseOver.call(this, intersections);
 		}
-	});
+	}
+
+	if (this.script.update !== undefined)
+	{
+		this.script.update.call(this, delta, this, this.scene, this.program, this.program.keyboard, this.program.mouse);
+	}
+
+	Object3D.prototype.update.call(this, delta);
+};
+
+/**
+ * Disposes the script, can be used to clear resources when the program exits.
+ * 
+ * Calls the script dispose method if it exists.
+ * 
+ * @method dispose
+ */
+PythonScript.prototype.dispose = function()
+{
+	if (this.script.dispose !== undefined)
+	{
+		this.script.dispose.call(this, this, this.scene, this.program, this.program.keyboard, this.program.mouse);
+	}
+
+	Object3D.prototype.dispose.call(this);
+};
+
+/**
+ * Call resize method if available.
+ *
+ * The resize method receives width and height as arguments.
+ * 
+ * @method resize
+ */
+PythonScript.prototype.resize = function(x, y)
+{
+	if (this.script.onResize !== undefined)
+	{
+		this.script.onResize.call(this, x, y, this, this.scene, this.program, this.program.keyboard, this.program.mouse);
+	}
+};
+
+/**
+ * Call onAppData() from the script if available.
+ *
+ * This method is called everytime that external data is passed to the runtime.
+ * 
+ * @method appData
+ * @param {Object} data
+ */
+PythonScript.prototype.appData = function(data)
+{
+	if (this.script.onAppData !== undefined)
+	{
+		this.script.onAppData.call(this, data, this, this.scene, this.program, this.program.keyboard, this.program.mouse);
+	}
 };
 
 /**
@@ -127,5 +253,15 @@ PythonScript.prototype.compileCode = function(code, onReady)
 		onReady();
 	}
 };
+
+PythonScript.prototype.toJSON = function(meta)
+{
+	var data = Object3D.prototype.toJSON.call(this, meta);
+
+	data.object.code = this.code;
+
+	return data;
+};
+
 
 export {PythonScript};
