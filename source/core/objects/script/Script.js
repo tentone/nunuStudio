@@ -225,7 +225,6 @@ Script.removeComments = function(code)
 	return code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, "");
 };
 
-
 /**
  * Remove includes from code.
  *

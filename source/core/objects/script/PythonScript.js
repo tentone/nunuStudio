@@ -1,4 +1,7 @@
 import * as Brython from "brython";
+import {Object3D} from "three";
+import {Scene} from "../Scene.js";
+import {Program} from "../Program.js";
 import {Script} from "./Script.js";
 
 /**
@@ -31,11 +34,40 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @attribute DEFAULT
  * @type {string}
  */
-PythonScript.DEFAULT = `def initialize(object, scene, program, keyboard, mouse):
+PythonScript.DEFAULT = `def initialize(obj, scene, program):
 	print(\"Initialize\")
 
-def update(delta, object, scene, program, keyboard, mouse):
+def update(delta):
 	print(\"Update\")`;
+
+PythonScript.prototype.initialize = function()
+{
+	var node = this;
+	while (node.parent !== null)
+	{
+		node = node.parent;
+		if (node instanceof Scene)
+		{
+			this.scene = node;
+		}
+		else if (node instanceof Program)
+		{
+			this.program = node;
+		}
+	}
+
+	Object3D.prototype.initialize.call(this);
+
+	var self = this;
+
+	this.compileCode(this.code, function()
+	{
+		if (self.script.initialize !== undefined)
+		{
+			self.script.initialize.call(self, self, self.scene, self.program);
+		}
+	});
+};
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
@@ -89,6 +121,11 @@ PythonScript.prototype.compileCode = function(code, onReady)
 
 	// TODO <REMOVE THIS>
 	console.log(this.script, code, compiled);
+
+	if (onReady !== undefined)
+	{
+		onReady();
+	}
 };
 
 export {PythonScript};
