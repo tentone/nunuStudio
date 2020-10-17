@@ -1,7 +1,4 @@
-import {Group, Object3D} from "three";
 import * as Brython from "brython";
-import {Scene} from "../Scene.js";
-import {Program} from "../Program.js";
 import {Script} from "./Script.js";
 
 /**
@@ -34,19 +31,11 @@ PythonScript.prototype = Object.create(Script.prototype);
  * @attribute DEFAULT
  * @type {string}
  */
-PythonScript.DEFAULT = "def initialize():\n\t# TODO <ADD CODE HERE>\n\tprint(\"Initialize\")\n\ndef update(delta):\n\t# TODO <ADD CODE HERE>\n\tprint(\"Update\")";
-/* PythonScript.DEFAULT = `class Script:
-	def __init__(self, x):
-		self.x = x
+PythonScript.DEFAULT = `def initialize(object, scene, program, keyboard, mouse):
+	print(\"Initialize\")
 
-	def initialize(self):
-		# TODO <ADD CODE HERE>
-		print("Initialize")
-
-	def update(self, delta):
-		# TODO <ADD CODE HERE>
-		print("Update")
-`;*/
+def update(delta, object, scene, program, keyboard, mouse):
+	print(\"Update\")`;
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
