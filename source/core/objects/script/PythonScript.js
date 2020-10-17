@@ -203,7 +203,7 @@ PythonScript.prototype.appData = function(data)
  * @method compileCode
  * @param {string} code Code to be compiled into usable code.
  */
-PythonScript.prototype.compileCode = function(code, onReady)
+PythonScript.prototype.compileCode = function(code)
 {	
 	var compiled;
 
@@ -243,14 +243,6 @@ PythonScript.prototype.compileCode = function(code, onReady)
 		this.script = {};
 		console.warn("nunuStudio: Error initializing script code", e);
 		throw new Error("Error initializing script code");
-	}
-
-	// TODO <REMOVE THIS>
-	console.log(this.script, code, compiled);
-
-	if (onReady !== undefined)
-	{
-		onReady();
 	}
 };
 
