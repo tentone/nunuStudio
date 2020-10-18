@@ -5,13 +5,15 @@ import {AppPage} from './app.page';
 import {HomePage} from "./page/home/home.page";
 import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
+import {LearnPage} from "./page/learn/learn.page";
 
 @NgModule({
 	declarations: [
 		AppPage,
 		MenuPage,
 		HomePage,
-		DownloadPage
+		DownloadPage,
+		LearnPage
 	],
 	imports: [
 		BrowserModule,
