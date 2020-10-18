@@ -1,52 +1,52 @@
-if(hljs !== undefined)
+if (hljs !== undefined)
 {
 	hljs.initHighlightingOnLoad();
 }
 
-var nunuApps = [];
+const nunuApps = [];
 
 function initialize(fname, canvasId)
-{	
-	var canvas = document.getElementById(canvasId || "canvas");
-	var app = new Nunu.App(canvas);
+{
+	const canvas = document.getElementById(canvasId || "canvas");
+	const app = new Nunu.App(canvas);
 
-	var onLoad = function()
+	const onLoad = function()
 	{
-		//Fullscreen Button
-		var fs = createButton("Fullscreen");
+		// Fullscreen Button
+		const fs = createButton("Fullscreen");
 		fs.onclick = function()
 		{
 			app.toggleFullscreen();
 		};
 		canvas.parentElement.appendChild(fs);
 
-		//VR Button
+		// VR Button
 		setTimeout(function()
 		{
-			if(app.vrAvailable())
+			if (app.vrAvailable())
 			{
-				var vr = createButton("Enter VR");
+				const vr = createButton("Enter VR");
 				vr.onclick = function()
 				{
 					app.toggleVR();
 				};
 				canvas.parentElement.appendChild(vr);
 			}
-		}, 1000)
+		}, 1000);
 	};
 
 	app.loadRunProgram(fname, onLoad);
-	nunuApps.push({canvas:canvas, app:app});
-	
+	nunuApps.push({canvas: canvas, app: app});
+
 	resize();
 	document.body.onresize = resize;
 }
 
 function resize()
 {
-	for(var i = 0; i < nunuApps.length; i++)
+	for (let i = 0; i < nunuApps.length; i++)
 	{
-		if(Nunu.isFullscreen())
+		if (Nunu.isFullscreen())
 		{
 			nunuApps[i].canvas.width = window.innerWidth;
 			nunuApps[i].canvas.height = window.innerHeight;
@@ -62,7 +62,7 @@ function resize()
 
 function createButton(text)
 {
-	var button = document.createElement("div");
+	const button = document.createElement("div");
 	button.style.backgroundColor = "#333333";
 	button.style.color = "#FFFFFF";
 	button.style.height = "30px";
@@ -75,10 +75,10 @@ function createButton(text)
 	button.style.textAlign = "center";
 	button.style.cursor = "pointer";
 
-	var span = document.createElement("span");
+	const span = document.createElement("span");
 	button.appendChild(span);
 
-	var b = document.createElement("b");
+	const b = document.createElement("b");
 	b.innerHTML = text;
 	span.appendChild(b);
 
@@ -90,6 +90,6 @@ function createButton(text)
 	{
 		this.style.backgroundColor = "#333333";
 	};
-	
+
 	return button;
 }
