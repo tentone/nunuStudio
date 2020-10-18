@@ -55,10 +55,10 @@
 			<h2 class="black">Terrain</h2>
 
 			<p>Since nunuStudio is built on top of three.js it is possible to use libraries that were designed to work with three. Most of base nunuStudio objects (e.g. Scene, Lights, Meshes etc) are directly based off three.js objects.</p>
-			<p>But some parts of the library were rewriten/overrided and from time to time you may encounter situations where external libraries made for three.js are not compatible with nunuStudio (e.g Post-processing, Renderers etc).</p>
+			<p>But some parts of the library were rewritten/override and from time to time you may encounter situations where external libraries made for three.js are not compatible with nunuStudio (e.g Post-processing, Renderers etc).</p>
 			<p>In this tutorial we will build a simple program using the <a href="https://github.com/IceCreamYou/THREE.Terrain">THREE.Terrain</a> library for procedurely generated terrain mesh.</p>
 			<p>It is important to understand that nunuStudio has its own resource management solution, but some resource types are based off three.js types, you should use the Material, Texture, Image, etc types available in nunuStudio. These should work for all external libraries (unless these libraries need a specific variant, in this scenario you should use the library specific types programatically).</p>
-			<p>To import external libraries into your project drag the JS file to the resource exporer then import them into your script using the import('library.js'); method after importing the file the library can be used normally.</p>
+			<p>To import external libraries into your project drag the JS file to the resource explorer then import them into your script using the import('library.js'); method after importing the file the library can be used normally.</p>
 
 <pre><code>include("THREE.Terrain.min.js");
 

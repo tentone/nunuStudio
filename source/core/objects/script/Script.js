@@ -13,10 +13,11 @@ import * as NUNU from "../../Main.js";
  * These scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.
  *
  * Its possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources.
- * 
+ *
  * @class Script
  * @extends {Object}
  * @param {string} code Javascript code to be used by this script
+ * @param {number} mode Mode used to import external code into the script.
  * @module Script
  */
 function Script(code, mode)
@@ -127,7 +128,13 @@ Script.includeRegexEnd = /["'][ \n]*\);*/gi;
  * @attribute DEFAULT
  * @type {string}
  */
-Script.DEFAULT = "function initialize()\n{\n	// TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n	// TODO <UPDATE CODE>\n}\n";
+Script.DEFAULT = `function initialize() {
+	// TODO ADD CODE
+}
+
+function update(delta) {
+	// TODO ADD CODE
+}`;
 
 /**
  * List of default methods that can be implemented by scripts.
