@@ -1,0 +1,56 @@
+	<section class="pad-sm">
+		<div class="container">
+			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
+			<h2 class="black">Materials</h2>
+			<p>Materials describe the appearance of objects. Materials define how the object superficie is renderer and can have attached to them textures, colors, videos, etc.</p>
+
+			<h3 class="black">Material types</h3>
+			<p>There are various types of materials available inside nunuStudio and there is even the possibility of creating customized materials using GLSL shaders, more information about material types can be found <a href="https://threejs.org/docs/index.html#Reference/Materials/Material">here</a>. Here is a list of some of the most used material types:</p>
+			<ul>
+				<li><p>Standard material - A standard physically based material. Physically based rendering (PBR) has recently become the standard in many 3D applications, such as Unity, Unreal and 3D Studio Max. More infomation abou PBR <a href="https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/">here</a>.</p></li>
+				<li><p>Phong material - A material for shiny surfaces with specular highlight.</p></li>
+				<li><p>Lambert material - A material for non-shiny surfaces, without specular highlights.</p></li>
+				<li><p>Basic material - A material for drawing geometries in a simple shaded way. This material is not affected by lights.</p></li>
+				<li><p>Sprite material - Special type of material to be used with sprite objects.</p></li>
+				<li><p>Shader material - Shader materials can be customized using GLSL code.</p></li>
+			</ul>
+			<p>The example bellow shows 4 different material types running, from the left to the right we have a Standard material, Phong material, Lambert material and a Basic Material, as we can se the Standard (PBR) and Phong materials are more detailed, the lambert material has basic light support (per vertex light calculation) and the basic material does not react to light.</p>
+			<div>
+				<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
+			<h3 class="black">Creating materials</h3>
+			<p>Materials can be crated by clicking on the Material menu in the resource explorer, and selecting the type of material desired, materials are also created when a image or video file is dragged to a mesh object or to the resource explorer.</p>
+			<img src="selector.png" class="img-normal"></img>
+			<p>After creating a material its possible edit its attributes double clicking on top of it on the resource explorer, this will open a new material editor tab.</p>
+			<p>Inside the material editor its possible to change every material parameter, add textures, change colors, etc.</p>
+			<p>On the left side of the material editor there is a real time preview of the material applied to an object that can be moved using the mouse left button, its also possible to change the preview settings on the bottom section of the left side.</p>
+			<img src="editor.jpg" class="img-big"></img>
+
+			<h3 class="black">Textures</h3>
+			<p>Materials can have textures attached to them, textures can be used to define the color of the material surface, but can also be used to define other attributes of the material, like the roughness, metalness, normal vectors, etc.</p>
+			<p>To add a texture to a material its possible to drag a texture from the resource explorer or drag direcly a image or video file from the host to the desired place in the material editor. This will automatically create a new texture object and attach it to the material.</p>
+			<p>In this example we will explore a PBR based texturing set (using a StandardMaterial) to demonstrate how each type of texture affects the material. The following textures will be used:</p>
+			<ul>
+				<li><p>Color texture - Defines the color of the object surface.</p></li>
+				<li><p>Normal texture - Defines how the surface of the object reacts to light (encode the normal vector of the object in rgb color).</p></li>
+				<li><p>Height texture - Used to increase detail on the object by applying deformations to it to match the material shape.</p></li>
+				<li><p>Metalness texture - Defines how metallic is the surface of the object.</p></li>
+				<li><p>Roughness texture - Defines how rough is the surface of the object.</p></li>
+			</ul>
+
+			<img src="textures/albedo.jpg" style="width:20%; margin:0; float:left;"></img>
+			<img src="textures/normal.jpg" style="width:20%; margin:0; float:left;"></img>
+			<img src="textures/height.jpg" style="width:20%; margin:0; float:left;"></img>
+			<img src="textures/metallic.jpg" style="width:20%; margin:0; float:left;"></img>
+			<img src="textures/roughness.jpg" style="width:20%; margin:0; float:left;"></img>
+
+			<p>The example bellow demonstrates how this different textures influence the material appearance, to try this example in the editor you can download the <a class="underline" href="rock.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/05_materials/rock.nsp">Web Editor</a>.</p>
+			<div>
+				<canvas id="rock" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
+
+			<h3 class="black">Applying materials</h3>
+			<p>To apply a material to an object select the scene editor and drag the material from the resource explorer to the desired object. Another way to create materials is by dragging an external image or video file direcly to a object in the scene explorer, this will create a Standard or Sprite material (depending on the object) automatically using the provided file as a texture.</p>
+			<img src="apply.jpg" class="img-big"></img>
+		</div>
+	</section>

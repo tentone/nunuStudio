@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomePage} from "./page/home/home.page";
 import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
+import {LearnPage} from "./page/learn/learn.page";
 
 const routes: Routes = [
 	{
@@ -21,6 +22,10 @@ const routes: Routes = [
 			{
 				path: 'download',
 				component: DownloadPage
+			},
+			{
+				path: 'learn',
+				component: LearnPage
 			}
 		]
 	}

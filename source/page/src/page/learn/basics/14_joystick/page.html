@@ -1,0 +1,86 @@
+	<section class="pad-sm">
+		<div class="container">
+			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
+			<h2 class="black">Joystick</h2>
+			<p>In this guide we will learn how to use an external library called nipple.js to add joystick controlls for mobile platforms. First we need to download the nipple library from github and import it into the project. The library is available at https://yoannmoinet.github.io/nipplejs/.</p>
+			<p>To import the javascript file into the editor drag it into the resource explorer. The file will appear as a javascript resource that can be imported to scripts using the import() method.</p>
+			<p>Script objects can import() files from the project resources or direclty from external URLs. Depending on the configured library mode (configured on the script object inspector panel) the files can evaluated in the context of the script, appended to the script code before compilation or included globally.</p>
+			<pre><code>include("nipplejs.min.js");
+
+var cube, camera;
+
+var manager;
+var direction, pressed;
+
+function initialize()
+{
+	camera = scene.getObjectByName("camera");
+	cube = scene.getObjectByName("cube");
+
+	direction = new Vector2(0, 0);
+	pressed = false;
+
+	manager = nipplejs.create(
+	{
+		zone: program.division,
+		multitouch: false,
+		maxNumberOfNipples: 1,
+		mode: "dynamic"
+	});
+
+	manager.on("added", function(event, nipple)
+	{
+		nipple.on("move start end", function(event, data)
+		{
+			if(event.type === "move")
+			{
+				var force = 0.08 * data.force;
+
+				direction.x = Math.cos(data.angle.radian) * force;
+				direction.y = Math.sin(data.angle.radian) * force;
+			}
+			else if(event.type === "start")
+			{
+				pressed = true;
+			}
+			else if(event.type === "end")
+			{
+				pressed = false;
+			}
+		});
+	});
+
+	manager.on("removed", function(event, nipple)
+	{
+		nipple.off("move start end");
+	});
+}
+
+function update()
+{
+	//If the joystick is pressed update position
+	if(pressed)
+	{
+		cube.position.x += direction.x;
+		cube.position.y += direction.y;
+	}
+
+	//Limit the square movement
+	if(cube.position.x > camera.right) cube.position.x = camera.right;
+	if(cube.position.x < camera.left) cube.position.x = camera.left;
+	if(cube.position.y > camera.top) cube.position.y = camera.top;
+	if(cube.position.y < camera.bottom) cube.position.y = camera.bottom;
+}
+
+function dispose()
+{
+	manager.destroy();
+}</code></pre>
+
+			<p>To try this example in the editor you can download the <a class="underline" href="joystick.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/14_joystick/joystick.nsp">Web Editor</a>. Use the mouse of touchscreen to interact with the white block and move it around the scene. You should be able to see the touch input provided by the library.</p>
+
+			<div>
+				<canvas id="joystick" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
+		</div>
+	</section>
