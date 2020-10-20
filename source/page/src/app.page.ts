@@ -2,6 +2,6 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-page',
-  templateUrl: './app.page.html'
+  template: '<router-outlet></router-outlet>'
 })
 export class AppPage {}
