@@ -11,37 +11,37 @@
 			<p>Lets start by creating a simple level for our game. All interactive objects in our game should be created using the physics objects. Phyics objects are invisible, to make them visible in the game we need to attach a visual representation to them.</p>
 			<p>Start by adding a physics cube, when selected the physics cube will be shown in the editor in green, but when we press start it will becore invisible.</p>
 
-			<img src="images/a.png" class="img-normal"></img>
+			<img src="images/a.png" class="img-normal"/>
 
 			<p>Lets now add a visual representation to our cube, we achieve this by creating a new cube and attaching it as children of the physics cube. To add the new cube as children of the physics cube drag it on the object explorer on top of the physics cube.</p>
 
-			<img src="images/b.png" class="img-small"></img>
+			<img src="images/b.png" class="img-small"/>
 
 			<p>After adding a visual representation to our cube we can see that it falls bellow the existing floor, to prevent this we need to add some additional physics elements to be used as floor for our cube.</p>
 			<p>We can move, resize and scale our cube physics object and the children objects will be afected as well.</p>
 
-			<img src="images/c.png" class="img-normal"></img>
+			<img src="images/c.png" class="img-normal"/>
 
 			<p>The new physics elements need to be configured as static. Static physics element don't move around, they are only used as static walls. To configure the physics as static select it and set the "Type" in the object panel to Static.</p>
 
-			<img src="images/d.png" class="img-small"></img>
+			<img src="images/d.png" class="img-small"/>
 
 			<p>Lets now add a camera to our project, cameras controll how the player will see the world, we will use a perspective camera, perspective cameras allow the player to perceive depth and see 3D objects, orthographic cameras are 2D cameras they don't allow the player to perceive distance.</p>
 
-			<img src="images/e.png" class="img-normal"></img>
+			<img src="images/e.png" class="img-normal"/>
 
 
 			<p>After adding the camera to our scene we need to make it our default camera, to achieve this select the camera object and select the "Use camera" option in the object panel.</p>
 
-			<img src="images/f.png" class="img-small"></img>
+			<img src="images/f.png" class="img-small"/>
 
 			<p>Now lets create a new material to make it easier to distinguish our player and the walls we created. To create a new material open the Material menu on the asset explorer and select Standard or Phong Material. To apply the new material to our objects drag it from the asset explorer to the object. I colored mine red but you can choose whatever color you want and even add a texture if you want to.</p>
 
-			<img src="images/g.png" class="img-small"></img>
+			<img src="images/g.png" class="img-small"/>
 
 			<p>After adding the material to our cube that we will use as our player we are ready to move on to coding our character behavior. If everything went as expected you should have something similar to this on your computer.</p>
 
-			<img src="images/h.png" class="img-normal"></img>
+			<img src="images/h.png" class="img-normal"/>
 
 			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/a.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/a.nsp">Web Editor</a>.</p>
 
@@ -56,7 +56,7 @@
 
 			<p>To open the code editor double click the script object on the object explorer or right click on top of it and select "Script editor", a new tab will be open with the code editor.</p>
 
-			<img src="images/i.png" class="img-normal"></img>
+			<img src="images/i.png" class="img-normal"/>
 
 			<p>In this tutorial we will use a single script object to controll all objects in the scene, but is possible to have multiple scripts.</p>
 
@@ -195,15 +195,15 @@ function update()
 
 			<p>Lets start by making our level a bit bigger, add more platforms some places where we can fall off, the fastest way to do this is by duplicating our already existing floor and after rotating, scaling and moving it around, be carefull we want to apply these changes to the physics object not to the visual representation.</p>
 
-			<img src="images/j.png" class="img-normal"></img>
+			<img src="images/j.png" class="img-normal"/>
 
 			<p>Now lets create some obstacles, first lets start with static obstacles and after we can make them move. I will add obstacles in red and change my player color to green, obstacles will also be static physics objects.</p>
 
-			<img src="images/k.png" class="img-normal"></img>
+			<img src="images/k.png" class="img-normal"/>
 
 			<p>After adding our enemies lets create a new group and add all enemies to that group, so that we can distinguish enemies from normal walls and other physics objects. In your object explorer you new group should look something like this.</p>
 
-			<img src="images/l.png" class="img-small"></img>
+			<img src="images/l.png" class="img-small"/>
 
 			<p>Now lets get back to our script and add code to detect collision with enemies, lets start by adding an attribute "isEnemy" to all our enemies that we added to the group we just created. We also need to store our player spawn position so that when we die we get back to that position.</p>
 
@@ -253,7 +253,7 @@ function update()
 
 			<p>Before moving on to moving enemies lets add a new static enemy under the floor so that the player dies when it falls off the level, this enemy doesn't need a visual representation.</p>
 
-			<img src="images/m.png" class="img-normal"></img>
+			<img src="images/m.png" class="img-normal"/>
 
 			<p>Now lets make our enemies move, lets choose on of our enemies, create a new script and attach that script as child of the enemy we choose. We can make our enemies move in a couple of different ways.</p>
 			<p>Bellow is the full code used for this script, it moves the object around from one position to another in looop, it can be ajusted to be easily ajusted and reused to move other objects (for example to create moving platforms).</p>
@@ -339,11 +339,11 @@ function update()
 			<h3 class="black">Put the pieces together</h3>
 			<p>Now we already have all basic blocks to make a complete platformer level lets take them and build complete level with actual game assets and tweak gameplay a little bit. To make it easier to overview our level we can use the 2D editor mode (can be toggled in the top right corner of the scene explorer).</p>
 
-			<img src="images/n.png" class="img-big"></img>
+			<img src="images/n.png" class="img-big"/>
 
 			<p>Were almost done now its the time to add textures and decoration to our level, this is a good time to experiment to use some of the decoration objects like Particles, LensFlare, etc. I haven't done much regarding decoration simply added a couple of materials and colored everything up, added a LensFlare effect and some particles floating around the level.</p>
 
-			<img src="images/p.png" class="img-normal"></img>
+			<img src="images/p.png" class="img-normal"/>
 
 			<p>Since the player movement was also a little slow i tweaked it a bit by adding the option to run using the keyboard shift key and tweaking the movement to have an acceleration curve instead of instant move.</p>
 			<p>At the beginning of this tutorial i was planning to change the cube for a ball or lock its rotation but since i find it kinda of funny to see the cube tumbling around so i will leave it like this.</p>
@@ -396,7 +396,7 @@ function update()
 
 			<p>First, we need to change the player physics object to a sphere instead of a cube. This way our player will roll easily and won't get stuck to the walls. I chose to make the scale of the sphere <code>(0.5, 0.5 , 0.5)</code> this way it fits our <code>(1.0, 1.0, 1.0)</code> cube.</p>
 
-			<img src="images/t.png" class="img-normal"></img>
+			<img src="images/t.png" class="img-normal"/>
 
 			<p>As you can see in red we have also changed the angular damping value, this makes it so our ball won't roll very far after you released the button. You can tweak this value to find the one that suits you the most. I found that <code>0.999</code> works pretty good.</p>
 

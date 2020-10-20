@@ -7,7 +7,6 @@ class HomePageExampleOption {
 	public image: string;
 }
 
-
 @Component({
   selector: 'home-page',
   templateUrl: './home.page.html'

@@ -8,11 +8,11 @@
 
 			<p>After we have our scene lets create a new material, we can use a standard, physical or phong material for this tutorial. Lets name this material water, this material will be used for our water surface. You can add some color and transparency if you want to.</p>
 
-			<img src="material.jpg" class="img-normal"></img>
+			<img src="material.jpg" class="img-normal"/>
 
 			<p>To create a water effect we can use a water surface normal map, we can find some of these around the web, here is the one that i have used for this tutorial. We can use our normal map as booth normal map and displacement map, by attaching our normal map as displacement map the only one color channel will be used to create displacement in the surface of our geometry creating a wavy effect that should make our water look even better.</p>
 
-			<img src="normal.jpeg" class="img-small"></img>
+			<img src="normal.jpeg" class="img-small"/>
 
 			<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work. To enable vertex animation we could set the needsUpdate attribute of our material and texture to true.</p>
 
