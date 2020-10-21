@@ -6,6 +6,7 @@ import {HomePage} from "./page/home/home.page";
 import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
 import {LearnPage} from "./page/learn/learn.page";
+import {LearnModule} from "./page/learn/learn.module";
 
 @NgModule({
 	declarations: [
@@ -16,6 +17,7 @@ import {LearnPage} from "./page/learn/learn.page";
 		LearnPage
 	],
 	imports: [
+		LearnModule,
 		BrowserModule,
 		Router
 	],

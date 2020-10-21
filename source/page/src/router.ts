@@ -4,6 +4,7 @@ import {HomePage} from "./page/home/home.page";
 import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
 import {LearnPage} from "./page/learn/learn.page";
+import {LearnRoutes} from "./page/learn/learn.routes";
 
 const routes: Routes = [
 	{
@@ -25,9 +26,10 @@ const routes: Routes = [
 			},
 			{
 				path: 'learn',
-				component: LearnPage
+				component: LearnPage,
 			}
-		]
+		// @ts-ignore
+		].concat(LearnRoutes)
 	}
 ];
 

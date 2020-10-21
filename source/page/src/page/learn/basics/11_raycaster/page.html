@@ -38,28 +38,28 @@ function update()
 }
 </code></pre>
 
-			<p>The intersectObjects method returns a list of intersection objects, each intersection object has the following attributes. To raycast a single object is also possible to use the intersectObject method that only returns a single intersection object.</p>
-			<ul>
-				<li><p>distance – distance between the origin of the ray and the intersection</p></li>
-				<li><p>point – point of intersection, in world coordinates</p></li>
-				<li><p>face – intersected face</p></li>
-				<li><p>faceIndex – index of the intersected face</p></li>
-				<li><p>indices – indices of vertices comprising the intersected face</p></li>
-				<li><p>object – the intersected object</p></li>
-				<li><p>uv - U,V coordinates at point of intersection</p></li>
-			</ul>
+		<p>The intersectObjects method returns a list of intersection objects, each intersection object has the following attributes. To raycast a single object is also possible to use the intersectObject method that only returns a single intersection object.</p>
+		<ul>
+			<li><p>distance – distance between the origin of the ray and the intersection</p></li>
+			<li><p>point – point of intersection, in world coordinates</p></li>
+			<li><p>face – intersected face</p></li>
+			<li><p>faceIndex – index of the intersected face</p></li>
+			<li><p>indices – indices of vertices comprising the intersected face</p></li>
+			<li><p>object – the intersected object</p></li>
+			<li><p>uv - U,V coordinates at point of intersection</p></li>
+		</ul>
 
-			<p>Intersections are sorted by distance, the first object in the intesection list is always the one closer to the camera. If everything worked as expected you should have something similar to the demo bellow. Use the left mouse button to paint the cubes blue and the right mouse button to paint them red.</p>
-			<p>To try this example in the editor you can download the <a class="underline" href="raycaster.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/11_raycaster/raycaster.nsp">Web Editor</a>.</p>
-			<div>
-				<canvas id="raycaster" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-			</div>
-			<p>A simpler way to use the raycaster is to declare a onMouseOver(intersects) method in the script. This method is automatically called when the mouse is over one of the children of that script.</p>
-			<pre><code>function onMouseOver(intersects)
+		<p>Intersections are sorted by distance, the first object in the intesection list is always the one closer to the camera. If everything worked as expected you should have something similar to the demo bellow. Use the left mouse button to paint the cubes blue and the right mouse button to paint them red.</p>
+		<p>To try this example in the editor you can download the <a class="underline" href="raycaster.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/11_raycaster/raycaster.nsp">Web Editor</a>.</p>
+		<div>
+			<canvas id="raycaster" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
+		<p>A simpler way to use the raycaster is to declare a onMouseOver(intersects) method in the script. This method is automatically called when the mouse is over one of the children of that script.</p>
+		<pre><code>function onMouseOver(intersects)
 {
 	console.log(intersects);
 }
 </code></pre>
 
-		</div>
-	</section>
+	</div>
+</section>
