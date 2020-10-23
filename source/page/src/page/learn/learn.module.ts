@@ -9,6 +9,9 @@ import {CommunicationPage} from "./integration/communication/communication.page"
 import {PlatformerPage} from "./tutorial/platformer/platformer.page";
 import {ScriptPage} from "./basics/script/script.page";
 import {VideoPage} from "./basics/video/video.page";
+import {JoystickPage} from "./basics/joystick/joystick.page";
+import {TimelinePage} from "./basics/timeline/timeline.page";
+import {WaterPage} from "./basics/water/water.page";
 
 @NgModule({
 	declarations: [
@@ -20,6 +23,9 @@ import {VideoPage} from "./basics/video/video.page";
 		ArPage,
 		ScriptPage,
 		VideoPage,
+		JoystickPage,
+		TimelinePage,
+		WaterPage,
 
 		// Integration
 		CommunicationPage,
