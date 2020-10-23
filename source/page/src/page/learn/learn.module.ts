@@ -7,6 +7,8 @@ import {ArPage} from "./basics/ar/ar.page";
 import {EmbeddingPage} from "./integration/embedding/embedding.page";
 import {CommunicationPage} from "./integration/communication/communication.page";
 import {PlatformerPage} from "./tutorial/platformer/platformer.page";
+import {ScriptPage} from "./basics/script/script.page";
+import {VideoPage} from "./basics/video/video.page";
 
 @NgModule({
 	declarations: [
@@ -16,6 +18,8 @@ import {PlatformerPage} from "./tutorial/platformer/platformer.page";
 		TerrainPage,
 		PythonPage,
 		ArPage,
+		ScriptPage,
+		VideoPage,
 
 		// Integration
 		CommunicationPage,
