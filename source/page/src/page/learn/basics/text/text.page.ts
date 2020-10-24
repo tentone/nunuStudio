@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'script-page',
-  templateUrl: './script.page.html'
+  selector: 'text-page',
+  templateUrl: './text.page.html'
 })
 export class TextPage {}
