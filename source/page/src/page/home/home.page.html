@@ -20,7 +20,7 @@
 			</div>
 			<!--Download-->
 			<div class="col-xs-6 text-left">
-				<a href="page/download.html" class="btn btn-primary btn-lg">Download</a>
+				<a routerLink="download" class="btn btn-primary btn-lg">Download</a>
 			</div>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 	</div>
 </header>
 
-<!--Built on division-->
+<!--Built on-->
 <section id="nunu" class="pad-sm">
 	<div class="container">
 		<div class="text-center">
@@ -49,79 +49,10 @@
 <section>
 	<div class="container">
 		<h2 class="black">Features</h2>
-		<!--Graphical Editor-->
-		<div class="col-sm-3">
-			<h3>Graphical Editor</h3>
-			<p>Familiar user interface similar to the ones you already know.</p>
-			<img class="feature-img" src="assets/screenshot/6.jpg"/>
-		</div>
-		<!--Graphics-->
-		<div class="col-sm-3">
-			<h3>3D Graphics</h3>
-			<p>Graphics powered by three.js with dynamic ligths, shadows, post-processing, etc.</p>
-			<img class="feature-img" src="assets/screenshot/8.jpg"/>
-		</div>
-		<!--Physics-->
-		<div class="col-sm-3">
-			<h3>Physics</h3>
-			<p>Fully features 3D physics engine powered by cannon.js</p>
-			<img class="feature-img" src="assets/screenshot/gif/1.gif"/>
-		</div>
-		<!--JS Scripts-->
-		<div class="col-sm-3">
-			<h3>JS Scripts</h3>
-			<p>Easy to learn language, familiar for web and game developers.</p>
-			<img class="feature-img" src="assets/screenshot/5.jpg"/>
-		</div>
-
-		<!--2D Mode-->
-		<div class="col-sm-3">
-			<h3>2D Mode</h3>
-			<p>Want 2D? No problem! Switch between 2D and 3D with the click of a button.</p>
-			<img class="feature-img" src="assets/screenshot/7.jpg"/>
-		</div>
-		<!--WebVR-->
-		<div class="col-sm-3">
-			<h3>WebVR</h3>
-			<p>Ready for web virtual reality, on mobile and desktop platforms.</p>
-			<img class="feature-img" src="assets/vr.jpg"/>
-		</div>
-		<!--Materials-->
-		<div class="col-sm-3">
-			<h3>Advanced materials</h3>
-			<p>Graphical material editor similar to the ones found in 3D design tools.</p>
-			<img class="feature-img" src="assets/screenshot/1.jpg"/>
-		</div>
-		<!--Particle-->
-		<div class="col-sm-3">
-			<h3>Particles</h3>
-			<p>GPU accelerated particle system powered by SPE.</p>
-			<img class="feature-img" src="assets/screenshot/2.jpg"/>
-		</div>
-
-		<!--Dragndrop-->
-		<div class="col-sm-3">
-			<h3>Drag and drop</h3>
-			<p>Drag and drop files into the editor, it just works.</p>
-			<img class="feature-img" src="assets/screenshot/gif/2.gif"/>
-		</div>
-		<!--Spine animations-->
-		<div class="col-sm-3">
-			<h3>Spine animations</h3>
-			<p>Create 2D animations using Esoteric spine animation tool and import them to nunuStudio.</p>
-			<img class="feature-img" src="assets/screenshot/9.jpg"/>
-		</div>
-		<!--WebAudio-->
-		<div class="col-sm-3">
-			<h3>WebAudio</h3>
-			<p>Audio engine built on top of web audio API with support for positional audio.</p>
-			<img class="feature-img" src="assets/screenshot/10.jpg"/>
-		</div>
-		<!--Multiplatform-->
-		<div class="col-sm-3">
-			<h3>Multi-platform editor</h3>
-			<p>nunuStudio was build on top of nwjs it works on windows, linux and OS X.<p>
-			<img class="feature-img" src="assets/screenshot/3.jpg"/>
+		<div *ngFor="let feature of this.features" class="col-sm-3">
+			<h3>{{feature.title}}</h3>
+			<p>{{feature.description}}</p>
+			<img class="feature-img" src="{{feature.image}}"/>
 		</div>
 	</div>
 	<br/>

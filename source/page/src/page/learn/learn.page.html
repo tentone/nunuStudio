@@ -7,19 +7,19 @@
 	</div>
 
 	<div class="container">
-		<ng-container *ngFor="let section of this.sections">
+		<div *ngFor="let section of this.sections">
 			<h2 class="black">{{section.title}}</h2>
 			<p>{{section.description}}</p>
 			<div class="col-sm-3" *ngFor="let option of section.options">
 				<h3>{{option.title}}</h3>
 				<p>{{option.description}}</p>
 				<div class="feature-img">
-					<a href="{{option.url}}">
+					<a routerLink="{{option.url}}">
 						<img class="feature-img" src="{{option.image}}"/>
 					</a>
 				</div>
 			</div>
-		</ng-container>
+		</div>
 		<br/>
 	</div>
 </section>
