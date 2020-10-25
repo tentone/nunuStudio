@@ -20,45 +20,45 @@
 <pre><code>include("SepiaShader.js");
 
 function initialize()
-{
+{{'{'}}
 	camera = scene.getObjectByName("camera");
 
 	//custom shader pass
 	var effect =
-	{
+	{{'{'}}
 	uniforms:
-		{
-			"tDiffuse": { value: null },
-			"amount":   { value: 1.0 }
-		},
+		{{'{'}}
+			"tDiffuse": {{'{'}} value: null {{'}'}},
+			"amount":   {{'{'}} value: 1.0 {{'}'}}
+		{{'}'}},
 		vertexShader: [
 			"varying vec2 vUv;",
-			"void main() {",
+			"void main() {{'{'}}",
 				"vUv = uv;",
 				"gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);",
-			"}"
+			"{{'}'}}"
 		].join("\n"),
 		fragmentShader: [
 			"uniform float amount;",
 			"uniform sampler2D tDiffuse;",
 			"varying vec2 vUv;",
-			"void main() {",
+			"void main() {{'{'}}",
 				"vec4 color = texture2D(tDiffuse, vUv);",
 				"vec3 c = color.rgb;",
 				"color.r = c.r * 2.0;",
 				"color.g = c.g / 1.2;",
 				"color.b = c.b;",
 				"gl_FragColor = vec4(color.rgb , color.a);",
-			"}"
+			"{{'}'}}"
 		].join("\n")
-	}
+	{{'}'}}
 
 	camera.composer.passes[0].renderToScreen = false;
 
 	var sepia = new ShaderPass(THREE.SepiaShader);
 	camera.composer.addPass(sepia);
 	sepia.renderToScreen = true;
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<div>
 				<canvas id="sepia" style="margin-left:auto; margin-right:auto; display: block;"></canvas>

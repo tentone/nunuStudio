@@ -17,23 +17,23 @@
 		<pre><code>var text, counter;
 
 function initialize()
-{
+{{'{'}}
 text = scene.getObjectByName("text");
 counter = 0;
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 if(Keyboard.keyJustPressed(Keyboard.P))
-{
+{{'{'}}
 	program.sendDataApp("test" + counter);
-}
-}
+{{'}'}}
+{{'}'}}
 
 function onAppData(data)
-{
+{{'{'}}
 text.setText(data);
-}</code></pre>
+{{'}'}}</code></pre>
 
 		<h3 class="black">App to page</h3>
 		<p>Before sending data from the nunu app to the webpage we need to define a onMessageReceive callback to process received messages. This callback can be defined as shown bellow, every time a message is send from the nunuStudio app to the webpage this function will be called.</p>
@@ -42,8 +42,8 @@ app.sendData("test text");
 
 //Callback to receive data sent from the app
 app.setOnDataReceived(function(data)
-{
+{{'{'}}
 console.log("Received message from nunuStudio app", data);
-});</code></pre>
+{{'}'}});</code></pre>
 	</div>
 </section>

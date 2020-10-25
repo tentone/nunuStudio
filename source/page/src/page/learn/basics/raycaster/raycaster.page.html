@@ -13,29 +13,29 @@
 			<pre><code>var red, blue;
 
 function initialize()
-{
+{{'{'}}
 	red = program.getMaterialByName("red");
 	blue = program.getMaterialByName("blue");
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	//Check interseted objects
 	var intersects = scene.raycaster.intersectObjects(scene.children);
 
 	//Intersections list contains object, point of intersection, distance, uv and face
 	for(var i = 0; i < intersects.length; i++)
-	{
+	{{'{'}}
 		if(Mouse.buttonPressed(Mouse.LEFT))
-		{
+		{{'{'}}
 			intersects[i].object.material = red;
-		}
+		{{'}'}}
 		else if(Mouse.buttonPressed(Mouse.RIGHT))
-		{
+		{{'{'}}
 			intersects[i].object.material = blue;
-		}
-	}
-}
+		{{'}'}}
+	{{'}'}}
+{{'}'}}
 </code></pre>
 
 		<p>The intersectObjects method returns a list of intersection objects, each intersection object has the following attributes. To raycast a single object is also possible to use the intersectObject method that only returns a single intersection object.</p>
@@ -56,9 +56,9 @@ function update()
 		</div>
 		<p>A simpler way to use the raycaster is to declare a onMouseOver(intersects) method in the script. This method is automatically called when the mouse is over one of the children of that script.</p>
 		<pre><code>function onMouseOver(intersects)
-{
+{{'{'}}
 	console.log(intersects);
-}
+{{'}'}}
 </code></pre>
 
 	</div>

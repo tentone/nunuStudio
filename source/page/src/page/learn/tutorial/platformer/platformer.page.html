@@ -65,9 +65,9 @@
 			<pre><code>var player;
 
 function initialize()
-{
+{{'{'}}
 	player = scene.getObjectByName("player");
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>To get keyboard input we have the Keyboard object, that offers keyPressed, keyJustPressed and keyJustRelease methods that allow us to detect when the user has pressed and released a specific key in the keyboard. For this guide we will use the WASD keys.</p>
 
@@ -76,30 +76,30 @@ function initialize()
 			<p>To code bellow detects when the user has pressed the A, W and D key and sets the player velocity accordingly. But after a bit of time we can the see that the player falls of our platform, that because our body is a cube and ends up rotating a bit on its corners changing its direction. To use other keys in the Keyboard check the <a class="underline" href="../../../docs/classes/Keyboard.html">Keyboard API documentation</a>.</p>
 
 			<pre><code>function update()
-{
+{{'{'}}
 	if(Keyboard.keyPressed(Keyboard.A))
-	{
+	{{'{'}}
 		player.body.velocity.x = -5;
-	}
+	{{'}'}}
 	if(Keyboard.keyPressed(Keyboard.D))
-	{
+	{{'{'}}
 		player.body.velocity.x = 5;
-	}
+	{{'}'}}
 
 	if(Keyboard.keyJustPressed(Keyboard.W))
-	{
+	{{'{'}}
 		player.body.velocity.y = 10;
-	}
-}</code></pre>
+	{{'}'}}
+{{'}'}}</code></pre>
 
 			<p>To avoid our player falling down our level we need to block its movement on the Z axis we can achieve this by forcing its position and/or velocity to 0 on that axis.</p>
 
 			<pre><code>function update()
-{
+{{'{'}}
 	...
 
 	player.body.position.z = 0;
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>Now there is still a problem left to solve, everytime the player keeps the W key pressed the player keeps going up. We can only let our player jump when he is touching the ground. To achieve this we need to check if our player is on the ground and create a new variable that will be set true when the player is touching the ground.</p>
 
@@ -108,7 +108,7 @@ function initialize()
 			<pre><code>var player, world;
 
 function initialize()
-{
+{{'{'}}
 	world = scene.world;
 	player = scene.getObjectByName("player");
 	player.canJump = false;
@@ -117,72 +117,72 @@ function initialize()
 	var temp = new Vector3(0, 0, 0);
 
 	world.addEventListener("postStep", function(e)
-	{
+	{{'{'}}
 		if(world.contacts.length > 0)
-		{
+		{{'{'}}
 			for(var i = 0; i < world.contacts.length; i++)
-			{
+			{{'{'}}
 				//Get contact points
 				var contact = world.contacts[i];
 
 				//Check if any of the physics elements in the contact is our player
 				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
-				{
+				{{'{'}}
 					//If our player is the first element negate direction and store in temp
 					if(contact.bi.id === player.body.id)
-					{
+					{{'{'}}
 						contact.ni.negate(temp);
-					}
+					{{'}'}}
 					//Else store direction in temp
 					else
-					{
+					{{'{'}}
 						contact.ni.copy(temp);
-					}
+					{{'}'}}
 
 					//If dot product if near 0 player is touching the floor and can jump again
 					if(temp.dot(up) > 0.1)
-					{
+					{{'{'}}
 						player.canJump = true;
-					}
-				}
-			}
-		}
-	});
-}
+					{{'}'}}
+				{{'}'}}
+			{{'}'}}
+		{{'}'}}
+	{{'}'}});
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	...
 
 
 	if(player.canJump && Keyboard.keyJustPressed(Keyboard.W))
-	{
+	{{'{'}}
 		player.body.velocity.y = 10;
 		player.canJump = false;
-	}
+	{{'}'}}
 
 	...
 
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>Now we are able to control our character and have it moving properly around our level, but our camera is still static, to make it follow our character we can simply equal its position in the X and Y coordinates to the player position.</p>
 
 			<pre><code>var player, world, camera;
 
 function initialize()
-{
+{{'{'}}
 	camera = scene.getObjectByName("camera");
 
 	...
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	...
 
 	camera.position.x = player.body.position.x;
 	camera.position.y = player.body.position.y + 2;
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/b.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/b.nsp">Web Editor</a>.</p>
 
@@ -208,48 +208,48 @@ function update()
 			<p>Now lets get back to our script and add code to detect collision with enemies, lets start by adding an attribute "isEnemy" to all our enemies that we added to the group we just created. We also need to store our player spawn position so that when we die we get back to that position.</p>
 
 			<pre><code>function initialize()
-{
+{{'{'}}
 	...
 
 	player.spawn = player.position.clone();
 
 	var enemies = scene.getObjectByName("enemies");
 	for(var i = 0; i < enemies.children.length; i++)
-	{
+	{{'{'}}
 		enemies.children[i].body.isEnemy = true;
-	}
+	{{'}'}}
 
 	...
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>After this we need to add the enemy collision check to the callback we created ealier in our physics world, we just need to check is there is a isEnemy true value and if so reset our character position and speed.</p>
 
 
 			<pre><code>function initialize()
-{
+{{'{'}}
 	...
 
 	world.addEventListener("postStep", function(e)
-	{
+	{{'{'}}
 		if(world.contacts.length > 0)
-		{
+		{{'{'}}
 			for(var i = 0; i < world.contacts.length; i++)
-			{
+			{{'{'}}
 				//Get contact points
 				var contact = world.contacts[i];
 
 				//Check if any of the physics elements in the contact is our player
 				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
-				{
+				{{'{'}}
 					//Check if is an enemy
 					if(contact.bi.isEnemy || contact.bj.isEnemy)
-					{
+					{{'{'}}
 						player.body.position.set(player.spawn.x, player.spawn.y, player.spawn.z);
 						player.body.velocity.set(0, 0, 0);
-					}
+					{{'}'}}
 
 	...
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>Before moving on to moving enemies lets add a new static enemy under the floor so that the player dies when it falls off the level, this enemy doesn't need a visual representation.</p>
 
@@ -266,45 +266,45 @@ var direction = 1;
 var enemy;
 
 function initialize()
-{
+{{'{'}}
 	//Get enemy
 	enemy = self.parent;
 
 	//Store a copy of original position
 	enemy.spawn = enemy.position.clone();
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	//Position direction
 	if(direction > 0)
-	{
+	{{'{'}}
 		//Check if position reached max
 		if(enemy.body.position.x < enemy.spawn.x + max)
-		{
+		{{'{'}}
 			enemy.body.position.x += velocity;
-		}
+		{{'}'}}
 		//Invert direction
 		else
-		{
+		{{'{'}}
 			direction = -1;
-		}
-	}
+		{{'}'}}
+	{{'}'}}
 	//Negative direction
 	else
-	{
+	{{'{'}}
 		//Check if position reached min
 		if(enemy.body.position.x > enemy.spawn.x + min)
-		{
+		{{'{'}}
 			enemy.body.position.x -= velocity;
-		}
+		{{'}'}}
 		//Invert direction
 		else
-		{
+		{{'{'}}
 			direction = 1;
-		}
-	}
-}
+		{{'}'}}
+	{{'}'}}
+{{'}'}}
 </code></pre>
 
 			<p>You should have now a moving enemy in your game, duplicate the created script and attach it to other object to make them move as well, try to create a moving platform like the ones in super mario games.</p>
@@ -321,20 +321,20 @@ function update()
 			<pre><code>var gamepad;
 
 function initialize()
-{
+{{'{'}}
 	gamepad = new Gamepad();
 
 	...
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	gamepad.update();
 
 	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
 
 	...
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<h3 class="black">Put the pieces together</h3>
 			<p>Now we already have all basic blocks to make a complete platformer level lets take them and build complete level with actual game assets and tweak gameplay a little bit. To make it easier to overview our level we can use the 2D editor mode (can be toggled in the top right corner of the scene explorer).</p>
@@ -349,7 +349,7 @@ function update()
 			<p>At the beginning of this tutorial i was planning to change the cube for a ball or lock its rotation but since i find it kinda of funny to see the cube tumbling around so i will leave it like this.</p>
 
 			<pre><code>function update()
-{
+{{'{'}}
 
 	...
 
@@ -357,29 +357,29 @@ function update()
 	var acceleration = 0.6;
 
 	if(Keyboard.keyPressed(Keyboard.SHIFT))
-	{
+	{{'{'}}
 		velocity = 8;
 		acceleration = 1;
-	}
+	{{'}'}}
 
 	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
-	{
+	{{'{'}}
 		if(player.body.velocity.x > -velocity)
-		{
+		{{'{'}}
 			player.body.velocity.x -= acceleration;
-		}
-	}
+		{{'}'}}
+	{{'}'}}
 	if(Keyboard.keyPressed(Keyboard.D) || gamepad.buttonPressed(Gamepad.RIGHT))
-	{
+	{{'{'}}
 		if(player.body.velocity.x < velocity)
-		{
+		{{'{'}}
 			player.body.velocity.x += acceleration;
-		}
-	}
+		{{'}'}}
+	{{'}'}}
 
 	...
 
-}</code></pre>
+{{'}'}}</code></pre>
 
 
 			<h3 class="black">Result</h3>
@@ -407,23 +407,23 @@ function update()
 			<pre><code>var playermesh;
 
 function initialize()
-{
+{{'{'}}
 ...
 
 playermesh = scene.getObjectByName("playermesh");
 
 ...
-};
+{{'}'}};
 
 function update()
-{
+{{'{'}}
 	...
 
 	//Copy the position of our physics object to our player mesh
 	playermesh.position.copy(player.body.position);
 
 	...
-}</code></pre>
+{{'}'}}</code></pre>
 
             <p>If you followed all the steps you should now have smoother controls on your player. You can of course experiment with it as much as you want.</p>
 

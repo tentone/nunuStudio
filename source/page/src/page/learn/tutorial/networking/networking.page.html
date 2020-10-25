@@ -25,56 +25,56 @@ server.listen(port);
 
 console.log("Server running at port " + port);
 
-var wsServer = new WebSocketServer({httpServer: server});
+var wsServer = new WebSocketServer({{'{'}}httpServer: server{{'}'}});
 wsServer.on("request", function(request)
-{
+{{'{'}}
 	var connection = request.accept(null, request.origin);
 
 	connection.on("message", function(message)
-	{
+	{{'{'}}
 		//Message handling code here
-	});
+	{{'}'}});
 
 	connection.on("close", function(connection)
-	{
+	{{'{'}}
 		//User disconnected code here
-	});
-});</code></pre>
+	{{'}'}});
+{{'}'}});</code></pre>
 
 			<p>The code bellow is the client part that we will write inside nunuStudio, as we can see the code to connect to a WebSocket is really simple and actually similar to the one used to create the server itself, when starting the client part in nunuStudio you should be able to see a "Connected to server" message in the console.</p>
 
 			<pre><code>var connection, connected = false;
 
 function initialize()
-{
+{{'{'}}
 	connection = new WebSocket("ws://127.0.0.1:1337");
 
 	connection.onopen = function()
-	{
+	{{'{'}}
 		connected = true;
 		console.log("Connected to server");
-	};
-}</code></pre>
+	{{'}'}};
+{{'}'}}</code></pre>
 
 			<p>Now lets send a simple message to the server and create a response to the message we sent, we will include in every message sent a type value to allow the server to differentiate message and a uuid to allow the server to distinguish clients. To send a message we will use the WebSocket send method, all of our message will be JSON encoded so we have to call JSON.stringify on our client to transform our objects to text format and JSON.parse to recreate the object on the server.</p>
 			<p>The code bellow is the the client side.</p>
 			<pre><code>uuid = THREE.Math.generateUUID();
 ...
 connection.onopen = function()
-{
+{{'{'}}
 	console.log("Connected to server");
 	connection.send(JSON.stringify(
-	{
+	{{'{'}}
 		type:"connected",
 		uuid:uuid
-	}));
-};</code></pre>
+	{{'}'}}));
+{{'}'}};</code></pre>
 			<p>The code bellow is the server side.</p>
 			<pre><code>connection.on("message", function(message)
-{
+{{'{'}}
 	console.log("Message received");
 	var data = JSON.parse(message.utf8Data);
-});</code></pre>
+{{'}'}});</code></pre>
 
 			<p>If everything is working as expected we should now be able to exchange messages between the client and the server, we can use the serialization method provided by nunuStudio to send and update states of objects in our scene between multiple clients.</p>
 			<p>Let’s now start creating our level, let’s start with a couple of walls preferably in a defined position in my case I have placed my walls exactly at position 20 on the X axis and 12 on the Z axis, knowing the wall position will be helpful later for manual collision checking.</p>
@@ -86,7 +86,7 @@ connection.onopen = function()
 			<p>The code bellow implements all the player initialization and movement. After the player status is updated an "update" message will be sent to the server, when the server receives this message it will redistribute it to all other clients so that they can update the remote player instance status.</p>
 
 			<code><pre>function initialize()
-{
+{{'{'}}
 	//Player
 	player = scene.getObjectByName("player");
 	player.material.color.setHex(Math.random() * 0xFFFFFF);
@@ -102,16 +102,16 @@ connection.onopen = function()
 	clock.start();
 
 	...
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	var delta = clock.getDelta();
 
 	if(connected)
-	{
+	{{'{'}}
 		if(player.alive)
-		{
+		{{'{'}}
 			//Move player
 			var speed = delta * 10;
 			if(Keyboard.keyPressed(Keyboard.W)) player.position.z -= speed;
@@ -128,26 +128,26 @@ function update()
 			//Mouse rotation
 			var intersect = scene.raycaster.intersectObject(ground);
 			if(intersect.length > 0)
-			{
+			{{'{'}}
 				var point = intersect[0].point;
 				point.y = player.position.y;
 				player.lookAt(point);
 
 				//Fire bullet
 				if(player.canFire && Mouse.buttonJustPressed(Mouse.LEFT))
-				{
+				{{'{'}}
 					//TODO Create bullet
 
 					player.canFire = false;
 					setTimeout(function()
-					{
+					{{'{'}}
 						player.canFire = true;
-					}, 500);
-				}
-			}
-		}
-	}
-}</pre></code>
+					{{'}'}}, 500);
+				{{'}'}}
+			{{'}'}}
+		{{'}'}}
+	{{'}'}}
+{{'}'}}</pre></code>
 
 			<p>If you want to you can customize your player to look a bit better, i added a couple eyes to mine and a stick that will act as its weapon.</p>
 
@@ -158,18 +158,18 @@ function update()
 			<code><pre>var players = [], clients = [];
 
 function Player(uuid, color)
-{
+{{'{'}}
 	this.uuid = uuid;
 	this.color = color;
 	this.position = null;
 	this.rotation = null;
-}
+{{'}'}}
 
 function Client(uuid, connection)
-{
+{{'{'}}
 	this.uuid = uuid;
 	this.connection = connection;
-}</pre></code>
+{{'}'}}</pre></code>
 
 			<p>When the player connects to the server it needs to send a "connected" message with initial data about the player like its UUID and the color used to represent it in the world. When the server receives this message the player is added to the players and connections arrays. When the player updates its state the "update" message is send, this message contains the player actual position and rotation and when it disconnects or dies a "disconnected" message is sent.</p>
 			<p>When the client receives an "update" message from the server (the server only redistributes these messages), the client needs to check if the player is already known if thats the case its position and rotation is updated, otherwise the player is created with the color and uuid indicated in the message, when a "disconnected" message is received the player indicated is destroyed.</p>
@@ -177,124 +177,124 @@ function Client(uuid, connection)
 			<code><pre>var players = [];
 
 function initialize()
-{
+{{'{'}}
 	...
 
 	websocket.onopen = function()
-	{
+	{{'{'}}
 		websocket.send(JSON.stringify(
-		{
+		{{'{'}}
 			type: "connected",
 			uuid: player.uuid,
 			color: player.material.color.getHex()
-		}));
+		{{'}'}}));
 		...
-	};
+	{{'}'}};
 
 	websocket.onmessage = function(message)
-	{
+	{{'{'}}
 		var data = JSON.parse(message.data);
 
 		if(data.type === "update")
-		{
+		{{'{'}}
 			var uuid = data.uuid;
 
 			if(data.uuid !== player.uuid)
-			{
+			{{'{'}}
 				var object = players[data.uuid];
 
 				if(object === undefined)
-				{
-					var material = new MeshPhongMaterial({color: data.color});
+				{{'{'}}
+					var material = new MeshPhongMaterial({{'{'}}color: data.color{{'}'}});
 					var object = player.clone();
 					object.material = material;
 					object.uuid = data.uuid;
 					object.color = data.color;
 					scene.add(object);
 					players[uuid] = object;
-				}
+				{{'}'}}
 
 				object.position.fromArray(data.position);
 				object.rotation.fromArray(data.rotation);
-			}
-		}
+			{{'}'}}
+		{{'}'}}
 		else if(data.type === "disconnect")
-		{
+		{{'{'}}
 			if(players[data.uuid] !== undefined)
-			{
+			{{'{'}}
 				players[data.uuid].destroy();
 				delete players[data.uuid];
-			}
-		}
-	};
-}
+			{{'}'}}
+		{{'}'}}
+	{{'}'}};
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	...
 
 	if(connected)
-	{
+	{{'{'}}
 		...
 
 		//Update message
 		websocket.send(JSON.stringify(
-		{
+		{{'{'}}
 			type: "update",
 			uuid: player.uuid,
 			position: player.position.toArray(),
 			rotation: player.rotation.toArray()
-		}));
-	}
-}</pre></code>
+		{{'}'}}));
+	{{'}'}}
+{{'}'}}</pre></code>
 			<p>The code bellow is the server part, for the server two arrays are maintaned one with connections and one with players.</p>
 			<pre><code>server.on("request", function(request)
-{
+{{'{'}}
 	var connection = request.accept(null, request.origin);
 
 	//Message
 	connection.on("message", function(message)
-	{
+	{{'{'}}
 		var data = JSON.parse(message.utf8Data);
 
 		//Connected
 		if(data.type === "connected")
-		{
+		{{'{'}}
 			players.push(new Player(data.uuid, data.color));
 			clients.push(new Client(data.uuid, connection));
 
 			console.log("Player " + data.uuid + " connected");
-		}
+		{{'}'}}
 		//Update
 		else if(data.type === "update")
-		{
+		{{'{'}}
 			var player = getPlayer(data.uuid);
 
 			if(player !== null)
-			{
+			{{'{'}}
 				player.position = data.position;
 				player.rotation = data.rotation;
-			}
+			{{'}'}}
 
 			for(var i = 0; i < clients.length; i++)
-			{
+			{{'{'}}
 				clients[i].connection.sendUTF(message.utf8Data);
-			}
-		}
+			{{'}'}}
+		{{'}'}}
 		//Disconnected
 		else if(data.type === "disconnect")
-		{
+		{{'{'}}
 			removePlayer(data.uuid);
 
 			for(var i = 0; i < clients.length; i++)
-			{
+			{{'{'}}
 				clients[i].connection.sendUTF(message.utf8Data);
-			}
+			{{'}'}}
 
 			console.log("Player " + data.uuid + " disconnected");
-		}
-	});
-}</code></pre>
+		{{'}'}}
+	{{'}'}});
+{{'}'}}</code></pre>
 
 			<p>If everything is working as expected you should be able to connect multiple clients to the server and see them move around, to test with multiple clients you can export a web version of the project and open inside your browser of choice.</p>
 
@@ -304,24 +304,24 @@ function update()
 			<p>The code bellow implements the bullet creation and update, all bullets are store in an array and updated every frame, when a player shoots a bullet a "bullet" message is sent to the server and redistributed to all clients. If the bullets hits the player the player dies and a "disconnected" message is sent to the server.</p>
 
 			<pre><code>function update()
-{
+{{'{'}}
 	...
 
-	{
+	{{'{'}}
 		...
-		{
+		{{'{'}}
 			...
 			//Mouse rotation
 			var intersect = scene.raycaster.intersectObject(ground);
 			if(intersect.length > 0)
-			{
+			{{'{'}}
 				var point = intersect[0].point;
 				point.y = player.position.y;
 				player.lookAt(point);
 
 				//Fire bullet
 				if(player.canFire && Mouse.buttonJustPressed(Mouse.LEFT))
-				{
+				{{'{'}}
 					var bullet = new Mesh(bulletGeometry, bulletMaterial);
 					bullet.owner = player.uuid;
 					bullet.velocity = point;
@@ -334,24 +334,24 @@ function update()
 
 					player.canFire = false;
 					setTimeout(function()
-					{
+					{{'{'}}
 						player.canFire = true;
-					}, 500);
+					{{'}'}}, 500);
 
 					websocket.send(JSON.stringify(
-					{
+					{{'{'}}
 						type: "bullet",
 						uuid: player.uuid,
 						position: bullet.position.toArray(),
 						velocity: bullet.velocity.toArray()
-					}));
-				}
-			}
-		}
+					{{'}'}}));
+				{{'}'}}
+			{{'}'}}
+		{{'}'}}
 
 		//Update bullets
 		for(var i = 0; i < bullets.length; i++)
-		{
+		{{'{'}}
 			var bullet = bullets[i];
 
 			bullet.position.x += bullet.velocity.x * delta;
@@ -360,15 +360,15 @@ function update()
 
 			//Check bullet out of arena
 			if(bullet.position.x > 20 || bullet.position.x < -20 || bullet.position.z > 12 || bullet.position.z < -12)
-			{
+			{{'{'}}
 				bullet.destroy();
 				bullets.splice(i, 1);
 				continue;
-			}
+			{{'}'}}
 
 			//Check collision with players
 			if(bullet.owner !== player.uuid && bullet.position.distanceTo(player.position) < 0.8)
-			{
+			{{'{'}}
 				bullet.destroy();
 				bullets.splice(i, 1);
 
@@ -376,47 +376,47 @@ function update()
 				player.alive = false;
 
 				websocket.send(JSON.stringify(
-				{
+				{{'{'}}
 					type: "disconnect",
 					uuid: player.uuid
-				}));
+				{{'}'}}));
 				break;
-			}
-		}
+			{{'}'}}
+		{{'}'}}
 
 		...
-	}
-}</code></pre>
+	{{'}'}}
+{{'}'}}</code></pre>
 
 			<p>In the server side the "bullet" message is only distributed to all connected clients.</p>
 
 			<pre><code>connection.on("message", function(message)
-{
+{{'{'}}
 	...
 	else if(data.type === "bullet")
-	{
+	{{'{'}}
 		for(var i = 0; i < clients.length; i++)
-		{
+		{{'{'}}
 			clients[i].connection.sendUTF(message.utf8Data);
-		}
+		{{'}'}}
 
 		console.log("Player " + data.uuid + " fired bullet!");
-	}
+	{{'}'}}
 	...
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>The game is pretty much ready now, we just need to add some code to make sure that the clients sends a disconnected message when the user closes the window, this can be easily done by adding a dispose function to the script. The dispose message is called automatically when the application terminates.</p>
 
 			<pre><code>function dispose()
-{
+{{'{'}}
 	websocket.send(JSON.stringify(
-	{
+	{{'{'}}
 		type: "disconnect",
 		uuid: player.uuid
-	}));
+	{{'}'}}));
 
 	websocket.close();
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>If you were able to follow all the steps congratulations, the mechanism explain in this tutorial for message exchange using websockets can easily adapted for other type of applications and used outside of nunuStudio.</p>
 			<p>I hope this tutorial was helpful, you can donwload the <a class="underline" href="files.zip">project files here</a>. Any question feel free to email me or open an issue in GitHub.</p>

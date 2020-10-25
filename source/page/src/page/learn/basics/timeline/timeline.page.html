@@ -26,29 +26,29 @@
 var camera;
 
 function initialize()
-{
+{{'{'}}
 	cameraAnimation = true;
 	camera = scene.getObjectByName("camera");
 	console.log(camera);
 
-}
+{{'}'}}
 
 function update(delta)
-{
+{{'{'}}
 	if(Mouse.buttonJustPressed(Mouse.LEFT))
-	{
+	{{'{'}}
 		cameraAnimation = !cameraAnimation;
 
 		if(cameraAnimation)
-		{
+		{{'{'}}
 			camera.mixer.play();
-		}
+		{{'}'}}
 		else
-		{
+		{{'{'}}
 			camera.mixer.pause();
-		}
-	}
-}</code></pre>
+		{{'}'}}
+	{{'}'}}
+{{'}'}}</code></pre>
 
 		<p>When more than one animation is active the system automatically interpolates between the state of each attribute for all the animations available. Animations speed can be different for each animation playing simultaneously. Each animation timeline is processed indepedently. External file (e.g. fbx, dae, gltf) may contain keyframe animations that are imported with the objects and can be edited using nunuStudio timeline.</p>
 

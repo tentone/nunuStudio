@@ -19,9 +19,9 @@
 			<pre><code>var object = scene.getObjectByName("animated");
 
 for(var i = 0; i < object.animations.length; i++)
-{
+{{'{'}}
 	console.log(object.animations[i].name);
-}
+{{'}'}}
 
 object.playAnimation(0);</code></pre>
 
@@ -55,23 +55,23 @@ object.playAnimation(0);</code></pre>
 			<pre><code>var spineboy;
 
 function initialize()
-{
+{{'{'}}
 	spineboy = scene.getObjectByName("spineboy");
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	...
 
 	if(Keyboard.keyJustPressed(Keyboard.RIGHT) || ...)
-	{
+	{{'{'}}
 		spineboy.setAnimation(0, "run", true);
-	}
+	{{'}'}}
 	if(Keyboard.keyJustReleased(Keyboard.RIGHT) || ...)
-	{
+	{{'{'}}
 		spineboy.setAnimation(0, "idle", true);
-	}
-}
+	{{'}'}}
+{{'}'}}
 </code></pre>
 
 			<p>The example bellow uses the spineboy animation available free on the spine runtime repository, and demonstrates how to use spine animations in a platformer style game.</p>

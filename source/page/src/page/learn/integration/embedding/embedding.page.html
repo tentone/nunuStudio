@@ -35,7 +35,7 @@
 
 //Should be called after page load
 function initialize()
-{
+{{'{'}}
 //Get the canvas that will be used to draw content
 canvas = document.getElementById("canvas");
 
@@ -44,18 +44,18 @@ app = new Nunu.App(canvas);
 
 //Load and run the "app.nsp" file
 app.loadRunProgram("app.nsp");
-}
+{{'}'}}
 
 //Should be called every time the window is resized
 function resize()
-{
+{{'{'}}
 //Update canvas width and height attributes
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 
 //Resize app
 app.resize();
-}</code></pre>
+{{'}'}}</code></pre>
 
 		<p>To finish we need to call the initialize method after the page loads, and the resize method every time the canvas is resized. To do this we can add the code bellow to the document body declaration.</p>
 		<pre><code class="xml hljs">&lt;body onload="initialize();" onresize="resize();"&gt;
@@ -67,26 +67,26 @@ app.resize();
 		<p>To toggle fullscreen its possible to use the toggleFullscreen method present in the app object, for VR its recomended to check if the browser supports WebVR and if there is a VRDisplay available before creating a button to toggle vr mode. To check for VR support use the following code.</p>
 		<pre><code class="javascript">//Toggle fullscreen mode
 function toggleFullscreen()
-{
+{{'{'}}
 app.toggleFullscreen(document.body);
-}
+{{'}'}}
 
 //Toggle VR mode
 function toggleVR()
-{
+{{'{'}}
 app.toggleVR();
-}
+{{'}'}}
 
 //Check if VR is available
 if(app.vrAvailable())
-{
+{{'{'}}
 //Check if there are displays available add button
 Nunu.getVRDisplays(function(display)
-{
+{{'{'}}
 	button = document.getElementById("vr");
 	button.style.visibility = "visible";
-});
-}</code></pre>
+{{'}'}});
+{{'}'}}</code></pre>
 
 		<!--Loading Bar-->
 		<h3 class="black">Adding a loading bar</h3>
@@ -102,16 +102,16 @@ Nunu.getVRDisplays(function(display)
 		<pre><code class="javascript">//onProgress callback
 var bar = document.getElementById("bar");
 var onProgress = function(event)
-{
+{{'{'}}
 if(event.lengthComputable)
-{
+{{'{'}}
 	var progress = event.loaded / event.total * 100;
 	bar.style.width = progress + "%";
-}
-};
+{{'}'}}
+{{'}'}};
 
 //onLoad callback
-var onLoad = function(){};
+var onLoad = function(){{'{'}}{{'}'}};
 
 //Load and run nunu app
 app.loadRunProgram("app.nsp", onLoad, onProgress);</code></pre>

@@ -19,15 +19,15 @@
 			<pre><code>var normal;
 
 function initialize()
-{
+{{'{'}}
 	normal = program.getTextureByName("normal");
-}
+{{'}'}}
 
 function update()
-{
+{{'{'}}
 	normal.offset.x += 0.002;
 	normal.offset.y += 0.002;
-}
+{{'}'}}
 </code></pre>
 
 			<p>Now we have a water like surface but it still does not reflect the environment around it, to add this we can create a cubecamera object. After adding the object to the scene we have to check auto update on, so that we don't have to manually update the cubecamera.</p>
@@ -35,13 +35,13 @@ function update()
 			<pre><code>var water, cube;
 
 function initialize()
-{
+{{'{'}}
 	...
 
 	water = program.getMaterialByName("water");
 	cube = scene.getObjectByName("cubecamera");
 	water.envMap = cube.cube;
-}</code></pre>
+{{'}'}}</code></pre>
 
 			<p>Our water its much ready right now, i have added a cubemap to make our scene look more complete and a OrbitControl object for camera movement. To try this example in the editor you can download the <a class="underline" href="water.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/13_water/water.nsp">Web Editor</a>.</p>
 
