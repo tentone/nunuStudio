@@ -65,9 +65,11 @@
 		<div *ngFor="let example of this.examples" class="col-sm-3">
 			<h3 class="white">{{example.title}}</h3>
 			<p class="white">{{example.description}}</p>
-			<a href="page/examples/demo.html?nsp=files/{{example.file}}">
-				<img class="madewith-preview" src="page/examples/files/{{example.image}}"/>
+			<!-- TODO OPEN EXAMPLE -->
+			<a href="examples/demo.html?nsp=files/{{example.file}}">
+				<img class="madewith-preview" src="examples/{{example.image}}"/>
 			</a>
+			<!-- TODO OPEN IN EDITOR -->
 			<div style="text-align: center;"><a href="build/editor/index.html?nsp=../../page/examples/files/{{example.file}}" class="btn btn-primary">Open in Editor</a></div>
 		</div>
 	</div>
