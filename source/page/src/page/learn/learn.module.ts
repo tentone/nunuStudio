@@ -25,8 +25,12 @@ import {PostProcessingPage} from "./basics/post-processing/post-processing.page"
 import {RaycasterPage} from "./basics/raycaster/raycaster.page";
 import {TextPage} from "./basics/text/text.page";
 import {VrPage} from "./basics/vr/vr.page";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
+	imports: [
+		RouterModule
+	],
 	declarations: [
 		// Basics
 		BasicsPage,

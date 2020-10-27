@@ -7,6 +7,8 @@ import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
 import {LearnPage} from "./page/learn/learn.page";
 import {LearnModule} from "./page/learn/learn.module";
+import {ExamplePage} from "./page/example/example.page";
+import {HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 
 @NgModule({
 	declarations: [
@@ -14,14 +16,27 @@ import {LearnModule} from "./page/learn/learn.module";
 		MenuPage,
 		HomePage,
 		DownloadPage,
+		ExamplePage,
 		LearnPage
 	],
 	imports: [
+		// External
+		HighlightModule,
+		// Internal
 		LearnModule,
 		BrowserModule,
 		Router
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HIGHLIGHT_OPTIONS,
+			useValue: {
+				coreLibraryLoader: () => import('highlight.js/lib/core'),
+				lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
+				languages: {javascript: () => import('highlight.js/lib/languages/javascript')}
+			}
+		}
+	],
 	bootstrap: [AppPage]
 })
 export class Module {}
