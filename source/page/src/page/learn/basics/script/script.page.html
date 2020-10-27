@@ -29,13 +29,13 @@
 
 		<h3 class="black">Moving an object</h3>
 		<p>To move an object we start by attaching that object as a children of the script object, we can do that by dragging the desired object to the script object, in this tutorial we will use the cube object on the default scene. Lets start by testing the following code</p>
-		<pre><code class="javascript">function initialize()
+		<pre><code class="hljs javascript">function initialize()
 {{'{'}}
 self.position.x += 2;
 {{'}'}}</code></pre>
 		<p>This code will move the cube 2 points in the x axis when the program is started, but, after  the object is moved it stays in place.</p>
 		<p>To animate an object we can instead move our code to the update method, instead of playing with the object position lets try to change now its rotation by testing the following code.</p>
-		<pre><code class="javascript">function update()
+		<pre><code class="hljs javascript">function update()
 {{'{'}}
 self.rotation.y += 0.01;
 {{'}'}}</code></pre>
@@ -45,7 +45,7 @@ self.rotation.y += 0.01;
 		</div>
 		<h3 class="black">Keyboard and Mouse input</h3>
 		<p>Its possible to use the keyboard and mouse to move objects around. This can be done using the Keyboard and Mouse objects inside scripts. The code bellow rotates an object in the y axis using the mouse delta, and moves the object aroud using keyboard arrow keys.</p>
-		<pre><code class="javascript">function update()
+		<pre><code class="hljs javascript">function update()
 {{'{'}}
 self.rotation.y += Mouse.delta.x * 0.01;
 
@@ -67,7 +67,7 @@ if(Keyboard.keyPressed(Keyboard.RIGHT))
 		<h3 class="black">Getting objects</h3>
 		<p>Its possible to access other objects and resources with scripts, in the example bellow we use the scene.getObjectByName() method to get an object by its name (in this case an object named box), if multiple objects with the same name are found the first one is returned.</p>
 		<p>Resources are stored in the program, similarly the methods program.getMaterialByName(), program.getTextureByName(), etc can be used to get them, (check the ResourceManager API documentation page for more information).</p>
-		<pre><code class="language-javascript">var object;
+		<pre><code class="hljs language-javascript">var object;
 
 function initialize()
 {{'{'}}
@@ -81,7 +81,7 @@ object.rotation.y += 0.01;
 
 		<p>Another way to access objects its by navigating the tree structure, every object has a parent and children, the parent points to the object above and children is an array of all objects bellow.</p>
 		<p>In the following code we get the first object placed inside the scripts and make it rotate without rotating the script itself. Be careful when accessing children or parent objects directly since it depends on the object placement in the project a change can break the code.</p>
-		<pre><code class="javascript">var object;
+		<pre><code class="hljs javascript">var object;
 
 function initialize()
 {{'{'}}
@@ -96,7 +96,7 @@ object.rotation.y += 0.01;
 		<h3 class="black">Switch scenes</h3>
 		<p>Its possible to create multiple scenes in the editor and switch between them using scripts. Scenes can be accessed from the program variable accessible to all scripts. The setScene() method discards the current scene and loads a new scene it receives the scene name or the scene object (stored in the program.scenes array) as argument</p>
 		<p>The code bellow can be used to switch to the "scene2" after the W key is pressed on the keyboard. To return to the original scene the scene2 has to implement a similar logic there is no automatic scene navigation flow.</p>
-		<pre><code class="javascript">function update(delta)
+		<pre><code class="hljs javascript">function update(delta)
 {{'{'}}
 if(Keyboard.keyPressed(Keyboard.W))
 {{'{'}}
@@ -107,7 +107,7 @@ if(Keyboard.keyPressed(Keyboard.W))
 		<h3 class="black">Object attributes</h3>
 		<p>The self pointer in the script object can be used to store aditional attributes that can be accessed by other scripts. Attributes can also be stored into objects be carefull to avoid collisions with the already existing ones provided by the nunuStudio API.</p>
 		<p>In the example bellow we create a counter variable attached to the script object and a increaseCounter function that can be accessed and called by other scripts.</p>
-		<pre><code class="javascript">self.counter = 0;
+		<pre><code class="hljs javascript">self.counter = 0;
 
 self.increaseCounter = function()
 {{'{'}}
@@ -117,7 +117,7 @@ self.counter++;
 		<h3 class="black">DOM Elements</h3>
 		<p>Its possible to attach dom elements to the program created. To do this we can use the division property of the program that gives us access to a DOM division element (parent of the canvas element used to draw content) where we can add HTML elements.</p>
 		<p>The example below demonstrates how to create a new red division with size 50 x 50 add it to the program and remove it when the program is being closed.</p>
-		<pre><code class="javascript">var element = document.createElement("div");
+		<pre><code class="hljs javascript">var element = document.createElement("div");
 element.style.width = "100px";
 element.style.height = "100px";
 element.style.position = "absolute";
@@ -141,7 +141,7 @@ function dispose()
 
 		<p>After importing the file into the project you can now include it in your script using the include(name) method preferabily at the top of your code. There are multiple include modes available by default the script objects use Evaluate mode the library is evaluated and executed in your script context, the Append mode appends the code of your library on top of your script code, this makes compiling a bit slower but local defined code becomes available to your script. Script mode can be selected in the Script object panel.</p>
 
-		<pre><code class="javascript">include("moment.min.js"); //https://momentjs.com/
+		<pre><code class="hljs javascript">include("moment.min.js"); //https://momentjs.com/
 // include("https://momentjs.com/downloads/moment.min.js");
 
 var date, hour;
@@ -169,7 +169,7 @@ delete moment;
 {{'}'}}
 </code></pre>
 
-		<p>The code above demonstrates how to use momentjs to display date and time on a text object. The library is available for free at https://momentjs.com/. To try this example in the editor you can download the <a class="underline" href="include.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/02_script/include.nsp">Web Editor</a>.</p>
+		<p>The code above demonstrates how to use moment.js to display date and time on a text object. The library is available for free at https://momentjs.com/. To try this example in the editor you can download the <a class="underline" href="include.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/02_script/include.nsp">Web Editor</a>.</p>
 
 		<div>
 			<canvas id="include" style="margin-left:auto; margin-right:auto; display: block;"></canvas>

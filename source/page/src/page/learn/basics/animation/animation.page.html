@@ -1,22 +1,22 @@
-	<section class="pad-sm">
-		<div class="container">
-			<a routerLink="/learn"><h3 class="black"><u>Back</u></h3></a>
-			<h2 class="black">Animation</h2>
-			<p>Animations are a essencial part of every game, sometimes it can be quite hard to get them right, in this tutorial we will explore the multiple options for 2D and 3D animations in nunuStudio.</p>
+<section class="pad-sm">
+	<div class="container">
+		<a routerLink="/learn"><h3 class="black"><u>Back</u></h3></a>
+		<h2 class="black">Animation</h2>
+		<p>Animations are a essencial part of every game, sometimes it can be quite hard to get them right, in this tutorial we will explore the multiple options for 2D and 3D animations in nunuStudio.</p>
 
-			<!-- Skinning -->
-			<h3 class="black">Skinning</h3>
-			<p>Skeletal animation is a technique in computer animation in which a character is represented in two parts, a surface representation used to draw the character (called skin or mesh) and a hierarchical set of interconnected bones (called the skeleton or rig) used to animate (pose and keyframe) the mesh.</p>
-			<p>While this technique is often used to animate humans or more generally for organic modeling, it only serves to make the animation process more intuitive and the same technique can be used to control the deformation of any object, a door, a spoon, a building, or a galaxy. When the animated object is more general than, for example, a humanoid character the set of bones may not be hierarchical or interconnected, but it just represents a higher level description of the motion of the part of mesh or skin it is influencing.</p>
-			<p>When importing a 3D model that contains a SkinnedMesh with bones attached will be created automatically, its possible to check the animations available for that 3D model in the object panel, its also possible to select one initial animation for that model that will be automatically player on start. The animation bellow was imported from a .x 3D model, to try this example in the editor you can download the <a class="underline" href="skinning.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/skinning.nsp">Web Editor</a>.</p>
+		<!-- Skinning -->
+		<h3 class="black">Skinning</h3>
+		<p>Skeletal animation is a technique in computer animation in which a character is represented in two parts, a surface representation used to draw the character (called skin or mesh) and a hierarchical set of interconnected bones (called the skeleton or rig) used to animate (pose and keyframe) the mesh.</p>
+		<p>While this technique is often used to animate humans or more generally for organic modeling, it only serves to make the animation process more intuitive and the same technique can be used to control the deformation of any object, a door, a spoon, a building, or a galaxy. When the animated object is more general than, for example, a humanoid character the set of bones may not be hierarchical or interconnected, but it just represents a higher level description of the motion of the part of mesh or skin it is influencing.</p>
+		<p>When importing a 3D model that contains a SkinnedMesh with bones attached will be created automatically, its possible to check the animations available for that 3D model in the object panel, its also possible to select one initial animation for that model that will be automatically player on start. The animation bellow was imported from a .x 3D model, to try this example in the editor you can download the <a class="underline" href="skinning.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/skinning.nsp">Web Editor</a>.</p>
 
-			<div>
-				<canvas id="skinning" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-			</div>
+		<div>
+			<canvas id="skinning" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
 
-			<p>Its also possible to play animations using a script object, the code bellow shows how to display available animations using a script and how to play the first one available in the list. Multiple animations can be played at the same time, the result of multiple animations is the interpolation of bone position for all the animations playing.</p>
+		<p>Its also possible to play animations using a script object, the code bellow shows how to display available animations using a script and how to play the first one available in the list. Multiple animations can be played at the same time, the result of multiple animations is the interpolation of bone position for all the animations playing.</p>
 
-			<pre><code class="javascript">var object = scene.getObjectByName("animated");
+		<pre><code class="hljs javascript">var object = scene.getObjectByName("animated");
 
 for(var i = 0; i < object.animations.length; i++)
 {{'{'}}
@@ -25,34 +25,34 @@ for(var i = 0; i < object.animations.length; i++)
 
 object.playAnimation(0);</code></pre>
 
-			<p>The playAnimation method received the animation index as a parameter, every time a animation is player a new action element is created in the actions array in the SkinnedMesh object, we can use action object to controll how much that animation track weigths on the final animation, this can be usefull to interpolate between multiple animations.</p>
+		<p>The playAnimation method received the animation index as a parameter, every time a animation is player a new action element is created in the actions array in the SkinnedMesh object, we can use action object to controll how much that animation track weigths on the final animation, this can be usefull to interpolate between multiple animations.</p>
 
-			<!-- Spritesheet -->
-			<h3 class="black">Spritesheet</h3>
-			<p></p>
-			<p>To import a new spritesheet animation into nunuStudio, we can select import/Texture/Spritesheet texture in the resource explorer. After we have selected an image a special type of texture will be created. We can open the spritesheet editor by double clicking the newly created texture.</p>
-			<p>The image bellow shows an example of a 10x8 animation spritesheet, that spritesheet actually contains multiple animations the character moving up, down, right, left and a couple of static poses.</p>
+		<!-- Spritesheet -->
+		<h3 class="black">Spritesheet</h3>
+		<p></p>
+		<p>To import a new spritesheet animation into nunuStudio, we can select import/Texture/Spritesheet texture in the resource explorer. After we have selected an image a special type of texture will be created. We can open the spritesheet editor by double clicking the newly created texture.</p>
+		<p>The image bellow shows an example of a 10x8 animation spritesheet, that spritesheet actually contains multiple animations the character moving up, down, right, left and a couple of static poses.</p>
 
-			<img src="spritesheet.png" class="img-small"/>
+		<img src="spritesheet.png" class="img-small"/>
 
-			<p>We have to manually configure in the spritesheet editor its size, number of frames to be used, where to start and end the animation, and how fast do we want to play it.</p>
-			<p>The example bellow uses three different spritesheet animations, one of them is controlled using a script object to display different parts of the animation depending on the player movement, this example also shows really well how lights can be used for 2D scenes. To try this example in the editor you can download the <a class="underline" href="spritesheet.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/spritesheet.nsp">Web Editor</a>.</p>
+		<p>We have to manually configure in the spritesheet editor its size, number of frames to be used, where to start and end the animation, and how fast do we want to play it.</p>
+		<p>The example bellow uses three different spritesheet animations, one of them is controlled using a script object to display different parts of the animation depending on the player movement, this example also shows really well how lights can be used for 2D scenes. To try this example in the editor you can download the <a class="underline" href="spritesheet.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/spritesheet.nsp">Web Editor</a>.</p>
 
-			<div>
-				<canvas id="spritesheet" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-			</div>
+		<div>
+			<canvas id="spritesheet" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
 
-			<!-- Spine -->
-			<h3 class="black">Spine</h3>
-			<p>Spine is a 2D animation software for Windows, Mac and Linux, developed by Esoteric Software. Spine is mostly targeted to people doing 2d video games, but can be used for pretty much any kind of 2D animated work.</p>
-			<p>For this tutorial Spine is not required, you can download some sample animations from <a class="underline" href="https://github.com/EsotericSoftware/spine-runtimes">Esoteric Github page</a>, only paid versions of spine can be used to export animations.</p>
-			<p>Spine animations can be imported into nunuStudio by selecting "Spine animation" on the resource explorer import menu. Spine objects can have multiple animations stored. nunuStudio provides a simple API to select and play animations. Animations can also have skins attached, the same object can use multiple skins. The image bellow shows the same Spine object using two different skins.</p>
+		<!-- Spine -->
+		<h3 class="black">Spine</h3>
+		<p>Spine is a 2D animation software for Windows, Mac and Linux, developed by Esoteric Software. Spine is mostly targeted to people doing 2d video games, but can be used for pretty much any kind of 2D animated work.</p>
+		<p>For this tutorial Spine is not required, you can download some sample animations from <a class="underline" href="https://github.com/EsotericSoftware/spine-runtimes">Esoteric Github page</a>, only paid versions of spine can be used to export animations.</p>
+		<p>Spine animations can be imported into nunuStudio by selecting "Spine animation" on the resource explorer import menu. Spine objects can have multiple animations stored. nunuStudio provides a simple API to select and play animations. Animations can also have skins attached, the same object can use multiple skins. The image bellow shows the same Spine object using two different skins.</p>
 
-			<img src="skin.jpg" class="img-normal"/>
+		<img src="skin.jpg" class="img-normal"/>
 
-			<p>The code bellow demonstrates how to change the animations programatically using the setAnimation(track, name, loop) function available in the SpineAnimation object. You can check the animations available for your animation in the object panel in the animation dropdown menu. There is also a setSkin(name) function that can be used to change the skin in use during runtime.</p>
+		<p>The code bellow demonstrates how to change the animations programatically using the setAnimation(track, name, loop) function available in the SpineAnimation object. You can check the animations available for your animation in the object panel in the animation dropdown menu. There is also a setSkin(name) function that can be used to change the skin in use during runtime.</p>
 
-			<pre><code class="javascript">var spineboy;
+		<pre><code class="hljs javascript">var spineboy;
 
 function initialize()
 {{'{'}}
@@ -74,21 +74,21 @@ function update()
 {{'}'}}
 </code></pre>
 
-			<p>The example bellow uses the spineboy animation available free on the spine runtime repository, and demonstrates how to use spine animations in a platformer style game.</p>
+		<p>The example bellow uses the spineboy animation available free on the spine runtime repository, and demonstrates how to use spine animations in a platformer style game.</p>
 
-			<div>
-				<canvas id="spine" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-			</div>
-
-			<p>Spine animations also have support for inverse kinematics, its also possible to use the mouse and keyboard import to change what would be the normal animation flow in order to adapt it to the current events.</p>
-
-			<!-- Code -->
-			<h3 class="black">Code</h3>
-			<p>Another way to animated objects is coding, scripted animations sometimes allow for a more dynamic interactiong, and can sometimes be even easier to do than using visual tools. We can easily animate the properties of objects, textures, materials, etc. Be creative a couple of lines of code can easily make good animations.</p>
-			<p>To try this example in the editor you can download the <a class="underline" href="code.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/code.nsp">Web Editor</a>.</p>
-
-			<div>
-				<canvas id="code" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-			</div>
+		<div>
+			<canvas id="spine" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 		</div>
-	</section>
+
+		<p>Spine animations also have support for inverse kinematics, its also possible to use the mouse and keyboard import to change what would be the normal animation flow in order to adapt it to the current events.</p>
+
+		<!-- Code -->
+		<h3 class="black">Code</h3>
+		<p>Another way to animated objects is coding, scripted animations sometimes allow for a more dynamic interactiong, and can sometimes be even easier to do than using visual tools. We can easily animate the properties of objects, textures, materials, etc. Be creative a couple of lines of code can easily make good animations.</p>
+		<p>To try this example in the editor you can download the <a class="underline" href="code.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/code.nsp">Web Editor</a>.</p>
+
+		<div>
+			<canvas id="code" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
+	</div>
+</section>

@@ -23,7 +23,7 @@
 
 		<h3>Using VR Controllers</h3>
 		<p>It's possible to acesss VR controllers from the renderer object directly attached to the program in the script objects. The controller object is automatically updated to match the physics controller position its coordinates can be used for interaction with objects in the scene. Its a regular Object3D object where other objects (e.g. Physics colliders, meshes) can be attached as children.</p>
-		<pre><code class="javascript">var controller = renderer.xr.getController(0);
+		<pre><code class="hljs javascript">var controller = renderer.xr.getController(0);
 controller.addEventListener("selectstart", (...));
 controller.addEventListener("selectend", (...));
 scene.add(controller);</code></pre>
