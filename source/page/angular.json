@@ -30,7 +30,8 @@
             ],
             "styles": [
               "src/styles.css",
-				"./node_modules/highlight.js/styles/github.css"
+				"./node_modules/highlight.js/styles/github.css",
+				"./node_modules/bootstrap/dist/bootstrap.css"
 			],
             "scripts": []
           },

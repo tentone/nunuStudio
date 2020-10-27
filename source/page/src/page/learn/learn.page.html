@@ -10,11 +10,11 @@
 		<div *ngFor="let section of this.sections">
 			<h2 class="black">{{section.title}}</h2>
 			<p>{{section.description}}</p>
-			<div class="col-sm-3" *ngFor="let option of section.options">
+			<div class="col-sm-3" *ngFor="let option of section.options" routerLink="{{option.url}}" style="cursor: pointer;">
 				<h3>{{option.title}}</h3>
 				<p>{{option.description}}</p>
 				<div class="feature-img">
-					<a routerLink="{{option.url}}">
+					<a>
 						<img class="feature-img" src="{{option.image}}"/>
 					</a>
 				</div>
