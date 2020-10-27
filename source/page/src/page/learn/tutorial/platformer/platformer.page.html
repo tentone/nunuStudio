@@ -62,7 +62,7 @@
 
 			<p>Lets start by getting the player object in our script, to get the player object we can use its name, lets rename our physics cube (that will be used as our player) to player. After that we can use the code bellow to get the player object and store it in a variable.</p>
 
-			<pre><code>var player;
+			<pre><code class="javascript">var player;
 
 function initialize()
 {{'{'}}
@@ -75,7 +75,7 @@ function initialize()
 
 			<p>To code bellow detects when the user has pressed the A, W and D key and sets the player velocity accordingly. But after a bit of time we can the see that the player falls of our platform, that because our body is a cube and ends up rotating a bit on its corners changing its direction. To use other keys in the Keyboard check the <a class="underline" href="../../../docs/classes/Keyboard.html">Keyboard API documentation</a>.</p>
 
-			<pre><code>function update()
+			<pre><code class="javascript">function update()
 {{'{'}}
 	if(Keyboard.keyPressed(Keyboard.A))
 	{{'{'}}
@@ -94,7 +94,7 @@ function initialize()
 
 			<p>To avoid our player falling down our level we need to block its movement on the Z axis we can achieve this by forcing its position and/or velocity to 0 on that axis.</p>
 
-			<pre><code>function update()
+			<pre><code class="javascript">function update()
 {{'{'}}
 	...
 
@@ -105,7 +105,7 @@ function initialize()
 
 			<p>To check if the player has touched the ground, we will create a new callback for the cannon.js world postStep event, this callback is called every time after the physics engine updates the object position, we can get a list of contact points and check if those contact points belong to our player if they do that means our player is colliding with something. Now we only need to check the orientation of the contact point, for that we will check the dot product of the contact point direction and the surface normal (we will assume a normal pointing up) is its the floor that should give us a result near 0, we will assume that any value bellow 0.1 is the floor and we will set a canJump flag to true if so.</p>
 
-			<pre><code>var player, world;
+			<pre><code class="javascript">var player, world;
 
 function initialize()
 {{'{'}}
@@ -167,7 +167,7 @@ function update()
 
 			<p>Now we are able to control our character and have it moving properly around our level, but our camera is still static, to make it follow our character we can simply equal its position in the X and Y coordinates to the player position.</p>
 
-			<pre><code>var player, world, camera;
+			<pre><code class="javascript">var player, world, camera;
 
 function initialize()
 {{'{'}}
@@ -207,7 +207,7 @@ function update()
 
 			<p>Now lets get back to our script and add code to detect collision with enemies, lets start by adding an attribute "isEnemy" to all our enemies that we added to the group we just created. We also need to store our player spawn position so that when we die we get back to that position.</p>
 
-			<pre><code>function initialize()
+			<pre><code class="javascript">function initialize()
 {{'{'}}
 	...
 
@@ -225,7 +225,7 @@ function update()
 			<p>After this we need to add the enemy collision check to the callback we created ealier in our physics world, we just need to check is there is a isEnemy true value and if so reset our character position and speed.</p>
 
 
-			<pre><code>function initialize()
+			<pre><code class="javascript">function initialize()
 {{'{'}}
 	...
 
@@ -258,7 +258,7 @@ function update()
 			<p>Now lets make our enemies move, lets choose on of our enemies, create a new script and attach that script as child of the enemy we choose. We can make our enemies move in a couple of different ways.</p>
 			<p>Bellow is the full code used for this script, it moves the object around from one position to another in looop, it can be ajusted to be easily ajusted and reused to move other objects (for example to create moving platforms).</p>
 
-			<pre><code>var velocity = 0.05;
+			<pre><code class="javascript">var velocity = 0.05;
 var min = -5;
 var max = 5;
 var direction = 1;
@@ -318,7 +318,7 @@ function update()
 			<h3 class="black">Gamepad input</h3>
 			<p>To add support for gamepad input we can create a Gamepad object in our script, the gamepad object allows us to get input from an USB gamepad, different gamepads might have different button mapping you can use <a class="underline" href="http://html5gamepad.com/">this website</a> to check you gamepad button mapping. To check the name of other buttons in the Gamepad check the <a class="underline" href="../../../docs/classes/Gamepad.html">Gamepad API documentation</a>.</p>
 
-			<pre><code>var gamepad;
+			<pre><code class="javascript">var gamepad;
 
 function initialize()
 {{'{'}}
@@ -348,7 +348,7 @@ function update()
 			<p>Since the player movement was also a little slow i tweaked it a bit by adding the option to run using the keyboard shift key and tweaking the movement to have an acceleration curve instead of instant move.</p>
 			<p>At the beginning of this tutorial i was planning to change the cube for a ball or lock its rotation but since i find it kinda of funny to see the cube tumbling around so i will leave it like this.</p>
 
-			<pre><code>function update()
+			<pre><code class="javascript">function update()
 {{'{'}}
 
 	...
@@ -404,7 +404,7 @@ function update()
 
 			<p>We're almost done now, all we have to do is to teleport our player mesh to the physics object every frame, we can do this by copying the physics position to our player mesh in our update function.</p>
 
-			<pre><code>var playermesh;
+			<pre><code class="javascript">var playermesh;
 
 function initialize()
 {{'{'}}

@@ -11,7 +11,7 @@
 			<p>Lets start by creating a simple minecraft like world using trignometric functions. The code bellow generates a wordls with size (200, 200), the block height is calculated by the coside of x plus the cosine z times the sine of x.</p>
 			<p>Feel free to experiment with the terrain generation code, until you find a configuration that you like.</p>
 
-			<pre><code>function initialize()
+			<pre><code class="javascript">function initialize()
 {{'{'}}
 	var geometry = new BoxBufferGeometry(1, 1, 1);
 	var material = program.getMaterialByName("phong");
@@ -35,7 +35,7 @@
 			<p>The code bellow shows how to create the world from merged geometry, by translating and merging multiple times the cube geometry into the same geometry.</p>
 			<p>Performance will be really good, but there is a problem with this approach, to remove a cube from the geometry we have to change the hole geometry.</p>
 
-			<pre><code>function initialize()
+			<pre><code class="javascript">function initialize()
 {{'{'}}
 	var geometry = new Geometry();
 	var cube = new BoxGeometry(1, 1, 1);

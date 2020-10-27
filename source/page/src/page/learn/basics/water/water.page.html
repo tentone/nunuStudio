@@ -16,7 +16,7 @@
 
 			<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work. To enable vertex animation we could set the needsUpdate attribute of our material and texture to true.</p>
 
-			<pre><code>var normal;
+			<pre><code class="javascript">var normal;
 
 function initialize()
 {{'{'}}
@@ -32,7 +32,7 @@ function update()
 
 			<p>Now we have a water like surface but it still does not reflect the environment around it, to add this we can create a cubecamera object. After adding the object to the scene we have to check auto update on, so that we don't have to manually update the cubecamera.</p>
 
-			<pre><code>var water, cube;
+			<pre><code class="javascript">var water, cube;
 
 function initialize()
 {{'{'}}

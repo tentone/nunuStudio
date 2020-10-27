@@ -1,4 +1,10 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {Module} from './module';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
 
-platformBrowserDynamic().bootstrapModule(Module).catch(err => console.error(err));
+hljs.registerLanguage('javascript', javascript);
+hljs.initHighlightingOnLoad();
+
+platformBrowserDynamic().bootstrapModule(Module);
+

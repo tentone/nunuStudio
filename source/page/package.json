@@ -16,7 +16,6 @@
 		"@angular/platform-browser": "~10.1.6",
 		"@angular/platform-browser-dynamic": "~10.1.6",
 		"@angular/router": "~10.1.6",
-		"ngx-highlightjs": "^4.1.2",
 		"highlight.js": "^10.3.1",
 		"jquery": "^3.5.1",
 		"rxjs": "~6.6.0",

@@ -14,7 +14,7 @@
 		<h3 class="black">Page to app</h3>
 		<p>To send a message from the webpage to the nunuStudio aplication running the use the app.sendData(data) method. Data can be anything, assuming that the nunuApp is on the same JS context as the sender its possible send even object references.</p>
 		<p>To receive these messages inside the app we need to create a onAppData callback and to send data we use the sendDataApp function stored in the program object. The code bellow is a simple example when the nunuStudio app receives data is shows the data on the text object, and every time the key P is pressed the nunuStudio app send a test message to the host webpage.</p>
-		<pre><code>var text, counter;
+		<pre><code class="javascript">var text, counter;
 
 function initialize()
 {{'{'}}
@@ -37,7 +37,7 @@ text.setText(data);
 
 		<h3 class="black">App to page</h3>
 		<p>Before sending data from the nunu app to the webpage we need to define a onMessageReceive callback to process received messages. This callback can be defined as shown bellow, every time a message is send from the nunuStudio app to the webpage this function will be called.</p>
-		<pre><code>//Send data to app
+		<pre><code class="javascript">//Send data to app
 app.sendData("test text");
 
 //Callback to receive data sent from the app

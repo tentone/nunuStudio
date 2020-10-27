@@ -16,7 +16,7 @@
 
 			<p>Its also possible to play animations using a script object, the code bellow shows how to display available animations using a script and how to play the first one available in the list. Multiple animations can be played at the same time, the result of multiple animations is the interpolation of bone position for all the animations playing.</p>
 
-			<pre><code>var object = scene.getObjectByName("animated");
+			<pre><code class="javascript">var object = scene.getObjectByName("animated");
 
 for(var i = 0; i < object.animations.length; i++)
 {{'{'}}
@@ -52,7 +52,7 @@ object.playAnimation(0);</code></pre>
 
 			<p>The code bellow demonstrates how to change the animations programatically using the setAnimation(track, name, loop) function available in the SpineAnimation object. You can check the animations available for your animation in the object panel in the animation dropdown menu. There is also a setSkin(name) function that can be used to change the skin in use during runtime.</p>
 
-			<pre><code>var spineboy;
+			<pre><code class="javascript">var spineboy;
 
 function initialize()
 {{'{'}}

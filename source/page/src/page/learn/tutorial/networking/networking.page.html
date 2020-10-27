@@ -15,7 +15,7 @@
 			<p>To set up our server code, we will start by importing the required node modules, after that a http server instance is created and configured with the correct port (we can use any port we want to), after that we create a WebSocketServer that will allow us to send and receive messages to the clients connected to the server. During the tutorial for convenience we will only use JSON messages but we can send any type of data.</p>
 			<p>The code bellow will be used as a base for our server, it takes care of all the steps necessary to establish connection with a client, from now on we will only focus on messages exchange. For the tutorial we will be using the port 1111 and localhost for communication make sure that you change this to the correct IP and configure port access if you are using an external server.</p>
 
-			<pre><code>var WebSocketServer = require("websocket").server;
+			<pre><code class="javascript">var WebSocketServer = require("websocket").server;
 var http = require("http");
 
 var port = 1111;
@@ -43,7 +43,7 @@ wsServer.on("request", function(request)
 
 			<p>The code bellow is the client part that we will write inside nunuStudio, as we can see the code to connect to a WebSocket is really simple and actually similar to the one used to create the server itself, when starting the client part in nunuStudio you should be able to see a "Connected to server" message in the console.</p>
 
-			<pre><code>var connection, connected = false;
+			<pre><code class="javascript">var connection, connected = false;
 
 function initialize()
 {{'{'}}
@@ -58,7 +58,7 @@ function initialize()
 
 			<p>Now lets send a simple message to the server and create a response to the message we sent, we will include in every message sent a type value to allow the server to differentiate message and a uuid to allow the server to distinguish clients. To send a message we will use the WebSocket send method, all of our message will be JSON encoded so we have to call JSON.stringify on our client to transform our objects to text format and JSON.parse to recreate the object on the server.</p>
 			<p>The code bellow is the the client side.</p>
-			<pre><code>uuid = THREE.Math.generateUUID();
+			<pre><code class="javascript">uuid = THREE.Math.generateUUID();
 ...
 connection.onopen = function()
 {{'{'}}
@@ -70,7 +70,7 @@ connection.onopen = function()
 	{{'}'}}));
 {{'}'}};</code></pre>
 			<p>The code bellow is the server side.</p>
-			<pre><code>connection.on("message", function(message)
+			<pre><code class="javascript">connection.on("message", function(message)
 {{'{'}}
 	console.log("Message received");
 	var data = JSON.parse(message.utf8Data);
@@ -248,7 +248,7 @@ function update()
 	{{'}'}}
 {{'}'}}</pre></code>
 			<p>The code bellow is the server part, for the server two arrays are maintaned one with connections and one with players.</p>
-			<pre><code>server.on("request", function(request)
+			<pre><code class="javascript">server.on("request", function(request)
 {{'{'}}
 	var connection = request.accept(null, request.origin);
 
@@ -303,7 +303,7 @@ function update()
 			<p>We are almost finished, just need to add the bullets and we are ready for the bullets we will do something similar to the player movement but instead of having the bullet position being updated by the client who sent it each client will update the bullets position and check collision locally, this should allow to reduce the amount of data transferred trough the server.</p>
 			<p>The code bellow implements the bullet creation and update, all bullets are store in an array and updated every frame, when a player shoots a bullet a "bullet" message is sent to the server and redistributed to all clients. If the bullets hits the player the player dies and a "disconnected" message is sent to the server.</p>
 
-			<pre><code>function update()
+			<pre><code class="javascript">function update()
 {{'{'}}
 	...
 
@@ -390,7 +390,7 @@ function update()
 
 			<p>In the server side the "bullet" message is only distributed to all connected clients.</p>
 
-			<pre><code>connection.on("message", function(message)
+			<pre><code class="javascript">connection.on("message", function(message)
 {{'{'}}
 	...
 	else if(data.type === "bullet")
@@ -407,7 +407,7 @@ function update()
 
 			<p>The game is pretty much ready now, we just need to add some code to make sure that the clients sends a disconnected message when the user closes the window, this can be easily done by adding a dispose function to the script. The dispose message is called automatically when the application terminates.</p>
 
-			<pre><code>function dispose()
+			<pre><code class="javascript">function dispose()
 {{'{'}}
 	websocket.send(JSON.stringify(
 	{{'{'}}
