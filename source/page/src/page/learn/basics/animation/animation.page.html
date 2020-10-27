@@ -33,7 +33,7 @@ object.playAnimation(0);</code></pre>
 		<p>To import a new spritesheet animation into nunuStudio, we can select import/Texture/Spritesheet texture in the resource explorer. After we have selected an image a special type of texture will be created. We can open the spritesheet editor by double clicking the newly created texture.</p>
 		<p>The image bellow shows an example of a 10x8 animation spritesheet, that spritesheet actually contains multiple animations the character moving up, down, right, left and a couple of static poses.</p>
 
-		<img src="spritesheet.png" class="img-small"/>
+		<img src="assets/learn/basics/animation/spritesheet.png" class="img-small"/>
 
 		<p>We have to manually configure in the spritesheet editor its size, number of frames to be used, where to start and end the animation, and how fast do we want to play it.</p>
 		<p>The example bellow uses three different spritesheet animations, one of them is controlled using a script object to display different parts of the animation depending on the player movement, this example also shows really well how lights can be used for 2D scenes. To try this example in the editor you can download the <a class="underline" href="spritesheet.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/12_animation/spritesheet.nsp">Web Editor</a>.</p>
@@ -48,7 +48,7 @@ object.playAnimation(0);</code></pre>
 		<p>For this tutorial Spine is not required, you can download some sample animations from <a class="underline" href="https://github.com/EsotericSoftware/spine-runtimes">Esoteric Github page</a>, only paid versions of spine can be used to export animations.</p>
 		<p>Spine animations can be imported into nunuStudio by selecting "Spine animation" on the resource explorer import menu. Spine objects can have multiple animations stored. nunuStudio provides a simple API to select and play animations. Animations can also have skins attached, the same object can use multiple skins. The image bellow shows the same Spine object using two different skins.</p>
 
-		<img src="skin.jpg" class="img-normal"/>
+		<img src="assets/learn/basics/animation/skin.jpg" class="img-normal"/>
 
 		<p>The code bellow demonstrates how to change the animations programatically using the setAnimation(track, name, loop) function available in the SpineAnimation object. You can check the animations available for your animation in the object panel in the animation dropdown menu. There is also a setSkin(name) function that can be used to change the skin in use during runtime.</p>
 

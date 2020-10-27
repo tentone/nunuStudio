@@ -79,7 +79,7 @@ var data = JSON.parse(message.utf8Data);
 		<p>If everything is working as expected we should now be able to exchange messages between the client and the server, we can use the serialization method provided by nunuStudio to send and update states of objects in our scene between multiple clients.</p>
 		<p>Let’s now start creating our level, let’s start with a couple of walls preferably in a defined position in my case I have placed my walls exactly at position 20 on the X axis and 12 on the Z axis, knowing the wall position will be helpful later for manual collision checking.</p>
 
-		<img src="level.jpg" class="img-normal"/>
+		<img src="assets/learn/tutorial/networking/level.jpg" class="img-normal"/>
 
 		<p>After creating the level lets now create our player, i started by just using a cube, and programmed the movement of the player, the player will move using WASD keys and will always be rotated in the mouse direction, when the mouse button is pressed the player will shoot a bullet.</p>
 		<p>To make the player always look at the mouse position we need to get world coordinates for where our mouse is pointing, for that we can use the ray caster object available in our scene and use it to check mouse intersection with the ground object.</p>
@@ -151,7 +151,7 @@ if(connected)
 
 		<p>If you want to you can customize your player to look a bit better, i added a couple eyes to mine and a stick that will act as its weapon.</p>
 
-		<img src="player.jpg" class="img-small"/>
+		<img src="assets/learn/tutorial/networking/player.jpg" class="img-small"/>
 
 		<p>Now let’s synchronize the position between multiple clients, let’s create a simple data structure to store Players in our server and in our clients. The code bellow implements the base data structures required in the server, the server will store Players and Connections in a list and redistribute the player status to all other players in the server.</p>
 
@@ -298,7 +298,7 @@ connection.on("message", function(message)
 
 		<p>If everything is working as expected you should be able to connect multiple clients to the server and see them move around, to test with multiple clients you can export a web version of the project and open inside your browser of choice.</p>
 
-		<img src="connected.png" class="img-big"/>
+		<img src="assets/learn/tutorial/networking/connected.png" class="img-big"/>
 
 		<p>We are almost finished, just need to add the bullets and we are ready for the bullets we will do something similar to the player movement but instead of having the bullet position being updated by the client who sent it each client will update the bullets position and check collision locally, this should allow to reduce the amount of data transferred trough the server.</p>
 		<p>The code bellow implements the bullet creation and update, all bullets are store in an array and updated every frame, when a player shoots a bullet a "bullet" message is sent to the server and redistributed to all clients. If the bullets hits the player the player dies and a "disconnected" message is sent to the server.</p>
@@ -419,9 +419,9 @@ websocket.close();
 {{'}'}}</code></pre>
 
 		<p>If you were able to follow all the steps congratulations, the mechanism explain in this tutorial for message exchange using websockets can easily adapted for other type of applications and used outside of nunuStudio.</p>
-		<p>I hope this tutorial was helpful, you can donwload the <a class="underline" href="files.zip">project files here</a>. Any question feel free to email me or open an issue in GitHub.</p>
+		<p>I hope this tutorial was helpful, you can donwload the <a class="underline" href="assets/learn/tutorial/networking/files.zip">project files here</a>. Any question feel free to email me or open an issue in GitHub.</p>
 
-		<img src="game.jpg" class="img-big"/>
+		<img src="assets/learn/tutorial/networking/game.jpg" class="img-big"/>
 
 	</div>
 </section>
