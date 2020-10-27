@@ -8,7 +8,7 @@
 		<h3 class="black">The fast way</h3>
 		<p>This is the fastest way to get a nunuStudio app running on your webpage, simple include the the nunu.min.js file in your webpage, and create a canvas with an id. Add the <code>NunuApp.loadApp('pong.nsp', 'canvas')</code> line to your body element onload and you are done, "pong.nsp" is the name of our project file and "canvas" is the id of our canvas element.</p>
 
-		<pre><code class="xml hljs">&lt;html&gt;
+		<pre><code class="xml">&lt;html&gt;
 &lt;head&gt;
 	&lt;script src="nunu.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
@@ -22,7 +22,7 @@
 		<h3 class="black">Using javascript</h3>
 		<p></p>
 		<p>First we need to import the nunu.min.js file to the webpage, this javascript file includes all the code required to run a nunuStudio aplication. After including the runtime file a canvas to display the application is needed, add a canvas to your html code.</p>
-		<pre><code class="xml hljs">&lt;!--Import nunuStudio runtime--&gt;
+		<pre><code class="xml">&lt;!--Import nunuStudio runtime--&gt;
 &lt;script type="text/javascript" src="nunu.min.js"&gt;&lt;/script&gt;
 
 &lt;!--Canvas used to draw content--&gt;
@@ -58,7 +58,7 @@ app.resize();
 {{'}'}}</code></pre>
 
 		<p>To finish we need to call the initialize method after the page loads, and the resize method every time the canvas is resized. To do this we can add the code bellow to the document body declaration.</p>
-		<pre><code class="xml hljs">&lt;body onload="initialize();" onresize="resize();"&gt;
+		<pre><code class="xml">&lt;body onload="initialize();" onresize="resize();"&gt;
 ...
 &lt;/body&gt;</code></pre>
 
@@ -92,7 +92,7 @@ Nunu.getVRDisplays(function(display)
 		<h3 class="black">Adding a loading bar</h3>
 		<p>Booth the loadRunProgram() and the loadProgramAsync() methods provide a onProgress callback field, this callback returns a value from 0.0 to 1.0 that indicates loading progress, this value can be used to control a loading bar.</p>
 		<p>A simple way to create a loading bar is by adding a couple of divisions, the code bellow is used for the default loading bar created when exporting web projects directly from the nunuStudio editor.</p>
-		<pre><code class="xml hljs">&lt;!--Loading bar frame--&gt;
+		<pre><code class="xml">&lt;!--Loading bar frame--&gt;
 &lt;div style="position:absolute; width:100%; height:7%; left:0%; top:120%; border-style:solid; border-color:#FFFFFF; border-width:2px"&gt;
 &lt;!--Loading bar--&gt;
 &lt;div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"&gt;
