@@ -1,0 +1,25 @@
+<section class="pad-sm">
+	<div class="container">
+		<h2 class="black">Learn</h2>
+		<br/>
+		<p>This page provides step by step tutorials for learning how to use nanoStudio, these tutorials will guide you through the editor tools and explain how they can be used to create dynamic web experiences in 3D.</p>
+		<p>For documentation about the nunuStudio scripting API check the <a class="underline" href="docs/index.html">API Documentation</a> page.</p>
+	</div>
+
+	<div class="container">
+		<div *ngFor="let section of this.sections">
+			<h2 class="black">{{section.title}}</h2>
+			<p>{{section.description}}</p>
+			<div class="col-sm-3" *ngFor="let option of section.options" routerLink="{{option.url}}" style="cursor: pointer;">
+				<h3>{{option.title}}</h3>
+				<p>{{option.description}}</p>
+				<div class="feature-img">
+					<a>
+						<img class="feature-img" src="{{option.image}}"/>
+					</a>
+				</div>
+			</div>
+		</div>
+		<br/>
+	</div>
+</section>

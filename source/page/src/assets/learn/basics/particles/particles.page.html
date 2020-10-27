@@ -1,0 +1,37 @@
+<section class="pad-sm">
+	<div class="container">
+		<a routerLink="/learn"><h3 class="black"><u>Back</u></h3></a>
+		<h2 class="black">Particles</h2>
+		<p>nunuStudio has a dedicated particle engine, the particle object encapsulates a Emitter and a Group that can be easily edited in the Particle Editor, but more Emitters can be added programmatically during runtime.</p>
+		<p>To add a new particle object select it from the tool bar. All new particle objects are created with the default template.</p>
+		<img src="select.png" style="width:20%; margin-left:40%"/>
+
+		<h3 class="black">Particle Editor</h3>
+		<p>The particle editor can be used to customize the particle object. To open the particle editor, double click on the particle object in the object explorer, a new tab with the particle editor will open.</p>
+		<img src="editor.png" style="width:60%; margin-left:20%"/>
+		<br/>
+		<p>Here are some of the basic attributes of a particle emitter. Its possible to control these attributes using scripts as well.</p>
+		<ul>
+			<li><p>Particle Count - Maximum number of particles</p></li>
+			<li><p>Texture - Particle emitter have a texture attached to them this texture to them.</p></li>
+			<li><p>Direction - If set backwards the particle starts at its endind position.</p></li>
+			<li><p>Particle Rate - How many particles to emitt relative to the age of a particle.</p></li>
+			<li><p>Emitter Type - Shape of the emitter (Box, Circle or Sphere).</p></li>
+			<li><p>Max Age - Age of the particles created.</p></li>
+			<li><p>Position - Position of the particle on creation relative to the emitter.</p></li>
+			<li><p>Velocity - Velocity of the particle on creation.</p></li>
+			<li><p>Acceleration - Acceleration of the particle.</p></li>
+			<li><p>Rotation - Rotation of the particle along its lifespan.</p></li>
+			<li><p>Color - Color of the particle along its lifespan.</p></li>
+		</ul>
+
+		<h3 class="black">Example</h3>
+		<p>In the demo bellow we can see a particle emitter object in action. To try this example in the editor you can download the <a class="underline" href="cameras.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/05_particles/particle.nsp">Web Editor</a>.</p>
+		<div>
+			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
+
+		<!--<h3 class="black">Scripting</h3>-->
+		<!--TODO-->
+	</div>
+</section>

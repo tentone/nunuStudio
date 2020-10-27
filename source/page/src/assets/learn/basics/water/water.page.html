@@ -1,0 +1,52 @@
+<section class="pad-sm">
+	<div class="container">
+		<a routerLink="/learn"><h3 class="black"><u>Back</u></h3></a>
+		<h2 class="black">Water</h2>
+		<p>In this tutorial we will experiment a bit more with materials and learn how to create a simple 3D water effect using textures and a cubecamera object (to create reflections)</p>
+		<p>Lets start by creating a basic scene with some objects and a plane that we will use to create our water, we have to configure our plane geometry to have multiple subdivision, we will need it later to create a wave effect with the material.</p>
+
+
+		<p>After we have our scene lets create a new material, we can use a standard, physical or phong material for this tutorial. Lets name this material water, this material will be used for our water surface. You can add some color and transparency if you want to.</p>
+
+		<img src="material.jpg" class="img-normal"/>
+
+		<p>To create a water effect we can use a water surface normal map, we can find some of these around the web, here is the one that i have used for this tutorial. We can use our normal map as booth normal map and displacement map, by attaching our normal map as displacement map the only one color channel will be used to create displacement in the surface of our geometry creating a wavy effect that should make our water look even better.</p>
+
+		<img src="normal.jpeg" class="img-small"/>
+
+		<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work. To enable vertex animation we could set the needsUpdate attribute of our material and texture to true.</p>
+
+		<pre><code class="hljs javascript">var normal;
+
+function initialize()
+{{'{'}}
+normal = program.getTextureByName("normal");
+{{'}'}}
+
+function update()
+{{'{'}}
+normal.offset.x += 0.002;
+normal.offset.y += 0.002;
+{{'}'}}
+</code></pre>
+
+		<p>Now we have a water like surface but it still does not reflect the environment around it, to add this we can create a cubecamera object. After adding the object to the scene we have to check auto update on, so that we don't have to manually update the cubecamera.</p>
+
+		<pre><code class="hljs javascript">var water, cube;
+
+function initialize()
+{{'{'}}
+...
+
+water = program.getMaterialByName("water");
+cube = scene.getObjectByName("cubecamera");
+water.envMap = cube.cube;
+{{'}'}}</code></pre>
+
+		<p>Our water its much ready right now, i have added a cubemap to make our scene look more complete and a OrbitControl object for camera movement. To try this example in the editor you can download the <a class="underline" href="water.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/13_water/water.nsp">Web Editor</a>.</p>
+
+		<div>
+			<canvas id="water" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
+	</div>
+</section>
