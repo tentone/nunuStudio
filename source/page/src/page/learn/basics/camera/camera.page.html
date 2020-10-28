@@ -2,8 +2,9 @@
 	<div class="container">
 		<a routerLink="/learn"><h3><u>Back</u></h3></a>
 		<h2>Cameras</h2>
-		<p>Cameras define how the scene is viewed in the screen, as every other object they have a position and rotation, and can control where to draw content on the screen and can have post-processing effects attached.</p>
+		<p>Cameras define how the scene is viewed in the screen, as every other object they have a position and rotation, and can control where to draw content on the screen and can have postprocessing effects attached.</p>
 		<p>A scene can use multiple cameras at the same time, camera have a draw order preference attached to them, used to decide which one to render from first. Cameras can be added from the object add bar.</p>
+
 		<img src="assets/learn/basics/camera/camera.jpg" class="img-big"/>
 
 		<h3>Perspective Camera</h3>
@@ -23,10 +24,8 @@
 
 		<h3>Comparison</h3>
 		<p>In the demo bellow we can see booth a perspective camera (on the left) and a orthographic camera (on the right) in action.</p>
-		<p>To try this example in the editor you can download the <a class="underline" href="cameras.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/03_camera/cameras.nsp">Web Editor</a>.</p>
-		<div>
-			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-		</div>
+
+		<app-viewer fname="assets/learn/basics/camera/cameras.nsp"></app-viewer>
 
 		<h3>Viewport</h3>
 		<p>The zone on the screen where the camera draws can be controlled using the viewport attributes. This allows for multiple cameras to be displayed at the same time on one screen.</p>
@@ -38,10 +37,8 @@
 		<img src="assets/learn/basics/camera/viewport.png" class="img-big"/>
 
 		<p>In the example bellow the booth cameras have a viewport of (1.0, 0.5) this means that the cameras ocupy 100% of the screen in the horizontal and half the screen in the vertical. And position for the camera on the bottom (0,0), and (0, 0.5) for the top camera. These positions are relative to the bottom left corner of the viewports. The bottom camera start on the bottom left of the screen and the top camera starts at 50% of the vertical size of the screen.</p>
-		<p>To try this example in the editor you can download the <a class="underline" href="viewport.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/03_camera/viewport.nsp">Web Editor</a>.</p>
-		<div>
-			<canvas id="viewport" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-		</div>
+
+		<app-viewer fname="assets/learn/basics/camera/viewport.nsp"></app-viewer>
 
 		<h3>Cube Camera</h3>
 		<p>Cube cameras are composed of 6 internal perspective cameras aligned to capture an entire 360 projection of the scene.</p>

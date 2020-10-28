@@ -21,7 +21,7 @@ import {GyroscopePage} from "./basics/gyroscope/gyroscope.page";
 import {MaterialsPage} from "./basics/materials/materials.page";
 import {ParticlesPage} from "./basics/particles/particles.page";
 import {PhysicsPage} from "./basics/physics/physics.page";
-import {PostProcessingPage} from "./basics/post-processing/post-processing.page";
+import {PostProcessingPage} from "./basics/postprocessing/postprocessing.page";
 import {RaycasterPage} from "./basics/raycaster/raycaster.page";
 import {TextPage} from "./basics/text/text.page";
 import {VrPage} from "./basics/vr/vr.page";

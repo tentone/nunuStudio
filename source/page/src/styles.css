@@ -22,6 +22,7 @@
 	display: block;
 	border-radius:5px;
 	width: 70%;
+	min-width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -30,6 +31,16 @@
 	display: block;
 	border-radius:5px;
 	width: 50%;
+	min-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.img-small {
+	display: block;
+	border-radius:5px;
+	width: 25%;
+	min-width: 200px;
 	margin-left: auto;
 	margin-right: auto;
 }

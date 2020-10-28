@@ -10,6 +10,8 @@ export class AppViewerComponent implements OnInit, OnDestroy {
 
 	@Input() public fname: string;
 
+	@Input() public hideLink: boolean;
+
 	// @ts-ignore
 	public app: Nunu.App;
 
@@ -63,8 +65,8 @@ export class AppViewerComponent implements OnInit, OnDestroy {
 
 	public createButton(text): HTMLElement {
 		const button = document.createElement("div");
-		button.style.backgroundColor = "#333333";
-		button.style.color = "#FFFFFF";
+		button.style.backgroundColor = "var(--dark)";
+		button.style.color = "var(--white)";
 		button.style.height = "30px";
 		button.style.lineHeight = "30px";
 		button.style.borderRadius = "5px";
@@ -84,11 +86,11 @@ export class AppViewerComponent implements OnInit, OnDestroy {
 
 		button.onmouseenter = function()
 		{
-			button.style.backgroundColor = "#666666";
+			button.style.backgroundColor = "var(--primary)";
 		};
 		button.onmouseleave = function()
 		{
-			button.style.backgroundColor = "#333333";
+			button.style.backgroundColor = "var(--dark)";
 		};
 
 		return button;

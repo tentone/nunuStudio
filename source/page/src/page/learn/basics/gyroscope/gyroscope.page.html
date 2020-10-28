@@ -6,7 +6,7 @@
 		<p>The gyroscope can be usefull booth to control objects in the scene as a controller or as a viewport controller for cameras. Gyroscopes are present in pretty much every recent mobile device out there. In this tutorial we will explore how to use it inside nunuStudio and explore some of its use cases.</p>
 		<p>The device gyroscope provides information about rotation of the device represented as an euler rotation.</p>
 
-		<img style="margin-left: 30%; width:40%" src="assets/learn/basics/gyroscope/gyro.png"/>
+		<img class="img-normal" src="assets/learn/basics/gyroscope/gyro.png"/>
 
 		<p>The code bellow demonstrates how to create a Gyroscope input object, the gyroscope object its not a normal a nunuSutio object is exists only as a programming API, and has the following attributes, each representing a rotation axis relative to the device:</p>
 		<ul>
@@ -33,28 +33,23 @@ function dispose()
 	gyro.dispose();
 {{'}'}}</code></pre>
 
-		<p>If everything works as expected you should see something similar to the example running bellow. To try this example in the editor you can download the <a class="underline" href="gyro.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/09_gyro/gyro.nsp">Web Editor</a>.</p>
-		<div>
-			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-		</div>
-		<br/>
+		<p>If everything works as expected you should see something similar to the example running bellow.</p>
+
+		<app-viewer fname="assets/learn/basics/gyroscope/gyro.nsp"></app-viewer>
 
 		<h3>Panorama</h3>
 		<p>The gyroscope can be used to easily create interactive panoramic visualizations for mobile devices, we can do this very simply using a cubemap.</p>
 		<p>A cubemap is a representation of a 360 scene using 6 images each one representing the face of a cube. For this example we will use the following images.</p>
 		<p>The picture used in this example was taken by Emil Persson and its available for download <a href="http://www.humus.name">here</a> (licensed under a Creative Commons Attribution 3.0).</p>
 
-		<img style="margin-left:20%; width:60%" src="assets/learn/basics/gyroscope/preview.jpg"/>
+		<img class="img-normal" src="assets/learn/basics/gyroscope/preview.jpg"/>
 
 		<p>To create a new cube map select Import, Texture, CubeMap in Asset Explorer a new asset will be created, double click the new asset and a cube map editor tab will open, now simply drag the sides of your cube map to the correct position in the editor.</p>
 
-		<img style="margin-left:20%; width:60%" src="assets/learn/basics/gyroscope/editor.jpg"/>
+		<img class="img-normal" src="assets/learn/basics/gyroscope/editor.jpg"/>
 
 		<p>To set this cubemap as the scene background, select the scene object in the object explorer and drag the cubemap asset to the background texture box.</p>
 
-		<p>To try this example in the editor you can download the <a class="underline" href="pano.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/09_gyro/pano.nsp">Web Editor</a>.</p>
-		<div>
-			<canvas id="pano" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
-		</div>
+		<app-viewer fname="assets/learn/basics/gyroscope/pano.nsp"></app-viewer>
 	</div>
 </div>
