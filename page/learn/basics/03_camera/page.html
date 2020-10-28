@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -71,7 +71,7 @@
 				<li><p>Size: Used to control how much the camera can see inside the scene</p></li>
 				<li><p>Resize mode: Defines how the camera is resized when the window size changes, if set to horizontal mode, the vertical size of the camera stays the same and the horizontal size changes on resize, if set to vertical mode, the horizontal stays locked and the vertical size changes.</p></li>
 			</ul>
-			
+
 			<h3 class="black">Comparison</h3>
 			<p>In the demo bellow we can see booth a perspective camera (on the left) and a orthographic camera (on the right) in action.</p>
 			<p>To try this example in the editor you can download the <a class="underline" href="cameras.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/03_camera/cameras.nsp">Web Editor</a>.</p>
@@ -84,7 +84,7 @@
 			<ul>
 				<li><p>Position: Normalized coordinates used to select where the draw zone starts (bottom left corner). Ranges from 0 to 1.</p></li>
 				<li><p>Size: Normalized coordinates used to define the size of the draw zone. Ranges from 0 to 1.</p></li>
-			</ul>		
+			</ul>
 
 			<img src="viewport.png" class="img-big"></img>
 
@@ -93,7 +93,7 @@
 			<div>
 				<canvas id="viewport" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
-			
+
 			<h3 class="black">Cube Camera</h3>
 			<p>Cube cameras are composed of 6 internal perspective cameras aligned to capture an entire 360 projection of the scene.</p>
 			<p>These type of cameras are useful for material effects that require access to information of the surroundings (e.g reflections, refraction). These can be programmatically attached to the scene (as background) or to materials (as environment map).</p>

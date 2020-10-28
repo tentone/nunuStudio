@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -67,10 +67,10 @@ function initialize()
 {
 	camera = scene.getObjectByName("camera");
 	cube = scene.getObjectByName("cube");
-	
+
 	direction = new Vector2(0, 0);
 	pressed = false;
-	
+
 	manager = nipplejs.create(
 	{
 		zone: program.division,
@@ -78,7 +78,7 @@ function initialize()
 		maxNumberOfNipples: 1,
 		mode: "dynamic"
 	});
-	
+
 	manager.on("added", function(event, nipple)
 	{
 		nipple.on("move start end", function(event, data)
@@ -86,7 +86,7 @@ function initialize()
 			if(event.type === "move")
 			{
 				var force = 0.08 * data.force;
-				
+
 				direction.x = Math.cos(data.angle.radian) * force;
 				direction.y = Math.sin(data.angle.radian) * force;
 			}
@@ -113,9 +113,9 @@ function update()
 	if(pressed)
 	{
 		cube.position.x += direction.x;
-		cube.position.y += direction.y;		
+		cube.position.y += direction.y;
 	}
-	
+
 	//Limit the square movement
 	if(cube.position.x > camera.right) cube.position.x = camera.right;
 	if(cube.position.x < camera.left) cube.position.x = camera.left;
@@ -127,9 +127,9 @@ function dispose()
 {
 	manager.destroy();
 }</code></pre>
-			
+
 			<p>To try this example in the editor you can download the <a class="underline" href="joystick.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/14_joystick/joystick.nsp">Web Editor</a>. Use the mouse of touchscreen to interact with the white block and move it around the scene. You should be able to see the touch input provided by the library.</p>
-			
+
 			<div>
 				<canvas id="joystick" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>

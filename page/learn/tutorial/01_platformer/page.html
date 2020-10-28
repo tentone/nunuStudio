@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -78,7 +78,7 @@
 			<img src="images/d.png" class="img-small"></img>
 
 			<p>Lets now add a camera to our project, cameras controll how the player will see the world, we will use a perspective camera, perspective cameras allow the player to perceive depth and see 3D objects, orthographic cameras are 2D cameras they don't allow the player to perceive distance.</p>
-			
+
 			<img src="images/e.png" class="img-normal"></img>
 
 
@@ -95,22 +95,22 @@
 			<img src="images/h.png" class="img-normal"></img>
 
 			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/a.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/a.nsp">Web Editor</a>.</p>
-			
-			<!--<div> 
+
+			<!--<div>
 				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>-->
 
 			<!--Player control-->
 			<h3 class="black">Player control</h3>
-			
+
 			<p>To move our player around we need to create a new script that will be used to controll the player using the keyboard keys. Scripts are objects, so they have a position, rotation, scale, etc, and can have objects attached as children.</p>
-			
+
 			<p>To open the code editor double click the script object on the object explorer or right click on top of it and select "Script editor", a new tab will be open with the code editor.</p>
-			
+
 			<img src="images/i.png" class="img-normal"></img>
-			
+
 			<p>In this tutorial we will use a single script object to controll all objects in the scene, but is possible to have multiple scripts.</p>
-			
+
 			<p>Lets start by getting the player object in our script, to get the player object we can use its name, lets rename our physics cube (that will be used as our player) to player. After that we can use the code bellow to get the player object and store it in a variable.</p>
 
 			<pre><code>var player;
@@ -121,9 +121,9 @@ function initialize()
 }</code></pre>
 
 			<p>To get keyboard input we have the Keyboard object, that offers keyPressed, keyJustPressed and keyJustRelease methods that allow us to detect when the user has pressed and released a specific key in the keyboard. For this guide we will use the WASD keys.</p>
-			
+
 			<p>To move the player around we will manipulate its body, physics bodies have position, velocity, acceleration and force attributes. We change manipulate those to make the player move around, for better control of the player movement we will manipulate the velocity attribute.</p>
-			
+
 			<p>To code bellow detects when the user has pressed the A, W and D key and sets the player velocity accordingly. But after a bit of time we can the see that the player falls of our platform, that because our body is a cube and ends up rotating a bit on its corners changing its direction. To use other keys in the Keyboard check the <a class="underline" href="../../../docs/classes/Keyboard.html">Keyboard API documentation</a>.</p>
 
 			<pre><code>function update()
@@ -136,7 +136,7 @@ function initialize()
 	{
 		player.body.velocity.x = 5;
 	}
-	
+
 	if(Keyboard.keyJustPressed(Keyboard.W))
 	{
 		player.body.velocity.y = 10;
@@ -153,7 +153,7 @@ function initialize()
 }</code></pre>
 
 			<p>Now there is still a problem left to solve, everytime the player keeps the W key pressed the player keeps going up. We can only let our player jump when he is touching the ground. To achieve this we need to check if our player is on the ground and create a new variable that will be set true when the player is touching the ground.</p>
-			
+
 			<p>To check if the player has touched the ground, we will create a new callback for the cannon.js world postStep event, this callback is called every time after the physics engine updates the object position, we can get a list of contact points and check if those contact points belong to our player if they do that means our player is colliding with something. Now we only need to check the orientation of the contact point, for that we will check the dot product of the contact point direction and the surface normal (we will assume a normal pointing up) is its the floor that should give us a result near 0, we will assume that any value bellow 0.1 is the floor and we will set a canJump flag to true if so.</p>
 
 			<pre><code>var player, world;
@@ -163,10 +163,10 @@ function initialize()
 	world = scene.world;
 	player = scene.getObjectByName("player");
 	player.canJump = false;
-	
+
 	var up = new Vector3(0, 1, 0);
 	var temp = new Vector3(0, 0, 0);
-	
+
 	world.addEventListener("postStep", function(e)
 	{
 		if(world.contacts.length > 0)
@@ -175,7 +175,7 @@ function initialize()
 			{
 				//Get contact points
 				var contact = world.contacts[i];
-				
+
 				//Check if any of the physics elements in the contact is our player
 				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
 				{
@@ -189,7 +189,7 @@ function initialize()
 					{
 						contact.ni.copy(temp);
 					}
-					
+
 					//If dot product if near 0 player is touching the floor and can jump again
 					if(temp.dot(up) > 0.1)
 					{
@@ -205,13 +205,13 @@ function update()
 {
 	...
 
-	
+
 	if(player.canJump && Keyboard.keyJustPressed(Keyboard.W))
 	{
 		player.body.velocity.y = 10;
 		player.canJump = false;
 	}
-	
+
 	...
 
 }</code></pre>
@@ -236,16 +236,16 @@ function update()
 }</code></pre>
 
 			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/b.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/b.nsp">Web Editor</a>.</p>
-			
-			<!--<div> 
+
+			<!--<div>
 				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>-->
 
 			<h3 class="black">Enemies</h2>
 			<p>We got our player moving but we still cant die, and dont have any obstacles to avoid or enemies to kill. Dont worry we will take care of that now.</p>
-			
+
 			<p>Lets start by making our level a bit bigger, add more platforms some places where we can fall off, the fastest way to do this is by duplicating our already existing floor and after rotating, scaling and moving it around, be carefull we want to apply these changes to the physics object not to the visual representation.</p>
-			
+
 			<img src="images/j.png" class="img-normal"></img>
 
 			<p>Now lets create some obstacles, first lets start with static obstacles and after we can make them move. I will add obstacles in red and change my player color to green, obstacles will also be static physics objects.</p>
@@ -263,7 +263,7 @@ function update()
 	...
 
 	player.spawn = player.position.clone();
-	
+
 	var enemies = scene.getObjectByName("enemies");
 	for(var i = 0; i < enemies.children.length; i++)
 	{
@@ -288,7 +288,7 @@ function update()
 			{
 				//Get contact points
 				var contact = world.contacts[i];
-				
+
 				//Check if any of the physics elements in the contact is our player
 				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
 				{
@@ -320,7 +320,7 @@ function initialize()
 {
 	//Get enemy
 	enemy = self.parent;
-	
+
 	//Store a copy of original position
 	enemy.spawn = enemy.position.clone();
 }
@@ -357,12 +357,12 @@ function update()
 	}
 }
 </code></pre>
-			
+
 			<p>You should have now a moving enemy in your game, duplicate the created script and attach it to other object to make them move as well, try to create a moving platform like the ones in super mario games.</p>
 
 			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/c.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/c.nsp">Web Editor</a>.</p>
-			
-			<!--<div> 
+
+			<!--<div>
 				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>-->
 
@@ -381,12 +381,12 @@ function initialize()
 function update()
 {
 	gamepad.update();
-	
+
 	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
-	
+
 	...
 }</code></pre>
-			
+
 			<h3 class="black">Put the pieces together</h3>
 			<p>Now we already have all basic blocks to make a complete platformer level lets take them and build complete level with actual game assets and tweak gameplay a little bit. To make it easier to overview our level we can use the 2D editor mode (can be toggled in the top right corner of the scene explorer).</p>
 
@@ -403,16 +403,16 @@ function update()
 {
 
 	...
-	
+
 	var velocity = 6;
 	var acceleration = 0.6;
-	
+
 	if(Keyboard.keyPressed(Keyboard.SHIFT))
 	{
 		velocity = 8;
 		acceleration = 1;
 	}
-	
+
 	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
 	{
 		if(player.body.velocity.x > -velocity)
@@ -436,7 +436,7 @@ function update()
 			<h3 class="black">Result</h3>
 			<p>If you were able to make it this far congratulations, you have created an awseome platformer game. This should cover all the basic aspects for platformer games. If you have any doubt about any of the steps in the tutorial, feel free to ask me about it.</p>
 			<p>You can try the final result of this tutorial bellow (wasd keys to move), you can also download the <a class="underline" href="platformer.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/platformer.nsp">Web Editor</a>.</p>
-			
+
 			<div>
 				<canvas id="platformer" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
@@ -444,17 +444,17 @@ function update()
 			<h3 class="black">Tweaking player controls</h3>
 
 			<p>If you wish to make the controls feel more like those in a classic platformer without the cube tumbling around the level you can add these little tweaks</p>
-			
+
 			<p>First, we need to change the player physics object to a sphere instead of a cube. This way our player will roll easily and won't get stuck to the walls. I chose to make the scale of the sphere <code>(0.5, 0.5 , 0.5)</code> this way it fits our <code>(1.0, 1.0, 1.0)</code> cube.</p>
 
 			<img src="images/t.png" class="img-normal"></img>
-			
+
 			<p>As you can see in red we have also changed the angular damping value, this makes it so our ball won't roll very far after you released the button. You can tweak this value to find the one that suits you the most. I found that <code>0.999</code> works pretty good.</p>
 
             <p>As you can see there is also a blue cube named 'playermesh', this mesh will represent our player. This can be a custom model if you wish, but make sure to change the sphere scale to fit your model.</p>
-			
+
 			<p>We're almost done now, all we have to do is to teleport our player mesh to the physics object every frame, we can do this by copying the physics position to our player mesh in our update function.</p>
-			
+
 			<pre><code>var playermesh;
 
 function initialize()
@@ -469,17 +469,17 @@ playermesh = scene.getObjectByName("playermesh");
 function update()
 {
 	...
-	
+
 	//Copy the position of our physics object to our player mesh
 	playermesh.position.copy(player.body.position);
-	
+
 	...
 }</code></pre>
 
             <p>If you followed all the steps you should now have smoother controls on your player. You can of course experiment with it as much as you want.</p>
 
             <p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/e.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/e.nsp">Web Editor</a>.</p>
-			
+
 		</div>
 	</section>
 

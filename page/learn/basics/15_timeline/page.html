@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -56,7 +56,7 @@
 			<p>In this guide we will learn how to use the timeline in nunuStudio. It can be used to animate any kind of object inside of nunuStudio. Timeline animations are composed of tracks and keyframes. Each track holds multiple keyframes for a specific attribute of the object, the keyframes are points of the animation that represent the value of that attribute in that specific time point.</p>
 			<p>The animation engine interpolates the values between the known keyframes for the animation to be smooth. The animation engine suports multiple interpolation modes allowing the user to select how the value between keyframes should be interpolated.</p>
 			<p>To create an animation select an object in the editor, select the Animation tab and click the add animation button. This will create a new default animation with the attributes position, rotation, scale and visible with a duration of three seconds.</p>
-			
+
 			<img src="create.png" class="img-big"></img>
 
 			<p>To create a new keyframe drag the timeline bar to the desired time, move the object to the desired position (or change the desired attribute) and click on the + button next to the attribute name that you want to create a keyframe for.</p>
@@ -81,7 +81,7 @@ function initialize()
 	cameraAnimation = true;
 	camera = scene.getObjectByName("camera");
 	console.log(camera);
-	
+
 }
 
 function update(delta)
@@ -89,7 +89,7 @@ function update(delta)
 	if(Mouse.buttonJustPressed(Mouse.LEFT))
 	{
 		cameraAnimation = !cameraAnimation;
-		
+
 		if(cameraAnimation)
 		{
 			camera.mixer.play();
@@ -100,9 +100,9 @@ function update(delta)
 		}
 	}
 }</code></pre>
-		
+
 		<p>When more than one animation is active the system automatically interpolates between the state of each attribute for all the animations available. Animations speed can be different for each animation playing simultaneously. Each animation timeline is processed indepedently. External file (e.g. fbx, dae, gltf) may contain keyframe animations that are imported with the objects and can be edited using nunuStudio timeline.</p>
-		
+
 		</div>
 	</section>
 

@@ -8,6 +8,7 @@ import {MenuPage} from "./page/menu.page";
 import {LearnPage} from "./page/learn/learn.page";
 import {LearnModule} from "./page/learn/learn.module";
 import {ExamplePage} from "./page/example/example.page";
+import {ComponentsModule} from "./components/components.module";
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import {ExamplePage} from "./page/example/example.page";
 		LearnPage
 	],
 	imports: [
+		ComponentsModule,
 		LearnModule,
 		BrowserModule,
 		Router

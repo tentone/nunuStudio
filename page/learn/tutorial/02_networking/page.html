@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -85,28 +85,28 @@ wsServer.on("request", function(request)
 	{
 		//Message handling code here
 	});
-	
+
 	connection.on("close", function(connection)
 	{
 		//User disconnected code here
 	});
 });</code></pre>
-			
+
 			<p>The code bellow is the client part that we will write inside nunuStudio, as we can see the code to connect to a WebSocket is really simple and actually similar to the one used to create the server itself, when starting the client part in nunuStudio you should be able to see a "Connected to server" message in the console.</p>
 
 			<pre><code>var connection, connected = false;
 
 function initialize()
-{	
+{
 	connection = new WebSocket("ws://127.0.0.1:1337");
-	
+
 	connection.onopen = function()
 	{
 		connected = true;
 		console.log("Connected to server");
 	};
 }</code></pre>
-	
+
 			<p>Now lets send a simple message to the server and create a response to the message we sent, we will include in every message sent a type value to allow the server to differentiate message and a uuid to allow the server to distinguish clients. To send a message we will use the WebSocket send method, all of our message will be JSON encoded so we have to call JSON.stringify on our client to transform our objects to text format and JSON.parse to recreate the object on the server.</p>
 			<p>The code bellow is the the client side.</p>
 			<pre><code>uuid = THREE.Math.generateUUID();
@@ -131,20 +131,20 @@ connection.onopen = function()
 			<p>Let’s now start creating our level, let’s start with a couple of walls preferably in a defined position in my case I have placed my walls exactly at position 20 on the X axis and 12 on the Z axis, knowing the wall position will be helpful later for manual collision checking.</p>
 
 			<img src="level.jpg" class="img-normal"></img>
-			
+
 			<p>After creating the level lets now create our player, i started by just using a cube, and programmed the movement of the player, the player will move using WASD keys and will always be rotated in the mouse direction, when the mouse button is pressed the player will shoot a bullet.</p>
 			<p>To make the player always look at the mouse position we need to get world coordinates for where our mouse is pointing, for that we can use the ray caster object available in our scene and use it to check mouse intersection with the ground object.</p>
 			<p>The code bellow implements all the player initialization and movement. After the player status is updated an "update" message will be sent to the server, when the server receives this message it will redistribute it to all other clients so that they can update the remote player instance status.</p>
 
 			<code><pre>function initialize()
-{		
+{
 	//Player
 	player = scene.getObjectByName("player");
 	player.material.color.setHex(Math.random() * 0xFFFFFF);
 	player.uuid = THREE.Math.generateUUID();
 	player.canFire = true;
 	player.alive = true;
-	
+
 	//Ground
 	ground = scene.getObjectByName("ground");
 
@@ -174,7 +174,7 @@ function update()
 			if(player.position.x > 19) player.position.x = 19;
 			if(player.position.x < -19) player.position.x = -19;
 			if(player.position.z > 11) player.position.z = 11;
-			if(player.position.z < -11) player.position.z = -11;			
+			if(player.position.z < -11) player.position.z = -11;
 
 			//Mouse rotation
 			var intersect = scene.raycaster.intersectObject(ground);
@@ -199,7 +199,7 @@ function update()
 		}
 	}
 }</pre></code>
-			
+
 			<p>If you want to you can customize your player to look a bit better, i added a couple eyes to mine and a stick that will act as its weapon.</p>
 
 			<img src="player.jpg" class="img-small"></img>
@@ -228,7 +228,7 @@ function Client(uuid, connection)
 			<code><pre>var players = [];
 
 function initialize()
-{	
+{
 	...
 
 	websocket.onopen = function()
@@ -241,13 +241,13 @@ function initialize()
 		}));
 		...
 	};
-	
+
 	websocket.onmessage = function(message)
 	{
 		var data = JSON.parse(message.data);
-		
+
 		if(data.type === "update")
-		{	
+		{
 			var uuid = data.uuid;
 
 			if(data.uuid !== player.uuid)
@@ -307,7 +307,7 @@ function update()
 	connection.on("message", function(message)
 	{
 		var data = JSON.parse(message.utf8Data);
-		
+
 		//Connected
 		if(data.type === "connected")
 		{
@@ -330,7 +330,7 @@ function update()
 			for(var i = 0; i < clients.length; i++)
 			{
 				clients[i].connection.sendUTF(message.utf8Data);
-			}				
+			}
 		}
 		//Disconnected
 		else if(data.type === "disconnect")
@@ -388,7 +388,7 @@ function update()
 					{
 						player.canFire = true;
 					}, 500);
-					
+
 					websocket.send(JSON.stringify(
 					{
 						type: "bullet",
@@ -399,7 +399,7 @@ function update()
 				}
 			}
 		}
-		
+
 		//Update bullets
 		for(var i = 0; i < bullets.length; i++)
 		{
@@ -422,7 +422,7 @@ function update()
 			{
 				bullet.destroy();
 				bullets.splice(i, 1);
-				
+
 				player.destroy();
 				player.alive = false;
 
@@ -436,7 +436,7 @@ function update()
 		}
 
 		...
-	}	
+	}
 }</code></pre>
 
 			<p>In the server side the "bullet" message is only distributed to all connected clients.</p>
@@ -465,13 +465,13 @@ function update()
 		type: "disconnect",
 		uuid: player.uuid
 	}));
-	
+
 	websocket.close();
 }</code></pre>
 
 			<p>If you were able to follow all the steps congratulations, the mechanism explain in this tutorial for message exchange using websockets can easily adapted for other type of applications and used outside of nunuStudio.</p>
 			<p>I hope this tutorial was helpful, you can donwload the <a class="underline" href="files.zip">project files here</a>. Any question feel free to email me or open an issue in GitHub.</p>
-			
+
 			<img src="game.jpg" class="img-big"></img>
 
 		</div>

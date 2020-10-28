@@ -26,10 +26,12 @@ import {RaycasterPage} from "./basics/raycaster/raycaster.page";
 import {TextPage} from "./basics/text/text.page";
 import {VrPage} from "./basics/vr/vr.page";
 import {RouterModule} from "@angular/router";
+import {ComponentsModule} from "../../components/components.module";
 
 @NgModule({
 	imports: [
 		RouterModule,
+		ComponentsModule,
 	],
 	declarations: [
 		// Basics

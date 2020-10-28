@@ -8,22 +8,27 @@ export class MenuPage {
 	public options: any[] = [
 		{
 			label: 'Home',
-			url: 'home'
+			route: 'home',
+			url: undefined
 		},
 		{
 			label: 'Learn',
-			url: 'learn'
+			route: 'learn',
+			url: undefined
 		},
 		{
 			label: 'Documentation',
+			route: undefined,
 			url: 'docs'
 		},
 		{
 			label: 'Download',
-			url: 'download'
+			route: 'download',
+			url: undefined
 		},
 		{
 			label: 'Github',
+			route: undefined,
 			url: 'https://www.github.com/tentone/nunuStudio'
 		},
 	]

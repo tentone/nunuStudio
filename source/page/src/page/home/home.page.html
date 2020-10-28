@@ -1,27 +1,26 @@
 <!--Principal container container-->
-<header id="header">
+<div style="height: 70vh; width: 100%; overflow: hidden;">
 	<!--Demo canvas-->
-	<canvas id="canvas" style="position:absolute; left:0%; top:0%; border:none"></canvas>
+	<canvas style="position:absolute; height: 70vh; width: 100%;"></canvas>
 
-	<!--Title and buttons-->
-	<div class="text-center" style="overflow:hidden; position:absolute; width:100%; bottom:25%">
-		<!--Description-->
-		<p class="lead noselect">
+	<!--Description-->
+	<div class="text-center" style="overflow:hidden; width:100%; bottom:25%">
+		<p style="font-size:21px; line-height:26px; color:#FFFFFF;">
 			Create interactive experiences for your webpage!
 			<br/>
 			Design, edit, code, all in one place!
 		</p>
+	</div>
 
-		<!--Buttons-->
-		<div class="row">
-			<!--Github button-->
-			<div class="col-xs-6 text-right">
-				<a href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
-			</div>
-			<!--Download-->
-			<div class="col-xs-6 text-left">
-				<a routerLink="download" class="btn btn-primary btn-lg">Download</a>
-			</div>
+	<!--Buttons-->
+	<div class="text-center row">
+		<!--Github button-->
+		<div class="col-xs-6 text-right">
+			<a href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
+		</div>
+		<!--Download-->
+		<div class="col-xs-6 text-left">
+			<a routerLink="download" class="btn btn-primary btn-lg">Download</a>
 		</div>
 	</div>
 
@@ -29,48 +28,52 @@
 	<div style="position:absolute; width:50%; height:3%; left:25%; top:50%; border-style:solid; border-color:#FFFFFF; border-width:2px">
 		<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"></div>
 	</div>
-</header>
+</div>
 
 <!--Built on-->
-<section id="nunu" class="pad-sm">
-	<div class="container">
-		<div class="text-center">
-			<h2>Built on OpenSource</h2>
-			<a href="https://threejs.org/"><img src="assets/logo/threejs.png" height="50"/></a>
-			<a href="https://codemirror.net/"><img src="assets/logo/codemirror.png" height="50"/></a>
-			<a href="https://nwjs.io/"><img src="assets/logo/nwjs.png" height="50"/></a>
-			<img src="assets/logo/js.jpg" height="50"/>
-			<img src="assets/logo/webgl.png" height="50"/>
-		</div>
+<div style="padding-top: 150px; padding-bottom: 150px; background:url(assets/editor.png) #222222 no-repeat center center fixed; background-size:cover;">
+	<div class="container text-center">
+		<h2 style="color: var(--white); margin-bottom: 20px;">Built on OpenSource</h2>
+		<a href="https://threejs.org/"><img src="assets/logo/threejs.png" style="height: 50px"/></a>
+		<a href="https://codemirror.net/"><img src="assets/logo/codemirror.png" style="height: 50px"/></a>
+		<a href="https://nwjs.io/"><img src="assets/logo/nwjs.png" style="height: 50px"/></a>
+		<img src="assets/logo/js.jpg" style="height: 50px"/>
+		<img src="assets/logo/webgl.png" style="height: 50px"/>
 	</div>
-</section>
+</div>
 
 <!--Features-->
-<section>
-	<div class="container">
-		<h2 class="black">Features</h2>
-		<div *ngFor="let feature of this.features" class="col-sm-3">
-			<h3>{{feature.title}}</h3>
+<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+	<h2 style="padding-bottom: 30px;">Features</h2>
+	<div class="row">
+		<div *ngFor="let feature of this.features" class="col-md-3">
+			<h4>{{feature.title}}</h4>
 			<p>{{feature.description}}</p>
-			<img class="feature-img" src="{{feature.image}}"/>
+			<img style="border-radius:5px; width:100%;" src="{{feature.image}}"/>
 		</div>
 	</div>
-	<br/>
-</section>
+</div>
 
 <!--Examples-->
-<section id="examples">
+<div style="padding-top: 30px; background-color: var(--dark); color: var(--white);">
 	<div class="container">
-		<h2 class="white">Made with <img height="38" src="assets/logo.png"/></h2>
-		<div *ngFor="let example of this.examples" class="col-sm-3">
-			<h3 class="white">{{example.title}}</h3>
-			<p class="white">{{example.description}}</p>
-			<!-- TODO OPEN EXAMPLE -->
-			<a href="examples/demo.html?nsp=files/{{example.file}}">
-				<img class="madewith-preview" src="examples/{{example.image}}"/>
-			</a>
-			<!-- TODO OPEN IN EDITOR -->
-			<div style="text-align: center;"><a href="build/editor/index.html?nsp=../../page/examples/files/{{example.file}}" class="btn btn-primary">Open in Editor</a></div>
+		<h2 style="padding-bottom: 30px;">Made with <img height="38" src="assets/logo.png"/></h2>
+
+		<div class="row">
+			<div *ngFor="let example of this.examples" class="col-md-3">
+				<h4>{{example.title}}</h4>
+				<p>{{example.description}}</p>
+
+				<!-- TODO OPEN EXAMPLE -->
+				<a href="examples/demo.html?nsp=files/{{example.file}}">
+					<img style="border-radius:5px; width:100%;" src="examples/{{example.image}}"/>
+				</a>
+				<!-- TODO OPEN IN EDITOR -->
+
+				<div style="text-align: center; margin-top: 5px;">
+					<a href="build/editor/index.html?nsp=../../page/examples/files/{{example.file}}" class="btn btn-outline-light btn-sm">Open in Editor</a>
+				</div>
+			</div>
 		</div>
 	</div>
-</section>
+</div>

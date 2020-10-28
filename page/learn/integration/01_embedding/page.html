@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -112,7 +112,7 @@ function resize()
 			<pre><code class="xml hljs">&lt;body onload="initialize();" onresize="resize();"&gt;
 ...
 &lt;/body&gt;</code></pre>
-			
+
 			<!--Toggle fullscreen and VR-->
 			<h3 class="black">Toggle Fullscreen and VR</h3>
 			<p>To toggle fullscreen its possible to use the toggleFullscreen method present in the app object, for VR its recomended to check if the browser supports WebVR and if there is a VRDisplay available before creating a button to toggle vr mode. To check for VR support use the following code.</p>
@@ -138,7 +138,7 @@ if(app.vrAvailable())
 		button.style.visibility = "visible";
 	});
 }</code></pre>
-			
+
 			<!--Loading Bar-->
 			<h3 class="black">Adding a loading bar</h3>
 			<p>Booth the loadRunProgram() and the loadProgramAsync() methods provide a onProgress callback field, this callback returns a value from 0.0 to 1.0 that indicates loading progress, this value can be used to control a loading bar.</p>

@@ -31,11 +31,12 @@
               "src/styles.css",
 				"./node_modules/highlight.js/styles/github.css",
 				"./node_modules/bootstrap/dist/css/bootstrap.css",
-				"./node_modules/bootstrap/dist/css/bootstrap-theme.css"
+				"./node_modules/bootstrap/dist/css/bootstrap-grid.css"
 			],
             "scripts": [
+				"../../build/runtime/nunu.min.js",
 				"./node_modules/jquery/dist/jquery.js",
-				"./node_modules/bootstrap/dist/js/bootstrap.js"
+				"./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
 			]
           },
           "configurations": {

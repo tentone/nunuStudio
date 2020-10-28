@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 	<link rel="stylesheet" href="../../js/tutorial.css">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -143,7 +143,7 @@ function update()
 {
 	object.rotation.y += 0.01;
 }</code></pre>
-			
+
 			<h3 class="black">Switch scenes</h3>
 			<p>Its possible to create multiple scenes in the editor and switch between them using scripts. Scenes can be accessed from the program variable accessible to all scripts. The setScene() method discards the current scene and loads a new scene it receives the scene name or the scene object (stored in the program.scenes array) as argument</p>
 			<p>The code bellow can be used to switch to the "scene2" after the W key is pressed on the keyboard. To return to the original scene the scene2 has to implement a similar logic there is no automatic scene navigation flow.</p>
@@ -187,9 +187,9 @@ function dispose()
 
 			<h3 class="black">Libraries</h3>
 			<p>To add external libraries to your script first you need to import the js file into the project, you can just simply drag the JS source file into the asset explorer or go to Import/Text and select the js file.</p>
-			
+
 			<img src="include.jpg" class="img-normal"></img>
-			
+
 			<p>After importing the file into the project you can now include it in your script using the include(name) method preferabily at the top of your code. There are multiple include modes available by default the script objects use Evaluate mode the library is evaluated and executed in your script context, the Append mode appends the code of your library on top of your script code, this makes compiling a bit slower but local defined code becomes available to your script. Script mode can be selected in the Script object panel.</p>
 
 			<pre><code>include("moment.min.js"); //https://momentjs.com/
@@ -201,7 +201,7 @@ function initialize()
 {
 	date = program.getObjectByName("date");
 	date.setText(moment().format("MMM Do YY"));
-	
+
 	hour = program.getObjectByName("hour");
 }
 
@@ -209,7 +209,7 @@ function update()
 {
 	var text = moment().format('LTS');
 	if(text !== hour.text)
-	{	
+	{
 		hour.setText(text);
 	}
 }

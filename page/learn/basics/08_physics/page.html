@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../source/page/src/assets/style/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
 
@@ -47,7 +47,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
@@ -74,7 +74,7 @@
 
 
 			<h3 class="black">Physics object control</h3>
-			
+
 			<p>To interact with physics objects using scrips we need to get the physics body attached to that object. Then we can access the <i>body</i> property that exists in every physics object and change the forces, acceleration and velocity values to make it move around the scene.</p>
 			<p>The following code gets an physics object body and using the keyboard WASD keys and the spacebar we add velocity to that body forcing the cube to move around.</p>
 			<pre><code class="javascript">var body;
@@ -102,7 +102,7 @@ this.update = function()
 	{
 		body.velocity.z += 0.2;
 	}
-	
+
 	if(Keyboard.keyJustPressed(Keyboard.SPACEBAR))
 	{
 		body.velocity.y += 5;

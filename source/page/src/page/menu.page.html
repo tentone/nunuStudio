@@ -1,20 +1,18 @@
 <!-- Navigation Bar -->
-<div class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="logo" routerLink="/"><img src="assets/logo.png" width="230" alt="Logo"></a>
-		</div>
+<div class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" routerLink="/"><img src="assets/logo.png" width="230" alt="Logo"></a>
 
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li *ngFor="let option of this.options"><a routerLink="{{option.url}}">{{option.label}}</a></li>
-			</ul>
-		</div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li *ngFor="let option of this.options" class="nav-item">
+				<a *ngIf="option.route" class="nav-link" [routerLink]="option.route">{{option.label}}</a>
+				<a *ngIf="option.url" class="nav-link" href="{{option.url}}">{{option.label}}</a>
+			</li>
+		</ul>
 	</div>
 </div>
 
@@ -22,11 +20,9 @@
 <router-outlet></router-outlet>
 
 <!--Footer-->
-<footer>
-	<div class="container">
-		<div class="text-right">
-			<p><small>nunuStudio</small></p>
-			<p><small>Distributed under MIT license | Tentone</small></p>
-		</div>
+<div style="background: var(--dark); color: var(--light); padding-bottom: 20px; padding-top: 20px;">
+	<div class="container text-right">
+		<img style="height:28px;" src="assets/logo.png"/>
+		<p><small>Distributed under MIT license, </small></p>
 	</div>
-</footer>
+</div>
