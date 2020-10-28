@@ -117,7 +117,7 @@ export class LearnPage {
 					title: 'Post-processing',
 					description: 'Post-procesing camera effects pipeline.',
 					url: '/learn/basics/postprocessing',
-					image: 'assets/learn/basics/post-processing/thumb.png'
+					image: 'assets/learn/basics/postprocessing/thumb.png'
 				},
 				{
 					title: 'Video',

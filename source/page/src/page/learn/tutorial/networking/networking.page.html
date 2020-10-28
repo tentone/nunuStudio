@@ -85,7 +85,7 @@ var data = JSON.parse(message.utf8Data);
 		<p>To make the player always look at the mouse position we need to get world coordinates for where our mouse is pointing, for that we can use the ray caster object available in our scene and use it to check mouse intersection with the ground object.</p>
 		<p>The code bellow implements all the player initialization and movement. After the player status is updated an "update" message will be sent to the server, when the server receives this message it will redistribute it to all other clients so that they can update the remote player instance status.</p>
 
-		<code><pre>function initialize()
+		<pre><code class="hljs javascript">function initialize()
 {{'{'}}
 //Player
 player = scene.getObjectByName("player");
@@ -147,7 +147,7 @@ if(connected)
 		{{'}'}}
 	{{'}'}}
 {{'}'}}
-{{'}'}}</pre></code>
+{{'}'}}</code></pre>
 
 		<p>If you want to you can customize your player to look a bit better, i added a couple eyes to mine and a stick that will act as its weapon.</p>
 
@@ -155,7 +155,7 @@ if(connected)
 
 		<p>Now let’s synchronize the position between multiple clients, let’s create a simple data structure to store Players in our server and in our clients. The code bellow implements the base data structures required in the server, the server will store Players and Connections in a list and redistribute the player status to all other players in the server.</p>
 
-		<code><pre>var players = [], clients = [];
+		<pre><code class="hljs javascript">var players = [], clients = [];
 
 function Player(uuid, color)
 {{'{'}}
@@ -169,12 +169,12 @@ function Client(uuid, connection)
 {{'{'}}
 this.uuid = uuid;
 this.connection = connection;
-{{'}'}}</pre></code>
+{{'}'}}</code></pre>
 
 		<p>When the player connects to the server it needs to send a "connected" message with initial data about the player like its UUID and the color used to represent it in the world. When the server receives this message the player is added to the players and connections arrays. When the player updates its state the "update" message is send, this message contains the player actual position and rotation and when it disconnects or dies a "disconnected" message is sent.</p>
 		<p>When the client receives an "update" message from the server (the server only redistributes these messages), the client needs to check if the player is already known if thats the case its position and rotation is updated, otherwise the player is created with the color and uuid indicated in the message, when a "disconnected" message is received the player indicated is destroyed.</p>
 		<p>The code bellow is the client part, with all code necessary to add, update and remove players from the game.</p>
-		<code><pre>var players = [];
+		<pre><code class="hljs javascript">var players = [];
 
 function initialize()
 {{'{'}}
@@ -246,7 +246,8 @@ if(connected)
 		rotation: player.rotation.toArray()
 	{{'}'}}));
 {{'}'}}
-{{'}'}}</pre></code>
+{{'}'}}</code></pre>
+
 		<p>The code bellow is the server part, for the server two arrays are maintaned one with connections and one with players.</p>
 		<pre><code class="hljs javascript">server.on("request", function(request)
 {{'{'}}

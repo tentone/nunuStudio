@@ -72,7 +72,7 @@ export const LearnRoutes: Routes = [
 		component: PythonPage
 	},
 	{
-		path: 'learn/basics/post-processing',
+		path: 'learn/basics/postprocessing',
 		component: PostProcessingPage
 	},
 	{

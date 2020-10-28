@@ -14,11 +14,40 @@ class HomePageFeatureOption {
 }
 
 
+class HomePageProject {
+	public image: string;
+	public url: string;
+}
+
+
 @Component({
   selector: 'home-page',
   templateUrl: './home.page.html'
 })
 export class HomePage {
+	public projects: HomePageProject[] = [
+		{
+			image: 'assets/logo/threejs.png',
+			url: 'https://threejs.org/'
+		},
+		{
+			image: 'assets/logo/codemirror.png',
+			url: 'https://codemirror.net/'
+		},
+		{
+			image: 'assets/logo/nwjs.png',
+			url: 'https://nwjs.io/'
+		},
+		{
+			image: 'assets/logo/js.jpg',
+			url: 'https://www.ecma-international.org/ecma-262/'
+		},
+		{
+			image: 'assets/logo/webgl.png',
+			url: 'https://get.webgl.org/'
+		},
+	];
+
 	public examples: HomePageExampleOption[] = [
 		{
 			title: 'nunuStudio',

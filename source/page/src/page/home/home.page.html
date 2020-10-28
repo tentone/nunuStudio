@@ -34,11 +34,9 @@
 <div style="padding-top: 150px; padding-bottom: 150px; background:url(assets/editor.png) #222222 no-repeat center center fixed; background-size:cover;">
 	<div class="container text-center">
 		<h2 style="color: var(--white); margin-bottom: 20px;">Built on OpenSource</h2>
-		<a href="https://threejs.org/"><img src="assets/logo/threejs.png" style="height: 50px"/></a>
-		<a href="https://codemirror.net/"><img src="assets/logo/codemirror.png" style="height: 50px"/></a>
-		<a href="https://nwjs.io/"><img src="assets/logo/nwjs.png" style="height: 50px"/></a>
-		<img src="assets/logo/js.jpg" style="height: 50px"/>
-		<img src="assets/logo/webgl.png" style="height: 50px"/>
+		<div *ngFor="let project of this.projects" style="display: inline; margin: 5px;">
+			<a href="{{project.url}}"><img src="{{project.image}}" style="height: 50px"/></a>
+		</div>
 	</div>
 </div>
 

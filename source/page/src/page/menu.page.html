@@ -1,18 +1,20 @@
 <!-- Navigation Bar -->
 <div class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" routerLink="/"><img src="assets/logo.png" width="230" alt="Logo"></a>
+	<div class="container">
+		<a class="navbar-brand" routerLink="/"><img src="assets/logo.png" width="230" alt="Logo"></a>
 
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto text-right">
-			<li *ngFor="let option of this.options" class="nav-item">
-				<a *ngIf="option.route" class="nav-link" [routerLink]="option.route">{{option.label}}</a>
-				<a *ngIf="option.url" class="nav-link" href="{{option.url}}">{{option.label}}</a>
-			</li>
-		</ul>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto text-right">
+				<li *ngFor="let option of this.options" class="nav-item">
+					<a *ngIf="option.route" class="nav-link" [routerLink]="option.route">{{option.label}}</a>
+					<a *ngIf="option.url" class="nav-link" href="{{option.url}}">{{option.label}}</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -20,7 +22,7 @@
 <router-outlet></router-outlet>
 
 <!--Footer-->
-<div style="background: var(--dark); color: var(--light); padding-bottom: 10px; padding-top: 20px; margin-top: 20px;">
+<div style="background: var(--dark); color: var(--light); padding-bottom: 10px; padding-top: 20px;">
 	<div class="container text-right">
 		<img style="height:28px;" src="assets/logo.png"/>
 		<p><small>Distributed under MIT license, </small></p>
