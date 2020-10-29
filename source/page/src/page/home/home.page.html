@@ -12,7 +12,7 @@
 	<!--Buttons-->
 	<div style="position:absolute; width:100%; top:60vh;">
 		<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
-			<a style="margin: 5px;" href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
+			<a style="margin: 5px;" href="{{global.editor}}" class="btn btn-secondary btn-lg">Web Version</a>
 			<a style="margin: 5px;" routerLink="/download" class="btn btn-primary btn-lg">Download</a>
 		</div>
 	</div>
@@ -60,10 +60,9 @@
 				<a href="examples/demo.html?nsp=files/{{example.file}}">
 					<img style="border-radius:5px; width:100%;" src="examples/{{example.image}}"/>
 				</a>
-				<!-- TODO OPEN IN EDITOR -->
 
 				<div style="text-align: center; margin-top: 5px;">
-					<a href="build/editor/index.html?nsp=../../page/examples/files/{{example.file}}" class="btn btn-outline-light btn-sm">Open in Editor</a>
+					<a (click)="global.openEditor('../../page/examples/files/' + example.file)" class="btn btn-outline-light btn-sm">Open in Editor</a>
 				</div>
 			</div>
 		</div>

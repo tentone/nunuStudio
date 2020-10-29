@@ -1,4 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Global} from "../../global";
 
 class HomePageExampleOption {
 	public title: string;
@@ -25,6 +26,8 @@ class HomePageProject {
   templateUrl: './home.page.html'
 })
 export class HomePage {
+	public get global(): any { return Global; }
+
 	@ViewChild('canvas', {static: true}) public canvas: ElementRef;
 
 	@ViewChild('bar', {static: true}) public bar: ElementRef;
