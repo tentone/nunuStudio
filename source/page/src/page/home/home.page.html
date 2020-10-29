@@ -1,8 +1,5 @@
 <!--Principal container container-->
-<div style="height: 70vh; width: 100%; overflow: hidden;">
-	<!--Demo canvas-->
-	<canvas style="position:absolute; height: 70vh; width: 100%;"></canvas>
-
+<div style="top: 0px; left: 0px; height: 70vh; width: 100%; overflow: hidden;">
 	<!--Description-->
 	<div class="text-center" style="overflow:hidden; width:100%; bottom:25%">
 		<p style="font-size:21px; line-height:26px; color:#FFFFFF;">
@@ -13,21 +10,18 @@
 	</div>
 
 	<!--Buttons-->
-	<div class="text-center row">
-		<!--Github button-->
-		<div class="col-xs-6 text-right">
-			<a href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
-		</div>
-		<!--Download-->
-		<div class="col-xs-6 text-left">
-			<a routerLink="download" class="btn btn-primary btn-lg">Download</a>
-		</div>
+	<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
+		<a href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
+		<a routerLink="/download" class="btn btn-primary btn-lg">Download</a>
 	</div>
 
 	<!--Loading bar-->
 	<div style="position:absolute; width:50%; height:3%; left:25%; top:50%; border-style:solid; border-color:#FFFFFF; border-width:2px">
 		<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"></div>
 	</div>
+
+	<!--Demo canvas-->
+	<canvas #canvas style="position:absolute; top: 0px; left: 0px; height: 70vh; width: 100%; z-index: -1;"></canvas>
 </div>
 
 <!--Built on-->

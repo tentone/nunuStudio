@@ -1,6 +1,6 @@
 <p *ngIf="this.hideLink !== true">To try this example in the editor you can download the <a class="underline" href="{{fname}}">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/{{fname}}">Web Editor</a>.</p>
 
-<div style="width: 70%; min-width: 400px; height: 360px; margin-left:auto; margin-right:auto; display: block;">
+<div [ngStyle]="this.style" style="margin-left:auto; margin-right:auto; display: block;">
 	<canvas #canvas style="width: 100%; height: 100%;"></canvas>
 </div>
 

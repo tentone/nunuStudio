@@ -21,6 +21,12 @@ export class AppViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 	@Input() public hideLink: boolean;
 
+	public style: any = {
+		width: "70%",
+		minWidth: "400px",
+		height: "360px"
+	};
+
 	// @ts-ignore
 	public app: Nunu.App;
 

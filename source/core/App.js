@@ -11,7 +11,7 @@ import {FileSystem} from "./FileSystem.js";
  * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
  *
  * Project files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.
- * 
+ *
  * @class App
  * @module Runtime
  * @constructor
@@ -26,7 +26,7 @@ function App(canvas)
 	 * @type {Program}
 	 */
 	this.program = null;
-	
+
 	/**
 	 * Graphics renderer in use by this app instance
 	 *
@@ -37,7 +37,7 @@ function App(canvas)
 
 	/**
 	 * Runtime control, if true the app is running.
-	 * 
+	 *
 	 * @property running
 	 * @type {boolean}
 	 */
@@ -45,9 +45,9 @@ function App(canvas)
 
 	/**
 	 * Flag used to controll if the canvas element is resized automatically by the nunu app instance.
-	 * 
+	 *
 	 * If true the canvas is resized whenether the resize method is called.
-	 * 
+	 *
 	 * @property canvasFitWindow
 	 * @type {boolean}
 	 * @default false if a canvas is provided, else true
@@ -64,7 +64,7 @@ function App(canvas)
 
 	/**
 	 * Event manager used to create and manage events for this app.
-	 * 
+	 *
 	 * @property events
 	 * @type {EventManager}
 	 */
@@ -92,7 +92,7 @@ function App(canvas)
  * @param {string} canvas Canvas object or canvas id.
  */
 App.loadApp = function(url, canvas)
-{	
+{
 	if (typeof canvas === "string")
 	{
 		canvas = document.getElementById(canvas);
@@ -121,9 +121,9 @@ App.loadApp = function(url, canvas)
  * Start running nunu program.
  *
  * Creates renderer, mouse and keyboard objects, and starts running the loaded application.
- * 
+ *
  * A nunu program must be loaded before calling this method.
- * 
+ *
  * @method run
  */
 App.prototype.run = function()
@@ -146,7 +146,7 @@ App.prototype.run = function()
 
 	// Set renderer
 	this.program.setRenderer(this.renderer);
-	
+
 	// Initialize program
 	this.program.initialize();
 
@@ -175,11 +175,11 @@ App.prototype.run = function()
 
 /**
  * Load program asynchronously and run it after its loaded.
- * 
+ *
  * @method loadRunProgram
  * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback
- * @param {Function} onProgress onProgress callback
+ * @param {Function} onProgress onProgress callback, receives progress (percentage) and the xhr onprogress event as parameters.
  */
 App.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 {
@@ -196,7 +196,7 @@ App.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 
 /**
  * Load program from file.
- * 
+ *
  * @method loadProgram
  * @param {string} fname Name of the file to load
  */
@@ -221,11 +221,11 @@ App.prototype.loadProgram = function(fname)
 
 /**
  * Load program from file, asynchronously.
- * 
+ *
  * @method loadProgramAsync
  * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
- * @param {Function} onProgress onProgress callback
+ * @param {Function} onProgress onProgress callback, receives progress (percentage) and the xhr onprogress event as parameters.
  */
 App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 {
@@ -238,12 +238,15 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 		{
 			var loader = new ObjectLoader();
 			self.program = loader.parse(JSON.parse(data));
-			
+
 			if (onLoad !== undefined)
 			{
 				onLoad(self);
 			}
-		}, onProgress);
+		}, function(event) {
+			var progress = event.lengthComputable ? event.loaded / event.total * 100 : 0;
+			onProgress(progress, event);
+		});
 	}
 	// Binary project
 	else if (fname.endsWith(".nsp"))
@@ -252,21 +255,24 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 		{
 			var loader = new ObjectLoader();
 			var pson = new StaticPair();
-			
+
 			self.program = loader.parse(pson.decode(data));
 			if (onLoad !== undefined)
 			{
 				onLoad(self);
 			}
-		}, onProgress);
+		}, function(event) {
+			var progress = event.lengthComputable ? event.loaded / event.total * 100 : 0;
+			onProgress(progress, event);
+		});
 	}
 };
 
 /**
  * Update nunu program state.
- * 
+ *
  * Automatically called by the runtime handler.
- * 
+ *
  * @method update
  */
 App.prototype.update = function()
@@ -277,13 +283,13 @@ App.prototype.update = function()
 
 /**
  * Exit from app.
- * 
+ *
  * This method kills the app and disposes all internal elements to avoid memory leaks.
- * 
+ *
  * Is should be called before exiting the webpage or before switching nunu programs.
- * 
+ *
  * When loading new nunu programs the same NunuApp instance can be used.
- * 
+ *
  * @method exit
  */
 App.prototype.exit = function()
@@ -360,9 +366,9 @@ App.prototype.setCanvas = function(canvas)
 
 /**
  * Resize the window.
- * 
+ *
  * Should be called whenether the host window is resized.
- * 
+ *
  * @method resize
  */
 App.prototype.resize = function()
@@ -376,7 +382,7 @@ App.prototype.resize = function()
 		if (this.canvasFitWindow)
 		{
 			this.canvas.style.width = window.innerWidth + "px";
-			this.canvas.style.height = window.innerHeight + "px";	
+			this.canvas.style.height = window.innerHeight + "px";
 			width = window.innerWidth;
 			height = window.innerHeight;
 		}
@@ -401,9 +407,9 @@ App.prototype.resize = function()
 
 /**
  * Send data to running nunu application.
- * 
+ *
  * The data sent using this method is received by scripts that implement the onAppData method.
- * 
+ *
  * @param {Object} data Data to send
  * @method sendData
  */
@@ -417,9 +423,9 @@ App.prototype.sendData = function(data)
 
 /**
  * Set on data receive callback.
- * 
+ *
  * Callback receives data as an argument.
- * 
+ *
  * @method setOnDataReceived
  * @param {Function} callback Function executed whenether the nunu app running sends data to the host
  */
@@ -430,9 +436,9 @@ App.prototype.setOnDataReceived = function(callback)
 
 /**
  * Set on exit callback.
- * 
+ *
  * Callback is executed when exiting the nunu app.
- * 
+ *
  * @method setOnExit
  * @param {Function} callback onExit callback
  */
@@ -443,7 +449,7 @@ App.prototype.setOnExit = function(callback)
 
 /**
  * Check if virtual reality mode is available.
- * 
+ *
  * @method vrAvailable
  * @return {boolean} True if VR mode available
  */
@@ -454,7 +460,7 @@ App.prototype.vrAvailable = function()
 
 /**
  * Toggle VR mode, only works if VR mode is available.
- * 
+ *
  * @method toggleVR
  */
 App.prototype.toggleVR = function()
@@ -478,7 +484,7 @@ App.prototype.toggleVR = function()
 
 /**
  * Check if augmented reality mode is available.
- * 
+ *
  * @method arAvailable
  * @return {boolean} True if VR mode available
  */
@@ -489,7 +495,7 @@ App.prototype.arAvailable = function()
 
 /**
  * Toggle augmented reality mode, only works if augmented reality mode is available.
- * 
+ *
  * @method toggleAR
  */
 App.prototype.toggleAR = function()

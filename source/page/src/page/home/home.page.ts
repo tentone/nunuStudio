@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 
 class HomePageExampleOption {
 	public title: string;
@@ -25,6 +25,28 @@ class HomePageProject {
   templateUrl: './home.page.html'
 })
 export class HomePage {
+	@ViewChild('canvas', {static: true}) public canvas: ElementRef;
+
+	// @ts-ignore
+	public app: Nunu.App;
+
+	public ngOnInit(): void {
+		// @ts-ignore
+		this.app = new Nunu.App(this.canvas.nativeElement);
+		this.app.loadProgramAsync("examples/nunu.nsp", () => {}, (progress) => {
+			console.log(progress);
+		});
+
+	}
+
+	public ngAfterViewChecked(): void {
+		this.app.resize();
+	}
+
+	public ngOnDestroy(): void {
+		this.app.exit();
+	}
+
 	public projects: HomePageProject[] = [
 		{
 			image: 'assets/logo/threejs.png',
