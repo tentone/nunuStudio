@@ -29,11 +29,19 @@ const config = {
 				query: "{\"append\": \"export {spine};\"}"
 			},
 			{
-				test: /\.js$/i,
-				use: {
-					loader: "babel-loader",
-					options: {presets: ["@babel/preset-env"]}
-				}
+				test: /.*brython.*/,
+				loader: "@shoutem/webpack-prepend-append",
+				query: JSON.stringify({
+					prepend: `(function (root, factory) {
+						if (typeof define === 'function' && define.amd) { define([], factory); }  // AMD loader
+						else if (typeof module === 'object' && module.exports) { module.exports = factory(); }  // CommonJS loader
+						else { root.brython = factory(); }  // Script tag
+						}(typeof self !== 'undefined' ? self : this, function () {
+						var process = {release: {name: ''}};`,
+					append: `window.__BRYTHON__ = __BRYTHON__;
+						return __BRYTHON__;
+						}));`
+				})
 			}
 		]
 	}
@@ -45,14 +53,14 @@ module.exports = [
 			filename: "nunu.min.js",
 			path: output,
 			library: "Nunu",
-			libraryTarget: "umd"	
+			libraryTarget: "umd"
 		}
 	}, config),
 	Object.assign({
 		output: {
 			filename: "nunu.module.min.js",
 			path: output,
-			libraryTarget: "umd"	
+			libraryTarget: "umd"
 		}
 	}, config)
 ];

@@ -27,14 +27,18 @@ class HomePageProject {
 export class HomePage {
 	@ViewChild('canvas', {static: true}) public canvas: ElementRef;
 
+	@ViewChild('bar', {static: true}) public bar: ElementRef;
+
 	// @ts-ignore
 	public app: Nunu.App;
 
 	public ngOnInit(): void {
 		// @ts-ignore
 		this.app = new Nunu.App(this.canvas.nativeElement);
-		this.app.loadProgramAsync("examples/nunu.nsp", () => {}, (progress) => {
-			console.log(progress);
+		this.app.loadRunProgram("examples/nunu.nsp", () => {
+			this.bar.nativeElement.parentElement.style.display = "none";
+		}, (progress) => {
+			this.bar.nativeElement.style.width = progress + "%";
 		});
 
 	}

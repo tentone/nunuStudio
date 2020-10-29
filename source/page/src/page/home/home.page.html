@@ -1,28 +1,28 @@
 <!--Principal container container-->
-<div style="top: 0px; left: 0px; height: 70vh; width: 100%; overflow: hidden;">
+<div style="height: 70vh; width: 100%; overflow: hidden;">
+	<!--Demo canvas-->
+	<canvas #canvas style="height: 100%; width: 100%; z-index: -1;"></canvas>
+
 	<!--Description-->
-	<div class="text-center" style="overflow:hidden; width:100%; bottom:25%">
-		<p style="font-size:21px; line-height:26px; color:#FFFFFF;">
-			Create interactive experiences for your webpage!
-			<br/>
-			Design, edit, code, all in one place!
-		</p>
+	<div class="text-center" style="position:absolute; width:100%; height:30px; top:50vh; font-size:21px; line-height:26px; color: var(--white);">
+		<p>Create interactive experiences for your webpage!</p>
+		<p>Design, edit, code, all in one place!</p>
 	</div>
 
 	<!--Buttons-->
-	<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
-		<a href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
-		<a routerLink="/download" class="btn btn-primary btn-lg">Download</a>
+	<div style="position:absolute; width:100%; top:60vh;">
+		<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
+			<a style="margin: 5px;" href="build/editor/index.html" class="btn btn-secondary btn-lg">Web Version</a>
+			<a style="margin: 5px;" routerLink="/download" class="btn btn-primary btn-lg">Download</a>
+		</div>
 	</div>
 
 	<!--Loading bar-->
 	<div style="position:absolute; width:50%; height:3%; left:25%; top:50%; border-style:solid; border-color:#FFFFFF; border-width:2px">
-		<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"></div>
+		<div #bar style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"></div>
 	</div>
-
-	<!--Demo canvas-->
-	<canvas #canvas style="position:absolute; top: 0px; left: 0px; height: 70vh; width: 100%; z-index: -1;"></canvas>
 </div>
+
 
 <!--Built on-->
 <div style="padding-top: 150px; padding-bottom: 150px; background:url(assets/editor.png) #222222 no-repeat center center fixed; background-size:cover;">

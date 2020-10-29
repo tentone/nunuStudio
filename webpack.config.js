@@ -21,11 +21,6 @@ module.exports = [
 		devtool: "inline-source-map",
 		module: {
 			rules: [
-				/* {
-					test: /\.js$/i,
-					loader: "babel-loader",
-					query: {presets: ["@babel/preset-env"]}
-				},*/
 				{
 					test: /\.glsl$/i,
 					use: "raw-loader"
