@@ -17,7 +17,7 @@
 		"pub": "npm publish --access public .",
 		"lint": "eslint --ext .js source/editor source/core",
 		"lint-fix": "eslint --ext .js --fix source/core source/editor",
-		"build": "npm version --no-commit-h.ebpack.runtime.js",
+		"build": "npm version --no-commit-hooks patch && npm run build-runtime && npm run build-editor",
 		"build-editor": "webpack --config webpack.prod.js",
 		"build-nwjs-win": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64 ./build/editor/",
 		"build-nwjs": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./build/editor/"
