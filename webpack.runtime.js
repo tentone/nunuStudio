@@ -2,7 +2,7 @@ const Path = require("path");
 const Webpack = require("webpack");
 
 const source = Path.resolve(__dirname, "source");
-const output = Path.resolve(__dirname, "build/runtime");
+const output = Path.resolve(__dirname, "dist");
 
 const config = {
 	context: source,
