@@ -8,6 +8,7 @@ import {
 	ViewChild,
 	ViewEncapsulation
 } from '@angular/core';
+import {Global} from "../../global";
 
 @Component({
 	selector: 'app-viewer',
@@ -15,6 +16,8 @@ import {
 	encapsulation: ViewEncapsulation.None
 })
 export class AppViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
+	public get global(): any { return Global; }
+
 	@ViewChild('canvas', {static: true}) public canvas: ElementRef;
 
 	@Input() public fname: string;
