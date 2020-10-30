@@ -11,35 +11,49 @@ export class ExamplePage implements OnInit {
 	// @ts-ignore
 	public app: Nunu.App;
 
-	public ngOnInit(): void {
-		const parameters = location.search.substring(1).split("&");
-		if (parameters.length > 0)
+	public ngOnInit(): void
+	{
+		try
 		{
-			let entry: string = unescape(parameters[0].split("=")[1]).replace(new RegExp("\"", "g"), "");
+			const parameters = location.search.substring(1).split("&");
+			if (parameters.length > 0)
+			{
+				let entry: string = unescape(parameters[0].split("=")[1]).replace(new RegExp("\"", "g"), "");
 
-			// @ts-ignore
-			this.app = new Nunu.App(this.canvas.nativeElement);
-			this.app.loadRunProgram(entry, undefined, (progress, event) => {
-				this.bar.nativeElement.style.width = progress + "%";
-			});
+				// @ts-ignore
+				this.app = new Nunu.App(this.canvas.nativeElement);
+				this.app.loadRunProgram(entry, undefined, (progress, event) => {
+					this.bar.nativeElement.style.width = progress + "%";
+				});
+			}
 		}
+		catch (e)
+		{
+			alert("Error loading the application, check the file path.")
+		}
+
 	}
 
-	public ngAfterViewChecked(): void {
+	public ngAfterViewChecked(): void
+	{
 		this.app.resize();
 	}
 
-	public ngOnDestroy(): void {
+	public ngOnDestroy(): void
+	{
 		this.app.exit();
 	}
 
-	public toggleVR(): void {
-		if (this.app.vrAvailable()) {
+	public toggleVR(): void
+	{
+		if (this.app.vrAvailable())
+		{
 			this.app.toggleVR();
 		}
 	}
 
-	public toggleFullscreen(): void {
+	public toggleFullscreen(): void
+	{
 		this.app.toggleFullscreen();
 	}
 }
