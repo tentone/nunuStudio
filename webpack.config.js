@@ -4,11 +4,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
 
-const GitRevisionPlugin = require("git-revision-webpack-plugin");
-const git = new GitRevisionPlugin();
 
 const source = Path.resolve(__dirname, "source");
-const output = Path.resolve(__dirname, "temp/build/editor");
+const output = Path.resolve(__dirname, "docs/editor");
 
 const Merge = require("webpack-merge");
 const runtime = require("./webpack.runtime.js");
@@ -52,13 +50,6 @@ module.exports = [
 			path: output
 		},
 		plugins: [
-			new Webpack.DefinePlugin({
-				"VERSION": JSON.stringify(require("./package.json").version),
-				"TIMESTAMP": JSON.stringify(new Date().toISOString()),
-				"REPOSITORY_BRANCH": JSON.stringify(git.branch()),
-				"REPOSITORY_COMMIT": JSON.stringify(git.commithash()),
-				"DEVELOPMENT": JSON.stringify(true)
-			}),
 			new CopyPlugin({
 				patterns: [
 					{

@@ -71,7 +71,7 @@ function SideBar(parent)
 	 *
 	 * @attribute buttons
 	 * @type {Array}
-	 */	
+	 */
 	this.buttons = [];
 
 	this.createObject();
@@ -146,7 +146,7 @@ SideBar.prototype.updateSize = function()
 	}
 };
 
-/** 
+/**
  * Create the icons to add objects to the scene.
  *
  * @method createObject
@@ -207,7 +207,7 @@ SideBar.prototype.createObject = function()
 
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.torusKnot);
-	
+
 	// Torus
 	models.addOption(Global.FILE_PATH + "icons/models/torus.png", function()
 	{
@@ -230,7 +230,7 @@ SideBar.prototype.createObject = function()
 
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cone);
-	
+
 	// Plane
 	models.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
@@ -303,7 +303,7 @@ SideBar.prototype.createObject = function()
 	{
 		var geometry = new DodecahedronBufferGeometry(1, 0);
 		geometry.name = "dodecahedron";
-		
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "dodecahedron";
 		Editor.addObject(model, self.editor.scene);
@@ -314,7 +314,7 @@ SideBar.prototype.createObject = function()
 	{
 		var geometry = new CapsuleBufferGeometry(0.5, 0.5, 1.0, 32, 1, 8, 8);
 		geometry.name = "capsule";
-		
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "capsule";
 
@@ -326,7 +326,7 @@ SideBar.prototype.createObject = function()
 	{
 		var geometry = new RoundedBoxBufferGeometry(1, 1, 1, 0.1, 8);
 		geometry.name = "box";
-		
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "box";
 
@@ -340,7 +340,7 @@ SideBar.prototype.createObject = function()
 
 		var geometry = new TerrainBufferGeometry(10, 10, 100, 100, 5, Editor.defaultImageTerrain);
 		geometry.name = "terrain";
-		
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "terrain";
 
@@ -502,11 +502,14 @@ return target.set(x, y, z);`;
 		Editor.addObject(new PythonScript(), self.editor.scene);
 	}, Locale.python);
 
-	// Node Graph script
-	scripts.addOption(Global.FILE_PATH + "icons/script/workflow.png", function()
+	if (DEVELOPMENT)
 	{
-		Editor.addObject(new NodeScript(), self.editor.scene);
-	}, Locale.nodeGraph);
+		// Node Graph script
+		scripts.addOption(Global.FILE_PATH + "icons/script/workflow.png", function()
+		{
+			Editor.addObject(new NodeScript(), self.editor.scene);
+		}, Locale.nodeGraph);
+	}
 
 	scripts.updateOptions();
 
