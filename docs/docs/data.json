@@ -3858,7 +3858,7 @@
                 {
                     "name": "url",
                     "description": "URL to Audio file or ArrayBuffer data.",
-                    "type": "ArrayBuffer, String"
+                    "type": "ArrayBuffer | string"
                 },
                 {
                     "name": "encoding",
@@ -3905,9 +3905,9 @@
             "extends": "{Resource}",
             "params": [
                 {
-                    "name": "data",
+                    "name": "url",
                     "description": "Can be URL to image, ArrayBuffer data or base64 encoded data.",
-                    "type": "ArrayBuffer, Base64, String"
+                    "type": "ArrayBuffer | string"
                 },
                 {
                     "name": "encoding",
@@ -14753,7 +14753,7 @@
                 {
                     "name": "delta",
                     "description": "Delta time.",
-                    "type": "[type]"
+                    "type": "Number"
                 }
             ],
             "class": "EffectComposer",
@@ -15899,7 +15899,7 @@
             "description": "Data encoding (mp3, jpg, mp4, ...).\n\nIndicates how the data is encoded.",
             "itemtype": "property",
             "name": "encoding",
-            "type": "{String, ArrayBuffer, ...}",
+            "type": "{string | ArrayBuffer}",
             "class": "Resource",
             "module": "Resources"
         },
@@ -18396,7 +18396,7 @@
             ],
             "return": {
                 "description": "data",
-                "type": "Arraybuffer"
+                "type": "ArrayBuffer"
             },
             "class": "ArraybufferUtils",
             "module": "BinaryUtils"
@@ -18416,7 +18416,7 @@
             ],
             "return": {
                 "description": "data",
-                "type": "Arraybuffer"
+                "type": "ArrayBuffer"
             },
             "class": "ArraybufferUtils",
             "module": "BinaryUtils"
@@ -18436,7 +18436,7 @@
             ],
             "return": {
                 "description": "data",
-                "type": "Arraybuffer"
+                "type": "ArrayBuffer"
             },
             "class": "ArraybufferUtils",
             "module": "BinaryUtils"
@@ -18521,7 +18521,7 @@
                 {
                     "name": "arraybuffer",
                     "description": "",
-                    "type": "Arraybuffer"
+                    "type": "ArrayBuffer"
                 }
             ],
             "return": {
@@ -18561,7 +18561,7 @@
                 {
                     "name": "array",
                     "description": "",
-                    "type": "Arraybuffer"
+                    "type": "ArrayBuffer"
                 }
             ],
             "return": {
