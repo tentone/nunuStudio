@@ -11,6 +11,7 @@ const routes: Routes = [
 	{
 		path: 'example',
 		component: ExamplePage,
+
 	},
 	{
 		path: '',

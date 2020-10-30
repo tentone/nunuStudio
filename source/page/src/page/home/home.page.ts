@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Global} from "../../global";
+import {Router} from "../../router";
 
 class HomePageExampleOption {
 	public title: string;
@@ -34,6 +35,9 @@ export class HomePage {
 
 	// @ts-ignore
 	public app: Nunu.App;
+
+	constructor(public router: Router) {
+	}
 
 	public ngOnInit(): void {
 		// @ts-ignore
