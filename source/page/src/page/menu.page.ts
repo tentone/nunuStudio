@@ -8,12 +8,12 @@ export class MenuPage {
 	public options: any[] = [
 		{
 			label: 'Home',
-			route: 'home',
+			route: '/',
 			url: undefined
 		},
 		{
 			label: 'Learn',
-			route: 'learn',
+			route: '/learn',
 			url: undefined
 		},
 		{
@@ -23,7 +23,7 @@ export class MenuPage {
 		},
 		{
 			label: 'Download',
-			route: 'download',
+			route: '/download',
 			url: undefined
 		},
 		{
