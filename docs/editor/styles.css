@@ -1,0 +1,98 @@
+body
+{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+	-webkit-scrollbar;
+}
+
+select {
+	-moz-appearance: window;
+	-webkit-appearance: none;
+}
+
+/* Webkit color input border */ 
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+
+/* Webkit scrollbar */
+::-webkit-scrollbar
+{
+	height: 8px;
+	width: 8px;
+	background: #333333;
+}
+::-webkit-scrollbar-thumb
+{
+	background: #555555;
+	-webkit-border-radius: 1ex;
+	border-radius: 1ex;
+	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-corner
+{
+	background: #333333;
+}
+
+/* Webkit autofill coloring */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active
+{
+	-webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+	transition: "color 9999s ease-out, background-color 9999s ease-out";
+	-webkit-transition-delay: 9999s;
+	transition-delay: 9999s;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button
+{ 
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+:root {
+	/* Fonts */
+	--font-main-family:"Arial";
+	--font-main-color:#FFFFFF;
+	--font-main-size:12px;
+	/* GUI Color Palette */
+	--color-light:#FFFFFF;
+	--color-graph:#AAAAAA;
+	--button-over-color:#555555;
+	--box-color:#444444;
+	--panel-color:#333333;
+	--bar-color:#222222;
+
+	--color-black:#000000;
+	--color-black-alpha-20:#00000033;
+
+	/* Solid Colors */
+	--color-red:#FF0000;
+	--color-green:#00FF00;
+	--color-blue:#0000FF;
+	--color-yellow:#FFFF00;
+
+	/* Console Colors */
+	--color-console-error:#FF0000;
+	--color-console-error-background:#FF000022;
+	--color-console-warn:#FFFF00;
+	--color-console-warn-background:#FFFF0022;
+}
