@@ -5,17 +5,17 @@ import {Resource} from "./Resource.js";
 
 /**
  * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API.
- * 
+ *
  * @class Audio
  * @extends {Resource}
  * @module Resources
- * @param {ArrayBuffer, String} url URL to Audio file or ArrayBuffer data.
+ * @param {ArrayBuffer | string} url URL to Audio file or ArrayBuffer data.
  * @param {string} encoding Audio encoding (mp3, wav, etc).
  */
 function Audio(url, encoding)
 {
 	Resource.call(this, "audio", "Audio");
-	
+
 	if (url !== undefined)
 	{
 		// Arraybuffer
@@ -69,7 +69,7 @@ Audio.fileIsAudio = function(file)
  * Get an WebAudio buffer to play the audio stored in this resources.
  *
  * This method is asyncronous and the value is returned using a callback function.
- * 
+ *
  * @method getAudioBuffer
  * @param {AudioContext} context WebAudio context used to decode the audio data.
  * @param {Function} callback Callback funtion that receives an audio buffer as argument.
@@ -85,7 +85,7 @@ Audio.prototype.getAudioBuffer = function(context, callback)
 
 /**
  * Serialize audio data as json.
- * 
+ *
  * Audio data is serialized in Base64.
  *
  * @method toJSON
@@ -100,7 +100,7 @@ Audio.prototype.toJSON = function(meta)
 	}
 
 	var data = Resource.prototype.toJSON.call(this, meta);
-	
+
 	data.encoding = this.encoding;
 	data.data = this.data;
 	data.format = this.format;

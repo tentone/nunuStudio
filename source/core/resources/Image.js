@@ -6,15 +6,15 @@ import {Resource} from "./Resource.js";
 
 /**
  * Image class is used to store image data that is used to create Textures.
- * 
+ *
  * Images can be stored in mutiple formats.
  *
  * Some formats (tga, tiff, etc) are converted to png or jpeg in order to work with the rest of the code.
- * 
+ *
  * @class Image
  * @extends {Resource}
  * @module Resources
- * @param {ArrayBuffer, Base64, String} data Can be URL to image, ArrayBuffer data or base64 encoded data.
+ * @param {ArrayBuffer | string} url Can be URL to image, ArrayBuffer data or base64 encoded data.
  * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
 function Image(url, encoding)
@@ -145,7 +145,7 @@ Image.prototype.getImageData = function(onLoad)
 	var image = document.createElement("img");
 	image.src = this.data;
 	image.onload = function()
-	{	
+	{
 		self.width = image.naturalWidth;
 		self.height = image.naturalHeight;
 
@@ -248,7 +248,7 @@ Image.prototype.hasTransparency = function(perPixel)
  * Compresses image data to JPEG.
  *
  * Can be used to compress data and save some space.
- * 
+ *
  * @method compressJPEG
  * @param {number} quality JPEG compression quality level by default 0.7 is used (1.0  means max quality).
  */
@@ -269,7 +269,7 @@ Image.prototype.compressJPEG = function(quality)
 	canvas.toBlob(function(blob)
 	{
 		var reader = new FileReader();
-		
+
 		reader.onload = function()
 		{
 			self.encoding = "jpeg";
@@ -332,7 +332,7 @@ Image.prototype.toJSON = function(meta)
 		data.format = this.format;
 		data.data = this.data;
 	}
-	
+
 	meta.images[this.uuid] = data;
 
 	return data;

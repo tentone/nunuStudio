@@ -26,7 +26,7 @@ import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
  * The effect composer is used to organize multiple post-processing passes.
  *
  * It is used by camera objects to organize the rendering pipeline.
- * 
+ *
  * @class EffectComposer
  * @module Postprocessing
  */
@@ -93,7 +93,7 @@ EffectComposer.bufferParameters =
  * Swap rendering buffers.
  *
  * Used to make the output buffer of a render pass the input of the next one.
- * 
+ *
  * @method swapBuffers
  */
 EffectComposer.prototype.swapBuffers = function()
@@ -105,7 +105,7 @@ EffectComposer.prototype.swapBuffers = function()
 
 /**
  * Add new pass to the composer.
- * 
+ *
  * @method addPass
  * @param {Pass} pass Rendering pass to be added.
  */
@@ -118,7 +118,7 @@ EffectComposer.prototype.addPass = function(pass)
  * Move pass back in the list of render passes.
  *
  * Moving back means that the pass is rendered earlier in the pipeline.
- * 
+ *
  * @method moveBack
  * @param {Pass} pass Pass to be moved.
  * @return {boolean} Returns true on success, false otherwise.
@@ -145,7 +145,7 @@ EffectComposer.prototype.moveBack = function(pass)
  * Move pass forward in the list of render passes.
  *
  * Moving forward in the list means being renderer later down the pipeline.
- * 
+ *
  * @method moveForward
  * @param {Pass} pass Pass to be moved.
  * @return {boolean} Returns true on success, false otherwise.
@@ -201,7 +201,7 @@ EffectComposer.prototype.insertPass = function(pass, index)
  * @method render
  * @param {WebGLRenderer} renderer Render to be used to render the scene.
  * @param {Scene} scene Scene to render.
- * @param {[type]} delta Delta time. 
+ * @param {number} delta Delta time.
  */
 EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 {
@@ -305,7 +305,7 @@ EffectComposer.prototype.reset = function()
 
 /**
  * Dispose this effect composer.
- * 
+ *
  * @method dispose
  */
 EffectComposer.prototype.dispose = function()
@@ -328,7 +328,7 @@ EffectComposer.prototype.toJSON = function()
 
 	data.uuid = this.uuid;
 	data.passes = [];
-	
+
 	for (var i = 0; i < this.passes.length; i++)
 	{
 		data.passes.push(this.passes[i].toJSON());
@@ -339,7 +339,7 @@ EffectComposer.prototype.toJSON = function()
 
 /**
  * Create a new effect composer loaded from json data.
- * 
+ *
  * @static
  * @method fromJSON
  * @param {Object} json JSON data to load.
@@ -351,7 +351,7 @@ EffectComposer.fromJSON = function(json)
 	composer.uuid = json.uuid;
 
 	for (var i = 0; i < json.passes.length; i++)
-	{	
+	{
 		var data = json.passes[i];
 		var pass = null;
 
@@ -463,7 +463,7 @@ EffectComposer.fromJSON = function(json)
 
 		composer.addPass(pass);
 	}
-	
+
 	return composer;
 };
 export {EffectComposer};

@@ -3,9 +3,9 @@ import {FileSystem} from "../FileSystem.js";
 
 /**
  * Resource class is used to represent resources.
- * 
+ *
  * Resources store data that is used by objects.
- * 
+ *
  * @class Resource
  * @module Resources
  */
@@ -13,9 +13,9 @@ function Resource(name, type)
 {
 	/**
 	 * Resource name.
-	 * 
+	 *
 	 * Not required to be unique.
-	 * 
+	 *
 	 * @property name
 	 * @type {string}
 	 */
@@ -23,7 +23,7 @@ function Resource(name, type)
 
 	/**
 	 * UUID unique identifier.
-	 * 
+	 *
 	 * @property uuid
 	 * @type {string}
 	 */
@@ -31,7 +31,7 @@ function Resource(name, type)
 
 	/**
 	 * Resource type. Used to identify the type of the resource, usefull for serialization.
-	 * 
+	 *
 	 * @property type
 	 * @type {string}
 	 */
@@ -39,9 +39,9 @@ function Resource(name, type)
 
 	/**
 	 * Data format (base64, arraybuffer, blob, url, chunk, ...).
-	 * 
+	 *
 	 * Indicates the format used to store the data.
-	 * 
+	 *
 	 * @property format
 	 * @type {Object}
 	 */
@@ -49,17 +49,17 @@ function Resource(name, type)
 
 	/**
 	 * Data encoding (mp3, jpg, mp4, ...).
-	 * 
+	 *
 	 * Indicates how the data is encoded.
-	 * 
+	 *
 	 * @property encoding
-	 * @type {String, ArrayBuffer, ...}
+	 * @type {string | ArrayBuffer}
 	 */
 	this.encoding = "";
 
 	/**
 	 * Resource data.
-	 * 
+	 *
 	 * @property data
 	 * @type {Object}
 	 */
@@ -115,7 +115,7 @@ Resource.prototype.dispose = function() {};
 Resource.prototype.toJSON = function(meta)
 {
 	var data = {};
-	
+
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;
