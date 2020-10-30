@@ -5,8 +5,13 @@ import {DownloadPage} from "./page/download/download.page";
 import {MenuPage} from "./page/menu.page";
 import {LearnPage} from "./page/learn/learn.page";
 import {LearnRoutes} from "./page/learn/learn.routes";
+import {ExamplePage} from "./page/example/example.page";
 
 const routes: Routes = [
+	{
+		path: 'example',
+		component: ExamplePage,
+	},
 	{
 		path: '',
 		component: MenuPage,
