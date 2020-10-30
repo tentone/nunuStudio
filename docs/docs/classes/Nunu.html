@@ -36,11 +36,14 @@
 								<li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
 								<li><a href="../classes/AnimationMixer.html">AnimationMixer</a></li>
 								<li><a href="../classes/AnimationTimer.html">AnimationTimer</a></li>
+								<li><a href="../classes/App.html">App</a></li>
+								<li><a href="../classes/ARHandler.html">ARHandler</a></li>
 								<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
 								<li><a href="../classes/Audio.html">Audio</a></li>
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BaseNode.html">BaseNode</a></li>
 								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
@@ -50,7 +53,6 @@
 								<li><a href="../classes/CapsuleBufferGeometry.html">CapsuleBufferGeometry</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
-								<li><a href="../classes/Container.html">Container</a></li>
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CSS3DObject.html">CSS3DObject</a></li>
 								<li><a href="../classes/CSS3DRenderer.html">CSS3DRenderer</a></li>
@@ -59,6 +61,7 @@
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
 								<li><a href="../classes/DataTexture.html">DataTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
+								<li><a href="../classes/DirectionalLightCSM.html">DirectionalLightCSM</a></li>
 								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
 								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
 								<li><a href="../classes/EventManager.html">EventManager</a></li>
@@ -71,6 +74,7 @@
 								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
 								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
 								<li><a href="../classes/GeometryLoader.html">GeometryLoader</a></li>
+								<li><a href="../classes/Group.html">Group</a></li>
 								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
 								<li><a href="../classes/HTMLView.html">HTMLView</a></li>
@@ -90,13 +94,15 @@
 								<li><a href="../classes/Mesh.html">Mesh</a></li>
 								<li><a href="../classes/Model.html">Model</a></li>
 								<li><a href="../classes/Mouse.html">Mouse</a></li>
+								<li><a href="../classes/NodeScript.html">NodeScript</a></li>
 								<li><a href="../classes/Nunu.html">Nunu</a></li>
-								<li><a href="../classes/NunuApp.html">NunuApp</a></li>
 								<li><a href="../classes/Object3D.html">Object3D</a></li>
 								<li><a href="../classes/ObjectLoader.html">ObjectLoader</a></li>
 								<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+								<li><a href="../classes/OperationNode.html">OperationNode</a></li>
 								<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
 								<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
+								<li><a href="../classes/ParametricBufferGeometry.html">ParametricBufferGeometry</a></li>
 								<li><a href="../classes/ParticleDistributions.html">ParticleDistributions</a></li>
 								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
 								<li><a href="../classes/ParticleEmitterControl.html">ParticleEmitterControl</a></li>
@@ -109,6 +115,7 @@
 								<li><a href="../classes/PointLight.html">PointLight</a></li>
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
+								<li><a href="../classes/PythonScript.html">PythonScript</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
 								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
 								<li><a href="../classes/RendererState.html">RendererState</a></li>
@@ -155,6 +162,7 @@
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/Viewport.html">Viewport</a></li>
+								<li><a href="../classes/VRHandler.html">VRHandler</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 								<li><a href="../classes/WorkerPool.html">WorkerPool</a></li>
 								<li><a href="../classes/WorkerTask.html">WorkerTask</a></li>
@@ -225,7 +233,7 @@
 						
 						<div class="box intro">
 							<p>nunuStudio core main file.</p>
-						<p>Store nunuStudio development version and timestamp and contains global method to check browser feature support.</p>
+						<p>Store development version, timestamp and contains global method to check browser feature support.</p>
 						
 						</div>
 						
@@ -256,31 +264,11 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_developmentMode">developmentMode</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_enterVR">enterVR</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_exitVR">exitVR</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_getPlatform">getPlatform</a>
 						
 													</li>
 													<li class="index-item method">
 														<a href="#method_getQueryParameters">getQueryParameters</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_getVRDisplays">getVRDisplays</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_getXRSession">getXRSession</a>
 						
 													</li>
 													<li class="index-item method">
@@ -300,23 +288,11 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_vrAvailable">vrAvailable</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_webAudioAvailable">webAudioAvailable</a>
 						
 													</li>
 													<li class="index-item method">
 														<a href="#method_webglAvailable">webglAvailable</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_webVRAvailable">webVRAvailable</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_webXRAvailable">webXRAvailable</a>
 						
 													</li>
 											</ul>
@@ -332,6 +308,9 @@
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_CORDOVA">CORDOVA</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_DEVELOPMENT">DEVELOPMENT</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_NAME">NAME</a>
@@ -350,18 +329,6 @@
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_VERSION">VERSION</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_webVRDisplay">webVRDisplay</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_webVRHasDisplay">webVRHasDisplay</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_webXRSession">webXRSession</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_webXRSupported">webXRSupported</a>
 													</li>
 											</ul>
 										</div>
@@ -479,164 +446,6 @@
 													</div>
 											
 											</div>
-											<div id="method_developmentMode" class="method item">
-												<h3 class="name"><code>developmentMode</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if nunu if running in development mode.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if running as development mode.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_enterVR" class="method item">
-												<h3 class="name"><code>enterVR</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>renderer</code>
-															</li>
-															<li class="arg">
-																	<code>onSuccess</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Enter virtual reality mode using WebXR or WebVR depending on the API available.</p>
-											<p>If booth API are available the WebXR API is used.</p>
-											<p>When displaying VR content the display.requestAnimationFrame should be used to call the render method.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">renderer</code>
-																	<span class="type">WebGLRenderer</span>
-											
-											
-																<div class="param-description">
-																	<p>Renderer used to draw the scene.</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">onSuccess</code>
-																	<span class="type">Function</span>
-											
-											
-																<div class="param-description">
-																	<p>Method called if the application entered VR successfully.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_exitVR" class="method item">
-												<h3 class="name"><code>exitVR</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>renderer</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Enter virtual reality mode, if the application is not running on VR mode does not do anything.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">renderer</code>
-																	<span class="type">WebGLRenderer</span>
-											
-											
-																<div class="param-description">
-																	<p>Renderer used to draw the scene.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
 											<div id="method_getPlatform" class="method item">
 												<h3 class="name"><code>getPlatform</code></h3>
 											
@@ -721,108 +530,6 @@
 											
 														</div>
 													</div>
-											
-											</div>
-											<div id="method_getVRDisplays" class="method item">
-												<h3 class="name"><code>getVRDisplays</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>onDisplay</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Used to get the first VR display available, the display is returned as argument of the onDisplay function.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">onDisplay</code>
-																	<span class="type">Function</span>
-											
-											
-																<div class="param-description">
-																	<p>Function used to get the display, receives the display as argument.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_getXRSession" class="method item">
-												<h3 class="name"><code>getXRSession</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>onSession</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Get WebXR session.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">onSession</code>
-																	<span class="type">Function</span>
-											
-											
-																<div class="param-description">
-																	<p>Function used to get the XR session, receives the session as argument.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
 											
 											</div>
 											<div id="method_isFullscreen" class="method item">
@@ -1002,47 +709,6 @@
 											
 											
 											</div>
-											<div id="method_vrAvailable" class="method item">
-												<h3 class="name"><code>vrAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if there is any VR API available, on the device.</p>
-											<p>Checks if there is support for WebVR or WebXR.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if the browser supports vr.</p>
-											
-														</div>
-													</div>
-											
-											</div>
 											<div id="method_webAudioAvailable" class="method item">
 												<h3 class="name"><code>webAudioAvailable</code></h3>
 											
@@ -1123,86 +789,6 @@
 													</div>
 											
 											</div>
-											<div id="method_webVRAvailable" class="method item">
-												<h3 class="name"><code>webVRAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if host supports WebVR.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True is WebVR is available.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_webXRAvailable" class="method item">
-												<h3 class="name"><code>webXRAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if host supports WebXR.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True is WebVR is available.</p>
-											
-														</div>
-													</div>
-											
-											</div>
 									</div>
 						
 						
@@ -1265,6 +851,35 @@
 											
 											
 											</div>
+											<div id="attr_DEVELOPMENT" class="attr item">
+												<a name="config_DEVELOPMENT"></a> 
+												<h3 class="name"><code>DEVELOPMENT</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the application/library is being used in development mode.</p>
+											<p>Can be usefull to restrict development functionality when building to production.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="attr_NAME" class="attr item">
 												<a name="config_NAME"></a> 
 												<h3 class="name"><code>NAME</code></h3>
@@ -1285,7 +900,7 @@
 												</div>
 											
 												<div class="description">
-													<p>nunuStudio</p>
+													<p>Aplication name (might be usefull if getting the module as a unnamed export)</p>
 											
 												</div>
 											
@@ -1397,7 +1012,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Stores the nunu runtime dev timestamp.</p>
+													<p>Stores the timestamp of the application build.</p>
 											
 												</div>
 											
@@ -1424,117 +1039,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Stores the nunu runtime version.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_webVRDisplay" class="attr item">
-												<a name="config_webVRDisplay"></a> 
-												<h3 class="name"><code>webVRDisplay</code></h3>
-												<span class="type">VRDisplay</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Web VR display obtained.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_webVRHasDisplay" class="attr item">
-												<a name="config_webVRHasDisplay"></a> 
-												<h3 class="name"><code>webVRHasDisplay</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Flag indicating if there are any VR displays available.</p>
-											<p>Checked on the library bootup if WebVR is available, while the check does not finish it is set to null.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_webXRSession" class="attr item">
-												<a name="config_webXRSession"></a> 
-												<h3 class="name"><code>webXRSession</code></h3>
-												<span class="type">XRSession</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>WebXR session created.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_webXRSupported" class="attr item">
-												<a name="config_webXRSupported"></a> 
-												<h3 class="name"><code>webXRSupported</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Flag checking if there is support for XR immersive VR mode.</p>
-											<p>Checked on the library startup if XR is supported, while the check does not finish it is set to null.</p>
+													<p>Stores the runtime version.</p>
 											
 												</div>
 											

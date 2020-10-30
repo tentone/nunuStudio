@@ -36,11 +36,14 @@
 								<li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
 								<li><a href="../classes/AnimationMixer.html">AnimationMixer</a></li>
 								<li><a href="../classes/AnimationTimer.html">AnimationTimer</a></li>
+								<li><a href="../classes/App.html">App</a></li>
+								<li><a href="../classes/ARHandler.html">ARHandler</a></li>
 								<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
 								<li><a href="../classes/Audio.html">Audio</a></li>
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BaseNode.html">BaseNode</a></li>
 								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
@@ -50,7 +53,6 @@
 								<li><a href="../classes/CapsuleBufferGeometry.html">CapsuleBufferGeometry</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
-								<li><a href="../classes/Container.html">Container</a></li>
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CSS3DObject.html">CSS3DObject</a></li>
 								<li><a href="../classes/CSS3DRenderer.html">CSS3DRenderer</a></li>
@@ -59,6 +61,7 @@
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
 								<li><a href="../classes/DataTexture.html">DataTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
+								<li><a href="../classes/DirectionalLightCSM.html">DirectionalLightCSM</a></li>
 								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
 								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
 								<li><a href="../classes/EventManager.html">EventManager</a></li>
@@ -71,6 +74,7 @@
 								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
 								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
 								<li><a href="../classes/GeometryLoader.html">GeometryLoader</a></li>
+								<li><a href="../classes/Group.html">Group</a></li>
 								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
 								<li><a href="../classes/HTMLView.html">HTMLView</a></li>
@@ -90,13 +94,15 @@
 								<li><a href="../classes/Mesh.html">Mesh</a></li>
 								<li><a href="../classes/Model.html">Model</a></li>
 								<li><a href="../classes/Mouse.html">Mouse</a></li>
+								<li><a href="../classes/NodeScript.html">NodeScript</a></li>
 								<li><a href="../classes/Nunu.html">Nunu</a></li>
-								<li><a href="../classes/NunuApp.html">NunuApp</a></li>
 								<li><a href="../classes/Object3D.html">Object3D</a></li>
 								<li><a href="../classes/ObjectLoader.html">ObjectLoader</a></li>
 								<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+								<li><a href="../classes/OperationNode.html">OperationNode</a></li>
 								<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
 								<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
+								<li><a href="../classes/ParametricBufferGeometry.html">ParametricBufferGeometry</a></li>
 								<li><a href="../classes/ParticleDistributions.html">ParticleDistributions</a></li>
 								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
 								<li><a href="../classes/ParticleEmitterControl.html">ParticleEmitterControl</a></li>
@@ -109,6 +115,7 @@
 								<li><a href="../classes/PointLight.html">PointLight</a></li>
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
+								<li><a href="../classes/PythonScript.html">PythonScript</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
 								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
 								<li><a href="../classes/RendererState.html">RendererState</a></li>
@@ -155,6 +162,7 @@
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/Viewport.html">Viewport</a></li>
+								<li><a href="../classes/VRHandler.html">VRHandler</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 								<li><a href="../classes/WorkerPool.html">WorkerPool</a></li>
 								<li><a href="../classes/WorkerTask.html">WorkerTask</a></li>
@@ -255,6 +263,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_arAvailable">arAvailable</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_clone">clone</a>
 						
 													</li>
@@ -263,7 +275,15 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_enterAR">enterAR</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_enterVR">enterVR</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_exitAR">exitAR</a>
 						
 													</li>
 													<li class="index-item method">
@@ -335,6 +355,10 @@
 											<ul class="index-list properties extends">
 													<li class="index-item property">
 														<a href="#property_app">app</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_ar">ar</a>
 						
 													</li>
 													<li class="index-item property">
@@ -414,11 +438,11 @@
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_vrRunning">vrRunning</a>
+														<a href="#property_vrScale">vrScale</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_vrScale">vrScale</a>
+														<a href="#property_xrEnabled">xrEnabled</a>
 						
 													</li>
 											</ul>
@@ -478,6 +502,35 @@
 															</li>
 														</ul>
 													</div>
+											
+											
+											</div>
+											<div id="method_arAvailable" class="method item">
+												<h3 class="name"><code>arAvailable</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if augmented reality is available.</p>
+											<p>The program need to be configured for AR and the host device should support the required WebXR modes.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -551,6 +604,34 @@
 											
 											
 											</div>
+											<div id="method_enterAR" class="method item">
+												<h3 class="name"><code>enterAR</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Enter virtual reality mode.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_enterVR" class="method item">
 												<h3 class="name"><code>enterVR</code></h3>
 											
@@ -579,6 +660,34 @@
 											
 											
 											</div>
+											<div id="method_exitAR" class="method item">
+												<h3 class="name"><code>exitAR</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Exit augmented reality mode.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_exitVR" class="method item">
 												<h3 class="name"><code>exitVR</code></h3>
 											
@@ -600,7 +709,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Exit virtual relity mode.</p>
+													<p>Exit virtual reality mode.</p>
 											
 												</div>
 											
@@ -1123,7 +1232,7 @@
 														<ul class="params-list">
 															<li class="param">
 																	<code class="param-name">scene</code>
-																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a> | String</span>
+																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a> | string</span>
 											
 											
 																<div class="param-description">
@@ -1306,7 +1415,7 @@
 						
 											<div id="property_app" class="property item">
 												<h3 class="name"><code>app</code></h3>
-												<span class="type"><a href="../classes/NunuApp.html" class="crosslink">NunuApp</a></span>
+												<span class="type"><a href="../classes/App.html" class="crosslink">App</a></span>
 											
 											
 											
@@ -1320,11 +1429,35 @@
 												</div>
 											
 												<div class="description">
-													<p>NunuRuntime instance used to communication between nunu app and the host webpage.</p>
+													<p>Runtime instance used to communication between nunu app and the host webpage.</p>
 											<p>Inside the editor communication with the app is simulated on the debug console.</p>
 											
 												</div>
 											
+											
+											
+											</div>
+											<div id="property_ar" class="property item">
+												<h3 class="name"><code>ar</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Enable augmented reality flag to allow the application to run using AR using WebXR.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> false</p>
 											
 											
 											</div>
@@ -1769,34 +1902,11 @@
 											
 												<div class="description">
 													<p>Enable virtual reality flag, allows the application to run in VR mode.</p>
-											<p>VR mode can only be enabled if the system and browser have support for VR.</p>
+											<p>VR mode can only be enabled if the system and browser have support for VR using WebXR or WebVR.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_vrRunning" class="property item">
-												<h3 class="name"><code>vrRunning</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>VR runtime control, true when the app is running in VR mode.</p>
-											
-												</div>
-											
+													<p><strong>Default:</strong> true</p>
 											
 											
 											</div>
@@ -1822,6 +1932,30 @@
 												</div>
 											
 													<p><strong>Default:</strong> 1.0</p>
+											
+											
+											</div>
+											<div id="property_xrEnabled" class="property item">
+												<h3 class="name"><code>xrEnabled</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>WebX runtime control, true when the app is running in an XR environment.</p>
+											<p>XR enviroment can be VR or AR only one of them can be used at a time.</p>
+											
+												</div>
+											
 											
 											
 											</div>

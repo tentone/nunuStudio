@@ -1,15 +1,18 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "ARHandler",
         "AfterimagePass",
         "AmbientLight",
         "AnimationMixer",
         "AnimationTimer",
+        "App",
         "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
         "AudioLoader",
         "Base64Utils",
+        "BaseNode",
         "BloomPass",
         "BokehPass",
         "BufferUtils",
@@ -22,12 +25,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "CapsuleBufferGeometry",
         "ColorifyPass",
         "CompressedTexture",
-        "Container",
         "CopyPass",
         "CubeCamera",
         "CubeTexture",
         "DataTexture",
         "DirectionalLight",
+        "DirectionalLightCSM",
         "DotScreenPass",
         "EffectComposer",
         "EventManager",
@@ -40,6 +43,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "FontLoader",
         "Gamepad",
         "GeometryLoader",
+        "Group",
         "Gyroscope",
         "HTMLView",
         "HemisphereLight",
@@ -59,13 +63,15 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mesh",
         "Model",
         "Mouse",
+        "NodeScript",
         "Nunu",
-        "NunuApp",
         "Object3D",
         "ObjectLoader",
         "ObjectUtils",
+        "OperationNode",
         "OrbitControls",
         "OrthographicCamera",
+        "ParametricBufferGeometry",
         "ParticleDistributions",
         "ParticleEmitter",
         "ParticleEmitterControl",
@@ -78,6 +84,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "PointLight",
         "PositionalAudio",
         "Program",
+        "PythonScript",
         "RectAreaLight",
         "RenderPass",
         "RendererConfiguration",
@@ -119,6 +126,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "TypedArrayHelper",
         "UnitConverter",
         "UnrealBloomPass",
+        "VRHandler",
         "Video",
         "VideoLoader",
         "VideoStream",
@@ -218,7 +226,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Misc",
             "name": "Misc",
-            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
+            "description": "Groups are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
         },
         {
             "displayName": "Particles",
@@ -238,17 +246,17 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Resources",
             "name": "Resources",
-            "description": "Video stream resource, used to load streamable video files."
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API."
         },
         {
             "displayName": "Runtime",
             "name": "Runtime",
-            "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
+            "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
         },
         {
             "displayName": "Script",
             "name": "Script",
-            "description": "Script objects are used to control other objects present in the scene.\n\nThese scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.\n\nIts possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources."
+            "description": "Base node are used as a basis for all other nodes, they implement the necessary common functionality for all nodes.\n\nBase nodes add a destructible function with a button which allows the user to destroy them.\n\nWhen the node gets destroyed it automatically gets removed from the graph."
         },
         {
             "displayName": "Sprite",
