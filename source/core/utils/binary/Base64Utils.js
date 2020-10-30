@@ -52,7 +52,7 @@ Base64Utils.isBase64 = function(data)
 
 /**
  * Remove base64 header from data.
- * 
+ *
  * Usefull for removing the heander from image, audio, video, etc.
  *
  * @method removeHeader
@@ -75,7 +75,7 @@ Base64Utils.getFileFormat = function(data)
 {
 	var start = data.indexOf("/") + 1;
 	var end = data.indexOf(";");
-	
+
 	return data.substr(start, end - start);
 };
 
@@ -83,7 +83,7 @@ Base64Utils.getFileFormat = function(data)
  * Create base64 string from arraybuffer.
  *
  * @method fromArraybuffer
- * @param {Arraybuffer} arraybuffer
+ * @param {ArrayBuffer} arraybuffer
  * @return {string} base64
  */
 Base64Utils.fromArraybuffer = function(arraybuffer)
@@ -160,7 +160,7 @@ Base64Utils.fromBinaryString = function(str)
 		base64 += Base64Utils.encoding.charAt((b & 0xF) << 2 | (c & 0xC0) >> 6);
 		base64 += Base64Utils.encoding.charAt(c & 0x3F);
 	}
-	
+
 	if (remainder === 1)
 	{
 		a = str.charCodeAt(i) & 0xff;

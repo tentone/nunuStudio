@@ -1,6 +1,6 @@
 /**
  * ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format
- * 
+ *
  * @class ArraybufferUtils
  * @module BinaryUtils
  * @static
@@ -12,7 +12,7 @@ function ArraybufferUtils() {}
  *
  * @method fromBinaryString
  * @param {string} str
- * @return {Arraybuffer} data
+ * @return {ArrayBuffer} data
  */
 ArraybufferUtils.fromBinaryString = function(str)
 {
@@ -33,7 +33,7 @@ ArraybufferUtils.fromBinaryString = function(str)
  *
  * @method fromBase64
  * @param {string} base64
- * @return {Arraybuffer} data
+ * @return {ArrayBuffer} data
  */
 ArraybufferUtils.fromBase64 = function(str)
 {
@@ -70,7 +70,7 @@ ArraybufferUtils.fromBase64 = function(str)
  *
  * @method fromBuffer
  * @param {Buffer} buffer
- * @return {Arraybuffer} data
+ * @return {ArrayBuffer} data
  */
 ArraybufferUtils.fromBuffer = function(buffer)
 {
