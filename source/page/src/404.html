@@ -2,9 +2,17 @@
 <html>
   <head>
 	<meta charset="utf-8">
-	<title>Single Page Apps for GitHub Pages</title>
+	<title></title>
 	<script type="text/javascript">
-		var pathSegmentsToKeep = 0;
+		let href = window.location.href;
+		let params = href.split('?');
+
+		let origin = window.location.origin;
+		let path = window.location.pathname.split('/');
+
+		window.location.replace(origin);
+
+		/*var pathSegmentsToKeep = 0;
 
 		var l = window.location;
 		l.replace(
@@ -13,7 +21,7 @@
 			l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
 			(l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
 			l.hash
-		);
+		);*/
 	</script>
   </head>
   <body>
