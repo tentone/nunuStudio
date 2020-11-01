@@ -38,7 +38,7 @@
 <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
 	<h2 style="padding-bottom: 30px;">Features</h2>
 	<div class="row">
-		<div *ngFor="let feature of this.features" class="col-md-3">
+		<div *ngFor="let feature of this.features" class="col-md-3" style="border-top: 5px;">
 			<h4>{{feature.title}}</h4>
 			<p>{{feature.description}}</p>
 			<img style="border-radius:5px; width:100%;" src="{{feature.image}}"/>
@@ -52,7 +52,7 @@
 		<h2 style="padding-bottom: 30px;">Made with <img height="38" src="assets/logo.png"/></h2>
 
 		<div class="row">
-			<div *ngFor="let example of this.examples" class="col-md-3">
+			<div *ngFor="let example of this.examples" class="col-md-3" style="border-top: 5px;">
 				<h4>{{example.title}}</h4>
 				<p>{{example.description}}</p>
 

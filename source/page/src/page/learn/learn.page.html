@@ -9,7 +9,7 @@
 		<h2>{{section.title}}</h2>
 		<p>{{section.description}}</p>
 		<div class="row">
-			<div *ngFor="let option of section.options" routerLink="{{option.url}}" style="cursor: pointer;" class="col-md-3">
+			<div *ngFor="let option of section.options" routerLink="{{option.url}}" style="cursor: pointer; border-top: 5px;" class="col-md-3">
 				<h4>{{option.title}}</h4>
 				<p>{{option.description}}</p>
 				<img style="border-radius:5px; width:100%;" src="{{option.image}}"/>
