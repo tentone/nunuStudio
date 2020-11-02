@@ -31,43 +31,43 @@ export class LearnPage {
 				},
 				{
 					title: 'First script',
-					description: 'This tutorial explains the basics about scripting inside nunuStudio.',
+					description: 'Learn how to use javascript to control your application.',
 					url: '/learn/basics/script',
 					image: 'assets/learn/basics/script/thumb.png'
 				},
 				{
 					title: 'Cameras',
-					description: 'This tutorial introduces the different camera types available and how to use them',
+					description: 'Different camera types explained, viewport control and cube cameras',
 					url: '/learn/basics/camera',
 					image: 'assets/learn/basics/camera/thumb.png'
 				},
 				{
 					title: 'Materials',
-					description: 'This tutorials explains what a material is and what types of materials are available.',
+					description: 'Material are used to control the appearance of objects.',
 					url: '/learn/basics/materials',
 					image: 'assets/learn/basics/materials/thumb.png'
 				},
 				{
 					title: 'Particles',
-					description: 'This tutorials introduces particles and the particle editor.',
+					description: 'Introduction to particle systems and the particle editor.',
 					url: '/learn/basics/particles',
 					image: 'assets/learn/basics/particles/thumb.png'
 				},
 				{
 					title: 'Audio',
-					description: 'Audio inside nunuStudio. Effects, positional audio and basic scripting.',
+					description: 'Audio, effects, positional audio and basic scripting.',
 					url: '/learn/basics/audio',
 					image: 'assets/learn/basics/audio/thumb.png'
 				},
 				{
 					title: 'Text',
-					description: 'Text basics inside nunu, create text objects, import external fonts, control text.',
+					description: 'Text basics, create text objects, import external fonts, control text.',
 					url: '/learn/basics/text',
 					image: 'assets/learn/basics/text/thumb.png'
 				},
 				{
 					title: 'Physics',
-					description: 'How to add, use and control physics objects inside nunuStudio.',
+					description: 'How to add, use and control physics objects inside the editor.',
 					url: '/learn/basics/physics',
 					image: 'assets/learn/basics/physics/thumb.png'
 				},
@@ -79,7 +79,7 @@ export class LearnPage {
 				},
 				{
 					title: 'Virtual Reality',
-					description: 'Create a virtual reality project using nunuStudio.',
+					description: 'Create a virtual reality projects.',
 					url: '/learn/basics/vr',
 					image: 'assets/learn/basics/vr/thumb.png'
 				},
@@ -121,7 +121,7 @@ export class LearnPage {
 				},
 				{
 					title: 'Video',
-					description: 'How to import and use video files in nunuStudio.',
+					description: 'How to import and use video files.',
 					url: '/learn/basics/video',
 					image: 'assets/learn/basics/video/thumb.png'
 				},
@@ -136,6 +136,12 @@ export class LearnPage {
 					description: 'Learn how to use existing three.js based libraries.',
 					url: '/learn/basics/terrain',
 					image: 'assets/learn/basics/terrain/thumb.jpg'
+				},
+				{
+					title: 'Python',
+					description: 'Introduction to the python language support.',
+					url: '/learn/basics/python',
+					image: 'assets/learn/basics/python/thumb.jpg'
 				}
 			]
 		},

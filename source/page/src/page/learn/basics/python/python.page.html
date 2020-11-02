@@ -3,6 +3,14 @@
 		<a routerLink="/learn" class="btn btn-outline-dark" style="margin-top: 5px;">Back</a>
 		<h2>Python</h2>
 		<p>In this tutorial we will explore how we can write scripts using the python programming language inside of nunuStudio. Python support is achieved using the <a href="https://brython.info/">Brython</a> project, that transpiles Python 3 compliant code to javascript.</p>
+		<p>It is not possible to get packages from pip or the easily integrate any native library into the projects. The python language implementation support may have some differences to the official implementation.</p>
+		<p>To use python create a python script object from the object side bar. To open the code editor double click the icon on the project tree. The editor will open with a base code template as shown bellow. One main difference between javascript and python is that the objects used to access data are received as an argument for each function.</p>
+
+		<pre><code class="hljs python">def initialize(obj, scene, program, keyboard, mouse):
+	pass
+
+def update(delta, obj, scene, program, keyboard, mouse):
+	pass</code></pre>
 
 		<app-viewer fname="assets/learn/basics/python/python.nsp"></app-viewer>
 	</div>
