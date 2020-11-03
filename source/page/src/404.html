@@ -1,29 +1,12 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<meta charset="utf-8">
-	<title></title>
-	<script type="text/javascript">
-		let href = window.location.href;
-		let params = href.split('?');
-
-		let origin = window.location.origin;
-		let path = window.location.pathname.split('/');
-
-		window.location.replace(origin);
-
-		/*var pathSegmentsToKeep = 0;
-
-		var l = window.location;
-		l.replace(
-			l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-			l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-			l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-			(l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-			l.hash
-		);*/
-	</script>
-  </head>
-  <body>
-  </body>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>nunuStudio</title>
+		<script>
+			window.sessionStorage.redirect = window.location.href;
+		</script>
+		<meta http-equiv="refresh" content="0;URL='/'">
+	</head>
+	<body></body>
 </html>
