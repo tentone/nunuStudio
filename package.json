@@ -10,6 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"start-page": "cd ./source/page && npm run start",
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
 		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./temp/build/editor",
 		"serve": "http-server . -p 8081 --cors -o",

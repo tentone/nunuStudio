@@ -12,6 +12,18 @@
 def update(delta, obj, scene, program, keyboard, mouse):
 	pass</code></pre>
 
+		<p>It is possible to access the script object using the obj parameter. and access the scene and program data from the respective parameters using the same methods as used in the javascript objects.</p>
+
+		<pre><code class="hljs python">def initialize(obj, scene, program, keyboard, mouse):
+	obj.position.y = 3
+
+def update(delta, obj, scene, program, keyboard, mouse):
+	obj.rotation.x += 0.1
+
+	ground = scene.getObjectByName("ground")
+	ground.rotation.y -= 0.02</code></pre>
+
 		<app-viewer fname="assets/learn/basics/python/python.nsp"></app-viewer>
+
 	</div>
 </div>
