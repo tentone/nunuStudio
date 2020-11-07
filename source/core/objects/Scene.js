@@ -56,7 +56,7 @@ function Scene()
 	 * @property background
 	 * @type {Color|Texture|null}
 	 */
-	this.background = new Color(0x000000);
+	this.background = null;
 
 	/**
 	 * Opacity of the background color.
@@ -266,9 +266,20 @@ Scene.prototype.render = function(renderer)
 	{
 		if (this.program.xrEnabled)
 		{
-			for (var i = 0; i < this.cameras.length; i++)
+			if (this.program.xrMode === Program.XR_VR)
 			{
-				this.cameras[i].render(renderer, this);
+				for (var i = 0; i < this.cameras.length; i++)
+				{
+					this.cameras[i].render(renderer, this);
+				}
+			}
+			else if (this.program.xrMode === Program.XR_AR)
+			{
+				renderer.setClearColor(null);
+				for (var i = 0; i < this.cameras.length; i++)
+				{
+					renderer.render(this, this.cameras[i]);
+				}
 			}
 		}
 		else
@@ -285,10 +296,17 @@ Scene.prototype.render = function(renderer)
 		}
 
 	}
-
 	else if (this.defaultCamera !== null)
 	{
-		this.defaultCamera.render(renderer, this);
+		if (this.program.xrMode === Program.XR_AR)
+		{
+			renderer.setClearColor(null);
+			renderer.render(this, this.defaultCamera);
+		}
+		else
+		{
+			this.defaultCamera.render(renderer, this);
+		}
 	}
 };
 
