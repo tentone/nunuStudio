@@ -437,7 +437,7 @@ Program.prototype.enterAR = function()
 	var self = this;
 	if (this.arAvailable() && !self.xrEnabled)
 	{
-		VRHandler.enterAR(this.renderer, function()
+		ARHandler.enterAR(this.renderer, function()
 		{
 			self.xrEnabled = true;
 		});
