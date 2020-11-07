@@ -929,7 +929,6 @@ Editor.addDefaultScene = function(material)
 
 	// Box
 	var model = new Mesh(Editor.defaultGeometry, material);
-	model.scale.set(0.1, 0.1, 0.1);
 	model.name = "box";
 	scene.add(model);
 

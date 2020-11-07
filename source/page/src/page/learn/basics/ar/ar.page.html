@@ -1,11 +1,15 @@
 <div style="padding-top: 15px; padding-bottom: 15px;">
 	<div class="container">
 		<a routerLink="/learn" class="btn btn-outline-dark" style="margin-top: 5px;">Back</a>
-		<h2>AR.js</h2>
-		<p>In this tutorial we will learn how to use ar.js and nunuStudio to create augmented reality experiences directly in the browser.</p>
+		<h2>Augmented Reality</h2>
 
-		<p>Under work!</p>
+		<p>In this tutorial we will learn how to use WebXR to create augmented reality experiences directly in the browser. The device used to view the augmented reality application has to support WebXR AR.</p>
+		<p>Movement and display of the AR environment is automatically adjusted to the device in use, it can be displayed as a overlay in AR glasses (e.g. Hololens) or projected over a camera captured image for smartphones. In Android powered devices the <a href="https://developers.google.com/ar">ARCore</a> needs to be installed in order to view the AR application properly.</p>
+		<p>For augmented reality consider a metric scale from the editor coordinated to the real world, 1 unit means one meter in real life. More information about <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Geometry">Geometry and reference spaces in WebXR</a>. The scene has to be scaled to fit the AR environment as intended. To enable AR in your application select the program in the object inspection and enable the AR checkbox.</p>
 
+		<app-viewer fname="assets/learn/basics/ar/engine.nsp"></app-viewer>
+
+		<p>Is is possible to access AR controllers that some devices offer for more advances interaction with the environment. These controllers are presented as Object3D objects that are automatically updated to match the real world position of the physical controller.</p>
 		<pre><code class="hljs javascript">var controller = program.renderer.xr.getController( 0 );
 		controller.addEventListener('select', function() {{'{'}}
 			// TODO ADD CODE HERE

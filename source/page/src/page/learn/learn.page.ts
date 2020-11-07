@@ -79,9 +79,15 @@ export class LearnPage {
 				},
 				{
 					title: 'Virtual Reality',
-					description: 'Create a virtual reality projects.',
+					description: 'Create virtual reality experiences.',
 					url: '/learn/basics/vr',
 					image: 'assets/learn/basics/vr/thumb.png'
+				},
+				{
+					title: 'Augmented Reality',
+					description: 'Create a augmented reality experiences.',
+					url: '/learn/basics/ar',
+					image: 'assets/learn/basics/ar/thumb.jpg'
 				},
 				{
 					title: 'Raycasting',
