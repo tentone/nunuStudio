@@ -38,9 +38,9 @@ import {NodeEditor} from "../node-editor/NodeEditor.js";
  * Represents a tree node element.
  *
  * A tree node is placed inside a tree view or inside another tree node.
- * 
+ *
  * @class TreeNode
- * @param {TreeNode} parent Parent tree node.
+ * @param {TreeNode} container Parent tree node.
  */
 function TreeNode(container)
 {
@@ -125,7 +125,7 @@ function TreeNode(container)
 	this.arrow.onclick = function(event)
 	{
 		event.stopPropagation();
-		
+
 		self.updateFoldedState(!self.folded);
 	};
 
@@ -187,7 +187,7 @@ function TreeNode(container)
 			var context = new ContextMenu(DocumentBody);
 			context.size.set(150, 20);
 			context.position.set(event.clientX, event.clientY);
-			
+
 			// Open editor
 			if (isScene)
 			{
@@ -198,7 +198,7 @@ function TreeNode(container)
 				context.addOption(Locale.createScene, function()
 				{
 					Editor.addDefaultScene();
-				});			
+				});
 			}
 			else if (self.object.isObject3D === true)
 			{
@@ -213,7 +213,7 @@ function TreeNode(container)
 					context.addOption(Locale.particleEditor, openParticleTab);
 				}
 			}
-	
+
 			if (self.object instanceof LightProbe)
 			{
 				context.addOption(Locale.calculateProbe, function()
@@ -226,7 +226,7 @@ function TreeNode(container)
 			context.addOption(Locale.groupObjects, function()
 			{
 				// TODO <USE THE MOVE ACTIONS INSTEAD TO KEEP EVERYTHING ON THE SAME POSITION>
-				
+
 				var actions = [];
 				var group = new Group();
 				var parent = self.object.parent;
@@ -358,7 +358,7 @@ function TreeNode(container)
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.CYLINDER);
 				});
-	
+
 				physics.addOption(Locale.convexHull, function()
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.HULL);
@@ -442,7 +442,7 @@ function TreeNode(container)
 					Editor.cutObject(self.object);
 				});
 			}
-			
+
 			if (!isProgram)
 			{
 				// Paste object form clipboard
@@ -548,10 +548,10 @@ function TreeNode(container)
 				}
 				// Inside
 				else // if(dragState === TreeNode.INSIDE)
-				{	
+				{
 					if (selfIsScene && !dragIsScene || dragIsScene && selfIsProgram || !selfIsScene && !selfIsProgram && !dragIsScene)
 					{
-						Editor.addAction(new MoveAction(object, self.object));	
+						Editor.addAction(new MoveAction(object, self.object));
 					}
 				}
 			}
@@ -597,7 +597,7 @@ function TreeNode(container)
 
 			var selecting = false;
 			var done = false;
-			
+
 			Editor.program.traverse(function(child)
 			{
 				if (done === true)
@@ -720,7 +720,7 @@ TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
 
 /**
  * Default value.
- * 
+ *
  * @static
  * @attribute NONE
  */
@@ -728,7 +728,7 @@ TreeNode.NONE = -1;
 
 /**
  * Place inside the object.
- * 
+ *
  * @static
  * @attribute INSIDE
  */
@@ -736,7 +736,7 @@ TreeNode.INSIDE = 0;
 
 /**
  * Place above object.
- * 
+ *
  * @static
  * @attribute ABOVE
  */
@@ -744,7 +744,7 @@ TreeNode.ABOVE = 1;
 
 /**
  * Place bellow object.
- * 
+ *
  * @static
  * @attribute BELLOW
  */
@@ -797,7 +797,7 @@ TreeNode.prototype.styleMouseOver = function()
 
 /**
  * Set selection state of this tree node.
- * 
+ *
  * @method setSelected
  * @param {boolean} selected If true set selected, otherwise se unselected.
  */
@@ -817,7 +817,7 @@ TreeNode.prototype.setSelected = function(selected)
 
 /**
  * Set node border.
- * 
+ *
  * @method setBorder
  * @param {number} place Border position.
  */
@@ -827,21 +827,21 @@ TreeNode.prototype.setBorder = function(place)
 
 	if (place === TreeNode.ABOVE)
 	{
-		this.element.style.borderTop = "1px solid #999999";
+		this.element.style.borderTop = "1px solid var(--color-gray-light)";
 	}
 	else if (place === TreeNode.BELLOW)
 	{
-		this.element.style.borderBottom = "1px solid #999999";
+		this.element.style.borderBottom = "1px solid var(--color-gray-light)";
 	}
-	else // if(place === TreeNode.INSIDE)
+	else if(place === TreeNode.INSIDE)
 	{
-		this.element.style.border = "1px solid #999999";
+		this.element.style.border = "1px solid var(--color-gray-light)";
 	}
 };
 
 /**
  * Attach a object to this tree element, the icon and name of the node is set automatically.
- * 
+ *
  * @method attach
  * @param {Object3D} object
  */
@@ -897,7 +897,7 @@ TreeNode.prototype.insertObject = function(object, index)
  * @method removeElementUUID
  */
 TreeNode.prototype.removeElementUUID = function(uuid)
-{	
+{
 	for (var i = 0; i < this.children.length; i++)
 	{
 		if (this.children[i].uuid === uuid)
@@ -949,7 +949,7 @@ TreeNode.prototype.expandToRoot = function()
 		parent.setVisibility(true);
 		parent = parent.parent;
 	}
-	
+
 	this.element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 };
 
@@ -959,7 +959,7 @@ TreeNode.prototype.destroy = function()
 	{
 		this.container.element.removeChild(this.element);
 	}
-	
+
 	for (var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].destroy();

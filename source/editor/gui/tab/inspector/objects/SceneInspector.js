@@ -6,6 +6,7 @@ import {TableForm} from "../../../../components/TableForm.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureChooser} from "../../../../components/input/TextureChooser.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {Slider} from "../../../../components/input/Slider.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";

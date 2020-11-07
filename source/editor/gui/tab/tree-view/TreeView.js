@@ -11,7 +11,7 @@ import {TreeNode} from "./TreeNode.js";
  * TreeView component is used to represent a object tree.
  *
  * Each tree entry represents direclty a Object3D object present in the editor.
- * 
+ *
  * @class TreeView
  * @extends {TabComponent}
  * @param {Component} parent Parent element.
@@ -20,7 +20,7 @@ import {TreeNode} from "./TreeNode.js";
  * @param {number} index Index inside the container button array.
  */
 function TreeView(parent, closeable, container, index)
-{	
+{
 	TabComponent.call(this, parent, closeable, container, index, "Project Explorer", Global.FILE_PATH + "icons/misc/menu.png");
 
 	var self = this;
@@ -31,7 +31,7 @@ function TreeView(parent, closeable, container, index)
 	this.search = new SearchBox(this);
 	this.search.element.style.backgroundColor = "var(--bar-color)";
 	this.search.setOnChange(function()
-	{	
+	{
 		self.selectByName(self.search.search.getText());
 	});
 
@@ -47,7 +47,7 @@ TreeView.prototype = Object.create(TabComponent.prototype);
  * All nodes that contain the name will be selected.
  *
  * @method selectByName
- * @param {string} name String with portion of the name to be found and filtered.
+ * @param {string} search String with portion of the name to be found and filtered.
  */
 TreeView.prototype.selectByName = function(search)
 {
@@ -79,7 +79,7 @@ TreeView.prototype.selectByName = function(search)
  * @method attach
  */
 TreeView.prototype.attach = function(program)
-{	
+{
 	if (this.program === program)
 	{
 		return;
@@ -101,9 +101,9 @@ TreeView.prototype.attach = function(program)
 
 /**
  * Traverse the whole tree view and call the callback method.
- * 
+ *
  * The callback method receives the object attached to the tree and the depth.
- * 
+ *
  * @method traverse
  * @param {Function} callback Callback function(treeNode)
  */
@@ -119,12 +119,12 @@ TreeView.prototype.traverse = function(callback)
 		}
 	}
 
-	traverse(this.root); 
+	traverse(this.root);
 };
 
 /**
  * Add new object to a parent in a specific position.
- * 
+ *
  * @method addObject
  * @param {Object3D} object New object to add to the tree.
  * @param {Object3D} parent Parent to insert the object.
@@ -164,7 +164,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 
 /**
  * Remove a object from the treeview.
- * 
+ *
  * @method removeObject
  * @param {Object3D} object Object to be removed from the tree.
  * @param {Object3D} parent Parent object.
@@ -184,11 +184,11 @@ TreeView.prototype.removeObject = function(object, parent)
 
 	if (node !== null)
 	{
-		node.destroy();	
+		node.destroy();
 	}
 	else
 	{
-		console.warn("nunuStudio: Failed to remove node from treeview.", object, parent, node, parentNode);
+		console.warn("nunuStudio: Failed to remove node from tree view.", object, parent, node, parentNode);
 	}
 
 	this.updateChildPosition();
@@ -196,7 +196,7 @@ TreeView.prototype.removeObject = function(object, parent)
 
 /**
  * Move object in the tree, from a position to another position and parent.
- * 
+ *
  * @method addObject
  * @param {Object3D} object New object to add to the tree.
  * @param {Object3D} oldParent Old parent to remove the object from.
@@ -212,7 +212,7 @@ TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 
 /**
  * Fill the tree view with the attached object children.
- * 
+ *
  * @method buildTree
  */
 TreeView.prototype.buildTree = function()
@@ -287,7 +287,7 @@ TreeView.prototype.updateChildPosition = function()
 				element.position.set(0, position);
 				element.level = level;
 				element.updateInterface();
-	 
+
 				folded = false;
 				position += 20;
 			}
@@ -306,7 +306,7 @@ TreeView.prototype.updateChildPosition = function()
 		this.root.position.set(0, this.search.size.y);
 		this.root.updateInterface();
 
-		this.size.y = updateChildPosition(this.root, 42, 1, this.root.folded);
+		this.size.y = updateChildPosition(this.root, this.search.size.y + 20, 1, this.root.folded);
 	}
 };
 

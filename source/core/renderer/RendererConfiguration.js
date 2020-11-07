@@ -276,7 +276,10 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		{
 			context = canvas.getContext("webgl2", {xrCompatible: true});
 		}
-		catch (e) {}
+		catch (e)
+		{
+			console.warn("nunuStudio: Failed to create WebGL2 context", e);
+		}
 	}
 
 	var parameters = {
@@ -292,7 +295,6 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		logarithmicDepthBuffer: this.logarithmicDepthBuffer
 	};
 
-
 	var renderer = new WebGLRenderer(parameters);
 
 	this.apply(renderer);
@@ -301,7 +303,6 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	{
 		canvas.style.backgroundColor = this.backgroundColor;
 	}
-
 
 	return renderer;
 };
