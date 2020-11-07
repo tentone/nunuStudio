@@ -19714,7 +19714,7 @@
         },
         {
             "file": "source\\core\\ARHandler.js",
-            "line": 76,
+            "line": 79,
             "description": "Enter virtual reality mode, if the application is not running on AR mode does not do anything.",
             "itemtype": "method",
             "name": "exitAR",
@@ -19730,7 +19730,7 @@
         },
         {
             "file": "source\\core\\ARHandler.js",
-            "line": 94,
+            "line": 97,
             "description": "Get WebXR session.",
             "itemtype": "method",
             "name": "getXRSession",
@@ -20905,7 +20905,7 @@
         },
         {
             "file": "source\\core\\VRHandler.js",
-            "line": 116,
+            "line": 122,
             "description": "Enter virtual reality mode, if the application is not running on VR mode does not do anything.",
             "itemtype": "method",
             "name": "exitVR",
@@ -20921,7 +20921,7 @@
         },
         {
             "file": "source\\core\\VRHandler.js",
-            "line": 145,
+            "line": 151,
             "description": "Get WebXR session.",
             "itemtype": "method",
             "name": "getXRSession",
@@ -20934,7 +20934,7 @@
         },
         {
             "file": "source\\core\\VRHandler.js",
-            "line": 163,
+            "line": 169,
             "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
