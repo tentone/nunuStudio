@@ -9,9 +9,9 @@ import {Program} from "./Program.js";
  * This is where you place objects, lights and cameras.
  *
  * A program may contain multiple scenes, its possible to change between scene using scripts.
- *  
+ *
  * Scene three.js documentation available here https:// threejs.org/docs/index.html#Reference/Scenes/Scene.
- * 
+ *
  * @class Scene
  * @module Core
  * @extends {Scene}
@@ -58,7 +58,7 @@ function Scene()
 	 */
 	this.background = new Color(0x000000);
 
-	/** 
+	/**
 	 * List of active cameras currently being displayed.
 	 *
 	 * The cameras are rendered by their render order.
@@ -72,7 +72,7 @@ function Scene()
 	 * Default camera of the scene used where there is no active camera.
 	 *
 	 * While using the editor the scene default camera gets set as the last camera configuration used.
-	 * 
+	 *
 	 * @property defaultCamera
 	 * @type {Camera}
 	 */
@@ -125,8 +125,8 @@ function Scene()
 	 * @type {Boolean}
 	 */
 	this.octreeUpdateScheduled = false;
-	
-	/** 
+
+	/**
 	 * Stores the octree object matches, that are the objects currently visible.
 	 *
 	 * @attribute octreeMatches
@@ -179,8 +179,8 @@ Scene.prototype.initialize = function()
 
 /**
  * Update scene objects and the physics world.
- * 
- * Also updates the global raycaster object used for object culling.
+ *
+ * Also updates the global ray caster object used for object culling.
  *
  * @method update
  * @param {number} delta The time since the last frame.
@@ -188,7 +188,7 @@ Scene.prototype.initialize = function()
 Scene.prototype.update = function(delta)
 {
 	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
-	
+
 	if (this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
@@ -197,7 +197,7 @@ Scene.prototype.update = function(delta)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.defaultCamera);
 	}
-	
+
 	if (this.usePhysics)
 	{
 		this.world.step(delta < 0.05 ? delta : 0.05);
@@ -246,7 +246,7 @@ Scene.prototype.dispose = function()
 
 /**
  * Render scene using all active cameras.
- * 
+ *
  * @method render
  * @param {Renderer} renderer
  */
@@ -272,12 +272,12 @@ Scene.prototype.render = function(renderer)
 				this.cameras[i].setupRenderer(renderer);
 				this.cameras[i].render(renderer, this);
 			}
-	
+
 			renderer.setScissorTest(false);
 		}
 
 	}
-	
+
 	else if (this.defaultCamera !== null)
 	{
 		this.defaultCamera.render(renderer, this);
@@ -286,7 +286,7 @@ Scene.prototype.render = function(renderer)
 
 /**
  * Get camera from scene using cameras uuid.
- * 
+ *
  * @method getCamera
  * @param {string} uuid UUID of the camera
  * @return {Camera} Camera if found, else null
@@ -318,7 +318,7 @@ Scene.prototype.getCamera = function(uuid, object)
 
 /**
  * Add camera to active cameras list.
- * 
+ *
  * @method addCamera
  * @param {Camera} camera
  */
@@ -335,7 +335,7 @@ Scene.prototype.addCamera = function(camera)
  * Update active camera lister order.
  *
  * This method should be called after changing order value for an active camera.
- *  
+ *
  *
  * @method updateCameraOrder
  */
@@ -349,7 +349,7 @@ Scene.prototype.updateCameraOrder = function()
 
 /**
  * Remove camera from active camera list.
- * 
+ *
  * @param {Camera} camera Camera to be removed
  * @method removeCamera
  */
@@ -364,7 +364,7 @@ Scene.prototype.removeCamera = function(camera)
 
 /**
  * Check is camera is active.
- * 
+ *
  * @param {Camera} camera Camera to be removed
  * @method isCameraActive
  */
@@ -376,18 +376,18 @@ Scene.prototype.isCameraActive = function(camera)
 
 /**
  * Set scene fog mode.
- * 
+ *
  * It recreates the fog object attached to the scene and set the same color.
  *
  * @method setFogMode
  * @param {number} mode
  */
 Scene.prototype.setFogMode = function(mode)
-{	
+{
 	var color = this.fog !== null ? this.fog.color.getHex() : "#FFFFFF";
 
 	if (mode === Fog.LINEAR)
-	{	
+	{
 		this.fog = new Fog(color, 5, 20);
 	}
 	else if (mode === Fog.EXPONENTIAL)
@@ -452,7 +452,7 @@ Scene.prototype.toJSON = function(meta)
 	}
 
 	data.object.usePhysics = this.usePhysics;
-	
+
 	data.object.cameras = [];
 	for (var i = 0; i < this.cameras.length; i++)
 	{

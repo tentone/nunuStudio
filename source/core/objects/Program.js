@@ -90,18 +90,16 @@ function Program()
 	 *
 	 * @property handlePixelRatio
 	 * @type {boolean}
-	 * @default false
 	 */
-	this.handlePixelRatio = false;
+	this.handlePixelRatio = true;
 
 	/**
 	 * Enable augmented reality flag to allow the application to run using AR using WebXR.
 	 *
 	 * @property ar
-	 * @default false
 	 * @type {boolean}
 	 */
-	this.ar = false;
+	this.ar = true;
 
 	/**
 	 * Enable virtual reality flag, allows the application to run in VR mode.
@@ -109,7 +107,6 @@ function Program()
 	 * VR mode can only be enabled if the system and browser have support for VR using WebXR or WebVR.
 	 *
 	 * @property vr
-	 * @default true
 	 * @type {boolean}
 	 */
 	this.vr = true;
@@ -121,7 +118,6 @@ function Program()
 	 *
 	 * @property vrScale
 	 * @type {number}
-	 * @default 1.0
 	 */
 	this.vrScale = 1.0;
 

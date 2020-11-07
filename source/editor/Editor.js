@@ -36,11 +36,12 @@ import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
+import {AmbientLight} from "../core/objects/lights/AmbientLight";
 
 /**
- * Main editor entry point. 
+ * Main editor entry point.
  *
- * @class Editor 
+ * @class Editor
  */
 function Editor() {}
 
@@ -60,7 +61,7 @@ Editor.initialize = function()
 		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();
 	}
-	
+
 	// Settings
 	Editor.settings = new Settings();
 	Editor.settings.load();
@@ -76,7 +77,7 @@ Editor.initialize = function()
 	document.body.style.fontFamily = "var(--font-main-family)";
 	document.body.style.color = "var(--font-main-color)";
 	document.body.style.fontSize = "var(--font-main-size)";
-	
+
 	// Disable context menu
 	document.body.oncontextmenu = function()
 	{
@@ -114,7 +115,7 @@ Editor.initialize = function()
 	{
 		// Clipboard
 		Editor.clipboard = new VirtualClipboard();
-		
+
 		// Arguments
 		Editor.args = [];
 
@@ -123,7 +124,7 @@ Editor.initialize = function()
 		{
 			Editor.args.push(parameters[i]);
 		}
-		
+
 		// Prevent some key combinations
 		var allowedKeys = [Keyboard.C, Keyboard.V, Keyboard.A, Keyboard.X];
 		document.onkeydown = function(event)
@@ -142,7 +143,7 @@ Editor.initialize = function()
 
 			var message = Locale.unsavedChangesExit;
 			event.returnValue = message;
-			return message;	
+			return message;
 		};
 	}
 
@@ -150,7 +151,7 @@ Editor.initialize = function()
 	document.body.ondrop = function(event)
 	{
 		event.preventDefault();
-		
+
 		for (var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
@@ -207,7 +208,7 @@ Editor.initialize = function()
 
 	// Create new program
 	if (Editor.program === null)
-	{	
+	{
 		Editor.createNewProgram();
 	}
 
@@ -256,7 +257,7 @@ Editor.initialize = function()
 						return;
 					}
 				}
-				
+
 				Editor.undo();
 			}
 			else if (key === Keyboard.Y)
@@ -305,7 +306,7 @@ Editor.initialize = function()
 	Editor.manager.create();
 };
 
-/** 
+/**
  * Run the project that is currently open in the editor.
  *
  * Opens a new tab, and sets the run button text.
@@ -332,7 +333,7 @@ Editor.runProject = function()
 
 /**
  * Select single object.
- * 
+ *
  * @method selectObject
  * @param {Object3D} object Object to select.
  */
@@ -363,9 +364,9 @@ Editor.selectObject = function(object)
 	Editor.updateSelectionGUI();
 };
 
-/** 
+/**
  * Add object to selection.
- * 
+ *
  * @method addToSelection
  * @param {Object3D} object Object to add to selection.
  * @param {boolean} updateClient If false does not update the management client.
@@ -391,7 +392,7 @@ Editor.addToSelection = function(object)
 
 /**
  * Remove from selection.
- * 
+ *
  * @method unselectObject
  * @param {Object3D} object Object to remove from selection.
  */
@@ -408,7 +409,7 @@ Editor.unselectObject = function(object)
 					Editor.selection[i].gui.node.setSelected(false);
 				}
 			}
-			
+
 			Editor.selection.splice(i, 1);
 			Editor.updateSelectionGUI();
 			return;
@@ -430,7 +431,7 @@ Editor.getPixelRatio = function()
 
 /**
  * Check if a object is selected.
- * 
+ *
  * @method isSelected
  * @param {Object3D} Check if object is selected.
  */
@@ -447,7 +448,7 @@ Editor.isSelected = function(object)
 	return false;
 };
 
-/** 
+/**
  * Resize the editor to fit the document body.
  *
  * @static
@@ -475,7 +476,7 @@ Editor.hasObjectSelected = function()
 
 /**
  * Clear object selection.
- * 
+ *
  * @method clearSelection
  */
 Editor.clearSelection = function()
@@ -498,7 +499,7 @@ Editor.clearSelection = function()
  * Add action to history.
  *
  * Automatically calls the change method of GUI elements.
- * 
+ *
  * @method addAction
  * @param {Action} action Action to add to the history.
  */
@@ -525,9 +526,9 @@ Editor.getScene = function()
 };
 
 /**
- * Add objects to a parent, and creates an action in the editor history. 
- * 
- * If no parent is specified it adds to object to the current scene. 
+ * Add objects to a parent, and creates an action in the editor history.
+ *
+ * If no parent is specified it adds to object to the current scene.
  *
  * @static
  * @method addObject
@@ -588,15 +589,15 @@ Editor.renameObject = function(object)
 
 
 /**
- * Delete object from the editor, and creates an action in the editor history. 
- * 
+ * Delete object from the editor, and creates an action in the editor history.
+ *
  * @method deleteObject
  * @param {Array} objects List of objects.
  */
 Editor.deleteObject = function(object)
 {
 	var selected = object === undefined ? Editor.selection : [object];
-	
+
 	// List of delete actions
 	var actions = [];
 
@@ -772,7 +773,7 @@ Editor.pasteObject = function(target)
 
 /**
  * Redo history action.
- * 
+ *
  * @method redo
  */
 Editor.redo = function()
@@ -789,7 +790,7 @@ Editor.redo = function()
 
 /**
  * Undo history action.
- * 
+ *
  * @method undo
  */
 Editor.undo = function()
@@ -830,7 +831,7 @@ Editor.createDefaultResouces = function()
 
 	Editor.defaultMaterial = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.defaultMaterial.name = "standard";
-	
+
 	Editor.defaultSpriteMaterial = new SpriteMaterial({map: Editor.defaultTexture, color: 0xFFFFFF});
 	Editor.defaultSpriteMaterial.name = "sprite";
 
@@ -889,13 +890,13 @@ Editor.resetEditor = function()
 
 /**
  * Create a program and set to the editor.
- * 
+ *
  * @method createNewProgram
  */
 Editor.createNewProgram = function()
 {
 	var program = new Program();
-	
+
 	Editor.createDefaultResouces();
 	Editor.setProgram(program);
 	Editor.addDefaultScene(Editor.defaultMaterial);
@@ -904,9 +905,9 @@ Editor.createNewProgram = function()
 
 /**
  * Create a scene using a default template.
- * 
+ *
  * This is the scene used when creating a new program or scene inside the editor.
- * 
+ *
  * @method addDefaultScene
  * @param {Material} material Default material used by objects, if empty a new material is created
  */
@@ -922,23 +923,27 @@ Editor.addDefaultScene = function(material)
 	var scene = new Scene();
 
 	// Sky
-	var sky = new Sky();
+	/* var sky = new Sky();
 	sky.autoUpdate = false;
-	scene.add(sky);
+	scene.add(sky);*/
+
+	var light = new AmbientLight();
+	scene.add(light);
 
 	// Box
 	var model = new Mesh(Editor.defaultGeometry, material);
+	model.scale.set(0.1, 0.1, 0.1);
 	model.name = "box";
 	scene.add(model);
 
 	// Floor
-	var ground = new BoxBufferGeometry(20, 1, 20);
+	/* var ground = new BoxBufferGeometry(20, 1, 20);
 	ground.name = "ground";
-	
+
 	model = new Mesh(ground, material);
  	model.position.set(0, -1.0, 0);
 	model.name = "ground";
-	scene.add(model);
+	scene.add(model);*/
 
 	// Add scene to program
 	Editor.addObject(scene, Editor.program);
@@ -959,13 +964,13 @@ Editor.saveProgramPath = function(path)
 {
 	var pson = new StaticPair();
 	var data = Editor.program.toJSON();
-	
+
 	for (var i = 0; i < ResourceContainer.libraries.length; i++)
 	{
 		var lib = ResourceContainer.libraries[i];
 		var resources = data[lib];
 		data[lib] = [];
-		
+
 		if (resources.length > 0)
 		{
 			FileSystem.makeDirectory(path + "\\" + lib);
@@ -1027,7 +1032,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		{
 			Editor.setOpenFile(fname);
 		}
-		
+
 		if (suppressMessage !== true)
 		{
 			Editor.alert(Locale.projectSaved);
@@ -1064,7 +1069,7 @@ Editor.setProgram = function(program)
 
 		// History
 		Editor.history = new History(Editor.settings.general.historySize);
-		
+
 		// Clear tabs
 		Editor.gui.tab.clear();
 
@@ -1168,7 +1173,7 @@ Editor.loadProgram = function(file, binary)
 Editor.setOpenFile = function(file)
 {
 	if (file !== undefined && file !== null)
-	{	
+	{
 		if (file instanceof window.File)
 		{
 			if (Nunu.runningOnDesktop())
@@ -1204,7 +1209,7 @@ Editor.setOpenFile = function(file)
  */
 Editor.confirm = function(message)
 {
-	return window.confirm(message);	
+	return window.confirm(message);
 };
 
 /**
@@ -1230,7 +1235,7 @@ Editor.alert = function(message)
  */
 Editor.prompt = function(message, defaultValue)
 {
-	return window.prompt(message, defaultValue);	
+	return window.prompt(message, defaultValue);
 };
 
 /**
@@ -1305,7 +1310,7 @@ Editor.exit = function()
 	if (Nunu.runningOnDesktop())
 	{
 		Editor.settings.store();
-		
+
 		var gui = window.require("nw.gui");
 		var win = gui.Window.get();
 
