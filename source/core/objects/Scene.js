@@ -59,6 +59,14 @@ function Scene()
 	this.background = new Color(0x000000);
 
 	/**
+	 * Opacity of the background color.
+	 *
+	 * @property alpha
+	 * @type {number}
+	 */
+	this.alpha = 1.0;
+
+	/**
 	 * List of active cameras currently being displayed.
 	 *
 	 * The cameras are rendered by their render order.
@@ -109,7 +117,7 @@ function Scene()
 	/**
 	 * Octree used to index all the unoObject in the scene being visualized.
 	 *
-	 * It is used to filter the visiblity of objects and raycast them.
+	 * It is used to filter the visibility of objects and raycast them.
 	 *
 	 * @attribute octree
 	 * @type {PointOctree}
@@ -252,16 +260,22 @@ Scene.prototype.dispose = function()
  */
 Scene.prototype.render = function(renderer)
 {
-	renderer.setClearColor(this.background);
+	renderer.setClearColor(this.background, this.alpha);
 
 	if (this.cameras.length > 0)
 	{
 		if (this.program.xrEnabled)
 		{
+
+			// TODO <TEST FOR AR>
+			renderer.render(this, this.cameras[0]);
+
+			/*
 			for (var i = 0; i < this.cameras.length; i++)
 			{
 				this.cameras[i].render(renderer, this);
 			}
+			*/
 		}
 		else
 		{

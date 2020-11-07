@@ -232,7 +232,7 @@ function Program()
 	/**
 	 * WebX runtime control, true when the app is running in an XR environment.
 	 *
-	 * XR enviroment can be VR or AR only one of them can be used at a time.
+	 * XR environment can be VR or AR only one of them can be used at a time.
 	 *
 	 * @property xrEnabled
 	 * @type {boolean}

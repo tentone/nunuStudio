@@ -1,6 +1,6 @@
 import {PCFSoftShadowMap, NoToneMapping, WebGLRenderer} from "three";
 
-/** 
+/**
  * Renderer configuration stores all the WebGL renderer related parameters.
  *
  * @constructor
@@ -31,7 +31,7 @@ function RendererConfiguration(options)
 	 */
 	this.backend = RendererConfiguration.WEBGL2;
 
-	/** 
+	/**
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
 	 *
 	 * @property autoClear
@@ -39,7 +39,7 @@ function RendererConfiguration(options)
 	 */
 	this.autoClear = false;
 
-	/** 
+	/**
 	 * Defines whether the renderer should clear the color buffer.
 	 *
 	 * @property autoClearColor
@@ -47,15 +47,15 @@ function RendererConfiguration(options)
 	 */
 	this.autoClearColor = false;
 
-	/** 
+	/**
 	 * Defines whether the renderer should clear the depth buffer.
 	 *
 	 * @property autoClearDepth
 	 * @type {boolean}
 	 */
 	this.autoClearDepth = false;
-	
-	/** 
+
+	/**
 	 * Defines whether the renderer should clear the stencil buffer.
 	 *
 	 * @property autoClearStencil
@@ -81,7 +81,7 @@ function RendererConfiguration(options)
 	 */
 	this.shadows = true;
 
-	/** 
+	/**
 	 * Whether the drawing buffer has a stencil buffer of at least 8 bits.
 	 *
 	 * @property @stencil
@@ -98,7 +98,7 @@ function RendererConfiguration(options)
 	 */
 	this.shadowsType = PCFSoftShadowMap;
 
-	/** 
+	/**
 	 * Enables automatic updates to the shadows in the scene.
 	 *
 	 * If you do not require dynamic lighting / shadows, you may set this to false.
@@ -127,7 +127,7 @@ function RendererConfiguration(options)
 	 */
 	this.toneMappingExposure = 1.0;
 
-	/** 
+	/**
 	 * If true the renderer sorts the objects from back to front for rendering.
 	 *
 	 * Important if using multiple transparent objects.
@@ -159,7 +159,7 @@ function RendererConfiguration(options)
 	 * @property alpha
 	 * @type {boolean}
 	 */
-	this.alpha = false;
+	this.alpha = true;
 
 	/**
 	 * Whether the renderer will assume that colors have premultiplied alpha.
@@ -169,7 +169,7 @@ function RendererConfiguration(options)
 	 */
 	this.premultipliedAlpha = true;
 
-	/** 
+	/**
 	 * Whether to preserve the buffers until manually cleared or overwritten.
 	 *
 	 * @property preserveDrawingBuffer
@@ -208,7 +208,7 @@ function RendererConfiguration(options)
 	 * @type {boolean}
 	 */
 	this.checkShaderErrors = true;
-	
+
 	/**
 	 * The maximum number of MorphTargets allowed in a shader.
 	 *
@@ -227,7 +227,7 @@ function RendererConfiguration(options)
 
 	// Copy values received from the options parameter
 	if (options !== undefined)
-	{	
+	{
 		for (var i in this)
 		{
 			if (options[i] !== undefined)
@@ -238,7 +238,7 @@ function RendererConfiguration(options)
 	}
 }
 
-/** 
+/**
  * Use WebGL 1.0 to render data.
  *
  * Most devices fully support WebGL 1.0 at this point, should work for any type of device.
@@ -249,7 +249,7 @@ function RendererConfiguration(options)
  */
 RendererConfiguration.WEBGL = 1;
 
-/** 
+/**
  * Use WebGL 2.0 to render data, should be faster for some types of data.
  *
  * Additinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.

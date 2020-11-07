@@ -1,4 +1,4 @@
-import {Vector2, WebGlRenderer} from "three";
+import {Vector2, WebGLRenderer} from "three";
 import {RendererConfiguration} from "../../core/renderer/RendererConfiguration.js";
 import {CSS3DRenderer} from "../../core/renderer/css/CSS3DRenderer.js";
 import {CSS3DObject} from "../../core/renderer/css/CSS3DObject.js";
@@ -13,16 +13,17 @@ import {Component} from "./Component.js";
  * @class RendererCanvas
  * @extends {Component}
  * @param {Component} parent Parent element.
- * @param {boolean} alpha If true the background is transparent.
+ * @param {RendererConfiguration} options Options to be used for the renderer.
+ * @param {boolean} useCSSRenderer If true a CSS renderer is created to render 3D DOM elements.
  */
 function RendererCanvas(parent, options, useCSSRenderer)
 {
 	Component.call(this, parent, "div");
 
 	this.element.style.backgroundColor = "var(--color-black)";
-	
-	/** 
-	 * List os parameters to be passed to the WebGLrenderer.
+
+	/**
+	 * List os parameters to be passed to the WebGLRenderer.
 	 *
 	 * @attribute options
 	 * @type {Object}
@@ -81,7 +82,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 
 	/**
 	 * Canvas DOM element.
-	 * 
+	 *
 	 * @attribute canvas
 	 * @type {Component}
 	 */
@@ -92,7 +93,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * three.js WebGl renderer.
 	 *
 	 * @attribute renderer
-	 * @type {WebGlRenderer}
+	 * @type {WebGLRenderer}
 	 */
 	this.renderer = null;
 	this.createRenderer();
@@ -102,9 +103,9 @@ RendererCanvas.prototype = Object.create(Component.prototype);
 
 /**
  * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
- * 
+ *
  * The callback receives the width and height of the rendering canvas.
- * 
+ *
  * @method setOnResize
  * @param {Function} callback
  */
@@ -115,9 +116,9 @@ RendererCanvas.prototype.setOnResize = function(callback)
 
 /**
  * Reset the canvas DOM element.
- * 
+ *
  * Removes the current canvas and creates a new one.
- * 
+ *
  * @method resetCanvas
  */
 RendererCanvas.prototype.resetCanvas = function()
@@ -167,11 +168,11 @@ RendererCanvas.prototype.resetCanvas = function()
 
 /**
  * Creates a new threejs WebGL renderer.
- * 
+ *
  * The renderer is created with the options specified on the object, always uses the canvas attached to the component.
  *
  * The user has to ensure that the old context was disposed before creating a new renderer.
- * 
+ *
  * @method createRenderer
  */
 RendererCanvas.prototype.createRenderer = function()
@@ -207,7 +208,7 @@ RendererCanvas.prototype.getBlob = function(onLoad, encoding, quality)
  * Deletes the canvas and creates a new one.
  *
  * This may be usefull to change some configurations in the renderer.
- * 
+ *
  * @method reloadContext
  */
 RendererCanvas.prototype.reloadContext = function()
@@ -220,9 +221,9 @@ RendererCanvas.prototype.reloadContext = function()
 
 /**
  * Force the current renderer to loose context.
- * 
+ *
  * This is achieved by using the WEBGL_lose_context extension and may not be supported by all browsers.
- * 
+ *
  * @method forceContextLoss
  */
 RendererCanvas.prototype.forceContextLoss = function()
