@@ -1218,11 +1218,20 @@
             "fors": {},
             "namespaces": {}
         },
-        "source\\core\\ARHandler.js": {
-            "name": "source\\core\\ARHandler.js",
+        "source\\core\\xr\\ARHandler.js": {
+            "name": "source\\core\\xr\\ARHandler.js",
             "modules": {},
             "classes": {
                 "ARHandler": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "source\\core\\xr\\VRHandler.js": {
+            "name": "source\\core\\xr\\VRHandler.js",
+            "modules": {},
+            "classes": {
+                "VRHandler": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1254,15 +1263,6 @@
             },
             "classes": {
                 "Nunu": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "source\\core\\VRHandler.js": {
-            "name": "source\\core\\VRHandler.js",
-            "modules": {},
-            "classes": {
-                "VRHandler": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1470,12 +1470,13 @@
                 "PhysicsGenerator": 1,
                 "PhysicsObject": 1,
                 "UnitConverter": 1,
-                "ARHandler": 1
+                "ARHandler": 1,
+                "VRHandler": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "source\\core\\ARHandler.js",
+            "file": "source\\core\\xr\\VRHandler.js",
             "line": 3,
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
@@ -1689,14 +1690,13 @@
             "elements": {},
             "classes": {
                 "Nunu": 1,
-                "App": 1,
-                "VRHandler": 1
+                "App": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "source\\core\\VRHandler.js",
-            "line": 3,
+            "file": "source\\core\\Nunu.js",
+            "line": 17,
             "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
         },
         "Files": {
@@ -3362,7 +3362,7 @@
             "namespace": "",
             "file": "source\\core\\objects\\Scene.js",
             "line": 6,
-            "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https:// threejs.org/docs/index.html#Reference/Scenes/Scene.",
+            "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n\nScene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "extends": "{Scene}"
         },
         "TargetConfig": {
@@ -4897,9 +4897,23 @@
             "extension_for": [],
             "module": "Physics",
             "namespace": "",
-            "file": "source\\core\\ARHandler.js",
+            "file": "source\\core\\xr\\ARHandler.js",
             "line": 3,
-            "description": "AR class handles all the agumented reality related tasks.\n\nCan be used to detect if the host system is capable of displaying AR content and checks for the availability of WebXR with the required modes."
+            "description": "AR class handles all the augmented reality related tasks.\n\nCan be used to detect if the host system is capable of displaying AR content and checks for the availability of WebXR with the required modes."
+        },
+        "VRHandler": {
+            "name": "VRHandler",
+            "shortname": "VRHandler",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 3,
+            "description": "VR class handles all the virtual reality related tasks.\n\nCan be used to detect if the host system is capable of displaying VR content and checks for the availability of WebXR and/or WebVR."
         },
         "App": {
             "name": "App",
@@ -4950,20 +4964,6 @@
             "file": "source\\core\\Nunu.js",
             "line": 17,
             "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
-        },
-        "VRHandler": {
-            "name": "VRHandler",
-            "shortname": "VRHandler",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Runtime",
-            "namespace": "",
-            "file": "source\\core\\VRHandler.js",
-            "line": 3,
-            "description": "VR class handles all the virtual reality related tasks.\n\nCan be used to detect if the host system is capable of displaying VR content and checks for the availability of WebXR and/or WebVR."
         }
     },
     "elements": {},
@@ -13286,46 +13286,42 @@
             "itemtype": "property",
             "name": "handlePixelRatio",
             "type": "{boolean}",
-            "default": "false",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 97,
+            "line": 96,
             "description": "Enable augmented reality flag to allow the application to run using AR using WebXR.",
             "itemtype": "property",
             "name": "ar",
-            "default": "false",
             "type": "{boolean}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 106,
+            "line": 104,
             "description": "Enable virtual reality flag, allows the application to run in VR mode.\n\nVR mode can only be enabled if the system and browser have support for VR using WebXR or WebVR.",
             "itemtype": "property",
             "name": "vr",
-            "default": "true",
             "type": "{boolean}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 117,
+            "line": 114,
             "description": "Virtual reality movement scale.\n\nIndicates the relation between the real movement and virtual world movement.",
             "itemtype": "property",
             "name": "vrScale",
             "type": "{number}",
-            "default": "1.0",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 128,
+            "line": 124,
             "description": "Renderer configuration applied to the WebGL renderer.",
             "itemtype": "property",
             "name": "rendererConfig",
@@ -13335,7 +13331,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 136,
+            "line": 132,
             "description": "Target related configurations applied when exporting the app.",
             "itemtype": "property",
             "name": "targetConfig",
@@ -13345,7 +13341,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 144,
+            "line": 140,
             "description": "Scene loaded as default on startup.",
             "itemtype": "property",
             "name": "defaultScene",
@@ -13355,7 +13351,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 152,
+            "line": 148,
             "description": "Default camera to be used by scenes where there is no camera.\n\nOn the editor this value is automatically set to the last editor camera point used",
             "itemtype": "property",
             "name": "defaultCamera",
@@ -13365,7 +13361,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 162,
+            "line": 158,
             "description": "Scene currently running in the program, runtime variable.\n\nShould never be manually defined, change it using the setScene(scene) method.",
             "itemtype": "property",
             "name": "scene",
@@ -13375,7 +13371,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 172,
+            "line": 168,
             "description": "Keyboard input object, runtime variable.",
             "itemtype": "property",
             "name": "keyboard",
@@ -13385,7 +13381,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 180,
+            "line": 176,
             "description": "Mouse input object, runtime variable.",
             "itemtype": "property",
             "name": "mouse",
@@ -13395,7 +13391,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 188,
+            "line": 184,
             "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
@@ -13405,7 +13401,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 196,
+            "line": 192,
             "description": "Canvas being used to draw content by the renderer.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
@@ -13415,7 +13411,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 206,
+            "line": 202,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
@@ -13425,7 +13421,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 216,
+            "line": 212,
             "description": "Event manager used to attach and manage program events.\n\nIts created on initialization and destroys on disposal, scripts can attach events to the manager safely during runtime.",
             "itemtype": "property",
             "name": "manager",
@@ -13435,7 +13431,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 226,
+            "line": 222,
             "description": "Clock object used to measure times between frames.\n\nThe time measured is passed down to the scene and its children elements.",
             "itemtype": "property",
             "name": "clock",
@@ -13445,8 +13441,8 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 236,
-            "description": "WebX runtime control, true when the app is running in an XR environment.\n\nXR enviroment can be VR or AR only one of them can be used at a time.",
+            "line": 232,
+            "description": "WebX runtime control, true when the app is running in an XR environment.\n\nXR environment can be VR or AR only one of them can be used at a time.",
             "itemtype": "property",
             "name": "xrEnabled",
             "type": "{boolean}",
@@ -13455,7 +13451,50 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 249,
+            "line": 242,
+            "description": "Indicates the XR mode currently active.",
+            "itemtype": "property",
+            "name": "xrMode",
+            "type": "{number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "source\\core\\objects\\Program.js",
+            "line": 251,
+            "description": "No XR mode is enabled.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "XR_NONE",
+            "type": "{number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "source\\core\\objects\\Program.js",
+            "line": 260,
+            "description": "XR is running in VR mode.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "XR_VR",
+            "type": "{number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "source\\core\\objects\\Program.js",
+            "line": 269,
+            "description": "XR is running in AR mode.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "XR_AR",
+            "type": "{number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "source\\core\\objects\\Program.js",
+            "line": 280,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -13464,7 +13503,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 300,
+            "line": 331,
             "description": "Set program mouse and keyboard.\n\nShould be set before initialize() is called otherwise a keyboard and mouse are created by default.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -13485,7 +13524,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 332,
+            "line": 363,
             "description": "Set program renderer to be used by this program.\n\nGets the renderer canvas and uses the parent DOM element of the canvas for DOM division property.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -13506,7 +13545,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 355,
+            "line": 386,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -13515,7 +13554,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 370,
+            "line": 401,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -13531,7 +13570,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 385,
+            "line": 416,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -13552,7 +13591,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 403,
+            "line": 434,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -13561,7 +13600,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 418,
+            "line": 449,
             "description": "Check if augmented reality is available.\n\nThe program need to be configured for AR and the host device should support the required WebXR modes.",
             "itemtype": "method",
             "name": "arAvailable",
@@ -13570,7 +13609,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 430,
+            "line": 461,
             "description": "Enter virtual reality mode.",
             "itemtype": "method",
             "name": "enterAR",
@@ -13579,7 +13618,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 447,
+            "line": 479,
             "description": "Exit augmented reality mode.",
             "itemtype": "method",
             "name": "exitAR",
@@ -13588,7 +13627,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 461,
+            "line": 495,
             "description": "Check if virtual reality is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13597,7 +13636,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 471,
+            "line": 505,
             "description": "Enter virtual reality mode.",
             "itemtype": "method",
             "name": "enterVR",
@@ -13606,7 +13645,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 488,
+            "line": 523,
             "description": "Exit virtual reality mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -13615,7 +13654,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 502,
+            "line": 538,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -13631,7 +13670,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 547,
+            "line": 583,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -13647,7 +13686,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 584,
+            "line": 620,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -13663,7 +13702,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 605,
+            "line": 641,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -13676,7 +13715,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 618,
+            "line": 654,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -13692,7 +13731,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 631,
+            "line": 667,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -13701,7 +13740,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 670,
+            "line": 706,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -13717,7 +13756,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 697,
+            "line": 733,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -13733,7 +13772,7 @@
         },
         {
             "file": "source\\core\\objects\\Program.js",
-            "line": 722,
+            "line": 758,
             "description": "Serialize the object to JSON format.",
             "itemtype": "method",
             "name": "toJSON",
@@ -13759,7 +13798,7 @@
         {
             "file": "source\\core\\objects\\Scene.js",
             "line": 28,
-            "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found here http:// schteppe.github.io/cannon.js/docs/classes/World.html.",
+            "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found at http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
             "type": "{World}",
@@ -13769,16 +13808,26 @@
         {
             "file": "source\\core\\objects\\Scene.js",
             "line": 49,
-            "description": "Background of the scene.\n\nThe background of the scene is drawn after the renderer clears the buffers.\n\nIt can be a color, a texture or a cubemap.",
+            "description": "Background of the scene.\n\nThe background of the scene is drawn after the renderer clears the buffers.\n\nIt can be a color, a texture or a cube map.",
             "itemtype": "property",
             "name": "background",
-            "type": "{Color|Texture}",
+            "type": "{Color|Texture|null}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "source\\core\\objects\\Scene.js",
             "line": 61,
+            "description": "Opacity of the background color.",
+            "itemtype": "property",
+            "name": "alpha",
+            "type": "{number}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "source\\core\\objects\\Scene.js",
+            "line": 69,
             "description": "List of active cameras currently being displayed.\n\nThe cameras are rendered by their render order.",
             "itemtype": "property",
             "name": "cameras",
@@ -13788,7 +13837,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 71,
+            "line": 79,
             "description": "Default camera of the scene used where there is no active camera.\n\nWhile using the editor the scene default camera gets set as the last camera configuration used.",
             "itemtype": "property",
             "name": "defaultCamera",
@@ -13798,7 +13847,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 81,
+            "line": 89,
             "description": "Stores the time since the last frame.",
             "itemtype": "property",
             "name": "delta",
@@ -13808,7 +13857,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 89,
+            "line": 97,
             "description": "Raycaster used for mouse interaction with 3D objects.\n\nThis raycaster is automatically updated using the first camera being drawn.",
             "itemtype": "property",
             "name": "raycaster",
@@ -13818,7 +13867,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 99,
+            "line": 107,
             "description": "Indicates if the scene is using octree indexation for raycasting.",
             "itemtype": "property",
             "name": "useOctree",
@@ -13828,8 +13877,8 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 109,
-            "description": "Octree used to index all the unoObject in the scene being visualized.\n\nIt is used to filter the visiblity of objects and raycast them.",
+            "line": 117,
+            "description": "Octree used to index all the unoObject in the scene being visualized.\n\nIt is used to filter the visibility of objects and raycast them.",
             "itemtype": "attribute",
             "name": "octree",
             "type": "{PointOctree}",
@@ -13838,7 +13887,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 119,
+            "line": 127,
             "description": "Flag indicating if the is a octree update scheduled.\n\nAvoids scheduling multiple octree updates from different objects.",
             "itemtype": "attribute",
             "name": "octreeUpdateScheduled",
@@ -13848,7 +13897,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 129,
+            "line": 137,
             "description": "Stores the octree object matches, that are the objects currently visible.",
             "itemtype": "attribute",
             "name": "octreeMatches",
@@ -13858,7 +13907,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 137,
+            "line": 145,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -13868,7 +13917,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 145,
+            "line": 153,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -13878,7 +13927,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 153,
+            "line": 161,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
@@ -13888,8 +13937,8 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 180,
-            "description": "Update scene objects and the physics world.\n\nAlso updates the global raycaster object used for object culling.",
+            "line": 188,
+            "description": "Update scene objects and the physics world.\n\nAlso updates the global ray caster object used for object culling.",
             "itemtype": "method",
             "name": "update",
             "params": [
@@ -13904,7 +13953,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 247,
+            "line": 255,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -13920,7 +13969,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 287,
+            "line": 313,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -13940,7 +13989,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 319,
+            "line": 345,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -13956,7 +14005,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 334,
+            "line": 360,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -13965,7 +14014,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 350,
+            "line": 376,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -13981,7 +14030,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 365,
+            "line": 391,
             "description": "Check is camera is active.",
             "params": [
                 {
@@ -13997,7 +14046,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 377,
+            "line": 403,
             "description": "Set scene fog mode.\n\nIt recreates the fog object attached to the scene and set the same color.",
             "itemtype": "method",
             "name": "setFogMode",
@@ -15274,7 +15323,7 @@
         {
             "file": "source\\core\\renderer\\RendererConfiguration.js",
             "line": 113,
-            "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
+            "description": "Tonemapping can be used to remap the color of the image to a different set giving the scene a different color mood and/or dynamic color based on global luminosity.",
             "itemtype": "property",
             "name": "toneMapping",
             "type": "{number}",
@@ -15457,7 +15506,7 @@
                 {
                     "name": "renderer",
                     "description": "",
-                    "type": "WebGlRenderer"
+                    "type": "WebGLRenderer"
                 }
             ],
             "class": "RendererState",
@@ -15473,7 +15522,7 @@
                 {
                     "name": "renderer",
                     "description": "",
-                    "type": "WebGlRenderer"
+                    "type": "WebGLRenderer"
                 }
             ],
             "class": "RendererState",
@@ -19659,8 +19708,41 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
+            "file": "source\\core\\xr\\ARHandler.js",
             "line": 12,
+            "description": "The rendered image is drawn without allowing any pass-through imagery. This is primarily used by fully-immersive VR headsets.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "OPAQUE",
+            "type": "{string}",
+            "class": "ARHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 21,
+            "description": "Primarily used by AR devices with transparent lenses which directly allow reality to pass through to the user's eyes.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "ADDITIVE",
+            "type": "{string}",
+            "class": "ARHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 30,
+            "description": "Used by headsets or goggles which use cameras to capture the real world and display it digitally on the screen or screens used to render the content for the user to see, this offers a way to create an AR presentation using a VR device.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "ALPHA_BLEND",
+            "type": "{string}",
+            "class": "ARHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 39,
             "description": "Flag checking if there is support for XR immersive AR mode.",
             "itemtype": "attribute",
             "name": "webXRSupported",
@@ -19669,8 +19751,8 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
-            "line": 20,
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 47,
             "description": "WebXR session if there is one active.",
             "itemtype": "attribute",
             "name": "webXRSession",
@@ -19679,8 +19761,8 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
-            "line": 28,
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 55,
             "description": "Check if there is any AR API available, on the device.\n\nChecks if there is support for WebAR or WebXR.",
             "itemtype": "method",
             "name": "arAvailable",
@@ -19692,8 +19774,8 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
-            "line": 41,
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 68,
             "description": "Enter virtual reality mode using WebXR or WebAR depending on the API available.\n\nIf booth API are available the WebXR API is used.\n\nWhen displaying AR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "enterAR",
@@ -19713,8 +19795,8 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
-            "line": 79,
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 108,
             "description": "Enter virtual reality mode, if the application is not running on AR mode does not do anything.",
             "itemtype": "method",
             "name": "exitAR",
@@ -19729,8 +19811,8 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\ARHandler.js",
-            "line": 97,
+            "file": "source\\core\\xr\\ARHandler.js",
+            "line": 126,
             "description": "Get WebXR session.",
             "itemtype": "method",
             "name": "getXRSession",
@@ -19739,6 +19821,122 @@
                 "type": "Promise"
             },
             "class": "ARHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 12,
+            "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported, while the check does not finish it is set to null.",
+            "itemtype": "attribute",
+            "name": "webXRSupported",
+            "type": "{boolean}",
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 22,
+            "description": "WebXR session if there is one active.",
+            "itemtype": "attribute",
+            "name": "webXRSession",
+            "type": "{XRSession}",
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 30,
+            "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available, while the check does not finish it is set to null.",
+            "itemtype": "attribute",
+            "name": "webVRHasDisplay",
+            "type": "{boolean}",
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 40,
+            "description": "WebVR display if there is one active.",
+            "itemtype": "attribute",
+            "name": "webVRDisplay",
+            "type": "{VRDisplay}",
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 48,
+            "description": "Check if there is any VR API available, on the device.\n\nChecks if there is support for WebVR or WebXR.",
+            "itemtype": "method",
+            "name": "vrAvailable",
+            "return": {
+                "description": "True if the browser supports vr.",
+                "type": "Boolean"
+            },
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 61,
+            "description": "Enter virtual reality mode using WebXR or WebVR depending on the API available.\n\nIf booth API are available the WebXR API is used.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
+            "itemtype": "method",
+            "name": "enterVR",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Renderer used to draw the scene.",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Method called if the application entered VR successfully.",
+                    "type": "Function"
+                }
+            ],
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 122,
+            "description": "Enter virtual reality mode, if the application is not running on VR mode does not do anything.",
+            "itemtype": "method",
+            "name": "exitVR",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Renderer used to draw the scene.",
+                    "type": "WebGLRenderer"
+                }
+            ],
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 151,
+            "description": "Get WebXR session.",
+            "itemtype": "method",
+            "name": "getXRSession",
+            "return": {
+                "description": "Promise used to get the XR session, receives the session as argument.",
+                "type": "Promise"
+            },
+            "class": "VRHandler",
+            "module": "Physics"
+        },
+        {
+            "file": "source\\core\\xr\\VRHandler.js",
+            "line": 169,
+            "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
+            "itemtype": "method",
+            "name": "getVRDisplays",
+            "return": {
+                "description": "Promise used to get the display, receives the display as argument.",
+                "type": "Promise"
+            },
+            "class": "VRHandler",
             "module": "Physics"
         },
         {
@@ -20827,122 +21025,6 @@
                 }
             ],
             "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 12,
-            "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported, while the check does not finish it is set to null.",
-            "itemtype": "attribute",
-            "name": "webXRSupported",
-            "type": "{boolean}",
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 22,
-            "description": "WebXR session if there is one active.",
-            "itemtype": "attribute",
-            "name": "webXRSession",
-            "type": "{XRSession}",
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 30,
-            "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available, while the check does not finish it is set to null.",
-            "itemtype": "attribute",
-            "name": "webVRHasDisplay",
-            "type": "{boolean}",
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 40,
-            "description": "WebVR display if there is one active.",
-            "itemtype": "attribute",
-            "name": "webVRDisplay",
-            "type": "{VRDisplay}",
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 48,
-            "description": "Check if there is any VR API available, on the device.\n\nChecks if there is support for WebVR or WebXR.",
-            "itemtype": "method",
-            "name": "vrAvailable",
-            "return": {
-                "description": "True if the browser supports vr.",
-                "type": "Boolean"
-            },
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 61,
-            "description": "Enter virtual reality mode using WebXR or WebVR depending on the API available.\n\nIf booth API are available the WebXR API is used.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
-            "itemtype": "method",
-            "name": "enterVR",
-            "params": [
-                {
-                    "name": "renderer",
-                    "description": "Renderer used to draw the scene.",
-                    "type": "WebGLRenderer"
-                },
-                {
-                    "name": "onSuccess",
-                    "description": "Method called if the application entered VR successfully.",
-                    "type": "Function"
-                }
-            ],
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 122,
-            "description": "Enter virtual reality mode, if the application is not running on VR mode does not do anything.",
-            "itemtype": "method",
-            "name": "exitVR",
-            "params": [
-                {
-                    "name": "renderer",
-                    "description": "Renderer used to draw the scene.",
-                    "type": "WebGLRenderer"
-                }
-            ],
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 151,
-            "description": "Get WebXR session.",
-            "itemtype": "method",
-            "name": "getXRSession",
-            "return": {
-                "description": "Promise used to get the XR session, receives the session as argument.",
-                "type": "Promise"
-            },
-            "class": "VRHandler",
-            "module": "Runtime"
-        },
-        {
-            "file": "source\\core\\VRHandler.js",
-            "line": 169,
-            "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
-            "itemtype": "method",
-            "name": "getVRDisplays",
-            "return": {
-                "description": "Promise used to get the display, receives the display as argument.",
-                "type": "Promise"
-            },
-            "class": "VRHandler",
             "module": "Runtime"
         }
     ],

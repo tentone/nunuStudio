@@ -238,7 +238,7 @@
 							<p>Scenes allow you to set up what and where is to be rendered by the engine.</p>
 						<p>This is where you place objects, lights and cameras.</p>
 						<p>A program may contain multiple scenes, its possible to change between scene using scripts.</p>
-						<p>Scene three.js documentation available here https:// <a href="http://threejs.org/docs/index.html#Reference/Scenes/Scene">threejs.org/docs/index.html#Reference/Scenes/Scene</a>.</p>
+						<p>Scene three.js documentation available here <a href="https://threejs.org/docs/index.html#Reference/Scenes/Scene">https://threejs.org/docs/index.html#Reference/Scenes/Scene</a>.</p>
 						
 						</div>
 						
@@ -299,6 +299,10 @@
 											<h3>Properties</h3>
 						
 											<ul class="index-list properties extends">
+													<li class="index-item property">
+														<a href="#property_alpha">alpha</a>
+						
+													</li>
 													<li class="index-item property">
 														<a href="#property_background">background</a>
 						
@@ -707,7 +711,7 @@
 											
 												<div class="description">
 													<p>Update scene objects and the physics world.</p>
-											<p>Also updates the global raycaster object used for object culling.</p>
+											<p>Also updates the global ray caster object used for object culling.</p>
 											
 												</div>
 											
@@ -765,9 +769,32 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_alpha" class="property item">
+												<h3 class="name"><code>alpha</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Opacity of the background color.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_background" class="property item">
 												<h3 class="name"><code>background</code></h3>
-												<span class="type">Color | <a href="../classes/Texture.html" class="crosslink">Texture</a></span>
+												<span class="type">Color | <a href="../classes/Texture.html" class="crosslink">Texture</a> | Null</span>
 											
 											
 											
@@ -783,7 +810,7 @@
 												<div class="description">
 													<p>Background of the scene.</p>
 											<p>The background of the scene is drawn after the renderer clears the buffers.</p>
-											<p>It can be a color, a texture or a cubemap.</p>
+											<p>It can be a color, a texture or a cube map.</p>
 											
 												</div>
 											
@@ -995,7 +1022,7 @@
 												<div class="description">
 													<p>Cannon.js world used for physics simulation.</p>
 											<p>The world is configured by default with a NaiveBroadphase and a SplitSolver.</p>
-											<p>Documentation for cannon.js physics World object can be found here http:// <a href="http://schteppe.github.io/cannon.js/docs/classes/World.html">schteppe.github.io/cannon.js/docs/classes/World.html</a>.</p>
+											<p>Documentation for cannon.js physics World object can be found at <a href="http://schteppe.github.io/cannon.js/docs/classes/World.html">http://schteppe.github.io/cannon.js/docs/classes/World.html</a>.</p>
 											
 												</div>
 											
@@ -1028,7 +1055,7 @@
 											
 												<div class="description">
 													<p>Octree used to index all the unoObject in the scene being visualized.</p>
-											<p>It is used to filter the visiblity of objects and raycast them.</p>
+											<p>It is used to filter the visibility of objects and raycast them.</p>
 											
 												</div>
 											

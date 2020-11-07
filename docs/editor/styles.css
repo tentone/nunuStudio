@@ -76,6 +76,7 @@ input[type=number]::-webkit-outer-spin-button
 	/* GUI Color Palette */
 	--color-light:#FFFFFF;
 	--color-graph:#AAAAAA;
+	--color-gray-light: #999999;
 	--button-over-color:#555555;
 	--box-color:#444444;
 	--panel-color:#333333;
