@@ -2,9 +2,9 @@ import {WebGLRenderer} from "three";
 
 /**
  * AR class handles all the agumented reality related tasks.
- * 
+ *
  * Can be used to detect if the host system is capable of displaying AR content and checks for the availability of WebXR with the required modes.
- * 
+ *
  * @class ARHandler
  */
 function ARHandler() {}
@@ -65,6 +65,9 @@ ARHandler.enterAR = function(renderer, onSuccess)
 			{
 				onSuccess();
 			}
+		}).catch(function(error)
+		{
+			console.warn("nunuStudio: Failed to start AR WebXR session.", error);
 		});
 	}
 	else

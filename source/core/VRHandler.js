@@ -2,9 +2,9 @@ import {WebGLRenderer} from "three";
 
 /**
  * VR class handles all the virtual reality related tasks.
- * 
+ *
  * Can be used to detect if the host system is capable of displaying VR content and checks for the availability of WebXR and/or WebVR.
- * 
+ *
  * @class VRHandler
  */
 function VRHandler() {}
@@ -83,6 +83,9 @@ VRHandler.enterVR = function(renderer, onSuccess)
 			{
 				onSuccess();
 			}
+		}).catch(function(error)
+		{
+			console.warn("nunuStudio: Failed to start VR WebXR session.", error);
 		});
 	}
 	else if (VRHandler.webVRAvailable)
@@ -98,13 +101,16 @@ VRHandler.enterVR = function(renderer, onSuccess)
 					renderer.xr.enabled = true;
 					renderer.xr.setDevice(VRHandler.webVRDisplay);
 					VRHandler.webVRDisplay.requestPresent([{source: renderer.domElement}]);
-					
+
 					if (onSuccess !== undefined)
 					{
 						onSuccess();
 					}
 				}
-			};
+			}
+		}).catch(function(error)
+		{
+			console.warn("nunuStudio: Failed to start VR WebVR session.", error);
 		});
 	}
 	else
@@ -162,7 +168,7 @@ VRHandler.getWebXRSession = function()
 
 /**
  * Used to get the first VR display available, the display is returned as argument of the onDisplay function.
- * 
+ *
  * @method getVRDisplays
  * @return {Promise} Promise used to get the display, receives the display as argument.
  */

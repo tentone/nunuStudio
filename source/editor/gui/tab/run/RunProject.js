@@ -9,7 +9,7 @@ import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
 
-/** 
+/**
  * Tab used to preview a project running.
  *
  * Clones the project instance and run it. Changes appplied in other tabs are not applied to the running instance.
@@ -166,7 +166,7 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 	{
 		Nunu.setFullscreen(true, this.element);
 
-		this.position.set(0, 0);	
+		this.position.set(0, 0);
 		this.size.set(window.screen.width, window.screen.height);
 		this.updateInterface();
 	}
@@ -177,7 +177,7 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 	}
 };
 
-/** 
+/**
  * Dispose runnning program.
  *
  * @method stopProgram
@@ -205,7 +205,7 @@ RunProject.prototype.resetCanvas = function()
 	}
 };
 
-/** 
+/**
  * Get the Editor.program object to be run in this tab.
  *
  * @method getProgram
@@ -224,7 +224,7 @@ RunProject.prototype.getProgram = function()
 	}
 };
 
-/** 
+/**
  * Prepare the program to be run, create a default camera.
  *
  * Run the initialization scripts from the object and set the renderer size.
@@ -238,7 +238,7 @@ RunProject.prototype.runProgram = function()
 		// Create a default camera for program (same as runtime).
 		this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 		this.program.defaultCamera.position.set(0, 5, -5);
-		
+
 		// Set runtime variables
 		this.program.setRenderer(this.canvas.renderer);
 		this.program.initialize();
@@ -252,24 +252,25 @@ RunProject.prototype.runProgram = function()
 		return;
 	}
 
+	var self = this;
+
 	// If program uses VR set button
 	if (this.program.vrAvailable())
 	{
 		// Show VR button
 		this.vrButton.setVisibility(true);
 		this.vrButton.position.set(40, 5);
-		
+
 		// Create VR switch callback
-		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
-			if (program.xrEnabled)
+			if (self.program.xrEnabled)
 			{
-				program.exitVR();
+				self.program.exitVR();
 			}
 			else
 			{
-				program.enterVR();
+				self.program.enterVR();
 			}
 		});
 	}
@@ -279,22 +280,18 @@ RunProject.prototype.runProgram = function()
 		// Show AR button
 		this.arButton.setVisibility(true);
 		this.arButton.position.set(this.program.vrAvailable() ? 75 : 40, 5);
-
-		var program = this.program;
 		this.arButton.setOnClick(function()
 		{
-			if (program.xrEnabled)
+			if (self.program.xrEnabled)
 			{
-				program.exitAR();
+				self.program.exitAR();
 			}
 			else
 			{
-				program.enterAR();
+				self.program.enterAR();
 			}
 		});
 	}
-
-	var self = this;
 
 	// Update the program logic and render the program to the canvas using the renderer.
 	this.canvas.renderer.setAnimationLoop(function()
@@ -330,7 +327,7 @@ RunProject.prototype.runProgram = function()
 	});
 };
 
-/** 
+/**
  * Restart the program running in the tab.
  *
  * @method restartProgram
