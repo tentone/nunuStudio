@@ -923,12 +923,9 @@ Editor.addDefaultScene = function(material)
 	var scene = new Scene();
 
 	// Sky
-	/* var sky = new Sky();
+	var sky = new Sky();
 	sky.autoUpdate = false;
-	scene.add(sky);*/
-
-	var light = new AmbientLight();
-	scene.add(light);
+	scene.add(sky);
 
 	// Box
 	var model = new Mesh(Editor.defaultGeometry, material);
@@ -937,13 +934,13 @@ Editor.addDefaultScene = function(material)
 	scene.add(model);
 
 	// Floor
-	/* var ground = new BoxBufferGeometry(20, 1, 20);
+	var ground = new BoxBufferGeometry(20, 1, 20);
 	ground.name = "ground";
 
 	model = new Mesh(ground, material);
  	model.position.set(0, -1.0, 0);
 	model.name = "ground";
-	scene.add(model);*/
+	scene.add(model);
 
 	// Add scene to program
 	Editor.addObject(scene, Editor.program);
