@@ -10,7 +10,7 @@ import {Program} from "./Program.js";
  *
  * A program may contain multiple scenes, its possible to change between scene using scripts.
  *
- * Scene three.js documentation available here https:// threejs.org/docs/index.html#Reference/Scenes/Scene.
+ * Scene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.
  *
  * @class Scene
  * @module Core
@@ -30,7 +30,7 @@ function Scene()
 	 *
 	 * The world is configured by default with a NaiveBroadphase and a SplitSolver.
 	 *
-	 * Documentation for cannon.js physics World object can be found here http:// schteppe.github.io/cannon.js/docs/classes/World.html.
+	 * Documentation for cannon.js physics World object can be found at http://schteppe.github.io/cannon.js/docs/classes/World.html.
 	 *
 	 * @property world
 	 * @type {World}
@@ -51,10 +51,10 @@ function Scene()
 	 *
 	 * The background of the scene is drawn after the renderer clears the buffers.
 	 *
-	 * It can be a color, a texture or a cubemap.
+	 * It can be a color, a texture or a cube map.
 	 *
 	 * @property background
-	 * @type {Color|Texture}
+	 * @type {Color|Texture|null}
 	 */
 	this.background = new Color(0x000000);
 
@@ -266,16 +266,10 @@ Scene.prototype.render = function(renderer)
 	{
 		if (this.program.xrEnabled)
 		{
-
-			// TODO <TEST FOR AR>
-			renderer.render(this, this.cameras[0]);
-
-			/*
 			for (var i = 0; i < this.cameras.length; i++)
 			{
 				this.cameras[i].render(renderer, this);
 			}
-			*/
 		}
 		else
 		{
