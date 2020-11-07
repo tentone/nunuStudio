@@ -14,11 +14,11 @@ import {Script} from "./script/Script.js";
 
 /**
  * Program class contains all the data of a nunuStudio program.
- * 
+ *
  * Is stores and manages all available resources used by the children objects.
  *
  * Is responsible for handling runtime tasks, initialization, update, resizes etc.
- * 
+ *
  * @class Program
  * @module Core
  * @extends {ResourceManager}
@@ -116,7 +116,7 @@ function Program()
 
 	/**
 	 * Virtual reality movement scale.
-	 * 
+	 *
 	 * Indicates the relation between the real movement and virtual world movement.
 	 *
 	 * @property vrScale
@@ -125,7 +125,7 @@ function Program()
 	 */
 	this.vrScale = 1.0;
 
-	/** 
+	/**
 	 * Renderer configuration applied to the WebGL renderer.
 	 *
 	 * @property rendererConfig
@@ -217,7 +217,7 @@ function Program()
 	 * Event manager used to attach and manage program events.
 	 *
 	 * Its created on initialization and destroys on disposal, scripts can attach events to the manager safely during runtime.
-	 * 
+	 *
 	 * @property manager
 	 * @type {EventManager}
 	 */
@@ -235,7 +235,7 @@ function Program()
 
 	/**
 	 * WebX runtime control, true when the app is running in an XR environment.
-	 * 
+	 *
 	 * XR enviroment can be VR or AR only one of them can be used at a time.
 	 *
 	 * @property xrEnabled
@@ -248,9 +248,9 @@ Program.prototype = Object.create(ResourceManager.prototype);
 
 /**
  * Select initial scene and initialize that scene.
- * 
+ *
  * Automatically called by the runtime.
- * 
+ *
  * @method initialize
  */
 Program.prototype.initialize = function()
@@ -287,7 +287,7 @@ Program.prototype.initialize = function()
 	{
 		this.setScene(this.children[0]);
 	}
-	
+
 	// Lock mouse pointer
 	if (this.lockPointer && this.mouse !== null)
 	{
@@ -301,7 +301,7 @@ Program.prototype.initialize = function()
  * Set program mouse and keyboard.
  *
  * Should be set before initialize() is called otherwise a keyboard and mouse are created by default.
- * 
+ *
  * @method setMouseKeyboard
  * @param {Mouse} mouse
  * @param {Keyboard} keyboard
@@ -325,7 +325,7 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 			this.keyboard.dispose();
 		}
 
-		this.keyboard = keyboard;	
+		this.keyboard = keyboard;
 	}
 };
 
@@ -354,7 +354,7 @@ Program.prototype.setRenderer = function(renderer, configure)
 
 /**
  * Update program state, this updated all current scene children elements.
- * 
+ *
  * @method update
  */
 Program.prototype.update = function()
@@ -371,9 +371,9 @@ Program.prototype.update = function()
  * Render current scene to canvas.
  *
  * When rendering in VR mode all effects and camera parameters are ignored.
- * 
+ *
  * Renderer should be initialized and passed as argument.
- * 
+ *
  * @method render
  * @param {Renderer} renderer
  */
@@ -384,7 +384,7 @@ Program.prototype.render = function(renderer)
 
 /**
  * Resize the current scene elements.
- * 
+ *
  * @method resize
  * @param {number} x Width.
  * @param {number} y Height.
@@ -417,9 +417,9 @@ Program.prototype.updateRenderer = function()
 
 /**
  * Check if augmented reality is available.
- * 
+ *
  * The program need to be configured for AR and the host device should support the required WebXR modes.
- * 
+ *
  * @method arAvailable
  */
 Program.prototype.arAvailable = function()
@@ -429,14 +429,14 @@ Program.prototype.arAvailable = function()
 
 /**
  * Enter virtual reality mode.
- * 
+ *
  * @method enterAR
  */
 Program.prototype.enterAR = function()
 {
+	var self = this;
 	if (this.arAvailable() && !self.xrEnabled)
 	{
-		var self = this;
 		VRHandler.enterAR(this.renderer, function()
 		{
 			self.xrEnabled = true;
@@ -446,12 +446,12 @@ Program.prototype.enterAR = function()
 
 /**
  * Exit augmented reality mode.
- * 
+ *
  * @method exitAR
  */
 Program.prototype.exitAR = function()
 {
-	if (self.xrEnabled)
+	if (this.xrEnabled)
 	{
 		ARHandler.exitAR(this.renderer);
 		this.xrEnabled = false;
@@ -459,8 +459,8 @@ Program.prototype.exitAR = function()
 };
 
 /**
- * Check if virtual reality is available. 
- * 
+ * Check if virtual reality is available.
+ *
  * @method vrAvailable
  */
 Program.prototype.vrAvailable = function()
@@ -470,7 +470,7 @@ Program.prototype.vrAvailable = function()
 
 /**
  * Enter virtual reality mode.
- * 
+ *
  * @method enterVR
  */
 Program.prototype.enterVR = function()
@@ -487,7 +487,7 @@ Program.prototype.enterVR = function()
 
 /**
  * Exit virtual reality mode.
- * 
+ *
  * @method exitVR
  */
 Program.prototype.exitVR = function()
@@ -501,9 +501,9 @@ Program.prototype.exitVR = function()
 
 /**
  * Change scene during runtime, this method can receive booth a scene name or a scene object.
- * 
+ *
  * This method should be used inside of script objects during runtime.
- * 
+ *
  * @method setScene
  * @param {Scene | string} scene Scene object or name of the scene to be used.
  */
@@ -533,7 +533,7 @@ Program.prototype.setScene = function(scene)
 
 		this.scene.initialize();
 
-		if (this.canvas !== null) 
+		if (this.canvas !== null)
 		{
 			this.scene.resize(this.canvas.width, this.canvas.height);
 		}
@@ -546,7 +546,7 @@ Program.prototype.setScene = function(scene)
 
 /**
  * Remove Scene from program.
- * 
+ *
  * @method remove
  * @param {Scene} scene
  */
@@ -568,7 +568,7 @@ Program.prototype.remove = function(scene)
 			this.scene.dispose();
 			this.scene = null;
 		}
-		
+
 		// If there are no scenes on program set actual scene to null
 		if (this.children.length === 0)
 		{
@@ -583,9 +583,9 @@ Program.prototype.remove = function(scene)
 
 /**
  * Add new scene to this program.
- * 
+ *
  * On the program class only scenes can be added as children.
- * 
+ *
  * @method add
  * @param {Scene} scene
  */
@@ -604,9 +604,9 @@ Program.prototype.add = function(scene)
 
 /**
  * Clone program, keeping uuids and every identification attribute.
- * 
+ *
  * Clone method uses the ObjectLoad to serialize and create a new program instance with the same data.
- * 
+ *
  * @method clone
  * @return {Program} Cloned program
  */
@@ -617,9 +617,9 @@ Program.prototype.clone = function()
 
 /**
  * Set a scene as initial scene using its uuid.
- * 
+ *
  * This method is used by the editor.
- * 
+ *
  * @method setInitialScene
  * @param {string} uuid Scene uuid
  */
@@ -630,9 +630,9 @@ Program.prototype.setInitialScene = function(scene)
 
 /**
  * Dispose program data to avoid memory leaks.
- * 
+ *
  * Called when exiting the program.
- * 
+ *
  * @method dispose
  */
 Program.prototype.dispose = function()
@@ -662,14 +662,14 @@ Program.prototype.dispose = function()
 	{
 		console.warn("nunuStudio: Program dispose() scene is null.", this);
 	}
-	
+
 	ResourceManager.prototype.dispose.call(this);
 	Object3D.prototype.dispose.call(this);
 };
 
 /**
  * Receive external data and pass it to all script instances.
- * 
+ *
  * @param {Object} data
  * @method receiveDataApp
  */
@@ -696,7 +696,7 @@ Program.prototype.receiveDataApp = function(data)
 
 /**
  * Send data to external app instance.
- * 
+ *
  * @param {Object} data
  * @method sendDataApp
  */
@@ -721,7 +721,7 @@ Program.prototype.sendDataApp = function(data)
 
 /**
  * Serialize the object to JSON format.
- * 
+ *
  * @method toJSON
  * @param {Object} meta Metadata object passed to the objects and resources toJSON method to store data.
  * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported.
@@ -764,10 +764,10 @@ Program.prototype.toJSON = function(meta, exportResources)
 	// Pointer
 	data.object.lockPointer = this.lockPointer;
 	data.object.handlePixelRatio = this.handlePixelRatio;
-	
+
 	// AR
 	data.object.ar = this.ar;
-	
+
 	// VR
 	data.object.vr = this.vr;
 	data.object.vrScale = this.vrScale;
