@@ -238,7 +238,42 @@ function Program()
 	 * @type {boolean}
 	 */
 	this.xrEnabled = false;
+
+	/**
+	 * Indicates the XR mode currently active.
+	 *
+	 * @property xrMode
+	 * @type {number}
+	 */
+	this.xrMode = Program.XR_NONE;
 }
+
+/**
+ * No XR mode is enabled.
+ *
+ * @static
+ * @attribute XR_NONE
+ * @type {number}
+ */
+Program.XR_NONE = 0;
+
+/**
+ * XR is running in VR mode.
+ *
+ * @static
+ * @attribute XR_VR
+ * @type {number}
+ */
+Program.XR_VR = 1;
+
+/**
+ * XR is running in AR mode.
+ *
+ * @static
+ * @attribute XR_AR
+ * @type {number}
+ */
+Program.XR_AR = 2;
 
 Program.prototype = Object.create(ResourceManager.prototype);
 
@@ -430,11 +465,12 @@ Program.prototype.arAvailable = function()
  */
 Program.prototype.enterAR = function()
 {
-	var self = this;
-	if (this.arAvailable() && !self.xrEnabled)
+	if (this.arAvailable() && !this.xrEnabled)
 	{
+		var self = this;
 		ARHandler.enterAR(this.renderer, function()
 		{
+			self.xrMode = Program.XR_AR;
 			self.xrEnabled = true;
 		});
 	}
@@ -450,6 +486,8 @@ Program.prototype.exitAR = function()
 	if (this.xrEnabled)
 	{
 		ARHandler.exitAR(this.renderer);
+
+		this.xrMode = Program.XR_NONE;
 		this.xrEnabled = false;
 	}
 };
@@ -471,11 +509,12 @@ Program.prototype.vrAvailable = function()
  */
 Program.prototype.enterVR = function()
 {
-	if (this.vr)
+	if (this.vrAvailable() && !this.xrEnabled)
 	{
 		var self = this;
 		VRHandler.enterVR(this.renderer, function()
 		{
+			self.xrMode = Program.XR_VR;
 			self.xrEnabled = true;
 		});
 	}
@@ -491,6 +530,7 @@ Program.prototype.exitVR = function()
 	if (this.vr)
 	{
 		VRHandler.exitVR(this.renderer);
+		this.xrMode = Program.XR_NONE;
 		this.xrEnabled = false;
 	}
 };

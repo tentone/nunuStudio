@@ -28,7 +28,7 @@ function SceneInspector(parent, object)
 		if (self.object !== null)
 		{
 			var program = self.object.parent;
-			
+
 			if (self.default.getValue())
 			{
 				Editor.addAction(new ChangeAction(program, "defaultScene", self.object.uuid));
@@ -64,6 +64,18 @@ function SceneInspector(parent, object)
 		Editor.addAction(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
 	});
 	this.form.add(this.backgroundTexture);
+	this.form.nextRow();
+
+	// Background alpha
+	this.form.addText(Locale.alpha);
+	this.alpha = new Slider(this.form);
+	this.alpha.size.set(60, 18);
+	this.alpha.setRange(0.0, 1.0);
+	this.alpha.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "alpha", self.alpha.getValue()));
+	});
+	this.form.add(this.alpha);
 	this.form.nextRow();
 
 	this.form.addText("");
@@ -178,7 +190,7 @@ function SceneInspector(parent, object)
 	// Add exponential fog form
 	this.form.add(this.fogExponentialForm);
 	this.form.nextRow();
-	
+
 	// Physics world
 	this.form.addText(Locale.physics);
 	this.form.nextRow();
@@ -237,7 +249,7 @@ SceneInspector.prototype = Object.create(ObjectInspector.prototype);
 SceneInspector.prototype.updateInspector = function()
 {
 	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
-	
+
 	if (this.object.fog instanceof Fog)
 	{
 		this.fog.setValue(Fog.LINEAR);
@@ -275,6 +287,8 @@ SceneInspector.prototype.updateInspector = function()
 		this.background.setValue(0, 0, 0);
 		this.backgroundTexture.setValue(null);
 	}
+	this.alpha.setValue(this.object.alpha);
+
 
 	this.environment.setValue(this.object.environment);
 	this.usePhysics.setValue(this.object.usePhysics);
@@ -287,7 +301,7 @@ SceneInspector.prototype.updateInspector = function()
 SceneInspector.prototype.updateForms = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);
-	
+
 	this.fogLinearForm.visible = this.object.fog instanceof Fog;
 	this.fogLinearForm.updateInterface();
 

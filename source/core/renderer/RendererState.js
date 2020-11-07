@@ -1,4 +1,4 @@
-import {Color, WebGlRenderer} from "three";
+import {Color, WebGLRenderer} from "three";
 
 /**
  * Renderer state can be used to store and restore a renderer state between postprocessing passes.
@@ -13,7 +13,7 @@ function RendererState()
 	this.autoClearColor = false;
 	this.autoClearStencil = false;
 	this.autoClearDepth = false;
-	
+
 	this.sortObjects = true;
 
 	this.clearColor = new Color();
@@ -24,8 +24,8 @@ function RendererState()
  * Store the renderer state.
  *
  * @method backup
- * @param {WebGlRenderer} renderer
- */ 
+ * @param {WebGLRenderer} renderer
+ */
 RendererState.prototype.backup = function(renderer)
 {
 	this.autoClear = renderer.autoClear;
@@ -43,8 +43,8 @@ RendererState.prototype.backup = function(renderer)
  * Restore the renderer state.
  *
  * @method restore
- * @param {WebGlRenderer} renderer
- */ 
+ * @param {WebGLRenderer} renderer
+ */
 RendererState.prototype.restore = function(renderer)
 {
 	renderer.autoClear = this.autoClear;

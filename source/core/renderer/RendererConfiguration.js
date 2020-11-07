@@ -111,7 +111,7 @@ function RendererConfiguration(options)
 	this.shadowsAutoUpdate = true;
 
 	/**
-	 * Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.
+	 * Tonemapping can be used to remap the color of the image to a different set giving the scene a different color mood and/or dynamic color based on global luminosity.
 	 *
 	 * @property toneMapping
 	 * @type {number}
@@ -274,24 +274,26 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	{
 		try
 		{
-			context = canvas.getContext("webgl2");
+			context = canvas.getContext("webgl2", {xrCompatible: true});
 		}
 		catch (e) {}
 	}
 
-	var renderer = new WebGLRenderer(
-		{
-			canvas: canvas,
-			context: context,
-			precision: this.precision,
-			alpha: this.alpha,
-			premultipliedAlpha: this.premultipliedAlpha,
-			antialias: this.antialiasing,
-			stencil: this.stencil,
-			preserveDrawingBuffer: this.preserveDrawingBuffer,
-			powerPreference: this.powerPreference,
-			logarithmicDepthBuffer: this.logarithmicDepthBuffer
-		});
+	var parameters = {
+		canvas: canvas,
+		context: context,
+		precision: this.precision,
+		alpha: this.alpha,
+		premultipliedAlpha: this.premultipliedAlpha,
+		antialias: this.antialiasing,
+		stencil: this.stencil,
+		preserveDrawingBuffer: this.preserveDrawingBuffer,
+		powerPreference: this.powerPreference,
+		logarithmicDepthBuffer: this.logarithmicDepthBuffer
+	};
+
+
+	var renderer = new WebGLRenderer(parameters);
 
 	this.apply(renderer);
 

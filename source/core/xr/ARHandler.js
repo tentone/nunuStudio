@@ -10,6 +10,33 @@ import {WebGLRenderer} from "three";
 function ARHandler() {}
 
 /**
+ * The rendered image is drawn without allowing any pass-through imagery. This is primarily used by fully-immersive VR headsets.
+ *
+ * @static
+ * @attribute OPAQUE
+ * @type {string}
+ */
+ARHandler.OPAQUE = "opaque";
+
+/**
+ * Primarily used by AR devices with transparent lenses which directly allow reality to pass through to the user's eyes.
+ *
+ * @static
+ * @attribute ADDITIVE
+ * @type {string}
+ */
+ARHandler.ADDITIVE = "additive";
+
+/**
+ * Used by headsets or goggles which use cameras to capture the real world and display it digitally on the screen or screens used to render the content for the user to see, this offers a way to create an AR presentation using a VR device.
+ *
+ * @static
+ * @attribute ALPHA_BLEND
+ * @type {string}
+ */
+ARHandler.ALPHA_BLEND = "alpha-blend";
+
+/**
  * Flag checking if there is support for XR immersive AR mode.
  *
  * @attribute webXRSupported
@@ -58,6 +85,8 @@ ARHandler.enterAR = function(renderer, onSuccess)
 			renderer.xr.enabled = true;
 			renderer.xr.setReferenceSpaceType("local");
 			renderer.xr.setSession(session);
+
+			console.log("nunuStudio: New AR WebXR session created", session);
 
 			ARHandler.webXRSession = session;
 
