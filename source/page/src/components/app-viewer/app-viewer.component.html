@@ -1,12 +1,20 @@
 <p *ngIf="this.hideLink !== true">To try this example in the editor you can download the <a class="underline" href="{{fname}}">project file</a> or open it on the <a class="underline" (click)="global.openEditor(this.fname)">Web Editor</a>.</p>
 
-<div [ngStyle]="this.style" style="margin-left:auto; margin-right:auto; display: block;">
-	<canvas #canvas style="width: 100%; height: 100%;"></canvas>
+<div #canvasSection style="display: none;">
+	<div style="width: 80%; height: 360px; margin-left:auto; margin-right:auto; display: block;">
+		<canvas #canvas style="left:0px; top:0px; width: 100%; height: 100%;"></canvas>
+	</div>
+
+	<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
+		<a (click)="this.app.toggleFullscreen()" style="margin: 5px;" class="btn btn-dark">Fullscreen</a>
+		<a *ngIf="this.app.vrAvailable()" (click)="this.app.toggleVR()" style="margin: 5px;" class="btn btn-dark">Enter VR</a>
+		<a *ngIf="this.app.arAvailable()" (click)="this.app.toggleAR()" style="margin: 5px;" class="btn btn-dark">Enter AR</a>
+	</div>
 </div>
 
-<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
-	<a (click)="this.app.toggleFullscreen()" style="margin: 5px;" class="btn btn-dark">Fullscreen</a>
-	<a *ngIf="this.app.vrAvailable()" (click)="this.app.toggleVR()" style="margin: 5px;" class="btn btn-dark">Enter VR</a>
-	<a *ngIf="this.app.arAvailable()" (click)="this.app.toggleAR()" style="margin: 5px;" class="btn btn-dark">Enter AR</a>
+<div #loadingSection style="width: 70%; min-width: 300px; height: 360px; margin-left:auto; margin-right:auto; display: block;">
+	<h4 style="margin-top: 150px">Loading</h4>
+	<div style="width:100%; height:20px; border-style:solid; border-color: var(--dark); border-width:2px">
+		<div #loading style="width:0px; height:100%; left:0px; top:0px; background-color: var(--dark)"></div>
+	</div>
 </div>
-
