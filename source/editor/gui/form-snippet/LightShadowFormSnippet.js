@@ -5,7 +5,7 @@ import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
 import {FormSnippet} from "./FormSnippet.js";
 
-/** 
+/**
  * Shadow map configuration form for light objects that emitt shadows.
  *
  * @class LightShadowFormSnippet
@@ -16,7 +16,7 @@ function LightShadowFormSnippet(form, object)
 	FormSnippet.call(this, form, object);
 
 	var self = this;
-	
+
 	// Resolution
 	this.form.addText(Locale.resolution);
 	this.width = new DropdownList(this.form);
@@ -79,12 +79,12 @@ function LightShadowFormSnippet(form, object)
 	this.cameraNear.setStep(0.1);
 	this.cameraNear.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "near", self.shadowNear.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "near", self.cameraNear.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraNear);
 	this.form.nextRow();
-	
+
 	// Camera far
 	this.form.addText(Locale.far);
 	this.cameraFar = new NumberBox(this.form);
@@ -92,7 +92,7 @@ function LightShadowFormSnippet(form, object)
 	this.cameraFar.setStep(0.1);
 	this.cameraFar.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "far", self.shadowFar.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "far", self.cameraFar.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraFar);
@@ -105,7 +105,7 @@ function LightShadowFormSnippet(form, object)
 	this.cameraLeft.setStep(0.1);
 	this.cameraLeft.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "left", self.shadowLeft.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "left", self.cameraLeft.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraLeft);
@@ -118,7 +118,7 @@ function LightShadowFormSnippet(form, object)
 	this.cameraRight.setStep(0.1);
 	this.cameraRight.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "right", self.shadowRight.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "right", self.cameraRight.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraRight);
@@ -131,7 +131,7 @@ function LightShadowFormSnippet(form, object)
 	this.cameraTop.setStep(0.1);
 	this.cameraTop.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "top", self.shadowTop.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "top", self.cameraTop.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraTop);
@@ -144,7 +144,7 @@ function LightShadowFormSnippet(form, object)
 	this.cameraBottom.setStep(0.1);
 	this.cameraBottom.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "bottom", self.shadowBottom.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "bottom", self.cameraBottom.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraBottom);
@@ -155,6 +155,8 @@ LightShadowFormSnippet.prototype = Object.create(FormSnippet.prototype);
 
 LightShadowFormSnippet.prototype.updateValues = function()
 {
+	console.log(this.object);
+
 	this.bias.setValue(this.object.shadow.bias);
 	this.radius.setValue(this.object.shadow.radius);
 	this.width.setValue(this.object.shadow.mapSize.width);
