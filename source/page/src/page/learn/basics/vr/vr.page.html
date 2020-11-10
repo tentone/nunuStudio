@@ -6,7 +6,7 @@
 		<p>WebXR is an open standard that makes it possible to experience VR and AR in your browser. The goal is to make it easier for everyone to get into expanded reality experiences, no matter what device you have. Is also allows for cross development of application to be run in different environments.</p>
 		<p>Two things are required to experience a WebXR application, a headset and a compatible browser. The easiest way to get started is with a basic headset like Google Cardboard. Just drop your phone in and you’re ready to go. </p>
 
-		<h3>Creating a VR project</h3>
+		<h3>Creating a project</h3>
 		<p>To enable vr support on your project, click the program object on the object explorer, and select enable vr in the program panel as shown on the image bellow.</p>
 
 		<img style="margin-left:20%; width:60%" src="assets/learn/basics/vr/editor.jpg"/>
@@ -17,7 +17,7 @@
 
 		<app-viewer fname="assets/learn/basics/vr/vr.nsp"></app-viewer>
 
-		<h3>Using VR Controllers</h3>
+		<h3>Using Controllers</h3>
 		<p>It is possible to access VR controllers from the renderer object directly attached to the program in the script objects. The controller object is automatically updated to match the physics controller position its coordinates can be used for interaction with objects in the scene. Its a regular Object3D object where other objects (e.g. Physics colliders, meshes) can be attached as children.</p>
 		<pre><code class="hljs javascript">var controller = renderer.xr.getController(0);
 controller.addEventListener("selectstart", (...));
