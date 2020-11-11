@@ -18,7 +18,7 @@ import "./three/textures/Texture.js";
  * nunuStudio core main file.
  *
  * Store development version, timestamp and contains global method to check browser feature support.
- * 
+ *
  * @class Nunu
  * @module Runtime
  */
@@ -26,7 +26,7 @@ function Nunu() {}
 
 /**
  * Aplication name (might be usefull if getting the module as a unnamed export)
- * 
+ *
  * @attribute NAME
  * @type {string}
  * @default "nunuStudio"
@@ -35,21 +35,21 @@ Nunu.NAME = "nunuStudio";
 
 /**
  * Stores the runtime version.
- * 
+ *
  * @attribute VERSION
  * @type {string}
  */
 
 /**
  * Stores the timestamp of the application build.
- * 
+ *
  * @attribute TIMESTAMP
  * @type {string}
  */
 
 /**
  * Repository branch, used to track the version after publishing.
- * 
+ *
  * @static
  * @attribute REPOSITORY_BRANCH
  * @type {string}
@@ -57,7 +57,7 @@ Nunu.NAME = "nunuStudio";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
- * 
+ *
  * @static
  * @attribute REPOSITORY_COMMIT
  * @type {string}
@@ -65,8 +65,8 @@ Nunu.NAME = "nunuStudio";
 
 /**
  * Indicates if the application/library is being used in development mode.
- * 
- * Can be usefull to restrict development functionality when building to production. 
+ *
+ * Can be usefull to restrict development functionality when building to production.
  *
  * @static
  * @attribute DEVELOPMENT
@@ -168,7 +168,7 @@ Nunu.createWorker = function(code, onMessage)
 	{
 		worker.onmessage = onMessage;
 	}
-	
+
 	return worker;
 };
 
@@ -193,7 +193,7 @@ Nunu.webGLAvailable = function()
 {
 	try
 	{
-		var canvas = document.createElement("canvas"); 
+		var canvas = document.createElement("canvas");
 		var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
 		var extensions = context.getSupportedExtensions();
 
@@ -225,15 +225,15 @@ Nunu.getPlatform = function()
 	{
 		return Nunu.CORDOVA;
 	}
-	
+
 	return Nunu.BROWSER;
 };
 
 /**
- * Check if nunu is running inside NWJS.
+ * Check if app is running inside NWJS.
  *
  * @method runningOnDesktop
- * @return {boolean} True if running inside NWJS 
+ * @return {boolean} True if running inside NWJS
  */
 Nunu.runningOnDesktop = function()
 {
@@ -245,7 +245,7 @@ Nunu.runningOnDesktop = function()
  *
  * On desktop and mobile it will open the default browser.
  *
- * On the web it will open as a popup. 
+ * On the web it will open as a popup.
  *
  * @method openWebpage
  */
@@ -265,7 +265,7 @@ Nunu.openWebpage = function(url)
  * Check if there is some element on fullscreen mode.
  *
  * Returns true even the fullscreen element is not related with the app.
- * 
+ *
  * @method isFullscreen
  * @return {boolean} True if there is some element in fullscreen mode.
  */
@@ -278,7 +278,7 @@ Nunu.isFullscreen = function()
  * Set an element into fullscreen mode or exit out of fullscreen mode.
  *
  * Uses isFullscreen to check if the application is running in fullscreen mode already.
- * 
+ *
  * @method setFullscreen
  * @param {boolean} fullscreen If true the application will enter fullscreen mode, if false it will exit, if undefine it will toggle the value.
  * @param {Component} element DOM element to put into fullscreen.
@@ -286,10 +286,10 @@ Nunu.isFullscreen = function()
 Nunu.setFullscreen = function(fullscreen, element)
 {
 	var isFullscreen = Nunu.isFullscreen();
-	
+
 	if (fullscreen === undefined)
 	{
-		fullscreen = !isFullscreen;	
+		fullscreen = !isFullscreen;
 	}
 
 	if (fullscreen === true)
@@ -302,7 +302,7 @@ Nunu.setFullscreen = function(fullscreen, element)
 		if (isFullscreen === false)
 		{
 			element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
-			
+
 			if (element.requestFullscreen !== undefined)
 			{
 				element.requestFullscreen();
@@ -312,9 +312,9 @@ Nunu.setFullscreen = function(fullscreen, element)
 	else
 	{
 		if (isFullscreen === true)
-		{		
+		{
 			document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-			
+
 			if (document.exitFullscreen !== undefined)
 			{
 				document.exitFullscreen();

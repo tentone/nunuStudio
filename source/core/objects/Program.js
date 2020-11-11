@@ -32,7 +32,7 @@ function Program()
 	this.matrixAutoUpdate = false;
 
 	/**
-	 * Runtime instance used to communication between nunu app and the host webpage.
+	 * Runtime instance used to communication between app and the host webpage.
 	 *
 	 * Inside the editor communication with the app is simulated on the debug console.
 	 *

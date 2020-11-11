@@ -231,9 +231,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 		console.error("nunuStudio: Failed to create cordova project.");
 	}
 
-	// Export nunu project
 	ProjectExporters.exportCordovaProject(ProjectExporters.TEMP + "/www");
-
 
 	setTimeout(function()
 	{

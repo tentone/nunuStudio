@@ -8,7 +8,7 @@ import {ObjectLoader} from "./loaders/ObjectLoader.js";
 import {FileSystem} from "./FileSystem.js";
 
 /**
- * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
+ * app is the main class of the runtime system, is used to embed projects into external webpages and applications.
  *
  * Project files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.
  *
@@ -20,7 +20,7 @@ import {FileSystem} from "./FileSystem.js";
 function App(canvas)
 {
 	/**
-	 * Nunu Program
+	 * Program
 	 *
 	 * @property program
 	 * @type {Program}
@@ -44,9 +44,9 @@ function App(canvas)
 	this.running = false;
 
 	/**
-	 * Flag used to controll if the canvas element is resized automatically by the nunu app instance.
+	 * Flag used to control if the canvas element is resized automatically by the app instance.
 	 *
-	 * If true the canvas is resized whenether the resize method is called.
+	 * If true the canvas is resized whether the resize method is called.
 	 *
 	 * @property canvasFitWindow
 	 * @type {boolean}
@@ -82,13 +82,13 @@ function App(canvas)
 }
 
 /**
- * Load a nunustudio application and attach it to the canvas indicated.
+ * Load a application and attach it to the canvas indicated.
  *
- * This method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.
+ * This method automatically creates resize events, this single line should be enough to make a app run in a webpage.
  *
  * @static
  * @method loadApp
- * @param {string} url URL for the nsp or isp nunuStudio file.
+ * @param {string} url URL for the nsp or isp file.
  * @param {string} canvas Canvas object or canvas id.
  */
 App.loadApp = function(url, canvas)
@@ -108,21 +108,21 @@ App.loadApp = function(url, canvas)
 			app.canvas.width = window.innerWidth;
 			app.canvas.height = window.innerHeight;
 		}
-		else
+		else if (app.canvas.parentElement)
 		{
-			app.canvas.width = nunuApps[i].canvas.parentElement.offsetWidth;
-			app.canvas.height = nunuApps[i].canvas.parentElement.offsetWidth;
+			app.canvas.width = app.canvas.parentElement.offsetWidth;
+			app.canvas.height = app.canvas.parentElement.offsetHeight;
 		}
 		app.resize();
 	});
 };
 
 /**
- * Start running nunu program.
+ * Start running program.
  *
  * Creates renderer, mouse and keyboard objects, and starts running the loaded application.
  *
- * A nunu program must be loaded before calling this method.
+ * A program must be loaded before calling this method.
  *
  * @method run
  */
@@ -243,7 +243,8 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 			{
 				onLoad(self);
 			}
-		}, function(event) {
+		}, function(event)
+		{
 			var progress = event.lengthComputable ? event.loaded / event.total * 100 : 0;
 			onProgress(progress, event);
 		});
@@ -261,7 +262,8 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 			{
 				onLoad(self);
 			}
-		}, function(event) {
+		}, function(event)
+		{
 			var progress = event.lengthComputable ? event.loaded / event.total * 100 : 0;
 			onProgress(progress, event);
 		});
@@ -269,7 +271,7 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 };
 
 /**
- * Update nunu program state.
+ * Update program state.
  *
  * Automatically called by the runtime handler.
  *
@@ -286,9 +288,9 @@ App.prototype.update = function()
  *
  * This method kills the app and disposes all internal elements to avoid memory leaks.
  *
- * Is should be called before exiting the webpage or before switching nunu programs.
+ * Is should be called before exiting the webpage or before switching programs.
  *
- * When loading new nunu programs the same NunuApp instance can be used.
+ * When loading new programs the same app instance can be used.
  *
  * @method exit
  */
@@ -406,7 +408,7 @@ App.prototype.resize = function()
 };
 
 /**
- * Send data to running nunu application.
+ * Send data to running application.
  *
  * The data sent using this method is received by scripts that implement the onAppData method.
  *
@@ -427,7 +429,7 @@ App.prototype.sendData = function(data)
  * Callback receives data as an argument.
  *
  * @method setOnDataReceived
- * @param {Function} callback Function executed whenether the nunu app running sends data to the host
+ * @param {Function} callback Function executed whenether the app running sends data to the host
  */
 App.prototype.setOnDataReceived = function(callback)
 {
@@ -437,7 +439,7 @@ App.prototype.setOnDataReceived = function(callback)
 /**
  * Set on exit callback.
  *
- * Callback is executed when exiting the nunu app.
+ * Callback is executed when exiting the app.
  *
  * @method setOnExit
  * @param {Function} callback onExit callback

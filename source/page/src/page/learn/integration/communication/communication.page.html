@@ -2,7 +2,7 @@
 	<div class="container">
 		<a routerLink="/learn" class="btn btn-outline-dark" style="margin-top: 5px;">Back</a>
 		<h2>Communication</h2>
-		<p>In this guide we will learn how to communicate with nunu applications embedded inside a webpage using messages and how to use DOM elements to control app content.</p>
+		<p>In this guide we will learn how to communicate with the applications embedded inside a webpage using messages and how to use DOM elements to control app content.</p>
 		<p>To communicate with the host webpage nunuStudio uses a message model system, where the host can send messages to the nunuStudio app and vice-versa, the messages are received using callback functions. To explore more about communication check the App API documentation.</p>
 
 		<img src="assets/learn/integration/communication/scheme.png" class="img-big"/>
@@ -35,7 +35,7 @@ function onAppData(data)
 {{'}'}}</code></pre>
 
 		<h3>App to page</h3>
-		<p>Before sending data from the nunu app to the webpage we need to define a onMessageReceive callback to process received messages. This callback can be defined as shown bellow, every time a message is send from the nunuStudio app to the webpage this function will be called.</p>
+		<p>Before sending data from the app to the webpage we need to define a onMessageReceive callback to process received messages. This callback can be defined as shown bellow, every time a message is send from the nunuStudio app to the webpage this function will be called.</p>
 		<pre><code class="hljs javascript">//Send data to app
 app.sendData("test text");
 

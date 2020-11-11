@@ -23,7 +23,7 @@ import * as NUNU from "../../Main.js";
 function Script(code, mode)
 {
 	Group.call(this);
-	
+
 	this.type = "Script";
 	this.name = "script";
 
@@ -45,7 +45,7 @@ function Script(code, mode)
 	 *    - Receives width and height as parameters
 	 *  - onAppData(data)
 	 *    - Called when receiving data sent by the host website
-	 * 
+	 *
 	 * Code written inside scripts have access to the following attributes:
 	 *  - scene
 	 *  - program
@@ -56,8 +56,8 @@ function Script(code, mode)
 	 *
 	 * There is also access to the following functions
 	 *  - include
-	 *    - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations. The access to this method may be restricted depeding on the include mode 
-	 * 
+	 *    - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations. The access to this method may be restricted depeding on the include mode
+	 *
 	 * @property code
 	 * @type {string}
 	 */
@@ -138,7 +138,7 @@ function update(delta) {
 
 /**
  * List of default methods that can be implemented by scripts.
- * 
+ *
  * This list is used to search for these implementations in the script object at runtime.
  *
  * @attribute METHODS
@@ -225,7 +225,7 @@ Script.getIncludes = function(code)
  * Remove comments from javascript code using regex.
  *
  * @param {string} code Input javascript code.
- * @return {string} The processed javascript code. 
+ * @return {string} The processed javascript code.
  */
 Script.removeComments = function(code)
 {
@@ -284,9 +284,9 @@ Script.prototype.initialize = function()
 
 /**
  * Update script state automatically calls for mouse events if they are defined and for the script update method.
- * 
+ *
  * This method is executed every frame, script logic should not relly on the frame time, use the "delta" value provided.
- * 
+ *
  * @method update
  */
 Script.prototype.update = function(delta)
@@ -310,9 +310,9 @@ Script.prototype.update = function(delta)
 
 /**
  * Disposes the script, can be used to clear resources when the program exits.
- * 
+ *
  * Calls the script dispose method if it exists.
- * 
+ *
  * @method dispose
  */
 Script.prototype.dispose = function()
@@ -329,7 +329,7 @@ Script.prototype.dispose = function()
  * Call resize method if available.
  *
  * The resize method receives width and height as arguments.
- * 
+ *
  * @method resize
  */
 Script.prototype.resize = function(x, y)
@@ -344,7 +344,7 @@ Script.prototype.resize = function(x, y)
  * Call onAppData() from the script if available.
  *
  * This method is called everytime that external data is passed to the runtime.
- * 
+ *
  * @method appData
  * @param {Object} data
  */
@@ -358,7 +358,7 @@ Script.prototype.appData = function(data)
 
 /**
  * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
- * 
+ *
  * Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.
  *
  * @method compileCode
@@ -381,7 +381,7 @@ Script.prototype.compileCode = function(code, onReady)
 		if (this.mode === Script.APPEND)
 		{
 			code = Script.removeComments(code);
-			var libs = Script.getIncludes(code);	
+			var libs = Script.getIncludes(code);
 			code = Script.removeIncludes(code);
 
 			for (var i = 0; i < libs.length; i++)
@@ -437,7 +437,7 @@ Script.prototype.compileCode = function(code, onReady)
 		// Include
 		else if (this.mode === Script.INCLUDE)
 		{
-			var libs = Script.getIncludes(code);	
+			var libs = Script.getIncludes(code);
 			code = Script.removeIncludes(code);
 
 			var libsLoaded = 0;
@@ -502,7 +502,7 @@ Script.prototype.compileCode = function(code, onReady)
 
 		// Create script object
 		try
-		{	
+		{
 			var context = this.createContextObject();
 			this.script = new Constructor(context);
 		}
@@ -528,9 +528,9 @@ Script.prototype.compileCode = function(code, onReady)
 
 /**
  * Create a object to access the context of this script.
- * 
- * Also includes the access to three cannon and nunu methods.
- * 
+ *
+ * Also includes the access to three cannon and engine methods.
+ *
  * @method createContextObject
  * @return {Object} Context object for the script to access data.
  */
@@ -541,7 +541,7 @@ Script.prototype.createContextObject = function()
 	Object.assign(context, CANNON);
 	Object.assign(context, THREE);
 	Object.assign(context, NUNU);
-	
+
 	var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc"];
 	var math = {};
 	for (var i of mathProps)
@@ -551,10 +551,10 @@ Script.prototype.createContextObject = function()
 	Object.assign(math, THREE.Math);
 
 	Object.assign(context,
-		{	
+		{
 			self: this,
-			program: this.program, 
-			scene: this.scene, 
+			program: this.program,
+			scene: this.scene,
 			THREE: THREE,
 			CANNON: CANNON,
 			Math: math,
