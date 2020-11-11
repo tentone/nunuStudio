@@ -4927,7 +4927,7 @@
             "namespace": "",
             "file": "source\\core\\App.js",
             "line": 10,
-            "description": "Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.\n\nProject files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.",
+            "description": "app is the main class of the runtime system, is used to embed projects into external webpages and applications.\n\nProject files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.",
             "is_constructor": 1,
             "params": [
                 {
@@ -12485,7 +12485,7 @@
         {
             "file": "source\\core\\objects\\script\\Script.js",
             "line": 529,
-            "description": "Create a object to access the context of this script.\n\nAlso includes the access to three cannon and nunu methods.",
+            "description": "Create a object to access the context of this script.\n\nAlso includes the access to three cannon and engine methods.",
             "itemtype": "method",
             "name": "createContextObject",
             "return": {
@@ -13220,7 +13220,7 @@
         {
             "file": "source\\core\\objects\\Program.js",
             "line": 34,
-            "description": "Runtime instance used to communication between nunu app and the host webpage.\n\nInside the editor communication with the app is simulated on the debug console.",
+            "description": "Runtime instance used to communication between app and the host webpage.\n\nInside the editor communication with the app is simulated on the debug console.",
             "itemtype": "property",
             "name": "app",
             "type": "{App}",
@@ -19942,7 +19942,7 @@
         {
             "file": "source\\core\\App.js",
             "line": 22,
-            "description": "Nunu Program",
+            "description": "Program",
             "itemtype": "property",
             "name": "program",
             "type": "{Program}",
@@ -19972,7 +19972,7 @@
         {
             "file": "source\\core\\App.js",
             "line": 46,
-            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
+            "description": "Flag used to control if the canvas element is resized automatically by the app instance.\n\nIf true the canvas is resized whether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
             "type": "{boolean}",
@@ -20003,14 +20003,14 @@
         {
             "file": "source\\core\\App.js",
             "line": 84,
-            "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
+            "description": "Load a application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a app run in a webpage.",
             "static": 1,
             "itemtype": "method",
             "name": "loadApp",
             "params": [
                 {
                     "name": "url",
-                    "description": "URL for the nsp or isp nunuStudio file.",
+                    "description": "URL for the nsp or isp file.",
                     "type": "String"
                 },
                 {
@@ -20025,7 +20025,7 @@
         {
             "file": "source\\core\\App.js",
             "line": 120,
-            "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
+            "description": "Start running program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
             "class": "App",
@@ -20101,8 +20101,8 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 271,
-            "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
+            "line": 273,
+            "description": "Update program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
             "class": "App",
@@ -20110,8 +20110,8 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 284,
-            "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
+            "line": 286,
+            "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching programs.\n\nWhen loading new programs the same app instance can be used.",
             "itemtype": "method",
             "name": "exit",
             "class": "App",
@@ -20119,7 +20119,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 321,
+            "line": 323,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -20128,7 +20128,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 342,
+            "line": 344,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -20137,7 +20137,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 353,
+            "line": 355,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -20153,7 +20153,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 367,
+            "line": 369,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -20162,8 +20162,8 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 408,
-            "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
+            "line": 410,
+            "description": "Send data to running application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
                     "name": "data",
@@ -20178,14 +20178,14 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 424,
+            "line": 426,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
             "params": [
                 {
                     "name": "callback",
-                    "description": "Function executed whenether the nunu app running sends data to the host",
+                    "description": "Function executed whenether the app running sends data to the host",
                     "type": "Function"
                 }
             ],
@@ -20194,8 +20194,8 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 437,
-            "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
+            "line": 439,
+            "description": "Set on exit callback.\n\nCallback is executed when exiting the app.",
             "itemtype": "method",
             "name": "setOnExit",
             "params": [
@@ -20210,7 +20210,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 450,
+            "line": 452,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -20223,7 +20223,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 461,
+            "line": 463,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -20232,7 +20232,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 485,
+            "line": 487,
             "description": "Check if augmented reality mode is available.",
             "itemtype": "method",
             "name": "arAvailable",
@@ -20245,7 +20245,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 496,
+            "line": 498,
             "description": "Toggle augmented reality mode, only works if augmented reality mode is available.",
             "itemtype": "method",
             "name": "toggleAR",
@@ -20254,7 +20254,7 @@
         },
         {
             "file": "source\\core\\App.js",
-            "line": 520,
+            "line": 522,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
@@ -20974,7 +20974,7 @@
         {
             "file": "source\\core\\Nunu.js",
             "line": 232,
-            "description": "Check if nunu is running inside NWJS.",
+            "description": "Check if app is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
             "return": {

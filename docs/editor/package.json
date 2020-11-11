@@ -2,7 +2,7 @@
 	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.98.27",
+	"version": "0.98.28",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -11,7 +11,8 @@
 	},
 	"scripts": {
 		"start-page": "cd ./source/page && npm run start",
-		"start": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
+		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
+		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
 		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./temp/build/editor",
 		"serve": "http-server . -p 8081 --cors -o",
 		"docs-jsdoc": "jsdoc -d jsdocs -r ./source/core",
