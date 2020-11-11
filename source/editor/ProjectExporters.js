@@ -58,6 +58,7 @@ ProjectExporters.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
 	FileSystem.copyFile(Global.RUNTIME_PATH + "vr.png", dir + "/vr.png");
+	FileSystem.copyFile(Global.RUNTIME_PATH + "ar.png", dir + "/ar.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "fullscreen.png", dir + "/fullscreen.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "logo.png", dir + "/logo.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "index.html", dir + "/index.html");
@@ -79,7 +80,7 @@ ProjectExporters.exportWebProjectZip = function(fname)
 	var zip = new JSZip();
 	zip.file("index.html", FileSystem.readFile(Global.RUNTIME_PATH + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile(Global.RUNTIME_PATH + "nunu.min.js"));
-	
+
 	var pson = new StaticPair();
 	var data = pson.toArrayBuffer(Editor.program.toJSON());
 
