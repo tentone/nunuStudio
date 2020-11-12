@@ -271,7 +271,7 @@ App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 };
 
 /**
- * Update program state.
+ * Update program state and render to the canvas.
  *
  * Automatically called by the runtime handler.
  *
@@ -286,9 +286,9 @@ App.prototype.update = function()
 /**
  * Exit from app.
  *
- * This method kills the app and disposes all internal elements to avoid memory leaks.
+ * Kills the app and disposes all internal elements to avoid memory leaks.
  *
- * Is should be called before exiting the webpage or before switching programs.
+ * Should be called before exiting the webpage or before switching programs.
  *
  * When loading new programs the same app instance can be used.
  *
@@ -523,7 +523,7 @@ App.prototype.toggleAR = function()
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen
- * @param {Component} element DOM element to go fullscren by default the rendering canvas is used
+ * @param {Component} element DOM element to go fullscreen by default the rendering canvas is used
  */
 App.prototype.toggleFullscreen = function(element)
 {
