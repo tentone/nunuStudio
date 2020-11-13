@@ -2,11 +2,11 @@ import {AnimationMixer as TAnimationMixer} from "three";
 
 /**
  * The AnimationMixer is a player for animations on a particular object in the scene.
- * 
+ *
  * When multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.
  *
- * The object stores animations in its animations attribute, wich is an array an of animation clips.
- * 
+ * The object stores animations in its animations attribute, which is an array an of animation clips.
+ *
  * @class AnimationMixer
  * @module Animation
  * @extends {AnimationMixer}
@@ -23,9 +23,9 @@ AnimationMixer.prototype = Object.create(TAnimationMixer.prototype);
 
 /**
  * Create actions from array of animations.
- * 
+ *
  * @method createActions
- * @param {Array} actions Array of animations.
+ * @param {Array} animations Array of animations.
  */
 AnimationMixer.prototype.createActions = function(animations)
 {
@@ -44,7 +44,7 @@ AnimationMixer.prototype.createActions = function(animations)
 
 /**
  * Set animation mixer time.
- * 
+ *
  * @method setTime
  * @param {number} time Time in seconds.
  */
@@ -62,7 +62,7 @@ AnimationMixer.prototype.setTime = function(time)
 
 /**
  * Play animation.
- * 
+ *
  * @method play
  */
 AnimationMixer.prototype.play = function()
@@ -72,7 +72,7 @@ AnimationMixer.prototype.play = function()
 
 /**
  * Stop animation playback.
- * 
+ *
  * @method stop
  */
 AnimationMixer.prototype.stop = function()
@@ -83,7 +83,7 @@ AnimationMixer.prototype.stop = function()
 
 /**
  * Pause animation playback.
- * 
+ *
  * @method pause
  */
 AnimationMixer.prototype.pause = function()
@@ -99,7 +99,7 @@ AnimationMixer.prototype.dispose = function()
 
 /**
  * Update animation state.
- * 
+ *
  * @method update
  * @param {number} delta Time since last call.
  * @param {boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
