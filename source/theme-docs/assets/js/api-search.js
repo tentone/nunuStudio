@@ -1,6 +1,5 @@
 YUI.add('api-search', function(Y)
 {
-
 	var Lang = Y.Lang,
 		Node = Y.Node,
 		YArray = Y.Array;
