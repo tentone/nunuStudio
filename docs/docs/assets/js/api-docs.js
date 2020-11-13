@@ -1,6 +1,4 @@
-YUI().use(
-	'yuidoc-meta',
-	'api-list', 'history-hash', 'node-screen', 'node-style', 'pjax',
+YUI().use('yuidoc-meta', 'api-list', 'history-hash', 'node-screen', 'node-style', 'pjax',
 	function(Y)
 	{
 
@@ -25,9 +23,7 @@ YUI().use(
 		// on the loaded content.
 		defaultRoute = Y.Pjax.defaultRoute.concat(function(req, res, next)
 		{
-			prettyPrint();
 			bdNode.removeClass('loading');
-
 			next();
 		});
 
@@ -36,29 +32,21 @@ YUI().use(
 			contentSelector: '#docs-main > .content',
 			linkSelector: '#bd a',
 			titleSelector: '#xhr-title',
-
 			navigateOnHash: true,
 			root: '/',
 			routes: [
-				// /------
 				{
 					path: '/(index.html)?',
 					callbacks: defaultRoute
 				},
-
-				// /classes/* -------------------------------------------------------
 				{
 					path: '/classes/:class.html*',
 					callbacks: [defaultRoute, 'handleClasses']
 				},
-
-				// /files/* ---------------------------------------------------------
 				{
 					path: '/files/*file',
 					callbacks: [defaultRoute, 'handleFiles']
 				},
-
-				// /modules/* -------------------------------------------------------
 				{
 					path: '/modules/:module.html*',
 					callbacks: defaultRoute
@@ -305,25 +293,17 @@ YUI().use(
 
 		pjax.updateVisibility = function()
 		{
-			var container = pjax.get('container');
-
-			container.toggleClass('hide-inherited',
-				!Y.one('#api-show-inherited').get('checked'));
-
-			container.toggleClass('show-deprecated',
-				Y.one('#api-show-deprecated').get('checked'));
-
-			container.toggleClass('show-protected',
-				Y.one('#api-show-protected').get('checked'));
-
-			container.toggleClass('show-private',
-				Y.one('#api-show-private').get('checked'));
+			/* var container = pjax.get('container');
+			container.toggleClass('hide-inherited', !Y.one('#api-show-inherited').get('checked'));
+			container.toggleClass('show-deprecated', Y.one('#api-show-deprecated').get('checked'));
+			container.toggleClass('show-protected', Y.one('#api-show-protected').get('checked'));
+			container.toggleClass('show-private', Y.one('#api-show-private').get('checked'));
+			*/
 
 			pjax.checkVisibility();
 		};
 
-		// Route Handlers-
-
+		// Route Handlers
 		pjax.handleClasses = function(req, res, next)
 		{
 			var status = res.ioResponse.status;
@@ -350,8 +330,7 @@ YUI().use(
 			next();
 		};
 
-		// Event Handlers-
-
+		// Event Handlers
 		pjax.onNavigate = function(e)
 		{
 			var hash = e.hash,
@@ -393,10 +372,7 @@ YUI().use(
 
 			selectedTab = tab;
 
-			// If switching from a previous tab (i.e., this is not the default tab),
-			// replace the history entry with a hash URL that will cause this tab to
-			// be selected if the user navigates away and then returns using the back
-			// or forward buttons.
+			// If switching from a previous tab (i.e., this is not the default tab), replace the history entry with a hash URL that will cause this tab to or forward buttons.
 			if (e.prevVal && localStorage)
 			{
 				localStorage.setItem('tab_' + pjax.getPath(), tabId);
@@ -405,10 +381,8 @@ YUI().use(
 			pjax.checkVisibility(tab);
 		};
 
-		// Init-----------
-
+		// Init
 		pjax.on('navigate', pjax.onNavigate);
-
 		pjax.initRoot();
 		pjax.upgrade();
 		pjax.initClassTabView();
@@ -417,7 +391,7 @@ YUI().use(
 
 		Y.APIList.rootPath = pjax.get('root');
 
-		Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
+		// Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
 
 		Y.on('hashchange', function(e)
 		{

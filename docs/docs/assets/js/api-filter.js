@@ -1,6 +1,5 @@
 YUI.add('api-filter', function(Y)
 {
-
 	Y.APIFilter = Y.Base.create('apiFilter', Y.Base, [Y.AutoCompleteBase], {
 		// Initializer
 		initializer: function()
@@ -21,9 +20,8 @@ YUI.add('api-filter', function(Y)
 
 			return name;
 		}
-
 	}, {
-		// Attributes-
+		// Attributes
 		ATTRS: {
 			resultHighlighter: {value: 'phraseMatch'},
 
@@ -53,7 +51,5 @@ YUI.add('api-filter', function(Y)
 	});
 
 }, '3.4.0', {
-	requires: [
-		'autocomplete-base', 'autocomplete-highlighters', 'autocomplete-sources'
-	]
+	requires: ['autocomplete-base', 'autocomplete-highlighters', 'autocomplete-sources']
 });
