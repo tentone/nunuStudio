@@ -2,1854 +2,1862 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../assets/css/cssgrids-min.css">
-	<link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+	<link rel="shortcut icon" type="image/png" href="../assets/img/favicon.ico">
+
+	<link rel="stylesheet" href="../assets/lib/cssgrids.css">
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
-	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Gamepad</title>  
+
+	<script src="../assets/lib/yui-min.js"></script>
+	<script src="../assets/js/api-prettify.js"></script>
+	<script src="../assets/js/api-filter.js"></script>
+	<script src="../assets/js/api-list.js"></script>
+	<script src="../assets/js/api-search.js"></script>
+	<script src="../assets/js/api-docs.js"></script>
+
+	<title>nunuStudio Gamepad</title>
 </head>
 <body class="yui3-skin-sam">
-
-<div id="doc">
-	<div id="hd" class="yui3-g header">
-		<div class="yui3-u-3-4">
-				<h1><a href="../index.html"><img src="../assets/css/logo.png" title=""></a></h1>
+	<div id="doc">
+		<div id="hd" class="yui3-g header">
+			<div class="yui3-u-3-4">
+					<h1><a href="../index.html"><img src="../assets/img/logo.png" title=""></a></h1>
+			</div>
 		</div>
-	</div>
-	<div id="bd" class="yui3-g">
-		<div class="yui3-u-1-4">
-			<div id="docs-sidebar" class="sidebar apidocs">
-				<div id="api-list">
-					<h2 class="off-left">APIs</h2>
-					<div id="api-tabview" class="tabview">
-						<div id="api-tabview-filter">
-							<input type="search" id="api-filter" placeholder="Type to filter APIs">
-						</div>
-						<ul class="tabs">
-							<li><a href="#api-classes">Classes</a></li>
-							<li><a href="#api-modules">Modules</a></li>
-						</ul>
-						<div id="api-tabview-panel">
-							<ul id="api-classes" class="apis classes">
-								<li><a href="../classes/AfterimagePass.html">AfterimagePass</a></li>
-								<li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
-								<li><a href="../classes/AnimationMixer.html">AnimationMixer</a></li>
-								<li><a href="../classes/AnimationTimer.html">AnimationTimer</a></li>
-								<li><a href="../classes/App.html">App</a></li>
-								<li><a href="../classes/ARHandler.html">ARHandler</a></li>
-								<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
-								<li><a href="../classes/Audio.html">Audio</a></li>
-								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
-								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
-								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
-								<li><a href="../classes/BaseNode.html">BaseNode</a></li>
-								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
-								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
-								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
-								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
-								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
-								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
-								<li><a href="../classes/CapsuleBufferGeometry.html">CapsuleBufferGeometry</a></li>
-								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
-								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
-								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
-								<li><a href="../classes/CSS3DObject.html">CSS3DObject</a></li>
-								<li><a href="../classes/CSS3DRenderer.html">CSS3DRenderer</a></li>
-								<li><a href="../classes/CSS3DSprite.html">CSS3DSprite</a></li>
-								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
-								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
-								<li><a href="../classes/DataTexture.html">DataTexture</a></li>
-								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
-								<li><a href="../classes/DirectionalLightCSM.html">DirectionalLightCSM</a></li>
-								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
-								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
-								<li><a href="../classes/EventManager.html">EventManager</a></li>
-								<li><a href="../classes/FileSystem.html">FileSystem</a></li>
-								<li><a href="../classes/FilmPass.html">FilmPass</a></li>
-								<li><a href="../classes/FirstPersonControls.html">FirstPersonControls</a></li>
-								<li><a href="../classes/Fog.html">Fog</a></li>
-								<li><a href="../classes/Font.html">Font</a></li>
-								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
-								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
-								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
-								<li><a href="../classes/GeometryLoader.html">GeometryLoader</a></li>
-								<li><a href="../classes/Group.html">Group</a></li>
-								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
-								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
-								<li><a href="../classes/HTMLView.html">HTMLView</a></li>
-								<li><a href="../classes/HueSaturationPass.html">HueSaturationPass</a></li>
-								<li><a href="../classes/Image.html">Image</a></li>
-								<li><a href="../classes/ImageLoader.html">ImageLoader</a></li>
-								<li><a href="../classes/InstancedMesh.html">InstancedMesh</a></li>
-								<li><a href="../classes/Key.html">Key</a></li>
-								<li><a href="../classes/Keyboard.html">Keyboard</a></li>
-								<li><a href="../classes/LegacyGeometryLoader.html">LegacyGeometryLoader</a></li>
-								<li><a href="../classes/LensFlare.html">LensFlare</a></li>
-								<li><a href="../classes/LightProbe.html">LightProbe</a></li>
-								<li><a href="../classes/LocalStorage.html">LocalStorage</a></li>
-								<li><a href="../classes/Material.html">Material</a></li>
-								<li><a href="../classes/MaterialLoader.html">MaterialLoader</a></li>
-								<li><a href="../classes/MathUtils.html">MathUtils</a></li>
-								<li><a href="../classes/Mesh.html">Mesh</a></li>
-								<li><a href="../classes/Model.html">Model</a></li>
-								<li><a href="../classes/Mouse.html">Mouse</a></li>
-								<li><a href="../classes/NodeScript.html">NodeScript</a></li>
-								<li><a href="../classes/Nunu.html">Nunu</a></li>
-								<li><a href="../classes/Object3D.html">Object3D</a></li>
-								<li><a href="../classes/ObjectLoader.html">ObjectLoader</a></li>
-								<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
-								<li><a href="../classes/OperationNode.html">OperationNode</a></li>
-								<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
-								<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
-								<li><a href="../classes/ParametricBufferGeometry.html">ParametricBufferGeometry</a></li>
-								<li><a href="../classes/ParticleDistributions.html">ParticleDistributions</a></li>
-								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
-								<li><a href="../classes/ParticleEmitterControl.html">ParticleEmitterControl</a></li>
-								<li><a href="../classes/ParticleEmitterControlOptions.html">ParticleEmitterControlOptions</a></li>
-								<li><a href="../classes/ParticleGroup.html">ParticleGroup</a></li>
-								<li><a href="../classes/Pass.html">Pass</a></li>
-								<li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
-								<li><a href="../classes/PhysicsGenerator.html">PhysicsGenerator</a></li>
-								<li><a href="../classes/PhysicsObject.html">PhysicsObject</a></li>
-								<li><a href="../classes/PointLight.html">PointLight</a></li>
-								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
-								<li><a href="../classes/Program.html">Program</a></li>
-								<li><a href="../classes/PythonScript.html">PythonScript</a></li>
-								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
-								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
-								<li><a href="../classes/RendererState.html">RendererState</a></li>
-								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
-								<li><a href="../classes/Resource.html">Resource</a></li>
-								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
-								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
-								<li><a href="../classes/Scene.html">Scene</a></li>
-								<li><a href="../classes/Script.html">Script</a></li>
-								<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
-								<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
-								<li><a href="../classes/ShaderUtils.html">ShaderUtils</a></li>
-								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
-								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
-								<li><a href="../classes/Sky.html">Sky</a></li>
-								<li><a href="../classes/SobelPass.html">SobelPass</a></li>
-								<li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
-								<li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
-								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
-								<li><a href="../classes/Sprite.html">Sprite</a></li>
-								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
-								<li><a href="../classes/SSAONOHPass.html">SSAONOHPass</a></li>
-								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
-								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
-								<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
-								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
-								<li><a href="../classes/TerrainBufferGeometry.html">TerrainBufferGeometry</a></li>
-								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
-								<li><a href="../classes/TextFile.html">TextFile</a></li>
-								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
-								<li><a href="../classes/TextSprite.html">TextSprite</a></li>
-								<li><a href="../classes/Texture.html">Texture</a></li>
-								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
-								<li><a href="../classes/Timer.html">Timer</a></li>
-								<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
-								<li><a href="../classes/Tree.html">Tree</a></li>
-								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
-								<li><a href="../classes/TwistModifier.html">TwistModifier</a></li>
-								<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
-								<li><a href="../classes/UnitConverter.html">UnitConverter</a></li>
-								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
-								<li><a href="../classes/Video.html">Video</a></li>
-								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
-								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
-								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
-								<li><a href="../classes/Viewport.html">Viewport</a></li>
-								<li><a href="../classes/VRHandler.html">VRHandler</a></li>
-								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
-								<li><a href="../classes/WorkerPool.html">WorkerPool</a></li>
-								<li><a href="../classes/WorkerTask.html">WorkerTask</a></li>
-								<li><a href="../classes/{Object} ParticleGroupOptions.html">{Object} ParticleGroupOptions</a></li>
+		<div id="bd" class="yui3-g">
+			<div class="yui3-u-1-4">
+				<div id="docs-sidebar" class="sidebar apidocs">
+					<div id="api-list">
+						<h2 class="off-left">APIs</h2>
+						<div id="api-tabview" class="tabview">
+							<div id="api-tabview-filter">
+								<input type="search" id="api-filter" placeholder="Type to filter APIs">
+							</div>
+							<ul class="tabs">
+								<li><a href="#api-classes">Classes</a></li>
+								<li><a href="#api-modules">Modules</a></li>
 							</ul>
-				
-							<ul id="api-modules" class="apis modules">
-								<li><a href="../modules/Animation.html">Animation</a></li>
-								<li><a href="../modules/Animations.html">Animations</a></li>
-								<li><a href="../modules/Audio.html">Audio</a></li>
-								<li><a href="../modules/BinaryUtils.html">BinaryUtils</a></li>
-								<li><a href="../modules/Cameras.html">Cameras</a></li>
-								<li><a href="../modules/Controls.html">Controls</a></li>
-								<li><a href="../modules/Core.html">Core</a></li>
-								<li><a href="../modules/Files.html">Files</a></li>
-								<li><a href="../modules/Input.html">Input</a></li>
-								<li><a href="../modules/Lights.html">Lights</a></li>
-								<li><a href="../modules/Loaders.html">Loaders</a></li>
-								<li><a href="../modules/Meshes.html">Meshes</a></li>
-								<li><a href="../modules/Misc.html">Misc</a></li>
-								<li><a href="../modules/Particles.html">Particles</a></li>
-								<li><a href="../modules/Physics.html">Physics</a></li>
-								<li><a href="../modules/Postprocessing.html">Postprocessing</a></li>
-								<li><a href="../modules/Resources.html">Resources</a></li>
-								<li><a href="../modules/Runtime.html">Runtime</a></li>
-								<li><a href="../modules/Script.html">Script</a></li>
-								<li><a href="../modules/Sprite.html">Sprite</a></li>
-								<li><a href="../modules/Textures.html">Textures</a></li>
-								<li><a href="../modules/THREE.html">THREE</a></li>
-								<li><a href="../modules/Utils.html">Utils</a></li>
-							</ul>
+							<div id="api-tabview-panel">
+								<ul id="api-classes" class="apis classes">
+									<li><a href="../classes/AfterimagePass.html">AfterimagePass</a></li>
+									<li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
+									<li><a href="../classes/AnimationMixer.html">AnimationMixer</a></li>
+									<li><a href="../classes/AnimationTimer.html">AnimationTimer</a></li>
+									<li><a href="../classes/App.html">App</a></li>
+									<li><a href="../classes/ARHandler.html">ARHandler</a></li>
+									<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
+									<li><a href="../classes/Audio.html">Audio</a></li>
+									<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
+									<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
+									<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+									<li><a href="../classes/BaseNode.html">BaseNode</a></li>
+									<li><a href="../classes/BloomPass.html">BloomPass</a></li>
+									<li><a href="../classes/BokehPass.html">BokehPass</a></li>
+									<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
+									<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
+									<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
+									<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
+									<li><a href="../classes/CapsuleBufferGeometry.html">CapsuleBufferGeometry</a></li>
+									<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
+									<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
+									<li><a href="../classes/CopyPass.html">CopyPass</a></li>
+									<li><a href="../classes/CSS3DObject.html">CSS3DObject</a></li>
+									<li><a href="../classes/CSS3DRenderer.html">CSS3DRenderer</a></li>
+									<li><a href="../classes/CSS3DSprite.html">CSS3DSprite</a></li>
+									<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
+									<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
+									<li><a href="../classes/DataTexture.html">DataTexture</a></li>
+									<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
+									<li><a href="../classes/DirectionalLightCSM.html">DirectionalLightCSM</a></li>
+									<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
+									<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
+									<li><a href="../classes/EventManager.html">EventManager</a></li>
+									<li><a href="../classes/FileSystem.html">FileSystem</a></li>
+									<li><a href="../classes/FilmPass.html">FilmPass</a></li>
+									<li><a href="../classes/FirstPersonControls.html">FirstPersonControls</a></li>
+									<li><a href="../classes/Fog.html">Fog</a></li>
+									<li><a href="../classes/Font.html">Font</a></li>
+									<li><a href="../classes/FontLoader.html">FontLoader</a></li>
+									<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
+									<li><a href="../classes/Gamepad.html">Gamepad</a></li>
+									<li><a href="../classes/GeometryLoader.html">GeometryLoader</a></li>
+									<li><a href="../classes/Group.html">Group</a></li>
+									<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
+									<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
+									<li><a href="../classes/HTMLView.html">HTMLView</a></li>
+									<li><a href="../classes/HueSaturationPass.html">HueSaturationPass</a></li>
+									<li><a href="../classes/Image.html">Image</a></li>
+									<li><a href="../classes/ImageLoader.html">ImageLoader</a></li>
+									<li><a href="../classes/InstancedMesh.html">InstancedMesh</a></li>
+									<li><a href="../classes/Key.html">Key</a></li>
+									<li><a href="../classes/Keyboard.html">Keyboard</a></li>
+									<li><a href="../classes/LegacyGeometryLoader.html">LegacyGeometryLoader</a></li>
+									<li><a href="../classes/LensFlare.html">LensFlare</a></li>
+									<li><a href="../classes/LightProbe.html">LightProbe</a></li>
+									<li><a href="../classes/LocalStorage.html">LocalStorage</a></li>
+									<li><a href="../classes/Material.html">Material</a></li>
+									<li><a href="../classes/MaterialLoader.html">MaterialLoader</a></li>
+									<li><a href="../classes/MathUtils.html">MathUtils</a></li>
+									<li><a href="../classes/Mesh.html">Mesh</a></li>
+									<li><a href="../classes/Model.html">Model</a></li>
+									<li><a href="../classes/Mouse.html">Mouse</a></li>
+									<li><a href="../classes/NodeScript.html">NodeScript</a></li>
+									<li><a href="../classes/Nunu.html">Nunu</a></li>
+									<li><a href="../classes/Object3D.html">Object3D</a></li>
+									<li><a href="../classes/ObjectLoader.html">ObjectLoader</a></li>
+									<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+									<li><a href="../classes/OperationNode.html">OperationNode</a></li>
+									<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
+									<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
+									<li><a href="../classes/ParametricBufferGeometry.html">ParametricBufferGeometry</a></li>
+									<li><a href="../classes/ParticleDistributions.html">ParticleDistributions</a></li>
+									<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
+									<li><a href="../classes/ParticleEmitterControl.html">ParticleEmitterControl</a></li>
+									<li><a href="../classes/ParticleEmitterControlOptions.html">ParticleEmitterControlOptions</a></li>
+									<li><a href="../classes/ParticleGroup.html">ParticleGroup</a></li>
+									<li><a href="../classes/Pass.html">Pass</a></li>
+									<li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
+									<li><a href="../classes/PhysicsGenerator.html">PhysicsGenerator</a></li>
+									<li><a href="../classes/PhysicsObject.html">PhysicsObject</a></li>
+									<li><a href="../classes/PointLight.html">PointLight</a></li>
+									<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
+									<li><a href="../classes/Program.html">Program</a></li>
+									<li><a href="../classes/PythonScript.html">PythonScript</a></li>
+									<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+									<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
+									<li><a href="../classes/RendererState.html">RendererState</a></li>
+									<li><a href="../classes/RenderPass.html">RenderPass</a></li>
+									<li><a href="../classes/Resource.html">Resource</a></li>
+									<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
+									<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
+									<li><a href="../classes/Scene.html">Scene</a></li>
+									<li><a href="../classes/Script.html">Script</a></li>
+									<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
+									<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
+									<li><a href="../classes/ShaderUtils.html">ShaderUtils</a></li>
+									<li><a href="../classes/SimplexNoise.html">SimplexNoise</a></li>
+									<li><a href="../classes/Skeleton.html">Skeleton</a></li>
+									<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
+									<li><a href="../classes/Sky.html">Sky</a></li>
+									<li><a href="../classes/SobelPass.html">SobelPass</a></li>
+									<li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
+									<li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
+									<li><a href="../classes/SpotLight.html">SpotLight</a></li>
+									<li><a href="../classes/Sprite.html">Sprite</a></li>
+									<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+									<li><a href="../classes/SSAONOHPass.html">SSAONOHPass</a></li>
+									<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
+									<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
+									<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
+									<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
+									<li><a href="../classes/TerrainBufferGeometry.html">TerrainBufferGeometry</a></li>
+									<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
+									<li><a href="../classes/TextFile.html">TextFile</a></li>
+									<li><a href="../classes/TextMesh.html">TextMesh</a></li>
+									<li><a href="../classes/TextSprite.html">TextSprite</a></li>
+									<li><a href="../classes/Texture.html">Texture</a></li>
+									<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
+									<li><a href="../classes/Timer.html">Timer</a></li>
+									<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
+									<li><a href="../classes/Tree.html">Tree</a></li>
+									<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+									<li><a href="../classes/TwistModifier.html">TwistModifier</a></li>
+									<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
+									<li><a href="../classes/UnitConverter.html">UnitConverter</a></li>
+									<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
+									<li><a href="../classes/Video.html">Video</a></li>
+									<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
+									<li><a href="../classes/VideoStream.html">VideoStream</a></li>
+									<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
+									<li><a href="../classes/Viewport.html">Viewport</a></li>
+									<li><a href="../classes/VRHandler.html">VRHandler</a></li>
+									<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
+									<li><a href="../classes/WorkerPool.html">WorkerPool</a></li>
+									<li><a href="../classes/WorkerTask.html">WorkerTask</a></li>
+									<li><a href="../classes/{Object} ParticleGroupOptions.html">{Object} ParticleGroupOptions</a></li>
+								</ul>
+					
+								<ul id="api-modules" class="apis modules">
+									<li><a href="../modules/Animation.html">Animation</a></li>
+									<li><a href="../modules/Animations.html">Animations</a></li>
+									<li><a href="../modules/Audio.html">Audio</a></li>
+									<li><a href="../modules/BinaryUtils.html">BinaryUtils</a></li>
+									<li><a href="../modules/Cameras.html">Cameras</a></li>
+									<li><a href="../modules/Controls.html">Controls</a></li>
+									<li><a href="../modules/Core.html">Core</a></li>
+									<li><a href="../modules/Files.html">Files</a></li>
+									<li><a href="../modules/Input.html">Input</a></li>
+									<li><a href="../modules/Lights.html">Lights</a></li>
+									<li><a href="../modules/Loaders.html">Loaders</a></li>
+									<li><a href="../modules/Meshes.html">Meshes</a></li>
+									<li><a href="../modules/Misc.html">Misc</a></li>
+									<li><a href="../modules/Particles.html">Particles</a></li>
+									<li><a href="../modules/Physics.html">Physics</a></li>
+									<li><a href="../modules/Postprocessing.html">Postprocessing</a></li>
+									<li><a href="../modules/Resources.html">Resources</a></li>
+									<li><a href="../modules/Runtime.html">Runtime</a></li>
+									<li><a href="../modules/Script.html">Script</a></li>
+									<li><a href="../modules/Sprite.html">Sprite</a></li>
+									<li><a href="../modules/Textures.html">Textures</a></li>
+									<li><a href="../modules/THREE.html">THREE</a></li>
+									<li><a href="../modules/Utils.html">Utils</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="yui3-u-3-4">
-			<!--<div id="api-options">
-				Show:
-				<label for="api-show-inherited">
-					<input type="checkbox" id="api-show-inherited" checked>
-					Inherited
-				</label>
-				<label for="api-show-protected">
-					<input type="checkbox" id="api-show-protected">
-					Protected
-				</label>
-				<label for="api-show-private">
-					<input type="checkbox" id="api-show-private">
-					Private
-				</label>
-				<label for="api-show-deprecated">
-					<input type="checkbox" id="api-show-deprecated">
-					Deprecated
-				</label>
-			</div>-->			<div class="apidocs">
-				<div id="docs-main">
-					<div class="content">
-						<h1>Gamepad Class</h1>
-						<div class="box meta">
-						
-						
-						
-									Module: <a href="../modules/Input.html">Input</a>
-						
-						</div>
-						
-						
-						<div class="box intro">
-							<p>Gamepad provides basic support for gamepads.</p>
-						<p>Some gamepads require a button press to being detected.</p>
-						<p>Gamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.</p>
-						<p>For more information about the Gamepad API state take look at the W3C Gamepad API page https:// <a href="http://www.w3.org/TR/gamepad/">www.w3.org/TR/gamepad/</a>.</p>
-						
-						</div>
-						
-						
-						<div id="classdocs" class="tabview">
-							<ul class="api-class-tabs">
-								<li class="api-class-tab index"><a href="#index">Index</a></li>
-						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
-							</ul>
-						
-							<div>
-								<div id="index" class="api-class-tabpanel index">
-									<h2 class="off-left">Item Index</h2>
-						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods">
-													<li class="index-item method">
-														<a href="#method_buttonExists">buttonExists</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonJustPressed">buttonJustPressed</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonJustReleased">buttonJustReleased</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonPressed">buttonPressed</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_disconnect">disconnect</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_getAnalogueButton">getAnalogueButton</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_getAxis">getAxis</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setGamepad">setGamepad</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setProductVendor">setProductVendor</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
-						
-													</li>
-											</ul>
+			<div class="yui3-u-3-4">
+				<!--<div id="api-options">
+					Show:
+					<label for="api-show-inherited">
+						<input type="checkbox" id="api-show-inherited" checked>
+						Inherited
+					</label>
+					<label for="api-show-protected">
+						<input type="checkbox" id="api-show-protected">
+						Protected
+					</label>
+					<label for="api-show-private">
+						<input type="checkbox" id="api-show-private">
+						Private
+					</label>
+					<label for="api-show-deprecated">
+						<input type="checkbox" id="api-show-deprecated">
+						Deprecated
+					</label>
+				</div>-->				<div class="apidocs">
+					<div id="docs-main">
+						<div class="content">
+							<h1>Gamepad Class</h1>
+							<div class="box meta">
+							
+							
+							
+										Module: <a href="../modules/Input.html">Input</a>
+							
+							</div>
+							
+							
+							<div class="box intro">
+								<p>Gamepad provides basic support for gamepads.</p>
+							<p>Some gamepads require a button press to being detected.</p>
+							<p>Gamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.</p>
+							<p>For more information about the Gamepad API state take look at the W3C Gamepad API page https:// <a href="http://www.w3.org/TR/gamepad/">www.w3.org/TR/gamepad/</a>.</p>
+							
+							</div>
+							
+							
+							<div id="classdocs" class="tabview">
+								<ul class="api-class-tabs">
+									<li class="api-class-tab index"><a href="#index">Index</a></li>
+							
+										<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+										<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+								</ul>
+							
+								<div>
+									<div id="index" class="api-class-tabpanel index">
+										<h2 class="off-left">Item Index</h2>
+							
+											<div class="index-section methods">
+												<h3>Methods</h3>
+							
+												<ul class="index-list methods">
+														<li class="index-item method">
+															<a href="#method_buttonExists">buttonExists</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_buttonJustPressed">buttonJustPressed</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_buttonJustReleased">buttonJustReleased</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_buttonPressed">buttonPressed</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_disconnect">disconnect</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_getAnalogueButton">getAnalogueButton</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_getAxis">getAxis</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_setGamepad">setGamepad</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_setProductVendor">setProductVendor</a>
+							
+														</li>
+														<li class="index-item method">
+															<a href="#method_update">update</a>
+							
+														</li>
+												</ul>
+											</div>
+							
+							
+											<div class="index-section attrs">
+												<h3>Attributes</h3>
+							
+												<ul class="index-list attrs">
+														<li class="index-item attr">
+															<a href="#attr_A">A</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_B">B</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_buttons">buttons</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_C">C</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_connected">connected</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_D">D</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_DOWN">DOWN</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_HOME">HOME</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_L1">L1</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_L2">L2</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_L3">L3</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT">LEFT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT_ANALOGUE_BUT">LEFT_ANALOGUE_BUT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT_ANALOGUE_HOR">LEFT_ANALOGUE_HOR</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT_ANALOGUE_VERT">LEFT_ANALOGUE_VERT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT_TRIGGER_A">LEFT_TRIGGER_A</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_LEFT_TRIGGER_B">LEFT_TRIGGER_B</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_product">product</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_R1">R1</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_R2">R2</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_R3">R3</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT">RIGHT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT_ANALOGUE_BUT">RIGHT_ANALOGUE_BUT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT_ANALOGUE_HOR">RIGHT_ANALOGUE_HOR</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT_ANALOGUE_VERT">RIGHT_ANALOGUE_VERT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT_TRIGGER_A">RIGHT_TRIGGER_A</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_RIGHT_TRIGGER_B">RIGHT_TRIGGER_B</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_SELECT">SELECT</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_START">START</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_UP">UP</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_vendor">vendor</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_X">X</a>
+														</li>
+														<li class="index-item attr">
+															<a href="#attr_Y">Y</a>
+														</li>
+												</ul>
+											</div>
+							
+									</div>
+							
+										<div id="methods" class="api-class-tabpanel">
+											<h2 class="off-left">Methods</h2>
+							
+												<div id="method_buttonExists" class="method item">
+													<h3 class="name"><code>buttonExists</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>button</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Boolean</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Check if a button exists in the connected Gamepad.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">button</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>Button to check status of</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Boolean</span>:
+																	<p>True if button exists in the connected gamepad.</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_buttonJustPressed" class="method item">
+													<h3 class="name"><code>buttonJustPressed</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>button</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Boolean</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Check if a gamepad button was just pressed.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">button</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>Button to check status of</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Boolean</span>:
+																	<p>True if button was just pressed</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_buttonJustReleased" class="method item">
+													<h3 class="name"><code>buttonJustReleased</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>button</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Boolean</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Check if a gamepad button was just released.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">button</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>Button to check status of</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Boolean</span>:
+																	<p>True if button was just released</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_buttonPressed" class="method item">
+													<h3 class="name"><code>buttonPressed</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>button</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Boolean</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Check if gamepad button is currently pressed.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">button</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>Button to check status of</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Boolean</span>:
+																	<p>True if button is currently pressed</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_disconnect" class="method item">
+													<h3 class="name"><code>disconnect</code></h3>
+												
+														<span class="paren">()</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Disconnect this gamepad object.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="method_getAnalogueButton" class="method item">
+													<h3 class="name"><code>getAnalogueButton</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>button</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Number</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Get analog button value between 0 and 1.</p>
+												<p>If the button is not analog enabled it will return 0 if button is not pressed or 1 if the button is pressed.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">button</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>Button to get analogue value from.</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Number</span>:
+																	<p>Value between 0 and 1 depending how hard the button is pressed.</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_getAxis" class="method item">
+													<h3 class="name"><code>getAxis</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>Axis</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+														<span class="returns-inline">
+															<span class="type">Number</span>
+														</span>
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Get axis value between -1 and 1 depending on the direction.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">Axis</code>
+																		<span class="type">Number</span>
+												
+												
+																	<div class="param-description">
+																		<p>to get value from.</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+														<div class="returns">
+															<h4>Returns:</h4>
+												
+															<div class="returns-description">
+																		<span class="type">Number</span>:
+																	<p>Value between -1 and 1 depending on the axis direction</p>
+												
+															</div>
+														</div>
+												
+												</div>
+												<div id="method_setGamepad" class="method item">
+													<h3 class="name"><code>setGamepad</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>Browser</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Set which gamepad should be used by this Gamepad instance.</p>
+												<p>Can be used to override the gamepad attached to this object and enable multiple gamepad support.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">Browser</code>
+																		<span class="type">Object</span>
+												
+												
+																	<div class="param-description">
+																		<p>gamepad object.</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+												
+												</div>
+												<div id="method_setProductVendor" class="method item">
+													<h3 class="name"><code>setProductVendor</code></h3>
+												
+														<div class="args">
+															<span class="paren">(</span><ul class="args-list inline commas">
+																<li class="arg">
+																		<code>gamepad</code>
+																</li>
+															</ul><span class="paren">)</span>
+														</div>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Get vendor id and product id for the connected gamepad.</p>
+												
+													</div>
+												
+														<div class="params">
+															<h4>Parameters:</h4>
+												
+															<ul class="params-list">
+																<li class="param">
+																		<code class="param-name">gamepad</code>
+																		<span class="type">Object</span>
+												
+												
+																	<div class="param-description">
+																		<p>Gamepad object.</p>
+												
+																	</div>
+												
+																</li>
+															</ul>
+														</div>
+												
+												
+												</div>
+												<div id="method_update" class="method item">
+													<h3 class="name"><code>update</code></h3>
+												
+														<span class="paren">()</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Update the gamepad state.</p>
+												<p>Should be called every frame before checking the buttons values.</p>
+												
+													</div>
+												
+												
+												
+												</div>
 										</div>
-						
-						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs">
-													<li class="index-item attr">
-														<a href="#attr_A">A</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_B">B</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_buttons">buttons</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_C">C</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_connected">connected</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_D">D</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_DOWN">DOWN</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_HOME">HOME</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_L1">L1</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_L2">L2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_L3">L3</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT">LEFT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT_ANALOGUE_BUT">LEFT_ANALOGUE_BUT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT_ANALOGUE_HOR">LEFT_ANALOGUE_HOR</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT_ANALOGUE_VERT">LEFT_ANALOGUE_VERT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT_TRIGGER_A">LEFT_TRIGGER_A</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT_TRIGGER_B">LEFT_TRIGGER_B</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_product">product</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_R1">R1</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_R2">R2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_R3">R3</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT">RIGHT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT_ANALOGUE_BUT">RIGHT_ANALOGUE_BUT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT_ANALOGUE_HOR">RIGHT_ANALOGUE_HOR</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT_ANALOGUE_VERT">RIGHT_ANALOGUE_VERT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT_TRIGGER_A">RIGHT_TRIGGER_A</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT_TRIGGER_B">RIGHT_TRIGGER_B</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_SELECT">SELECT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_START">START</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_UP">UP</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_vendor">vendor</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_X">X</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_Y">Y</a>
-													</li>
-											</ul>
+							
+							
+										<div id="attrs" class="api-class-tabpanel">
+											<h2 class="off-left">Attributes</h2>
+							
+												<div id="attr_A" class="attr item">
+													<a name="config_A"></a> 
+													<h3 class="name"><code>A</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad A button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_B" class="attr item">
+													<a name="config_B"></a> 
+													<h3 class="name"><code>B</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad B button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_buttons" class="attr item">
+													<a name="config_buttons"></a> 
+													<h3 class="name"><code>buttons</code></h3>
+													<span class="type">Array</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad buttons with their associated state.</p>
+												<p>Should be different for every gamepad.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_C" class="attr item">
+													<a name="config_C"></a> 
+													<h3 class="name"><code>C</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad C button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_connected" class="attr item">
+													<a name="config_connected"></a> 
+													<h3 class="name"><code>connected</code></h3>
+													<span class="type">Boolean</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Connected state of the gamepad.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_D" class="attr item">
+													<a name="config_D"></a> 
+													<h3 class="name"><code>D</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad D button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_DOWN" class="attr item">
+													<a name="config_DOWN"></a> 
+													<h3 class="name"><code>DOWN</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad DOWN button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_HOME" class="attr item">
+													<a name="config_HOME"></a> 
+													<h3 class="name"><code>HOME</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad HOME button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_L1" class="attr item">
+													<a name="config_L1"></a> 
+													<h3 class="name"><code>L1</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad L1 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_L2" class="attr item">
+													<a name="config_L2"></a> 
+													<h3 class="name"><code>L2</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad L2 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_L3" class="attr item">
+													<a name="config_L3"></a> 
+													<h3 class="name"><code>L3</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad L3 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT" class="attr item">
+													<a name="config_LEFT"></a> 
+													<h3 class="name"><code>LEFT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT_ANALOGUE_BUT" class="attr item">
+													<a name="config_LEFT_ANALOGUE_BUT"></a> 
+													<h3 class="name"><code>LEFT_ANALOGUE_BUT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT_ANALOGUE_BUT axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT_ANALOGUE_HOR" class="attr item">
+													<a name="config_LEFT_ANALOGUE_HOR"></a> 
+													<h3 class="name"><code>LEFT_ANALOGUE_HOR</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT_ANALOGUE_HOR axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT_ANALOGUE_VERT" class="attr item">
+													<a name="config_LEFT_ANALOGUE_VERT"></a> 
+													<h3 class="name"><code>LEFT_ANALOGUE_VERT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT_ANALOGUE_VERT axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT_TRIGGER_A" class="attr item">
+													<a name="config_LEFT_TRIGGER_A"></a> 
+													<h3 class="name"><code>LEFT_TRIGGER_A</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT_TRIGGER_A button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_LEFT_TRIGGER_B" class="attr item">
+													<a name="config_LEFT_TRIGGER_B"></a> 
+													<h3 class="name"><code>LEFT_TRIGGER_B</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad LEFT_TRIGGER_B button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_product" class="attr item">
+													<a name="config_product"></a> 
+													<h3 class="name"><code>product</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Product code of the gamepad device.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_R1" class="attr item">
+													<a name="config_R1"></a> 
+													<h3 class="name"><code>R1</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad R1 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_R2" class="attr item">
+													<a name="config_R2"></a> 
+													<h3 class="name"><code>R2</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad R2 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_R3" class="attr item">
+													<a name="config_R3"></a> 
+													<h3 class="name"><code>R3</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad R3 button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT" class="attr item">
+													<a name="config_RIGHT"></a> 
+													<h3 class="name"><code>RIGHT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT_ANALOGUE_BUT" class="attr item">
+													<a name="config_RIGHT_ANALOGUE_BUT"></a> 
+													<h3 class="name"><code>RIGHT_ANALOGUE_BUT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT_ANALOGUE_BUT axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT_ANALOGUE_HOR" class="attr item">
+													<a name="config_RIGHT_ANALOGUE_HOR"></a> 
+													<h3 class="name"><code>RIGHT_ANALOGUE_HOR</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT_ANALOGUE_HOR axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT_ANALOGUE_VERT" class="attr item">
+													<a name="config_RIGHT_ANALOGUE_VERT"></a> 
+													<h3 class="name"><code>RIGHT_ANALOGUE_VERT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT_ANALOGUE_VERT axis.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT_TRIGGER_A" class="attr item">
+													<a name="config_RIGHT_TRIGGER_A"></a> 
+													<h3 class="name"><code>RIGHT_TRIGGER_A</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT_TRIGGER_A button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_RIGHT_TRIGGER_B" class="attr item">
+													<a name="config_RIGHT_TRIGGER_B"></a> 
+													<h3 class="name"><code>RIGHT_TRIGGER_B</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad RIGHT_TRIGGER_B button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_SELECT" class="attr item">
+													<a name="config_SELECT"></a> 
+													<h3 class="name"><code>SELECT</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad SELECT button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_START" class="attr item">
+													<a name="config_START"></a> 
+													<h3 class="name"><code>START</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad START button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_UP" class="attr item">
+													<a name="config_UP"></a> 
+													<h3 class="name"><code>UP</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad UP button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_vendor" class="attr item">
+													<a name="config_vendor"></a> 
+													<h3 class="name"><code>vendor</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Vendor code of the gamepad device.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_X" class="attr item">
+													<a name="config_X"></a> 
+													<h3 class="name"><code>X</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad X button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
+												<div id="attr_Y" class="attr item">
+													<a name="config_Y"></a> 
+													<h3 class="name"><code>Y</code></h3>
+													<span class="type">Number</span>
+												
+												
+												
+												
+												
+												
+												
+												
+													<div class="meta">
+																<p>
+														</p>
+												
+												
+													</div>
+												
+													<div class="description">
+														<p>Gamepad Y button.</p>
+												
+													</div>
+												
+												
+												
+												</div>
 										</div>
-						
+							
 								</div>
-						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_buttonExists" class="method item">
-												<h3 class="name"><code>buttonExists</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if a button exists in the connected Gamepad.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button exists in the connected gamepad.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonJustPressed" class="method item">
-												<h3 class="name"><code>buttonJustPressed</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if a gamepad button was just pressed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button was just pressed</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonJustReleased" class="method item">
-												<h3 class="name"><code>buttonJustReleased</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if a gamepad button was just released.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button was just released</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonPressed" class="method item">
-												<h3 class="name"><code>buttonPressed</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if gamepad button is currently pressed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button is currently pressed</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_disconnect" class="method item">
-												<h3 class="name"><code>disconnect</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Disconnect this gamepad object.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_getAnalogueButton" class="method item">
-												<h3 class="name"><code>getAnalogueButton</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Number</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Get analog button value between 0 and 1.</p>
-											<p>If the button is not analog enabled it will return 0 if button is not pressed or 1 if the button is pressed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to get analogue value from.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Number</span>:
-																<p>Value between 0 and 1 depending how hard the button is pressed.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_getAxis" class="method item">
-												<h3 class="name"><code>getAxis</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>Axis</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Number</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Get axis value between -1 and 1 depending on the direction.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">Axis</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>to get value from.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Number</span>:
-																<p>Value between -1 and 1 depending on the axis direction</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_setGamepad" class="method item">
-												<h3 class="name"><code>setGamepad</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>Browser</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set which gamepad should be used by this Gamepad instance.</p>
-											<p>Can be used to override the gamepad attached to this object and enable multiple gamepad support.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">Browser</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	<p>gamepad object.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setProductVendor" class="method item">
-												<h3 class="name"><code>setProductVendor</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>gamepad</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Get vendor id and product id for the connected gamepad.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">gamepad</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	<p>Gamepad object.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update the gamepad state.</p>
-											<p>Should be called every frame before checking the buttons values.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
-						
-						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_A" class="attr item">
-												<a name="config_A"></a> 
-												<h3 class="name"><code>A</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad A button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_B" class="attr item">
-												<a name="config_B"></a> 
-												<h3 class="name"><code>B</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad B button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_buttons" class="attr item">
-												<a name="config_buttons"></a> 
-												<h3 class="name"><code>buttons</code></h3>
-												<span class="type">Array</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad buttons with their associated state.</p>
-											<p>Should be different for every gamepad.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_C" class="attr item">
-												<a name="config_C"></a> 
-												<h3 class="name"><code>C</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad C button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_connected" class="attr item">
-												<a name="config_connected"></a> 
-												<h3 class="name"><code>connected</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Connected state of the gamepad.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_D" class="attr item">
-												<a name="config_D"></a> 
-												<h3 class="name"><code>D</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad D button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_DOWN" class="attr item">
-												<a name="config_DOWN"></a> 
-												<h3 class="name"><code>DOWN</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad DOWN button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_HOME" class="attr item">
-												<a name="config_HOME"></a> 
-												<h3 class="name"><code>HOME</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad HOME button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_L1" class="attr item">
-												<a name="config_L1"></a> 
-												<h3 class="name"><code>L1</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad L1 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_L2" class="attr item">
-												<a name="config_L2"></a> 
-												<h3 class="name"><code>L2</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad L2 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_L3" class="attr item">
-												<a name="config_L3"></a> 
-												<h3 class="name"><code>L3</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad L3 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT" class="attr item">
-												<a name="config_LEFT"></a> 
-												<h3 class="name"><code>LEFT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT_ANALOGUE_BUT" class="attr item">
-												<a name="config_LEFT_ANALOGUE_BUT"></a> 
-												<h3 class="name"><code>LEFT_ANALOGUE_BUT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT_ANALOGUE_BUT axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT_ANALOGUE_HOR" class="attr item">
-												<a name="config_LEFT_ANALOGUE_HOR"></a> 
-												<h3 class="name"><code>LEFT_ANALOGUE_HOR</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT_ANALOGUE_HOR axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT_ANALOGUE_VERT" class="attr item">
-												<a name="config_LEFT_ANALOGUE_VERT"></a> 
-												<h3 class="name"><code>LEFT_ANALOGUE_VERT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT_ANALOGUE_VERT axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT_TRIGGER_A" class="attr item">
-												<a name="config_LEFT_TRIGGER_A"></a> 
-												<h3 class="name"><code>LEFT_TRIGGER_A</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT_TRIGGER_A button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT_TRIGGER_B" class="attr item">
-												<a name="config_LEFT_TRIGGER_B"></a> 
-												<h3 class="name"><code>LEFT_TRIGGER_B</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad LEFT_TRIGGER_B button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_product" class="attr item">
-												<a name="config_product"></a> 
-												<h3 class="name"><code>product</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Product code of the gamepad device.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_R1" class="attr item">
-												<a name="config_R1"></a> 
-												<h3 class="name"><code>R1</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad R1 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_R2" class="attr item">
-												<a name="config_R2"></a> 
-												<h3 class="name"><code>R2</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad R2 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_R3" class="attr item">
-												<a name="config_R3"></a> 
-												<h3 class="name"><code>R3</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad R3 button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT" class="attr item">
-												<a name="config_RIGHT"></a> 
-												<h3 class="name"><code>RIGHT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT_ANALOGUE_BUT" class="attr item">
-												<a name="config_RIGHT_ANALOGUE_BUT"></a> 
-												<h3 class="name"><code>RIGHT_ANALOGUE_BUT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT_ANALOGUE_BUT axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT_ANALOGUE_HOR" class="attr item">
-												<a name="config_RIGHT_ANALOGUE_HOR"></a> 
-												<h3 class="name"><code>RIGHT_ANALOGUE_HOR</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT_ANALOGUE_HOR axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT_ANALOGUE_VERT" class="attr item">
-												<a name="config_RIGHT_ANALOGUE_VERT"></a> 
-												<h3 class="name"><code>RIGHT_ANALOGUE_VERT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT_ANALOGUE_VERT axis.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT_TRIGGER_A" class="attr item">
-												<a name="config_RIGHT_TRIGGER_A"></a> 
-												<h3 class="name"><code>RIGHT_TRIGGER_A</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT_TRIGGER_A button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT_TRIGGER_B" class="attr item">
-												<a name="config_RIGHT_TRIGGER_B"></a> 
-												<h3 class="name"><code>RIGHT_TRIGGER_B</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad RIGHT_TRIGGER_B button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_SELECT" class="attr item">
-												<a name="config_SELECT"></a> 
-												<h3 class="name"><code>SELECT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad SELECT button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_START" class="attr item">
-												<a name="config_START"></a> 
-												<h3 class="name"><code>START</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad START button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_UP" class="attr item">
-												<a name="config_UP"></a> 
-												<h3 class="name"><code>UP</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad UP button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_vendor" class="attr item">
-												<a name="config_vendor"></a> 
-												<h3 class="name"><code>vendor</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Vendor code of the gamepad device.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_X" class="attr item">
-												<a name="config_X"></a> 
-												<h3 class="name"><code>X</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad X button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_Y" class="attr item">
-												<a name="config_Y"></a> 
-												<h3 class="name"><code>Y</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Gamepad Y button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
-						
 							</div>
 						</div>
 					</div>
@@ -1857,14 +1865,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

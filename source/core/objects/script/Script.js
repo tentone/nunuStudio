@@ -224,6 +224,7 @@ Script.getIncludes = function(code)
 /**
  * Remove comments from javascript code using regex.
  *
+ * @method removeComments
  * @param {string} code Input javascript code.
  * @return {string} The processed javascript code.
  */

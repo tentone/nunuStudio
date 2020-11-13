@@ -3,9 +3,9 @@ import {NodeGraph} from "escher.js/build/escher.module.js";
 
 /**
  * Node scripts are build using a graph composed of operations.
- * 
+ *
  * They can be used to create interaction without requiring any coding, logic can be build from provided blocks.
- * 
+ *
  * @class NodeScript
  * @extends {Object}
  * @module Script
@@ -13,13 +13,13 @@ import {NodeGraph} from "escher.js/build/escher.module.js";
 function NodeScript()
 {
 	Group.call(this);
-	
+
 	this.type = "NodeScript";
 	this.name = "script";
 
 	/**
 	 * Node graph that composes this script.
-	 * 
+	 *
 	 * @attribute graph
 	 * @type {NodeGraph}
 	 */
@@ -30,7 +30,8 @@ NodeScript.prototype = Object.create(Group.prototype);
 
 /**
  * Add a node the graph, these nodes can be connected with other already existing nodes in the graph.
- * 
+ *
+ * @method addNode
  * @param {Node} node Node to be added into the graph.
  */
 NodeScript.prototype.addNode = function(node)
@@ -54,7 +55,7 @@ NodeScript.prototype.initialize = function()
 
 /**
  * Update node script state runs the update methods from the node graph.
- * 
+ *
  * @method update
  */
 NodeScript.prototype.update = function(delta)
@@ -66,9 +67,9 @@ NodeScript.prototype.update = function(delta)
 
 /**
  * Disposes the script, can be used to clear resources when the program exits.
- * 
+ *
  * Calls the script dispose method if it exists.
- * 
+ *
  * @method dispose
  */
 NodeScript.prototype.dispose = function()
@@ -82,7 +83,7 @@ NodeScript.prototype.dispose = function()
  * Call resize method if available.
  *
  * The resize method receives width and height as arguments.
- * 
+ *
  * @method resize
  */
 NodeScript.prototype.resize = function(x, y)

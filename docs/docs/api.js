@@ -100,6 +100,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ShaderAttribute",
         "ShaderPass",
         "ShaderUtils",
+        "SimplexNoise",
         "Skeleton",
         "SkinnedMesh",
         "Sky",

@@ -4,7 +4,7 @@ import {BaseNode} from "./BaseNode.js";
 
 /**
  * Operation nodes can be used for simple math operations with two input values.
- * 
+ *
  * @constructor
  * @class OperationNode
  * @param {string} operation Math operation symbol to be performed.
@@ -17,6 +17,9 @@ function OperationNode(operation)
 
 	/**
 	 * Math operation performed by this node.
+	 *
+	 * @attribute operation
+	 * @type {string}
 	 */
 	this.operation = operation;
 
@@ -24,15 +27,15 @@ function OperationNode(operation)
 
 	/**
 	 * Input node socket a.
-	 * 
+	 *
 	 * @attribute a
 	 * @type {NodeSocket}
 	 */
 	this.a = null;
-	
+
 	/**
 	 * Input node socket b.
-	 * 
+	 *
 	 * @attribute b
 	 * @type {NodeSocket}
 	 */
@@ -40,12 +43,12 @@ function OperationNode(operation)
 
 	/**
 	 * Output node socket r with the result.
-	 * 
+	 *
 	 * @attribute r
 	 * @type {NodeSocket}
 	 */
 	this.r = null;
-	
+
 	this.text = new Text();
 	this.text.strokeStyle = new ColorStyle(DOMUtils.getCSSVariable("--color-light"));
 	this.text.serializable = false;
@@ -71,7 +74,7 @@ OperationNode.prototype.registerSockets = function()
 	if (this.r === null)
 	{
 		this.r = this.addOutput("string", "r");
-		this.r.getValue = () => 
+		this.r.getValue = () =>
 		{
 			return "(" + this.a.getValue() + this.operation + this.b.getValue() + ")";
 		};

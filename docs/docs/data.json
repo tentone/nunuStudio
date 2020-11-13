@@ -1205,7 +1205,9 @@
         "source\\core\\utils\\SimplexNoise.js": {
             "name": "source\\core\\utils\\SimplexNoise.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "SimplexNoise": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -1469,6 +1471,7 @@
             "classes": {
                 "PhysicsGenerator": 1,
                 "PhysicsObject": 1,
+                "SimplexNoise": 1,
                 "UnitConverter": 1,
                 "ARHandler": 1,
                 "VRHandler": 1
@@ -1727,7 +1730,7 @@
             "module": "Animation",
             "file": "source\\core\\animation\\AnimationMixer.js",
             "line": 3,
-            "description": "The AnimationMixer is a player for animations on a particular object in the scene.\n\nWhen multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.\n\nThe object stores animations in its animations attribute, wich is an array an of animation clips.",
+            "description": "The AnimationMixer is a player for animations on a particular object in the scene.\n\nWhen multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.\n\nThe object stores animations in its animations attribute, which is an array an of animation clips.",
             "extends": "{AnimationMixer}",
             "params": [
                 {
@@ -4872,6 +4875,28 @@
             "author": "tentone",
             "static": 1
         },
+        "SimplexNoise": {
+            "name": "SimplexNoise",
+            "shortname": "SimplexNoise",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "source\\core\\utils\\SimplexNoise.js",
+            "line": 1,
+            "description": "Simplex noise generator object. Can generate 1D, 2D, 3D and 4D noise.\n\nPorted from Stefan Gustavson's java implementation (http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf) Stefan's excellent paper for details on how this code works.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "r",
+                    "description": "Optional, random number generator object, it is assumed to have a random() method.",
+                    "type": "Any"
+                }
+            ]
+        },
         "UnitConverter": {
             "name": "UnitConverter",
             "shortname": "UnitConverter",
@@ -4976,7 +5001,7 @@
             "name": "createActions",
             "params": [
                 {
-                    "name": "actions",
+                    "name": "animations",
                     "description": "Array of animations.",
                     "type": "Array"
                 }
@@ -5114,6 +5139,10 @@
             "description": "Compile the generator code and generate a function to be passed to the geometry generator.",
             "itemtype": "method",
             "name": "compile",
+            "return": {
+                "description": "Compiled function to calculate the position of the vertex from (U, V) coordinates.",
+                "type": "Function"
+            },
             "class": "ParametricBufferGeometry",
             "module": "Animation"
         },
@@ -12029,12 +12058,15 @@
             "file": "source\\core\\objects\\script\\nodes\\OperationNode.js",
             "line": 18,
             "description": "Math operation performed by this node.",
+            "itemtype": "attribute",
+            "name": "operation",
+            "type": "{string}",
             "class": "OperationNode",
             "module": "Script"
         },
         {
             "file": "source\\core\\objects\\script\\nodes\\OperationNode.js",
-            "line": 25,
+            "line": 28,
             "description": "Input node socket a.",
             "itemtype": "attribute",
             "name": "a",
@@ -12044,7 +12076,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\nodes\\OperationNode.js",
-            "line": 33,
+            "line": 36,
             "description": "Input node socket b.",
             "itemtype": "attribute",
             "name": "b",
@@ -12054,7 +12086,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\nodes\\OperationNode.js",
-            "line": 41,
+            "line": 44,
             "description": "Output node socket r with the result.",
             "itemtype": "attribute",
             "name": "r",
@@ -12076,6 +12108,8 @@
             "file": "source\\core\\objects\\script\\NodeScript.js",
             "line": 31,
             "description": "Add a node the graph, these nodes can be connected with other already existing nodes in the graph.",
+            "itemtype": "method",
+            "name": "addNode",
             "params": [
                 {
                     "name": "node",
@@ -12088,7 +12122,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\NodeScript.js",
-            "line": 41,
+            "line": 42,
             "description": "Initialize script, automatically called by the runtime.\n\nCompiles the script code and calls the script initialize method if it exists after the code is compiled.",
             "itemtype": "method",
             "name": "initialize",
@@ -12097,7 +12131,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\NodeScript.js",
-            "line": 55,
+            "line": 56,
             "description": "Update node script state runs the update methods from the node graph.",
             "itemtype": "method",
             "name": "update",
@@ -12106,7 +12140,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\NodeScript.js",
-            "line": 67,
+            "line": 68,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -12115,7 +12149,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\NodeScript.js",
-            "line": 81,
+            "line": 82,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -12378,6 +12412,8 @@
             "file": "source\\core\\objects\\script\\Script.js",
             "line": 224,
             "description": "Remove comments from javascript code using regex.",
+            "itemtype": "method",
+            "name": "removeComments",
             "params": [
                 {
                     "name": "code",
@@ -12394,7 +12430,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 235,
+            "line": 236,
             "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -12411,7 +12447,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 249,
+            "line": 250,
             "description": "Initialize script, code automatically called by the runtime on program initialization.\n\nCompiles the script code and calls the script initialize method if it exists after the code is compiled.",
             "itemtype": "method",
             "name": "initialize",
@@ -12420,7 +12456,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 285,
+            "line": 286,
             "description": "Update script state automatically calls for mouse events if they are defined and for the script update method.\n\nThis method is executed every frame, script logic should not relly on the frame time, use the \"delta\" value provided.",
             "itemtype": "method",
             "name": "update",
@@ -12429,7 +12465,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 311,
+            "line": 312,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -12438,7 +12474,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 328,
+            "line": 329,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -12447,7 +12483,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 343,
+            "line": 344,
             "description": "Call onAppData() from the script if available.\n\nThis method is called everytime that external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -12463,7 +12499,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 359,
+            "line": 360,
             "description": "Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
@@ -12484,7 +12520,7 @@
         },
         {
             "file": "source\\core\\objects\\script\\Script.js",
-            "line": 529,
+            "line": 530,
             "description": "Create a object to access the context of this script.\n\nAlso includes the access to three cannon and engine methods.",
             "itemtype": "method",
             "name": "createContextObject",
@@ -19648,13 +19684,6 @@
             "module": "Physics"
         },
         {
-            "file": "source\\core\\utils\\SimplexNoise.js",
-            "line": 10,
-            "description": "You can pass in a random number generator object if you like.\nIt is assumed to have a random() method.",
-            "class": "UnitConverter",
-            "module": "Physics"
-        },
-        {
             "file": "source\\core\\utils\\UnitConverter.js",
             "line": 12,
             "description": "Scale levels.\n\nIs a map containing the scale symbol and its value.",
@@ -20102,7 +20131,7 @@
         {
             "file": "source\\core\\App.js",
             "line": 273,
-            "description": "Update program state.\n\nAutomatically called by the runtime handler.",
+            "description": "Update program state and render to the canvas.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
             "class": "App",
@@ -20111,7 +20140,7 @@
         {
             "file": "source\\core\\App.js",
             "line": 286,
-            "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching programs.\n\nWhen loading new programs the same app instance can be used.",
+            "description": "Exit from app.\n\nKills the app and disposes all internal elements to avoid memory leaks.\n\nShould be called before exiting the webpage or before switching programs.\n\nWhen loading new programs the same app instance can be used.",
             "itemtype": "method",
             "name": "exit",
             "class": "App",
@@ -20261,7 +20290,7 @@
             "params": [
                 {
                     "name": "element",
-                    "description": "DOM element to go fullscren by default the rendering canvas is used",
+                    "description": "DOM element to go fullscreen by default the rendering canvas is used",
                     "type": "Component"
                 }
             ],
@@ -21028,26 +21057,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " source\\core\\geometries\\ParametricBufferGeometry.js:33"
-        },
-        {
-            "message": "Missing item type\nMath operation performed by this node.",
-            "line": " source\\core\\objects\\script\\nodes\\OperationNode.js:18"
-        },
-        {
-            "message": "Missing item type\nAdd a node the graph, these nodes can be connected with other already existing nodes in the graph.",
-            "line": " source\\core\\objects\\script\\NodeScript.js:31"
-        },
-        {
-            "message": "Missing item type\nRemove comments from javascript code using regex.",
-            "line": " source\\core\\objects\\script\\Script.js:224"
-        },
-        {
-            "message": "Missing item type\nYou can pass in a random number generator object if you like.\nIt is assumed to have a random() method.",
-            "line": " source\\core\\utils\\SimplexNoise.js:10"
-        }
-    ]
+    "warnings": []
 }

@@ -153,16 +153,16 @@ pre.cmd
 	border:1px solid #D0CBFB;
 	border-left:5px solid #D0CBFB;
 }
-/* Don't reduce the font size of <code>/<kbd>/<samp> elements inside <pre>
-	 blocks. */
+
+/* Don't reduce the font size of <code>/<kbd>/<samp> elements inside <pre>  blocks. */
 pre code,
 pre kbd,
 pre samp
 {
 	font-size:100%;
 }
-/* Used to denote text that shouldn't be selectable, such as line numbers or
-	 shell prompts. Guess which browser this doesn't work in. */
+
+/* Used to denote text that shouldn't be selectable, such as line numbers or shell prompts. Guess which browser this doesn't work in. */
 .noselect
 {
 	-moz-user-select:-moz-none;
