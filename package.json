@@ -15,7 +15,7 @@
 		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
 		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./temp/build/editor",
 		"serve": "http-server . -p 8081 --cors -o",
-		"docs-jsdoc": "node --max_old_space_size=8192 node_modules/jsdoc/jsdoc.js -d jsdocs -r ./source/core",
+		"docs-jsdoc": "jsdoc -d jsdocs -r ./source/core",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
 		"pub": "npm publish --access public .",
 		"lint": "eslint --ext .js source/editor source/core",
