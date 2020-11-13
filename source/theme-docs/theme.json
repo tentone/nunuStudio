@@ -1,6 +1,6 @@
 {
 	"name": "nunuStudio",
-	"description": "nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins",
+	"description": "Javascript powered framework for 3D and VR applications that run directly on the browser without the need for additional plugins",
 	"version": "0.9",
-	"url": "http://tentone.github.io/nunuStudio"
+	"url": "https://www.nunustudio.org"
 }
