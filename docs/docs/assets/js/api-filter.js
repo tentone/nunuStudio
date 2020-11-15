@@ -34,16 +34,22 @@ YUI.add('api-filter', function(Y)
 					var self = this;
 					return function(q)
 					{
-						var data = Y.YUIDoc.meta[self.get('queryType')],
-							out = [];
-						Y.each(data, function(v)
+						// TODO <ADD CODE HERE>
+						console.log(Y);
+
+						if (Y && Y.YUIDoc && Y.YUIDoc.meta)
 						{
-							if (v.toLowerCase().indexOf(q.toLowerCase()) > -1)
+							var data = Y.YUIDoc.meta[self.get('queryType')];
+							var out = [];
+							Y.each(data, function(v)
 							{
-								out.push(v);
-							}
-						});
-						return out;
+								if (v.toLowerCase().indexOf(q.toLowerCase()) > -1)
+								{
+									out.push(v);
+								}
+							});
+							return out;
+						}
 					};
 				}
 			}

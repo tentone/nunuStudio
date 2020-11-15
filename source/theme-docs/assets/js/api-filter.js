@@ -34,7 +34,7 @@ YUI.add('api-filter', function(Y)
 					var self = this;
 					return function(q)
 					{
-						if (Y && Y.YUIDoc & Y.YUIDoc.meta)
+						if (Y && Y.YUIDoc && Y.YUIDoc.meta)
 						{
 							var data = Y.YUIDoc.meta[self.get('queryType')];
 							var out = [];
@@ -53,6 +53,4 @@ YUI.add('api-filter', function(Y)
 		}
 	});
 
-}, '3.4.0', {
-	requires: ['autocomplete-base', 'autocomplete-highlighters', 'autocomplete-sources']
-});
+}, '3.4.0', {requires: ['autocomplete-base', 'autocomplete-highlighters', 'autocomplete-sources']});
