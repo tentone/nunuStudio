@@ -3,8 +3,8 @@
 	<a routerLink="/learn" class="btn btn-outline-dark" style="margin-top: 5px;">Back</a>
 	<h2>Physics</h2>
 	<p>In this tutorial we will experiment how physics work inside nunuStudio, physics are represented as objects in the editor, physics object dont have a visual representation they are just used for physics simulations.</p>
-	<p>Physics in nunuStudio are powered by cannon.js developed by schteppe, for more information about the physics engine please consult http://www.cannonjs.org/.</p>
-	<p>nunuStudio encapsulates the physics bodies in objects, these bodies are managed and updated on a scene basis, physics configuration is managed by scene.</p>
+	<p>Physics in nunuStudio are powered by <a href="https://github.com/schteppe/cannon.js">cannon.js</a> developed by <a href="https://github.com/schteppe">schteppe</a>, for more information about the physics engine please consult the cannon.js <a href="http://www.cannonjs.org/">project page</a> and its <a href="http://schteppe.github.io/cannon.js/docs/">API documentation</a> page.</p>
+	<p>The editor encapsulates the physics bodies in objects, these bodies are managed and updated on a scene basis, physics configuration is managed by scene.</p>
 
 	<h3>Physics object</h3>
 
@@ -59,4 +59,24 @@ this.update = function()
 	<p>The code shown above can be seen running bellow for a physics cube, use the WASD keys to control the cube, and the spacebar to make the cube jump. Even when we dont specify rotation for the cube the physics engine automatically calculates it based on the friction beween the surface of the cube and floor. As we can observe the cube tumbles around the scene naturally.</p>
 
 	<app-viewer fname="assets/learn/basics/physics/physics.nsp"></app-viewer>
+
+	<p>It is also possible to detect collisions, contact points and explore the full state of the physics simulation. You can access the physics world from the scene object, and from there attach eventListeners to access the data after each simulation step for example.</p>
+
+	<pre><code class="hljs javascript">var world = scene.world;
+world.addEventListener("postStep", function(e)
+{{'{'}}
+	if(world.contacts.length > 0)
+	{{'{'}}
+		for(var i = 0; i < world.contacts.length; i++)
+		{{'{'}}
+			var contact = world.contacts[i];
+
+			// Check collision between a and b
+			if(contact.bi === a || contact.bj === b)
+			{{'{'}}
+				// ...
+			{{'}'}}
+		{{'}'}}
+	{{'}'}}
+{{'}'}}</code></pre>
 </div>
