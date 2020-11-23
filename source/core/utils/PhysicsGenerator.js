@@ -4,12 +4,11 @@ import {ConvexHull} from "three/examples/jsm/math/ConvexHull";
 
 /**
  * Physics generator is used to create Cannon.js shapes from three.js geometries.
- * 
+ *
  * Can be used with any object that contains a geometry.
- * 
+ *
  * It is based on the original Mesh2Shape converted by @donmccurdy.
- * 
- * @author tentone
+ *
  * @class PhysicsGenerator
  * @static
  * @module Physics
@@ -17,12 +16,12 @@ import {ConvexHull} from "three/examples/jsm/math/ConvexHull";
 function PhysicsGenerator() {}
 
 /**
- * Type is used to indentify the type of cannonjs:
+ * Type is used to identify the type of physics shapes:
  * - BOX
  * - CYLINDER
  * - SPHERE
  * - HULL
- * 
+ *
  * @attribute Type
  * @type {Object}
  */
@@ -62,7 +61,7 @@ PhysicsGenerator.createShape = function(object, type)
 		{
 			return PhysicsGenerator.createConvexPolyhedron(object);
 		}
-		
+
 		return null;
 	}
 
@@ -113,9 +112,9 @@ PhysicsGenerator.createBoxShape = function(geometry)
 	}
 
 	geometry.computeBoundingBox();
-	
+
 	var box = geometry.boundingBox;
-	
+
 	return new Box(new Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 };
 
@@ -123,7 +122,7 @@ PhysicsGenerator.createBoxShape = function(geometry)
  * Bounding box needs to be computed with the entire mesh, not just geometry.
  *
  * @method createBoundingBoxShape
- * @param {Geometry} geometry
+ * @param {Object3D} object
  * @return {Box} shape
  */
 PhysicsGenerator.createBoundingBoxShape = function(object)
@@ -149,9 +148,11 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
 /**
  * Computes 3D convex hull as a ConvexPolyhedron.
  *
+ * A convex hull is a convex geometry that contain all the geometry points inside.
+ *
  * @method createConvexPolyhedron
- * @param {ConvexPolyhedron} geometry
- * @return {Shape} shape
+ * @param {Object3D} object Object to calculate the convex hull.
+ * @return {ConvexPolyhedron} Convex polyhedron calculated from thr object meshes.
  */
 PhysicsGenerator.createConvexPolyhedron = function(object)
 {
@@ -167,7 +168,7 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 	{
 		var face = quickhull.faces[i];
 		var edge = face.edge;
-		
+
 		// We move along a doubly-connected edge list to access all face points
 		do
 		{
@@ -219,7 +220,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	var geometry = PhysicsGenerator.getGeometry(object);
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
-	
+
 	var height = geometry.boundingBox.max.y - geometry.boundingBox.min.y;
 	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]], geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
@@ -227,7 +228,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	var shape = new Cylinder(radius, radius, height, 12);
 	shape.orientation = new CQuaternion();
 	shape.orientation.setFromEuler(Math.PI / 2, 0, 0, "XYZ").normalize();
-	
+
 	return shape;
 };
 
@@ -274,7 +275,7 @@ PhysicsGenerator.createBoundingSphereShape = function(object)
 };
 
 /**
- * Sphere shape from bouding sphere.
+ * Cylinder shape from bounding sphere.
  *
  * @method createTubeShape
  * @param {Geometry} geometry
@@ -288,30 +289,31 @@ PhysicsGenerator.createTubeShape = function(geometry)
 };
 
 /**
- * Trimesh shape from geometry.
- * 
+ * Trimesh shape from geometry. Trimesh objects represent the object exactly with all the triangles that compose the original geometry
+ *
+ * This type of physics shape should be avoided as much as possible since it is a lot slower that other available types.
+ *
  * @method createTrimeshShape
  * @param {Geometry} geometry
  * @return {Trimesh} shape
  */
 PhysicsGenerator.createTrimeshShape = function(geometry)
 {
-	var indices, vertices = PhysicsGenerator.getVertices(geometry);
-
-	if (!vertices.length)
+	var vertices = PhysicsGenerator.getVertices(geometry);
+	if (!vertices || vertices.length === 0)
 	{
 		return null;
 	}
 
-	indices = Object.keys(vertices).map(Number);
+	var indices = Object.keys(vertices).map(Number);
 	return new Trimesh(vertices, indices);
 };
 
 /**
  * Returns a single geometry for the given object.
- * 
+ *
  * If the object is compound, its geometries are automatically merged.
- * 
+ *
  * @method getGeometry
  * @param {Object3D} object
  * @return {Geometry} Geometry that contains all merger geometry
@@ -326,7 +328,7 @@ PhysicsGenerator.getGeometry = function(object)
 	}
 
 	var tmp = new Geometry();
-	
+
 	// Apply scale (it can't easily be applied to a Shape later)
 	if (meshes.length === 1)
 	{
@@ -380,16 +382,17 @@ PhysicsGenerator.getGeometry = function(object)
  */
 PhysicsGenerator.getVertices = function(geometry)
 {
-	if (!geometry.attributes)
+	if (geometry instanceof Geometry)
 	{
 		geometry = new BufferGeometry().fromGeometry(geometry);
 	}
+
 	return geometry.attributes.position.array;
 };
 
 /**
  * Returns a array of Mesh instances from the given object.
- * 
+ *
  * If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
  *
  * @method getMeshes
