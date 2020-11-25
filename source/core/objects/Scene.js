@@ -105,7 +105,7 @@ function Scene()
 	this.raycaster = new Raycaster();
 
 	/**
-	 * Indicates if the scene is using octree indexation for raycasting.
+	 * Indicates if the scene is using octree indexation for ray casting.
 	 *
 	 * @property useOctree
 	 * @type {boolean}

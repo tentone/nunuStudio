@@ -13,7 +13,7 @@ import {Keyboard} from "../input/Keyboard.js";
 import {Script} from "./script/Script.js";
 
 /**
- * Program class contains all the data of a nunuStudio program.
+ * Program class contains all the data of a app.
  *
  * Is stores and manages all available resources used by the children objects.
  *
@@ -760,7 +760,7 @@ Program.prototype.sendDataApp = function(data)
  *
  * @method toJSON
  * @param {Object} meta Metadata object passed to the objects and resources toJSON method to store data.
- * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported.
+ * @param {boolean} exportResources If true all resources in the program are exported, else only resources attached to objects are exported.
  * @return {Object} json Serialized JSON data containing the program, all scenes and resources stored.
  */
 Program.prototype.toJSON = function(meta, exportResources)

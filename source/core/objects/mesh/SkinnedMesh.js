@@ -2,11 +2,11 @@ import {SkinnedMesh as TSkinnedMesh, Object3D} from "three";
 
 /**
  * SkinnedMesh is a Mesh that has a Skeleton attached.
- * 
+ *
  * A skeleton contains bones that are used to animate the vertices of the geometry.
- * 
+ *
  * Based on SkinnedMesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
- * 
+ *
  * @class SkinnedMesh
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
@@ -18,7 +18,7 @@ function SkinnedMesh(geometry, material)
 	TSkinnedMesh.call(this, geometry, material);
 
 	this.name = "skinned";
-	
+
 	this.receiveShadow = true;
 	this.castShadow = true;
 
@@ -29,7 +29,7 @@ SkinnedMesh.prototype = Object.create(TSkinnedMesh.prototype);
 
 /**
  * Dispose mesh along with its material and geometry.
- * 
+ *
  * @method dispose
  */
 SkinnedMesh.prototype.dispose = function()
@@ -50,9 +50,8 @@ SkinnedMesh.prototype.dispose = function()
 SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var self = this;
-
 	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
-	{	
+	{
 		if (self.skeleton !== null)
 		{
 			if (meta.skeletons[self.skeleton.uuid] === undefined)
@@ -73,7 +72,7 @@ SkinnedMesh.prototype.toJSON = function(meta)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
 	}
-	
+
 	return data;
 };
 
@@ -93,14 +92,14 @@ SkinnedMesh.prototype.toJSON = function(meta)
 
 /**
  * Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
- * 
+ *
  * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
- * 
+ *
  * @method bind
  * @param {Skeleton} skeleton
  * @param {Matrix4} bindMatrix
  */
- 
+
 /**
  * Determines how the mesh triangles are constructed from the vertices.
  *

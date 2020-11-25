@@ -8,7 +8,7 @@ import {AudioEmitter} from "./AudioEmitter.js";
  * PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.
  *
  * Using the positional audio object the sound is controlled by the camera that renders first in the scene.
- * 
+ *
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
  * @extends {AudioEmitter}
@@ -41,7 +41,7 @@ function PositionalAudio(audio)
 	 * WebAudio panner effect.
 	 *
 	 * https:// developer.mozilla.org/en-US/docs/Web/API/PannerNode
-	 * 
+	 *
 	 * @property panner
 	 * @type {PannerNode}
 	 */
@@ -71,17 +71,15 @@ function PositionalAudio(audio)
 
 PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
 
-// THREE.PositionalAudio = PositionalAudio;
-
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
- * 
+ *
  * @method initialize
  */
 PositionalAudio.prototype.initialize = function()
 {
 	AudioEmitter.prototype.initialize.call(this);
-	
+
 	var node = this.parent;
 	while (node !== null)
 	{
@@ -97,7 +95,7 @@ PositionalAudio.prototype.initialize = function()
 
 /**
  * Update positional audio panner relative to the camera.
- * 
+ *
  * @method update
  */
 PositionalAudio.prototype.update = function(delta)
@@ -112,7 +110,7 @@ PositionalAudio.prototype.update = function(delta)
 
 		this.tempPosition.sub(this.tempPositionCamera);
 		this.tempPosition.z = -this.tempPosition.z;
-		
+
 		this.tempPosition.applyQuaternion(this.tempQuaternionCamera);
 		this.panner.setPosition(this.tempPosition.x, this.tempPosition.z, this.tempPosition.y);
 	}
@@ -127,7 +125,7 @@ PositionalAudio.prototype.update = function(delta)
 
 /**
  * Get output audio node.
- * 
+ *
  * @method getOutput
  * @return {Object} Output audio node.
  */
@@ -138,7 +136,7 @@ PositionalAudio.prototype.getOutput = function()
 
 /**
  * Get reference distance.
- * 
+ *
  * @method getRefDistance
  * @return {number} Reference distance.
  */
@@ -149,7 +147,7 @@ PositionalAudio.prototype.getRefDistance = function()
 
 /**
  * Set reference distance.
- * 
+ *
  * @method setRefDistance
  * @param {number} value Reference distance.
  */
@@ -160,7 +158,7 @@ PositionalAudio.prototype.setRefDistance = function(value)
 
 /**
  * Get rolloff factor.
- * 
+ *
  * @method getRolloffFactor
  * @return {number} Rolloff factor.
  */
@@ -171,7 +169,7 @@ PositionalAudio.prototype.getRolloffFactor = function()
 
 /**
  * Set rolloff factor.
- * 
+ *
  * @method setRolloffFactor
  * @param {number} value Rolloff factor.
  */
@@ -204,7 +202,7 @@ PositionalAudio.prototype.getDistanceModel = function()
  *    - refDistance / (refDistance + rolloffFactor * (distance - refDistance))
  *  - "exponential": An exponential distance model calculating the gain induced by the distance according to:
  *    - pow(distance / refDistance, -rolloffFactor).
- * 
+ *
  * @method setDistanceModel
  * @param {string} model Distance Model to be used.
  */

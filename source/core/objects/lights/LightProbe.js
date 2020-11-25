@@ -20,8 +20,6 @@ function LightProbe(sh, intensity)
 
 LightProbe.prototype = Object.create(TLightProbe.prototype);
 
-// THREE.LightProbe = LightProbe;
-
 /**
  * Generate light probe data from cube camera render.
  *
@@ -39,9 +37,9 @@ LightProbe.prototype.generate = function()
 	var canvas = new OffscreenCanvas(256, 256);
 
 	var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
-	
+
 	var cubeCamera = new TCubeCamera(1, 1000, 256,
-		{	
+		{
 			format: RGBAFormat,
 			magFilter: LinearFilter,
 			minFilter: LinearFilter

@@ -3,7 +3,7 @@ import {Texture} from "../../texture/Texture.js";
 
 /**
  * Spine animation textures are used alognside with SpineAnimation objects.
- * 
+ *
  * Each animations sprite atlas uses a SpineTexture object.
  *
  * @class SpineTexture
@@ -13,10 +13,10 @@ import {Texture} from "../../texture/Texture.js";
 function SpineTexture(texture)
 {
 	spine.threejs.ThreeJsTexture.call(this, texture.image);
-	
+
 	this.texture = texture;
-	this.texture.flipY = false;	
-};
+	this.texture.flipY = false;
+}
 
 SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
 

@@ -2,9 +2,9 @@ import {RectAreaLight as TRectAreaLight, Light} from "three";
 
 /**
  * A RectAreLight emit light from a rectagular surface.
- * 
+ *
  * Based on RectAreaLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/RectAreaLight
- * 
+ *
  * @param {number} color Light color in hex RGB
  * @param {number} intensity Light intensity
  * @param {number} width
@@ -21,8 +21,6 @@ function RectAreaLight(color, intensity, width, height)
 }
 
 RectAreaLight.prototype = Object.create(TRectAreaLight.prototype);
-
-// THREE.RectAreaLight = RectAreaLight;
 
 RectAreaLight.prototype.toJSON = function(meta)
 {

@@ -2,9 +2,9 @@ import {SpotLight as TSpotLight, Light} from "three";
 
 /**
  * A SpotLight emit light from a point in a specific direction in a cone volume.
- * 
+ *
  * SpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.
- * 
+ *
  * Based on SpotLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/SpotLight
  *
  * @param {number} color Light color in hex RGB
@@ -22,7 +22,7 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	TSpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
 
 	this.name = "spotlight";
-	
+
 	this.castShadow = true;
 
 	this.shadow.camera.near = 0.05;
@@ -33,11 +33,9 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 
 SpotLight.prototype = Object.create(TSpotLight.prototype);
 
-// THREE.SpotLight = SpotLight;
-
 /**
  * SpotLight looks to the target object coordinates.
- * 
+ *
  * The target object should always be at the scene root.
  *
  * @method setTarget
@@ -50,7 +48,7 @@ SpotLight.prototype.setTarget = function(target)
 
 /**
  * Update light shadow map atributtes at runtime.
- * 
+ *
  * @method updateShadowMap
  */
 SpotLight.prototype.updateShadowMap = function()
