@@ -19,9 +19,9 @@ import {Pass} from "../Pass.js";
 function UnrealBloomPass(strength, radius, threshold)
 {
 	Pass.call(this);
-	
+
 	this.type = "UnrealBloom";
-	
+
 	// Render targets for passes
 	this.renderTargetsHorizontal = [];
 	this.renderTargetsVertical = [];
@@ -98,7 +98,6 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.basic = new MeshBasicMaterial();
 
 	// Setters and getters for uniforms
-	var self = this;
 	Object.defineProperties(this,
 		{
 		/**
@@ -127,7 +126,7 @@ function UnrealBloomPass(strength, radius, threshold)
 
 			/**
 			 * Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.
-			 * 
+			 *
 			 * To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
 			 *
 			 * @property threshold
@@ -201,7 +200,7 @@ UnrealBloomPass.prototype.setSize = function(width, height)
 	var resy = Math.round(height / 2);
 
 	this.renderTargetBright.setSize(resx, resy);
-	
+
 	for (var i = 0; i < this.nMips; i++)
 	{
 		this.renderTargetsHorizontal[i].setSize(resx, resy);
@@ -217,7 +216,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 {
 	renderer.autoClear = false;
 	renderer.setClearColor(new Color(0, 0, 0), 0);
-	
+
 	if (maskActive)
 	{
 		renderer.context.disable(renderer.context.STENCIL_TEST);
@@ -272,7 +271,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	// Blend it additively over the input texture
 	this.quad.material = this.materialCopy;
 	this.copyUniforms["tDiffuse"].value = this.renderTargetsHorizontal[0].texture;
-	
+
 	if (maskActive)
 	{
 		renderer.context.enable(renderer.context.STENCIL_TEST);
@@ -290,7 +289,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 UnrealBloomPass.prototype.toJSON = function(meta)
 {
 	var data = Pass.prototype.toJSON.call(this, meta);
-	
+
 	data.strength = this.strength;
 	data.radius = this.radius;
 	data.threshold = this.threshold;

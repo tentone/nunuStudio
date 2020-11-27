@@ -4,7 +4,7 @@ import {Pass} from "../Pass.js";
 
 /**
  * Colorify pass can be used to colorify the scene.
- * 
+ *
  * @class ColorifyPass
  * @module Postprocessing
  */
@@ -14,7 +14,6 @@ function ColorifyPass()
 
 	this.type = "Colorify";
 
-	var self = this;
 	Object.defineProperties(this,
 		{
 			color:
@@ -38,7 +37,7 @@ ColorifyPass.prototype.toJSON = function(meta)
 	var data = Pass.prototype.toJSON.call(this, meta);
 
 	data.color = this.color.getHex();
-	
+
 	return data;
 };
 export {ColorifyPass};

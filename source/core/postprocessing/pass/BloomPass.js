@@ -58,12 +58,11 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 			vertexShader: ConvolutionShader.vertexShader,
 			fragmentShader: ConvolutionShader.fragmentShader,
 			defines:
-		{
-			"KERNEL_SIZE_FLOAT": kernelSize.toFixed(1),
-			"KERNEL_SIZE_INT": kernelSize.toFixed(0)
-		}
+			{
+				"KERNEL_SIZE_FLOAT": kernelSize.toFixed(1),
+				"KERNEL_SIZE_INT": kernelSize.toFixed(0)
+			}
 		});
-	
 }
 
 BloomPass.blurX = new Vector2(0.001953125, 0.0);

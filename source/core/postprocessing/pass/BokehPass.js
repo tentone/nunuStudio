@@ -4,7 +4,7 @@ import {Pass} from "../Pass.js";
 
 /**
  * Depth-of-field post-process with bokeh shader.
- * 
+ *
  * @class BokehPass
  * @module Postprocessing
  * @param {number} focus Focus distance.
@@ -70,7 +70,7 @@ function BokehPass(focus, aperture, maxblur)
 			get: function() {return self.uniforms["focus"].value;},
 			set: function(value) {self.uniforms["focus"].value = value;}
 		},
-		
+
 			/**
 			 * Maximum level of blur that can be applied to more distant objects.
 			 *
@@ -87,7 +87,7 @@ function BokehPass(focus, aperture, maxblur)
 	this.focus = focus !== undefined ? focus : 1.0;
 	this.aperture = aperture !== undefined ? aperture : 1.0;
 	this.maxblur = maxblur !== undefined ? maxblur : 0.2;
-};
+}
 
 BokehPass.prototype = Object.create(Pass.prototype);
 
@@ -147,7 +147,7 @@ BokehPass.prototype.toJSON = function(meta)
 	data.aperture = this.aperture;
 	data.focus = this.focus;
 	data.maxblur = this.maxblur;
-	
+
 	return data;
 };
 export {BokehPass};

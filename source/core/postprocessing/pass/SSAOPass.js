@@ -7,7 +7,7 @@ import {Pass} from "../Pass.js";
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
  *
  * This variant of SSAO produces a halo like effect to simulate the effect.
- * 
+ *
  * More information about SSAO here
  *  - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
  *
@@ -34,7 +34,6 @@ function SSAOPass()
 	this.uniforms["size"].value.set(2, 2);
 
 	// Setters and getters for uniforms
-	var self = this;
 	Object.defineProperties(this,
 		{
 		/**
@@ -96,7 +95,7 @@ SSAOPass.prototype = Object.create(ShaderPass.prototype);
 
 /**
  * Render using this pass.
- * 
+ *
  * @method render
  * @param {WebGLRenderer} renderer
  * @param {WebGLRenderTarget} writeBuffer Buffer to write output.
@@ -111,7 +110,7 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	// Render depth
 	scene.overrideMaterial = this.depthMaterial;
-	
+
 	renderer.setRenderTarget(this.depthRenderTarget);
 	renderer.clear(true, true, true);
 	renderer.render(scene, camera);
@@ -125,7 +124,7 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 /**
  * Set resolution of this render pass.
- * 
+ *
  * @method setSize
  * @param {number} width
  * @param {number} height
@@ -145,7 +144,7 @@ SSAOPass.prototype.setSize = function(width, height)
 SSAOPass.prototype.toJSON = function(meta)
 {
 	var data = Pass.prototype.toJSON.call(this, meta);
-	
+
 	data.onlyAO = this.onlyAO;
 	data.radius = this.radius;
 	data.aoClamp = this.aoClamp;

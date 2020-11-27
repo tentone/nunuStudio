@@ -4,7 +4,7 @@ import {Pass} from "../Pass.js";
 
 /**
  * DotScreen pass generates a poster like effect on top of the scene.
- *  
+ *
  *
  * @class DotScreenPass
  * @module Postprocessing
@@ -29,7 +29,6 @@ function DotScreenPass(center, angle, scale)
 			fragmentShader: DotScreenShader.fragmentShader
 		});
 
-	var self = this;
 	Object.defineProperties(this,
 		{
 		/**
@@ -73,10 +72,10 @@ function DotScreenPass(center, angle, scale)
 	{
 		this.center.copy(center);
 	}
-	
+
 	this.angle = angle !== undefined ? angle : 0.5;
 	this.scale = scale !== undefined ? scale : 0.8;
-};
+}
 
 DotScreenPass.prototype = Object.create(Pass.prototype);
 

@@ -6,7 +6,7 @@ import {Pass} from "../Pass.js";
  * After image render pass blends the current frame with the previous frame.
  *
  * A dampening value is applied in the blend, that is performed additively.
- *  
+ *
  *
  * @class AfterimagePass
  * @module Postprocessing
@@ -44,7 +44,6 @@ function AfterimagePass(damp)
 
 	this.createQuadScene();
 
-	var self = this;
 	Object.defineProperties(this,
 		{
 		/**
@@ -61,7 +60,7 @@ function AfterimagePass(damp)
 		});
 
 	this.damp = damp !== undefined ? damp : 0.96;
-};
+}
 
 AfterimagePass.prototype = Object.create(Pass.prototype);
 

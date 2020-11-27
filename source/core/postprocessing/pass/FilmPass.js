@@ -29,7 +29,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	Object.defineProperties(this,
 		{
 		/**
-		 * If set true a grascale effect will be applied.
+		 * If set true a grayscale effect will be applied.
 		 *
 		 * @property grayscale
 		 * @type {boolean}
@@ -41,7 +41,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		},
 
 			/**
-			 * Ammout of noise to be applied to the image.
+			 * Amount of noise to be applied to the image.
 			 *
 			 * @property noiseIntensity
 			 * @type {number}
@@ -81,7 +81,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	this.noiseIntensity = noiseIntensity !== undefined ? noiseIntensity : 0.35;
 	this.scanlinesIntensity = scanlinesIntensity !== undefined ? scanlinesIntensity : 0.5;
 	this.scanlinesCount = scanlinesCount !== undefined ? scanlinesCount : 512;
-};
+}
 
 FilmPass.prototype = Object.create(Pass.prototype);
 
