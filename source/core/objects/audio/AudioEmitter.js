@@ -139,7 +139,7 @@ AudioEmitter.SOURCE = {
 };
 
 /**
- * Method called when the audio playback stoped.
+ * Method called when the audio playback stopped.
  *
  * @method onEnded
  */
