@@ -1,5 +1,5 @@
 /**
- * MathUtils contains auxiliar values and function to help with mathematical operations.
+ * MathUtils contains auxiliary values and function to help with mathematical operations.
  *
  * @static
  * @class MathUtils
