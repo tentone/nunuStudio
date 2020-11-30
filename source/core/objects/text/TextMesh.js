@@ -3,25 +3,27 @@ import {Mesh} from "../mesh/Mesh.js";
 
 /**
  * Special mesh type used to draw 3D text.
- * 
+ *
  * It receives a Font resource that is used to triangulate and extrude font data into a 3D mesh.
- * 
+ *
  * @class TextMesh
  * @module Meshes
  * @param {string} text Text to be draw
- * @param {Material} material Material used to shade the superficie of the geometry
+ * @param {Material} material Material used to shade the surface of the geometry
  * @param {Font} font Font
  * @param {number} height Text height
  * @param {boolean} bevel
  * @param {number} bevelThickness
+ * @param {number} bevelSize
  * @param {number} size
  * @param {number} curveSegments
+ * @param {boolean} extruded
  * @extends {Mesh}
  */
 function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments, extruded)
 {
 	Mesh.call(this, TextMesh.EMPTY_GEOMETRY, material);
-	
+
 	this.name = "text";
 	this.type = "TextMesh";
 
@@ -95,7 +97,10 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * @property text
 	 * @type {string}
 	 */
-	var text = text !== undefined ? text : "text";
+	if (text !== undefined)
+	{
+		text = "text";
+	}
 	Object.defineProperties(this,
 		{
 			text:
@@ -111,7 +116,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 			}
 		}
 		});
-	
+
 	this.updateGeometry();
 }
 
@@ -121,7 +126,7 @@ TextMesh.EMPTY_GEOMETRY = new Geometry();
 
 /**
  * Set font used by this text 3D instance.
- * 
+ *
  * @param {Font} font Font
  * @method setFont
  */
@@ -136,7 +141,7 @@ TextMesh.prototype.setFont = function(font)
 
 /**
  * Change text.
- * 
+ *
  * @param {string} text
  * @method setText
  */
@@ -147,9 +152,9 @@ TextMesh.prototype.setText = function(text)
 
 /**
  * Update the text geometry.
- * 
+ *
  * Should be called after chaging any attribute to generate a new geometry.
- * 
+ *
  * @method updateGeometry
  */
 TextMesh.prototype.updateGeometry = function()
@@ -171,7 +176,7 @@ TextMesh.prototype.updateGeometry = function()
 		var shapes = this.font.generateShapes(this.text, this.size);
 
 		if (this.extruded)
-		{		
+		{
 			this.geometry = new ExtrudeBufferGeometry(shapes,
 				{
 					curveSegments: this.curveSegments,
@@ -191,7 +196,7 @@ TextMesh.prototype.updateGeometry = function()
 
 /**
  * Clone this object instance into a new object.
- * 
+ *
  * @method clone
  * @return {TextMesh} Clone of this object.
  */
@@ -202,7 +207,7 @@ TextMesh.prototype.clone = function()
 
 /**
  * Create JSON for object.
- * 
+ *
  * Need to backup geometry and set to undefined to avoid it being stored.
  *
  * @method toJSON
