@@ -13,7 +13,7 @@
 		"start-page": "cd ./source/page && npm run start",
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
 		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
-		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./temp/build/editor",
+		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./docs/editor",
 		"serve": "http-server . -p 8081 --cors -o",
 		"docs-jsdoc": "jsdoc -d jsdocs -r ./source/core",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
@@ -51,7 +51,7 @@
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
 		"tern": "^0.24.3",
 		"escher.js": "^0.1.15",
-		"three": "^0.123.0",
+		"three": "^0.119.0",
 		"sparse-octree": "^6.1.0",
 		"iterator-result": "^1.0.0",
 		"math-ds": "^1.2.1",
@@ -111,7 +111,7 @@
 		"double_tap_to_zoom_enabled": false
 	},
 	"build": {
-		"nwVersion": "0.49.0",
+		"nwVersion": "0.50.1",
 		"appId": "io.tentone.nunustudio",
 		"output": "./build/desktop/",
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
