@@ -1,7 +1,5 @@
 import {Tree} from "./Tree.js";
 
-// TODO <NOT USED ANYWERE>
-
 /**
  * TreeUtils used to compare Tree.
  *
@@ -14,7 +12,7 @@ function TreeUtils() {}
 
 /**
  * Flag used to indicate ADDED diff.
- * 
+ *
  * @attribute DIFF_ADDED
  * @type {number}
  */
@@ -22,7 +20,7 @@ TreeUtils.DIFF_ADDED = 0;
 
 /**
  * Flag used to indicate REMOVED diff.
- * 
+ *
  * @attribute DIFF_REMOVED
  * @type {number}
  */
@@ -30,7 +28,7 @@ TreeUtils.DIFF_REMOVED = 1;
 
 /**
  * Flag used to indicate MOVED diff.
- * 
+ *
  * @attribute DIFF_MOVED
  * @type {number}
  */
@@ -79,55 +77,18 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	var newLength = newChildren.length;
 
 	var i = 0, j = 0;
-	
+
 	while (i < oldLength && j < newLength)
 	{
 		// Different element
 		if (oldChildren[i].uuid !== newChildren[j].uuid)
 		{
-			/*
-			// Check if elements were removed
-			for(var k = i + 1; k < oldChildren.length; k++)
-			{
-				// Found matching element
-				if(oldChildren[k].uuid === newChildren[j].uuid)
-				{
-					for(var l = i; l < k; l++)
-					{
-						var from = pathOldTree.slice(0);
-						from.push(l);
-						diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[l].uuid, from: from, to: null});
-					}
-
-					i = k;
-					break;
-				}
-			}
-			
-			// Check if elements were added
-			for(var k = j + 1; k < newChildren.length; k++)
-			{
-				// Found matching element
-				if(newChildren[k].uuid === oldChildren[i].uuid)
-				{
-					for(var l = j; l < k; l++)
-					{
-						var from = pathOldTree.slice(0);
-						from.push(l);
-						diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: newChildren[l].uuid, from: from, to: null});
-					}
-
-					j = k;
-					break;
-				}
-			}
-			*/
 			// Element removed
 			if (i + 1 < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
 			{
 				var from = pathOldTree.slice(0);
 				from.push(i);
-				
+
 				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[i].uuid, from: from, to: null});
 				i++;
 			}
@@ -147,7 +108,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 		{
 			var from = pathOldTree.slice(0);
 			from.push(i);
-			
+
 			var to = pathNewTree.slice(0);
 			to.push(j);
 
@@ -204,33 +165,4 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	return diffs;
 };
 
-/**
- * Print tree into console, recursively.
- *
- * Trees are represented by a UUID a parent and a children array.
- *
- * @method print
- * @param {Tree} tree Tree object to be printed.
- * @param {number} level Recursive parameter, not required.
- */
-TreeUtils.print = function(tree, level)
-{
-	if (level === undefined)
-	{
-		level = 1;
-	}
-
-	var space = "";
-	for (var i = level - 1; i > 0; i--)
-	{
-		space += "----";
-	}
-	space += "--->";
-
-	for (var i = 0; i < tree.children.length; i++)
-	{
-		console.log(space + tree.children[i].uuid);
-		TreeUtils.print(tree.children[i], level + 1);
-	}
-};
 export {TreeUtils};

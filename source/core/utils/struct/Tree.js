@@ -1,7 +1,4 @@
-import {Math} from "three";
-
-
-// TODO <NOT USED ANYWERE>
+import {MathUtils} from "three";
 
 /**
  * Tree structure used to represent Trees.
@@ -15,8 +12,8 @@ import {Math} from "three";
 function Tree(value)
 {
 	this.value = value !== undefined ? value : null;
-	
-	this.uuid = Math.generateUUID();
+
+	this.uuid = MathUtils.generateUUID();
 	this.parent = null;
 	this.children = [];
 }
@@ -41,7 +38,7 @@ Tree.prototype.add = function(tree)
 		tree.parent = this;
 		this.children.push(tree);
 		return tree;
-	}	
+	}
 };
 
 /**
