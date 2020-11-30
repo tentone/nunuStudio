@@ -315,6 +315,7 @@ Scene.prototype.render = function(renderer)
  *
  * @method getCamera
  * @param {string} uuid UUID of the camera
+ * @param {Object3D} object Object to search cameras in.
  * @return {Camera} Camera if found, else null
  */
 Scene.prototype.getCamera = function(uuid, object)
