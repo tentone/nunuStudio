@@ -57,7 +57,7 @@ THREE.Object3D.prototype.playAnimation = function()
 
 /**
  * Stop all animations playback.
- * 
+ *
  * @method stopAnimation
  */
 THREE.Object3D.prototype.stopAnimation = function()
@@ -72,13 +72,13 @@ THREE.Object3D.prototype.stopAnimation = function()
  * Initializes the object.
  *
  * This method is calling one time on initialization.
- * 
+ *
  * @method initialize
  */
 THREE.Object3D.prototype.initialize = function()
 {
 	if (this.animations !== undefined)
-	{	
+	{
 		this.mixer = new AnimationMixer(this);
 		this.mixer.createActions(this.animations);
 		this.mixer.play();
@@ -87,9 +87,9 @@ THREE.Object3D.prototype.initialize = function()
 
 /**
  * Update the object state.
- * 
+ *
  * Called every time before rendering into the screen.
- * 
+ *
  * @method update
  * @param {number} delta Time since last update call.
  */
@@ -103,18 +103,18 @@ THREE.Object3D.prototype.update = function(delta)
 
 /**
  * Resize this object, called everytime the window is resized.
- * 
+ *
  * @method resize
  * @param {number} x Screen width.
  * @param {number} y Screen height.
  */
-THREE.Object3D.prototype.resize = function() {};
+THREE.Object3D.prototype.resize = function(x, y) {};
 
 /**
  * Disposes the object from memory.
- * 
+ *
  * Should be called when the object is no longer required to avoid memory leaks.
- * 
+ *
  * @method dispose
  */
 THREE.Object3D.prototype.dispose = function()
@@ -224,7 +224,7 @@ THREE.Object3D.prototype.getScene = function()
 
 /**
  * Remove all children from the object.
- * 
+ *
  * @method removeAll
  */
 THREE.Object3D.prototype.removeAll = function()
@@ -237,7 +237,7 @@ THREE.Object3D.prototype.removeAll = function()
 
 /**
  * Check if object is empty (has no childrens).
- * 
+ *
  * @method isEmpty
  * @return {boolean} True is object is empty
  */
@@ -248,7 +248,7 @@ THREE.Object3D.prototype.isEmpty = function()
 
 /**
  * Destroy object, dispose and remove from its parent.
- * 
+ *
  * @method destroy
  */
 THREE.Object3D.prototype.destroy = function()
@@ -257,14 +257,14 @@ THREE.Object3D.prototype.destroy = function()
 	{
 		this.children[0].destroy();
 	}
-	
+
 	if (this.parent !== null)
 	{
 		if (this.dispose)
 		{
 			this.dispose();
 		}
-		
+
 		this.parent.remove(this);
 		this.parent = null;
 	}
@@ -450,11 +450,11 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 /**
  * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
- * 
+ *
  * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.
- * 
+ *
  * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
- * 
+ *
  * @class Object3D
  * @module THREE
  */
@@ -664,21 +664,21 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * Returns a quaternion representing the rotation of the object in world space.
  *
  * @method getWorldQuaternion
- * @param {Quaternion} optionalTarget If specified, the result will be copied into this Quaternion, otherwise a new Quaternion will be created. 
+ * @param {Quaternion} optionalTarget If specified, the result will be copied into this Quaternion, otherwise a new Quaternion will be created.
  */
 
 /**
  * Returns a vector of the scaling factors applied to the object for each axis in world space.
  *
  * @method getWorldScale
- * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created. 
+ * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created.
  */
 
 /**
  * Returns a vector representing the direction of object's positive z-axis in world space.
  *
  * @method getWorldDirection
- * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created. 
+ * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created.
  */
 
 /**

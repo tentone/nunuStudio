@@ -13,7 +13,7 @@ function Group()
 {
 	TGroup.call(this);
 
-	this.name = "container";
+	this.name = "group";
 	this.type = "Group";
 }
 

@@ -14,6 +14,7 @@ import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
 import {HTMLView} from "../../../../../core/objects/misc/HTMLView.js";
 import {Group} from "../../../../../core/objects/misc/Group.js";
+import {BillboardGroup} from "../../../../../core/objects/misc/BillboardGroup.js";
 import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {SpotLight} from "../../../../../core/objects/lights/SpotLight.js";
 import {RectAreaLight} from "../../../../../core/objects/lights/RectAreaLight.js";
@@ -533,11 +534,17 @@ return target.set(x, y, z);`;
 		Editor.addObject(particle, self.editor.scene);
 	}, Locale.particleEmitter);
 
-	// Container
+	// Group
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()
 	{
 		Editor.addObject(new Group(), self.editor.scene);
-	}, Locale.container);
+	}, Locale.group);
+
+	// Billboard Group
+	effects.addOption(Global.FILE_PATH + "icons/misc/rotate.png", function()
+	{
+		Editor.addObject(new BillboardGroup(), self.editor.scene);
+	}, Locale.billboardGroup);
 
 	// Cube Camera
 	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()

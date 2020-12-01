@@ -1,4 +1,4 @@
-import {Group as TGroup} from "three";
+import {BufferGeometry, Mesh, MeshBasicMaterial} from "three";
 
 /**
  * Object that makes it rotation be the same as the camera.
@@ -10,20 +10,22 @@ import {Group as TGroup} from "three";
  */
 function BillboardGroup()
 {
-	TGroup.call(this);
+	Mesh.call(this, new BufferGeometry(), new MeshBasicMaterial({depthWrite: false, colorWrite: false}));
 
-	this.name = "container";
-	this.type = "Group";
+	this.name = "billboard";
+	this.type = "BillboardGroup";
 }
 
-BillboardGroup.prototype = Object.create(TGroup.prototype);
+BillboardGroup.prototype = Object.create(Mesh.prototype);
 BillboardGroup.prototype.constructor = BillboardGroup;
+
+BillboardGroup.prototype.isScene = true;
 
 BillboardGroup.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
 {
-	var temp = new THREE.Quaternion();
-	camera.getWorldQuaternion(temp);
-	this.quaternion.copy(temp);
+	var quaternion = new THREE.Quaternion();
+	camera.getWorldQuaternion(quaternion);
+	this.quaternion.copy(quaternion);
 };
 
 export {BillboardGroup};

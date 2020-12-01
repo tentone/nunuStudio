@@ -41,14 +41,15 @@ import {FontLoader} from "./FontLoader.js";
 import {AudioLoader} from "./AudioLoader.js";
 import {TextureLoader} from "./TextureLoader.js";
 import {VideoLoader} from "./VideoLoader.js";
+import {BillboardGroup} from "../objects/misc/BillboardGroup";
 
 /**
  * Objectloader can be used to load external objects from files.
  *
  * Also loads all resources attached to the objects being loaded.
- * 
+ *
  * Can parse be used to load on runtime resources and objects from external project files.
- * 
+ *
  * @module Loaders
  * @class ObjectLoader
  * @param {Object} manager
@@ -88,8 +89,8 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 };
 
 /**
- * Parse JSON object and create the correct Object structure. 
- * 
+ * Parse JSON object and create the correct Object structure.
+ *
  * Data can be loaded from a file and should be parsed into Object.
  *
  * @method parse
@@ -214,7 +215,7 @@ ObjectLoader.prototype.parseGeometries = function(array)
 		loader.setImages(this.images);
 
 		for (var i = 0; i < array.length; i++)
-		{	
+		{
 			this.geometries[array[i].uuid] = loader.parse(array[i]);
 		}
 	}
@@ -349,7 +350,7 @@ ObjectLoader.prototype.parseTextures = function(json)
 			this.textures[json[i].uuid] = loader.parse(json[i]);
 		}
 	}
-	
+
 	return this.textures;
 };
 
@@ -423,7 +424,7 @@ ObjectLoader.prototype.parseObject = function(data)
 			}
 
 			object = new SpineAnimation(data.json, data.atlas, "", data.textures);
-				
+
 			if (data.animation !== undefined)
 			{
 				object.animation = data.animation;
@@ -467,12 +468,12 @@ ObjectLoader.prototype.parseObject = function(data)
 			break;
 
 		case "ParticleEmiter":
-			object = ParticleEmitter.fromJSON(data, this); 
+			object = ParticleEmitter.fromJSON(data, this);
 			break;
 
 		case "LensFlare":
 			object = new LensFlare();
-				
+
 			if (data.lensFlares !== undefined)
 			{
 				data.elements = data.lensFlares;
@@ -492,13 +493,13 @@ ObjectLoader.prototype.parseObject = function(data)
 
 		case "Program":
 			object = new Program(data.name);
-				
+
 			object.description = data.description;
 			object.author = data.author;
 			object.version = data.version;
 
 			object.ar = data.ar === true;
-				
+
 			object.vr = data.vr;
 			object.vrScale = data.vrScale;
 
@@ -524,21 +525,21 @@ ObjectLoader.prototype.parseObject = function(data)
 			{
 				object.defaultScene = data.defaultScene;
 			}
-				
+
 			if (data.handlePixelRatio !== undefined)
 			{
-				object.handlePixelRatio = data.handlePixelRatio;	
+				object.handlePixelRatio = data.handlePixelRatio;
 			}
 
 			break;
 
 		case "Sky":
 			object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
-				
+
 			if (data.sun !== undefined)
 			{
 				object.sun.shadow.fromJSON(data.sun.shadow);
-					
+
 				if (data.sun.castShadow !== undefined)
 				{
 					object.sun.castShadow = data.sun.castShadow;
@@ -550,7 +551,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				object.colorTop = [];
 				for (var i = 0; i < data.colorTop.length; i++)
 				{
-					object.colorTop.push(new Color(data.colorTop[i])); 
+					object.colorTop.push(new Color(data.colorTop[i]));
 				}
 			}
 			if (data.colorBottom !== undefined)
@@ -558,7 +559,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				object.colorBottom = [];
 				for (var i = 0; i < data.colorBottom.length; i++)
 				{
-					object.colorBottom.push(new Color(data.colorBottom[i])); 
+					object.colorBottom.push(new Color(data.colorBottom[i]));
 				}
 			}
 			if (data.sunColor !== undefined)
@@ -579,7 +580,7 @@ ObjectLoader.prototype.parseObject = function(data)
 		case "CubeCamera":
 			object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
 			break;
-				
+
 		case "FirstPersonControls":
 			object = new FirstPersonControls();
 			object.sensitivity = data.sensitivity;
@@ -601,7 +602,7 @@ ObjectLoader.prototype.parseObject = function(data)
 			object.needsButtonPressed = data.needsButtonPressed;
 			object.zoomEnabled = data.zoomEnabled;
 			object.movementEnabled = data.movementEnabled;
-				
+
 			if (data.smooth !== undefined)
 			{
 				object.smooth = data.smooth;
@@ -616,7 +617,7 @@ ObjectLoader.prototype.parseObject = function(data)
 			}
 
 			break;
-				
+
 		case "Scene":
 			object = new Scene();
 
@@ -669,7 +670,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
 				object.world.quatNormalizeSkip = data.world.quatNormalizeSkip;
 				object.world.quatNormalizeFast = data.world.quatNormalizeFast;
-					
+
 				object.world.solver.tolerance = data.world.solver.tolerance;
 				object.world.solver.iterations = data.world.solver.iterations;
 			}
@@ -677,8 +678,8 @@ ObjectLoader.prototype.parseObject = function(data)
 
 		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
-				
-			if (data.focus !== undefined) 
+
+			if (data.focus !== undefined)
 			{
 				object.focus = data.focus;
 			}
@@ -784,7 +785,7 @@ ObjectLoader.prototype.parseObject = function(data)
 		case "Script":
 			object = new Script(data.code, data.mode);
 			break;
-			
+
 
 		case "PythonScript":
 			object = new PythonScript(data.code);
@@ -887,6 +888,10 @@ ObjectLoader.prototype.parseObject = function(data)
 			object = new Group();
 			break;
 
+		case "BillboardGroup":
+			object = new BillboardGroup();
+			break;
+
 		case "Bone":
 			object = new Bone();
 			break;
@@ -911,12 +916,12 @@ ObjectLoader.prototype.parseObject = function(data)
 	{
 		object.frustumCulled = data.frustumCulled;
 	}
-	
+
 	if (data.renderOrder !== undefined)
 	{
 		object.renderOrder = data.renderOrder;
 	}
-	
+
 	// Animations
 	if (data.animations !== undefined)
 	{
@@ -961,7 +966,7 @@ ObjectLoader.prototype.parseObject = function(data)
 	// Aditional user data
 	if (data.userData !== undefined) {object.userData = data.userData;}
 	if (data.layers !== undefined) {object.layers.mask = data.layers;}
-	
+
 	// Add children
 	if (data.children !== undefined)
 	{
@@ -975,7 +980,7 @@ ObjectLoader.prototype.parseObject = function(data)
 	if (data.matrixAutoUpdate !== undefined)
 	{
 		object.matrixAutoUpdate = data.matrixAutoUpdate;
-		
+
 		if (!object.matrixAutoUpdate)
 		{
 			object.updateMatrix();

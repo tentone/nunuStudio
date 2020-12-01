@@ -1,6 +1,6 @@
 /**
  * Locale EN defines text of the GUI for the English language.
- * 
+ *
  * @static
  * @class LocaleEN
  */
@@ -35,7 +35,7 @@ var LocaleEN = {
 	setTransparent: "Set transparent",
 	mergeGeometries: "Merge Geometries",
 	executeScript: "Execute Script",
-	
+
 	// Context menu
 	computeNormals: "Compute Normals",
 	applyTransformation: "Apply Transformation",
@@ -69,6 +69,8 @@ var LocaleEN = {
 	positionalAudio: "Positional Audio",
 	audio: "Audio",
 	container: "Container",
+	group: "Group",
+	billboardGroup: "Billboard Group",
 	sprite: "Sprite",
 	perspectiveCamera: "Perspective Camera",
 	orthographicCamera: "Orthographic Camera",
@@ -513,7 +515,7 @@ var LocaleEN = {
 	theme: "Theme",
 	historySize: "History size",
 	hintHistory: "How many changes are stored in the history.",
-	
+
 	// Resources
 	image: "Image",
 	video: "Video",
@@ -538,7 +540,7 @@ var LocaleEN = {
 	loadProject: "Load project from file?",
 	createProject: "Create new project?",
 	exportOnlyVisibleObjects: "Export only the visible objects from the project?",
-	
+
 	// Warnings
 	unsavedChangesExit: "All unsaved changes to the project will be lost. Do you really wanna exit?",
 	cannotAddItself: "Cannot add object into itself.",

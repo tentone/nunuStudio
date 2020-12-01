@@ -47,7 +47,7 @@ ObjectIcons.icons = new Map([
 	["Points", ObjectIcons.path + "models/points.png"],
 	["Line", ObjectIcons.path + "misc/nodes.png"],
 	["LineSegments", ObjectIcons.path + "misc/nodes.png"],
-	
+
 	["Script", ObjectIcons.path + "script/javascript.png"],
 	["PythonScript", ObjectIcons.path + "script/python.png"],
 	["NodeScript", ObjectIcons.path + "script/workflow.png"],
@@ -73,6 +73,7 @@ ObjectIcons.icons = new Map([
 	["CubeCamera", ObjectIcons.path + "misc/probe.png"],
 	["Bone", ObjectIcons.path + "misc/bone.png"],
 	["Group", ObjectIcons.path + "misc/container.png"],
+	["BillboardGroup", ObjectIcons.path + "misc/rotate.png"],
 	["LensFlare", ObjectIcons.path + "misc/flare.png"],
 	["OrbitControls", ObjectIcons.path + "misc/orbit.png"],
 	["FirstPersonControls", ObjectIcons.path + "misc/crosshair.png"]
@@ -80,7 +81,7 @@ ObjectIcons.icons = new Map([
 
 /**
  * Get icon path from object type, if no icon available a default icon is returned.
- * 
+ *
  * @static
  * @method get
  * @param {string} Object type.
