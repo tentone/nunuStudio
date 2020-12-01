@@ -4,7 +4,7 @@ import {CSS3DObject} from "../../renderer/css/CSS3DObject.js";
  * HTMLView object is used to navigate webpages inside of the 3D scene.
  *
  * Can be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.
- * 
+ *
  * @class HTMLView
  * @extends {CSS3DObject}
  * @param {string} url URL to be opened by default.
@@ -13,7 +13,7 @@ function HTMLView(url)
 {
 	var element = document.createElement("iframe");
 	element.style.border = "none";
-	
+
 	CSS3DObject.call(this, element);
 
 	this.type = "HTMLView";
@@ -21,7 +21,7 @@ function HTMLView(url)
 
 	var self = this;
 	var url, width, height;
-	
+
 	Object.defineProperties(this,
 		{
 		/**
@@ -79,19 +79,18 @@ function HTMLView(url)
 }
 
 HTMLView.prototype = Object.create(CSS3DObject.prototype);
-
 HTMLView.prototype.constructor = HTMLView;
 
-/** 
+/**
  * Process URL to transform it into embedded URL when possible for common services.
  *
  * @method processURL
  * @param {string} url
  */
 HTMLView.processURL = function(url)
-{	
+{
 	// Replace youtube url to use embeded link
-	return url.replace("watch?v=", "embed/");			
+	return url.replace("watch?v=", "embed/");
 };
 
 HTMLView.prototype.toJSON = function(meta)
