@@ -833,7 +833,7 @@ TreeNode.prototype.setBorder = function(place)
 	{
 		this.element.style.borderBottom = "1px solid var(--color-gray-light)";
 	}
-	else if(place === TreeNode.INSIDE)
+	else if (place === TreeNode.INSIDE)
 	{
 		this.element.style.border = "1px solid var(--color-gray-light)";
 	}
