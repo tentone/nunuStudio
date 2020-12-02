@@ -21,7 +21,7 @@ function ObjectUtils() {}
 ObjectUtils.getRoot = function(obj)
 {
 	var node = obj;
-	
+
 	while (node.parent !== null)
 	{
 		node = node.parent;
@@ -34,21 +34,21 @@ ObjectUtils.getRoot = function(obj)
  * Scale and center object into a unitary box.
  *
  * Useful to scale objects to fit into a known size box.
- * 
+ *
  * @method centerUnitary
  * @param {Object3D} object Object to be positioned and scaled.
  */
 ObjectUtils.centerUnitary = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
-	
+
 	if (box !== null)
 	{
 		var size = new Vector3();
 		box.getSize(size);
 
 		var scale = 1 / (size.x > size.y ? size.x > size.z ? size.x : size.z : size.y > size.z ? size.y : size.z);
-		
+
 		var center = new Vector3();
 		box.getCenter(center);
 		center.multiplyScalar(scale);
@@ -59,13 +59,13 @@ ObjectUtils.centerUnitary = function(object)
 };
 
 /**
- * Calculates a bouding box for an object considering all its children.
+ * Calculates a bounding box for an object considering all its children.
  *
- * Includes booth the object and all of its children, the box is ajusted to world space coordinates.
+ * Includes booth the object and all of its children, the box is adjusted to world space coordinates.
  *
- * @method calculateBoudingBox
+ * @method calculateBoundingBox
  * @param {Object3D} object Root object to be traversed.
- * @return {Box3} Bouding box of the object considering all of its children.
+ * @return {Box3} Bounding box of the object considering all of its children.
  */
 ObjectUtils.calculateBoundingBox = function(object)
 {
@@ -90,7 +90,7 @@ ObjectUtils.calculateBoundingBox = function(object)
 			boundingBox.applyMatrix4(children.matrixWorld);
 
 			children.geometry.computeBoundingBox();
-			var boundingBox = children.geometry.boundingBox;
+			boundingBox = children.geometry.boundingBox;
 		}
 
 		// Update bouding box size
