@@ -8,7 +8,7 @@
  - The project  build on top of open source libraries with good community support like [nwjs.io](https://nwjs.io), [three.js](https://github.com/mrdoob/three.js), [cannon.js](https://schteppe.github.io/cannon.js), [opentype](https://opentype.js.org), [jscolor.com](http://jscolor.com), [codemirror.net](https://codemirror.net), [leapjs](https://github.com/leapmotion/leapjs), [jshint.com](https://jshint.com), [yuidoc](https://yui.github.io/yuidoc)
 
  - Fully featured [web version](https://www.nunustudio.org/build/editor/index.html) of the editor is available on the project page.
- - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
+ - The web version is tested with [Firefox](https://www.mozilla.org/en-US/firefox/new/), [Chrome](https://www.google.com/chrome/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge), mobile browsers are supported as well.
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/web.png">
 
@@ -28,16 +28,16 @@
 ### Features
 
 - Visual application editor
-  - Drag and drop files directly into the project
-  - Manage project resources
-  - Edit material, textures, shaders, code, etc
-- Built on three.js rendering library
+  - Drag and drop files directly into the project (images, video, models, ...)
+  - Manage project resources.
+  - Edit material, textures, shaders, code, ...
+- Built on [three.js](https://threejs.org/) library
   - Real time lighting and shadow map support
-  - three.js code can be used inside nunuStudio scripts without the need for THREE prefix
-  - Wide range of file formats supported
-- NWJS and Cordova exports for desktop and mobile deployment
-- Physics engine (cannon.js)
-- Compatible with WebXR virtual and augmented reality
+  - three.js libraries can be imported into the editor
+  - Wide range of file formats supported (gltf, dae, obj, fbx, 3ds, ...)
+- [NW.js](https://nwjs.io/) and [Cordova](https://cordova.apache.org/) exports for desktop and mobile deployment
+- Physics powered by [cannon.js](https://schteppe.github.io/cannon.js/)
+- Compatible with [WebXR](https://www.w3.org/TR/webxr/) for Virtual Reality and Augmented Reality
 
 
 
@@ -71,6 +71,6 @@
 
 ### License
 
-- nunuStudio uses a MIT license that allow for commercial usage of the platform without any cost.
+- The project is distributed under a MIT license that allow for commercial usage of the platform without any cost.
 - The license is available on the project GitHub page
 
