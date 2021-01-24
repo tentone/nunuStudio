@@ -1,4 +1,4 @@
-import {Shape} from "cannon";
+import {Shape} from "cannon-es";
 import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
 import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
@@ -82,7 +82,7 @@ TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
 			this.activePlane = this.planes["YZ"];
 		}
 	}
-	else if (axis === "XYZ") 
+	else if (axis === "XYZ")
 	{
 		this.activePlane = this.planes["XYZE"];
 	}
@@ -105,18 +105,18 @@ TransformGizmoScale.prototype.applyChanges = function(controls)
 		actions.push(new ChangeAction(object, "y", object.y, controls.attributes[i].oldScale.y));
 		actions.push(new ChangeAction(object, "z", object.z, controls.attributes[i].oldScale.z));
 	}
-	
+
 	Editor.addAction(new ActionBundle(actions));
 };
 
 TransformGizmoScale.prototype.transformObject = function(controls)
 {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
-	if (planeIntersect === false) 
+	if (planeIntersect === false)
 	{
 		return;
 	}
-	
+
 	for (var i = 0; i < controls.objects.length; i++)
 	{
 		controls.point.copy(planeIntersect.point);
@@ -157,7 +157,7 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 			for (var i = 0; i < shapes.length; i++)
 			{
 				var shape = shapes[i];
-				
+
 				if (shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;

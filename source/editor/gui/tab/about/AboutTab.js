@@ -1,5 +1,5 @@
 import {REVISION} from "three";
-import * as CANNON from "cannon";
+import * as CANNON from "cannon-es";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {Global} from "../../../Global.js";

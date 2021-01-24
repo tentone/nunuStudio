@@ -1,4 +1,4 @@
-import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon";
+import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon-es";
 import {Vector3, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
 import {ConvexHull} from "three/examples/jsm/math/ConvexHull";
 

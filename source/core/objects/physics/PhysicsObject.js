@@ -1,4 +1,4 @@
-import {Body, World, Shape, Sphere, Box, Vec3, Particle, Plane, Heightfield, ConvexPolyhedron} from "cannon";
+import {Body, World, Shape, Sphere, Box, Vec3, Particle, Plane, Heightfield, ConvexPolyhedron} from "cannon-es";
 import {Group, Vector3, Quaternion, Object3D, Matrix4} from "three";
 import {Scene} from "../Scene.js";
 
@@ -6,9 +6,9 @@ import {Scene} from "../Scene.js";
  * Wrapper for cannon.js physics objects.
  *
  * The editor includes tools to create cannon shapes from three.js geometry objects.
- * 
+ *
  * Documentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/
- * 
+ *
  * @class PhysicsObject
  * @extends {Group}
  * @module Physics
@@ -39,7 +39,7 @@ function PhysicsObject()
 	 *  - collisionFilterMask Number
 	 *  - fixedRotation Boolean
 	 *  - shape Array
-	 *  
+	 *
 	 *
 	 * @attribute body
 	 * @type {Body}
@@ -58,7 +58,7 @@ function PhysicsObject()
 
 	/**
 	 * Refenrece to the physics world.
-	 * 
+	 *
 	 * @attribute world
 	 * @type {World}
 	 */
@@ -71,7 +71,7 @@ PhysicsObject.prototype = Object.create(Group.prototype);
  * The position of the object is copied directly from the body.
  *
  * Ignores the world tranforms inherited from parent objects.
- * 
+ *
  * Faster but the physics object should not carry any world transformations.
  *
  * @static
@@ -93,7 +93,7 @@ PhysicsObject.WORLD = 101;
 
 /**
  * Intialize physics object and add it to the scene physics world.
- * 
+ *
  * @method initialize
  */
 PhysicsObject.prototype.initialize = function()
@@ -101,7 +101,7 @@ PhysicsObject.prototype.initialize = function()
 	if (this.mode === PhysicsObject.LOCAL)
 	{
 		this.body.position.copy(this.position);
-		this.body.quaternion.copy(this.quaternion);	
+		this.body.quaternion.copy(this.quaternion);
 	}
 	else if (this.mode === PhysicsObject.WORLD)
 	{
@@ -131,7 +131,7 @@ PhysicsObject.prototype.initialize = function()
 
 /**
  * Update object position and rotation based on cannon.js body.
- * 
+ *
  * @method update
  */
 PhysicsObject.prototype.update = function(delta)
@@ -171,13 +171,13 @@ PhysicsObject.prototype.update = function(delta)
 		inverse.multiply(transform);
 		inverse.decompose(this.position, this.quaternion, scale);
 	}
- 
+
 	Object3D.prototype.update.call(this, delta);
 };
 
 /**
  * Add shape to physics object body.
- * 
+ *
  * @param {Shape} shape
  * @method addShape
  */
@@ -261,7 +261,7 @@ PhysicsObject.prototype.toJSON = function(meta)
 PhysicsObject.fromJSON = function(data)
 {
 	var object = new PhysicsObject();
-	
+
 	if (data.mode !== undefined)
 	{
 		object.mode = data.mode;
@@ -316,7 +316,7 @@ PhysicsObject.fromJSON = function(data)
 			{
 				shape.vertices[k] = new Vec3(shape.vertices[k].x, shape.vertices[k].y, shape.vertices[k].z);
 			}
-			
+
 			object.body.addShape(new ConvexPolyhedron(shape.vertices, shape.faces));
 		}
 	}

@@ -1,7 +1,7 @@
 import {Group, Object3D} from "three";
 // eslint-disable-next-line no-duplicate-imports
 import * as THREE from "three";
-import * as CANNON from "cannon";
+import * as CANNON from "cannon-es";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 import {FileSystem} from "../../FileSystem.js";

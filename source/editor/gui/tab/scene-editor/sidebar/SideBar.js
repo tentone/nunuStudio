@@ -1,4 +1,4 @@
-import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon";
+import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon-es";
 import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";

@@ -1,4 +1,4 @@
-import {Shape, Body} from "cannon";
+import {Shape, Body} from "cannon-es";
 import {Locale} from "../../../../../locale/LocaleManager.js";
 import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
@@ -27,7 +27,7 @@ function PhysicsInspector(parent, object)
 			for (var i = 0; i < shapes.length; i++)
 			{
 				var shape = shapes[i];
-				
+
 				if (shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;

@@ -1,4 +1,4 @@
-import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon";
+import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon-es";
 import {Color, Texture, Camera, Raycaster, Vector2, Scene as TScene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
 import {PointOctree} from "sparse-octree";
 import {Program} from "./Program.js";
