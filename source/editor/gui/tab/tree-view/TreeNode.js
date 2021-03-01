@@ -1,4 +1,6 @@
 import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
+import {ConvexGeometry} from "three/examples/jsm/geometries/ConvexGeometry";
+import {BufferGeometryUtils} from "three/examples/jsm/utils/BufferGeometryUtils";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {PhysicsGenerator} from "../../../../core/utils/PhysicsGenerator.js";
 import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
@@ -283,6 +285,27 @@ function TreeNode(container)
 				// If mesh has a geometry attached
 				if (self.object.geometry !== undefined)
 				{
+					// Generate a convex hull for this geometry
+					context.addOption(Locale.convexHull, function()
+					{
+						var geometry = self.object.geometry.clone();
+						geometry = BufferGeometryUtils.mergeVertices(geometry);
+
+						const vertices = [];
+						const positionAttribute = dodecahedronGeometry.getAttribute("position");
+
+						for (var i = 0; i < positionAttribute.count; i++)
+						{
+							const vertex = new THREE.Vector3();
+							vertex.fromBufferAttribute(positionAttribute, i);
+							vertices.push(vertex);
+						}
+
+						var quickhull = new ConvexGeometry(vertices);
+						quickhull.computeVertexNormals();
+						Editor.addAction(new ChangeAction(self.object, "geometry", quickhull));
+					});
+
 					// Generate normals for the attached geometry
 					context.addOption(Locale.computeNormals, function()
 					{
