@@ -292,17 +292,16 @@ function TreeNode(container)
 						geometry = BufferGeometryUtils.mergeVertices(geometry);
 
 						const vertices = [];
-						const positionAttribute = dodecahedronGeometry.getAttribute("position");
+						const positionAttribute = geometry.getAttribute("position");
 
 						for (var i = 0; i < positionAttribute.count; i++)
 						{
-							const vertex = new THREE.Vector3();
+							const vertex = new Vector3();
 							vertex.fromBufferAttribute(positionAttribute, i);
 							vertices.push(vertex);
 						}
 
 						var quickhull = new ConvexGeometry(vertices);
-						quickhull.computeVertexNormals();
 						Editor.addAction(new ChangeAction(self.object, "geometry", quickhull));
 					});
 

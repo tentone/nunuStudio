@@ -32,7 +32,7 @@
   var mac_geMountainLion = /Mac OS X 1\d\D([8-9]|\d\d)\D/.test(userAgent);
   var phantom = /PhantomJS/.test(userAgent);
 
-  var ios = !edge && /AppleWebKit/.test(userAgent) && /Mobile\/\w+/.test(userAgent);
+  var ios = safari && (/Mobile\/\w+/.test(userAgent) || navigator.maxTouchPoints > 2);
   var android = /Android/.test(userAgent);
   // This is woefully incomplete. Suggestions for alternative methods welcome.
   var mobile = ios || android || /webOS|BlackBerry|Opera Mini|Opera Mobi|IEMobile/i.test(userAgent);
@@ -3285,19 +3285,22 @@
   }
 
   function ensureFocus(cm) {
-    if (!cm.state.focused) { cm.display.input.focus(); onFocus(cm); }
+    if (!cm.hasFocus()) {
+      cm.display.input.focus();
+      if (!cm.state.focused) { onFocus(cm); }
+    }
   }
 
   function delayBlurEvent(cm) {
     cm.state.delayingBlurEvent = true;
     setTimeout(function () { if (cm.state.delayingBlurEvent) {
       cm.state.delayingBlurEvent = false;
-      onBlur(cm);
+      if (cm.state.focused) { onBlur(cm); }
     } }, 100);
   }
 
   function onFocus(cm, e) {
-    if (cm.state.delayingBlurEvent) { cm.state.delayingBlurEvent = false; }
+    if (cm.state.delayingBlurEvent && !cm.state.draggingText) { cm.state.delayingBlurEvent = false; }
 
     if (cm.options.readOnly == "nocursor") { return }
     if (!cm.state.focused) {
@@ -3479,14 +3482,15 @@
       if (newTop != screentop) { result.scrollTop = newTop; }
     }
 
-    var screenleft = cm.curOp && cm.curOp.scrollLeft != null ? cm.curOp.scrollLeft : display.scroller.scrollLeft;
-    var screenw = displayWidth(cm) - (cm.options.fixedGutter ? display.gutters.offsetWidth : 0);
+    var gutterSpace = cm.options.fixedGutter ? 0 : display.gutters.offsetWidth;
+    var screenleft = cm.curOp && cm.curOp.scrollLeft != null ? cm.curOp.scrollLeft : display.scroller.scrollLeft - gutterSpace;
+    var screenw = displayWidth(cm) - display.gutters.offsetWidth;
     var tooWide = rect.right - rect.left > screenw;
     if (tooWide) { rect.right = rect.left + screenw; }
     if (rect.left < 10)
       { result.scrollLeft = 0; }
     else if (rect.left < screenleft)
-      { result.scrollLeft = Math.max(0, rect.left - (tooWide ? 0 : 10)); }
+      { result.scrollLeft = Math.max(0, rect.left + gutterSpace - (tooWide ? 0 : 10)); }
     else if (rect.right > screenw + screenleft - 3)
       { result.scrollLeft = rect.right + (tooWide ? 0 : 10) - screenw; }
     return result
@@ -4794,19 +4798,19 @@
     });
   }
 
-  function History(startGen) {
+  function History(prev) {
     // Arrays of change events and selections. Doing something adds an
     // event to done and clears undo. Undoing moves events from done
     // to undone, redoing moves them in the other direction.
     this.done = []; this.undone = [];
-    this.undoDepth = Infinity;
+    this.undoDepth = prev ? prev.undoDepth : Infinity;
     // Used to track when changes can be merged into a single undo
     // event
     this.lastModTime = this.lastSelTime = 0;
     this.lastOp = this.lastSelOp = null;
     this.lastOrigin = this.lastSelOrigin = null;
     // Used by the isClean() method
-    this.generation = this.maxGeneration = startGen || 1;
+    this.generation = this.maxGeneration = prev ? prev.maxGeneration : 1;
   }
 
   // Create a history change event from an updateDoc-style change
@@ -5111,7 +5115,7 @@
       (cmp(sel.primary().head, doc.sel.primary().head) < 0 ? -1 : 1);
     setSelectionInner(doc, skipAtomicInSelection(doc, sel, bias, true));
 
-    if (!(options && options.scroll === false) && doc.cm)
+    if (!(options && options.scroll === false) && doc.cm && doc.cm.getOption("readOnly") != "nocursor")
       { ensureCursorVisible(doc.cm); }
   }
 
@@ -5768,7 +5772,7 @@
     changeLine(doc, handle, "widget", function (line) {
       var widgets = line.widgets || (line.widgets = []);
       if (widget.insertAt == null) { widgets.push(widget); }
-      else { widgets.splice(Math.min(widgets.length - 1, Math.max(0, widget.insertAt)), 0, widget); }
+      else { widgets.splice(Math.min(widgets.length, Math.max(0, widget.insertAt)), 0, widget); }
       widget.line = line;
       if (cm && !lineIsHidden(doc, line)) {
         var aboveVisible = heightAtLine(line) < doc.scrollTop;
@@ -6240,7 +6244,7 @@
     clearHistory: function() {
       var this$1 = this;
 
-      this.history = new History(this.history.maxGeneration);
+      this.history = new History(this.history);
       linkedDocs(this, function (doc) { return doc.history = this$1.history; }, true);
     },
 
@@ -6261,7 +6265,7 @@
               undone: copyHistoryArray(this.history.undone)}
     },
     setHistory: function(histData) {
-      var hist = this.history = new History(this.history.maxGeneration);
+      var hist = this.history = new History(this.history);
       hist.done = copyHistoryArray(histData.done.slice(0), null, true);
       hist.undone = copyHistoryArray(histData.undone.slice(0), null, true);
     },
@@ -7377,6 +7381,10 @@
     var dragEnd = operation(cm, function (e) {
       if (webkit) { display.scroller.draggable = false; }
       cm.state.draggingText = false;
+      if (cm.state.delayingBlurEvent) {
+        if (cm.hasFocus()) { cm.state.delayingBlurEvent = false; }
+        else { delayBlurEvent(cm); }
+      }
       off(display.wrapper.ownerDocument, "mouseup", dragEnd);
       off(display.wrapper.ownerDocument, "mousemove", mouseMove);
       off(display.scroller, "dragstart", dragStart);
@@ -7400,15 +7408,15 @@
     if (webkit) { display.scroller.draggable = true; }
     cm.state.draggingText = dragEnd;
     dragEnd.copy = !behavior.moveOnDrag;
-    // IE's approach to draggable
-    if (display.scroller.dragDrop) { display.scroller.dragDrop(); }
     on(display.wrapper.ownerDocument, "mouseup", dragEnd);
     on(display.wrapper.ownerDocument, "mousemove", mouseMove);
     on(display.scroller, "dragstart", dragStart);
     on(display.scroller, "drop", dragEnd);
 
-    delayBlurEvent(cm);
+    cm.state.delayingBlurEvent = true;
     setTimeout(function () { return display.input.focus(); }, 20);
+    // IE's approach to draggable
+    if (display.scroller.dragDrop) { display.scroller.dragDrop(); }
   }
 
   function rangeForUnit(cm, pos, unit) {
@@ -7421,6 +7429,7 @@
 
   // Normal selection, as opposed to text dragging.
   function leftButtonSelect(cm, event, start, behavior) {
+    if (ie) { delayBlurEvent(cm); }
     var display = cm.display, doc = cm.doc;
     e_preventDefault(event);
 
@@ -7699,7 +7708,7 @@
       for (var i = newBreaks.length - 1; i >= 0; i--)
         { replaceRange(cm.doc, val, newBreaks[i], Pos(newBreaks[i].line, newBreaks[i].ch + val.length)); }
     });
-    option("specialChars", /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b-\u200c\u200e\u200f\u2028\u2029\ufeff\ufff9-\ufffc]/g, function (cm, val, old) {
+    option("specialChars", /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b\u200e\u200f\u2028\u2029\ufeff\ufff9-\ufffc]/g, function (cm, val, old) {
       cm.state.specialChars = new RegExp(val.source + (val.test("\t") ? "" : "|\t"), "g");
       if (old != Init) { cm.refresh(); }
     });
@@ -8666,10 +8675,13 @@
     function moveOnce(boundToLine) {
       var next;
       if (unit == "codepoint") {
-        var ch = lineObj.text.charCodeAt(pos.ch + (unit > 0 ? 0 : -1));
-        if (isNaN(ch)) { next = null; }
-        else { next = new Pos(pos.line, Math.max(0, Math.min(lineObj.text.length, pos.ch + dir * (ch >= 0xD800 && ch < 0xDC00 ? 2 : 1))),
-                            -dir); }
+        var ch = lineObj.text.charCodeAt(pos.ch + (dir > 0 ? 0 : -1));
+        if (isNaN(ch)) {
+          next = null;
+        } else {
+          var astral = dir > 0 ? ch >= 0xD800 && ch < 0xDC00 : ch >= 0xDC00 && ch < 0xDFFF;
+          next = new Pos(pos.line, Math.max(0, Math.min(lineObj.text.length, pos.ch + dir * (astral ? 2 : 1))), -dir);
+        }
       } else if (visually) {
         next = moveVisually(doc.cm, lineObj, pos, dir);
       } else {
@@ -9781,7 +9793,7 @@
 
   addLegacyProps(CodeMirror);
 
-  CodeMirror.version = "5.58.1";
+  CodeMirror.version = "5.59.4";
 
   return CodeMirror;
 
@@ -10737,9 +10749,19 @@
     cm.setCursor(cm.getCursor());
   }
 
+  function makePrompt(msg) {
+    var fragment = document.createDocumentFragment();
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.style.width = "10em";
+    fragment.appendChild(document.createTextNode(msg + ": "));
+    fragment.appendChild(input);
+    return fragment;
+  }
+
   function getInput(cm, msg, f) {
     if (cm.openDialog)
-      cm.openDialog(msg + ": <input type=\"text\" style=\"width: 10em\"/>", f, {bottom: true});
+      cm.openDialog(makePrompt(msg), f, {bottom: true});
     else
       f(prompt(msg, ""));
   }
@@ -11168,6 +11190,7 @@
     { name: 'yank', shortName: 'y' },
     { name: 'delmarks', shortName: 'delm' },
     { name: 'registers', shortName: 'reg', excludeFromCommandHistory: true },
+    { name: 'vglobal', shortName: 'v' },
     { name: 'global', shortName: 'g' }
   ];
 
@@ -11277,7 +11300,7 @@
       return cmd;
     }
 
-    var modifiers = {'Shift': 'S', 'Ctrl': 'C', 'Alt': 'A', 'Cmd': 'D', 'Mod': 'A'};
+    var modifiers = {Shift:'S',Ctrl:'C',Alt:'A',Cmd:'D',Mod:'A',CapsLock:''};
     var specialKeys = {Enter:'CR',Backspace:'BS',Delete:'Del',Insert:'Ins'};
     function cmKeyToVimKey(key) {
       if (key.charAt(0) == '\'') {
@@ -11661,7 +11684,7 @@
         // TODO: Convert keymap into dictionary format for fast lookup.
       },
       // Testing hook, though it might be useful to expose the register
-      // controller anyways.
+      // controller anyway.
       getRegisterController: function() {
         return vimGlobalState.registerController;
       },
@@ -12374,7 +12397,7 @@
               showPrompt(cm, {
                   onClose: onPromptClose,
                   prefix: promptPrefix,
-                  desc: searchPromptDesc,
+                  desc: '(JavaScript regexp)',
                   onKeyUp: onPromptKeyUp,
                   onKeyDown: onPromptKeyDown
               });
@@ -14407,7 +14430,7 @@
         },
         isComplete: function(state) {
           if (state.nextCh === '#') {
-            var token = state.lineText.match(/#(\w+)/)[1];
+            var token = state.lineText.match(/^#(\w+)/)[1];
             if (token === 'endif') {
               if (state.forward && state.depth === 0) {
                 return true;
@@ -15034,16 +15057,6 @@
       var vim = cm.state.vim;
       return vim.searchState_ || (vim.searchState_ = new SearchState());
     }
-    function dialog(cm, template, shortText, onClose, options) {
-      if (cm.openDialog) {
-        cm.openDialog(template, onClose, { bottom: true, value: options.value,
-            onKeyDown: options.onKeyDown, onKeyUp: options.onKeyUp,
-            selectValueOnOpen: false});
-      }
-      else {
-        onClose(prompt(shortText, ''));
-      }
-    }
     function splitBySlash(argString) {
       return splitBySeparator(argString, '/');
     }
@@ -15230,28 +15243,64 @@
           (ignoreCase || forceIgnoreCase) ? 'i' : undefined);
       return regexp;
     }
-    function showConfirm(cm, text) {
+
+    /**
+     * dom - Document Object Manipulator
+     * Usage:
+     *   dom('<tag>'|<node>[, ...{<attributes>|<$styles>}|<child-node>|'<text>'])
+     * Examples:
+     *   dom('div', {id:'xyz'}, dom('p', 'CM rocks!', {$color:'red'}))
+     *   dom(document.head, dom('script', 'alert("hello!")'))
+     * Not supported:
+     *   dom('p', ['arrays are objects'], Error('objects specify attributes'))
+     */
+    function dom(n) {
+      if (typeof n === 'string') n = document.createElement(n);
+      for (var a, i = 1; i < arguments.length; i++) {
+        if (!(a = arguments[i])) continue;
+        if (typeof a !== 'object') a = document.createTextNode(a);
+        if (a.nodeType) n.appendChild(a);
+        else for (var key in a) {
+          if (!Object.prototype.hasOwnProperty.call(a, key)) continue;
+          if (key[0] === '$') n.style[key.slice(1)] = a[key];
+          else n.setAttribute(key, a[key]);
+        }
+      }
+      return n;
+    }
+
+    function showConfirm(cm, template) {
+      var pre = dom('pre', {$color: 'red'}, template);
       if (cm.openNotification) {
-        cm.openNotification('<span style="color: red">' + text + '</span>',
-                            {bottom: true, duration: 5000});
+        cm.openNotification(pre, {bottom: true, duration: 5000});
       } else {
-        alert(text);
+        alert(pre.innerText);
       }
     }
+
     function makePrompt(prefix, desc) {
-      var raw = '<span style="font-family: monospace; white-space: pre">' +
-          (prefix || "") + '<input type="text" autocorrect="off" ' +
-          'autocapitalize="off" spellcheck="false"></span>';
-      if (desc)
-        raw += ' <span style="color: #888">' + desc + '</span>';
-      return raw;
+      return dom(document.createDocumentFragment(),
+               dom('span', {$fontFamily: 'monospace', $whiteSpace: 'pre'},
+                 prefix,
+                 dom('input', {type: 'text', autocorrect: 'off',
+                               autocapitalize: 'off', spellcheck: 'false'})),
+               desc && dom('span', {$color: '#888'}, desc));
     }
-    var searchPromptDesc = '(Javascript regexp)';
+
     function showPrompt(cm, options) {
       var shortText = (options.prefix || '') + ' ' + (options.desc || '');
-      var prompt = makePrompt(options.prefix, options.desc);
-      dialog(cm, prompt, shortText, options.onClose, options);
+      var template = makePrompt(options.prefix, options.desc);
+      if (cm.openDialog) {
+        cm.openDialog(template, options.onClose, {
+          onKeyDown: options.onKeyDown, onKeyUp: options.onKeyUp,
+          bottom: true, selectValueOnOpen: false, value: options.value
+        });
+      }
+      else {
+        options.onClose(prompt(shortText, ''));
+      }
     }
+
     function regexEqual(r1, r2) {
       if (r1 instanceof RegExp && r2 instanceof RegExp) {
           var props = ['global', 'multiline', 'ignoreCase', 'source'];
@@ -15425,7 +15474,7 @@
       if (start instanceof Array) {
         return inArray(pos, start);
       } else {
-        if (end) {
+        if (typeof end == 'number') {
           return (pos >= start && pos <= end);
         } else {
           return pos == start;
@@ -15488,7 +15537,7 @@
         try {
           this.parseInput_(cm, inputStream, params);
         } catch(e) {
-          showConfirm(cm, e);
+          showConfirm(cm, e.toString());
           throw e;
         }
         var command;
@@ -15532,7 +15581,7 @@
             params.callback();
           }
         } catch(e) {
-          showConfirm(cm, e);
+          showConfirm(cm, e.toString());
           throw e;
         }
       },
@@ -15804,12 +15853,12 @@
       registers: function(cm, params) {
         var regArgs = params.args;
         var registers = vimGlobalState.registerController.registers;
-        var regInfo = '----------Registers----------<br><br>';
+        var regInfo = '----------Registers----------\n\n';
         if (!regArgs) {
           for (var registerName in registers) {
             var text = registers[registerName].toString();
             if (text.length) {
-              regInfo += '"' + registerName + '    ' + text + '<br>';
+              regInfo += '"' + registerName + '    ' + text + '\n'
             }
           }
         } else {
@@ -15821,7 +15870,7 @@
               continue;
             }
             var register = registers[registerName] || new Register();
-            regInfo += '"' + registerName + '    ' + register.toString() + '<br>';
+            regInfo += '"' + registerName + '    ' + register.toString() + '\n'
           }
         }
         showConfirm(cm, regInfo);
@@ -15916,6 +15965,10 @@
         }
         cm.replaceRange(text.join('\n'), curStart, curEnd);
       },
+      vglobal: function(cm, params) {
+        // global inspects params.commandName
+        this.global(cm, params);
+      },
       global: function(cm, params) {
         // a global command is of the form
         // :[range]g/pattern/[cmd]
@@ -15925,6 +15978,7 @@
           showConfirm(cm, 'Regular Expression missing from global');
           return;
         }
+        var inverted = params.commandName[0] === 'v';
         // range is specified here
         var lineStart = (params.line !== undefined) ? params.line : cm.firstLine();
         var lineEnd = params.lineEnd || params.line || cm.lastLine();
@@ -15949,28 +16003,33 @@
         // now that we have the regexPart, search for regex matches in the
         // specified range of lines
         var query = getSearchState(cm).getQuery();
-        var matchedLines = [], content = '';
+        var matchedLines = [];
         for (var i = lineStart; i <= lineEnd; i++) {
-          var matched = query.test(cm.getLine(i));
-          if (matched) {
-            matchedLines.push(i+1);
-            content+= cm.getLine(i) + '<br>';
+          var line = cm.getLineHandle(i);
+          var matched = query.test(line.text);
+          if (matched !== inverted) {
+            matchedLines.push(cmd ? line : line.text);
           }
         }
         // if there is no [cmd], just display the list of matched lines
         if (!cmd) {
-          showConfirm(cm, content);
+          showConfirm(cm, matchedLines.join('\n'));
           return;
         }
         var index = 0;
         var nextCommand = function() {
           if (index < matchedLines.length) {
-            var command = matchedLines[index] + cmd;
+            var line = matchedLines[index++];
+            var lineNum = cm.getLineNumber(line);
+            if (lineNum == null) {
+              nextCommand();
+              return;
+            }
+            var command = (lineNum + 1) + cmd;
             exCommandDispatcher.processCommand(cm, command, {
               callback: nextCommand
             });
           }
-          index++;
         };
         nextCommand();
       },
@@ -15990,9 +16049,11 @@
               regexPart = new RegExp(regexPart).source; //normalize not escaped characters
           }
           replacePart = tokens[1];
-          if (regexPart && regexPart[regexPart.length - 1] === '$') {
-            regexPart = regexPart.slice(0, regexPart.length - 1) + '\\n';
-            replacePart = replacePart ? replacePart + '\n' : '\n';
+          // If the pattern ends with $ (line boundary assertion), change $ to \n.
+          // Caveat: this workaround cannot match on the last line of the document.
+          if (/(^|[^\\])(\\\\)*\$$/.test(regexPart)) {
+            regexPart = regexPart.slice(0, -1) + '\\n';
+            replacePart = (replacePart || '') + '\n';
           }
           if (replacePart !== undefined) {
             if (getOption('pcre')) {
@@ -16021,11 +16082,9 @@
           if (flagsPart) {
             if (flagsPart.indexOf('c') != -1) {
               confirm = true;
-              flagsPart.replace('c', '');
             }
             if (flagsPart.indexOf('g') != -1) {
               global = true;
-              flagsPart.replace('g', '');
             }
             if (getOption('pcre')) {
                regexPart = regexPart + '/' + flagsPart;
@@ -16158,7 +16217,7 @@
     * @param {Cursor} lineEnd Line to stop replacing at.
     * @param {RegExp} query Query for performing matches with.
     * @param {string} replaceWith Text to replace matches with. May contain $1,
-    *     $2, etc for replacing captured groups using Javascript replace.
+    *     $2, etc for replacing captured groups using JavaScript replace.
     * @param {function()} callback A callback for when the replace is done.
     */
     function doReplace(cm, confirm, global, lineStart, lineEnd, searchCursor, query,
@@ -16166,7 +16225,7 @@
       // Set up all the functions.
       cm.state.vim.exMode = true;
       var done = false;
-      var lastPos = searchCursor.from();
+      var lastPos, modifiedLineNumber, joined;
       function replaceAll() {
         cm.operation(function() {
           while (!done) {
@@ -16179,14 +16238,18 @@
       function replace() {
         var text = cm.getRange(searchCursor.from(), searchCursor.to());
         var newText = text.replace(query, replaceWith);
+        var unmodifiedLineNumber = searchCursor.to().line;
         searchCursor.replace(newText);
+        modifiedLineNumber = searchCursor.to().line;
+        lineEnd += modifiedLineNumber - unmodifiedLineNumber;
+        joined = modifiedLineNumber < unmodifiedLineNumber;
       }
       function next() {
         // The below only loops to skip over multiple occurrences on the same
         // line when 'global' is not true.
         while(searchCursor.findNext() &&
               isInRange(searchCursor.from(), lineStart, lineEnd)) {
-          if (!global && lastPos && searchCursor.from().line == lastPos.line) {
+          if (!global && searchCursor.from().line == modifiedLineNumber && !joined) {
             continue;
           }
           cm.scrollIntoView(searchCursor.from(), 30);
@@ -16251,7 +16314,7 @@
         return;
       }
       showPrompt(cm, {
-        prefix: 'replace with <strong>' + replaceWith + '</strong> (y/n/a/q/l)',
+        prefix: dom('span', 'replace with ', dom('strong', replaceWith), ' (y/n/a/q/l)'),
         onKeyDown: onPromptKeyDown
       });
     }
@@ -16459,9 +16522,7 @@
       clearFakeCursor(vim);
       // In visual mode, the cursor may be positioned over EOL.
       if (from.ch == cm.getLine(from.line).length) {
-        var widget = document.createElement("span");
-        widget.textContent = "\u00a0";
-        widget.className = className;
+        var widget = dom('span', { 'class': className }, '\u00a0');
         vim.fakeCursorBookmark = cm.setBookmark(from, {widget: widget});
       } else {
         vim.fakeCursor = cm.markText(from, to, {className: className});
@@ -17166,7 +17227,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
           var kw = keywords[word]
           return ret(kw.type, kw.style, word)
         }
-        if (word == "async" && stream.match(/^(\s|\/\*.*?\*\/)*[\[\(\w]/, false))
+        if (word == "async" && stream.match(/^(\s|\/\*([^*]|\*(?!\/))*?\*\/)*[\[\(\w]/, false))
           return ret("async", "keyword", word)
       }
       return ret("variable", "variable", word)
@@ -17656,12 +17717,17 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     if (value == "|" || value == "&") return cont(typeexpr)
     if (type == "string" || type == "number" || type == "atom") return cont(afterType);
     if (type == "[") return cont(pushlex("]"), commasep(typeexpr, "]", ","), poplex, afterType)
-    if (type == "{") return cont(pushlex("}"), commasep(typeprop, "}", ",;"), poplex, afterType)
+    if (type == "{") return cont(pushlex("}"), typeprops, poplex, afterType)
     if (type == "(") return cont(commasep(typearg, ")"), maybeReturnType, afterType)
     if (type == "<") return cont(commasep(typeexpr, ">"), typeexpr)
   }
   function maybeReturnType(type) {
     if (type == "=>") return cont(typeexpr)
+  }
+  function typeprops(type) {
+    if (type.match(/[\}\)\]]/)) return cont()
+    if (type == "," || type == ";") return cont(typeprops)
+    return pass(typeprop, typeprops)
   }
   function typeprop(type, value) {
     if (type == "variable" || cx.style == "keyword") {
@@ -17675,6 +17741,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       return cont(expect("variable"), maybetypeOrIn, expect("]"), typeprop)
     } else if (type == "(") {
       return pass(functiondecl, typeprop)
+    } else if (!type.match(/[;\}\)\],]/)) {
+      return cont()
     }
   }
   function typearg(type, value) {
@@ -17908,7 +17976,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     },
 
     indent: function(state, textAfter) {
-      if (state.tokenize == tokenComment) return CodeMirror.Pass;
+      if (state.tokenize == tokenComment || state.tokenize == tokenQuasi) return CodeMirror.Pass;
       if (state.tokenize != tokenBase) return 0;
       var firstChar = textAfter && textAfter.charAt(0), lexical = state.lexical, top
       // Kludge to prevent 'maybelse' from blocking lexical scope pops
@@ -17965,9 +18033,10 @@ CodeMirror.defineMIME("text/ecmascript", "javascript");
 CodeMirror.defineMIME("application/javascript", "javascript");
 CodeMirror.defineMIME("application/x-javascript", "javascript");
 CodeMirror.defineMIME("application/ecmascript", "javascript");
-CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
-CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
-CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+CodeMirror.defineMIME("application/json", { name: "javascript", json: true });
+CodeMirror.defineMIME("application/x-json", { name: "javascript", json: true });
+CodeMirror.defineMIME("application/manifest+json", { name: "javascript", json: true })
+CodeMirror.defineMIME("application/ld+json", { name: "javascript", jsonld: true });
 CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
 CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
 
@@ -18004,7 +18073,8 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
       valueKeywords = parserConfig.valueKeywords || {},
       allowNested = parserConfig.allowNested,
       lineComment = parserConfig.lineComment,
-      supportsAtComponent = parserConfig.supportsAtComponent === true;
+      supportsAtComponent = parserConfig.supportsAtComponent === true,
+      highlightNonStandardPropertyKeywords = config.highlightNonStandardPropertyKeywords !== false;
 
   var type, override;
   function ret(style, tp) { type = tp; return style; }
@@ -18052,8 +18122,8 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
       return ret("qualifier", "qualifier");
     } else if (/[:;{}\[\]\(\)]/.test(ch)) {
       return ret(null, ch);
-    } else if (stream.match(/[\w-.]+(?=\()/)) {
-      if (/^(url(-prefix)?|domain|regexp)$/.test(stream.current().toLowerCase())) {
+    } else if (stream.match(/^[\w-.]+(?=\()/)) {
+      if (/^(url(-prefix)?|domain|regexp)$/i.test(stream.current())) {
         state.tokenize = tokenParenthesized;
       }
       return ret("variable callee", "variable");
@@ -18082,7 +18152,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
 
   function tokenParenthesized(stream, state) {
     stream.next(); // Must be '('
-    if (!stream.match(/\s*[\"\')]/, false))
+    if (!stream.match(/^\s*[\"\')]/, false))
       state.tokenize = tokenString(")");
     else
       state.tokenize = null;
@@ -18172,7 +18242,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
         override = "property";
         return "maybeprop";
       } else if (nonStandardPropertyKeywords.hasOwnProperty(word)) {
-        override = "string-2";
+        override = highlightNonStandardPropertyKeywords ? "string-2" : "property";
         return "maybeprop";
       } else if (allowNested) {
         override = stream.match(/^\s*:(?:\s|$)/, false) ? "property" : "tag";
@@ -18266,7 +18336,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
       else if (propertyKeywords.hasOwnProperty(word))
         override = "property";
       else if (nonStandardPropertyKeywords.hasOwnProperty(word))
-        override = "string-2";
+        override = highlightNonStandardPropertyKeywords ? "string-2" : "property";
       else if (valueKeywords.hasOwnProperty(word))
         override = "atom";
       else if (colorKeywords.hasOwnProperty(word))
@@ -18755,7 +18825,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
         }
       },
       ":": function(stream) {
-        if (stream.match(/\s*\{/, false))
+        if (stream.match(/^\s*\{/, false))
           return [null, null]
         return false;
       },
@@ -19028,7 +19098,7 @@ CodeMirror.defineMode("xml", function(editorConf, config_) {
 
   function Context(state, tagName, startOfLine) {
     this.prev = state.context;
-    this.tagName = tagName;
+    this.tagName = tagName || "";
     this.indent = state.indented;
     this.startOfLine = startOfLine;
     if (config.doNotIndent.hasOwnProperty(tagName) || (state.context && state.context.noIndent))
@@ -19238,7 +19308,7 @@ CodeMirror.defineMode("xml", function(editorConf, config_) {
     xmlCurrentContext: function(state) {
       var context = []
       for (var cx = state.context; cx; cx = cx.prev)
-        if (cx.tagName) context.push(cx.tagName)
+        context.push(cx.tagName)
       return context.reverse()
     }
   };
@@ -19327,7 +19397,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       name: "xml",
       htmlMode: true,
       multilineTagIndentFactor: parserConfig.multilineTagIndentFactor,
-      multilineTagIndentPastTag: parserConfig.multilineTagIndentPastTag
+      multilineTagIndentPastTag: parserConfig.multilineTagIndentPastTag,
+      allowMissingTagName: parserConfig.allowMissingTagName,
     });
 
     var tags = {};
@@ -19493,7 +19564,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     cm.operation(function() {
       var linesep = cm.lineSeparator() || "\n";
       cm.replaceSelection(linesep + linesep, null);
-      cm.execCommand("goCharLeft");
+      moveSel(cm, -1)
       ranges = cm.listSelections();
       for (var i = 0; i < ranges.length; i++) {
         var line = ranges[i].head.line;
@@ -19501,6 +19572,17 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
         cm.indentLine(line + 1, null, true);
       }
     });
+  }
+
+  function moveSel(cm, dir) {
+    var newRanges = [], ranges = cm.listSelections(), primary = 0
+    for (var i = 0; i < ranges.length; i++) {
+      var range = ranges[i]
+      if (range.head == cm.getCursor()) primary = i
+      var pos = range.head.ch || dir > 0 ? {line: range.head.line, ch: range.head.ch + dir} : {line: range.head.line - 1}
+      newRanges.push({anchor: pos, head: pos})
+    }
+    cm.setSelections(newRanges, primary)
   }
 
   function contractSelection(sel) {
@@ -19559,10 +19641,9 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     var right = pos % 2 ? ch : pairs.charAt(pos + 1);
     cm.operation(function() {
       if (type == "skip") {
-        cm.execCommand("goCharRight");
+        moveSel(cm, 1)
       } else if (type == "skipThree") {
-        for (var i = 0; i < 3; i++)
-          cm.execCommand("goCharRight");
+        moveSel(cm, 3)
       } else if (type == "surround") {
         var sels = cm.getSelections();
         for (var i = 0; i < sels.length; i++)
@@ -19575,10 +19656,10 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       } else if (type == "both") {
         cm.replaceSelection(left + right, null);
         cm.triggerElectric(left + right);
-        cm.execCommand("goCharLeft");
+        moveSel(cm, -1)
       } else if (type == "addFour") {
         cm.replaceSelection(left + left + left + left, "before");
-        cm.execCommand("goCharRight");
+        moveSel(cm, 1)
       }
     });
   }
@@ -19636,7 +19717,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     if (config && config.strict && (dir > 0) != (pos == where.ch)) return null;
     var style = cm.getTokenTypeAt(Pos(where.line, pos + 1));
 
-    var found = scanForBracket(cm, Pos(where.line, pos + (dir > 0 ? 1 : 0)), dir, style || null, config);
+    var found = scanForBracket(cm, Pos(where.line, pos + (dir > 0 ? 1 : 0)), dir, style, config);
     if (found == null) return null;
     return {from: Pos(where.line, pos), to: found && found.pos,
             match: found && found.ch == match.charAt(0), forward: dir > 0};
@@ -19665,7 +19746,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       if (lineNo == where.line) pos = where.ch - (dir < 0 ? 1 : 0);
       for (; pos != end; pos += dir) {
         var ch = line.charAt(pos);
-        if (re.test(ch) && (style === undefined || cm.getTokenTypeAt(Pos(lineNo, pos + 1)) == style)) {
+        if (re.test(ch) && (style === undefined ||
+                            (cm.getTokenTypeAt(Pos(lineNo, pos + 1)) || "") == (style || ""))) {
           var match = matching[ch];
           if (match && (match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
           else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
@@ -19678,11 +19760,12 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 
   function matchBrackets(cm, autoclear, config) {
     // Disable brace matching in long lines, since it'll cause hugely slow updates
-    var maxHighlightLen = cm.state.matchBrackets.maxHighlightLineLength || 1000;
+    var maxHighlightLen = cm.state.matchBrackets.maxHighlightLineLength || 1000,
+      highlightNonMatching = config && config.highlightNonMatching;
     var marks = [], ranges = cm.listSelections();
     for (var i = 0; i < ranges.length; i++) {
       var match = ranges[i].empty() && findMatchingBracket(cm, ranges[i].head, config);
-      if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
+      if (match && (match.match || highlightNonMatching !== false) && cm.getLine(match.from.line).length <= maxHighlightLen) {
         var style = match.match ? "CodeMirror-matchingbracket" : "CodeMirror-nonmatchingbracket";
         marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
         if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
@@ -19692,7 +19775,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 
     if (marks.length) {
       // Kludge to work around the IE bug from issue #1193, where text
-      // input stops going to the textare whever this fires.
+      // input stops going to the textarea whenever this fires.
       if (ie_lt8 && cm.state.focused) cm.focus();
 
       var clear = function() {
@@ -19715,25 +19798,25 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     });
   }
 
-  CodeMirror.defineOption("matchBrackets", false, function(cm, val, old) {
-    function clear(cm) {
-      if (cm.state.matchBrackets && cm.state.matchBrackets.currentlyHighlighted) {
-        cm.state.matchBrackets.currentlyHighlighted();
-        cm.state.matchBrackets.currentlyHighlighted = null;
-      }
+  function clearHighlighted(cm) {
+    if (cm.state.matchBrackets && cm.state.matchBrackets.currentlyHighlighted) {
+      cm.state.matchBrackets.currentlyHighlighted();
+      cm.state.matchBrackets.currentlyHighlighted = null;
     }
+  }
 
+  CodeMirror.defineOption("matchBrackets", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
       cm.off("cursorActivity", doMatchBrackets);
       cm.off("focus", doMatchBrackets)
-      cm.off("blur", clear)
-      clear(cm);
+      cm.off("blur", clearHighlighted)
+      clearHighlighted(cm);
     }
     if (val) {
       cm.state.matchBrackets = typeof val == "object" ? val : {};
       cm.on("cursorActivity", doMatchBrackets);
       cm.on("focus", doMatchBrackets)
-      cm.on("blur", clear)
+      cm.on("blur", clearHighlighted)
     }
   });
 
@@ -19905,6 +19988,9 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 })(function(CodeMirror) {
   "use strict";
 
+  // default search panel location
+  CodeMirror.defineOption("search", {bottom: false});
+
   function searchOverlay(query, caseInsensitive) {
     if (typeof query == "string")
       query = new RegExp(query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), caseInsensitive ? "gi" : "g");
@@ -19949,12 +20035,13 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       selectValueOnOpen: true,
       closeOnEnter: false,
       onClose: function() { clearSearch(cm); },
-      onKeyDown: onKeyDown
+      onKeyDown: onKeyDown,
+      bottom: cm.options.search.bottom
     });
   }
 
   function dialog(cm, text, shortText, deflt, f) {
-    if (cm.openDialog) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true});
+    if (cm.openDialog) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true, bottom: cm.options.search.bottom});
     else f(prompt(shortText, deflt));
   }
 
@@ -20457,8 +20544,11 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 })(function(CodeMirror) {
   "use strict";
 
+  // default search panel location
+  CodeMirror.defineOption("search", {bottom: false});
+
   function dialog(cm, text, shortText, deflt, f) {
-    if (cm.openDialog) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true});
+    if (cm.openDialog) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true, bottom: cm.options.search.bottom});
     else f(prompt(shortText, deflt));
   }
 
@@ -20511,7 +20601,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 // highlighted only if the selected text is a word. showToken, when enabled,
 // will cause the current token to be highlighted when nothing is selected.
 // delay is used to specify how much time to wait, in milliseconds, before
-// highlighting the matches. If annotateScrollbar is enabled, the occurences
+// highlighting the matches. If annotateScrollbar is enabled, the occurrences
 // will be highlighted on the scrollbar via the matchesonscrollbar addon.
 
 (function(mod) {
@@ -20762,6 +20852,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
+// declare global: DOMRect
+
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../../lib/codemirror"));
@@ -20820,8 +20912,10 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     this.startPos = this.cm.getCursor("start");
     this.startLen = this.cm.getLine(this.startPos.line).length - this.cm.getSelection().length;
 
-    var self = this;
-    cm.on("cursorActivity", this.activityFunc = function() { self.cursorActivity(); });
+    if (this.options.updateOnCursorActivity) {
+      var self = this;
+      cm.on("cursorActivity", this.activityFunc = function() { self.cursorActivity(); });
+    }
   }
 
   var requestAnimationFrame = window.requestAnimationFrame || function(fn) {
@@ -20834,7 +20928,9 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       if (!this.active()) return;
       this.cm.state.completionActive = null;
       this.tick = null;
-      this.cm.off("cursorActivity", this.activityFunc);
+      if (this.options.updateOnCursorActivity) {
+        this.cm.off("cursorActivity", this.activityFunc);
+      }
 
       if (this.widget && this.data) CodeMirror.signal(this.data, "close");
       if (this.widget) this.widget.close();
@@ -20855,8 +20951,10 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
                                completion.to || data.to, "complete");
         CodeMirror.signal(data, "pick", completion);
         self.cm.scrollIntoView();
-      })
-      this.close();
+      });
+      if (this.options.closeOnPick) {
+        this.close();
+      }
     },
 
     cursorActivity: function() {
@@ -21020,10 +21118,15 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     var winW = parentWindow.innerWidth || Math.max(ownerDocument.body.offsetWidth, ownerDocument.documentElement.offsetWidth);
     var winH = parentWindow.innerHeight || Math.max(ownerDocument.body.offsetHeight, ownerDocument.documentElement.offsetHeight);
     container.appendChild(hints);
-    var box = hints.getBoundingClientRect(), overlapY = box.bottom - winH;
-    var scrolls = hints.scrollHeight > hints.clientHeight + 1
-    var startScroll = cm.getScrollInfo();
 
+    var box = completion.options.moveOnOverlap ? hints.getBoundingClientRect() : new DOMRect();
+    var scrolls = completion.options.paddingForScrollbar ? hints.scrollHeight > hints.clientHeight + 1 : false;
+
+    // Compute in the timeout to avoid reflow on init
+    var startScroll;
+    setTimeout(function() { startScroll = cm.getScrollInfo(); });
+
+    var overlapY = box.bottom - winH;
     if (overlapY > 0) {
       var height = box.bottom - box.top, curTop = pos.top - (pos.bottom - box.top);
       if (curTop - height > 0) { // Fits above cursor
@@ -21093,7 +21196,12 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     CodeMirror.on(hints, "mousedown", function() {
       setTimeout(function(){cm.focus();}, 20);
     });
-    this.scrollToActive()
+
+    // The first hint doesn't need to be scrolled to on init
+    var selectedHintRange = this.getSelectedHintRange();
+    if (selectedHintRange.from !== 0 || selectedHintRange.to !== 0) {
+      this.scrollToActive();
+    }
 
     CodeMirror.signal(data, "select", completions[this.selectedHint], hints.childNodes[this.selectedHint]);
     return true;
@@ -21140,9 +21248,9 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     },
 
     scrollToActive: function() {
-      var margin = this.completion.options.scrollMargin || 0;
-      var node1 = this.hints.childNodes[Math.max(0, this.selectedHint - margin)];
-      var node2 = this.hints.childNodes[Math.min(this.data.list.length - 1, this.selectedHint + margin)];
+      var selectedHintRange = this.getSelectedHintRange();
+      var node1 = this.hints.childNodes[selectedHintRange.from];
+      var node2 = this.hints.childNodes[selectedHintRange.to];
       var firstNode = this.hints.firstChild;
       if (node1.offsetTop < this.hints.scrollTop)
         this.hints.scrollTop = node1.offsetTop - firstNode.offsetTop;
@@ -21152,6 +21260,14 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 
     screenAmount: function() {
       return Math.floor(this.hints.clientHeight / this.hints.firstChild.offsetHeight) || 1;
+    },
+
+    getSelectedHintRange: function() {
+      var margin = this.completion.options.scrollMargin || 0;
+      return {
+        from: Math.max(0, this.selectedHint - margin),
+        to: Math.min(this.data.list.length - 1, this.selectedHint + margin),
+      };
     }
   };
 
@@ -21229,11 +21345,15 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
     completeSingle: true,
     alignWithWord: true,
     closeCharacters: /[\s()\[\]{};:>,]/,
+    closeOnPick: true,
     closeOnUnfocus: true,
+    updateOnCursorActivity: true,
     completeOnSingleClick: true,
     container: null,
     customKeys: null,
-    extraKeys: null
+    extraKeys: null,
+    paddingForScrollbar: true,
+    moveOnOverlap: true,
   };
 
   CodeMirror.defineOption("hintOptions", null);
@@ -21909,6 +22029,10 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
       var anns = annotations[line];
       if (!anns) continue;
 
+      // filter out duplicate messages
+      var message = [];
+      anns = anns.filter(function(item) { return message.indexOf(item.message) > -1 ? false : message.push(item.message) });
+
       var maxSeverity = null;
       var tipLabel = state.hasGutter && document.createDocumentFragment();
 
@@ -21926,9 +22050,9 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
           __annotation: ann
         }));
       }
-
+      // use original annotations[line] to show multiple messages
       if (state.hasGutter)
-        cm.setGutterMarker(line, GUTTER_ID, makeMarker(cm, tipLabel, maxSeverity, anns.length > 1,
+        cm.setGutterMarker(line, GUTTER_ID, makeMarker(cm, tipLabel, maxSeverity, annotations[line].length > 1,
                                                        state.options.tooltips));
     }
     if (options.onUpdateLinting) options.onUpdateLinting(annotationsNotSorted, annotations, cm);
@@ -21995,6 +22119,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: https://codemirror.net/LICENSE
+
+// Depends on jshint.js from https://github.com/jshint/jshint
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
