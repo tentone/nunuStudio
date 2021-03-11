@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AudioLoader",
         "Base64Utils",
         "BaseNode",
+        "BillboardGroup",
         "BloomPass",
         "BokehPass",
         "BufferUtils",
@@ -197,7 +198,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Core",
             "name": "Core",
-            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
+            "description": "Program class contains all the data of a app.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
         },
         {
             "displayName": "Files",
@@ -262,7 +263,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Sprite",
             "name": "Sprite",
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites always face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
         },
         {
             "displayName": "Textures",

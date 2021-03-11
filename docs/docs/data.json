@@ -371,6 +371,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "source\\core\\objects\\misc\\BillboardGroup.js": {
+            "name": "source\\core\\objects\\misc\\BillboardGroup.js",
+            "modules": {},
+            "classes": {
+                "BillboardGroup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "source\\core\\objects\\misc\\Group.js": {
             "name": "source\\core\\objects\\misc\\Group.js",
             "modules": {
@@ -1441,6 +1450,7 @@
                 "InstancedMesh": 1,
                 "Mesh": 1,
                 "SkinnedMesh": 1,
+                "BillboardGroup": 1,
                 "TextSprite": 1
             },
             "fors": {},
@@ -1551,7 +1561,7 @@
             "tag": "module",
             "file": "source\\core\\objects\\text\\TextBitmap.js",
             "line": 8,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites always face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
         },
         "Core": {
             "name": "Core",
@@ -1567,7 +1577,7 @@
             "tag": "module",
             "file": "source\\core\\platform\\TargetConfig.js",
             "line": 1,
-            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
+            "description": "Program class contains all the data of a app.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
         },
         "Postprocessing": {
             "name": "Postprocessing",
@@ -2100,7 +2110,7 @@
             "module": "Loaders",
             "namespace": "",
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 45,
+            "line": 46,
             "description": "Objectloader can be used to load external objects from files.\n\nAlso loads all resources attached to the objects being loaded.\n\nCan parse be used to load on runtime resources and objects from external project files."
         },
         "TextureLoader": {
@@ -2396,7 +2406,7 @@
             "namespace": "",
             "file": "source\\core\\objects\\lights\\DirectionalLightCSM.js",
             "line": 4,
-            "description": "A light that gets emitted in a specific direction and has a cascaded shadow map set.\n\nAllows to project shadows over large distances by spliting the shadow frustum sections into multiple shadow maps with diferent resolution.",
+            "description": "A light that gets emitted in a specific direction and has a cascaded shadow map set.\n\nAllows to project shadows over large distances by splitting the shadow frustum sections into multiple shadow maps with diferent resolution.",
             "extends": "{Object3D}"
         },
         "HemisphereLight": {
@@ -2659,6 +2669,21 @@
                 }
             ],
             "extends": "{SkinnedMesh}"
+        },
+        "BillboardGroup": {
+            "name": "BillboardGroup",
+            "shortname": "BillboardGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "source\\core\\objects\\misc\\BillboardGroup.js",
+            "line": 3,
+            "description": "Object that makes it rotation be the same as the camera.\n\nIt is rotated every frame before rendering to always face the camera direction.",
+            "extends": "{THREE.Group}"
         },
         "Group": {
             "name": "Group",
@@ -3219,7 +3244,7 @@
             "namespace": "",
             "file": "source\\core\\objects\\sprite\\Sprite.js",
             "line": 3,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite.",
+            "description": "Sprites always face the screen are used for 2D elements.\n\nBased on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite.",
             "params": [
                 {
                     "name": "material",
@@ -3287,7 +3312,7 @@
                 },
                 {
                     "name": "material",
-                    "description": "Material used to shade the superficie of the geometry",
+                    "description": "Material used to shade the surface of the geometry",
                     "type": "Material"
                 },
                 {
@@ -3311,6 +3336,11 @@
                     "type": "Number"
                 },
                 {
+                    "name": "bevelSize",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
                     "name": "size",
                     "description": "",
                     "type": "Number"
@@ -3319,6 +3349,11 @@
                     "name": "curveSegments",
                     "description": "",
                     "type": "Number"
+                },
+                {
+                    "name": "extruded",
+                    "description": "",
+                    "type": "Boolean"
                 }
             ],
             "extends": "{Mesh}"
@@ -3350,7 +3385,7 @@
             "namespace": "",
             "file": "source\\core\\objects\\Program.js",
             "line": 15,
-            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc.",
+            "description": "Program class contains all the data of a app.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc.",
             "extends": "{ResourceManager}"
         },
         "Scene": {
@@ -3619,7 +3654,7 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "source\\core\\postprocessing\\pass\\SobelPass.js",
-            "line": 5,
+            "line": 4,
             "description": "Sobel pass is used to create a edge highlight effect with a sobel operator."
         },
         "TechnicolorPass": {
@@ -4682,7 +4717,7 @@
             "module": "BinaryUtils",
             "namespace": "",
             "file": "source\\core\\utils\\struct\\Tree.js",
-            "line": 6,
+            "line": 3,
             "description": "Tree structure used to represent Trees.\n\nEvery tree stores Trees as children and have a parent children.\n\nIf the parent is null then the Tree is the root."
         },
         "TreeUtils": {
@@ -4696,7 +4731,7 @@
             "module": "BinaryUtils",
             "namespace": "",
             "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 5,
+            "line": 3,
             "description": "TreeUtils used to compare Tree.\n\nCan also be used to compare Object structure.",
             "static": 1
         },
@@ -4841,7 +4876,7 @@
             "namespace": "",
             "file": "source\\core\\utils\\MathUtils.js",
             "line": 1,
-            "description": "MathUtils contains auxiliar values and function to help with mathematical operations.",
+            "description": "MathUtils contains auxiliary values and function to help with mathematical operations.",
             "static": 1
         },
         "ObjectUtils": {
@@ -4872,7 +4907,6 @@
             "file": "source\\core\\utils\\PhysicsGenerator.js",
             "line": 5,
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
-            "author": "tentone",
             "static": 1
         },
         "SimplexNoise": {
@@ -7765,7 +7799,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 66,
+            "line": 67,
             "description": "Load object file from URL.",
             "itemtype": "method",
             "name": "load",
@@ -7796,8 +7830,8 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 90,
-            "description": "Parse JSON object and create the correct Object structure. \n\nData can be loaded from a file and should be parsed into Object.",
+            "line": 91,
+            "description": "Parse JSON object and create the correct Object structure.\n\nData can be loaded from a file and should be parsed into Object.",
             "itemtype": "method",
             "name": "parse",
             "params": [
@@ -7821,7 +7855,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 133,
+            "line": 134,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -7837,7 +7871,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 144,
+            "line": 145,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -7853,7 +7887,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 155,
+            "line": 156,
             "description": "Parse resources on JSON.",
             "itemtype": "method",
             "name": "parseResources",
@@ -7873,7 +7907,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 180,
+            "line": 181,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseShape",
@@ -7893,7 +7927,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 201,
+            "line": 202,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -7913,7 +7947,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 225,
+            "line": 226,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -7933,7 +7967,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 248,
+            "line": 249,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -7953,7 +7987,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 269,
+            "line": 270,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -7973,7 +8007,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 290,
+            "line": 291,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -7993,7 +8027,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 311,
+            "line": 312,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -8013,7 +8047,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 332,
+            "line": 333,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -8033,7 +8067,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 356,
+            "line": 357,
             "description": "Parse array of skeletons from JSON object.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -8054,7 +8088,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 376,
+            "line": 377,
             "description": "Auxiliar method to bind skeletons to loaded objects.\n\nLook for skeletonUUID property, wich is a placeholder with the skeleton UUID and replace it with the skeleton object.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -8070,7 +8104,7 @@
         },
         {
             "file": "source\\core\\loaders\\ObjectLoader.js",
-            "line": 406,
+            "line": 407,
             "description": "Parse objects from json data,",
             "itemtype": "method",
             "name": "parseObjects",
@@ -8407,7 +8441,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 130,
+            "line": 128,
             "description": "Possible source types for the audio emitter.",
             "static": 1,
             "itemtype": "attribute",
@@ -8418,8 +8452,8 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 143,
-            "description": "Method called when the audio playback stoped.",
+            "line": 141,
+            "description": "Method called when the audio playback stopped.",
             "itemtype": "method",
             "name": "onEnded",
             "class": "AudioEmitter",
@@ -8427,7 +8461,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 153,
+            "line": 151,
             "description": "Connect the audio source.\n\nUsed internally on initialisation and when setting / removing",
             "itemtype": "method",
             "name": "connect",
@@ -8436,7 +8470,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 182,
+            "line": 180,
             "description": "Disconnect the audio source.\n\nUsed internally when setting / removing filters.",
             "itemtype": "method",
             "name": "disconnect",
@@ -8445,7 +8479,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 210,
+            "line": 208,
             "description": "Initialize audio object, loads audio data decodes it and starts playback ifautoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -8454,7 +8488,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 237,
+            "line": 235,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -8474,7 +8508,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 257,
+            "line": 255,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -8487,7 +8521,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 290,
+            "line": 288,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -8500,7 +8534,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 305,
+            "line": 303,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -8513,7 +8547,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 320,
+            "line": 318,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -8529,7 +8563,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 349,
+            "line": 347,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -8545,7 +8579,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 360,
+            "line": 358,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -8565,7 +8599,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 375,
+            "line": 373,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -8585,7 +8619,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 394,
+            "line": 392,
             "description": "Set detune value.",
             "itemtype": "method",
             "name": "setDetune",
@@ -8605,7 +8639,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 413,
+            "line": 411,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -8618,7 +8652,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 424,
+            "line": 422,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -8638,7 +8672,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 443,
+            "line": 441,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -8651,7 +8685,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 454,
+            "line": 452,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -8664,7 +8698,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 465,
+            "line": 463,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -8684,7 +8718,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 493,
+            "line": 491,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -8703,7 +8737,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 505,
+            "line": 503,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -8719,7 +8753,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 516,
+            "line": 514,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -8739,7 +8773,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 534,
+            "line": 532,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8752,7 +8786,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 545,
+            "line": 543,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -8801,7 +8835,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 76,
+            "line": 74,
             "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -8810,7 +8844,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 98,
+            "line": 96,
             "description": "Update positional audio panner relative to the camera.",
             "itemtype": "method",
             "name": "update",
@@ -8819,7 +8853,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 128,
+            "line": 126,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8832,7 +8866,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 139,
+            "line": 137,
             "description": "Get reference distance.",
             "itemtype": "method",
             "name": "getRefDistance",
@@ -8845,7 +8879,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 150,
+            "line": 148,
             "description": "Set reference distance.",
             "itemtype": "method",
             "name": "setRefDistance",
@@ -8861,7 +8895,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 161,
+            "line": 159,
             "description": "Get rolloff factor.",
             "itemtype": "method",
             "name": "getRolloffFactor",
@@ -8874,7 +8908,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 172,
+            "line": 170,
             "description": "Set rolloff factor.",
             "itemtype": "method",
             "name": "setRolloffFactor",
@@ -8890,7 +8924,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 184,
+            "line": 182,
             "description": "Get distance model in use by this audio emitter.",
             "itemtype": "method",
             "name": "getDistanceModel",
@@ -8903,7 +8937,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 195,
+            "line": 193,
             "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
             "itemtype": "method",
             "name": "setDistanceModel",
@@ -8919,7 +8953,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 216,
+            "line": 214,
             "description": "Get maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "getMaxDistance",
@@ -8931,7 +8965,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 227,
+            "line": 225,
             "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "setMaxDistance",
@@ -9938,8 +9972,8 @@
         },
         {
             "file": "source\\core\\objects\\lights\\DirectionalLight.js",
-            "line": 32,
-            "description": "Update light shadow map atributtes at runtime.",
+            "line": 30,
+            "description": "Update light shadow map attributes at runtime.",
             "itemtype": "method",
             "name": "updateShadowMap",
             "class": "DirectionalLight",
@@ -9947,7 +9981,7 @@
         },
         {
             "file": "source\\core\\objects\\lights\\LightProbe.js",
-            "line": 25,
+            "line": 23,
             "description": "Generate light probe data from cube camera render.",
             "itemtype": "method",
             "name": "generate",
@@ -9956,7 +9990,7 @@
         },
         {
             "file": "source\\core\\objects\\lights\\PointLight.js",
-            "line": 34,
+            "line": 32,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -9965,7 +9999,7 @@
         },
         {
             "file": "source\\core\\objects\\lights\\SpotLight.js",
-            "line": 38,
+            "line": 36,
             "description": "SpotLight looks to the target object coordinates.\n\nThe target object should always be at the scene root.",
             "itemtype": "method",
             "name": "setTarget",
@@ -9981,7 +10015,7 @@
         },
         {
             "file": "source\\core\\objects\\lights\\SpotLight.js",
-            "line": 51,
+            "line": 49,
             "description": "Update light shadow map atributtes at runtime.",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -10048,7 +10082,7 @@
         },
         {
             "file": "source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 80,
+            "line": 79,
             "description": "Geometry defined the object structure.",
             "itemtype": "property",
             "name": "geometry",
@@ -10058,7 +10092,7 @@
         },
         {
             "file": "source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 87,
+            "line": 86,
             "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
@@ -10068,7 +10102,7 @@
         },
         {
             "file": "source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 94,
+            "line": 93,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -10089,7 +10123,7 @@
         },
         {
             "file": "source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 104,
+            "line": 103,
             "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
             "itemtype": "property",
             "name": "drawMode",
@@ -10129,7 +10163,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\HTMLView.js",
-            "line": 85,
+            "line": 84,
             "description": "Process URL to transform it into embedded URL when possible for common services.",
             "itemtype": "method",
             "name": "processURL",
@@ -12969,7 +13003,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 28,
+            "line": 30,
             "description": "Font used to draw text.",
             "itemtype": "property",
             "name": "font",
@@ -12979,7 +13013,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 36,
+            "line": 38,
             "description": "Indicates if the text mesh has volume or not.",
             "itemtype": "property",
             "name": "extruded",
@@ -12989,7 +13023,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 44,
+            "line": 46,
             "description": "Size of the text (depth).",
             "itemtype": "property",
             "name": "size",
@@ -12999,7 +13033,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 52,
+            "line": 54,
             "description": "Height of the text.",
             "itemtype": "property",
             "name": "height",
@@ -13009,7 +13043,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 60,
+            "line": 62,
             "description": "Number of segments that compose a curve in the font.",
             "itemtype": "property",
             "name": "curveSegments",
@@ -13019,7 +13053,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 68,
+            "line": 70,
             "description": "If true a bevel is added to the text.",
             "itemtype": "property",
             "name": "bevel",
@@ -13029,7 +13063,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 76,
+            "line": 78,
             "description": "Bevel thickness.",
             "itemtype": "property",
             "name": "bevelThickness",
@@ -13039,7 +13073,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 84,
+            "line": 86,
             "description": "Bevel size.",
             "itemtype": "property",
             "name": "bevelSize",
@@ -13049,7 +13083,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 92,
+            "line": 94,
             "description": "Text to be diplayed in the mesh.",
             "itemtype": "property",
             "name": "text",
@@ -13059,7 +13093,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 122,
+            "line": 127,
             "description": "Set font used by this text 3D instance.",
             "params": [
                 {
@@ -13075,7 +13109,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 137,
+            "line": 142,
             "description": "Change text.",
             "params": [
                 {
@@ -13091,7 +13125,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 148,
+            "line": 153,
             "description": "Update the text geometry.\n\nShould be called after chaging any attribute to generate a new geometry.",
             "itemtype": "method",
             "name": "updateGeometry",
@@ -13100,7 +13134,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 192,
+            "line": 197,
             "description": "Clone this object instance into a new object.",
             "itemtype": "method",
             "name": "clone",
@@ -13113,7 +13147,7 @@
         },
         {
             "file": "source\\core\\objects\\text\\TextMesh.js",
-            "line": 203,
+            "line": 208,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -13820,7 +13854,7 @@
                 },
                 {
                     "name": "exportResources",
-                    "description": "If true all resouces in the program are exported, else only resources attached to objects are exported.",
+                    "description": "If true all resources in the program are exported, else only resources attached to objects are exported.",
                     "type": "Boolean"
                 }
             ],
@@ -13904,7 +13938,7 @@
         {
             "file": "source\\core\\objects\\Scene.js",
             "line": 107,
-            "description": "Indicates if the scene is using octree indexation for raycasting.",
+            "description": "Indicates if the scene is using octree indexation for ray casting.",
             "itemtype": "property",
             "name": "useOctree",
             "type": "{boolean}",
@@ -14014,6 +14048,11 @@
                     "name": "uuid",
                     "description": "UUID of the camera",
                     "type": "String"
+                },
+                {
+                    "name": "object",
+                    "description": "Object to search cameras in.",
+                    "type": "Object3D"
                 }
             ],
             "return": {
@@ -14025,7 +14064,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 345,
+            "line": 346,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -14041,7 +14080,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 360,
+            "line": 361,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -14050,7 +14089,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 376,
+            "line": 377,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -14066,7 +14105,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 391,
+            "line": 392,
             "description": "Check is camera is active.",
             "params": [
                 {
@@ -14082,7 +14121,7 @@
         },
         {
             "file": "source\\core\\objects\\Scene.js",
-            "line": 403,
+            "line": 404,
             "description": "Set scene fog mode.\n\nIt recreates the fog object attached to the scene and set the same color.",
             "itemtype": "method",
             "name": "setFogMode",
@@ -14138,7 +14177,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\AfterimagePass.js",
-            "line": 50,
+            "line": 49,
             "description": "Dampening applied to the previous frame.",
             "itemtype": "property",
             "name": "damp",
@@ -14194,7 +14233,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\ColorifyPass.js",
-            "line": 30,
+            "line": 29,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14210,7 +14249,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 35,
+            "line": 34,
             "description": "Center of rotation of the dot grid in normalized coordinates.",
             "itemtype": "property",
             "name": "center",
@@ -14220,7 +14259,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 47,
+            "line": 46,
             "description": "Rotation of the dot grid.",
             "itemtype": "property",
             "name": "angle",
@@ -14230,7 +14269,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 59,
+            "line": 58,
             "description": "Scale of the dots used in the effect.",
             "itemtype": "property",
             "name": "scale",
@@ -14241,7 +14280,7 @@
         {
             "file": "source\\core\\postprocessing\\pass\\FilmPass.js",
             "line": 31,
-            "description": "If set true a grascale effect will be applied.",
+            "description": "If set true a grayscale effect will be applied.",
             "itemtype": "property",
             "name": "grayscale",
             "type": "{boolean}",
@@ -14251,7 +14290,7 @@
         {
             "file": "source\\core\\postprocessing\\pass\\FilmPass.js",
             "line": 43,
-            "description": "Ammout of noise to be applied to the image.",
+            "description": "Amount of noise to be applied to the image.",
             "itemtype": "property",
             "name": "noiseIntensity",
             "type": "{number}",
@@ -14486,7 +14525,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 40,
+            "line": 39,
             "description": "Ambient occlusion shadow radius.",
             "itemtype": "property",
             "name": "radius",
@@ -14496,7 +14535,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 52,
+            "line": 51,
             "description": "Display only ambient occlusion result.",
             "itemtype": "property",
             "name": "onlyAO",
@@ -14506,7 +14545,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 64,
+            "line": 63,
             "description": "Ambient occlusion clamp.",
             "itemtype": "property",
             "name": "aoClamp",
@@ -14516,7 +14555,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 76,
+            "line": 75,
             "description": "Pixel luminosity influence in AO calculation.",
             "itemtype": "property",
             "name": "lumInfluence",
@@ -14526,7 +14565,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 97,
+            "line": 96,
             "description": "Render using this pass.",
             "itemtype": "method",
             "name": "render",
@@ -14562,7 +14601,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 126,
+            "line": 125,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -14583,7 +14622,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 139,
+            "line": 138,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14599,7 +14638,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 104,
+            "line": 103,
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
@@ -14609,7 +14648,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 116,
+            "line": 115,
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
@@ -14619,7 +14658,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 128,
+            "line": 127,
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
@@ -14629,7 +14668,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 142,
+            "line": 141,
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
@@ -14639,7 +14678,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 154,
+            "line": 153,
             "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
             "itemtype": "property",
             "name": "bloomFactors",
@@ -14649,7 +14688,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 166,
+            "line": 165,
             "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
             "itemtype": "property",
             "name": "bloomTintColors",
@@ -14659,7 +14698,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 285,
+            "line": 284,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -18678,7 +18717,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\Tree.js",
-            "line": 24,
+            "line": 21,
             "description": "Add new element to tree.",
             "itemtype": "method",
             "name": "add",
@@ -18694,7 +18733,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\Tree.js",
-            "line": 47,
+            "line": 44,
             "description": "Remove element from tree.",
             "itemtype": "method",
             "name": "remove",
@@ -18710,7 +18749,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\Tree.js",
-            "line": 67,
+            "line": 64,
             "description": "Clone tree recursively.\n\nThe cloned tree has the same UUID.",
             "itemtype": "method",
             "name": "clone",
@@ -18723,7 +18762,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\Tree.js",
-            "line": 89,
+            "line": 86,
             "description": "Print tree into console, recursively.",
             "itemtype": "method",
             "name": "print",
@@ -18739,7 +18778,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 15,
+            "line": 13,
             "description": "Flag used to indicate ADDED diff.",
             "itemtype": "attribute",
             "name": "DIFF_ADDED",
@@ -18749,7 +18788,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 23,
+            "line": 21,
             "description": "Flag used to indicate REMOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_REMOVED",
@@ -18759,7 +18798,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 31,
+            "line": 29,
             "description": "Flag used to indicate MOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_MOVED",
@@ -18769,7 +18808,7 @@
         },
         {
             "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 39,
+            "line": 37,
             "description": "Compare two trees and return list of changes.\n\noldTree is compared to newTree. The list of changes indicate wath needs to be changed in oldTree to become wqual to the newTree.\n\nElements inside Trees are compared using their UUID.\n\nThe array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}",
             "static": 1,
             "itemtype": "method",
@@ -18805,27 +18844,6 @@
                 "description": "Array with diffs between oldTree and newTree.",
                 "type": "Array"
             },
-            "class": "TreeUtils",
-            "module": "BinaryUtils"
-        },
-        {
-            "file": "source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 207,
-            "description": "Print tree into console, recursively.\n\nTrees are represented by a UUID a parent and a children array.",
-            "itemtype": "method",
-            "name": "print",
-            "params": [
-                {
-                    "name": "tree",
-                    "description": "Tree object to be printed.",
-                    "type": "Tree"
-                },
-                {
-                    "name": "level",
-                    "description": "Recursive parameter, not required.",
-                    "type": "Number"
-                }
-            ],
             "class": "TreeUtils",
             "module": "BinaryUtils"
         },
@@ -19339,9 +19357,9 @@
         {
             "file": "source\\core\\utils\\ObjectUtils.js",
             "line": 61,
-            "description": "Calculates a bouding box for an object considering all its children.\n\nIncludes booth the object and all of its children, the box is ajusted to world space coordinates.",
+            "description": "Calculates a bounding box for an object considering all its children.\n\nIncludes booth the object and all of its children, the box is adjusted to world space coordinates.",
             "itemtype": "method",
-            "name": "calculateBoudingBox",
+            "name": "calculateBoundingBox",
             "params": [
                 {
                     "name": "object",
@@ -19350,7 +19368,7 @@
                 }
             ],
             "return": {
-                "description": "Bouding box of the object considering all of its children.",
+                "description": "Bounding box of the object considering all of its children.",
                 "type": "Box3"
             },
             "class": "ObjectUtils",
@@ -19390,8 +19408,8 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 19,
-            "description": "Type is used to indentify the type of cannonjs:\n- BOX\n- CYLINDER\n- SPHERE\n- HULL",
+            "line": 18,
+            "description": "Type is used to identify the type of physics shapes:\n- BOX\n- CYLINDER\n- SPHERE\n- HULL",
             "itemtype": "attribute",
             "name": "Type",
             "type": "{Object}",
@@ -19400,7 +19418,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 37,
+            "line": 36,
             "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
             "itemtype": "method",
             "name": "createShape",
@@ -19425,7 +19443,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 99,
+            "line": 98,
             "description": "Create box shape from geometry.",
             "itemtype": "method",
             "name": "createBoxShape",
@@ -19445,15 +19463,15 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 122,
+            "line": 121,
             "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
             "itemtype": "method",
             "name": "createBoundingBoxShape",
             "params": [
                 {
-                    "name": "geometry",
+                    "name": "object",
                     "description": "",
-                    "type": "Geometry"
+                    "type": "Object3D"
                 }
             ],
             "return": {
@@ -19465,27 +19483,27 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 149,
-            "description": "Computes 3D convex hull as a ConvexPolyhedron.",
+            "line": 148,
+            "description": "Computes 3D convex hull as a ConvexPolyhedron.\n\nA convex hull is a convex geometry that contain all the geometry points inside.",
             "itemtype": "method",
             "name": "createConvexPolyhedron",
             "params": [
                 {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "ConvexPolyhedron"
+                    "name": "object",
+                    "description": "Object to calculate the convex hull.",
+                    "type": "Object3D"
                 }
             ],
             "return": {
-                "description": "shape",
-                "type": "Shape"
+                "description": "Convex polyhedron calculated from thr object meshes.",
+                "type": "ConvexPolyhedron"
             },
             "class": "PhysicsGenerator",
             "module": "Physics"
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 188,
+            "line": 189,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -19505,7 +19523,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 206,
+            "line": 207,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -19525,7 +19543,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 234,
+            "line": 235,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -19545,7 +19563,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 249,
+            "line": 250,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -19565,7 +19583,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 261,
+            "line": 262,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -19585,8 +19603,8 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 276,
-            "description": "Sphere shape from bouding sphere.",
+            "line": 277,
+            "description": "Cylinder shape from bounding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
             "params": [
@@ -19605,8 +19623,8 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 290,
-            "description": "Trimesh shape from geometry.",
+            "line": 291,
+            "description": "Trimesh shape from geometry. Trimesh objects represent the object exactly with all the triangles that compose the original geometry\n\nThis type of physics shape should be avoided as much as possible since it is a lot slower that other available types.",
             "itemtype": "method",
             "name": "createTrimeshShape",
             "params": [
@@ -19625,7 +19643,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 310,
+            "line": 312,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -19645,7 +19663,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 374,
+            "line": 376,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -19665,7 +19683,7 @@
         },
         {
             "file": "source\\core\\utils\\PhysicsGenerator.js",
-            "line": 390,
+            "line": 393,
             "description": "Returns a array of Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",

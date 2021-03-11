@@ -50,6 +50,7 @@
 									<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 									<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 									<li><a href="../classes/BaseNode.html">BaseNode</a></li>
+									<li><a href="../classes/BillboardGroup.html">BillboardGroup</a></li>
 									<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 									<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 									<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
@@ -343,7 +344,7 @@
 														<div class="args">
 															<span class="paren">(</span><ul class="args-list inline commas">
 																<li class="arg">
-																		<code>geometry</code>
+																		<code>object</code>
 																</li>
 															</ul><span class="paren">)</span>
 														</div>
@@ -376,8 +377,8 @@
 												
 															<ul class="params-list">
 																<li class="param">
-																		<code class="param-name">geometry</code>
-																		<span class="type">Geometry</span>
+																		<code class="param-name">object</code>
+																		<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
 												
 												
 																	<div class="param-description">
@@ -591,13 +592,13 @@
 														<div class="args">
 															<span class="paren">(</span><ul class="args-list inline commas">
 																<li class="arg">
-																		<code>geometry</code>
+																		<code>object</code>
 																</li>
 															</ul><span class="paren">)</span>
 														</div>
 												
 														<span class="returns-inline">
-															<span class="type">Shape</span>
+															<span class="type">ConvexPolyhedron</span>
 														</span>
 												
 												
@@ -616,6 +617,7 @@
 												
 													<div class="description">
 														<p>Computes 3D convex hull as a ConvexPolyhedron.</p>
+												<p>A convex hull is a convex geometry that contain all the geometry points inside.</p>
 												
 													</div>
 												
@@ -624,12 +626,13 @@
 												
 															<ul class="params-list">
 																<li class="param">
-																		<code class="param-name">geometry</code>
-																		<span class="type">ConvexPolyhedron</span>
+																		<code class="param-name">object</code>
+																		<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
 												
 												
 																	<div class="param-description">
-																		 
+																		<p>Object to calculate the convex hull.</p>
+												
 																	</div>
 												
 																</li>
@@ -640,8 +643,8 @@
 															<h4>Returns:</h4>
 												
 															<div class="returns-description">
-																		<span class="type">Shape</span>:
-																	<p>shape</p>
+																		<span class="type">ConvexPolyhedron</span>:
+																	<p>Convex polyhedron calculated from thr object meshes.</p>
 												
 															</div>
 														</div>
@@ -939,7 +942,8 @@
 													</div>
 												
 													<div class="description">
-														<p>Trimesh shape from geometry.</p>
+														<p>Trimesh shape from geometry. Trimesh objects represent the object exactly with all the triangles that compose the original geometry</p>
+												<p>This type of physics shape should be avoided as much as possible since it is a lot slower that other available types.</p>
 												
 													</div>
 												
@@ -1001,7 +1005,7 @@
 													</div>
 												
 													<div class="description">
-														<p>Sphere shape from bouding sphere.</p>
+														<p>Cylinder shape from bounding sphere.</p>
 												
 													</div>
 												
@@ -1247,7 +1251,7 @@
 													</div>
 												
 													<div class="description">
-														<p>Type is used to indentify the type of cannonjs:</p>
+														<p>Type is used to identify the type of physics shapes:</p>
 												<ul>
 												<li>BOX</li>
 												<li>CYLINDER</li>
