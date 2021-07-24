@@ -61,7 +61,7 @@
     <head>
         <script src="nunu.min.js"></script>
     </head>
-    <body onload="NunuApp.loadApp('pong.nsp', 'canvas')">
+    <body onload="Nunu.App.loadApp('pong.nsp', 'canvas')">
         <canvas width="800" height="480" id="canvas"></canvas>
     </body>
 </html>
