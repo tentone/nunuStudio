@@ -3,7 +3,6 @@ import {BufferGeometry, DefaultLoadingManager, DirectionalLight, FileLoader, Flo
 /**
  * Babylon loader is used to load babylon files.
  * 
- * @author mrdoob / http://mrdoob.com/
  * @author Mugen87 / https://github.com/Mugen87
  */
 var BabylonLoader = function(manager)

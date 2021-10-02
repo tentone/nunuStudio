@@ -11,7 +11,6 @@ import {TransformGizmo} from "./gizmo/TransformGizmo.js";
  * The objects are transformed by Gizmos managed by the transform controls object, gizmos may be compatible with multiple types of objects (Object3D, Vector3, etc).
  *
  * @class TransformControls
- * @author arodic (github.com/arodic)
  * @param {Camera} camera
  * @param {Canvas} canvas
  * @param {Mouse} mouse

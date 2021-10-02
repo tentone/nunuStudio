@@ -7,7 +7,6 @@ import {Pass} from "../Pass.js";
  * Simple bloom effect pass.
  *
  * @class BloomPass
- * @author alteredq / http:// alteredqualia.com/
  * @module Postprocessing
  * @param {number} strength  Bloom effect strength.
  * @param {number} kernelSize Bloom kernel size.

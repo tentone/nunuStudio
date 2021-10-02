@@ -4,7 +4,6 @@
  * Allows for easy resizing, assignment of various component-based types (e.g. Vector2, Vector3, Mat3, Color, ...) Numbers, and setting from other TypedArrays.
  *
  * @constructor
- * @author Luke Moody
  * @class TypedArrayHelper
  * @param {Function} TypedArrayConstructor The constructor to use (Float32Array, Uint8Array, etc.)
  * @param {number} size The size of the array to create

@@ -3,7 +3,6 @@ import {Object3D, AudioListener, Audio} from "three";
 /**
  * AudioEmitter is a Object3D used to play audio inside the scene.
  *
- * @author mrdoob
  * @author Reece Aaron Lecrivain
  * @param {Audio} audio Audio used by this emitter
  * @class AudioEmitter

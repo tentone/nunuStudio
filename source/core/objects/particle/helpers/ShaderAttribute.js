@@ -6,7 +6,6 @@ import {TypedArrayHelper} from "./TypedArrayHelper.js";
  *
  * @constructor
  * @class ShaderAttribute
- * @author Luke Moody
  * @param {string} type The buffer attribute type. See ShaderAttribute.typeSizeMap for valid values.
  * @param {boolean} dynamicBuffer Whether this buffer attribute should be marked as dynamic or not.
  * @param {Function} arrayType A reference to a TypedArray constructor. Defaults to Float32Array if none provided.

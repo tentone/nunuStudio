@@ -1,5 +1,4 @@
 import {Clock, Object3D} from "three";
-import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js";
 import {Texture} from "../../texture/Texture.js";
 import {Image} from "../../resources/Image.js";
 import {SpineTexture} from "./SpineTexture.js";

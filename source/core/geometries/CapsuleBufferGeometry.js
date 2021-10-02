@@ -5,7 +5,6 @@ import {BufferGeometry, BufferAttribute, Vector3, Vector2} from "three";
  *
  * The geometry is fully configurable booth in size and details, and can also be used to generate sections of capsule.
  *
- * @author maximequiblier
  * @class CapsuleBufferGeometry
  * @constructor
  */

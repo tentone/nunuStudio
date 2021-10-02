@@ -6,7 +6,6 @@ import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry, DefaultLoa
  * May be necessary to load old project files.
  * 
  * @class LegacyGeometryLoader
- * @author mrdoob / http:// mrdoob.com/
  * @author alteredq / http:// alteredqualia.com/
  */
 function LegacyGeometryLoader(manager)

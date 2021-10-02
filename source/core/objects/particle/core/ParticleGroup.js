@@ -30,7 +30,6 @@ import {ParticleEmitterControl} from "./ParticleEmitterControl.js";
  * The ParticleGroup class. Creates a new group, containing a material, geometry, and mesh.
  *
  * @constructor
- * @author Luke Moody
  * @class ParticleGroup
  * @param {ParticleGroupOptions} options A map of options to configure the group instance.
  */

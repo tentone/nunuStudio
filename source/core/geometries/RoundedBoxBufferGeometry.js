@@ -5,7 +5,6 @@ import {BufferGeometry, BufferAttribute, Vector3} from "three";
  *
  * The rounded parts of the geometry can be configured in detail level.
  *
- * @author pailhead / http://dusanbosnjak.com
  * @class RoundedBoxBufferGeometry
  * @constructor
  */

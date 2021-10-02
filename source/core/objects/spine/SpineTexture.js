@@ -1,4 +1,3 @@
-import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js";
 import {Texture} from "../../texture/Texture.js";
 
 /**

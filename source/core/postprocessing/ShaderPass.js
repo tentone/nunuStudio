@@ -4,7 +4,6 @@ import {Pass} from "./Pass.js";
 /**
  * Shader pass is used to apply a post processing effect over an already rendered scene.
  * 
- * @author alteredq / http:// alteredqualia.com/
  * @class ShaderPass
  * @module Postprocessing
  */

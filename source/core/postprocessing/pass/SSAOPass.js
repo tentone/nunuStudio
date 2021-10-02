@@ -11,7 +11,6 @@ import {Pass} from "../Pass.js";
  * More information about SSAO here
  *  - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
  *
- * @author alteredq / http:// alteredqualia.com/
  * @class SSAOPass
  * @module Postprocessing
  */

@@ -9,7 +9,6 @@ import {Pass} from "../Pass.js";
  * More information available here
  *  - https:// docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/
  *
- * @author spidersharma / http:// eduperiment.com/
  * @class UnrealBloomPass
  * @module Postprocessing
  * @param {number} strength  Bloom effect strength.

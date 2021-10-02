@@ -5,7 +5,6 @@ import {Vector2, Vector3, Vector4, Color} from "three";
  *
  * @static
  * @class ShaderUtils
- * @author Luke Moody
  */
 var ShaderUtils =
 {

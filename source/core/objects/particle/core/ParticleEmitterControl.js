@@ -71,7 +71,6 @@ import {ShaderUtils} from "./ShaderUtils.js";
  * The ParticleEmitterControl class.
  *
  * @constructor
- * @author Luke Moody
  * @class ParticleEmitterControl
  * @param {ParticleEmitterControlOptions} options A map of options to configure the emitter.
  */
