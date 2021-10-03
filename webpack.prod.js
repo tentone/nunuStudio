@@ -20,7 +20,7 @@ module.exports = [
 				"REPOSITORY_BRANCH": JSON.stringify(git.branch()),
 				"REPOSITORY_COMMIT": JSON.stringify(git.commithash()),
 				"DEVELOPMENT": JSON.stringify(false)
-			}),
+			})
 		],
 		output: {
 			filename: "bundle.js",
