@@ -10,7 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"install-napa": "napa",
+		"napa": "napa",
 		"start-page": "cd ./source/page && npm run start",
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
 		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
@@ -51,6 +51,7 @@
 	},
 	"dependencies": {
 		"@as-com/pson": "~3.0.1",
+		"@esotericsoftware/spine-core": "~4.0.14",
 		"@esotericsoftware/spine-threejs": "~4.0.14",
 		"@tweenjs/tween.js": "~18.6.4",
 		"brython": "~3.9.0",

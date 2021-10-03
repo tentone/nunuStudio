@@ -1,3 +1,4 @@
+import {ThreeJsTexture} from "@esotericsoftware/spine-threejs";
 import {Texture} from "../../texture/Texture.js";
 
 /**
@@ -11,12 +12,12 @@ import {Texture} from "../../texture/Texture.js";
  */
 function SpineTexture(texture)
 {
-	spine.threejs.ThreeJsTexture.call(this, texture.image);
+	ThreeJsTexture.call(this, texture.image);
 
 	this.texture = texture;
 	this.texture.flipY = false;
 }
 
-SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
+SpineTexture.prototype = Object.create(ThreeJsTexture.prototype);
 
 export {SpineTexture};

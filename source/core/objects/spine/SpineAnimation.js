@@ -1,18 +1,19 @@
 import {Clock, Object3D} from "three";
+import {AtlasAttachmentLoader, SkeletonJson, SkeletonMesh, TextureAtlas} from "@esotericsoftware/spine-threejs";
 import {Texture} from "../../texture/Texture.js";
 import {Image} from "../../resources/Image.js";
 import {SpineTexture} from "./SpineTexture.js";
 
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
- * 
+ *
  * Based on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.
- * 
+ *
  * More information about spine available at www.esotericsoftware.com.
- * 
+ *
  * @class SpineAnimation
- * @extends {spine.threejs.SkeletonMesh}
- * @param {Object} json Object containing the spine JSON encoded data for this animation. 
+ * @extends {SkeletonMesh}
+ * @param {Object} json Object containing the spine JSON encoded data for this animation.
  * @param {string} atlas Atlas file path.
  * @param {string} path Path to retrieve images from.
  * @param {Texture[]} textures List of textures provided for this animation.
@@ -24,8 +25,8 @@ function SpineAnimation(json, atlas, path, textures)
 	{
 		textures = [];
 	}
-	
-	var textureAtlas = new spine.TextureAtlas(atlas, function(file)
+
+	var textureAtlas = new TextureAtlas(atlas, function(file)
 	{
 		for (var i = 0; i < textures.length; i++)
 		{
@@ -66,14 +67,14 @@ function SpineAnimation(json, atlas, path, textures)
 			element.width = parseInt(size[0]);
 			element.height = parseInt(size[1]);
 		}
-		
+
 		return texture;
 	});
 
-	var loader = new spine.AtlasAttachmentLoader(textureAtlas);
-	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
+	var loader = new AtlasAttachmentLoader(textureAtlas);
+	var skeleton = new SkeletonJson(loader).readSkeletonData(json);
 
-	spine.threejs.SkeletonMesh.call(this, skeleton);
+	SkeletonMesh.call(this, skeleton);
 
 	this.name = "spine";
 	this.type = "SpineAnimation";
@@ -87,7 +88,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @type {Object}
 	 */
 	this.json = json;
-	
+
 	/**
 	 * Texture atlas information.
 	 *
@@ -95,7 +96,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @type {Object}
 	 */
 	this.atlas = atlas;
-	
+
 	/**
 	 * Array of SpineTextures used by the animation.
 	 *
@@ -111,7 +112,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @type {Object}
 	 */
 	this.skin = this.getSkins().length > 0 ? this.getSkins()[0].name : null;
-	
+
 	/**
 	 * Animation currently playing, animations are split into tracks.
 	 *
@@ -121,8 +122,8 @@ function SpineAnimation(json, atlas, path, textures)
 	 * @type {Object}
 	 */
 	this.animation = this.getAnimations().length > 0 ? this.getAnimations()[0].name : null;
-		
-	/** 
+
+	/**
 	 * Index of the animation track playing.
 	 *
 	 * @attribute track
@@ -130,7 +131,7 @@ function SpineAnimation(json, atlas, path, textures)
 	 */
 	this.track = 0;
 
-	/** 
+	/**
 	 * Indicates the loop mode of the animation if set true the animation starts again after it ends.
 	 *
 	 * @attribute loop
@@ -139,21 +140,21 @@ function SpineAnimation(json, atlas, path, textures)
 	this.loop = true;
 
 	this.clock = new Clock();
-	
+
 	this.play();
 }
 
-SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
+SpineAnimation.prototype = Object.create(SkeletonMesh.prototype);
 
 SpineAnimation.prototype.update = function(delta)
 {
-	spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
+	SkeletonMesh.prototype.update.call(this, delta);
 	Object3D.prototype.update.call(this);
 };
 
 /**
  * Update mesh geometry from animation state before rendering.
- * 
+ *
  * @method onBeforeRender
  */
 SpineAnimation.prototype.onBeforeRender = function()
@@ -166,7 +167,7 @@ SpineAnimation.prototype.onBeforeRender = function()
 
 /**
  * Play animation.
- * 
+ *
  * @method play
  */
 SpineAnimation.prototype.play = function()
@@ -184,7 +185,7 @@ SpineAnimation.prototype.play = function()
 
 /**
  * Get all available animations.
- * 
+ *
  * @method getAnimations
  * @return {Array} Animations
  */
@@ -195,7 +196,7 @@ SpineAnimation.prototype.getAnimations = function()
 
 /**
  * Set animation from track number and name.
- * 
+ *
  * @method setAnimation
  * @param {number} track Track number.
  * @param {string} animation Animation name.
@@ -278,7 +279,7 @@ SpineAnimation.prototype.toJSON = function(meta)
 	}
 	if (this.skin !== null)
 	{
-		data.object.skin = this.skin;	
+		data.object.skin = this.skin;
 	}
 
 	return data;

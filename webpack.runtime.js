@@ -24,11 +24,6 @@ const config = {
 				use: "raw-loader"
 			},
 			{
-				test: /.*spine-threejs.*/,
-				loader: "@shoutem/webpack-prepend-append",
-				query: "{\"append\": \"export {spine};\"}"
-			},
-			{
 				test: /.*brython.*/,
 				loader: "@shoutem/webpack-prepend-append",
 				query: JSON.stringify({
