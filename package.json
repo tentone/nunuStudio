@@ -67,7 +67,7 @@
 		"math-ds": "~1.2.1",
 		"sparse-octree": "~6.1.0",
 		"tern": "~0.24.3",
-		"three": "^0.119.0",
+		"three": "~0.119.0",
 		"three-bmfont-text": "~2.3.0",
 		"three-to-cannon": "~3.1.0",
 		"troika-three-text": "~0.35.0"
