@@ -51,4 +51,5 @@ MathUtils.randomColor = function()
 
 	return color;
 };
+
 export {MathUtils};

@@ -6,7 +6,7 @@ import {BufferGeometry, Mesh, MeshBasicMaterial} from "three";
  * It is rotated every frame before rendering to always face the camera direction.
  *
  * @class BillboardGroup
- * @extends {THREE.Group}
+ * @extends {Mesh}
  */
 function BillboardGroup()
 {
