@@ -492,7 +492,7 @@ App.prototype.toggleVR = function()
  */
 App.prototype.arAvailable = function()
 {
-	return this.program !== null && this.program.vrAvailable();
+	return this.program !== null && this.program.arAvailable();
 };
 
 /**
