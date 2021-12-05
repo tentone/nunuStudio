@@ -20,7 +20,7 @@
 - To build the project first install [Node.js LTS](https://nodejs.org/en/) and NPM:
   - The building system generates minified builds for the runtime and for the editor
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
-  - Install dependencies from npm by running `npm install`
+  - Install dependencies from npm by running `npm install --legacy-peer-deps` and additional non-npm packages using `npm run napa`
   - Build  editor, runtime and documentation, run `npm run build`
 - Webpage of the project is built using [Angular](https://angular.io/) and is hosted on [GitHub Pages](https://pages.github.com/)
 
