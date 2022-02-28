@@ -16,8 +16,6 @@
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/web.png">
 
-### Getting Started
-
 - [API Documentation](https://nunustudio.org/docs) with full details about the inner working of every module are available. These can also be generated from the project source code by running `npm run docs`.
 - Basic tutorials are available on the [project page](https://www.nunustudio.org/page/learn.html). The basic tutorials explain step-by-step how to use the editor.
 
@@ -43,15 +41,17 @@
 
 ### Building
 
-- The project uses a custom solution for code bundling
+- The project uses [Webpack](https://webpack.js.org/) to build and bundle its code base.
   - The building system generates minified builds for the runtime and for the editor
-  - JavaScript is optimized and minified using [Google closure](https://developers.google.com/closure/library)
+  - JavaScript is optimized and minified using [Uglify](https://www.npmjs.com/package/uglify-js)
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
 - To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
-- Install dependencies from npm by running `npm install`
+- Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
 - Build  editor, runtime and documentation, run `npm run build`
 
-#### Embedding Application
+
+
+### Embedding Application
 
 - Application developed with can be embedded into already existing web pages, and are compatible with frameworks like [Angular](https://angular.io/) or [React](https://reactjs.org/).
 - To embed applications in HTML pages the following code can be used, the application is bootstrapped using the `loadApp(file, id)` method.
