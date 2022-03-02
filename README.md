@@ -50,6 +50,7 @@
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
 - To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
 - Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
+- Install the dependencies for the project webpage running `cd source/page && npm install`
 - Build  editor, runtime and documentation, run `npm run build`
 
 
