@@ -10,6 +10,6 @@
  - <VERSION> <TIMSTAMP>
 
 ##### Platform
- - Web Version [X]
- - Windows [X]
- - Linux [X]
+- [ ] Web Version
+- [ ] Windows
+- [ ] Linux
