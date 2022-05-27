@@ -3,6 +3,7 @@
 package-lock.json
 node_modules/
 nwjs/
+.DS_Store
 
 source/temp/
 source/node_modules/
