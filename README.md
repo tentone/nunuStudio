@@ -1,6 +1,7 @@
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/logo.png">
 
-[![GitHub version](https://badge.fury.io/gh/tentone%2FnunuStudio.svg)](https://badge.fury.io/gh/tentone%2FnunuStudio)[![npm version](https://badge.fury.io/js/nunu-studio.svg)](https://badge.fury.io/js/nunu-studio)[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio?ref=badge_shield)
+[![GitHub version](https://badge.fury.io/gh/tentone%2FnunuStudio.svg)](https://badge.fury.io/gh/tentone%2FnunuStudio)[![npm version](https://badge.fury.io/js/nunu-studio.svg)](https://badge.fury.io/js/nunu-studio)[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio?ref=badge_shield)
 
 
 - nunuStudio is an open source  game engine for the web it allows designers and web developers to easily develop 3D experiences for the web.
@@ -71,6 +72,42 @@
     </body>
 </html>
 ```
+
+### Vue.js with Nuxtjs
+
+ - Build `nunu.min.js` and place into `static/js` folder of your nuxt instance
+ - Place canvas element into your `template` area where you want it, for example:
+```vue
+<template>
+  <div>
+    <canvas
+      id="canvas"
+      width="800"
+      height="480"
+    />
+</div>
+</template>
+```
+ - Add the script to your head function of the page you want the 3D integration on (or place is into your global head)
+```js
+head() {
+return {
+      script: [
+        {
+          hid: 'Nunu',
+          src: 'assets/js/nunu.min.js',
+          defer: true,
+          callback: () => {
+            Nunu.App.loadApp('assets/file.nsp', 'canvas') //add file to load in here
+          },
+        },
+      ],
+    },
+  }
+```
+
+ - You are now able to address `Nunu` as usual within the app.
+
 
 ### License
 
