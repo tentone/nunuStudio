@@ -24,7 +24,7 @@
 
 
 
-### Screenshots
+## Screenshots
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/3.png">
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/4.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/1.png">
@@ -32,7 +32,7 @@
 
 
 
-### Features
+## Features
 
 - Visual application editor
   - Drag and drop files directly into the project (images, video, models, ...)
@@ -45,19 +45,20 @@
 - [NW.js](https://nwjs.io/) and [Cordova](https://cordova.apache.org/) exports for desktop and mobile deployment
 - Compatible with [WebXR](https://www.w3.org/TR/webxr/) for Virtual Reality and Augmented Reality
 
-
+## Build
 - The project uses [Webpack](https://webpack.js.org/) to build and bundle its code base.
   - The building system generates minified builds for the runtime and for the editor
   - JavaScript is optimized and minified using [Uglify](https://www.npmjs.com/package/uglify-js)
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
 - To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
 - Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
+  - If running on Node >=16 run `npm install --legacy-peer-deps`
 - Install the dependencies for the project webpage running `cd source/page && npm install`
 - Build  editor, runtime and documentation, run `npm run build`
 
 
 
-### Embedding Application
+## Embedding Application
 
 - Application developed with can be embedded into already existing web pages, and are compatible with frameworks like [Angular](https://angular.io/) or [React](https://reactjs.org/).
 - To embed applications in HTML pages the following code can be used, the application is bootstrapped using the `loadApp(file, id)` method.
@@ -73,7 +74,7 @@
 </html>
 ```
 
-### Vue.js with Nuxtjs
+## Vue.js with Nuxtjs
 
  - Build `nunu.min.js` and place into `static/js` folder of your nuxt instance
  - Place canvas element into your `template` area where you want it, for example:
@@ -109,10 +110,9 @@ return {
  - You are now able to address `Nunu` as usual within the app.
 
 
-### License
+## License
 
 - The project is distributed under a MIT license that allow for commercial usage of the platform without any cost.
 - The license is available on the project GitHub page
-
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftentone%2FnunuStudio?ref=badge_large)
