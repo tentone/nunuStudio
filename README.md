@@ -55,7 +55,7 @@
   - If running on Node >=16 run `npm install --legacy-peer-deps`
 - Install the dependencies for the project webpage running `cd source/page && npm install`
 - Build  editor, runtime and documentation, run `npm run build`
-
+- To start the editor locally for development and testing run `npm run start`
 
 
 ## Embedding Application
