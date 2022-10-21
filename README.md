@@ -46,17 +46,22 @@
 - Compatible with [WebXR](https://www.w3.org/TR/webxr/) for Virtual Reality and Augmented Reality
 
 ## Build
-- The project uses [Webpack](https://webpack.js.org/) to build and bundle its code base.
+The project uses [Webpack](https://webpack.js.org/) to build and bundle its code base.
   - The building system generates minified builds for the runtime and for the editor
   - JavaScript is optimized and minified using [Uglify](https://www.npmjs.com/package/uglify-js)
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
-- To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
-- Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
-  - If running on Node >=16 run `npm install --legacy-peer-deps`
-- Install the dependencies for the project webpage running `cd source/page && npm install`
-- Build  editor, runtime and documentation, run `npm run build`
-- To start the editor locally for development and testing run `npm run start`
 
+Steps needed to build the project:
+1. To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
+2. Install dependencies from npm by running `npm install`.
+> **Note**: If running on Node >=16 run `npm install --legacy-peer-deps` instead
+3. Some dependencies are not available on npm and have to be installed by running `npm install napa`
+> **Note**: If running on Node >=16 run `npm install napa --legacy-peer-deps` instead
+4. Install the dependencies for the project webpage running `cd source/page && npm install`
+5. Running napa `npm run napa`
+6. Building/running
+    1. Building: to build editor, runtime and documentation, run `npm run build`
+    2. Running: To start the editor locally for development and testing run `npm run start`
 
 ## Embedding Application
 

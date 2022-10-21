@@ -218,15 +218,26 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.add(this.navigation);
 	this.form.nextRow();
 
-	// Invert navigation
+	// Invert navigation vertical
 	this.form.addText("Invert Vertical");
-	this.invertNavigation = new CheckBox(this.form);
-	this.invertNavigation.size.set(18, 18);
-	this.invertNavigation.setOnChange(function()
+	this.invertNavigationY = new CheckBox(this.form);
+	this.invertNavigationY.size.set(18, 18);
+	this.invertNavigationY.setOnChange(function()
 	{
-		Editor.settings.editor.invertNavigation = self.invertNavigation.getValue();
+		Editor.settings.editor.invertNavigationY = self.invertNavigationY.getValue();
 	});
-	this.form.add(this.invertNavigation);
+	this.form.add(this.invertNavigationY);
+	this.form.nextRow();
+
+	// Invert navigation horizontal
+	this.form.addText("Invert Horizontal");
+	this.invertNavigationX = new CheckBox(this.form);
+	this.invertNavigationX.size.set(18, 18);
+	this.invertNavigationX.setOnChange(function()
+	{
+		Editor.settings.editor.invertNavigationX = self.invertNavigationX.getValue();
+	});
+	this.form.add(this.invertNavigationX);
 	this.form.nextRow();
 
 	// Mouse look sensitivity
@@ -398,7 +409,8 @@ EditorSettingsTab.prototype.activate = function()
 	// Navigation
 	this.lockMouse.setValue(Editor.settings.editor.lockMouse);
 	this.navigation.setValue(Editor.settings.editor.navigation);
-	this.invertNavigation.setValue(Editor.settings.editor.invertNavigation);
+	this.invertNavigationX.setValue(Editor.settings.editor.invertNavigationX);
+	this.invertNavigationY.setValue(Editor.settings.editor.invertNavigationY);
 	this.keyboardNavigation.setValue(Editor.settings.editor.keyboardNavigation);
 	this.keyboardNavigationSpeed.setValue(Editor.settings.editor.keyboardNavigationSpeed);
 	this.mouseLookSensitivity.setValue(Editor.settings.editor.mouseLookSensitivity);
