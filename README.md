@@ -54,9 +54,9 @@ The project uses [Webpack](https://webpack.js.org/) to build and bundle its code
 Steps needed to build the project:
 1. To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
 2. Install dependencies from npm by running `npm install`.
-> **Note**: If running on Node >=16 run `npm install --legacy-peer-deps` instead
+    1. If running on Node >=16 run `npm install --legacy-peer-deps` instead
 3. Some dependencies are not available on npm and have to be installed by running `npm install napa`
-> **Note**: If running on Node >=16 run `npm install napa --legacy-peer-deps` instead
+    1. If running on Node >=16 run `npm install napa --legacy-peer-deps` instead
 4. Install the dependencies for the project webpage running `cd source/page && npm install`
 5. Running napa `npm run napa`
 6. Building/running
