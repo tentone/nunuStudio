@@ -15,7 +15,10 @@ module.exports = [
 		context: source,
 		entry: source + "/editor/Main.js",
 		target: "web",
-		devtool: "inline-source-map",
+		devtool: false,
+		performance: {
+			hints: false,
+		},
 		module: {
 			rules: [
 				{

@@ -8,13 +8,11 @@ const common = require("./webpack.config.js");
 
 module.exports = [
 	merge(common[0], {
-		devtool: "inline-source-map",
+		devtool: false,
 		mode: "development",
 		optimization: {minimize: false},
 		performance: {
 			hints: false,
-			maxEntrypointSize: 512000,
-			maxAssetSize: 512000
 		},
 		devServer: {
 			static: common[0].output.path,

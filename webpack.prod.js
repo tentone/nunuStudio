@@ -10,9 +10,12 @@ const output = Path.resolve(__dirname, "docs/editor");
 
 module.exports = [
 	merge(common[0], {
-		devtool: "inline-source-map",
+		devtool: false,
 		mode: "production",
 		optimization: {minimize: true},
+		performance: {
+			hints: false,
+		},
 		plugins: [
 			new Webpack.DefinePlugin({
 				"VERSION": JSON.stringify(require("./package.json").version),

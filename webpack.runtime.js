@@ -8,9 +8,12 @@ const config = {
 	context: source,
 	entry: source + "/core/Main.js",
 	target: "web",
-	devtool: "inline-source-map",
+	devtool: false,
 	mode: "production",
 	optimization: {minimize: true},
+	performance: {
+		hints: false,
+	},
 	plugins: [
 		new Webpack.ProvidePlugin({
 			THREE: "three",
