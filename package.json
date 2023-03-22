@@ -12,7 +12,7 @@
 	"scripts": {
 		"napa": "napa",
 		"start-page": "cd ./source/page && npm run start",
-		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
+		"start": "webpack-dev-server --open --hot --config webpack.dev.js",
 		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
 		"start-docker": "http-server ./docs/editor -p 8081 --cors -o",
 		"start-nwjs": "webpack --config webpack.dev.js && run --with-ffmpeg --mirror https://dl.nwjs.io/ ./docs/editor",
@@ -74,6 +74,7 @@
 		"troika-three-text": "0.44.0"
 	},
 	"devDependencies": {
+		"ajv": "8.12.0",
 		"@babel/core": "7.21.3",
 		"@babel/plugin-transform-classes": "7.21.0",
 		"@babel/preset-env": "7.20.2",

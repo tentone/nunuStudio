@@ -3,13 +3,12 @@ const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
-
+const {merge} = require("webpack-merge");
+const runtime = require("./webpack.runtime.js");
 
 const source = Path.resolve(__dirname, "source");
 const output = Path.resolve(__dirname, "docs/editor");
 
-const Merge = require("webpack-merge");
-const runtime = require("./webpack.runtime.js");
 
 module.exports = [
 	{
@@ -26,7 +25,7 @@ module.exports = [
 				{
 					test: /.*brython.*/,
 					loader: "@shoutem/webpack-prepend-append",
-					query: JSON.stringify({
+					options: JSON.stringify({
 						prepend: `(function (root, factory) {
 						if (typeof define === 'function' && define.amd) { define([], factory); }  // AMD loader
 						else if (typeof module === 'object' && module.exports) { module.exports = factory(); }  // CommonJS loader
@@ -133,7 +132,7 @@ module.exports = [
 			})
 		]
 	},
-	Merge(runtime[0], {
+	merge(runtime[0], {
 		output: {
 			hashFunction: "sha256",
 			filename: "nunu.min.js",

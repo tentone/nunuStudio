@@ -1,7 +1,7 @@
 const Path = require("path");
-const Merge = require("webpack-merge");
+const {merge} = require("webpack-merge");
 const Webpack = require("webpack");
-const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const {GitRevisionPlugin} = require("git-revision-webpack-plugin");
 const common = require("./webpack.config.js");
 
 const git = new GitRevisionPlugin();
@@ -9,8 +9,8 @@ const git = new GitRevisionPlugin();
 const output = Path.resolve(__dirname, "docs/editor");
 
 module.exports = [
-	Merge(common[0], {
-		devtool: "none",
+	merge(common[0], {
+		devtool: "inline-source-map",
 		mode: "production",
 		optimization: {minimize: true},
 		plugins: [

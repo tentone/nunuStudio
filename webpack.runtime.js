@@ -8,7 +8,7 @@ const config = {
 	context: source,
 	entry: source + "/core/Main.js",
 	target: "web",
-	devtool: "none",
+	devtool: "inline-source-map",
 	mode: "production",
 	optimization: {minimize: true},
 	plugins: [
@@ -26,7 +26,7 @@ const config = {
 			{
 				test: /.*brython.*/,
 				loader: "@shoutem/webpack-prepend-append",
-				query: JSON.stringify({
+				options: JSON.stringify({
 					prepend: `(function (root, factory) {
 						if (typeof define === 'function' && define.amd) { define([], factory); }  // AMD loader
 						else if (typeof module === 'object' && module.exports) { module.exports = factory(); }  // CommonJS loader
