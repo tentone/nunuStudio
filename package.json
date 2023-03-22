@@ -74,9 +74,9 @@
 		"troika-three-text": "0.44.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.11.6",
-		"@babel/plugin-transform-classes": "7.10.4",
-		"@babel/preset-env": "7.11.5",
+		"@babel/core": "7.21.3",
+		"@babel/plugin-transform-classes": "7.21.0",
+		"@babel/preset-env": "7.20.2",
 		"@shoutem/webpack-prepend-append": "1.0.1",
 		"@types/node": "18.15.5",
 		"@types/webpack": "5.28.0",
