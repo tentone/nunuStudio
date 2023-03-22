@@ -38,7 +38,7 @@ function AboutTab(parent, closeable, container, index)
 	var libs = [];
 	libs.push("three.js R" + REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);
-	libs.push("CannonJS V" + CANNON.version);
+	// libs.push("CannonJS V" + CANNON.version);
 	libs.push("TernJS V" + tern.version);
 	if (Nunu.runningOnDesktop())
 	{
