@@ -45,6 +45,7 @@ const config = {
 module.exports = [
 	Object.assign({
 		output: {
+			hashFunction: "sha256",
 			filename: "nunu.min.js",
 			path: output,
 			library: "Nunu",
@@ -53,6 +54,7 @@ module.exports = [
 	}, config),
 	Object.assign({
 		output: {
+			hashFunction: "sha256",
 			filename: "nunu.module.min.js",
 			path: output,
 			libraryTarget: "umd"

@@ -23,6 +23,7 @@ module.exports = [
 			})
 		],
 		output: {
+			hashFunction: "sha256",
 			filename: "bundle.js",
 			path: output
 		}

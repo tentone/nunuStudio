@@ -41,6 +41,7 @@ module.exports = [
 			]
 		},
 		output: {
+			hashFunction: "sha256",
 			filename: "bundle.js",
 			path: output
 		},
@@ -134,6 +135,7 @@ module.exports = [
 	},
 	Merge(runtime[0], {
 		output: {
+			hashFunction: "sha256",
 			filename: "nunu.min.js",
 			path: output + "/files/runtime",
 			library: "Nunu",
