@@ -6,7 +6,6 @@ import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {MeshStandardMaterialEditor} from "./MeshStandardMaterialEditor.js";
 
-
 function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 {
 	MeshStandardMaterialEditor.call(this, parent, closeable, container, index);
@@ -81,16 +80,16 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 
 	// Transparency
 	this.form.addText(Locale.transparency);
-	this.transparency = new Slider(this.form);
-	this.transparency.size.set(160, 18);
-	this.transparency.setRange(0, 1);
-	this.transparency.setStep(0.01);
-	this.transparency.setOnChange(function()
+	this.transmission = new Slider(this.form);
+	this.transmission.size.set(160, 18);
+	this.transmission.setRange(0, 1);
+	this.transmission.setStep(0.01);
+	this.transmission.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.material, "transparency", self.transparency.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "transmission", self.transmission.getValue()));
 		self.material.needsUpdate = true;
 	});
-	this.form.add(this.transparency);
+	this.form.add(this.transmission);
 	this.form.nextRow();
 
 	// Clear coat normal map
@@ -129,7 +128,7 @@ MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 	this.clearcoat.setValue(material.clearcoat);
 	this.clearcoatRoughness.setValue(material.clearcoatRoughness);
 	this.reflectivity.setValue(material.reflectivity);
-	this.transparency.setValue(material.transparency);
+	this.transmission.setValue(material.transmission);
 	this.clearcoatNormalMap.setValue(material.clearcoatNormalMap);
 	this.clearcoatNormalScale.setValue(material.clearcoatNormalScale);
 	this.clearcoatMap.setValue(material.clearcoatMap);

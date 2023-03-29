@@ -110,9 +110,9 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.clearcoatRoughness = this.clearcoatRoughness;
 	}
-	if (this.transparency !== undefined)
+	if (this.transmission !== undefined)
 	{
-		data.transparency = this.transparency;
+		data.transmission = this.transmission;
 	}
 
 	// Color map
