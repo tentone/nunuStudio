@@ -10,5 +10,7 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('python', python);
 hljs.initHighlightingOnLoad();
 
-platformBrowserDynamic().bootstrapModule(Module);
+platformBrowserDynamic().bootstrapModule(Module, {
+    ngZone: 'zone.js'
+});
 
