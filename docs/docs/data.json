@@ -1777,7 +1777,6 @@
             "file": "source\\core\\geometries\\CapsuleBufferGeometry.js",
             "line": 3,
             "description": "Capsule like geometry shape consisting of a cylinder with hemispherical ends.\n\nThe geometry is fully configurable booth in size and details, and can also be used to generate sections of capsule.",
-            "author": "maximequiblier",
             "is_constructor": 1
         },
         "ParametricBufferGeometry": {
@@ -1825,7 +1824,6 @@
             "file": "source\\core\\geometries\\RoundedBoxBufferGeometry.js",
             "line": 3,
             "description": "Rounded corners box buffer geometry, composed of a box with spherical corners and cylindrical edges.\n\nThe rounded parts of the geometry can be configured in detail level.",
-            "author": "pailhead / http://dusanbosnjak.com",
             "is_constructor": 1
         },
         "TerrainBufferGeometry": {
@@ -2683,7 +2681,7 @@
             "file": "source\\core\\objects\\misc\\BillboardGroup.js",
             "line": 3,
             "description": "Object that makes it rotation be the same as the camera.\n\nIt is rotated every frame before rendering to always face the camera direction.",
-            "extends": "{THREE.Group}"
+            "extends": "{Mesh}"
         },
         "Group": {
             "name": "Group",
@@ -2805,7 +2803,6 @@
             "line": 70,
             "description": "The ParticleEmitterControl class.",
             "is_constructor": 1,
-            "author": "Luke Moody",
             "params": [
                 {
                     "name": "options",
@@ -2918,7 +2915,6 @@
             "line": 29,
             "description": "The ParticleGroup class. Creates a new group, containing a material, geometry, and mesh.",
             "is_constructor": 1,
-            "author": "Luke Moody",
             "params": [
                 {
                     "name": "options",
@@ -2940,8 +2936,7 @@
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
             "line": 3,
             "description": "A bunch of utility functions used throughout the library.",
-            "static": 1,
-            "author": "Luke Moody"
+            "static": 1
         },
         "ShaderAttribute": {
             "name": "ShaderAttribute",
@@ -2957,7 +2952,6 @@
             "line": 4,
             "description": "A helper to handle creating and updating a BufferAttribute instance.",
             "is_constructor": 1,
-            "author": "Luke Moody",
             "params": [
                 {
                     "name": "type",
@@ -2990,7 +2984,6 @@
             "line": 1,
             "description": "A helper class for TypedArrays.\n\nAllows for easy resizing, assignment of various component-based types (e.g. Vector2, Vector3, Mat3, Color, ...) Numbers, and setting from other TypedArrays.",
             "is_constructor": 1,
-            "author": "Luke Moody",
             "params": [
                 {
                     "name": "TypedArrayConstructor",
@@ -3172,7 +3165,7 @@
             "file": "source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 7,
             "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com.",
-            "extends": "{spine.threejs.SkeletonMesh}",
+            "extends": "{SkeletonMesh}",
             "params": [
                 {
                     "name": "json",
@@ -3458,7 +3451,6 @@
             "file": "source\\core\\postprocessing\\pass\\BloomPass.js",
             "line": 6,
             "description": "Simple bloom effect pass.",
-            "author": "alteredq / http:// alteredqualia.com/",
             "params": [
                 {
                     "name": "strength",
@@ -3554,7 +3546,6 @@
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
             "line": 5,
             "description": "DotScreen pass generates a poster like effect on top of the scene.",
-            "author": "alteredq / http:// alteredqualia.com/",
             "params": [
                 {
                     "name": "center",
@@ -3640,8 +3631,7 @@
             "namespace": "",
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
             "line": 6,
-            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nThis variant of SSAO produces a halo like effect to simulate the effect.\n\nMore information about SSAO here\n - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
-            "author": "alteredq / http:// alteredqualia.com/"
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nThis variant of SSAO produces a halo like effect to simulate the effect.\n\nMore information about SSAO here\n - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf"
         },
         "SobelPass": {
             "name": "SobelPass",
@@ -3684,7 +3674,6 @@
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
             "line": 6,
             "description": "Unreal engine like bloom effect pass.\n\nMore information available here\n - https:// docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/",
-            "author": "spidersharma / http:// eduperiment.com/",
             "params": [
                 {
                     "name": "strength",
@@ -3774,8 +3763,7 @@
             "namespace": "",
             "file": "source\\core\\postprocessing\\ShaderPass.js",
             "line": 4,
-            "description": "Shader pass is used to apply a post processing effect over an already rendered scene.",
-            "author": "alteredq / http:// alteredqualia.com/"
+            "description": "Shader pass is used to apply a post processing effect over an already rendered scene."
         },
         "CSS3DObject": {
             "name": "CSS3DObject",
@@ -8335,7 +8323,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 20,
+            "line": 19,
             "description": "AudioListener used by this emmiter.\n\nEvery AudioEmitter has a different WebAudio AudioListener.",
             "itemtype": "property",
             "name": "listener",
@@ -8345,7 +8333,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 32,
+            "line": 31,
             "description": "WebAudio gain node, used to control the volume.\n\nhttps:// developer.mozilla.org/en-US/docs/Web/API/GainNode",
             "itemtype": "property",
             "name": "gain",
@@ -8355,7 +8343,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 47,
+            "line": 46,
             "description": "Audio source type, can have the following values:\n - empty\n - buffer\n - audioNode",
             "itemtype": "property",
             "name": "sourceType",
@@ -8366,7 +8354,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 59,
+            "line": 58,
             "description": "Audio source resource.",
             "itemtype": "property",
             "name": "audio",
@@ -8376,7 +8364,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 67,
+            "line": 66,
             "description": "If true the playback starts automatically.",
             "itemtype": "property",
             "name": "autoplay",
@@ -8387,7 +8375,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 76,
+            "line": 75,
             "description": "Audio volume.",
             "itemtype": "property",
             "name": "volume",
@@ -8398,7 +8386,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 85,
+            "line": 84,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
@@ -8409,7 +8397,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 94,
+            "line": 93,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "startTime",
@@ -8420,7 +8408,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 103,
+            "line": 102,
             "description": "If true the audio plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -8431,7 +8419,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 112,
+            "line": 111,
             "description": "Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.",
             "itemtype": "property",
             "name": "detune",
@@ -8441,7 +8429,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 128,
+            "line": 127,
             "description": "Possible source types for the audio emitter.",
             "static": 1,
             "itemtype": "attribute",
@@ -8452,7 +8440,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 141,
+            "line": 140,
             "description": "Method called when the audio playback stopped.",
             "itemtype": "method",
             "name": "onEnded",
@@ -8461,7 +8449,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 151,
+            "line": 150,
             "description": "Connect the audio source.\n\nUsed internally on initialisation and when setting / removing",
             "itemtype": "method",
             "name": "connect",
@@ -8470,7 +8458,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 180,
+            "line": 179,
             "description": "Disconnect the audio source.\n\nUsed internally when setting / removing filters.",
             "itemtype": "method",
             "name": "disconnect",
@@ -8479,7 +8467,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 208,
+            "line": 207,
             "description": "Initialize audio object, loads audio data decodes it and starts playback ifautoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -8488,7 +8476,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 235,
+            "line": 234,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -8508,7 +8496,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 255,
+            "line": 254,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -8521,7 +8509,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 288,
+            "line": 287,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -8534,7 +8522,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 303,
+            "line": 302,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -8547,7 +8535,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 318,
+            "line": 317,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -8563,7 +8551,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 347,
+            "line": 346,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -8579,7 +8567,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 358,
+            "line": 357,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -8599,7 +8587,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 373,
+            "line": 372,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -8619,7 +8607,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 392,
+            "line": 391,
             "description": "Set detune value.",
             "itemtype": "method",
             "name": "setDetune",
@@ -8639,7 +8627,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 411,
+            "line": 410,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -8652,7 +8640,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 422,
+            "line": 421,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -8672,7 +8660,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 441,
+            "line": 440,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -8685,7 +8673,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 452,
+            "line": 451,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -8698,7 +8686,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 463,
+            "line": 462,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -8718,7 +8706,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 491,
+            "line": 490,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -8737,7 +8725,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 503,
+            "line": 502,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -8753,7 +8741,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 514,
+            "line": 513,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -8773,7 +8761,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 532,
+            "line": 531,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8786,7 +8774,7 @@
         },
         {
             "file": "source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 543,
+            "line": 542,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -10179,7 +10167,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\LensFlare.js",
-            "line": 233,
+            "line": 232,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -10351,7 +10339,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleEmitterControl.js",
-            "line": 741,
+            "line": 740,
             "description": "Simulates one frame worth of particles, updating particles that are already alive, and marking ones that are currently dead but should be alive as alive.\n\nIf the emitter is marked as static, then this function will do nothing.",
             "itemtype": "method",
             "name": "tick",
@@ -10367,7 +10355,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleEmitterControl.js",
-            "line": 808,
+            "line": 807,
             "description": "Resets all the emitter\"s particles to their start positions and marks the particles as dead if the force argument is true.",
             "itemtype": "method",
             "name": "reset",
@@ -10389,7 +10377,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleEmitterControl.js",
-            "line": 843,
+            "line": 842,
             "description": "Enables the emitter. If not already enabled, the emitter will start emitting particles.",
             "itemtype": "method",
             "name": "enable",
@@ -10402,7 +10390,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleEmitterControl.js",
-            "line": 855,
+            "line": 854,
             "description": "Disables th emitter, but does not instantly remove it's particles fromt the scene. When called, the emitter will be \"switched off\" and just stop emitting.\n\nAny particle\"s alive will be allowed to finish their lifecycle.",
             "itemtype": "method",
             "name": "disable",
@@ -10415,7 +10403,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleEmitterControl.js",
-            "line": 869,
+            "line": 868,
             "description": "Remove this emitter from it's parent group (if it has been added to one).\n\nDelgates to group.prototype.removeEmitter().\n\nWhen called, all particle\"s belonging to this emitter will be instantly removed from the scene.",
             "itemtype": "method",
             "name": "remove",
@@ -10428,7 +10416,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 85,
+            "line": 84,
             "description": "Map of uniforms to be applied to the ShaderMaterial instance.",
             "itemtype": "attribute",
             "name": "uniforms",
@@ -10438,7 +10426,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 147,
+            "line": 146,
             "description": "Map of all attributes to be applied to the particles.\n\nSee ShaderAttribute for a bit more info on this bit.",
             "itemtype": "attribute",
             "name": "attributes",
@@ -10448,7 +10436,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 271,
+            "line": 270,
             "description": "Adds an ParticleEmitterControl instance to this group, creating particle values and assigning them to this group\"s shader attributes.",
             "itemtype": "method",
             "name": "addEmitter",
@@ -10464,7 +10452,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 371,
+            "line": 370,
             "description": "Removes an ParticleEmitterControl instance from this group.\n\nWhen called, all particle\"s belonging to the given emitter will be instantly removed from the scene.",
             "itemtype": "method",
             "name": "removeEmitter",
@@ -10480,7 +10468,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 433,
+            "line": 432,
             "description": "Fetch a single emitter instance from the pool.\n\nIf there are no objects in the pool, a new emitter will becreated if specified.",
             "itemtype": "method",
             "name": "getFromPool",
@@ -10493,7 +10481,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 462,
+            "line": 461,
             "description": "Release an emitter into the pool.",
             "itemtype": "method",
             "name": "releaseIntoPool",
@@ -10513,7 +10501,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 483,
+            "line": 482,
             "description": "Get the pool array",
             "itemtype": "method",
             "name": "getPool",
@@ -10526,7 +10514,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 494,
+            "line": 493,
             "description": "Add a pool of emitters to this particle group",
             "itemtype": "method",
             "name": "addPool",
@@ -10556,7 +10544,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 557,
+            "line": 556,
             "description": "Set a given number of emitters as alive, with an optional position vector3 to move them to.",
             "itemtype": "method",
             "name": "triggerEmitter",
@@ -10583,7 +10571,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 619,
+            "line": 618,
             "description": "Simulate all the emitter\"s belonging to this group, updating attribute values along the way.",
             "itemtype": "method",
             "name": "tick",
@@ -10601,7 +10589,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ParticleGroup.js",
-            "line": 682,
+            "line": 681,
             "description": "Dipose the geometry and material for the group.",
             "itemtype": "method",
             "name": "dispose",
@@ -10614,7 +10602,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 12,
+            "line": 11,
             "description": "A map of types used by ShaderUtils.ensureTypedArg and ShaderUtils.ensureArrayTypedArg to compare types against.",
             "static": 1,
             "itemtype": "attribute",
@@ -10625,7 +10613,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 27,
+            "line": 26,
             "description": "Given a value, a type, and a default value to fallback to, ensure the given argument adheres to the type requesting, returning the default value if type check is false.",
             "itemtype": "method",
             "name": "ensureTypedArg",
@@ -10655,7 +10643,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 48,
+            "line": 47,
             "description": "Given an array of values, a type, and a default value, ensure the given array\"s contents ALL adhere to the provided type, returning the default value if type check fails.\n\nIf the given value to check isn't an Array, delegates to ShaderUtils.ensureTypedArg.",
             "static": 1,
             "itemtype": "attribute",
@@ -10686,7 +10674,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 80,
+            "line": 79,
             "description": "Ensures the given value is an instance of a constructor function.",
             "static": 1,
             "itemtype": "attribute",
@@ -10716,7 +10704,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 102,
+            "line": 101,
             "description": "Given an array of values, ensure the instances of all items in the array matches the given instance constructor falling back to a default value if the check fails.\n\nIf given value isn't an Array, delegates to ShaderUtils.ensureInstanceOf.",
             "static": 1,
             "itemtype": "attribute",
@@ -10747,7 +10735,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 133,
+            "line": 132,
             "description": "Ensures that any \"value-over-lifetime\" properties of an emitter are of the correct length (as dictated by valueOverLifetimeLength).\n\nDelegates to ShaderUtils.interpolateArray for array resizing.\n\nIf properties aren't arrays, then property values are put into one.",
             "static": 1,
             "itemtype": "attribute",
@@ -10774,7 +10762,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 177,
+            "line": 176,
             "description": "Performs linear interpolation (lerp) on an array.\n\nFor example, lerping [1, 10], with a newLength of 10 will produce [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].\n\nDelegates to ShaderUtils.lerpTypeAgnostic to perform the actual interpolation.",
             "static": 1,
             "itemtype": "attribute",
@@ -10800,7 +10788,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 216,
+            "line": 215,
             "description": "Clamp a number to between the given min and max values.",
             "static": 1,
             "itemtype": "attribute",
@@ -10831,7 +10819,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 231,
+            "line": 230,
             "description": "If the given value is less than the epsilon value, then return a randomised epsilon value if specified, or just the epsilon value if not.\n\nWorks for negative numbers as well as positive.",
             "static": 1,
             "itemtype": "attribute",
@@ -10857,7 +10845,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 257,
+            "line": 256,
             "description": "Linearly interpolates two values of various types. The given values must be of the same type for the interpolation to work.",
             "static": 1,
             "itemtype": "attribute",
@@ -10888,7 +10876,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 314,
+            "line": 313,
             "description": "Perform a linear interpolation operation on two numbers.",
             "static": 1,
             "itemtype": "attribute",
@@ -10919,7 +10907,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 329,
+            "line": 328,
             "description": "Rounds a number to a nearest multiple.",
             "static": 1,
             "itemtype": "attribute",
@@ -10945,7 +10933,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 362,
+            "line": 361,
             "description": "Check if all items in an array are equal. Uses strict equality.",
             "static": 1,
             "itemtype": "attribute",
@@ -10966,7 +10954,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 383,
+            "line": 382,
             "description": "Given a start value and a spread value, create and return a random number.",
             "static": 1,
             "itemtype": "attribute",
@@ -10992,7 +10980,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 397,
+            "line": 396,
             "description": "Given an ShaderAttribute instance, and various other settings, assign values to the attribute\"s array in a vec3 format.",
             "static": 1,
             "itemtype": "attribute",
@@ -11029,7 +11017,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 424,
+            "line": 423,
             "description": "Given an Shader attribute instance, and various other settings, assign Color values to the attribute.",
             "static": 1,
             "itemtype": "attribute",
@@ -11061,7 +11049,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 449,
+            "line": 448,
             "description": "Assigns a random color value, encoded as a hex value in decimal format, to a ShaderAttribute instance.",
             "static": 1,
             "itemtype": "attribute",
@@ -11093,7 +11081,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 489,
+            "line": 488,
             "description": "Assigns a random vector 3 value to an ShaderAttribute instance, projecting the given values onto a sphere.",
             "static": 1,
             "itemtype": "attribute",
@@ -11140,7 +11128,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 543,
+            "line": 542,
             "description": "Assigns a random vector 3 value to an ShaderAttribute instance, projecting the given values onto a 2d-disc.",
             "static": 1,
             "itemtype": "attribute",
@@ -11187,7 +11175,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 586,
+            "line": 585,
             "description": "Given an ShaderAttribute instance, create a direction vector from the given\nposition, using speed as the magnitude. Values are saved to the attribute.",
             "static": 1,
             "itemtype": "attribute",
@@ -11239,7 +11227,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 620,
+            "line": 619,
             "description": "Given an ShaderAttribute instance, create a direction vector from the given position, using speed as the magnitude. Values are saved to the attribute.",
             "static": 1,
             "itemtype": "attribute",
@@ -11291,7 +11279,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\core\\ShaderUtils.js",
-            "line": 652,
+            "line": 651,
             "description": "Given a rotation axis, and a rotation axis spread vector, calculate a randomised rotation axis, and pack it into a hexadecimal value represented in decimal form.",
             "static": 1,
             "itemtype": "attribute",
@@ -11317,7 +11305,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 29,
+            "line": 28,
             "description": "A map of uniform types to their component size.",
             "static": 1,
             "itemtype": "attribute",
@@ -11327,7 +11315,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 46,
+            "line": 45,
             "description": "Calculate the minimum and maximum update range for this buffer attribute using component size independant min and max values.",
             "itemtype": "method",
             "name": "setUpdateRange",
@@ -11348,7 +11336,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 59,
+            "line": 58,
             "description": "Calculate the number of indices that this attribute should mark as needing updating. Also marks the attribute as needing an update.",
             "itemtype": "method",
             "name": "flagUpdate",
@@ -11357,7 +11345,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 73,
+            "line": 72,
             "description": "Reset the index update counts for this attribute",
             "itemtype": "method",
             "name": "resetUpdateRange",
@@ -11366,7 +11354,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 89,
+            "line": 88,
             "description": "Perform a splice operation on this attribute\"s buffer.",
             "itemtype": "method",
             "name": "splice",
@@ -11387,7 +11375,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 113,
+            "line": 112,
             "description": "Make sure this attribute has a typed array associated with it.\n\nIf it does, then it will ensure the typed array is of the correct size.\n\nIf not, a new TypedArrayHelper instance will be created.",
             "itemtype": "method",
             "name": "_ensureTypedArray",
@@ -11403,7 +11391,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 145,
+            "line": 144,
             "description": "Creates a BufferAttribute instance if one doesn't exist already.\n\nEnsures a typed array is present by calling _ensureTypedArray() first.\n\nIf a buffer attribute exists already, then it will be marked as needing an update.",
             "itemtype": "method",
             "name": "_createBufferAttribute",
@@ -11419,7 +11407,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 173,
+            "line": 172,
             "description": "Returns the length of the typed array associated with this attribute.",
             "itemtype": "method",
             "name": "getLength",
@@ -11432,7 +11420,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 25,
+            "line": 24,
             "description": "Sets the size of the internal array.\n\nDelegates to this.shrink or this.grow depending on size argument's relation to the current size of the internal array.\n\nNote that if the array is to be shrunk, data will be lost.",
             "itemtype": "method",
             "name": "setSize",
@@ -11448,7 +11436,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 54,
+            "line": 53,
             "description": "Shrinks the internal array.",
             "itemtype": "method",
             "name": "shrink",
@@ -11468,7 +11456,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 68,
+            "line": 67,
             "description": "Grows the internal array.",
             "itemtype": "method",
             "name": "grow",
@@ -11488,7 +11476,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 88,
+            "line": 87,
             "description": "Perform a splice operation on this arrays buffer.",
             "itemtype": "method",
             "name": "splice",
@@ -11513,7 +11501,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 119,
+            "line": 118,
             "description": "Copies from the given TypedArray into this one, using the index argument as the start position.\n\nAlias for TypedArray.set. Will automatically resize if the given source array is of a larger size than the internal array.",
             "itemtype": "method",
             "name": "setFromArray",
@@ -11538,7 +11526,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 148,
+            "line": 147,
             "description": "Set a Vector2 value at index.",
             "itemtype": "method",
             "name": "setVec2",
@@ -11563,7 +11551,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 161,
+            "line": 160,
             "description": "Set a Vector2 value using raw components.",
             "itemtype": "method",
             "name": "setVec2Components",
@@ -11593,7 +11581,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 180,
+            "line": 179,
             "description": "Set a Vector3 value at index.",
             "itemtype": "method",
             "name": "setVec3",
@@ -11618,7 +11606,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 193,
+            "line": 192,
             "description": "Set a Vector3 value using raw components.",
             "itemtype": "method",
             "name": "setVec3Components",
@@ -11653,7 +11641,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 214,
+            "line": 213,
             "description": "Set a Vector4 value at index.",
             "itemtype": "method",
             "name": "setVec4",
@@ -11678,7 +11666,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 227,
+            "line": 226,
             "description": "Set a Vector4 value using raw components.",
             "itemtype": "method",
             "name": "setVec4Components",
@@ -11718,7 +11706,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 250,
+            "line": 249,
             "description": "Set a Matrix3 value at index.",
             "itemtype": "method",
             "name": "setMat3",
@@ -11743,7 +11731,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 263,
+            "line": 262,
             "description": "Set a Matrix4 value at index.",
             "itemtype": "method",
             "name": "setMat4",
@@ -11768,7 +11756,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 276,
+            "line": 275,
             "description": "Set a Color value at index.",
             "itemtype": "method",
             "name": "setColor",
@@ -11793,7 +11781,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 289,
+            "line": 288,
             "description": "Set a Number value at index.",
             "itemtype": "method",
             "name": "setNumber",
@@ -11818,7 +11806,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 303,
+            "line": 302,
             "description": "Returns the value of the array at the given index, taking into account the indexOffset property of this class.\n\nNote that this function ignores the component size and will just return a single value.",
             "itemtype": "method",
             "name": "getValueAtIndex",
@@ -11838,7 +11826,7 @@
         },
         {
             "file": "source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js",
-            "line": 317,
+            "line": 316,
             "description": "Returns the component value of the array at the given index, taking into account the indexOffset property of this class.\n\nIf the componentSize is set to 3, then it will return a new TypedArray of length 3.",
             "itemtype": "method",
             "name": "getComponentValueAtIndex",
@@ -14249,7 +14237,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 34,
+            "line": 33,
             "description": "Center of rotation of the dot grid in normalized coordinates.",
             "itemtype": "property",
             "name": "center",
@@ -14259,7 +14247,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 46,
+            "line": 45,
             "description": "Rotation of the dot grid.",
             "itemtype": "property",
             "name": "angle",
@@ -14269,7 +14257,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 58,
+            "line": 57,
             "description": "Scale of the dots used in the effect.",
             "itemtype": "property",
             "name": "scale",
@@ -14525,7 +14513,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 39,
+            "line": 38,
             "description": "Ambient occlusion shadow radius.",
             "itemtype": "property",
             "name": "radius",
@@ -14535,7 +14523,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 51,
+            "line": 50,
             "description": "Display only ambient occlusion result.",
             "itemtype": "property",
             "name": "onlyAO",
@@ -14545,7 +14533,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 63,
+            "line": 62,
             "description": "Ambient occlusion clamp.",
             "itemtype": "property",
             "name": "aoClamp",
@@ -14555,7 +14543,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 75,
+            "line": 74,
             "description": "Pixel luminosity influence in AO calculation.",
             "itemtype": "property",
             "name": "lumInfluence",
@@ -14565,7 +14553,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 96,
+            "line": 95,
             "description": "Render using this pass.",
             "itemtype": "method",
             "name": "render",
@@ -14601,7 +14589,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 125,
+            "line": 124,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -14622,7 +14610,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 138,
+            "line": 137,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14638,7 +14626,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 103,
+            "line": 102,
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
@@ -14648,7 +14636,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 115,
+            "line": 114,
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
@@ -14658,7 +14646,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 127,
+            "line": 126,
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
@@ -14668,7 +14656,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 141,
+            "line": 140,
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
@@ -14678,7 +14666,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 153,
+            "line": 152,
             "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
             "itemtype": "property",
             "name": "bloomFactors",
@@ -14688,7 +14676,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 165,
+            "line": 164,
             "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
             "itemtype": "property",
             "name": "bloomTintColors",
@@ -14698,7 +14686,7 @@
         },
         {
             "file": "source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 284,
+            "line": 283,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
