@@ -43,13 +43,6 @@
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"napa": {
-		"js.blend": "git+https://github.com/acweathersby/js.blend.git"
-	},
-	"napa-config": {
-		"cache": false,
-		"log-level": "error"
-	},
 	"dependencies": {
 		"@as-com/pson": "3.0.1",
 		"@esotericsoftware/spine-core": "4.0.14",
@@ -94,7 +87,6 @@
 		"html-webpack-plugin": "5.5.0",
 		"http-server": "14.1.1",
 		"jsdoc": "3.6.6",
-		"napa": "3.0.0",
 		"nwjs-builder-phoenix": "1.15.0",
 		"raw-loader": "4.0.2",
 		"style-loader": "3.3.2",
