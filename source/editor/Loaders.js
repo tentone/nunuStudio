@@ -45,7 +45,6 @@ import {AddResourceAction} from "./history/action/resources/AddResourceAction.js
 import {Locale} from "./locale/LocaleManager.js";
 import {AWDLoader} from "./loaders/AWDLoader";
 import {BabylonLoader} from "./loaders/BabylonLoader";
-import "js.blend/build/js.blend.js";
 
 function Loaders() {}
 
@@ -604,30 +603,30 @@ Loaders.loadModel = function(file, parent)
 			reader.readAsText(file);
 		}
 		// Blender
-		else if (extension === "blend")
-		{	
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				try
-				{
-					JSBLEND(reader.result).then(function(blend)
-					{
-						var container = new Group();
-						container.name = FileSystem.getNameWithoutExtension(name);
-						blend.three.loadScene(container);
-						Editor.addObject(container, parent);
-						modal.destroy();
-					});
-				}
-				catch (e)
-				{
-					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
-				}
-			};
-			reader.readAsArrayBuffer(file);
-		}
+		// else if (extension === "blend")
+		// {	
+		// 	var reader = new FileReader();
+		// 	reader.onload = function()
+		// 	{
+		// 		try
+		// 		{
+		// 			JSBLEND(reader.result).then(function(blend)
+		// 			{
+		// 				var container = new Group();
+		// 				container.name = FileSystem.getNameWithoutExtension(name);
+		// 				blend.three.loadScene(container);
+		// 				Editor.addObject(container, parent);
+		// 				modal.destroy();
+		// 			});
+		// 		}
+		// 		catch (e)
+		// 		{
+		// 			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
+		// 			console.error("nunuStudio: Error loading file", e);
+		// 		}
+		// 	};
+		// 	reader.readAsArrayBuffer(file);
+		// }
 		// 3DS
 		else if (extension === "3ds")
 		{
