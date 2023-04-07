@@ -699,4 +699,5 @@ Keyboard.F11 = 122;
  * @type {number}
  */
 Keyboard.F12 = 123;
+
 export {Keyboard};

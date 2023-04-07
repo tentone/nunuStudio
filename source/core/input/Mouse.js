@@ -134,7 +134,7 @@ function Mouse(domElement, dontInitialize)
 	}
 
 	// Touchscreen input events
-	if (window.ontouchstart !== undefined || navigator.msMaxTouchPoints > 0)
+	if ('ontouchstart' in window  || navigator.msMaxTouchPoints > 0)
 	{
 		// Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);
@@ -144,10 +144,10 @@ function Mouse(domElement, dontInitialize)
 		{
 			var touch = event.touches[0];
 
-			self.updatePosition(touch.clientX, touch.clientY, 0, 0);
+			self.updatePosition(touch.screenX, touch.screenY, 0, 0);
 			self.updateKey(Mouse.LEFT, Key.DOWN);
 
-			lastTouch.set(touch.clientX, touch.clientY);
+			lastTouch.set(touch.screenX, touch.screenY);
 		});
 
 		// Touch end event
@@ -166,15 +166,15 @@ function Mouse(domElement, dontInitialize)
 		this.events.add(document.body, "touchmove", function(event)
 		{
 			var touch = event.touches[0];
-			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
-			lastTouch.set(touch.clientX, touch.clientY);
+			self.updatePosition(touch.screenX, touch.screenY, touch.screenX - lastTouch.x, touch.screenY - lastTouch.y);
+			lastTouch.set(touch.screenX, touch.screenY);
 		});
 	}
 
 	// Move
 	this.events.add(this.domElement, "mousemove", function(event)
 	{
-		self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
+		self.updatePosition(event.offsetX, event.offsetY, event.movementX, event.movementY);
 	});
 
 	// Button pressed
