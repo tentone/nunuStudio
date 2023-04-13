@@ -6670,7 +6670,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 213,
+            "line": 215,
             "description": "Left mouse button.",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -6680,7 +6680,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 221,
+            "line": 223,
             "description": "Middle mouse button.",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -6690,7 +6690,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 229,
+            "line": 231,
             "description": "Right mouse button.",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -6700,7 +6700,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 237,
+            "line": 239,
             "description": "Back mouse navigation button.",
             "itemtype": "attribute",
             "name": "BACK",
@@ -6710,7 +6710,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 245,
+            "line": 247,
             "description": "Forward mouse navigation button.",
             "itemtype": "attribute",
             "name": "FORWARD",
@@ -6720,7 +6720,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 253,
+            "line": 255,
             "description": "Element to be used to calculate coordinates relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -6736,7 +6736,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 276,
+            "line": 278,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -6749,7 +6749,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 287,
+            "line": 289,
             "description": "Set mouse lock, if true mouse lock will be request, if false the mouse will be released.",
             "itemtype": "method",
             "name": "setLock",
@@ -6765,7 +6765,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 323,
+            "line": 325,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -6785,7 +6785,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 335,
+            "line": 337,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -6805,7 +6805,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 347,
+            "line": 349,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -6825,7 +6825,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 359,
+            "line": 361,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -6845,7 +6845,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 371,
+            "line": 373,
             "description": "Update mouse position.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -6876,7 +6876,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 395,
+            "line": 397,
             "description": "Update a mouse button.",
             "itemtype": "method",
             "name": "updateKey",
@@ -6897,7 +6897,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 410,
+            "line": 412,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -6906,7 +6906,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 470,
+            "line": 472,
             "description": "Create mouse events.",
             "itemtype": "method",
             "name": "create",
@@ -6915,7 +6915,7 @@
         },
         {
             "file": "source\\core\\input\\Mouse.js",
-            "line": 480,
+            "line": 482,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",
