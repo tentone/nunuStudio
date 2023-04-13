@@ -34,6 +34,7 @@ import {TextBitmap} from "../objects/text/TextBitmap.js";
 import {TextFile} from "../resources/TextFile.js";
 import {TextMesh} from "../objects/text/TextMesh.js";
 import {TextSprite} from "../objects/text/TextSprite.js";
+import {BillboardGroup} from "../objects/misc/BillboardGroup";
 import {MaterialLoader} from "./MaterialLoader.js";
 import {ImageLoader} from "./ImageLoader.js";
 import {GeometryLoader} from "./GeometryLoader.js";
@@ -41,7 +42,6 @@ import {FontLoader} from "./FontLoader.js";
 import {AudioLoader} from "./AudioLoader.js";
 import {TextureLoader} from "./TextureLoader.js";
 import {VideoLoader} from "./VideoLoader.js";
-import {BillboardGroup} from "../objects/misc/BillboardGroup";
 
 /**
  * Objectloader can be used to load external objects from files.

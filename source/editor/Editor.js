@@ -16,6 +16,7 @@ import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {ResourceContainer} from "../core/resources/ResourceContainer.js";
+import {AmbientLight} from "../core/objects/lights/AmbientLight";
 import {Locale} from "./locale/LocaleManager.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
@@ -36,7 +37,6 @@ import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {AmbientLight} from "../core/objects/lights/AmbientLight";
 
 /**
  * Main editor entry point.

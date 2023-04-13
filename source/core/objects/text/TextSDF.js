@@ -1,10 +1,11 @@
-import {Text} from "troika-three-text"
+import {Text} from "troika-three-text";
 
-function TextSDF() {
+function TextSDF() 
+{
 	Text.call(this);
 
 	this.text = "text";
-	this.fontSize = 0.1
+	this.fontSize = 0.1;
 	this.color = 0xFFFFFF;
 	this.anchorX = "center";
 	this.anchorY = "middle";

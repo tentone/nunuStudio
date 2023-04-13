@@ -134,7 +134,7 @@ function Mouse(domElement, dontInitialize)
 	}
 
 	// Touchscreen input events
-	if ('ontouchstart' in window  || navigator.msMaxTouchPoints > 0)
+	if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0)
 	{
 		// Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);

@@ -150,7 +150,8 @@ TabComponent.prototype.activate = function()
 
 		var update = function()
 		{
-			if (self.active) {
+			if (self.active) 
+			{
 				self.update();
 				requestAnimationFrame(update);
 			}

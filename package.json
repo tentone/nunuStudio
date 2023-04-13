@@ -10,7 +10,6 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"napa": "napa",
 		"start-page": "cd ./source/page && npm run start",
 		"start": "webpack-dev-server --open --hot --config webpack.dev.js",
 		"start-https": "webpack-dev-server --open --hot --inline --host 0.0.0.0 --https --config webpack.dev.js",
