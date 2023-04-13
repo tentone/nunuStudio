@@ -445,4 +445,5 @@ MaterialEditor.prototype.updateSize = function()
 	this.previewForm.updateInterface();
 	this.form.updateInterface();
 };
+
 export {MaterialEditor};

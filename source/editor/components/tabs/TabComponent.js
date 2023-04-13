@@ -22,7 +22,6 @@ function TabComponent(parent, closeable, container, index, title, icon)
 {
 	Component.call(this, parent, "div");
 
-
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = "var(--panel-color)";
 	this.preventDragEvents();
@@ -151,10 +150,8 @@ TabComponent.prototype.activate = function()
 
 		var update = function()
 		{
-			self.update();
-
-			if (self.active === true)
-			{
+			if (self.active) {
+				self.update();
 				requestAnimationFrame(update);
 			}
 		};
