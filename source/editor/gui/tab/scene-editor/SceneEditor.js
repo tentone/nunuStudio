@@ -151,60 +151,8 @@ function SceneEditor(parent, closeable, container, index)
 					]));
 			}
 
-			console.log("nunuStudio: Canvas drag ondrop event", event);
-
-			// Dragged file
-			if (event.dataTransfer.files.length > 0)
-			{
-				var files = event.dataTransfer.files;
-
-				for (var i = 0; i < files.length; i++)
-				{
-					var file = files[i];
-
-					// Check if mouse intersects and object
-					if (intersections.length > 0)
-					{
-						var object = intersections[0].object;
-
-						// Image
-						if (Image.fileIsImage(file))
-						{
-							Loaders.loadTexture(file, function(texture)
-							{
-								attachTexture(texture, object);
-							});
-						}
-						// Video
-						else if (Video.fileIsVideo(file))
-						{
-							Loaders.loadVideoTexture(file, function(texture)
-							{
-								attachTexture(texture, object);
-							});
-						}
-						// Font
-						else if (Font.fileIsFont(file))
-						{
-							if (object.font !== undefined)
-							{
-								Loaders.loadFont(file, function(font)
-								{
-									object.setFont(font);
-								});
-							}
-						}
-					}
-					
-					// Model
-					if (Model.fileIsModel(file))
-					{
-						Loaders.loadModel(file);
-					}
-				}
-			}
 			// Dragged resource
-			else if (draggedObject !== null)
+			if (draggedObject !== null)
 			{
 				// Object intersected
 				if (intersections.length > 0)
@@ -324,6 +272,57 @@ function SceneEditor(parent, closeable, container, index)
 					Editor.addObject(audio);
 				}
 			}
+			// Dragged file
+			else if (event.dataTransfer.files.length > 0)
+			{
+				var files = event.dataTransfer.files;
+
+				for (var i = 0; i < files.length; i++)
+				{
+					var file = files[i];
+
+					// Check if mouse intersects and object
+					if (intersections.length > 0)
+					{
+						var object = intersections[0].object;
+
+						// Image
+						if (Image.fileIsImage(file))
+						{
+							Loaders.loadTexture(file, function(texture)
+							{
+								attachTexture(texture, object);
+							});
+						}
+						// Video
+						else if (Video.fileIsVideo(file))
+						{
+							Loaders.loadVideoTexture(file, function(texture)
+							{
+								attachTexture(texture, object);
+							});
+						}
+						// Font
+						else if (Font.fileIsFont(file))
+						{
+							if (object.font !== undefined)
+							{
+								Loaders.loadFont(file, function(font)
+								{
+									object.setFont(font);
+								});
+							}
+						}
+					}
+					
+					// Model
+					if (Model.fileIsModel(file))
+					{
+						Loaders.loadModel(file);
+					}
+				}
+			}
+
 		};
 	};
 

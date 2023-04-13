@@ -16,7 +16,7 @@ var DragBuffer = {};
 DragBuffer.buffer = [];
 
 /** 
- * Push elemento to drag buffer.
+ * Push an element to drag buffer.
  *
  * Checks if element dont exist on drag buffer before inserting.
  *
@@ -24,8 +24,6 @@ DragBuffer.buffer = [];
  */
 DragBuffer.push = function(obj)
 {
-	console.log("nunuStudio: Object ", obj, " added to the drag buffer.");
-
 	if (DragBuffer.buffer.indexOf(obj) === -1)
 	{
 		DragBuffer.buffer.push(obj);
