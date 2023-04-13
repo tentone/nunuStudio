@@ -47,7 +47,7 @@ DOMUtils.isVisible = function(element)
 		left += element.offsetLeft;
 	}
 
-	return value = top >= window.pageYOffset && left >= window.pageXOffset && top + height <= window.pageYOffset + window.innerHeight && left + width <= window.pageXOffset + window.innerWidth;
+	return value = top >= window.scrollY && left >= window.scrollX && top + height <= window.scrollY + window.innerHeight && left + width <= window.scrollX + window.innerWidth;
 };
 
 /**
@@ -80,12 +80,7 @@ DOMUtils.getPosition = function(element)
  * @return {Vector2} Distance outside of the viewport.
  */
 DOMUtils.checkBorder = function(element)
-{
-	if (element.isElement === true)
-	{
-		element = element.element;
-	}
-
+{	
 	var top = element.offsetTop;
 	var left = element.offsetLeft;
 	var width = element.offsetWidth;
@@ -101,25 +96,25 @@ DOMUtils.checkBorder = function(element)
 	var result = {x: 0, y: 0};
 
 	// Over the top of the window
-	if (top < window.pageYOffset)
+	if (top < window.scrollY)
 	{
-		result.y = top - window.pageYOffset;
+		result.y = top - window.scrollY;
 	}
 	// Bellow the window
-	else if (top + height > window.pageYOffset + window.innerHeight)
+	else if (top + height > window.scrollY + window.innerHeight)
 	{
-		result.y = top + height - (window.pageYOffset + window.innerHeight);
+		result.y = top + height - (window.scrollY + window.innerHeight);
 	}
 
 	// Left to the window
-	if (left < window.pageXOffset)
+	if (left < window.scrollX)
 	{
-		result.x = left - window.pageXOffset;
+		result.x = left - window.scrollX;
 	}
 	// Right to the window
-	else if (left + width > window.pageXOffset + window.innerWidth)
+	else if (left + width > window.scrollX + window.innerWidth)
 	{
-		result.x = left + width - (window.pageXOffset + window.innerWidth);
+		result.x = left + width - (window.scrollX + window.innerWidth);
 	}
 
 	return result;

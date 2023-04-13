@@ -263,8 +263,8 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.element.style.top = this.position.y + this.size.y + "px";
 			this.panel.element.style.left = this.position.x + "px";
 
-			var out = DOMUtils.checkBorder(this.panel);
-
+			var out = DOMUtils.checkBorder(this.panel.element);
+			console.log(out);
 			if (out.y !== 0)
 			{
 				this.panel.element.style.top = null;
@@ -280,7 +280,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.element.style.bottom = this.position.y + this.size.y + "px";
 			this.panel.element.style.left = this.position.x + "px";
 
-			var out = DOMUtils.checkBorder(this.panel);
+			var out = DOMUtils.checkBorder(this.panel.element);
 			if (out.y !== 0)
 			{
 				this.panel.element.style.bottom = null;
@@ -296,7 +296,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.element.style.top = this.position.y + "px";
 			this.panel.element.style.left = this.position.x + this.size.x + "px";
 
-			var out = DOMUtils.checkBorder(this.panel);
+			var out = DOMUtils.checkBorder(this.panel.element);
 			if (out.x !== 0)
 			{
 				this.panel.element.style.left = this.position.x - this.size.x + "px"; 
@@ -311,7 +311,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.element.style.top = this.position.y + "px";
 			this.panel.element.style.left = this.position.x - this.size.x + "px";
 
-			var out = DOMUtils.checkBorder(this.panel);
+			var out = DOMUtils.checkBorder(this.panel.element);
 			if (out.x !== 0)
 			{
 				this.panel.element.style.left = this.position.x + this.size.x + "px";
