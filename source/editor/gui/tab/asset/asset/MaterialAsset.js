@@ -216,6 +216,8 @@ function MaterialAsset(parent)
 		// Insert material into drag buffer
 		if (self.asset !== null)
 		{
+			console.log("nunuStudio: Start drag event", event, self.asset);
+
 			event.dataTransfer.setData("uuid", self.asset.uuid);
 			DragBuffer.push(self.asset);
 		}

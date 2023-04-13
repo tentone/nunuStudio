@@ -24,6 +24,8 @@ DragBuffer.buffer = [];
  */
 DragBuffer.push = function(obj)
 {
+	console.log("nunuStudio: Object ", obj, " added to the drag buffer.");
+
 	if (DragBuffer.buffer.indexOf(obj) === -1)
 	{
 		DragBuffer.buffer.push(obj);

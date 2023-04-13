@@ -151,6 +151,8 @@ function SceneEditor(parent, closeable, container, index)
 					]));
 			}
 
+			console.log("nunuStudio: Canvas drag ondrop event", event);
+
 			// Dragged file
 			if (event.dataTransfer.files.length > 0)
 			{
