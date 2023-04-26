@@ -8,9 +8,9 @@ const common = require("./webpack.config.js");
 
 module.exports = [
 	merge(common[0], {
-		devtool: false,
 		mode: "development",
 		optimization: {minimize: false},
+		devtool: 'inline-source-map',
 		performance: {
 			hints: false,
 		},

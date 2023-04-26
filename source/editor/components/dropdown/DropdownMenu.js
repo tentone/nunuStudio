@@ -264,7 +264,6 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.element.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel.element);
-			console.log(out);
 			if (out.y !== 0)
 			{
 				this.panel.element.style.top = null;

@@ -18,7 +18,7 @@ function FileSystem() {}
 
 try
 {
-	FileSystem.fs = window.require("fs");
+	FileSystem.fs = window.require ? window.require("fs") : null;
 }
 catch (e) {}
 
@@ -54,7 +54,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 	}
 
 	// NodeJS
-	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs && FileSystem.isLocalFile(fname))
 	{
 		if (sync === true)
 		{
@@ -138,7 +138,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 	}
 
 	// NodeJS
-	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs && FileSystem.isLocalFile(fname))
 	{
 		if (sync === true)
 		{
@@ -216,7 +216,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 	}
 	
 	// NodeJS
-	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
+	if (FileSystem.fs && FileSystem.isLocalFile(fname))
 	{
 		if (sync === true)
 		{
@@ -285,7 +285,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
  */
 FileSystem.writeFile = function(fname, data, sync, onFinish)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		if (FileSystem.fs.writeFileSync !== undefined)
 		{
@@ -344,7 +344,7 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
  */
 FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		var buffer = Buffer.from(Base64Utils.removeHeader(data), "base64");
 
@@ -407,7 +407,7 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
  */
 FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 {	
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		var buffer = BufferUtils.fromArrayBuffer(data);
 
@@ -602,7 +602,7 @@ FileSystem.chooseFileName = function(onLoad, saveas, name)
  */
 FileSystem.copyFile = function(src, dst)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		if (FileSystem.fs.copyFileSync !== undefined)
 		{
@@ -628,7 +628,7 @@ FileSystem.copyFile = function(src, dst)
  */
 FileSystem.makeDirectory = function(dir)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		dir.replace(new RegExp("/", 'g'), "\\");
 		FileSystem.fs.mkdirSync(dir, {recursive: true});
@@ -645,7 +645,7 @@ FileSystem.makeDirectory = function(dir)
  */
 FileSystem.getFilesDirectory = function(dir)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		try
 		{
@@ -671,7 +671,7 @@ FileSystem.getFilesDirectory = function(dir)
  */
 FileSystem.deleteFolder = function(path)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		if (FileSystem.fs.existsSync(path))
 		{
@@ -705,7 +705,7 @@ FileSystem.deleteFolder = function(path)
  */
 FileSystem.copyFolder = function(src, dst)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		src.replace(new RegExp("/", 'g'), "\\");
 		dst.replace(new RegExp("/", 'g'), "\\");
@@ -749,7 +749,7 @@ FileSystem.copyFolder = function(src, dst)
  */
 FileSystem.fileExists = function(file)
 {
-	if (FileSystem.fs !== undefined)
+	if (FileSystem.fs)
 	{
 		file.replace(new RegExp("/", 'g'), "\\");
 

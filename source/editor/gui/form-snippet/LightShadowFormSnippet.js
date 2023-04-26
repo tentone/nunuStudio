@@ -155,8 +155,6 @@ LightShadowFormSnippet.prototype = Object.create(FormSnippet.prototype);
 
 LightShadowFormSnippet.prototype.updateValues = function()
 {
-	console.log(this.object);
-
 	this.bias.setValue(this.object.shadow.bias);
 	this.radius.setValue(this.object.shadow.radius);
 	this.width.setValue(this.object.shadow.mapSize.width);

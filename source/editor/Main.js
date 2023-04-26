@@ -11,3 +11,5 @@ GLSL(CodeMirror);
 
 document.body.onload = Editor.initialize;
 document.body.onresize = Editor.resize;
+
+window.Buffer = window.ArrayBuffer;
