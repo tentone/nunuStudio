@@ -67,5 +67,8 @@
         }
       }
     }},
-  "defaultProject": "page"
+  "defaultProject": "page",
+  "cli": {
+    "analytics": false
+  }
 }
