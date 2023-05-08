@@ -18,7 +18,7 @@
 - To build the project first install [Node.js LTS](https://nodejs.org/en/) and NPM:
   - The building system generates minified builds for the runtime and for the editor
   - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
-  - Install dependencies from npm by running `npm install --legacy-peer-deps` and additional non-npm packages using `npm run napa`
+  - Install dependencies from npm by running `npm install --legacy-peer-deps`
   - Build  editor, runtime and documentation, run `npm run build`
 - Webpage of the project is built using [Angular](https://angular.io/) and is hosted on [GitHub Pages](https://pages.github.com/)
 
@@ -55,11 +55,8 @@ Steps needed to build the project:
 1. To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
 2. Install dependencies from npm by running `npm install`.
     1. If running on Node >=16 run `npm install --legacy-peer-deps` instead
-3. Some dependencies are not available on npm and have to be installed by running `npm install napa`
-    1. If running on Node >=16 run `npm install napa --legacy-peer-deps` instead
-4. Install the dependencies for the project webpage running `cd source/page && npm install`
-5. Running napa `npm run napa`
-6. Building/running
+3. Install the dependencies for the project webpage running `cd source/page && npm install`
+4. Building/running
     1. Building: to build editor, runtime and documentation, run `npm run build`
     2. Running: To start the editor locally for development and testing run `npm run start`
 
