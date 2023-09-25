@@ -6,19 +6,19 @@
         "src": "icons/icon-512.png",
         "type": "image/png",
         "sizes": "512x512",
-        "purpose": "any"
+        "purpose": "maskable"
       },
       {
         "src": "icons/icon-192.ico",
         "type": "image/x-icon",
         "sizes": "192x192",
-        "purpose": "any"
+        "purpose": "maskable"
       },
       {
         "src": "icons/icon-128.ico",
         "type": "image/x-icon",
         "sizes": "128x128",
-        "purpose": "any"
+        "purpose": "maskable"
       }
     ],
     "id": "/",
