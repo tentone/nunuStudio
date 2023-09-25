@@ -22,7 +22,7 @@
       }
     ],
     "id": "/",
-    "start_url": "/",
+    "start_url": "/editor/index.html",
     "background_color": "#222222",
     "display": "standalone",
     "scope": "/",
