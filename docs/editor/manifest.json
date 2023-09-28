@@ -1,0 +1,32 @@
+{
+    "short_name": "Nunu Studio",
+    "name": "Nunu Studio",
+    "icons": [
+      {
+        "src": "icons/icon-512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any"
+      },
+      {
+        "src": "icons/icon-192.ico",
+        "type": "image/x-icon",
+        "sizes": "192x192",
+        "purpose": "any"
+      },
+      {
+        "src": "icons/icon-128.ico",
+        "type": "image/x-icon",
+        "sizes": "128x128",
+        "purpose": "any"
+      }
+    ],
+    "id": "/",
+    "start_url": "/editor/index.html",
+    "background_color": "#222222",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#222222",
+    "description": "Web powered cross-platform 3D, WebXR game engine"
+    
+  }
