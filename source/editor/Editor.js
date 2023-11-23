@@ -557,6 +557,44 @@ Editor.addObject = function(object, parent)
 };
 
 /**
+ * Add objects array to a parent, and creates an action in the editor history.
+ *
+ * If no parent is specified it adds to object to the current scene.
+ *
+ * @static
+ * @method addObjects
+ * @param {Array} object Object to be added.
+ * @param {Object3D} parent Parent object, if undefined the program scene is used.
+ */
+Editor.addObjects = function(objects, parent) 
+{
+	if (parent === undefined) 
+	{
+		parent = Editor.getScene();
+	}
+
+	var actions = [];
+
+	for (var i = 0; i < objects.length; i++) 
+	{
+		actions.push(new AddAction(objects[i], parent));
+
+		var resources = ResourceCrawler.searchObject(objects[i], Editor.program);
+
+		for (var category in resources) 
+		{
+			for (var resource in resources[category]) 
+			{
+				actions.push(new AddResourceAction(resources[category][resource], Editor.program, category));
+			}
+		}
+	}
+
+	Editor.addAction(new ActionBundle(actions));
+};
+
+
+/**
  * Rename object, if none passed as argument selected object is used.
  *
  * @static
@@ -672,30 +710,30 @@ Editor.deleteObject = function(object)
  * @method copyObject
  * @param {Object3D} object Object to copy.
  */
-Editor.copyObject = function(object)
+Editor.copyObject = function(object) 
 {
-	// If no object passed copy selected object
-	if (object === undefined)
-	{
-		if (Editor.hasObjectSelected())
-		{
-			object = Editor.selection[0];
-		}
-		else
-		{
-			return;
-		}
-	}
+	var objects = object === undefined ? Editor.selection : [object];
 
-	if (object instanceof Program || object instanceof Scene)
+	// filter out locked objects and program/scene
+	objects = objects.filter(function(object) 
+	{
+		return !(object.locked || object instanceof Program || object instanceof Scene);
+	});
+
+	if (objects.length === 0) 
 	{
 		return;
 	}
 
-	if (!object.locked)
-	{
-		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
-	}
+	Editor.clipboard.set(
+		JSON.stringify(objects.map(function(object) 
+		{
+			return object.toJSON();
+		})),
+		"text"
+	);
+
+
 };
 
 /**
@@ -707,31 +745,30 @@ Editor.copyObject = function(object)
  * @method copyObject
  * @param {Object3D} object Object to copy.
  */
-Editor.cutObject = function(object)
+Editor.cutObject = function(object) 
 {
-	if (object === undefined)
-	{
-		if (Editor.hasObjectSelected())
-		{
-			object = Editor.selection[0];
-		}
-		else
-		{
-			return;
-		}
-	}
+	var objects = object === undefined ? Editor.selection : [object];
 
-	// Avoid cutting program or scene objects
-	if (object instanceof Program || object instanceof Scene)
+	// filter out locked objects and program/scene
+	objects = objects.filter(function(object) 
+	{
+		return !(object.locked || object instanceof Program || object instanceof Scene);
+	});
+
+	if (objects.length === 0) 
 	{
 		return;
 	}
 
-	if (!object.locked)
-	{
-		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
-		Editor.addAction(new RemoveAction(object));
-	}
+	Editor.clipboard.set(
+		JSON.stringify(objects.map(function(object) 
+		{
+			return object.toJSON();
+		})
+		));
+
+	Editor.deleteObject();
+
 };
 
 /**
@@ -741,31 +778,37 @@ Editor.cutObject = function(object)
  * @method pasteObject
  * @param {Object3D} parent
  */
-Editor.pasteObject = function(target)
+Editor.pasteObject = function(target) 
 {
-	try
+	try 
 	{
 		var content = Editor.clipboard.get("text");
 		var data = JSON.parse(content);
 
-		// Create object
-		var obj = new ObjectLoader().parse(data);
-		obj.traverse(function(child)
+		// Create object from data(objects)
+		var objs = [];
+		for (var i = 0; i < data.length; i++) 
 		{
-			child.uuid = Math.generateUUID();
-		});
+			var obj = new ObjectLoader().parse(data[i]);
+			obj.traverse(function(child) 
+			{
+				child.uuid = Math.generateUUID();
+			});
+			objs.push(obj);
+		}
 
-		// Add object to target
-		if (target !== undefined && !target.locked)
+		// Add objs to target
+		if (target !== undefined && !target.locked) 
 		{
-			Editor.addObject(obj, target);
+			Editor.addObjects(objs, target);
 		}
-		else
+		else 
 		{
-			Editor.addObject(obj);
+			Editor.addObjects(objs);
 		}
+
 	}
-	catch (e)
+	catch (e) 
 	{
 		Editor.alert(Locale.errorPaste);
 	}
