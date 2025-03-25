@@ -1,8 +1,12 @@
 import {Component} from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'menu-page',
-  templateUrl: './menu.page.html'
+    selector: 'menu-page',
+    templateUrl: './menu.page.html',
+    standalone: true,
+    imports: [RouterLink, NgFor, NgIf, RouterOutlet]
 })
 export class MenuPage {
 	public options: any[] = [

@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'example-page',
-  templateUrl: './example.page.html'
+    selector: 'example-page',
+    templateUrl: './example.page.html',
+    standalone: true,
+    imports: [NgIf]
 })
 export class ExamplePage implements OnInit {
 	@ViewChild('canvas', {static: true}) public canvas: ElementRef;

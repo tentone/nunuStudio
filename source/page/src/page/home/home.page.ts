@@ -1,6 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Global} from "../../global";
 import {Router} from "../../router";
+import { NgFor } from '@angular/common';
 
 class HomePageExampleOption {
 	public title: string;
@@ -23,8 +24,10 @@ class HomePageProject {
 
 
 @Component({
-  selector: 'home-page',
-  templateUrl: './home.page.html'
+    selector: 'home-page',
+    templateUrl: './home.page.html',
+    standalone: true,
+    imports: [NgFor]
 })
 export class HomePage {
 	public get global(): any { return Global; }
