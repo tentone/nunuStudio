@@ -27,7 +27,7 @@ module.exports = {
 			ignoreMemberSort: false,
 			memberSyntaxSortOrder: ["none", "all", "multiple", "single"]
 		}],
-		"import/no-deprecated": "warn",
+		"import/no-deprecated": "off",
 		"import/no-unassigned-import": "off",
 		"import/order": "error",
 		"jsdoc/check-alignment": "error",

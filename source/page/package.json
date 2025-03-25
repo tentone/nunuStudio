@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /nunuStudio"
+    "build": "ng build --base-href /nunuStudio/"
   },
   "dependencies": {
     "@angular/animations": "18.2.13",
