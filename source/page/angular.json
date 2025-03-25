@@ -66,8 +66,8 @@
           }
         }
       }
-    }},
-  "defaultProject": "page",
+    }
+  },
   "cli": {
     "analytics": false
   }
