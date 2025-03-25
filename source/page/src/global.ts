@@ -1,5 +1,5 @@
 export class Global {
-	public static editor: string = 'https://www.nunustudio.org/editor/index.html';
+	public static editor: string = 'https://tentone.github.io/nunuStudio/editor/index.html';
 
 	public static repo: string = 'https://github.com/tentone/nunuStudio';
 
