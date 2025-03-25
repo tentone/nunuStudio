@@ -10260,7 +10260,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 83,
+            "line": 84,
             "description": "Directional light to simulate sun light and cast shadows.",
             "itemtype": "property",
             "name": "sun",
@@ -10270,7 +10270,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 115,
+            "line": 116,
             "description": "Sky mesh with material shader to calculate dinamically sky color.",
             "itemtype": "property",
             "name": "sky",
@@ -10280,7 +10280,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 132,
+            "line": 134,
             "description": "If set to true the sky auto updates its time.",
             "itemtype": "property",
             "name": "autoUpdate",
@@ -10291,7 +10291,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 141,
+            "line": 143,
             "description": "Sun distance.",
             "itemtype": "property",
             "name": "sunDistance",
@@ -10301,7 +10301,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 149,
+            "line": 151,
             "description": "Day time in seconds.",
             "itemtype": "property",
             "name": "dayTime",
@@ -10311,7 +10311,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 157,
+            "line": 159,
             "description": "Current day time in seconds.",
             "itemtype": "property",
             "name": "time",
@@ -10321,7 +10321,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 177,
+            "line": 179,
             "description": "Update sky state, updates the time value and the gradient uniform values.",
             "itemtype": "method",
             "name": "update",
@@ -10330,7 +10330,7 @@
         },
         {
             "file": "source\\core\\objects\\misc\\Sky.js",
-            "line": 199,
+            "line": 201,
             "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",

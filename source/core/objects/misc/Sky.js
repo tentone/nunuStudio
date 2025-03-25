@@ -76,6 +76,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @type {HemisphereLight}
 	 */
 	this.hemisphere = new HemisphereLight(0x3284ff, 0xffcc7f, 0.5);
+	this.hemisphere.name = "hemisphere";
 	this.hemisphere.locked = true;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
@@ -121,6 +122,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sky = new Mesh(geometry, material);
 	this.sky.locked = true;
 	this.sky.matrixAutoUpdate = false;
+	this.sky.name = "sky";
 	this.add(this.sky);
 
 	// Override sky raycast function
