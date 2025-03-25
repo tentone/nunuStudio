@@ -2,7 +2,7 @@
 	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.98.44",
+	"version": "0.98.45",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
