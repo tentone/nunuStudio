@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { NgFor } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 
 class LearnPageOption {
@@ -19,7 +19,7 @@ class LearnPageSection {
     selector: 'learn-page',
     templateUrl: './learn.page.html',
     standalone: true,
-    imports: [NgFor, RouterLink]
+    imports: [RouterLink]
 })
 export class LearnPage {
 	public sections: LearnPageSection[] = [

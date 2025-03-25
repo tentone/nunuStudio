@@ -9,14 +9,14 @@ import {
 	ViewEncapsulation
 } from '@angular/core';
 import {Global} from "../../global";
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-viewer',
     templateUrl: 'app-viewer.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class AppViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
 	public get global(): any { return Global; }

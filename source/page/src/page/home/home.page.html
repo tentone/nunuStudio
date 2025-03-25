@@ -1,68 +1,72 @@
 <!--Principal container container-->
 <div style="height: 70vh; width: 100%; overflow: hidden;">
-	<!--Demo canvas-->
-	<canvas #canvas style="height: 100%; width: 100%; z-index: -1;"></canvas>
+  <!--Demo canvas-->
+  <canvas #canvas style="height: 100%; width: 100%; z-index: -1;"></canvas>
 
-	<!--Description-->
-	<div class="text-center" style="position:absolute; width:100%; height:30px; top:calc(60vh - 100px); font-size:21px; line-height:26px; color: var(--white);">
-		<p>Create interactive experiences for your webpage!</p>
-		<p>Design, edit, code, all in one place!</p>
-	</div>
+  <!--Description-->
+  <div class="text-center" style="position:absolute; width:100%; height:30px; top:calc(60vh - 100px); font-size:21px; line-height:26px; color: var(--white);">
+    <p>Create interactive experiences for your webpage!</p>
+    <p>Design, edit, code, all in one place!</p>
+  </div>
 
-	<!--Buttons-->
-	<div style="position:absolute; width:100%; top:60vh;">
-		<div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
-			<a style="margin: 5px;" href="{{global.editor}}" class="btn btn-dark btn-lg">Web Version</a>
-			<a style="margin: 5px;" href="{{global.repo}}" class="btn btn-primary btn-lg">GitHub</a>
-		</div>
-	</div>
+  <!--Buttons-->
+  <div style="position:absolute; width:100%; top:60vh;">
+    <div style="margin-left:auto; margin-right:auto; display: block; text-align: center;">
+      <a style="margin: 5px;" href="{{global.editor}}" class="btn btn-dark btn-lg">Web Version</a>
+      <a style="margin: 5px;" href="{{global.repo}}" class="btn btn-primary btn-lg">GitHub</a>
+    </div>
+  </div>
 
-	<!--Loading bar-->
-	<div style="position:absolute; width:50%; height:3%; left:25%; top:50%; border-style:solid; border-color: var(--white); border-width:2px">
-		<div #bar style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color: var(--white)"></div>
-	</div>
+  <!--Loading bar-->
+  <div style="position:absolute; width:50%; height:3%; left:25%; top:50%; border-style:solid; border-color: var(--white); border-width:2px">
+    <div #bar style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color: var(--white)"></div>
+  </div>
 </div>
 
 <!--Built on-->
 <div style="padding-top: 150px; padding-bottom: 150px; background:url(assets/editor.png) #222222 no-repeat center center fixed; background-size:cover;">
-	<div class="container text-center">
-		<h2 style="color: var(--white); margin-bottom: 20px;">Built on OpenSource</h2>
-		<div *ngFor="let project of this.projects" style="display: inline; margin: 5px;">
-			<a href="{{project.url}}"><img src="{{project.image}}" style="height: 50px"/></a>
-		</div>
-	</div>
+  <div class="container text-center">
+    <h2 style="color: var(--white); margin-bottom: 20px;">Built on OpenSource</h2>
+    @for (project of this.projects; track project) {
+      <div style="display: inline; margin: 5px;">
+        <a href="{{project.url}}"><img src="{{project.image}}" style="height: 50px"/></a>
+      </div>
+    }
+  </div>
 </div>
 
 <!--Features-->
 <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
-	<h2 style="padding-bottom: 20px;">Features</h2>
-	<div class="row">
-		<div *ngFor="let feature of this.features" class="col-md-3" style="padding: 10px;">
-			<h4>{{feature.title}}</h4>
-			<p>{{feature.description}}</p>
-			<img style="border-radius:5px; width:100%;" src="{{feature.image}}"/>
-		</div>
-	</div>
+  <h2 style="padding-bottom: 20px;">Features</h2>
+  <div class="row">
+    @for (feature of this.features; track feature) {
+      <div class="col-md-3" style="padding: 10px;">
+        <h4>{{feature.title}}</h4>
+        <p>{{feature.description}}</p>
+        <img style="border-radius:5px; width:100%;" src="{{feature.image}}"/>
+      </div>
+    }
+  </div>
 </div>
 
 <!--Examples-->
 <div style="padding-top: 30px; background-color: var(--dark); color: var(--white);">
-	<div class="container">
-		<h2 style="padding-bottom: 20px;">Made with <img height="38" src="assets/logo.png"/></h2>
+  <div class="container">
+    <h2 style="padding-bottom: 20px;">Made with <img height="38" src="assets/logo.png"/></h2>
 
-		<div class="row">
-			<div *ngFor="let example of this.examples" class="col-md-3" style="padding: 10px;">
-				<h4>{{example.title}}</h4>
-				<p>{{example.description}}</p>
-
-				<a href="/example?nsp=examples/{{example.file}}">
-					<img style="border-radius:5px; width:100%;" src="examples/{{example.image}}"/>
-				</a>
-
-				<div style="text-align: center; margin-top: 5px;">
-					<a (click)="global.openEditor('../examples/' + example.file)" class="btn btn-outline-light btn-sm">Open in Editor</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+      @for (example of this.examples; track example) {
+        <div class="col-md-3" style="padding: 10px;">
+          <h4>{{example.title}}</h4>
+          <p>{{example.description}}</p>
+          <a href="/example?nsp=examples/{{example.file}}">
+            <img style="border-radius:5px; width:100%;" src="examples/{{example.image}}"/>
+          </a>
+          <div style="text-align: center; margin-top: 5px;">
+            <a (click)="global.openEditor('../examples/' + example.file)" class="btn btn-outline-light btn-sm">Open in Editor</a>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
 </div>
