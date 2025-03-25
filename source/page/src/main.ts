@@ -1,4 +1,3 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -8,6 +7,7 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { Router } from './router';
 import { AppPage } from './app.page';
 import { importProvidersFrom } from '@angular/core';
+import 'zone.js';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
