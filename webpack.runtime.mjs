@@ -1,8 +1,12 @@
-const Path = require("path");
-const Webpack = require("webpack");
+import path from "path";
+import Webpack from "webpack";
+import {fileURLToPath} from "url";
 
-const source = Path.resolve(__dirname, "source");
-const output = Path.resolve(__dirname, "dist");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const source = path.resolve(__dirname, "source");
+const output = path.resolve(__dirname, "dist");
 
 const config = {
 	context: source,
@@ -45,7 +49,7 @@ const config = {
 	}
 };
 
-module.exports = [
+export default [
 	Object.assign({
 		output: {
 			hashFunction: "sha256",

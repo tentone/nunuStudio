@@ -1,16 +1,20 @@
-const Path = require("path");
-const Webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
-const CopyPlugin = require("copy-webpack-plugin");
-const {merge} = require("webpack-merge");
-const runtime = require("./webpack.runtime.js");
+import path from "path";
+import Webpack from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MergeIntoSingleFilePlugin from "webpack-merge-and-include-globally";
+import CopyPlugin from "copy-webpack-plugin";
+import {merge} from "webpack-merge";
+import runtime from "./webpack.runtime.mjs";
+import {fileURLToPath} from "url";
 
-const source = Path.resolve(__dirname, "source");
-const output = Path.resolve(__dirname, "docs/editor");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const source = path.resolve(__dirname, "source");
+const output = path.resolve(__dirname, "docs/editor");
 
 
-module.exports = [
+export default [
 	{
 		context: source,
 		entry: source + "/editor/Main.js",

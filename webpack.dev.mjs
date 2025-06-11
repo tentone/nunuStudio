@@ -1,12 +1,17 @@
-const Webpack = require("webpack");
-const {GitRevisionPlugin} = require("git-revision-webpack-plugin");
-const {merge} = require("webpack-merge");
+import Webpack from "webpack";
+import {GitRevisionPlugin} from "git-revision-webpack-plugin";
+import {merge} from "webpack-merge";
+import {fileURLToPath} from "url";
+import path from "path";
+
+import common from "./webpack.config.mjs";
+import pkg from "./package.json" assert { type: "json" };
 
 const git = new GitRevisionPlugin();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const common = require("./webpack.config.js");
-
-module.exports = [
+export default [
 	merge(common[0], {
 		mode: "development",
 		optimization: {minimize: false},
@@ -23,7 +28,7 @@ module.exports = [
 		},
 		plugins: [
 			new Webpack.DefinePlugin({
-				"VERSION": JSON.stringify(require("./package.json").version),
+                                "VERSION": JSON.stringify(pkg.version),
 				"TIMESTAMP": JSON.stringify(new Date().toISOString()),
 				"REPOSITORY_BRANCH": JSON.stringify(git.branch()),
 				"REPOSITORY_COMMIT": JSON.stringify(git.commithash()),
