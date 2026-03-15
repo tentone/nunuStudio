@@ -1,4 +1,4 @@
-import {Scene, DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3, GridHelper} from "three";
+import {Scene, DirectionalLight, AmbientLight, Mesh, MeshPhongMaterial, Vector3, GridHelper} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {AnimationTimer} from "../../../../../core/utils/timer/AnimationTimer.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
@@ -7,9 +7,9 @@ import {EditorOrbitControls} from "../../scene-editor/controls/EditorOrbitContro
 import {RendererCanvas} from "../../../../components/RendererCanvas.js";
 import {ResourceInspector} from "./ResourceInspector.js";
 
-function GeometryInspector(parent, object)
-{
-	ResourceInspector.call(this, parent, object);
+class GeometryInspector extends ResourceInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -65,20 +65,16 @@ function GeometryInspector(parent, object)
 		self.preview.renderer.render(self.scene, self.camera);
 	});
 	this.timer.start();
-}
+	}
 
-GeometryInspector.prototype = Object.create(ResourceInspector.prototype);
-
-GeometryInspector.prototype.destroy = function()
-{
-	ResourceInspector.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.timer.stop();
-};
+	}
 
-GeometryInspector.prototype.updateInspector = function()
-{
-	ResourceInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	var geometry = this.object;
 	geometry.computeBoundingBox();
@@ -108,6 +104,8 @@ GeometryInspector.prototype.updateInspector = function()
 	this.mesh.position.copy(center);
 
 	this.controls.focusObject(this.mesh);
-};
+	}
+
+}
 
 export {GeometryInspector};

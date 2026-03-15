@@ -17,9 +17,9 @@ import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
  * @class RunProject
  * @extends {TabComponent}
  */
-function RunProject(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.run, Global.FILE_PATH + "icons/misc/play.png");
+class RunProject extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.run, Global.FILE_PATH + "icons/misc/play.png");
 
 	var self = this;
 
@@ -110,15 +110,9 @@ function RunProject(parent, closeable, container, index)
 	this.arButton.setVisibility(false);
 	this.arButton.setStyle("borderRadius", "5px");
 	this.arButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
-}
+	}
 
-RunProject.prototype = Object.create(TabComponent.prototype);
-
-RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
-RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
-
-RunProject.prototype.activate = function()
-{
+	activate() {
 	this.canvas.createRenderer();
 	this.updateSettings();
 
@@ -130,29 +124,26 @@ RunProject.prototype.activate = function()
 
 	Editor.gui.menuBar.run.setText(Locale.stop);
 
-	TabComponent.prototype.activate.call(this);
-};
+	super.activate();
+	}
 
-RunProject.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 
 	Editor.gui.menuBar.run.setText(Locale.run);
-};
+	}
 
-RunProject.prototype.isAttached = function(program)
-{
+	isAttached(program) {
 	return program === Editor.program;
-};
+	}
 
-RunProject.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.stopProgram();
 
 	this.canvas.forceContextLoss();
-};
+	}
 
 /**
  * Set fullscreen mode of the tab canvas.
@@ -160,8 +151,7 @@ RunProject.prototype.destroy = function()
  * @method setFullscreen
  * @param {boolean} fullscreen If true enters fullscreen if false exits fullscreen.
  */
-RunProject.prototype.setFullscreen = function(fullscreen)
-{
+	setFullscreen(fullscreen) {
 	if (fullscreen)
 	{
 		Nunu.setFullscreen(true, this.element);
@@ -175,15 +165,14 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 		Nunu.setFullscreen(false);
 		Editor.gui.updateInterface();
 	}
-};
+	}
 
 /**
  * Dispose runnning program.
  *
  * @method stopProgram
  */
-RunProject.prototype.stopProgram = function()
-{
+	stopProgram() {
 	this.setFullscreen(false);
 
 	if (this.program !== null)
@@ -193,25 +182,23 @@ RunProject.prototype.stopProgram = function()
 	}
 
 	this.canvas.renderer.setAnimationLoop(null);
-};
+	}
 
-RunProject.prototype.resetCanvas = function()
-{
+	resetCanvas() {
 	RendererCanvas.prototype.resetCanvas.call(this);
 
 	if (this.program !== null && this.program.mouse !== null)
 	{
 		this.program.mouse.setCanvas(this.canvas.canvas);
 	}
-};
+	}
 
 /**
  * Get the Editor.program object to be run in this tab.
  *
  * @method getProgram
  */
-RunProject.prototype.getProgram = function()
-{
+	getProgram() {
 	// Run the program directly all changed made with code are kept
 	if (Editor.settings.general.immediateMode)
 	{
@@ -222,7 +209,7 @@ RunProject.prototype.getProgram = function()
 	{
 		this.program = Editor.program.clone();
 	}
-};
+	}
 
 /**
  * Prepare the program to be run, create a default camera.
@@ -231,8 +218,7 @@ RunProject.prototype.getProgram = function()
  *
  * @method runProgram
  */
-RunProject.prototype.runProgram = function()
-{
+	runProgram() {
 	try
 	{
 		// Create a default camera for program (same as runtime).
@@ -325,26 +311,29 @@ RunProject.prototype.runProgram = function()
 			return;
 		}
 	});
-};
+	}
 
 /**
  * Restart the program running in the tab.
  *
  * @method restartProgram
  */
-RunProject.prototype.restartProgram = function()
-{
+	restartProgram() {
 	this.stopProgram();
 	this.getProgram();
 	this.runProgram();
-};
+	}
 
-RunProject.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.canvas.size.copy(this.size);
 	this.canvas.updateSize();
-};
+	}
+
+}
+
+RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
+RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
 export {RunProject};

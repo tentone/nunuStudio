@@ -10,9 +10,9 @@ import {Component} from "../Component.js";
  * @class CodeInput
  * @extends {Component}
  */
-function CodeInput(parent)
-{
-	Component.call(this, parent, "div");
+class CodeInput extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "auto";
 
@@ -117,9 +117,7 @@ function CodeInput(parent)
 		});
 		context.updateInterface();
 	};
-}
-
-CodeInput.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set code editor font size.
@@ -127,8 +125,7 @@ CodeInput.prototype = Object.create(Component.prototype);
  * @method setFontSize
  * @param {number} size
  */
-CodeInput.prototype.setFontSize = function(size)
-{
+	setFontSize(size) {
 	if (size < 5)
 	{
 		size = 5;
@@ -136,7 +133,7 @@ CodeInput.prototype.setFontSize = function(size)
 
 	Editor.settings.code.fontSize = size;
 	this.code.display.wrapper.style.fontSize = size + "px";
-};
+	}
 
 /**
  * Set language mode (javascript, glsl, etc).
@@ -144,10 +141,9 @@ CodeInput.prototype.setFontSize = function(size)
  * @method setLanguage
  * @param {string} mode Language mode.
  */
-CodeInput.prototype.setLanguage = function(mode)
-{
+	setLanguage(mode) {
 	this.code.setOption("mode", mode);
-};
+	}
 
 /**
  * Set the disabled state of the element.
@@ -155,10 +151,9 @@ CodeInput.prototype.setLanguage = function(mode)
  * @method setDisabled
  * @param {boolean} disabled
  */
-CodeInput.prototype.setDisabled = function(value)
-{
+	setDisabled(value) {
 	this.element.disabled = value;
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -166,10 +161,9 @@ CodeInput.prototype.setDisabled = function(value)
  * @method setOnChange
  * @param {Function} onChange
  */
-CodeInput.prototype.setOnChange = function(callback)
-{
+	setOnChange(callback) {
 	this.code.on("change", callback);
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -177,10 +171,9 @@ CodeInput.prototype.setOnChange = function(callback)
  * @method setText
  * @param {Object} text
  */
-CodeInput.prototype.setText = function(text)
-{
+	setText(text) {
 	this.code.setValue(text);
-};
+	}
 
 /**
  * Get text stored in the input element.
@@ -188,10 +181,9 @@ CodeInput.prototype.setText = function(text)
  * @method getText
  * @return {string} Text stored in the input element.
  */
-CodeInput.prototype.getText = function()
-{
+	getText() {
 	return this.code.getValue();
-};
+	}
 
 /**
  * Set value stored in the input element. Same as setText().
@@ -199,7 +191,6 @@ CodeInput.prototype.getText = function()
  * @method setValue
  * @param {Object} text
  */
-CodeInput.prototype.setValue = CodeInput.prototype.setText;
 
 /**
  * Get text stored in the input element. Same as getText().
@@ -207,6 +198,10 @@ CodeInput.prototype.setValue = CodeInput.prototype.setText;
  * @method getValue
  * @return {string} Text stored in the input element.
  */
+
+}
+
+CodeInput.prototype.setValue = CodeInput.prototype.setText;
 CodeInput.prototype.getValue = CodeInput.prototype.getText;
 
 export {CodeInput};

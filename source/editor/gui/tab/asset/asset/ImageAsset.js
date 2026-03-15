@@ -10,10 +10,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function ImageAsset(parent)
-{
-	Asset.call(this, parent);
+class ImageAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
         this.preview = document.createElement("img");
         this.preview.draggable = false;
@@ -103,14 +102,13 @@ function ImageAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
-ImageAsset.prototype = Object.create(Asset.prototype);
-
-ImageAsset.prototype.attach = function(asset)
-{
-	Asset.prototype.attach.call(this, asset);
+	attach(asset) {
+	super.attach(asset);
 
 	this.preview.src = asset.data;
-};
+	}
+
+}
 export {ImageAsset};

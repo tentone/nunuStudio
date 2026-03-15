@@ -16,9 +16,9 @@ import {Component} from "./Component.js";
  * @param {RendererConfiguration} options Options to be used for the renderer.
  * @param {boolean} useCSSRenderer If true a CSS renderer is created to render 3D DOM elements.
  */
-function RendererCanvas(parent, options, useCSSRenderer)
-{
-	Component.call(this, parent, "div");
+class RendererCanvas extends Component {
+	constructor(parent, options, useCSSRenderer) {
+	super(parent, "div");
 
 	this.element.style.backgroundColor = "var(--color-black)";
 
@@ -97,9 +97,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 */
 	this.renderer = null;
 	this.createRenderer();
-}
-
-RendererCanvas.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
@@ -109,10 +107,9 @@ RendererCanvas.prototype = Object.create(Component.prototype);
  * @method setOnResize
  * @param {Function} callback
  */
-RendererCanvas.prototype.setOnResize = function(callback)
-{
+	setOnResize(callback) {
 	this.onResize = callback;
-};
+	}
 
 /**
  * Reset the canvas DOM element.
@@ -121,8 +118,7 @@ RendererCanvas.prototype.setOnResize = function(callback)
  *
  * @method resetCanvas
  */
-RendererCanvas.prototype.resetCanvas = function()
-{
+	resetCanvas() {
 	if (this.element.contains(this.canvas))
 	{
 		this.element.removeChild(this.canvas);
@@ -164,7 +160,7 @@ RendererCanvas.prototype.resetCanvas = function()
 	{
 		this.onCanvasReset(this);
 	}
-};
+	}
 
 /**
  * Creates a new threejs WebGL renderer.
@@ -175,8 +171,7 @@ RendererCanvas.prototype.resetCanvas = function()
  *
  * @method createRenderer
  */
-RendererCanvas.prototype.createRenderer = function()
-{
+	createRenderer() {
 	// Create renderer
 	this.renderer = this.options.createRenderer(this.canvas);
 
@@ -185,7 +180,7 @@ RendererCanvas.prototype.createRenderer = function()
 	{
 		this.cssRenderer = new CSS3DRenderer(this.cssDivision);
 	}
-};
+	}
 
 /**
  * Get blob with data present on this rendering canvas.
@@ -197,10 +192,9 @@ RendererCanvas.prototype.createRenderer = function()
  * @param {string} encoding Image encoding.
  * @param {number} quality Quality of the JPEG encoding is used.
  */
-RendererCanvas.prototype.getBlob = function(onLoad, encoding, quality)
-{
+	getBlob(onLoad, encoding, quality) {
 	this.canvas.toBlob(onLoad, encoding !== undefined ? encoding : "image/jpeg", quality !== undefined ? quality : 0.7);
-};
+	}
 
 /**
  * Create a new fresh context for this renderer.
@@ -211,13 +205,12 @@ RendererCanvas.prototype.getBlob = function(onLoad, encoding, quality)
  *
  * @method reloadContext
  */
-RendererCanvas.prototype.reloadContext = function()
-{
+	reloadContext() {
 	this.forceContextLoss();
 	this.resetCanvas();
 	this.createRenderer();
 	this.updateSize();
-};
+	}
 
 /**
  * Force the current renderer to loose context.
@@ -226,8 +219,7 @@ RendererCanvas.prototype.reloadContext = function()
  *
  * @method forceContextLoss
  */
-RendererCanvas.prototype.forceContextLoss = function()
-{
+	forceContextLoss() {
 	try
 	{
 		if (this.renderer !== null)
@@ -242,15 +234,14 @@ RendererCanvas.prototype.forceContextLoss = function()
 		this.renderer = null;
 		console.log("nunuStudio: Failed to destroy WebGL context.");
 	}
-};
+	}
 
 /**
  * Resize the canvas to match the parent size and consider the device pixel ratio.
  *
  * @method resizeCanvas
  */
-RendererCanvas.prototype.resizeCanvas = function()
-{
+	resizeCanvas() {
 	this.resolution.copy(this.size);
 	this.resolution.multiplyScalar(Editor.getPixelRatio());
 
@@ -269,18 +260,16 @@ RendererCanvas.prototype.resizeCanvas = function()
 	{
 		this.onResize(this.resolution.x, this.resolution.y);
 	}
-};
+	}
 
-RendererCanvas.prototype.destroy = function()
-{
-	Component.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.forceContextLoss();
-};
+	}
 
-RendererCanvas.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.resizeCanvas();
 
@@ -293,6 +282,8 @@ RendererCanvas.prototype.updateSize = function()
 	{
 		this.cssRenderer.setSize(this.size.x, this.size.y);
 	}
-};
+	}
+
+}
 
 export {RendererCanvas};

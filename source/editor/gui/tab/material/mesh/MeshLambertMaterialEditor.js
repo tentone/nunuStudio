@@ -9,10 +9,9 @@ import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-
-function MeshLambertMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshLambertMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -191,13 +190,10 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
-}
+	}
 
-MeshLambertMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshLambertMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);
@@ -214,5 +210,7 @@ MeshLambertMaterialEditor.prototype.attach = function(material, asset)
 	this.refractionRatio.setValue(material.refractionRatio || 0);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
-};
+	}
+
+}
 export {MeshLambertMaterialEditor};

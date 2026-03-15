@@ -8,9 +8,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Slider(parent)
-{
-	Component.call(this, parent, "div");
+class Slider extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 
@@ -150,9 +150,7 @@ function Slider(parent)
 			self.onChange(self.value);
 		}
 	};
-}
-
-Slider.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set if element is disabled.
@@ -160,16 +158,14 @@ Slider.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} value.
  */
-Slider.prototype.setDisabled = function()
-{
+	setDisabled() {
 	// TODO
-};
+	}
 
 // Set slider min step
-Slider.prototype.setStep = function(step)
-{
+	setStep(step) {
 	this.step = step;
-};
+	}
 
 /**
  * Set value range of the slider.
@@ -178,11 +174,10 @@ Slider.prototype.setStep = function(step)
  * @param {number} min
  * @param {number} max
  */
-Slider.prototype.setRange = function(min, max)
-{
+	setRange(min, max) {
 	this.min = min;
 	this.max = max;
-};
+	}
 
 /** 
  * Set onchange callback.
@@ -191,10 +186,9 @@ Slider.prototype.setRange = function(min, max)
  * @param {Function} onChange
  * @param {string} name Graph name.
  */
-Slider.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.onChange = onChange;
-};
+	}
 
 /**
  * Set Slider value.
@@ -202,8 +196,7 @@ Slider.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {number} value
  */
-Slider.prototype.setValue = function(value)
-{
+	setValue(value) {
 	if (value < this.min)
 	{
 		value = this.min;
@@ -238,7 +231,7 @@ Slider.prototype.setValue = function(value)
 
 	this.value = value;
 	this.updateValue();
-};
+	}
 
 /**
  * Get Slider value.
@@ -246,32 +239,31 @@ Slider.prototype.setValue = function(value)
  * @method getValue
  * @return {number} Value of the slider.
  */
-Slider.prototype.getValue = function()
-{
+	getValue() {
 	return this.value;
-};
+	}
 
 /**
  * Update the DOM elements to represent the value.
  *
  * @method updateValue
  */
-Slider.prototype.updateValue = function()
-{
+	updateValue() {
 	var progress = (this.value - this.min) / (this.max - this.min) * 100;
 
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
 	this.textValue.data = this.value;
-};
+	}
 
-Slider.prototype.destroy = function()
-{
-	Component.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 	
 	if (document.body.contains(this.text))
 	{
 		document.body.removeChild(this.text);
 	}
-};
+	}
+
+}
 export {Slider};

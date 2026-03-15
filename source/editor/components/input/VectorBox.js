@@ -8,9 +8,9 @@ import {Component} from "../Component.js";
  * @class VectorBox
  * @extends {Component}
  */
-function VectorBox(parent)
-{
-	Component.call(this, parent, "div");
+class VectorBox extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	/**
 	 * Indicates if the number box is storing a angle value.
@@ -94,13 +94,11 @@ function VectorBox(parent)
 	// Order
 	this.order = "XYZ";
 	this.type = VectorBox.VECTOR3;
-}
+	}
 
 VectorBox.VECTOR2 = 2;
 VectorBox.VECTOR3 = 3;
 VectorBox.QUATERNION = 4;
-
-VectorBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set the type of box, (type of data to use).
@@ -111,14 +109,13 @@ VectorBox.prototype = Object.create(Component.prototype);
  * @method setType
  * @param {number} type
  */
-VectorBox.prototype.setType = function(type)
-{
+	setType(type) {
 	if (this.type !== type)
 	{
 		this.type = type;
 		this.updateInterface();
 	}
-};
+	}
 
 /**
  * Set the values step.
@@ -126,14 +123,13 @@ VectorBox.prototype.setType = function(type)
  * @method setStep
  * @param {number} value
  */
-VectorBox.prototype.setStep = function(value)
-{
+	setStep(value) {
 	var value = String(value);
 	this.x.step = value;
 	this.y.step = value;
 	this.z.step = value;
 	this.w.step = value;
-};
+	}
 
 /**
  * Set the values range
@@ -142,8 +138,7 @@ VectorBox.prototype.setStep = function(value)
  * @param {number} min
  * @param {number} max
  */
-VectorBox.prototype.setRange = function(min, max)
-{
+	setRange(min, max) {
  	var min = String(min);
  	var max = String(max);
 	this.x.min = min;
@@ -154,7 +149,7 @@ VectorBox.prototype.setRange = function(min, max)
 	this.z.max = max;
 	this.w.min = min;
 	this.w.max = max;	
-};
+	}
 
 /**
  * Get a value from the box.
@@ -162,8 +157,7 @@ VectorBox.prototype.setRange = function(min, max)
  * @method getValue
  * @return {Object} Value stored.
  */
-VectorBox.prototype.getValue = function()
-{
+	getValue() {
 	var value = {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 
 	if (this.isAngle)
@@ -175,7 +169,7 @@ VectorBox.prototype.getValue = function()
 	}
 
 	return value;
-};
+	}
 
 /**
  * Set value to the vector box.
@@ -187,8 +181,7 @@ VectorBox.prototype.getValue = function()
  * @param {number} w
  * @param {Object} value Value
  */
-VectorBox.prototype.setValue = function(x, y, z, w)
-{
+	setValue(x, y, z, w) {
 	if (x.isVector2)
 	{
 		if (this.isAngle)
@@ -262,7 +255,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 		this.z.value = z !== undefined ? z : 0;
 		this.w.value = w !== undefined ? w : 0;
 	}
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -270,17 +263,15 @@ VectorBox.prototype.setValue = function(x, y, z, w)
  * @method setOnChange
  * @param {Function} onChange
  */
-VectorBox.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.x.onchange = onChange;
 	this.y.onchange = onChange;
 	this.z.onchange = onChange;
 	this.w.onchange = onChange;
-};
+	}
 
-VectorBox.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	var sizeX = Math.round((this.size.x - this.type * 15) / this.type);
 	var sizeY = this.size.y + "px";
@@ -331,6 +322,8 @@ VectorBox.prototype.updateSize = function()
 		this.w.style.visibility = "hidden";
 		this.wText.style.visibility = "hidden";
 	}
-};
+	}
+
+}
 
 export {VectorBox};

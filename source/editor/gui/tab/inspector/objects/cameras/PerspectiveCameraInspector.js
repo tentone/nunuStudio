@@ -7,9 +7,9 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function PerspectiveCameraInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class PerspectiveCameraInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -174,13 +174,10 @@ function PerspectiveCameraInspector(parent, object)
 	});
 	this.form.add(this.clearStencil);
 	this.form.nextRow();
-}
+	}
 
-PerspectiveCameraInspector.prototype = Object.create(ObjectInspector.prototype);
-
-PerspectiveCameraInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.fov.setValue(this.object.fov);
 	this.filmGauge.setValue(this.object.filmGauge);
@@ -195,6 +192,8 @@ PerspectiveCameraInspector.prototype.updateInspector = function()
 	this.clearDepth.setValue(this.object.clearDepth);
 	this.clearStencil.setValue(this.object.clearStencil);
 	this.viewport.attach(this.object.viewport);
-};
+	}
+
+}
 
 export {PerspectiveCameraInspector};

@@ -1,4 +1,4 @@
-import {Color, Material, MeshPhongMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, SpriteMaterial, ShaderMaterial, LineDashedMaterial, LineBasicMaterial, PointsMaterial, Math} from "three";
+import {Color, Material, MeshPhongMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, SpriteMaterial, ShaderMaterial, LineDashedMaterial, LineBasicMaterial, PointsMaterial, MathUtils} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {MaterialLoader} from "../../../../../core/loaders/MaterialLoader.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
@@ -26,9 +26,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-function MaterialAsset(parent)
-{
-	Asset.call(this, parent);
+class MaterialAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/material.png");
 	
@@ -194,7 +194,7 @@ function MaterialAsset(parent)
 
 				// Load
 				var material = loader.parse(json); 
-				material.uuid = Math.generateUUID();
+				material.uuid = MathUtils.generateUUID();
 				material.name += "*";
 				
 				Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
@@ -227,33 +227,29 @@ function MaterialAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
 // Super prototypes
-MaterialAsset.prototype = Object.create(Asset.prototype);
 
 // Destroy material file
-MaterialAsset.prototype.destroy = function()
-{
-	Asset.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.restoreMaterial();
-};
+	}
 
 // Highlight material
-MaterialAsset.prototype.highlightMaterial = function()
-{
+	highlightMaterial() {
 	if (this.asset instanceof Material && this.asset.color !== undefined)
 	{
 		this.materialColor.copy(this.asset.color);
 		this.asset.color.setRGB(1, 1, 0);
 		this.materialHighlighted = true;
 	}
-};
+	}
 
 // Restore material to normal color
-MaterialAsset.prototype.restoreMaterial = function()
-{
+	restoreMaterial() {
 	if (this.materialHighlighted)
 	{
 		if (this.asset instanceof Material && this.asset.color !== undefined)
@@ -262,10 +258,9 @@ MaterialAsset.prototype.restoreMaterial = function()
 			this.materialHighlighted = false;
 		}
 	}
-};
+	}
 
-MaterialAsset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.asset !== null)
 	{
 		var image = this.image;
@@ -277,5 +272,7 @@ MaterialAsset.prototype.updateMetadata = function()
 		
 		this.setText(this.asset.name);
 	}
-};
+	}
+
+}
 export {MaterialAsset};

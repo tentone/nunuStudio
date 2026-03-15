@@ -8,14 +8,12 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Canvas(parent)
-{
-	Component.call(this, parent, "canvas");
+class Canvas extends Component {
+	constructor(parent) {
+	super(parent, "canvas");
 
 	this.preventDragEvents();
-}
-
-Canvas.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Get a context from this canvas.
@@ -24,18 +22,18 @@ Canvas.prototype = Object.create(Component.prototype);
  * @param {string} type Type of context to get "2d", "webgl", etc
  * @return {Object} Context obtained from the canvas.
  */
-Canvas.prototype.getContext = function(type)
-{
+	getContext(type) {
 	return this.element.getContext(type);
-};
+	}
 
-Canvas.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	var pixelRatio = Editor.getPixelRatio();
 	
 	this.element.width = this.size.x * pixelRatio;
 	this.element.height = this.size.y * pixelRatio;
-};
+	}
+
+}
 export {Canvas};

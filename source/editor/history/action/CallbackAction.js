@@ -9,24 +9,24 @@ import {Action} from "./Action.js";
  * @param {Action} action Base action.
  * @param {Function} callback Callback function.
  */
-function CallbackAction(action, callback)
-{
+class CallbackAction {
+	constructor(action, callback) {
 	Action.call(this);
 
 	this.action = action;
 	this.callback = callback;
-}
+	}
 
-CallbackAction.prototype.apply = function()
-{
+	apply() {
 	this.action.apply();
 	this.callback();
-};
+	}
 
-CallbackAction.prototype.revert = function()
-{
+	revert() {
 	this.action.revert();
 	this.callback();
-};
+	}
+
+}
 
 export {CallbackAction};

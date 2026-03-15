@@ -9,9 +9,9 @@ import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function TextSpriteInspector(parent, object)
-{
-	DrawableInspector.call(this, parent, object);
+class TextSpriteInspector extends DrawableInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -120,13 +120,10 @@ function TextSpriteInspector(parent, object)
 	});
 	this.form.add(this.outlineColor);
 	this.form.nextRow();
-}
+	}
 
-TextSpriteInspector.prototype = Object.create(DrawableInspector.prototype);
-
-TextSpriteInspector.prototype.updateInspector = function()
-{
-	DrawableInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.text.setText(this.object.text);
 	this.color.setValueString(this.object.color);
@@ -136,6 +133,8 @@ TextSpriteInspector.prototype.updateInspector = function()
 	this.outline.setValue(this.object.outline);
 	this.outlineWidth.setValue(this.object.outlineWidth);
 	this.outlineColor.setValueString(this.object.outlineColor);
-};
+	}
+
+}
 
 export {TextSpriteInspector};

@@ -6,8 +6,8 @@ import {NumberRow} from "../../../../components/input/NumberRow.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {ImageChooser} from "../../../../components/input/ImageChooser.js";
 
-function TerrainGeometryForm(form, object)
-{
+class TerrainGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -70,23 +70,23 @@ function TerrainGeometryForm(form, object)
 
 	this.form.add(this.segmentsRow);
 	this.form.nextRow();
-}
+	}
 
-TerrainGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
 	var geometry = new TerrainBufferGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.scale.getValue(), this.image.getValue());
 	Editor.addAction(new ChangeAction(this.object, "geometry", geometry));
-};
+	}
 
-TerrainGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.width.setValue(this.object.geometry.parameters.width || 1);
 	this.height.setValue(this.object.geometry.parameters.height || 1);
 	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 1);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
 	this.scale.setValue(this.object.geometry.parameters.scale);
 	this.image.setValue(this.object.geometry.image);
-};
+	}
+
+}
 
 export {TerrainGeometryForm};

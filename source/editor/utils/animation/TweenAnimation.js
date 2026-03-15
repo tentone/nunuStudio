@@ -13,8 +13,8 @@ import {TWEEN} from "@tweenjs/tween.js";
  * @param {number} time Time of the animation in milliseconds.
  * @param {Function} onUpdate Callback function that runs after updating the value.
  */
-function TweenAnimation(object, attribute, target, time, onUpdate)
-{
+class TweenAnimation {
+	constructor(object, attribute, target, time, onUpdate) {
 	var isVectorial = TweenAnimation.isVetorial(object[attribute]);
 	var self = this;
 
@@ -91,7 +91,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 			onUpdate();
 		}
 	});
-}
+	}
 
 /**
  * Check if a attribute is a THREE vectorial data type.
@@ -114,25 +114,24 @@ TweenAnimation.isVetorial = function(object)
 	return object.isVector3 === true || object.isEuler === true || object instanceof Quaternion || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };
 
-
 /**
  * Set an on complete callback function, that is executed when the animation finishes.
  *
  * @method onComplete
  * @param {Function} callback
  */
-TweenAnimation.prototype.onComplete = function(callback)
-{
+	onComplete(callback) {
 	this.tween.onComplete(callback);
-};
+	}
 
 /**
  * Start the animation.
  *
  * @method start
  */
-TweenAnimation.prototype.start = function()
-{
+	start() {
 	this.tween.start();
-};
+	}
+
+}
 export {TweenAnimation};

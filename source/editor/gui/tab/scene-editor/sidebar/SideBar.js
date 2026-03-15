@@ -1,5 +1,5 @@
 import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon-es";
-import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
+import {BoxGeometry, CylinderGeometry, SphereGeometry, TorusKnotGeometry, TorusGeometry, ConeGeometry, PlaneGeometry, CircleGeometry, RingGeometry, IcosahedronGeometry, TetrahedronGeometry, OctahedronGeometry, DodecahedronGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {TextSprite} from "../../../../../core/objects/text/TextSprite.js";
@@ -31,7 +31,7 @@ import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
 import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
-import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
+import {RoundedBoxGeometry} from "../../../../../core/geometries/RoundedBoxGeometry.js";
 import {ParametricBufferGeometry} from "../../../../../core/geometries/ParametricBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
@@ -50,9 +50,9 @@ import {PythonScript} from "../../../../../core/objects/script/PythonScript.js";
  * @class SideBar
  * @extends {Component}
  */
-function SideBar(parent)
-{
-	Component.call(this, parent, "div");
+class SideBar extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.preventDragEvents();
 
@@ -92,13 +92,10 @@ function SideBar(parent)
 	this.more = new ButtonDrawer(this);
 	this.more.setImage(Global.FILE_PATH + "icons/misc/more.png");
 	this.more.optionsPerLine = 1;
-}
+	}
 
-SideBar.prototype = Object.create(Component.prototype);
-
-SideBar.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	var size = this.size.x;
 	var y = 30, i = 0;
@@ -145,15 +142,14 @@ SideBar.prototype.updateSize = function()
 			this.more.setVisibility(false);
 		}
 	}
-};
+	}
 
 /**
  * Create the icons to add objects to the scene.
  *
  * @method createObject
  */
-SideBar.prototype.createObject = function()
-{
+	createObject() {
 	var self = this;
 
 	// Add Models
@@ -164,7 +160,7 @@ SideBar.prototype.createObject = function()
 	// Cube
 	models.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
-		var geometry = new BoxBufferGeometry(1, 1, 1);
+		var geometry = new BoxGeometry(1, 1, 1);
 		geometry.name = "cube";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -176,7 +172,7 @@ SideBar.prototype.createObject = function()
 	// Cylinder
 	models.addOption(Global.FILE_PATH + "icons/models/cylinder.png", function()
 	{
-		var geometry = new CylinderBufferGeometry(1, 1, 2, 32);
+		var geometry = new CylinderGeometry(1, 1, 2, 32);
 		geometry.name = "cylinder";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -188,7 +184,7 @@ SideBar.prototype.createObject = function()
 	// Sphere
 	models.addOption(Global.FILE_PATH + "icons/models/sphere.png", function()
 	{
-		var geometry = new SphereBufferGeometry(1, 32, 32);
+		var geometry = new SphereGeometry(1, 32, 32);
 		geometry.name = "sphere";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -200,7 +196,7 @@ SideBar.prototype.createObject = function()
 	// Torus Knot
 	models.addOption(Global.FILE_PATH + "icons/models/torusknot.png", function()
 	{
-		var geometry = new TorusKnotBufferGeometry(1, 0.4, 128, 96, 2, 3);
+		var geometry = new TorusKnotGeometry(1, 0.4, 128, 96, 2, 3);
 		geometry.name = "torusknot";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -212,7 +208,7 @@ SideBar.prototype.createObject = function()
 	// Torus
 	models.addOption(Global.FILE_PATH + "icons/models/torus.png", function()
 	{
-		var geometry = new TorusBufferGeometry(1, 0.5, 16, 96);
+		var geometry = new TorusGeometry(1, 0.5, 16, 96);
 		geometry.name = "torus";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -223,7 +219,7 @@ SideBar.prototype.createObject = function()
 	// Cone
 	models.addOption(Global.FILE_PATH + "icons/models/cone.png", function()
 	{
-		var geometry = new ConeBufferGeometry(1, 2, 32);
+		var geometry = new ConeGeometry(1, 2, 32);
 		geometry.name = "cone";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -235,7 +231,7 @@ SideBar.prototype.createObject = function()
 	// Plane
 	models.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
-		var geometry = new PlaneBufferGeometry(1, 1);
+		var geometry = new PlaneGeometry(1, 1);
 		geometry.name = "plane";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -246,7 +242,7 @@ SideBar.prototype.createObject = function()
 	// Circle
 	models.addOption(Global.FILE_PATH + "icons/models/circle.png", function()
 	{
-		var geometry = new CircleBufferGeometry(1, 32);
+		var geometry = new CircleGeometry(1, 32);
 		geometry.name = "circle";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -257,7 +253,7 @@ SideBar.prototype.createObject = function()
 	// Ring
 	models.addOption(Global.FILE_PATH + "icons/models/ring.png", function()
 	{
-		var geometry = new RingBufferGeometry(1, 5, 32, 1);
+		var geometry = new RingGeometry(1, 5, 32, 1);
 		geometry.name = "ring";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -269,7 +265,7 @@ SideBar.prototype.createObject = function()
 	// Icosahedron
 	models.addOption(Global.FILE_PATH + "icons/models/icosahedron.png", function()
 	{
-		var geometry = new IcosahedronBufferGeometry(1, 0);
+		var geometry = new IcosahedronGeometry(1, 0);
 		geometry.name = "icosahedron";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -280,7 +276,7 @@ SideBar.prototype.createObject = function()
 	// Tetrahedron
 	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
 	{
-		var geometry = new TetrahedronBufferGeometry(1, 0);
+		var geometry = new TetrahedronGeometry(1, 0);
 		geometry.name = "tetrahedron";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -291,7 +287,7 @@ SideBar.prototype.createObject = function()
 	// Octahedron
 	models.addOption(Global.FILE_PATH + "icons/models/octahedron.png", function()
 	{
-		var geometry = new OctahedronBufferGeometry(1, 0);
+		var geometry = new OctahedronGeometry(1, 0);
 		geometry.name = "octahedron";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -302,7 +298,7 @@ SideBar.prototype.createObject = function()
 	// Dodecahedron
 	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
 	{
-		var geometry = new DodecahedronBufferGeometry(1, 0);
+		var geometry = new DodecahedronGeometry(1, 0);
 		geometry.name = "dodecahedron";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -325,7 +321,7 @@ SideBar.prototype.createObject = function()
 	// Rounded box
 	models.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
-		var geometry = new RoundedBoxBufferGeometry(1, 1, 1, 0.1, 8);
+		var geometry = new RoundedBoxGeometry(1, 1, 1, 0.1, 8);
 		geometry.name = "box";
 
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -663,6 +659,8 @@ return target.set(x, y, z);`;
 	}, Locale.firstPersonControls);
 
 	controls.updateOptions();
-};
+	}
+
+}
 
 export {SideBar};

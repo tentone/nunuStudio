@@ -7,9 +7,9 @@ import {Object3D, Sprite, Texture, SpriteMaterial} from "three";
  * @param {Object3D} object
  * @param {String) icon Icon URL.
  */
-function ObjectIconHelper(object, icon)
-{
-	Sprite.call(this, ObjectIconHelper.getMaterial(icon));
+class ObjectIconHelper extends Sprite {
+	constructor(object, icon) {
+	super(ObjectIconHelper.getMaterial(icon));
 
 	/**
 	 * Object attached to the helper
@@ -28,9 +28,7 @@ function ObjectIconHelper(object, icon)
 	this.size = 0.1;
 	
 	this.matrixAutoUpdate = false;
-}
-
-ObjectIconHelper.prototype = Object.create(Sprite.prototype);
+	}
 
 /**
  * Cache of icon helper materials.
@@ -81,8 +79,7 @@ ObjectIconHelper.getMaterial = function(icon)
 	return material;
 };
 
-ObjectIconHelper.prototype.update = function()
-{
+	update() {
 	// Position
 	this.matrix.elements[12] = this.object.matrixWorld.elements[12];
 	this.matrix.elements[13] = this.object.matrixWorld.elements[13];
@@ -93,6 +90,8 @@ ObjectIconHelper.prototype.update = function()
 	this.matrix.elements[5] = this.size / this.material.ratio;
 	this.matrix.elements[10] = this.size;
 
-};
+	}
+
+}
 
 export {ObjectIconHelper};

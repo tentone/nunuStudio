@@ -17,9 +17,8 @@ import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
 import {MaterialEditor} from "./MaterialEditor.js";
 
-
-function ShaderMaterialEditor(parent, closeable, container, index)
-{
+class ShaderMaterialEditor extends MaterialEditor {
+	constructor(parent, closeable, container, index) {
 	TabComponent.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
@@ -271,12 +270,9 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		Editor.addAction(new ChangeAction(self.material, "vertexShader", self.vertexShader.getText()));
 		self.material.needsUpdate = true;
 	});
-}
+	}
 
-ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-
-ShaderMaterialEditor.prototype.attach = function(material, asset)
-{
+	attach(material, asset) {
 	this.mesh.material = material;
 
 	if (asset !== undefined)
@@ -299,10 +295,9 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	// Shader
 	this.fragmentShader.setText(material.fragmentShader);
 	this.vertexShader.setText(material.vertexShader);
-};
+	}
 
-ShaderMaterialEditor.prototype.updateSize = function()
-{
+	updateSize() {
 	TabComponent.prototype.updateSize.call(this);
 
 	this.main.size.copy(this.size);
@@ -310,5 +305,7 @@ ShaderMaterialEditor.prototype.updateSize = function()
 
 	this.form.size.copy(this.general.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {ShaderMaterialEditor};

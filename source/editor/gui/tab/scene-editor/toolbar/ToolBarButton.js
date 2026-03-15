@@ -9,9 +9,9 @@ import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
  * @extends {ButtonIcon}
  * @param {Component} parent Parent element.
  */
-function ToolBarButton(parent)
-{
-	ButtonIcon.call(this, parent);
+class ToolBarButton extends ButtonIcon {
+	constructor(parent) {
+	super(parent);
 
 	var self = this;
 
@@ -43,9 +43,7 @@ function ToolBarButton(parent)
 	{
 		self.text.setVisibility(false);
 	};
-}
-
-ToolBarButton.prototype = Object.create(ButtonIcon.prototype);
+	}
 
 /**
  * Set button text, the text is displayed when mouse passes over the button.
@@ -53,19 +51,19 @@ ToolBarButton.prototype = Object.create(ButtonIcon.prototype);
  * @method setText
  * @param {String} text Text to display on mouse over.
  */
-ToolBarButton.prototype.setText = function(text)
-{
+	setText(text) {
 	this.text.setText(text);
-};
+	}
 
-ToolBarButton.prototype.updateSize = function()
-{
-	ButtonIcon.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.text.size.set(this.text.measure().x + 20, 30);
 	this.text.updateSize();
 	this.text.position.set((this.size.x - this.text.size.x) / 2, this.size.y + 2);
 	this.text.updatePosition();
-};
+	}
+
+}
 
 export {ToolBarButton};

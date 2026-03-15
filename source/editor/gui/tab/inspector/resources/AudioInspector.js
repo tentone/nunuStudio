@@ -2,10 +2,9 @@ import {Locale} from "../../../../locale/LocaleManager.js";
 import {AudioPlayer} from "../../../../components/media/AudioPlayer.js";
 import {ResourceInspector} from "./ResourceInspector.js";
 
-function AudioInspector(parent, object)
-{
-	ResourceInspector.call(this, parent, object);
-
+class AudioInspector extends ResourceInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	// Audio player
 	this.form.addText(Locale.audio);
@@ -13,21 +12,19 @@ function AudioInspector(parent, object)
 	this.player.size.set(190, 18);
 	this.form.add(this.player);
 	this.form.nextRow();
-}
+	}
 
-AudioInspector.prototype = Object.create(ResourceInspector.prototype);
-
-AudioInspector.prototype.destroy = function()
-{
-	ResourceInspector.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.player.destroy();
-};
+	}
 
-AudioInspector.prototype.updateInspector = function()
-{
-	ResourceInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.player.setAudioBuffer(this.object.data);
-};
+	}
+
+}
 export {AudioInspector};

@@ -12,10 +12,10 @@ import {FileSystem} from "../core/FileSystem.js";
  * @constructor
  * @class Settings
  */
-function Settings()
-{
+class Settings {
+	constructor() {
 	this.loadDefault();
-}
+	}
 
 /**
  * Path to the configuration file if running ouside of the browser.
@@ -62,8 +62,7 @@ Settings.STABLE = 30;
 Settings.BETA = 31;
 
 // Load default settings
-Settings.prototype.loadDefault = function()
-{
+	loadDefault() {
 	// General
 	this.general =
 	{		
@@ -220,15 +219,14 @@ Settings.prototype.loadDefault = function()
 		wsh: false, // Windows Scripting Host
 		yui: false // Yahoo User Interface
 	};
-};
+	}
 
 /**
  * Store settings in the local storage.
  *
  * @method store
  */
-Settings.prototype.store = function()
-{
+	store() {
 	var data = JSON.stringify(
 		{
 			general: this.general,
@@ -252,15 +250,14 @@ Settings.prototype.store = function()
 	{
 		LocalStorage.set("config", data);
 	}
-};
+	}
 
 /**
  * Load settings from the local storage.
  *
  * @method load
  */
-Settings.prototype.load = function()
-{
+	load() {
 	try
 	{
 		if (Nunu.runningOnDesktop())
@@ -289,5 +286,7 @@ Settings.prototype.load = function()
 	{
 		console.warn("nunuStudio: Failed to load configuration file");
 	}
-};
+	}
+
+}
 export {Settings};

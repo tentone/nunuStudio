@@ -3,7 +3,6 @@ import {Resource} from "../../../../../core/resources/Resource.js";
 import {Editor} from "../../../../Editor.js";
 import {Component} from "../../../../components/Component.js";
 
-
 /**
  * Asset represents an resource in the asset explorer.
  *
@@ -13,9 +12,9 @@ import {Component} from "../../../../components/Component.js";
  * @param {Component} parent
  * @extends {Component}
  */
-function Asset(parent)
-{
-	Component.call(this, parent, "div");
+class Asset extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.asset = null;
 
@@ -95,9 +94,7 @@ function Asset(parent)
 			Editor.selectObject(self.asset);
 		}
 	};
-}
-
-Asset.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Update selection state and the matching visual elements.
@@ -105,12 +102,11 @@ Asset.prototype = Object.create(Component.prototype);
  * @method setSelected
  * @param {boolean} selected If true set selected, otherwise se unselected.
  */
-Asset.prototype.setSelected = function(selected)
-{
+	setSelected(selected) {
 	// this.selected = selected;
 
 	this.element.style.backgroundColor = selected ? "var(--button-over-color)" : null;
-};
+	}
 
 /**
  * Set the size of the asset.
@@ -118,11 +114,10 @@ Asset.prototype.setSelected = function(selected)
  * @method setSize
  * @param {number} size Size in px.
  */
-Asset.prototype.setSize = function(size)
-{
+	setSize(size) {
 	this.element.style.width = size + "px";
 	this.element.style.height = size + "px";
-};
+	}
 
 /**
  * Attach resource to this asset.
@@ -130,13 +125,12 @@ Asset.prototype.setSize = function(size)
  * @method attach
  * @param {Resource} asset
  */
-Asset.prototype.attach = function(asset)
-{
+	attach(asset) {
 	this.asset = asset;
 	this.asset.gui = {node: this};
 	
 	this.updateMetadata();
-};
+	}
 
 /**
  * Set icon to use in the asset.
@@ -144,10 +138,9 @@ Asset.prototype.attach = function(asset)
  * @method setIcon
  * @param {string} icon Image URL.
  */
-Asset.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	this.icon.src = icon;
-};
+	}
 
 /**
  * Set asset label.
@@ -155,15 +148,15 @@ Asset.prototype.setIcon = function(icon)
  * @method setText
  * @param {string} text Asset label.
  */
-Asset.prototype.setText = function(text)
-{
+	setText(text) {
 	this.name.data = text;
-};
+	}
 
-Asset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	this.setText(this.asset.name);
-};
+	}
 
-Asset.prototype.updateInterface = function() {};
+	updateInterface() {}
+
+}
 export {Asset};

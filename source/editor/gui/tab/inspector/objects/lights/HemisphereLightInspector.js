@@ -5,9 +5,9 @@ import {ObjectInspector} from "../ObjectInspector.js";
 import {Editor} from "../../../../../Editor.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 
-function HemisphereLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class HemisphereLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -32,16 +32,15 @@ function HemisphereLightInspector(parent, object)
 	});
 	this.form.add(this.groundColor);
 	this.form.nextRow();
-}
+	}
 
-HemisphereLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-HemisphereLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.groundColor.setValue(this.object.groundColor.r, this.object.groundColor.g, this.object.groundColor.b);
-};
+	}
+
+}
 
 export {HemisphereLightInspector};

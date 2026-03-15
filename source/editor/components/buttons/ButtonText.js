@@ -11,25 +11,23 @@ import {Button} from "./Button.js";
  * @extends {Button, Text}
  * @param {Component} parent Parent element.
  */
-function ButtonText(parent)
-{
-	Button.call(this, parent);
+class ButtonText extends Button {
+	constructor(parent) {
+	super(parent);
 
 	this.text = new Text(this);
-}
+	}
 
-ButtonText.prototype = Object.create(Button.prototype);
-
-ButtonText.prototype.setText = function(text)
-{
+	setText(text) {
 	this.text.setText(text);
-};
+	}
 
-ButtonText.prototype.updateSize = function()
-{
-	Button.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.text.size.copy(this.size);
 	this.text.updateSize();
-};
+	}
+
+}
 export {ButtonText};

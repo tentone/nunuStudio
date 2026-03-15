@@ -1,7 +1,7 @@
 import {BufferGeometry, Color, Float32BufferAttribute, LineSegments, LineBasicMaterial, VertexColors, Matrix4, Vector3} from "three";
 
-function SkeletonHelper(object) 
-{
+class SkeletonHelper extends LineSegments {
+	constructor(object) {
 	this.object = object;
 
 	var bones = SkeletonHelper.getBoneList(object);
@@ -29,7 +29,7 @@ function SkeletonHelper(object)
 	geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
 	geometry.setAttribute("color", new Float32BufferAttribute(colors, 3));
 
-	LineSegments.call(this, geometry, new LineBasicMaterial(
+	super(geometry, new LineBasicMaterial(
 		{
 			vertexColors: VertexColors,
 			depthTest: false,
@@ -42,9 +42,7 @@ function SkeletonHelper(object)
 	this.matrixAutoUpdate = false;
 
 	this.update();
-}
-
-SkeletonHelper.prototype = Object.create(LineSegments.prototype);
+	}
 
 SkeletonHelper.getBoneList = function(object)
 {
@@ -63,8 +61,7 @@ SkeletonHelper.getBoneList = function(object)
 	return boneList;
 };
 
-SkeletonHelper.prototype.update = function()
-{
+	update() {
 	var bones = this.bones;
 	var geometry = this.geometry;
 	var position = geometry.getAttribute("position");
@@ -93,5 +90,7 @@ SkeletonHelper.prototype.update = function()
 	}
 
 	geometry.getAttribute("position").needsUpdate = true;
-};
+	}
+
+}
 export {SkeletonHelper};

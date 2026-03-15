@@ -3,9 +3,9 @@ import {EventManager} from "../../../core/utils/EventManager.js";
 import {Global} from "../../Global.js";
 import {Component} from "../Component.js";
 
-function AudioPlayer(parent)
-{
-	Component.call(this, parent, "div");
+class AudioPlayer extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 
@@ -196,13 +196,10 @@ function AudioPlayer(parent)
 		}
 	}
 	draw();
-}
-
-AudioPlayer.prototype = Object.create(Component.prototype);
+	}
 
 // Decode audio
-AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
-{
+	setAudioBuffer(buffer, onLoad) {
 	var self = this;
 
 	this.context.decodeAudioData(buffer.slice(0), function(buffer)
@@ -214,11 +211,10 @@ AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 			onLoad(buffer);
 		}
 	}.bind(this));
-};
+	}
 
 // Connect audio source
-AudioPlayer.prototype.connect = function()
-{
+	connect() {
 	if (this.playing)
 	{
 		this.pause();
@@ -227,17 +223,15 @@ AudioPlayer.prototype.connect = function()
 	this.source = this.context.createBufferSource();
 	this.source.buffer = this.buffer;
 	this.source.connect(this.context.destination);
-};
+	}
 
 // Disconnect source
-AudioPlayer.prototype.disconnect = function()
-{
+	disconnect() {
 	this.source.disconnect();
-};
+	}
 
 // Play audio
-AudioPlayer.prototype.play = function(time)
-{
+	play(time) {
 	this.connect();
 
 	if (time !== undefined)
@@ -251,11 +245,10 @@ AudioPlayer.prototype.play = function(time)
 	this.playing = true;
 
 	this.icon.src = Global.FILE_PATH + "icons/misc/pause.png";
-};
+	}
 
 // Pause audio
-AudioPlayer.prototype.pause = function()
-{
+	pause() {
 	if (this.playing)
 	{
 		this.playing = false;
@@ -264,11 +257,10 @@ AudioPlayer.prototype.pause = function()
 
 		this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	}
-};
+	}
 
 // Stop audio playback
-AudioPlayer.prototype.stop = function()
-{	
+	stop() {	
 	if (this.playing)
 	{
 		this.source.stop();
@@ -277,11 +269,10 @@ AudioPlayer.prototype.stop = function()
 
 		this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	}
-};
+	}
 
 // Seek time
-AudioPlayer.prototype.seek = function(time)
-{
+	seek(time) {
 	if (this.playing)
 	{
 		this.play(time);
@@ -290,11 +281,10 @@ AudioPlayer.prototype.seek = function(time)
 	{
 		this.time = time;
 	}
-};
+	}
 
 // Toggle play/pause
-AudioPlayer.prototype.toggle = function()
-{
+	toggle() {
 	if (!this.playing)
 	{
 		this.play();
@@ -303,10 +293,9 @@ AudioPlayer.prototype.toggle = function()
 	{
 		this.pause();
 	}
-};
+	}
 
-AudioPlayer.prototype.destroy = function()
-{
+	destroy() {
 	try
 	{
 		this.disconnect();
@@ -314,12 +303,11 @@ AudioPlayer.prototype.destroy = function()
 	}
 	catch (e) {}
 
-	Component.prototype.destroy.call(this);
-};
+	super.destroy();
+	}
 
-AudioPlayer.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	// Button
 	this.button.style.width = this.element.style.height;
@@ -334,6 +322,8 @@ AudioPlayer.prototype.updateSize = function()
 	// Scrubber
 	this.scrubber.style.height = this.size.y * 0.8 + "px";
 	this.scrubber.style.top = -this.size.y * 0.15 + "px";
-};
+	}
+
+}
 
 export {AudioPlayer};

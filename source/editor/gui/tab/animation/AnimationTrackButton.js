@@ -14,9 +14,9 @@ import {Component} from "../../../components/Component.js";
  * @class AnimationTrackButton
  * @extends {Component}
  */
-function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
-{
-	Component.call(this, parent, "div");
+class AnimationTrackButton extends Component {
+	constructor(parent, editor, animation, track, trackTimeline) {
+	super(parent, "div");
 
 	this.element.style.position = "relative";
 	this.element.style.backgroundColor = "var(--bar-color)";
@@ -175,17 +175,15 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	});
 
 	this.updateTrack();
-}
+	}
 
-AnimationTrackButton.prototype = Object.create(Component.prototype);
-
-AnimationTrackButton.prototype.updateTrack = function()
-{
+	updateTrack() {
 	this.name.appendChild(document.createTextNode(this.track.name));
 	this.color.setValueString(this.track.color);
 	this.interpolation.setValue(this.track.getInterpolation());
-};
+	}
 
-AnimationTrackButton.prototype.updateInterface = function()
-{};
+	updateInterface() {}
+
+}
 export {AnimationTrackButton};

@@ -1,11 +1,10 @@
 import {ObjectInspector} from "../ObjectInspector.js";
 
-function LensFlareInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class LensFlareInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 }
-
-LensFlareInspector.prototype = Object.create(ObjectInspector.prototype);
+}
 
 export {LensFlareInspector};

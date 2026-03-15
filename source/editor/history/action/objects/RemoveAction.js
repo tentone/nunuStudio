@@ -11,18 +11,17 @@ import {AddAction} from "./AddAction.js";
  * @param {Object3D} object
  * @param {Object3D} parent Optional.
  */
-function RemoveAction(object, parent)
-{
+class RemoveAction {
+	constructor(object, parent) {
 	Action.call(this);
 	
 	this.object = object;
 
 	this.parent = parent !== undefined ? parent : object.parent;
 	this.index = -1;
-}
+	}
 
-RemoveAction.prototype.apply = function()
-{
+	apply() {
 	if (this.object instanceof Camera)
 	{
 		var scene = this.object.getScene();
@@ -36,10 +35,9 @@ RemoveAction.prototype.apply = function()
 	this.parent.remove(this.object);
 
 	RemoveAction.updateGUI(this.object, this.parent);
-};
+	}
 
-RemoveAction.prototype.revert = function()
-{
+	revert() {
 	if (this.index === -1)
 	{
 		this.parent.add(this.object);
@@ -51,7 +49,9 @@ RemoveAction.prototype.revert = function()
 	}
 
 	AddAction.updateGUI(this.object, this.parent, this.index);
-};
+	}
+
+}
 
 RemoveAction.updateGUI = function(object, parent)
 {

@@ -10,9 +10,9 @@ import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 
-function TextBitmapInspector(parent, object)
-{
-	DrawableInspector.call(this, parent, object);
+class TextBitmapInspector extends DrawableInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -131,13 +131,10 @@ function TextBitmapInspector(parent, object)
 	});
 	this.form.add(this.smoothing);
 	this.form.nextRow();
-}
+	}
 
-TextBitmapInspector.prototype = Object.create(DrawableInspector.prototype);
-
-TextBitmapInspector.prototype.updateInspector = function()
-{
-	DrawableInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.text.setText(this.object.text);
 	this.lineHeight.setValue(this.object.lineHeight);
@@ -147,6 +144,8 @@ TextBitmapInspector.prototype.updateInspector = function()
 	this.color.setValue(this.object.color);
 	this.threshold.setValue(this.object.threshold);
 	this.smoothing.setValue(this.object.smoothing);
-};
+	}
+
+}
 
 export {TextBitmapInspector};

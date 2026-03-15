@@ -1,26 +1,22 @@
 import {Component} from "../../../components/Component.js";
 import {AnimationKeyframe} from "./AnimationKeyframe.js";
 
-function AnimationTrack(parent, editor, track)
-{
-	Component.call(this, parent, "div");
+class AnimationTrack extends Component {
+	constructor(parent, editor, track) {
+	super(parent, "div");
 
 	this.editor = editor;
 	this.track = track;
 
 	this.createKeyframes();
-}
+	}
 
-AnimationTrack.prototype = Object.create(Component.prototype);
-
-AnimationTrack.prototype.updateKeyframes = function()
-{
+	updateKeyframes() {
 	this.removeAllChildren();
 	this.createKeyframes();
-};
+	}
 
-AnimationTrack.prototype.createKeyframes = function()
-{
+	createKeyframes() {
 	var times = this.track.times;
 
 	for (var k = 0; k < times.length; k++)
@@ -30,6 +26,8 @@ AnimationTrack.prototype.createKeyframes = function()
 		key.position.set(this.editor.zoom * times[k], 0);
 		key.updateInterface();
 	}
-};
+	}
+
+}
 
 export {AnimationTrack};

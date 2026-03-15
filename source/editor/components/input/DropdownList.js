@@ -1,9 +1,9 @@
 import {Global} from "../../Global.js";
 import {Component} from "../Component.js";
 
-function DropdownList(parent)
-{
-	Component.call(this, parent, "div");
+class DropdownList extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	// Select
 	this.select = document.createElement("select");
@@ -35,9 +35,7 @@ function DropdownList(parent)
 
 	// Attributes
 	this.values = [];
-}
-
-DropdownList.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set the disabled state of the element.
@@ -45,10 +43,9 @@ DropdownList.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} disabled
  */
-DropdownList.prototype.setDisabled = function(value)
-{
+	setDisabled(value) {
 	this.select.disabled = value;
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -56,10 +53,9 @@ DropdownList.prototype.setDisabled = function(value)
  * @method setOnChange
  * @param {Function} onChange
  */
-DropdownList.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.select.onchange = onChange;
-};
+	}
 
 /**
  * Add option to the dropdown list.
@@ -68,27 +64,25 @@ DropdownList.prototype.setOnChange = function(onChange)
  * @param {string} text Label of the option.
  * @param {Object} value Value of the option.
  */
-DropdownList.prototype.addValue = function(text, value)
-{
+	addValue(text, value) {
 	var option = document.createElement("option");
 	option.appendChild(document.createTextNode(text));
 	this.values.push(value);
 	this.select.appendChild(option);
-};
+	}
 
 /**
  * Remove all element from dropdown
  *
  * @method clearValues
  */
-DropdownList.prototype.clearValues = function()
-{
+	clearValues() {
 	this.values = [];
 	for (var i = 0; i < this.select.children.length; i++)
 	{
 		this.select.removeChild(this.select.children[i]);
 	}
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -96,14 +90,13 @@ DropdownList.prototype.clearValues = function()
  * @method setValue
  * @return {Object} Value stored in the input element.
  */
-DropdownList.prototype.getValue = function()
-{
+	getValue() {
 	if (this.select.selectedIndex > -1)
 	{
 		return this.values[this.select.selectedIndex];
 	}
 	return null;
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -111,8 +104,7 @@ DropdownList.prototype.getValue = function()
  * @method setValue
  * @param {Object} value
  */
-DropdownList.prototype.setValue = function(value)
-{
+	setValue(value) {
 	// Get value index
 	for (var i = 0; i < this.values.length; i++)
 	{
@@ -128,33 +120,31 @@ DropdownList.prototype.setValue = function(value)
 	{
 		this.select.selectedIndex = -1;
 	}
-};
+	}
 
 // Get dropdownlist selected index
-DropdownList.prototype.getSelectedIndex = function()
-{
+	getSelectedIndex() {
 	return this.select.selectedIndex;
-};
+	}
 
 // Set dropdownlist selected index
-DropdownList.prototype.setSelectedIndex = function(index)
-{
+	setSelectedIndex(index) {
 	this.select.selectedIndex = index;
-};
+	}
 
-DropdownList.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+	}
 
-DropdownList.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.select.style.width = this.size.x + "px";
 	this.select.style.height = this.size.y + "px";
 
 	this.arrow.style.top = (this.size.y - 10) / 2 + "px";
-};
+	}
+
+}
 
 export {DropdownList};

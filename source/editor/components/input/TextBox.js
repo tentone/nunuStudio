@@ -11,9 +11,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function TextBox(parent)
-{
-	Component.call(this, parent, "input");
+class TextBox extends Component {
+	constructor(parent) {
+	super(parent, "input");
 
 	this.element.type = "text";
 	this.element.style.backgroundColor = "var(--box-color)";
@@ -58,9 +58,7 @@ function TextBox(parent)
 		});
 		context.updateInterface();
 	};
-}
-
-TextBox.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set font configuration to use for the text presented in this component.
@@ -72,8 +70,7 @@ TextBox.prototype = Object.create(Component.prototype);
  * @param {number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
  * @param {string} fontStyle Font style, specifies the font style for a text.
  */
-TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
-{
+	setFont(fontFamily, fontWeight, fontStyle) {
 	this.element.style.fontFamily = fontFamily;
 
 	if (fontWeight !== undefined)
@@ -85,7 +82,7 @@ TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 	{
 		this.element.style.fontStyle = fontStyle;
 	}
-};
+	}
 
 /**
  * Set the disabled state of the element.
@@ -93,10 +90,9 @@ TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  * @method setDisabled
  * @param {boolean} disabled
  */
-TextBox.prototype.setDisabled = function(value)
-{
+	setDisabled(value) {
 	this.element.disabled = value;
-};
+	}
 
 /**
  * Set oninput callback called after every letter typed into the box.
@@ -107,8 +103,7 @@ TextBox.prototype.setDisabled = function(value)
  * @param {Function} onInput Callback method called everytime the user types something.
  * @param {number} timeout Time (ms) after the user stopped typing to activate the callback.
  */
-TextBox.prototype.setOnInput = function(onInput, timeout)
-{
+	setOnInput(onInput, timeout) {
 	if (timeout !== undefined)
 	{
 		var timer = null;
@@ -132,7 +127,7 @@ TextBox.prototype.setOnInput = function(onInput, timeout)
 	{
 		this.element.oninput = onInput;
 	}
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -140,10 +135,9 @@ TextBox.prototype.setOnInput = function(onInput, timeout)
  * @method setOnChange
  * @param {Function} onChange
  */
-TextBox.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.element.onchange = onChange;
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -151,10 +145,9 @@ TextBox.prototype.setOnChange = function(onChange)
  * @method setText
  * @param {Object} text
  */
-TextBox.prototype.setText = function(text)
-{
+	setText(text) {
 	this.element.value = text;
-};
+	}
 
 /**
  * Get text stored in the input element.
@@ -162,9 +155,10 @@ TextBox.prototype.setText = function(text)
  * @method getText
  * @return {string} Text stored in the input element.
  */
-TextBox.prototype.getText = function()
-{
+	getText() {
 	return this.element.value;
-};
+	}
+
+}
 
 export {TextBox};

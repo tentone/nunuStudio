@@ -9,9 +9,9 @@ import {Object3D, Mesh, MeshBasicMaterial} from "three";
  * @param {Object3D} object
  * @param {number} hex Helper color in hexadecimal.
  */
-function WireframeHelper(object, hex) 
-{
-	Mesh.call(this, object.geometry, new MeshBasicMaterial(
+class WireframeHelper extends Mesh {
+	constructor(object, hex) {
+	super(object.geometry, new MeshBasicMaterial(
 		{
 			color: hex !== undefined ? hex : 0xFFFFFF,
 			wireframe: true
@@ -27,13 +27,12 @@ function WireframeHelper(object, hex)
 	
 	this.matrixAutoUpdate = false;
 	this.update();
-}
+	}
 
-WireframeHelper.prototype = Object.create(Mesh.prototype);
-
-WireframeHelper.prototype.update = function()
-{
+	update() {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
-};
+	}
+
+}
 export {WireframeHelper};

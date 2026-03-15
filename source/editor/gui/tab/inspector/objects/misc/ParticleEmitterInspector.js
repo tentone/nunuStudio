@@ -4,9 +4,9 @@ import {ObjectInspector} from "../ObjectInspector.js";
 import {Editor} from "../../../../../Editor.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function ParticleEmitterInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class ParticleEmitterInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -20,16 +20,14 @@ function ParticleEmitterInspector(parent, object)
 	});
 	this.form.add(this.dynamicEmitter);
 	this.form.nextRow();
-}
+	}
 
-ParticleEmitterInspector.prototype = Object.create(ObjectInspector.prototype);
-
-ParticleEmitterInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.dynamicEmitter.setValue(this.object.dynamicEmitter);
-};
+	}
 
+}
 
 export {ParticleEmitterInspector};

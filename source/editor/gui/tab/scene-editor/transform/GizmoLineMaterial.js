@@ -6,9 +6,9 @@ import {LineBasicMaterial} from "three";
  * @class GizmoMaterial
  * @extends {LineBasicMaterial}
  */
-function GizmoLineMaterial(parameters)
-{
-	LineBasicMaterial.call(this);
+class GizmoLineMaterial extends LineBasicMaterial {
+	constructor(parameters) {
+	super();
 
 	this.depthTest = false;
 	this.depthWrite = false;
@@ -19,9 +19,7 @@ function GizmoLineMaterial(parameters)
 
 	this.baseColor = this.color.clone();
 	this.baseOpacity = this.opacity;
-}
-
-GizmoLineMaterial.prototype = Object.create(LineBasicMaterial.prototype);
+	}
 
 GizmoLineMaterial.red = new GizmoLineMaterial({color: 0xff0000});
 GizmoLineMaterial.green = new GizmoLineMaterial({color: 0x00ff00});
@@ -35,8 +33,7 @@ GizmoLineMaterial.grey = new GizmoLineMaterial({color: 0x787878});
  * @method highlight
  * @param {boolean} highlighted
  */
-GizmoLineMaterial.prototype.highlight = function(highlighted)
-{
+	highlight(highlighted) {
 	if (highlighted)
 	{
 		this.color.setRGB(1.0, 1.0, 0);
@@ -47,5 +44,7 @@ GizmoLineMaterial.prototype.highlight = function(highlighted)
 		this.color.copy(this.baseColor);
 		this.opacity = this.baseOpacity;
 	}
-};
+	}
+
+}
 export {GizmoLineMaterial};

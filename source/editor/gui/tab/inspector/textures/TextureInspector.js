@@ -9,9 +9,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function TextureInspector(parent, object)
-{
-	Inspector.call(this, parent, object);
+class TextureInspector extends Inspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -168,12 +168,9 @@ function TextureInspector(parent, object)
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();
-}
+	}
 
-TextureInspector.prototype = Object.create(Inspector.prototype);
-
-TextureInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.name.setText(this.object.name);
 		
 	if (this.uuid !== undefined)
@@ -191,6 +188,8 @@ TextureInspector.prototype.updateInspector = function()
 	this.minFilter.setValue(this.object.minFilter);
 	this.premultiplyAlpha.setValue(this.object.premultiplyAlpha);
 	this.flipY.setValue(this.object.flipY);
-};
+	}
+
+}
 
 export {TextureInspector};

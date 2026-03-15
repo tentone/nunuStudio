@@ -12,10 +12,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function AudioAsset(parent)
-{
-	Asset.call(this, parent);
+class AudioAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/audio.png");
 	
@@ -126,6 +125,6 @@ function AudioAsset(parent)
 		DragBuffer.pop(self.asset.uuid);
 	};
 }
+}
 
-AudioAsset.prototype = Object.create(Asset.prototype);
 export {AudioAsset};

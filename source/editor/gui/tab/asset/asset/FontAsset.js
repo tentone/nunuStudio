@@ -9,10 +9,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function FontAsset(parent)
-{
-	Asset.call(this, parent);
+class FontAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/font.png");
 	
@@ -87,12 +86,9 @@ function FontAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
-FontAsset.prototype = Object.create(Asset.prototype);
-
-FontAsset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	var image = this.image;
 	
 	FontRenderer.render(this.asset, function(url)
@@ -101,5 +97,7 @@ FontAsset.prototype.updateMetadata = function()
 	});
 
 	this.setText(this.asset.name);
-};
+	}
+
+}
 export {FontAsset};

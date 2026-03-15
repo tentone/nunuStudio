@@ -1,4 +1,4 @@
-import {Scene, RepeatWrapping, NearestFilter, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
+import {Scene, RepeatWrapping, NearestFilter, PlaneGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Texture} from "../../../../core/texture/Texture.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
@@ -15,9 +15,9 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
 
-function TextureEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/image.png");
+class TextureEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/image.png");
 
 	var self = this;
 
@@ -46,7 +46,7 @@ function TextureEditor(parent, closeable, container, index)
 	alpha.minFilter = NearestFilter;
 	alpha.repeat.set(400, 400);
 	
-	var geometry = new PlaneBufferGeometry(1, 1);
+	var geometry = new PlaneGeometry(1, 1);
 
 	this.background = new Mesh(geometry, new MeshBasicMaterial({map: alpha}));
 	this.background.position.set(0, 0, -2);
@@ -230,14 +230,11 @@ function TextureEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();
-}
-
-TextureEditor.prototype = Object.create(TabComponent.prototype);
+	}
 
 // Activate
-TextureEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 	
 	this.updatePreview();
 
@@ -253,32 +250,28 @@ TextureEditor.prototype.activate = function()
 	this.minFilter.setValue(texture.minFilter);
 	this.premultiplyAlpha.setValue(texture.premultiplyAlpha);
 	this.flipY.setValue(texture.flipY);
-};
+	}
 
 // Destroy
-TextureEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.canvas.destroy();
-};
+	}
 
 // Update test material
-TextureEditor.prototype.updatePreview = function()
-{
+	updatePreview() {
 	this.sprite.material.map.needsUpdate = true;
 	this.sprite.material.needsUpdate = true;
-};
+	}
 
 // Check if texture is attached to tab
-TextureEditor.prototype.isAttached = function(texture)
-{
+	isAttached(texture) {
 	return this.texture === texture;
-};
+	}
 
 // Update object data
-TextureEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.texture !== null)
 	{
 		// Set name
@@ -294,28 +287,27 @@ TextureEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
 // Attach texure
-TextureEditor.prototype.attach = function(texture)
-{
+	attach(texture) {
 	this.texture = texture;
 	this.sprite.material.map = texture;
 	
 	this.updateMetadata();
 	this.updatePreview();
-};
+	}
 
-TextureEditor.prototype.update = function()
-{
+	update() {
 	this.canvas.renderer.render(this.scene, this.camera);
-};
+	}
 
-TextureEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.division.size.copy(this.size);
 	this.division.updateInterface();
-};
+	}
+
+}
 export {TextureEditor};

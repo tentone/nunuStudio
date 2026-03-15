@@ -3,9 +3,9 @@ import {Editor} from "../../../../Editor.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {PassNode} from "./PassNode.js";
 
-function AfterimagePassNode(parent)
-{
-	PassNode.call(this, parent, "Afterimage");
+class AfterimagePassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Afterimage");
 
 	var self = this;
 
@@ -20,16 +20,15 @@ function AfterimagePassNode(parent)
 	});
 	this.add(this.damp);
 	this.nextRow();
-}
-
-AfterimagePassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("Afterimage", AfterimagePassNode);
 
-AfterimagePassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.damp.setValue(this.pass.damp);
-};
+	}
+
+}
 export {AfterimagePassNode};

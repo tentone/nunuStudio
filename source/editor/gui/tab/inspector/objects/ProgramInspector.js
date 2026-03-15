@@ -7,9 +7,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ObjectInspector} from "./ObjectInspector.js";
 
-function ProgramInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class ProgramInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -109,13 +109,10 @@ function ProgramInspector(parent, object)
 	this.form.addText(Locale.rendering);
 	this.form.nextRow();
 	this.rendererConfig = new RendererConfigurationFormSnippet(this.form, object.rendererConfig);
-}
+	}
 
-ProgramInspector.prototype = Object.create(ObjectInspector.prototype);
-
-ProgramInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.author.setText(this.object.author);
 	this.version.setText(this.object.version);
@@ -126,6 +123,8 @@ ProgramInspector.prototype.updateInspector = function()
 	this.vrScale.setValue(this.object.vrScale);
 
 	this.rendererConfig.attach(this.object.rendererConfig);
-};
+	}
+
+}
 
 export {ProgramInspector};

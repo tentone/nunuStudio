@@ -13,24 +13,22 @@ import {RemoveResourceAction} from "./RemoveResourceAction.js";
  * @param {ResourceManager} manager Manager to insert the resource into.
  * @param {string} category Category of the resource.
  */
-function AddResourceAction(resource, manager, category)
-{
+class AddResourceAction {
+	constructor(resource, manager, category) {
 	Action.call(this);
 	
 	this.resource = resource;
 	this.manager = manager;
 	this.category = category;
-}
+	}
 
-AddResourceAction.prototype.apply = function()
-{
+	apply() {
 	ResourceCrawler.addResource(this.manager, this.resource, this.category);
 	
 	AddResourceAction.updateGUI();
-};
+	}
 
-AddResourceAction.prototype.revert = function()
-{
+	revert() {
 	ResourceCrawler.removeResource(this.manager, this.resource, this.category);
 
 	if (this.resource.dispose !== undefined)
@@ -39,7 +37,9 @@ AddResourceAction.prototype.revert = function()
 	}
 
 	RemoveResourceAction.updateGUI();
-};
+	}
+
+}
 
 AddResourceAction.updateGUI = function()
 {

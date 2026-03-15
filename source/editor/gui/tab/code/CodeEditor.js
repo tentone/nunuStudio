@@ -12,9 +12,9 @@ import {DocumentBody} from "../../../components/DocumentBody.js";
  * @class CodeEditor
  * @extends {TabComponent}
  */
-function CodeEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.codeEditor, Global.FILE_PATH + "icons/misc/code.png");
+class CodeEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.codeEditor, Global.FILE_PATH + "icons/misc/code.png");
 
 	var self = this;
 
@@ -128,19 +128,15 @@ function CodeEditor(parent, closeable, container, index)
 		}
 	});
 	this.manager.create();
-}
+	}
 
-CodeEditor.prototype = Object.create(TabComponent.prototype);
-
-CodeEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.updateSettings();
-};
+	}
 
-CodeEditor.prototype.updateSettings = function()
-{
+	updateSettings() {
 	this.setFontSize(Editor.settings.code.fontSize);
 
 	this.code.setOption("lint", {options: Editor.settings.jslint});
@@ -158,7 +154,7 @@ CodeEditor.prototype.updateSettings = function()
 	this.code.setOption("smartIndent", Editor.settings.code.smartIndent);
 	this.code.setOption("matchBrackets", Editor.settings.code.matchBrackets);
 	this.code.setOption("vimMode", Editor.settings.code.vimMode);
-};
+	}
 
 /**
  * Set code editor font size.
@@ -166,8 +162,7 @@ CodeEditor.prototype.updateSettings = function()
  * @method setFontSize
  * @param {number} size
  */
-CodeEditor.prototype.setFontSize = function(size)
-{
+	setFontSize(size) {
 	if (size < 5)
 	{
 		size = 5;
@@ -175,7 +170,7 @@ CodeEditor.prototype.setFontSize = function(size)
 
 	Editor.settings.code.fontSize = size;
 	this.code.display.wrapper.style.fontSize = size + "px";
-};
+	}
 
 /**
  * Get the code open in the editor.
@@ -183,10 +178,9 @@ CodeEditor.prototype.setFontSize = function(size)
  * @method getText
  * @return {string} The code in the editor.
  */
-CodeEditor.prototype.getText = function()
-{
+	getText() {
 	return this.code.getValue();
-};
+	}
 
 /**
  * Set the code open in the editor.
@@ -194,10 +188,9 @@ CodeEditor.prototype.getText = function()
  * @method getText
  * @param {string} text Code to put in the editor.
  */
-CodeEditor.prototype.setText = function(text)
-{
+	setText(text) {
 	this.code.setValue(text);
-};
+	}
 
 /**
  * Set language mode (javascript, glsl, etc).
@@ -205,10 +198,9 @@ CodeEditor.prototype.setText = function(text)
  * @method setLanguage
  * @param {string} mode Language mode.
  */
-CodeEditor.prototype.setLanguage = function(mode)
-{
+	setLanguage(mode) {
 	this.code.setOption("mode", mode);
-};
+	}
 
 /**
  * Set onchange callback.
@@ -216,16 +208,16 @@ CodeEditor.prototype.setLanguage = function(mode)
  * @method setOnChange
  * @param {Function} callback
  */
-CodeEditor.prototype.setOnChange = function(callback)
-{
+	setOnChange(callback) {
 	this.code.on("change", callback);
-};
+	}
 
-CodeEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.code.setSize(this.size.x, this.size.y);
-};
+	}
+
+}
 
 export {CodeEditor};

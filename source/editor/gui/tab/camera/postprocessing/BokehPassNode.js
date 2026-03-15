@@ -5,9 +5,9 @@ import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {PassNode} from "./PassNode.js";
 
-function BokehPassNode(parent)
-{
-	PassNode.call(this, parent, "Bokeh");
+class BokehPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Bokeh");
 
 	var self = this;
 
@@ -45,18 +45,17 @@ function BokehPassNode(parent)
 	});
 	this.add(this.maxblur);
 	this.nextRow();
-}
-
-BokehPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("Bokeh", BokehPassNode);
 
-BokehPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.aperture.setValue(pass.aperture);
 	this.focus.setValue(pass.focus);
 	this.maxblur.setValue(pass.maxblur);
-};
+	}
+
+}
 export {BokehPassNode};

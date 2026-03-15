@@ -8,9 +8,9 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function OrbitControlsInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class OrbitControlsInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -222,13 +222,10 @@ function OrbitControlsInspector(parent, object)
 	});
 	this.form.add(this.vector);
 	this.form.nextRow();
-}
+	}
 
-OrbitControlsInspector.prototype = Object.create(ObjectInspector.prototype);
-
-OrbitControlsInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.distance.setValue(this.object.distance);
 	this.maxDistance.setValue(this.object.maxDistance);
@@ -246,6 +243,8 @@ OrbitControlsInspector.prototype.updateInspector = function()
 	this.invertNavigation.setValue(this.object.invertNavigation);
 	this.center.setValue(this.object.center);
 	this.vector.setValue(this.object.vector);
-};
+	}
+
+}
 
 export {OrbitControlsInspector};

@@ -10,18 +10,16 @@ import {ToolBarButton} from "./ToolBarButton.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ToolBarGroup(parent)
-{
-	Component.call(this, parent, "div");
+class ToolBarGroup extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.setStyle("overflow", "visible");
 	this.setStyle("backgroundColor", "var(--bar-color)");
 	this.setStyle("borderRadius", "5px");
 
 	this.buttons = [];
-}
-
-ToolBarGroup.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Add new toggle button to this tool bar group.
@@ -29,8 +27,7 @@ ToolBarGroup.prototype = Object.create(Component.prototype);
  * @method addOption
  * @return {ButtonIcon} The button created for the new option
  */
-ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
-{
+	addToggleOption(text, icon, callback) {
 	var button = new ToolBarToogleButton(this);
 	button.text.setText(text);
 	button.setImage(icon);
@@ -43,7 +40,7 @@ ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
 	this.size.x = this.buttons.length * this.size.y;
 
 	return button;
-};
+	}
 
 /**
  * Add new button to this tool bar group.
@@ -51,8 +48,7 @@ ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
  * @method addOption
  * @return {ButtonIcon} The button created for the new option
  */
-ToolBarGroup.prototype.addOption = function(text, icon, callback)
-{
+	addOption(text, icon, callback) {
 	var button = new ToolBarButton(this);
 	button.text.setText(text);
 	button.setImage(icon);
@@ -65,6 +61,8 @@ ToolBarGroup.prototype.addOption = function(text, icon, callback)
 	this.size.x = this.buttons.length * this.size.y;
 
 	return button;
-};
+	}
+
+}
 
 export {ToolBarGroup};

@@ -1,5 +1,5 @@
 import {StaticPair} from "@as-com/pson";
-import {BufferGeometry, Geometry} from "three";
+import {BufferGeometry} from "three";
 import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
 import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
 import {Locale} from "../locale/LocaleManager.js";
@@ -32,9 +32,9 @@ import {SettingsTab} from "./tab/settings/SettingsTab.js";
  * @class MainMenu
  * @extends {Component}
  */
-function MainMenu(parent)
-{
-	Component.call(this, parent, "div");
+class MainMenu extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = "var(--bar-color)";
@@ -600,7 +600,6 @@ function MainMenu(parent)
 		// Convert back to radians if necessary
 		angle = UnitConverter.convert(angle, Editor.settings.units.angle, "r");
 
-
 		var start = parseFloat(Editor.prompt("Start Point", 0));
 		var end = parseFloat(Editor.prompt("End Point", 1));
 		if (isNaN(start) || isNaN(end))
@@ -744,13 +743,12 @@ function MainMenu(parent)
 	{
 		Editor.runProject();
 	});
-}
+	}
 
-MainMenu.prototype = Object.create(Component.prototype);
-
-MainMenu.prototype.updateInterface = function()
-{
+	updateInterface() {
 	this.updateVisibility();
-};
+	}
+
+}
 
 export {MainMenu};

@@ -1,12 +1,12 @@
-import {CylinderBufferGeometry, CylinderGeometry, BufferGeometry} from "three";
+import {CylinderGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function CylinderGeometryForm(form, object)
-{
+class CylinderGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -78,22 +78,22 @@ function CylinderGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-CylinderGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? CylinderBufferGeometry : CylinderGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? CylinderGeometry : CylinderGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
-};
+	}
 
-CylinderGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radiusTop.setValue(this.object.geometry.parameters.radiusTop || 20);
 	this.radiusBottom.setValue(this.object.geometry.parameters.radiusBottom || 20);
 	this.height.setValue(this.object.geometry.parameters.height || 100);
 	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {CylinderGeometryForm};

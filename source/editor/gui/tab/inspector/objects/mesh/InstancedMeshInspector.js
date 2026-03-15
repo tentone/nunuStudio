@@ -4,9 +4,9 @@ import {Editor} from "../../../../../Editor.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {MeshInspector} from "./MeshInspector.js";
 
-function InstancedMeshInspector(parent, object)
-{
-	MeshInspector.call(this, parent, object);
+class InstancedMeshInspector extends MeshInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 	
@@ -22,15 +22,14 @@ function InstancedMeshInspector(parent, object)
 	this.form.add(this.count);
 	this.form.nextRow();
 
-}
+	}
 
-InstancedMeshInspector.prototype = Object.create(MeshInspector.prototype);
-
-InstancedMeshInspector.prototype.updateInspector = function()
-{
-	MeshInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.count.setValue(this.object.count);
-};
+	}
+
+}
 
 export {InstancedMeshInspector};

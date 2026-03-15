@@ -4,8 +4,8 @@ import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 
-function CapsuleGeometryForm(form, object)
-{
+class CapsuleGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -105,10 +105,9 @@ function CapsuleGeometryForm(form, object)
 	this.capsBottomSegments.setOnChange(updateGeometry);
 	this.form.add(this.capsBottomSegments);
 	this.form.nextRow();
-}
+	}
 
-CapsuleGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
 
 	var geometry = new CapsuleBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(),
@@ -116,10 +115,9 @@ CapsuleGeometryForm.prototype.updateGeometry = function()
 		this.capsBottomSegments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
 
 	Editor.addAction(new ChangeAction(this.object, "geometry", geometry));
-};
+	}
 
-CapsuleGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radiusTop.setValue(this.object.geometry.parameters.radiusTop || 0.5);
 	this.radiusBottom.setValue(this.object.geometry.parameters.radiusBottom || 0.5);
 	this.height.setValue(this.object.geometry.parameters.height || 1.0);
@@ -131,5 +129,7 @@ CapsuleGeometryForm.prototype.updateValues = function()
 	this.capsBottomSegments.setValue(this.object.geometry.parameters.capsBottomSegments || 8);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
-};
+	}
+
+}
 export {CapsuleGeometryForm};

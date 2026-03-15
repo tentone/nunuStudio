@@ -7,10 +7,9 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {ImageChooser} from "../../../components/input/ImageChooser.js";
 import {TextureEditor} from "./TextureEditor.js";
 
-
-function SpriteSheetTextureEditor(parent, closeable, container, index)
-{
-	TextureEditor.call(this, parent, closeable, container, index);
+class SpriteSheetTextureEditor extends TextureEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -101,13 +100,10 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.animationSpeed);
 	this.form.nextRow();
-}
+	}
 
-SpriteSheetTextureEditor.prototype = Object.create(TextureEditor.prototype);
-
-SpriteSheetTextureEditor.prototype.attach = function(texture)
-{
-	TextureEditor.prototype.attach.call(this, texture);
+	attach(texture) {
+	super.attach(texture);
 
 	this.source.setValue(this.texture.source);
 	this.frames.setValue(this.texture.framesHorizontal, this.texture.framesVertical);
@@ -115,5 +111,7 @@ SpriteSheetTextureEditor.prototype.attach = function(texture)
 	this.beginFrame.setValue(this.texture.beginFrame);
 	this.endFrame.setValue(this.texture.endFrame);
 	this.animationSpeed.setValue(this.texture.animationSpeed);
-};
+	}
+
+}
 export {SpriteSheetTextureEditor};

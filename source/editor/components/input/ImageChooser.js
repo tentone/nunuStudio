@@ -13,9 +13,9 @@ import {Component} from "../Component.js";
  * @class ImageChooser
  * @extends {Component}
  */
-function ImageChooser(parent)
-{
-	Component.call(this, parent, "div");
+class ImageChooser extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	// Image
 	this.img = document.createElement("img");
@@ -104,9 +104,7 @@ function ImageChooser(parent)
 	 * @type {Function}
 	 */
 	this.onChange = null;
-}
-
-ImageChooser.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -114,11 +112,10 @@ ImageChooser.prototype = Object.create(Component.prototype);
  * @method setOnChange
  * @param {Function} onChange
  */
-ImageChooser.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.onChange = onChange;
 	this.img.style.cursor = "pointer";
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -126,11 +123,10 @@ ImageChooser.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {Object} image
  */
-ImageChooser.prototype.setValue = function(image)
-{
+	setValue(image) {
 	this.value = image;
 	this.img.src = image.data;
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -138,9 +134,10 @@ ImageChooser.prototype.setValue = function(image)
  * @method setValue
  * @return {Object} Image URL.
  */
-ImageChooser.prototype.getValue = function()
-{
+	getValue() {
 	return this.value;
-};
+	}
+
+}
 
 export {ImageChooser};

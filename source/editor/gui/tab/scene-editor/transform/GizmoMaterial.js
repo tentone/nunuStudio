@@ -6,9 +6,9 @@ import {MeshBasicMaterial, FrontSide} from "three";
  * @class GizmoMaterial
  * @extends {MeshBasicMaterial}
  */
-function GizmoMaterial(parameters)
-{
-	MeshBasicMaterial.call(this);
+class GizmoMaterial extends MeshBasicMaterial {
+	constructor(parameters) {
+	super();
 
 	this.depthTest = false;
 	this.depthWrite = false;
@@ -19,9 +19,7 @@ function GizmoMaterial(parameters)
 
 	this.baseColor = this.color.clone();
 	this.baseOpacity = this.opacity;
-}
-
-GizmoMaterial.prototype = Object.create(MeshBasicMaterial.prototype);
+	}
 
 GizmoMaterial.red = new GizmoMaterial({color: 0xff0000});
 GizmoMaterial.green = new GizmoMaterial({color: 0x00ff00});
@@ -41,8 +39,7 @@ GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
  * @method highlight
  * @param {boolean} highlighted
  */
-GizmoMaterial.prototype.highlight = function(highlighted)
-{
+	highlight(highlighted) {
 	if (highlighted)
 	{
 		this.color.setRGB(1.0, 1.0, 0);
@@ -53,6 +50,8 @@ GizmoMaterial.prototype.highlight = function(highlighted)
 		this.color.copy(this.baseColor);
 		this.opacity = this.baseOpacity;
 	}
-};
+	}
+
+}
 
 export {GizmoMaterial};

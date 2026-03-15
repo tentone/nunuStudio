@@ -19,9 +19,9 @@ import {TreeNode} from "./TreeNode.js";
  * @param {TabGroup} container The container where this tab is inserted.
  * @param {number} index Index inside the container button array.
  */
-function TreeView(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, "Project Explorer", Global.FILE_PATH + "icons/misc/menu.png");
+class TreeView extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, "Project Explorer", Global.FILE_PATH + "icons/misc/menu.png");
 
 	var self = this;
 
@@ -37,9 +37,7 @@ function TreeView(parent, closeable, container, index)
 
 	this.program = null;
 	this.root = null;
-}
-
-TreeView.prototype = Object.create(TabComponent.prototype);
+	}
 
 /**
  * Select tree nodes by their name.
@@ -49,8 +47,7 @@ TreeView.prototype = Object.create(TabComponent.prototype);
  * @method selectByName
  * @param {string} search String with portion of the name to be found and filtered.
  */
-TreeView.prototype.selectByName = function(search)
-{
+	selectByName(search) {
 	search = search.toLowerCase();
 
 	Editor.clearSelection();
@@ -70,16 +67,14 @@ TreeView.prototype.selectByName = function(search)
 	}
 
 	filterRecursive(this.root);
-};
-
+	}
 
 /**
  * Attach a program to the tree view.
  *
  * @method attach
  */
-TreeView.prototype.attach = function(program)
-{
+	attach(program) {
 	if (this.program === program)
 	{
 		return;
@@ -97,7 +92,7 @@ TreeView.prototype.attach = function(program)
 	// Create program tree
 	this.buildTree();
 	this.updateChildPosition();
-};
+	}
 
 /**
  * Traverse the whole tree view and call the callback method.
@@ -107,8 +102,7 @@ TreeView.prototype.attach = function(program)
  * @method traverse
  * @param {Function} callback Callback function(treeNode)
  */
-TreeView.prototype.traverse = function(callback)
-{
+	traverse(callback) {
 	function traverse(node)
 	{
 		callback(node);
@@ -120,7 +114,7 @@ TreeView.prototype.traverse = function(callback)
 	}
 
 	traverse(this.root);
-};
+	}
 
 /**
  * Add new object to a parent in a specific position.
@@ -130,8 +124,7 @@ TreeView.prototype.traverse = function(callback)
  * @param {Object3D} parent Parent to insert the object.
  * @param {number} index Index to insert the object.
  */
-TreeView.prototype.addObject = function(object, parent, index)
-{
+	addObject(object, parent, index) {
 	var parentNode = null;
 	this.traverse(function(node)
 	{
@@ -160,7 +153,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 			insertObject(element, object.children[k]);
 		}
 	}
-};
+	}
 
 /**
  * Remove a object from the treeview.
@@ -169,8 +162,7 @@ TreeView.prototype.addObject = function(object, parent, index)
  * @param {Object3D} object Object to be removed from the tree.
  * @param {Object3D} parent Parent object.
  */
-TreeView.prototype.removeObject = function(object, parent)
-{
+	removeObject(object, parent) {
 	var parentNode = null;
 	this.traverse(function(node)
 	{
@@ -192,7 +184,7 @@ TreeView.prototype.removeObject = function(object, parent)
 	}
 
 	this.updateChildPosition();
-};
+	}
 
 /**
  * Move object in the tree, from a position to another position and parent.
@@ -203,20 +195,18 @@ TreeView.prototype.removeObject = function(object, parent)
  * @param {Object3D} newParent New parent to insert the object into.
  * @param {number} index New index to insert the object.
  */
-TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
-{
+	moveObject(object, oldParent, newParent, index) {
 	this.removeObject(object, oldParent);
 	this.addObject(object, newParent, index);
 	this.updateChildPosition();
-};
+	}
 
 /**
  * Fill the tree view with the attached object children.
  *
  * @method buildTree
  */
-TreeView.prototype.buildTree = function()
-{
+	buildTree() {
 	function fillTree(root, object)
 	{
 		var element = root.addObject(object);
@@ -241,15 +231,14 @@ TreeView.prototype.buildTree = function()
 	{
 		fillTree(this.root, this.program.children[i]);
 	}
-};
+	}
 
 /**
  * Update tree view children positions.
  *
  * @method updateChildPosition
  */
-TreeView.prototype.updateChildPosition = function()
-{
+	updateChildPosition() {
 	// Check if parent if folded (recursive)
 	function checkParentFolded(element)
 	{
@@ -308,14 +297,15 @@ TreeView.prototype.updateChildPosition = function()
 
 		this.size.y = updateChildPosition(this.root, this.search.size.y + 20, 1, this.root.folded);
 	}
-};
+	}
 
-TreeView.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.search.size.set(this.size.x, 25);
 	this.search.updateInterface();
-};
+	}
+
+}
 
 export {TreeView};

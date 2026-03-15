@@ -10,9 +10,9 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function TableForm(parent)
-{
-	Component.call(this, parent, "div");
+class TableForm extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 	
@@ -56,9 +56,7 @@ function TableForm(parent)
 	 */
 	this.rows = [];
 	this.rows.push([]);
-}
-
-TableForm.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set if the form should be automatically resized, and ajust overflow value.
@@ -66,33 +64,30 @@ TableForm.prototype = Object.create(Component.prototype);
  * @method setAutoSize
  * @param {boolean} autoSize
  */
-TableForm.prototype.setAutoSize = function(autoSize)
-{
+	setAutoSize(autoSize) {
 	this.autoSize = autoSize;
 	this.element.style.overflow = autoSize ? "visible" : "auto";
-};
+	}
 
 /**
  * Add a element to form (in actual row).
  *
  * @method add
  */
-TableForm.prototype.add = function(element)
-{
+	add(element) {
 	if (this.rows.length > 0)
 	{
 		this.rows[this.rows.length - 1].push(element);
 		element.attachTo(this);
 	}
-};
+	}
 
 /**
  * Create text element.
  *
  * @method addText
  */
-TableForm.prototype.addText = function(text, fit)
-{
+	addText(text, fit) {
 	var element = new Text(this);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
@@ -110,39 +105,36 @@ TableForm.prototype.addText = function(text, fit)
 	this.add(element);
 
 	return element;
-};
+	}
 
 /**
  * Create division.
  *
  * @method addDivision
  */
-TableForm.prototype.addDivision = function(x, y)
-{
+	addDivision(x, y) {
 	var division = new Division(this);
 	division.size.set(x, y);
 	this.add(division);
 
 	return division;
-};
+	}
 
 /**
  * Add new row to form.
  *
  * @method nextRow
  */
-TableForm.prototype.nextRow = function()
-{
+	nextRow() {
 	this.rows.push([]);
-};
+	}
 
 /**
  * Remove last row from form.
  *
  * @method removeLastRow
  */
-TableForm.prototype.removeLastRow = function()
-{
+	removeLastRow() {
 	if (this.rows.length > 0)
 	{
 		var row = this.rows.pop();
@@ -152,15 +144,14 @@ TableForm.prototype.removeLastRow = function()
 			row[i].destroy();
 		}
 	}
-};
+	}
 
 /**
  * Clear all elements from form.
  *
  * @method removeAll
  */
-TableForm.prototype.removeAll = function()
-{
+	removeAll() {
 	for (var i = 0; i < this.rows.length; i++)
 	{
 		for (var j = 0; j < this.rows[i].length; j++)
@@ -171,10 +162,9 @@ TableForm.prototype.removeAll = function()
 
 	this.rows = [];
 	this.rows.push([]);
-};
+	}
 
-TableForm.prototype.updateSize = function()
-{
+	updateSize() {
 	var x = 0, y = 0;
 	var sizeX = 0;
 
@@ -232,7 +222,9 @@ TableForm.prototype.updateSize = function()
 		this.size.set(sizeX, y);
 	}
 
-	Component.prototype.updateSize.call(this);
-};
+	super.updateSize();
+	}
+
+}
 
 export {TableForm};

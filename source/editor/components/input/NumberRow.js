@@ -8,9 +8,9 @@ import {NumberBox} from "./NumberBox.js";
  * @class NumberRow
  * @extends {Component}
  */
-function NumberRow(parent)
-{
-	Component.call(this, parent, "div");
+class NumberRow extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	/**
 	 * Array with the values objects.
@@ -29,9 +29,7 @@ function NumberRow(parent)
 	 * @type {number}
 	 */
 	this.labelSize = 15;
-}
-
-NumberRow.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set the values step.
@@ -39,15 +37,14 @@ NumberRow.prototype = Object.create(Component.prototype);
  * @method setStep
  * @param {number} value
  */
-NumberRow.prototype.setStep = function(value)
-{
+	setStep(value) {
 	var value = String(value);
 
 	for (var i = 0; i < this.values.length; i++)
 	{
 		this.values[i].input.setStep(value);
 	}
-};
+	}
 
 /**
  * Set the values range
@@ -56,8 +53,7 @@ NumberRow.prototype.setStep = function(value)
  * @param {number} min
  * @param {number} max
  */
-NumberRow.prototype.setRange = function(min, max)
-{
+	setRange(min, max) {
  	var min = String(min);
  	var max = String(max);
 
@@ -65,7 +61,7 @@ NumberRow.prototype.setRange = function(min, max)
 	{
 		this.values[i].input.setRange(min, max);
 	}
-};
+	}
 
 /**
  * Add value to the box
@@ -74,8 +70,7 @@ NumberRow.prototype.setRange = function(min, max)
  * @param {string} label Label of de attribute.
  * @return {NumberBox} The input number box created for this value.
  */
-NumberRow.prototype.addValue = function(label)
-{
+	addValue(label) {
 	var input = new NumberBox(this);
 
 	var text = new Text(this);
@@ -88,11 +83,10 @@ NumberRow.prototype.addValue = function(label)
 		});
 
 	return input;
-};
+	}
 
-NumberRow.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	var width = Math.round((this.size.x - this.values.length * this.labelSize) / this.values.length);
 	var x = 0;
@@ -111,6 +105,8 @@ NumberRow.prototype.updateSize = function()
 
 		x += width + this.labelSize;
 	}
-};
+	}
+
+}
 
 export {NumberRow};

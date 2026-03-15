@@ -15,9 +15,9 @@ import {CheckBox} from "../../../components/input/CheckBox.js";
 import {Division} from "../../../components/Division.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
 
-function CubeTextureEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/cube.png");
+class CubeTextureEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/cube.png");
 
 	var self = this;
 
@@ -282,18 +282,14 @@ function CubeTextureEditor(parent, closeable, container, index)
 		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.bottom);
-}
+	}
 
-CubeTextureEditor.prototype = Object.create(TabComponent.prototype);
-
-CubeTextureEditor.prototype.updateMaterial = function()
-{
+	updateMaterial() {
 	this.texture.needsUpdate = true;
-};
+	}
 
 // Update input elements
-CubeTextureEditor.prototype.updateMode = function()
-{
+	updateMode() {
 	var mode = this.mode.getValue();
 
 	if (mode === CubeTexture.CUBE)
@@ -327,37 +323,32 @@ CubeTextureEditor.prototype.updateMode = function()
 	}
 
 	this.image.updateInterface();
-};
+	}
 
-CubeTextureEditor.prototype.isAttached = function(texture)
-{
+	isAttached(texture) {
 	return this.texture === texture;
-};
+	}
 
-CubeTextureEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.mouse.create();
-};
+	}
 
-CubeTextureEditor.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 	
 	this.mouse.dispose();
-};
+	}
 
-CubeTextureEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.mouse.dispose();
 	this.canvas.destroy();
-};
+	}
 
-CubeTextureEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.texture !== null)
 	{
 		// Set name
@@ -373,10 +364,9 @@ CubeTextureEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
-CubeTextureEditor.prototype.attach = function(texture)
-{
+	attach(texture) {
 	this.texture = texture;
 	this.updateMetadata();
 
@@ -405,10 +395,9 @@ CubeTextureEditor.prototype.attach = function(texture)
 	}
 
 	this.updateMode();
-};
+	}
 
-CubeTextureEditor.prototype.update = function()
-{
+	update() {
 	this.mouse.update();
 	
 	if (this.mouse.buttonPressed(Mouse.LEFT))
@@ -417,13 +406,14 @@ CubeTextureEditor.prototype.update = function()
 	}
 
 	this.canvas.renderer.render(this.scene, this.camera);
-};
+	}
 
-CubeTextureEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.division.size.copy(this.size);
 	this.division.updateInterface();
-};
+	}
+
+}
 export {CubeTextureEditor};

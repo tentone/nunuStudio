@@ -11,9 +11,9 @@ import {ButtonIcon} from "./ButtonIcon.js";
  * @extends {ButtonIcon}
  * @param {Component} parent Parent element.
  */
-function ButtonDrawer(parent)
-{
-	ButtonIcon.call(this, parent);
+class ButtonDrawer extends ButtonIcon {
+	constructor(parent) {
+	super(parent);
 
 	this.element.style.zIndex = "200";
 	this.element.style.overflow = "visible";
@@ -88,19 +88,16 @@ function ButtonDrawer(parent)
 	{
 		self.setExpanded(false);
 	});
-}
+	}
 
-ButtonDrawer.prototype = Object.create(ButtonIcon.prototype);
-
-ButtonDrawer.prototype.clear = function()
-{
+	clear() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].destroy();
 	}
 	
 	this.options = [];
-};
+	}
 
 /**
  * Expand or close the button drawer panel.
@@ -108,11 +105,10 @@ ButtonDrawer.prototype.clear = function()
  * @method setExpanded
  * @param {boolean} expanded
  */
-ButtonDrawer.prototype.setExpanded = function(expanded)
-{
+	setExpanded(expanded) {
 	this.expanded = expanded;
 	this.panel.element.style.display = this.expanded ? "block" : "none";
-};
+	}
 
 /** 
  * Insert new option from already created element.
@@ -120,11 +116,10 @@ ButtonDrawer.prototype.setExpanded = function(expanded)
  * @method insertOption
  * @param {Component} Element of the option to be inserted in the drawer
  */
-ButtonDrawer.prototype.insertOption = function(element)
-{
+	insertOption(element) {
 	element.attachTo(this.panel);
 	this.options.push(element);
-};
+	}
 
 /**
  * Add new option to the menu.
@@ -134,8 +129,7 @@ ButtonDrawer.prototype.insertOption = function(element)
  * @param {Function} callback
  * @param {string} altText
  */
-ButtonDrawer.prototype.addOption = function(image, callback, altText)
-{
+	addOption(image, callback, altText) {
 	var self = this;
 
 	var button = new ButtonIcon(this.panel);
@@ -153,7 +147,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 	}
 
 	this.options.push(button);
-};
+	}
 
 /**
  * Remove an option from the menu.
@@ -161,22 +155,20 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
  * @method removeOption
  * @param {number} index
  */
-ButtonDrawer.prototype.removeOption = function(index)
-{
+	removeOption(index) {
 	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 	}
-};
+	}
 
 /**
  * Updates drawer panel size based on the number of options available.
  * 
  * @method updatePanelSize
  */
-ButtonDrawer.prototype.updatePanelSize = function()
-{
+	updatePanelSize() {
 	var optionsPerLine = this.options.length < this.optionsPerLine ? this.options.length : this.optionsPerLine;
 
 	this.panel.size.x = this.optionsSize.x * optionsPerLine;
@@ -185,7 +177,7 @@ ButtonDrawer.prototype.updatePanelSize = function()
 
 	this.panel.position.set(this.optionsSize.x, 0);
 	this.panel.updatePosition();
-};
+	}
 
 /**
  * Update drawer options position and size.
@@ -194,8 +186,7 @@ ButtonDrawer.prototype.updatePanelSize = function()
  *
  * @method updateOptions
  */
-ButtonDrawer.prototype.updateOptions = function()
-{
+	updateOptions() {
 	this.updatePanelSize();
 
 	var optionsPerLine = this.options.length < this.optionsPerLine ? this.options.length : this.optionsPerLine;
@@ -207,11 +198,12 @@ ButtonDrawer.prototype.updateOptions = function()
 		this.options[i].position.y = this.optionsSize.y * Math.floor(i / optionsPerLine);
 		this.options[i].updateInterface();
 	}
-};
+	}
 
-ButtonDrawer.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.display = this.visible ? "block" : "none";
-};
+	}
+
+}
 
 export {ButtonDrawer};

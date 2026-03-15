@@ -5,9 +5,9 @@ import {Locale} from "../../../locale/LocaleManager.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {SideBar} from "./SideBar.js";
 
-function NodeEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
+class NodeEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 	
@@ -59,31 +59,25 @@ function NodeEditor(parent, closeable, container, index)
 	 * @type {ViewportControls}
 	 */
 	this.controls = new ViewportControls(this.viewport);
-}
+	}
 
-NodeEditor.prototype = Object.create(TabComponent.prototype);
-
-NodeEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.node !== null)
 	{
 		this.setName(this.node.name);
 	}	
-};
+	}
 
-NodeEditor.prototype.attach = function(node)
-{
+	attach(node) {
 	this.node = node;
 	this.updateMetadata();
-};
+	}
 
-NodeEditor.prototype.isAttached = function(node)
-{
+	isAttached(node) {
 	return this.node === node;
-};
+	}
 
-NodeEditor.prototype.update = function()
-{
+	update() {
 	if (this.node !== null && this.node.graph !== null)
 	{
 		if (this.canvas.pointerInside)
@@ -93,11 +87,10 @@ NodeEditor.prototype.update = function()
 
 		this.renderer.update(this.node.graph, this.viewport);
 	}
-};
+	}
 
-NodeEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.sideBar.position.set(0, 0);
 	this.sideBar.size.set(40, this.size.y);
@@ -109,6 +102,8 @@ NodeEditor.prototype.updateSize = function()
 	this.canvas.position.set(this.sideBar.size.x, 0);
 	this.canvas.size.set(width, height);
 	this.canvas.updateInterface();
-};
+	}
+
+}
 
 export {NodeEditor};

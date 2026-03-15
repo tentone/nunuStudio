@@ -9,12 +9,11 @@ import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function MeshMaterialEditor(parent, closeable, container, index)
-{
-	MaterialEditor.call(this, parent, closeable, container, index);
+class MeshMaterialEditor extends MaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 	
 	var self = this;
-
 
 	// Skinning
 	this.form.addText(Locale.skinning);
@@ -120,7 +119,6 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-
 	// Preview scene
 	this.sky = new Sky();
 	this.scene.add(this.sky);
@@ -214,13 +212,10 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	});
 	this.previewForm.add(this.ambientLightColor);
 	this.previewForm.nextRow();
-}
+	}
 
-MeshMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-
-MeshMaterialEditor.prototype.attach = function(material, asset)
-{
-	MaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.sky.visible = material.envMap === null;
 	this.mesh.material = material;
@@ -233,6 +228,8 @@ MeshMaterialEditor.prototype.attach = function(material, asset)
 	this.wireframeLinejoin.setValue(material.wireframeLinejoin);
 	this.wireframeLinewidth.setValue(material.wireframeLinewidth);
 	this.flatShading.setValue(material.flatShading);
-};
+	}
+
+}
 
 export {MeshMaterialEditor};

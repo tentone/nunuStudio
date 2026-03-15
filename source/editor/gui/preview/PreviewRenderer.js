@@ -6,8 +6,8 @@ import {Component} from "../../components/Component.js";
  *
  * @class PreviewRenderer
  */
-function PreviewRenderer()
-{
+class PreviewRenderer {
+	constructor() {
 	/**
 	 * WebGL renderer used to generate the preview.
 	 *
@@ -32,7 +32,7 @@ function PreviewRenderer()
 	 * @type {Scene}
 	 */
 	this.scene = new Scene();
-}
+	}
 
 /**
  * Render the thumbnail to internal canvas and copy image to html image element.
@@ -44,7 +44,7 @@ function PreviewRenderer()
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function() {};
+	render() {}
 
 /**
  * Set thumbnail renderer size.
@@ -53,10 +53,9 @@ PreviewRenderer.prototype.render = function() {};
  * @param {number} x
  * @param {number} y
  */
-PreviewRenderer.prototype.setSize = function(x, y)
-{
+	setSize(x, y) {
 	this.renderer.setSize(x, y);
-};
+	}
 
 /**
  * Render the thumbnail to internal canvas and copy image to html image element.
@@ -67,6 +66,8 @@ PreviewRenderer.prototype.setSize = function(x, y)
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function() {};
+	render() {}
+
+}
 
 export {PreviewRenderer};

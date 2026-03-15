@@ -1,12 +1,12 @@
-import {CircleBufferGeometry, CircleGeometry, BufferGeometry} from "three";
+import {CircleGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function CircleGeometryForm(form, object)
-{
+class CircleGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 
@@ -65,21 +65,21 @@ function CircleGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-CircleGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? CircleBufferGeometry : CircleGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? CircleGeometry : CircleGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
-};
+	}
 
-CircleGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radius.setValue(this.object.geometry.parameters.radius || 1);
 	this.segments.setValue(this.object.geometry.parameters.segments || 32);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {CircleGeometryForm};

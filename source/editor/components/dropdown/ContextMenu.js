@@ -12,9 +12,9 @@ import {ButtonMenu} from "./ButtonMenu.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ContextMenu(parent)
-{
-	Component.call(this, parent, "div");
+class ContextMenu extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -34,9 +34,7 @@ function ContextMenu(parent)
 	 * @type {Array}
 	 */
 	this.options = [];
-}
-
-ContextMenu.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set the text of this context menu.
@@ -44,10 +42,9 @@ ContextMenu.prototype = Object.create(Component.prototype);
  * @method setText
  * @param {string} text
  */
-ContextMenu.prototype.setText = function(text)
-{
+	setText(text) {
 	this.text.setText(text);
-};
+	}
 
 /**
  * Remove option from context menu.
@@ -55,14 +52,13 @@ ContextMenu.prototype.setText = function(text)
  * @method removeOption
  * @param {number} index
  */
-ContextMenu.prototype.removeOption = function(index)
-{
+	removeOption(index) {
 	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 	}
-};
+	}
 
 /**
  * Add new option to context menu
@@ -71,8 +67,7 @@ ContextMenu.prototype.removeOption = function(index)
  * @param {string} name of the option
  * @param {Function} callback Callback function
  */
-ContextMenu.prototype.addOption = function(name, callback)
-{
+	addOption(name, callback) {
 	var button = new ButtonMenu(this);
 	button.setStyle("zIndex", "10000");
 	button.setText(name);
@@ -87,7 +82,7 @@ ContextMenu.prototype.addOption = function(name, callback)
 	});
 	
 	this.options.push(button);
-};
+	}
 
 /**
  * Add new menu to context menu
@@ -96,8 +91,7 @@ ContextMenu.prototype.addOption = function(name, callback)
  * @param {string} name of the option.
  * @return {DropdownMenu} The new menu created.
  */
-ContextMenu.prototype.addMenu = function(name)
-{
+	addMenu(name) {
 	var menu = new DropdownMenu(this);
 	menu.setText(name);
 	menu.setDirection(DropdownMenu.LEFT);
@@ -108,33 +102,30 @@ ContextMenu.prototype.addMenu = function(name)
 	this.options.push(menu);
 
 	return menu;
-};
+	}
 
 /**
  * Update all options in the menu.
  * 
  * @method updateOptions
  */
-ContextMenu.prototype.updateOptions = function()
-{
+	updateOptions() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.copy(this.size);
 		this.options[i].position.set(0, this.size.y * i);
 		this.options[i].updateInterface();
 	}
-};
+	}
 
-ContextMenu.prototype.updateSize = function()
-{
+	updateSize() {
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y * this.options.length + "px";
 
 	this.updateOptions();
-};
+	}
 
-ContextMenu.prototype.updatePosition = function()
-{
+	updatePosition() {
 	this.element.style.top = this.position.y - this.offset.y + "px";
 	this.element.style.left = this.position.x - this.offset.x + "px";
 
@@ -148,6 +139,8 @@ ContextMenu.prototype.updatePosition = function()
 	{
 		this.element.style.top = this.position.y - this.offset.y - out.y + "px";
 	}
-};
+	}
+
+}
 
 export {ContextMenu};

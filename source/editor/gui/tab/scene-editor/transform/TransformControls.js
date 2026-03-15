@@ -15,9 +15,9 @@ import {TransformGizmo} from "./gizmo/TransformGizmo.js";
  * @param {Canvas} canvas
  * @param {Mouse} mouse
  */
-function TransformControls(camera, canvas, mouse)
-{
-	Object3D.call(this);
+class TransformControls extends Object3D {
+	constructor(camera, canvas, mouse) {
+	super();
 
 	this.visible = false;
 
@@ -230,7 +230,7 @@ function TransformControls(camera, canvas, mouse)
 	this.quaternionY = new Quaternion();
 	this.quaternionZ = new Quaternion();
 	this.quaternionE = new Quaternion();
-}
+	}
 
 /**
  * Attributes that need to be stored for each object to keep their transform state.
@@ -260,16 +260,13 @@ TransformControls.SCALE = "scale";
 TransformControls.LOCAL = "local";
 TransformControls.WORLD = "world";
 
-TransformControls.prototype = Object.create(Object3D.prototype);
-
 /**
  * Attach a list of objects to the transform controls.
  *
  * @method attach
  * @param {Array} objects Array of objects to be attached.
  */
-TransformControls.prototype.attach = function(objects)
-{
+	attach(objects) {
 	this.objects = [];
 
 	for (var i = 0; i < objects.length; i++)
@@ -294,19 +291,18 @@ TransformControls.prototype.attach = function(objects)
 	{
 		this.clear();
 	}
-};
+	}
 
 /**
  * Detach/clear all objects attached to the transform controls.
  * 
  * @method clear
  */
-TransformControls.prototype.clear = function()
-{
+	clear() {
 	this.objects = [];
 	this.visible = false;
 	this.axis = null;
-};
+	}
 
 /**
  * Set canvas where the scene is being rendered.
@@ -314,10 +310,9 @@ TransformControls.prototype.clear = function()
  * @method setCanvas
  * @param {DOM} canvas Canvas element.
  */
-TransformControls.prototype.setCanvas = function(canvas)
-{
+	setCanvas(canvas) {
 	this.canvas = canvas;
-};
+	}
 
 /**
  * Set the transform gizmo to be used by the transform controls.
@@ -325,8 +320,7 @@ TransformControls.prototype.setCanvas = function(canvas)
  * @method setMode
  * @param {string} mode Name of the gizmo to be activated.
  */
-TransformControls.prototype.setMode = function(mode)
-{
+	setMode(mode) {
 	if (this.mode === mode)
 	{
 		return;
@@ -367,9 +361,8 @@ TransformControls.prototype.setMode = function(mode)
 		this.add(this.gizmo);
 	}
 
-
 	this.visible = this.objects.length > 0;
-};
+	}
 
 /**
  * Update the controls using mouse input provided takes camera of all the functionality of the controls.
@@ -378,8 +371,7 @@ TransformControls.prototype.setMode = function(mode)
  *
  * @method update
  */
-TransformControls.prototype.update = function()
-{
+	update() {
 	if (this.mouse.buttonJustPressed(Mouse.LEFT))
 	{
 		this.onPointerDown();
@@ -399,15 +391,14 @@ TransformControls.prototype.update = function()
 	this.updatePose();
 
 	return this.editing;
-};
+	}
 
 /**
  * Update the pose and transform of the controls and gizmos based on the selected objects and view camera.
  *
  * @method updatePose
  */
-TransformControls.prototype.updatePose = function()
-{
+	updatePose() {
 	if (this.objects.length === 0 || this.gizmo === null)
 	{
 		return;
@@ -450,7 +441,7 @@ TransformControls.prototype.updatePose = function()
 
 	// Update gizmo specific pose
 	this.gizmo.updatePose(this);
-};
+	}
 
 /**
  * Check if the pointer if over any of the picker objects.
@@ -459,8 +450,7 @@ TransformControls.prototype.updatePose = function()
  *
  * @method onPointerHover
  */
-TransformControls.prototype.onPointerHover = function()
-{
+	onPointerHover() {
 	if (this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
@@ -479,10 +469,9 @@ TransformControls.prototype.onPointerHover = function()
 	{
 		this.axis = null;
 	}
-};
+	}
 
-TransformControls.prototype.onPointerDown = function()
-{
+	onPointerDown() {
 	if (this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
@@ -520,7 +509,7 @@ TransformControls.prototype.onPointerDown = function()
 	}
 
 	this.dragging = true;
-};
+	}
 
 /**
  * Called whenever the mouse is moved inside of the canvas.
@@ -529,15 +518,14 @@ TransformControls.prototype.onPointerDown = function()
  *
  * @method onPointerMove
  */
-TransformControls.prototype.onPointerMove = function()
-{
+	onPointerMove() {
 	if (this.objects.length === 0 || this.axis === null || this.dragging === false || this.gizmo === null)
 	{
 		return;
 	}
 
 	this.gizmo.transformObject(this);
-};
+	}
 
 /**
  * Method called when user input button is released.
@@ -546,8 +534,7 @@ TransformControls.prototype.onPointerMove = function()
  * 
  * @method onPointerUp
  */
-TransformControls.prototype.onPointerUp = function()
-{
+	onPointerUp() {
 	if (this.editing)
 	{
 		this.gizmo.applyChanges(this);
@@ -555,7 +542,7 @@ TransformControls.prototype.onPointerUp = function()
 
 	this.editing = false;
 	this.dragging = false;
-};
+	}
 
 /**
  * Check if the mouse is currently intersecting objects inside of the canvas.
@@ -564,8 +551,7 @@ TransformControls.prototype.onPointerUp = function()
  * @param {Array} objects Object to be tested.
  * @return {Object} Object intersected is any, false otherwise.
  */
-TransformControls.prototype.intersectObjects = function(objects)
-{
+	intersectObjects(objects) {
 	var rect = this.canvas.getBoundingClientRect();
 	var x = this.mouse.position.x / rect.width;
 	var y = this.mouse.position.y / rect.height;
@@ -576,6 +562,8 @@ TransformControls.prototype.intersectObjects = function(objects)
 	var intersections = this.raycaster.intersectObjects(objects, true);
 
 	return intersections.length > 0 ? intersections[0] : false;
-};
+	}
+
+}
 
 export {TransformControls};

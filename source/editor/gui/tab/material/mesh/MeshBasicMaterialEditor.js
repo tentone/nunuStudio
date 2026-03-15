@@ -8,10 +8,9 @@ import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-
-function MeshBasicMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshBasicMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -177,13 +176,10 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
-}
+	}
 
-MeshBasicMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshBasicMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.map.setValue(material.map);
 	this.alphaMap.setValue(material.alphaMap);
@@ -198,6 +194,8 @@ MeshBasicMaterialEditor.prototype.attach = function(material, asset)
 	this.refractionRatio.setValue(material.refractionRatio || 0);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
-};
+	}
+
+}
 
 export {MeshBasicMaterialEditor};

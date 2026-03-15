@@ -5,10 +5,10 @@
  * 
  * @class Action
  */
-function Action()
-{
+class Action {
+	constructor() {
 	this.id = Action._id++;
-}
+	}
 
 Action._id = 1;
 
@@ -19,7 +19,7 @@ Action._id = 1;
  *
  * @method apply
  */
-Action.prototype.apply = function() {};
+	apply() {}
 
 /** 
  * Revert the action.
@@ -28,6 +28,8 @@ Action.prototype.apply = function() {};
  *
  * @method revert
  */
-Action.prototype.revert = function() {};
+	revert() {}
+
+}
 
 export {Action};

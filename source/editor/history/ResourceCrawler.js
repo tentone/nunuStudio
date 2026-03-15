@@ -1,4 +1,4 @@
-import {Texture, Object3D, Material, MultiMaterial, Mesh, SkinnedMesh, BufferGeometry, Geometry} from "three";
+import {Texture, Object3D, Material, MultiMaterial, Mesh, SkinnedMesh, BufferGeometry} from "three";
 import {Video} from "../../core/resources/Video.js";
 import {ResourceManager} from "../../core/resources/ResourceManager.js";
 import {ResourceContainer} from "../../core/resources/ResourceContainer.js";
@@ -105,7 +105,6 @@ ResourceCrawler.swapResource = function(manager, category, oldResource, newResou
 ResourceCrawler.removeDuplicated = function(object)
 {
 	// Check if two resources are similar
-
 
 	// Fetch resources to be optimized
 	ResourceCrawler.traverseDeep(object, function(value)

@@ -1,12 +1,12 @@
-import {PlaneBufferGeometry, PlaneGeometry, BufferGeometry} from "three";
+import {PlaneGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberRow} from "../../../../components/input/NumberRow.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function PlaneGeometryForm(form, object)
-{
+class PlaneGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -59,21 +59,21 @@ function PlaneGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-PlaneGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? PlaneBufferGeometry : PlaneGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? PlaneGeometry : PlaneGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
-};
+	}
 
-PlaneGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.width.setValue(this.object.geometry.parameters.width || 1);
 	this.height.setValue(this.object.geometry.parameters.height || 1);
 	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 1);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {PlaneGeometryForm};

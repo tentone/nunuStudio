@@ -9,9 +9,9 @@ import {CodeEditor} from "./CodeEditor.js";
  * @class TextEditor
  * @extends {CodeEditor}
  */
-function TextEditor(parent, closeable, container, index)
-{
-	CodeEditor.call(this, parent, closeable, container, index);
+class TextEditor extends CodeEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -42,12 +42,9 @@ function TextEditor(parent, closeable, container, index)
 	});
 
 	this.resource = null;
-}
+	}
 
-TextEditor.prototype = Object.create(CodeEditor.prototype);
-
-TextEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	this.setName(this.resource.name);
 
 	// If not found close tab
@@ -55,22 +52,19 @@ TextEditor.prototype.updateMetadata = function()
 	{
 		this.close();
 	}
-};
+	}
 
-TextEditor.prototype.activate = function()
-{
-	CodeEditor.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.updateCode();
-};
+	}
 
-TextEditor.prototype.isAttached = function(resource)
-{
+	isAttached(resource) {
 	return this.resource === resource;
-};
+	}
 
-TextEditor.prototype.attach = function(resource)
-{
+	attach(resource) {
 	this.resource = resource;
 	this.setText(resource.data);
 
@@ -93,15 +87,16 @@ TextEditor.prototype.attach = function(resource)
 	
 	this.updateMetadata();
 	this.updateSettings();
-};
+	}
 
 // Update attached script
-TextEditor.prototype.updateCode = function()
-{
+	updateCode() {
 	if (this.resource !== null)
 	{
 		this.resource.data = this.code.getValue();
 	}
-};
+	}
+
+}
 
 export {TextEditor};

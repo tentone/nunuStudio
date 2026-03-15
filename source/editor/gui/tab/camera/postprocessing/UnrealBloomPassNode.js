@@ -4,9 +4,9 @@ import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {PassNode} from "./PassNode.js";
 
-function UnrealBloomPassNode(parent)
-{
-	PassNode.call(this, parent, "Unreal Bloom");
+class UnrealBloomPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Unreal Bloom");
 
 	var self = this;
 
@@ -49,19 +49,18 @@ function UnrealBloomPassNode(parent)
 	});
 	this.add(this.smooth);
 	this.nextRow();
-}
-
-UnrealBloomPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("UnrealBloom", UnrealBloomPassNode);
 
-UnrealBloomPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.strength.setValue(pass.strength);
 	this.radius.setValue(pass.radius);
 	this.threshold.setValue(pass.threshold);
 	this.smooth.setValue(pass.smooth);
-};
+	}
+
+}
 export {UnrealBloomPassNode};

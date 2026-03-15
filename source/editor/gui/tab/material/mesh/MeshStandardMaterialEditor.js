@@ -11,10 +11,9 @@ import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-
-function MeshStandardMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshStandardMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -322,13 +321,10 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
-}
+	}
 
-MeshStandardMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshStandardMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.roughness.setValue(material.roughness);
 	this.metalness.setValue(material.metalness);
@@ -354,5 +350,7 @@ MeshStandardMaterialEditor.prototype.attach = function(material, asset)
 	this.refractionRatio.setValue(material.refractionRatio);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
-};
+	}
+
+}
 export {MeshStandardMaterialEditor};

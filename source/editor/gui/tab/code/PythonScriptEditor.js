@@ -7,9 +7,9 @@ import {CodeEditor} from "./CodeEditor.js";
  * @class PythonScriptEditor
  * @extends {CodeEditor}
  */
-function PythonScriptEditor(parent, closeable, container, index)
-{
-	CodeEditor.call(this, parent, closeable, container, index);
+class PythonScriptEditor extends CodeEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -57,12 +57,9 @@ function PythonScriptEditor(parent, closeable, container, index)
 	 * @type {Script}
 	 */
 	this.script = null;
-}
+	}
 
-PythonScriptEditor.prototype = Object.create(CodeEditor.prototype);
-
-PythonScriptEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	// Name
 	this.setName(this.script.name);
 
@@ -88,38 +85,36 @@ PythonScriptEditor.prototype.updateMetadata = function()
 	{
 		this.close();
 	}
-};
+	}
 
-PythonScriptEditor.prototype.activate = function()
-{
-	CodeEditor.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.updateCode();
-};
+	}
 
-PythonScriptEditor.prototype.isAttached = function(script)
-{
+	isAttached(script) {
 	return this.script === script;
-};
+	}
 
-PythonScriptEditor.prototype.attach = function(script)
-{
+	attach(script) {
 	this.script = script;
 	this.setText(script.code);
 	this.updateMetadata();
-};
+	}
 
 /**
  * Update the attached object script code.
  *
  * @method updateCode
  */
-PythonScriptEditor.prototype.updateCode = function()
-{
+	updateCode() {
 	if (this.script !== null)
 	{
 		this.script.code = this.code.getValue();
 	}
-};
+	}
+
+}
 
 export {PythonScriptEditor};

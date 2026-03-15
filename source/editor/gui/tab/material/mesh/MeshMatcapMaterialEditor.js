@@ -9,10 +9,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-
-function MeshMatcapMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshMatcapMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -155,13 +154,10 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
-}
+	}
 
-MeshMatcapMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshMatcapMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.matcap.setValue(material.matcap);
 	this.map.setValue(material.map);
@@ -174,5 +170,7 @@ MeshMatcapMaterialEditor.prototype.attach = function(material, asset)
 	this.displacementScale.setValue(material.displacementScale);
 	this.displacementBias.setValue(material.displacementBias);
 	this.alphaMap.setValue(material.alphaMap);
-};
+	}
+
+}
 export {MeshMatcapMaterialEditor};

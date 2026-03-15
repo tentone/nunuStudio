@@ -8,9 +8,9 @@ import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function PhysicsInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class PhysicsInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -170,13 +170,10 @@ function PhysicsInspector(parent, object)
 	});
 	this.form.add(this.sleepTimeLimit);
 	this.form.nextRow();
-}
+	}
 
-PhysicsInspector.prototype = Object.create(ObjectInspector.prototype);
-
-PhysicsInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.mode.setValue(this.object.mode);
 	this.bodyType.setValue(this.object.body.type);
@@ -188,6 +185,8 @@ PhysicsInspector.prototype.updateInspector = function()
 	this.sleepSpeedLimit.setValue(this.object.body.sleepSpeedLimit);
 	this.fixedRotation.setValue(this.object.body.fixedRotation);
 	this.collisionFilterGroup.setValue(this.object.body.collisionFilterGroup);
-};
+	}
+
+}
 
 export {PhysicsInspector};

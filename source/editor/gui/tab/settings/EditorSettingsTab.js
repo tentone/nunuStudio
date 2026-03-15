@@ -10,10 +10,9 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 
-
-function EditorSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.editor, Global.FILE_PATH + "icons/misc/scene.png");
+class EditorSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.editor, Global.FILE_PATH + "icons/misc/scene.png");
 
 	this.element.style.overflow = "auto";
 
@@ -384,12 +383,9 @@ function EditorSettingsTab(parent, closeable, container, index)
 	
 	// Update form
 	this.form.updateInterface();
-}
+	}
 
-EditorSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-EditorSettingsTab.prototype.activate = function()
-{
+	activate() {
 	// Inspector
 	this.filePreviewSize.setValue(Editor.settings.general.filePreviewSize);
 	this.showUUID.setValue(Editor.settings.general.showUUID);
@@ -425,13 +421,14 @@ EditorSettingsTab.prototype.activate = function()
 	// Transformations
 	this.keepTransformMove.setValue(Editor.settings.editor.keepTransformMove);
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
-};
+	}
 
-EditorSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {EditorSettingsTab};

@@ -11,9 +11,9 @@ import {FormSnippet} from "./FormSnippet.js";
  * @class LightShadowFormSnippet
  * @extends {FormSnippet}
  */
-function LightShadowFormSnippet(form, object)
-{
-	FormSnippet.call(this, form, object);
+class LightShadowFormSnippet extends FormSnippet {
+	constructor(form, object) {
+	super(form, object);
 
 	var self = this;
 
@@ -70,7 +70,6 @@ function LightShadowFormSnippet(form, object)
 	});
 	this.form.add(this.radius);
 	this.form.nextRow();
-
 
 	// Camera near
 	this.form.addText(Locale.near);
@@ -149,12 +148,9 @@ function LightShadowFormSnippet(form, object)
 	});
 	this.form.add(this.cameraBottom);
 	this.form.nextRow();
-}
+	}
 
-LightShadowFormSnippet.prototype = Object.create(FormSnippet.prototype);
-
-LightShadowFormSnippet.prototype.updateValues = function()
-{
+	updateValues() {
 	this.bias.setValue(this.object.shadow.bias);
 	this.radius.setValue(this.object.shadow.radius);
 	this.width.setValue(this.object.shadow.mapSize.width);
@@ -165,6 +161,8 @@ LightShadowFormSnippet.prototype.updateValues = function()
 	this.cameraRight.setValue(this.object.shadow.camera.right);
 	this.cameraTop.setValue(this.object.shadow.camera.top);
 	this.cameraBottom.setValue(this.object.shadow.camera.bottom);
-};
+	}
+
+}
 
 export {LightShadowFormSnippet};

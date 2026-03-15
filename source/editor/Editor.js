@@ -1,4 +1,4 @@
-import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
+import {Object3D, Material, Texture, BufferGeometry, Shape, MathUtils, BoxGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
 import {StaticPair} from "@as-com/pson";
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";
@@ -593,7 +593,6 @@ Editor.addObjects = function(objects, parent)
 	Editor.addAction(new ActionBundle(actions));
 };
 
-
 /**
  * Rename object, if none passed as argument selected object is used.
  *
@@ -624,7 +623,6 @@ Editor.renameObject = function(object)
 		}
 	}
 };
-
 
 /**
  * Delete object from the editor, and creates an action in the editor history.
@@ -733,7 +731,6 @@ Editor.copyObject = function(object)
 		"text"
 	);
 
-
 };
 
 /**
@@ -792,7 +789,7 @@ Editor.pasteObject = function(target)
 			var obj = new ObjectLoader().parse(data[i]);
 			obj.traverse(function(child) 
 			{
-				child.uuid = Math.generateUUID();
+				child.uuid = MathUtils.generateUUID();
 			});
 			objs.push(obj);
 		}
@@ -869,7 +866,7 @@ Editor.createDefaultResouces = function()
 	Editor.defaultImageTerrain = new Image(Global.FILE_PATH + "terrain.png");
 	Editor.defaultImageTerrain.name = "terrain";
 
-	Editor.defaultGeometry = new BoxBufferGeometry(1, 1, 1);
+	Editor.defaultGeometry = new BoxGeometry(1, 1, 1);
 	Editor.defaultGeometry.name = "box";
 
 	Editor.defaultMaterial = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
@@ -976,7 +973,7 @@ Editor.addDefaultScene = function(material)
 	scene.add(model);
 
 	// Floor
-	var ground = new BoxBufferGeometry(20, 1, 20);
+	var ground = new BoxGeometry(20, 1, 20);
 	ground.name = "ground";
 
 	model = new Mesh(ground, material);

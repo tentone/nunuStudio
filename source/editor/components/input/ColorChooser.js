@@ -1,9 +1,9 @@
 import {Color} from "three";
 import {Component} from "../Component.js";
 
-function ColorChooser(parent)
-{
-	Component.call(this, parent, "input");
+class ColorChooser extends Component {
+	constructor(parent) {
+	super(parent, "input");
 
 	this.element.type = "color";
 	this.element.style.outline = "none";
@@ -24,9 +24,7 @@ function ColorChooser(parent)
 	 * @type {Function}
 	 */
 	this.onChange = null;
-}
-
-ColorChooser.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -34,10 +32,9 @@ ColorChooser.prototype = Object.create(Component.prototype);
  * @method setOnChange
  * @param {Function} onChange
  */
-ColorChooser.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.element.onchange = onChange;
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -47,8 +44,7 @@ ColorChooser.prototype.setOnChange = function(onChange)
  * @param {number} g Green color channel.
  * @param {number} b Blue color channel.
  */
-ColorChooser.prototype.setValue = function(r, g, b)
-{
+	setValue(r, g, b) {
 	if (r instanceof Color)
 	{
 		this.element.value = "#" + r.getHexString();
@@ -58,7 +54,7 @@ ColorChooser.prototype.setValue = function(r, g, b)
 		var c = new Color(r, g, b);
 		this.element.value = "#" + c.getHexString();
 	}
-};
+	}
 
 /**
  * Set value from numeric hex.
@@ -66,13 +62,12 @@ ColorChooser.prototype.setValue = function(r, g, b)
  * @method setValueHex
  * @param {number} hex
  */
-ColorChooser.prototype.setValueHex = function(hex)
-{
+	setValueHex(hex) {
 	hex = Math.floor(hex);
 
 	var c = new Color(hex);
 	this.element.value = "#" + c.getHexString();
-};
+	}
 
 /**
  * Set value from CSS string.
@@ -80,10 +75,9 @@ ColorChooser.prototype.setValueHex = function(hex)
  * @method setValueString
  * @param {number} color
  */
-ColorChooser.prototype.setValueString = function(color)
-{
+	setValueString(color) {
 	this.element.value = color;
-};
+	}
 
 /**
  * Get color value HEX as string.
@@ -91,10 +85,9 @@ ColorChooser.prototype.setValueString = function(color)
  * @method getValueString
  * @return {string} String hex color.
  */
-ColorChooser.prototype.getValueString = function(color)
-{
+	getValueString(color) {
 	return this.element.value;
-};
+	}
 
 /**
  * Get color value object.
@@ -102,12 +95,11 @@ ColorChooser.prototype.getValueString = function(color)
  * @method getValue
  * @return {Color} Color object.
  */
-ColorChooser.prototype.getValue = function()
-{
+	getValue() {
 	var c = new Color();
 	c.setStyle(this.element.value);
 	return c;
-};
+	}
 
 /**
  * Get color value HEX.
@@ -115,11 +107,12 @@ ColorChooser.prototype.getValue = function()
  * @method getValueHex
  * @return {number} Numeric hex color.
  */
-ColorChooser.prototype.getValueHex = function()
-{
+	getValueHex() {
 	var c = new Color();
 	c.setStyle(this.element.value);
 	return c.getHex();
-};
+	}
+
+}
 
 export {ColorChooser};

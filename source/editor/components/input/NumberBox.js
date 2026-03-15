@@ -9,9 +9,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function NumberBox(parent)
-{
-	Component.call(this, parent, "input");
+class NumberBox extends Component {
+	constructor(parent) {
+	super(parent, "input");
 
 	/**
 	 * Indicates if the number box is storing a angle value.
@@ -36,9 +36,7 @@ function NumberBox(parent)
 	this.element.style.MozAppearance = "textfield";
 	this.element.style.webkitAppearance = "caret";
 	this.element.style.appearance = "textfield";
-}
-
-NumberBox.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set the disabled state of the element.
@@ -46,10 +44,9 @@ NumberBox.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} disabled
  */
-NumberBox.prototype.setDisabled = function(disabled)
-{
+	setDisabled(disabled) {
 	this.element.disabled = disabled;
-};
+	}
 
 /**
  * Set number range.
@@ -58,11 +55,10 @@ NumberBox.prototype.setDisabled = function(disabled)
  * @param {number} min
  * @param {number} max
  */
-NumberBox.prototype.setRange = function(min, max)
-{
+	setRange(min, max) {
 	this.element.min = String(min);
 	this.element.max = String(max);
-};
+	}
 
 /**
  * Set number step.
@@ -70,10 +66,9 @@ NumberBox.prototype.setRange = function(min, max)
  * @method setStep
  * @param {number} value
  */
-NumberBox.prototype.setStep = function(value)
-{
+	setStep(value) {
 	this.element.step = String(value);
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -81,10 +76,9 @@ NumberBox.prototype.setStep = function(value)
  * @method setOnChange
  * @param {Function} onChange
  */
-NumberBox.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.element.onchange = onChange;
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -92,15 +86,14 @@ NumberBox.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {number} value
  */
-NumberBox.prototype.setValue = function(value)
-{
+	setValue(value) {
 	if (this.isAngle)
 	{
 		value = UnitConverter.convert(value, "r", Editor.settings.units.angle);
 	}
 
 	this.element.value = value;
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -108,8 +101,7 @@ NumberBox.prototype.setValue = function(value)
  * @method setValue
  * @return {Object} Value stored in the input element.
  */
-NumberBox.prototype.getValue = function()
-{	
+	getValue() {	
 	var value = Number.parseFloat(this.element.value);
 	if (this.isAngle)
 	{
@@ -117,10 +109,11 @@ NumberBox.prototype.getValue = function()
 	}
 
 	return value;
-};
+	}
 
-NumberBox.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+	}
+
+}
 export {NumberBox};

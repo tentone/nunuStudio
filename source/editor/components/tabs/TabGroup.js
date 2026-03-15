@@ -15,9 +15,9 @@ import {TabButton} from "./TabButton.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function TabGroup(parent, placement)
-{
-	Component.call(this, parent, "div");
+class TabGroup extends Component {
+	constructor(parent, placement) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -114,40 +114,36 @@ function TabGroup(parent, placement)
 	{
 		self.focused = false;
 	};
-}
+	}
 
 TabGroup.TOP = 0;
 TabGroup.BOTTOM = 1;
 TabGroup.LEFT = 2;
 TabGroup.RIGHT = 3;
 
-TabGroup.prototype = Object.create(Component.prototype);
-
 /**
  * Update all tabs object data.
  *
  * @method updateMetadata
  */
-TabGroup.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateMetadata();
 	}
-};
+	}
 
 /**
  * Update all tab object views.
  *
  * @method updateMetadata
  */
-TabGroup.prototype.updateObjectsView = function()
-{
+	updateObjectsView() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateObjectsView();
 	}
-};
+	}
 
 /**
  * Attach tab to this group and remove it from the original group.
@@ -156,8 +152,7 @@ TabGroup.prototype.updateObjectsView = function()
  * @param {TabComponent} tab Tab to be moved.
  * @param {number} insertIndex Index where to place the tab.
  */
-TabGroup.prototype.attachTab = function(tab, insertIndex)
-{	
+	attachTab(tab, insertIndex) {	
 	// Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
@@ -188,7 +183,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 	this.updateInterface();
 
 	return tab;
-};
+	}
 
 /**
  * Move tab from position to another.
@@ -197,8 +192,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
  * @param {number} origin Origin index.
  * @param {number} destination Destination index.
  */
-TabGroup.prototype.moveTabIndex = function(origin, destination)
-{
+	moveTabIndex(origin, destination) {
 	var button = this.options[origin];
 
 	this.options.splice(origin, 1);
@@ -206,52 +200,48 @@ TabGroup.prototype.moveTabIndex = function(origin, destination)
 
 	this.updateOptionIndex();
 	this.updateInterface();
-};
+	}
 
-TabGroup.prototype.updateSelection = function()
-{
+	updateSelection() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateSelection();
 	}
-};
+	}
 
-TabGroup.prototype.updateSettings = function()
-{
+	updateSettings() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateSettings();
 	}
-};
+	}
 
 /**
  * Get the currently active tab of the group.
  *
  * @method getActiveTab
  */
-TabGroup.prototype.getActiveTab = function()
-{
+	getActiveTab() {
 	if (this.selected !== null)
 	{
 		return this.selected;
 	}
 
 	return null;
-};
+	}
 
 /**
  * Close actual tab if its closeable.
  *
  * @method closeActual
  */
-TabGroup.prototype.closeActual = function()
-{
+	closeActual() {
 	if (this.selected !== null && this.selected.closeable)
 	{
 		this.selected.deactivate();
 		this.removeTab(this.selected);
 	}
-};
+	}
 
 /** 
  * Select tab to set active on this group.
@@ -261,8 +251,7 @@ TabGroup.prototype.closeActual = function()
  * @method selectTab
  * @param {TabComponent} tab TabComponent to be selected or index in the tab array.
  */
-TabGroup.prototype.selectTab = function(tab)
-{
+	selectTab(tab) {
 	if (this.selected !== null)
 	{
 		this.selected.deactivate();
@@ -287,28 +276,26 @@ TabGroup.prototype.selectTab = function(tab)
 
 	this.empty.style.display = this.selected === null ? "flex" : "none";
 	this.updateInterface();
-};
+	}
 
 /**
  * Select next tab.
  *
  * @method selectNextTab
  */
-TabGroup.prototype.selectNextTab = function()
-{
+	selectNextTab() {
 	if (this.options.length > 0)
 	{
 		this.selectTab((this.selected.index + 1) % this.options.length);
 	}
-};
+	}
 
 /**
  * Select previous tab.
  *
  * @method selectPreviousTab
  */
-TabGroup.prototype.selectPreviousTab = function()
-{
+	selectPreviousTab() {
 	if (this.options.length > 0)
 	{
 		if (this.selected.index === 0)
@@ -320,15 +307,14 @@ TabGroup.prototype.selectPreviousTab = function()
 			this.selectTab(this.selected.index - 1);
 		}
 	}
-};
+	}
 
 /**
  * Add new option to tab group.
  *
  * @method addtab
  */
-TabGroup.prototype.addTab = function(TabConstructor, closeable)
-{
+	addTab(TabConstructor, closeable) {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
 	tab.button = new TabButton(this.buttons, tab);
 	this.options.push(tab);
@@ -343,7 +329,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	}
 
 	return tab;
-};
+	}
 
 /**
  * Get tab from tab type and attached object is there is any.
@@ -352,8 +338,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
  * @param {Constructor} type Type of tab to look for.
  * @param {Object} object Object attached to the tab.
  */
-TabGroup.prototype.getTab = function(type, object)
-{
+	getTab(type, object) {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		if (this.options[i] instanceof type)
@@ -366,7 +351,7 @@ TabGroup.prototype.getTab = function(type, object)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Remove tab from group.
@@ -375,8 +360,7 @@ TabGroup.prototype.getTab = function(type, object)
  * @param {number} index Index of tab to look for.
  * @param {boolean} dontDestroy If true the element is not destroyed.
  */
-TabGroup.prototype.removeTab = function(index, dontDestroy)
-{	
+	removeTab(index, dontDestroy) {	
 	// If index is an object get the actual index
 	if (typeof index === "object")
 	{
@@ -417,7 +401,7 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Remove all closable tabs from the group.
@@ -425,8 +409,7 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
  * @method clear
  * @param {boolean} forceAll Remove also the not closable tabs.
  */
-TabGroup.prototype.clear = function(forceAll)
-{
+	clear(forceAll) {
 	if (forceAll === true)
 	{
 		while (this.options.length > 0)
@@ -459,20 +442,19 @@ TabGroup.prototype.clear = function(forceAll)
 			this.selectTab(0);
 		}
 	}
-};
+	}
 
 /**
  * Update index variable stored in the tabs.
  *
  * @method updateOptionIndex
  */
-TabGroup.prototype.updateOptionIndex = function()
-{
+	updateOptionIndex() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].index = i;
 	}
-};
+	}
 
 /**
  * Set the tab group buttons placement.
@@ -480,14 +462,12 @@ TabGroup.prototype.updateOptionIndex = function()
  * @method setPlacement
  * @param {number} placement
  */
-TabGroup.prototype.setPlacement = function(placement)
-{
+	setPlacement(placement) {
 	this.placement = placement;
-};
+	}
 
-TabGroup.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	var tabSize = this.size.clone();
 	var buttonSize = this.buttonSize.clone();
@@ -574,6 +554,8 @@ TabGroup.prototype.updateSize = function()
 		this.tab.position.set(0, 0);
 		this.tab.updatePosition();
 	}
-};
+	}
+
+}
 
 export {TabGroup};

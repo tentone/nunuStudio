@@ -8,9 +8,9 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function SpotLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class SpotLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -72,13 +72,10 @@ function SpotLightInspector(parent, object)
 
 	// Shadow
 	this.shadow = new LightShadowFormSnippet(this.form, object);
-}
+	}
 
-SpotLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-SpotLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.angle.setValue(this.object.angle);
@@ -86,6 +83,8 @@ SpotLightInspector.prototype.updateInspector = function()
 	this.castShadow.setValue(this.object.castShadow);
 
 	this.shadow.attach(this.object);
-};
+	}
+
+}
 
 export {SpotLightInspector};

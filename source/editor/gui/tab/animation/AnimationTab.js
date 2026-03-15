@@ -23,9 +23,9 @@ import {AnimationClipTrack} from "./AnimationClipTrack.js";
  * @extends {AnimationTab}
  * @param {Component} parent
  */
-function AnimationTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.animation, Global.FILE_PATH + "icons/misc/animation.png");
+class AnimationTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.animation, Global.FILE_PATH + "icons/misc/animation.png");
 
 	var self = this;
 
@@ -266,12 +266,9 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		self.tabManager.destroy();
 	});
-}
+	}
 
-AnimationTab.prototype = Object.create(TabComponent.prototype);
-
-AnimationTab.prototype.attach = function(object)
-{
+	attach(object) {
 	this.object = object;
 
 	if (this.object !== null)
@@ -286,38 +283,34 @@ AnimationTab.prototype.attach = function(object)
 	}
 
 	this.emptyText.setVisibility(this.object === null);
-};
+	}
 
-AnimationTab.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.updateSelection();
-};
+	}
 
-AnimationTab.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 
 	if (this.mixer !== null && this.mixer.playing)
 	{
 		this.play.setText(Locale.play);
 		this.mixer.stop();
 	}
-};
+	}
 
-AnimationTab.prototype.updateSelection = function()
-{
+	updateSelection() {
 	this.attach(Editor.selection.length > 0 ? Editor.selection[0] : null);
-};
+	}
 
 /**
  * Clear animation mixer object.
  *
  * @method clearAnimationMixer
  */
-AnimationTab.prototype.clearAnimationMixer = function()
-{
+	clearAnimationMixer() {
 	if (this.mixer !== null)
 	{
 		this.play.setText(Locale.play);
@@ -325,7 +318,7 @@ AnimationTab.prototype.clearAnimationMixer = function()
 		this.mixer.dispose();
 		this.mixer = null;
 	}
-};
+	}
 
 /**
  * Create a new animation mixer for the attached object.
@@ -334,8 +327,7 @@ AnimationTab.prototype.clearAnimationMixer = function()
  *
  * @method createAnimationMixer
  */
-AnimationTab.prototype.createAnimationMixer = function(keepTime)
-{
+	createAnimationMixer(keepTime) {
 	var time = 0;
 
 	// Remove old mixer
@@ -356,10 +348,9 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 		this.mixer.createActions(this.object.animations);
 		this.mixer.setTime(time);
 	}
-};
+	}
 
-AnimationTab.prototype.update = function()
-{
+	update() {
 	if (this.mixer !== null)
 	{
 		for (var i = 0; i < this.mixer._actions.length; i++)
@@ -375,26 +366,24 @@ AnimationTab.prototype.update = function()
 			Editor.gui.inspector.updateValues();
 		}
 	}
-};
+	}
 
 /**
  * Clear timeline GUI elements.
  *
  * @method clearTimeline
  */
-AnimationTab.prototype.clearTimeline = function()
-{
+	clearTimeline() {
 	this.tracks.removeAllChildren();
 	this.info.removeAllChildren();
-};
+	}
 
 /**
  * Create new timeline GUI elements remove the old ones from the tab.
  *
  * @method createTimeline
  */
-AnimationTab.prototype.createTimeline = function()
-{
+	createTimeline() {
 	this.clearTimeline();
 	this.animations = [];
 
@@ -409,7 +398,7 @@ AnimationTab.prototype.createTimeline = function()
 	}
 
 	this.updateInterface();
-};
+	}
 
 /**
  * Add a new keyframe to a specific track with a specific value.
@@ -418,8 +407,7 @@ AnimationTab.prototype.createTimeline = function()
  * @param {Object} track
  * @param {Object} value
  */
-AnimationTab.prototype.addKeyFrame = function(track, value)
-{
+	addKeyFrame(track, value) {
 	var attributes = track.name.split(".");
 
 	for (var i = 0; i < attributes.length; i++)
@@ -480,10 +468,9 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 
 		track.sort();
 	}
-};
+	}
 
-AnimationTab.prototype.updateInterface = function()
-{
+	updateInterface() {
 	if (this.visible)
 	{
 		// Timeline
@@ -519,6 +506,8 @@ AnimationTab.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-};
+	}
+
+}
 
 export {AnimationTab};

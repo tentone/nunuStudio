@@ -8,36 +8,32 @@ import {DualContainer} from "../../containers/DualContainer.js";
  * @class TabDualContainer
  * @extends {Element, TabDual}
  */
-function TabDualContainer(parent)
-{
-	DualContainer.call(this, parent);
+class TabDualContainer extends DualContainer {
+	constructor(parent) {
+	super(parent);
 
 	this.element.style.overflow = "visible";
-}
-
-TabDualContainer.prototype = Object.create(DualContainer.prototype);
+	}
 
 /**
  * Update all tabs object data.
  *
  * @method updateMetadata
  */
-TabDualContainer.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	this.elementA.updateMetadata();
 	this.elementB.updateMetadata();
-};
+	}
 
 /**
  * Update all tab object views.
  *
  * @method updateObjectsView
  */
-TabDualContainer.prototype.updateObjectsView = function()
-{
+	updateObjectsView() {
 	this.elementA.updateObjectsView();
 	this.elementB.updateObjectsView();
-};
+	}
 
 /**
  * Update all tab object selection status.
@@ -46,11 +42,10 @@ TabDualContainer.prototype.updateObjectsView = function()
  *
  * @method updateSelection
  */
-TabDualContainer.prototype.updateSelection = function()
-{
+	updateSelection() {
 	this.elementA.updateSelection();
 	this.elementB.updateSelection();
-};
+	}
 
 /**
  * Update all tab settings.
@@ -59,11 +54,10 @@ TabDualContainer.prototype.updateSelection = function()
  *
  * @method updateSettings
  */
-TabDualContainer.prototype.updateSettings = function()
-{
+	updateSettings() {
 	this.elementA.updateSettings();
 	this.elementB.updateSettings();
-};
+	}
 
 /**
  * Get an array with all the tabs currently active.
@@ -71,8 +65,7 @@ TabDualContainer.prototype.updateSettings = function()
  * @method getActiveTab
  * @return {Array} Active tabs.
  */
-TabDualContainer.prototype.getActiveTab = function()
-{
+	getActiveTab() {
 	var active = [];
 
 	if (this.elementA instanceof TabGroup)
@@ -103,15 +96,14 @@ TabDualContainer.prototype.getActiveTab = function()
 	}
 
 	return active;
-};
+	}
 
 /**
  * Close the tab that is currently being shown if it is closeable.
  *
  * @method closeActual
  */
-TabDualContainer.prototype.closeActual = function()
-{
+	closeActual() {
 	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.closeActual();
@@ -121,7 +113,7 @@ TabDualContainer.prototype.closeActual = function()
 	{
 		this.elementB.closeActual();
 	}
-};
+	}
 
 /**
  * Select a specific tab from the container tab tree.
@@ -129,19 +121,17 @@ TabDualContainer.prototype.closeActual = function()
  * @method selectTab
  * @param {TabComponent} tab Tab to select.
  */
-TabDualContainer.prototype.selectTab = function(tab)
-{
+	selectTab(tab) {
 	this.elementA.selectTab(tab);
 	this.elementB.selectTab(tab);
-};
+	}
 
 /**
  * Select next tab from the currently focused tab group.
  *
  * @method selectNextTab
  */
-TabDualContainer.prototype.selectNextTab = function()
-{
+	selectNextTab() {
 	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.selectNextTab();
@@ -151,15 +141,14 @@ TabDualContainer.prototype.selectNextTab = function()
 	{
 		this.elementB.selectNextTab();
 	}
-};
+	}
 
 /**
  * Select previous tab from the currently focused tab group.
  *
  * @method selectPreviousTab
  */
-TabDualContainer.prototype.selectPreviousTab = function()
-{
+	selectPreviousTab() {
 	if (!(this.elementA instanceof TabGroup) || this.elementA.focused)
 	{
 		this.elementA.selectPreviousTab();
@@ -169,7 +158,7 @@ TabDualContainer.prototype.selectPreviousTab = function()
 	{
 		this.elementB.selectPreviousTab();
 	}
-};
+	}
 
 /**
  * Add new option to tab group.
@@ -180,8 +169,7 @@ TabDualContainer.prototype.selectPreviousTab = function()
  * @param {Constructor} TabConstructor Constructor if the TabComponent to be added to the container.
  * @param {boolean} closeable Indicates if the tab can be closed.
  */
-TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
-{
+	addTab(TabConstructor, closeable) {
 	var tab = this.elementA.addTab(TabConstructor, closeable);
 	if (tab === null)
 	{
@@ -189,7 +177,7 @@ TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 	}
 
 	return tab;
-};
+	}
 
 /**
  * Get tab from tab type and attached object is there is any.
@@ -198,8 +186,7 @@ TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
  * @param {Object} object Object attached to the tab.
  * @return TabComponent The tab from the type specified that has the object attached to it.
  */
-TabDualContainer.prototype.getTab = function(type, object)
-{
+	getTab(type, object) {
 	var tab = this.elementA.getTab(type, object);
 	
 	if (tab === null)
@@ -208,17 +195,18 @@ TabDualContainer.prototype.getTab = function(type, object)
 	}
 
 	return tab;
-};
+	}
 
 /**
  * Remove all tabs from the container.
  * 
  * @method clear
  */
-TabDualContainer.prototype.clear = function(forceAll)
-{
+	clear(forceAll) {
 	this.elementA.clear(forceAll);
 	this.elementB.clear(forceAll);
-};
+	}
+
+}
 
 export {TabDualContainer};

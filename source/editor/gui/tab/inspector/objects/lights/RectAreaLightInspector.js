@@ -7,9 +7,9 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 
-function RectAreaLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class RectAreaLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -60,18 +60,17 @@ function RectAreaLightInspector(parent, object)
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
-}
+	}
 
-RectAreaLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-RectAreaLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.intensity.setValue(this.object.intensity);
 	this.width.setValue(this.object.width);
 	this.height.setValue(this.object.height);
-};
+	}
+
+}
 
 export {RectAreaLightInspector};

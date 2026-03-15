@@ -8,9 +8,9 @@ import {PreviewRenderer} from "./PreviewRenderer.js";
  * @class MaterialRenderer
  * @extends {PreviewRenderer}
  */
-function MaterialRenderer()
-{
-	PreviewRenderer.call(this);
+class MaterialRenderer extends PreviewRenderer {
+	constructor() {
+	super();
 
 	// Camera
 	this.camera = new OrthographicCamera(2.15, 1);
@@ -43,9 +43,7 @@ function MaterialRenderer()
 	var point = new PointLight(0x999999);
 	point.position.set(-0.5, 1, 1.5);
 	this.scene.add(point);
-}
-
-MaterialRenderer.prototype = Object.create(PreviewRenderer.prototype);
+	}
 
 /**
  * Create a DOM element with the material preview render.
@@ -75,8 +73,7 @@ MaterialRenderer.render = function(material, onRender)
 	MaterialRenderer.instance.render(material, onRender);
 };
 
-MaterialRenderer.prototype.render = function(material, onRender)
-{
+	render(material, onRender) {
 	if (material instanceof SpriteMaterial)
 	{
 		this.mesh.visible = false;
@@ -123,5 +120,7 @@ MaterialRenderer.prototype.render = function(material, onRender)
 
 	// Callback
 	onRender(this.canvas.toDataURL());
-};
+	}
+
+}
 export {MaterialRenderer};

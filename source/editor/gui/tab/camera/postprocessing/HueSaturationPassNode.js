@@ -3,9 +3,9 @@ import {Editor} from "../../../../Editor.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {PassNode} from "./PassNode.js";
 
-function HueSaturationPassNode(parent)
-{
-	PassNode.call(this, parent, "HueSaturation");
+class HueSaturationPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "HueSaturation");
 
 	var self = this;
 
@@ -32,17 +32,16 @@ function HueSaturationPassNode(parent)
 	});
 	this.add(this.saturation);
 	this.nextRow();
-}
-
-HueSaturationPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("HueSaturation", HueSaturationPassNode);
 
-HueSaturationPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.hue.setValue(this.pass.hue);
 	this.saturation.setValue(this.pass.saturation);
-};
+	}
+
+}
 export {HueSaturationPassNode};

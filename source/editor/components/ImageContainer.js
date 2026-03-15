@@ -7,15 +7,13 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ImageContainer(parent)
-{
-	Component.call(this, parent, "img");
+class ImageContainer extends Component {
+	constructor(parent) {
+	super(parent, "img");
 
 	this.element.style.borderStyle = "none";
 	this.element.style.objectFit = "contain"; // contain | cover | fill
-}
-
-ImageContainer.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set image from URL or source content.
@@ -23,9 +21,10 @@ ImageContainer.prototype = Object.create(Component.prototype);
  * @method setImage
  * @param {string} source Image URL.
  */
-ImageContainer.prototype.setImage = function(source)
-{
+	setImage(source) {
 	this.element.src = source;
-};
+	}
+
+}
 
 export {ImageContainer};

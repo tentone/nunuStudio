@@ -1,4 +1,4 @@
-import {Math} from "three";
+import {MathUtils} from "three";
 import {Component} from "../Component.js";
 import {TabGroup} from "./TabGroup.js";
 import {TabButton} from "./TabButton.js";
@@ -18,9 +18,9 @@ import {TabContainer} from "./splittable/TabContainer.js";
  * @param {string} title Title of the tab.
  * @param {string} icon Icon of the tab.
  */
-function TabComponent(parent, closeable, container, index, title, icon)
-{
-	Component.call(this, parent, "div");
+class TabComponent extends Component {
+	constructor(parent, closeable, container, index, title, icon) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = "var(--panel-color)";
@@ -40,7 +40,7 @@ function TabComponent(parent, closeable, container, index, title, icon)
 	 * @property uuid
 	 * @type {string}
 	 */
-	this.uuid = Math.generateUUID();
+	this.uuid = MathUtils.generateUUID();
 
 	/**
 	 * Index of the tab inside of the container
@@ -70,9 +70,7 @@ function TabComponent(parent, closeable, container, index, title, icon)
 	 * @type {boolean}
 	 */
 	this.active = false;
-}
-
-TabComponent.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Update tab metadata (name, icon, ...)
@@ -83,7 +81,7 @@ TabComponent.prototype = Object.create(Component.prototype);
  *
  * @method updateMetadata
  */
-TabComponent.prototype.updateMetadata = function() {};
+	updateMetadata() {}
 
 /**
  * Update tab settings.
@@ -94,7 +92,7 @@ TabComponent.prototype.updateMetadata = function() {};
  *
  * @method updateSettings
  */
-TabComponent.prototype.updateSettings = function() {};
+	updateSettings() {}
 
 /**
  * Update tab values of the gui for the object attached.
@@ -105,7 +103,7 @@ TabComponent.prototype.updateSettings = function() {};
  *
  * @method updateValues
  */
-TabComponent.prototype.updateValues = function() {};
+	updateValues() {}
 
 /**
  * Update tab object view.
@@ -116,7 +114,7 @@ TabComponent.prototype.updateValues = function() {};
  *
  * @method updateObjectsView
  */
-TabComponent.prototype.updateObjectsView = function() {};
+	updateObjectsView() {}
 
 /**
  * Update tab after object selection changed.
@@ -127,7 +125,7 @@ TabComponent.prototype.updateObjectsView = function() {};
  *
  * @method updateSelection
  */
-TabComponent.prototype.updateSelection = function() {};
+	updateSelection() {}
 
 /**
  * Activate tab.
@@ -136,8 +134,7 @@ TabComponent.prototype.updateSelection = function() {};
  *
  * @method activate
  */
-TabComponent.prototype.activate = function()
-{
+	activate() {
 	if (this.active === true)
 	{
 		this.deactivate();
@@ -161,7 +158,7 @@ TabComponent.prototype.activate = function()
 	}
 
 	this.active = true;
-};
+	}
 
 /**
  * Deactivate tab.
@@ -170,10 +167,9 @@ TabComponent.prototype.activate = function()
  *
  * @method deactivate
  */
-TabComponent.prototype.deactivate = function()
-{
+	deactivate() {
 	this.active = false;
-};
+	}
 
 /**
  * Generic method to attach object to a tab.
@@ -183,7 +179,7 @@ TabComponent.prototype.deactivate = function()
  * @method attach
  * @param {Object} object
  */
-TabComponent.prototype.attach = function() {};
+	attach() {}
 
 /**
  * Check if an object or resource is attached to the tab.
@@ -192,30 +188,27 @@ TabComponent.prototype.attach = function() {};
  *
  * @method isAttached
  */
-TabComponent.prototype.isAttached = function()
-{
+	isAttached() {
 	return false;
-};
+	}
 
 /**
  * Close the tab element and remove is from the container.
  * 
  * @method close
  */
-TabComponent.prototype.close = function()
-{
+	close() {
 	this.container.removeTab(this);
-};
+	}
 
 /**
  * Select this tab.
  * 
  * @method select
  */
-TabComponent.prototype.select = function()
-{
+	select() {
 	this.container.selectTab(this);
-};
+	}
 
 /**
  * Check if tab is selected
@@ -223,10 +216,9 @@ TabComponent.prototype.select = function()
  * @method isSelected
  * @return {boolean} True if the tab is selected in the container.
  */
-TabComponent.prototype.isSelected = function()
-{
+	isSelected() {
 	return this === this.container.selected;
-};
+	}
 
 /**
  * Set icon of the button attached to this tab.
@@ -236,11 +228,10 @@ TabComponent.prototype.isSelected = function()
  * @method setIcon
  * @param {string} icon URL of the icon.
  */
-TabComponent.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	this.icon = icon;
 	this.button.setIcon(icon);
-};
+	}
 
 /**
  * Set text in the button.
@@ -250,20 +241,20 @@ TabComponent.prototype.setIcon = function(icon)
  * @method setName
  * @param {string} text
  */
-TabComponent.prototype.setName = function(text)
-{
+	setName(text) {
 	this.title = text;
 	this.button.setName(text);
-};
+	}
 
-TabComponent.prototype.destroy = function()
-{
-	Component.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 	
 	if (this.button !== null)
 	{
 		this.button.destroy();
 	}
-};
+	}
+
+}
 
 export {TabComponent};

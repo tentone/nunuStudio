@@ -1,4 +1,4 @@
-import {LinearFilter, CubeReflectionMapping, WebGLRenderer, Object3D, Mesh, SkinnedMesh, AnimationClip, MeshBasicMaterial, MeshPhongMaterial, ShapeBufferGeometry, JSONLoader, Matrix4} from "three";
+import {LinearFilter, CubeReflectionMapping, WebGLRenderer, Object3D, Mesh, SkinnedMesh, AnimationClip, MeshBasicMaterial, MeshPhongMaterial, ShapeGeometry, Matrix4, SRGBColorSpace} from "three";
 import {BasisTextureLoader} from "three/examples/jsm/loaders/BasisTextureLoader";
 import {AMFLoader} from "three/examples/jsm/loaders/AMFLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
@@ -155,7 +155,7 @@ Loaders.loadTexture = function(file, onLoad)
 			loader.detectSupport(renderer);
 			loader._createTexture(reader.result).then(function(texture)
 			{
-				texture.encoding = THREE.sRGBEncoding;
+				texture.colorSpace = SRGBColorSpace;
 				texture.name = name;
 				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 			}).catch(function(error)
@@ -468,7 +468,7 @@ Loaders.loadModel = function(file, parent)
 					
 					var name = FileSystem.getFileName(file) || "vox";
 
-					var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+					var geometry = new THREE.BoxGeometry(1, 1, 1);
 					geometry.name = name;
 				
 					var material = new MeshPhongMaterial();
@@ -1039,7 +1039,7 @@ Loaders.loadModel = function(file, parent)
 						for (var j = 0; j < shapes.length; j++)
 						{
 							var shape = shapes[j];
-							var geometry = new ShapeBufferGeometry(shape);
+							var geometry = new ShapeGeometry(shape);
 							var mesh = new Mesh(geometry, material);
 							mesh.position.z = position;
 							position += 0.1;

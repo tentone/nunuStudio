@@ -17,9 +17,9 @@ import {TabButtonSplit} from "./TabButtonSplit.js";
  * @extends {TabGroup}
  * @param {Component} parent Parent element.
  */
-function TabGroupSplit(parent, placement)
-{
-	TabGroup.call(this, parent, placement);
+class TabGroupSplit extends TabGroup {
+	constructor(parent, placement) {
+	super(parent, placement);
 
 	var self = this;
 
@@ -200,9 +200,7 @@ function TabGroupSplit(parent, placement)
 			self.tab.element.removeChild(self.tabArea);
 		}
 	};
-}
-
-TabGroupSplit.prototype = Object.create(TabGroup.prototype);
+	}
 
 /**
  * Split this tab group into two new tab groups.
@@ -211,8 +209,7 @@ TabGroupSplit.prototype = Object.create(TabGroup.prototype);
  * @param {number} direction Direction where to insert the new tab.
  * @return {TabGroupSplit} The new created tab group.
  */
-TabGroupSplit.prototype.split = function(direction)
-{
+	split(direction) {
 	if (this.canSplit)
 	{
 		if (direction === undefined)
@@ -274,15 +271,14 @@ TabGroupSplit.prototype.split = function(direction)
 	{
 		console.warn("nunuStudio: Tab is not splitable.");
 	}
-};
+	}
 
 /**
  * If the tab is in a split container, move all the tabs to the other tabgroup in the container and close this group.
  *
  * @method collapse
  */ 
-TabGroupSplit.prototype.collapse = function()
-{
+	collapse() {
 	if (this.canCollapse)
 	{
 		if (this.parent instanceof DualContainer)
@@ -325,7 +321,7 @@ TabGroupSplit.prototype.collapse = function()
 	{
 		console.warn("nunuStudio: Tab is not collapsable.");
 	}
-};
+	}
 
 /**
  * Attach tab to this group and remove it from the original group.
@@ -334,10 +330,9 @@ TabGroupSplit.prototype.collapse = function()
  * @param {TabComponent} tab Tab to be moved.
  * @param {number} insertIndex Index where to place the tab.
  */
-TabGroupSplit.prototype.attachTab = function(tab, insertIndex)
-{	
+	attachTab(tab, insertIndex) {	
 	var container = tab.container;
-	var tab = TabGroup.prototype.attachTab.call(this, tab, insertIndex);
+	var tab = super.attachTab(tab, insertIndex);
 
 	if (container.options.length === 0)
 	{
@@ -345,20 +340,18 @@ TabGroupSplit.prototype.attachTab = function(tab, insertIndex)
 	}
 
 	return tab;
-};
+	}
 
-TabGroupSplit.prototype.removeTab = function(index, dontDestroy)
-{
-	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
+	removeTab(index, dontDestroy) {
+	super.removeTab(index, dontDestroy);
 
 	if (this.options.length === 0 && dontDestroy !== true)
 	{
 		this.collapse();
 	}
-};
+	}
 
-TabGroupSplit.prototype.addTab = function(TabConstructor, closeable)
-{
+	addTab(TabConstructor, closeable) {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
 	tab.button = new TabButtonSplit(this.buttons, tab);
 	tab.updateInterface();
@@ -375,6 +368,8 @@ TabGroupSplit.prototype.addTab = function(TabConstructor, closeable)
 	}
 	
 	return tab;
-};
+	}
+
+}
 
 export {TabGroupSplit};

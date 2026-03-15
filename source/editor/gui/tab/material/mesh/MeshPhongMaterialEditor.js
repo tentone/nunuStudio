@@ -11,10 +11,9 @@ import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-
-function MeshPhongMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshPhongMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -322,13 +321,10 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
-}
+	}
 
-MeshPhongMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshPhongMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
 	this.shininess.setValue(material.shininess);
@@ -354,5 +350,7 @@ MeshPhongMaterialEditor.prototype.attach = function(material, asset)
 	this.refractionRatio.setValue(material.refractionRatio || 0);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
-};
+	}
+
+}
 export {MeshPhongMaterialEditor};

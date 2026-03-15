@@ -9,9 +9,9 @@ import {TextureChooser} from "./TextureChooser.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
 
-function TextureForm(parent)
-{
-	TextureChooser.call(this, parent);
+class TextureForm extends TextureChooser {
+	constructor(parent) {
+	super(parent);
 
 	this.element.style.overflow = "visible";
 	
@@ -52,9 +52,7 @@ function TextureForm(parent)
 	this.repeat.size.set(120, 18);
 	this.repeat.setValue(1, 1, 0);
 	this.form.add(this.repeat);
-}
-
-TextureForm.prototype = Object.create(TextureChooser.prototype);
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -62,15 +60,14 @@ TextureForm.prototype = Object.create(TextureChooser.prototype);
  * @method setOnChange
  * @param {Function} onChange
  */
-TextureForm.prototype.setOnChange = function(onChange)
-{
-	TextureChooser.prototype.setOnChange.call(this, onChange);
+	setOnChange(onChange) {
+	super.setOnChange(onChange);
 
 	this.useTexture.setOnChange(onChange);
 	this.wrapT.setOnChange(onChange);
 	this.wrapS.setOnChange(onChange);
 	this.repeat.setOnChange(onChange);
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -78,8 +75,7 @@ TextureForm.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {Object} texture
  */
-TextureForm.prototype.setValue = function(texture)
-{
+	setValue(texture) {
 	if (texture instanceof Texture && !texture.isCubeTexture)
 	{
 		this.texture = texture;
@@ -95,7 +91,7 @@ TextureForm.prototype.setValue = function(texture)
 	{
 		this.texture = null;
 	}
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -103,8 +99,7 @@ TextureForm.prototype.setValue = function(texture)
  * @method getValue
  * @return {Object} Value stored in the input element.
  */
-TextureForm.prototype.getValue = function()
-{
+	getValue() {
 	if (this.useTexture.getValue())
 	{
 		if (this.texture !== null)
@@ -119,11 +114,10 @@ TextureForm.prototype.getValue = function()
 	}
 
 	return null;
-};
+	}
 
 // Load texture from file
-TextureForm.prototype.loadTexture = function(file)
-{
+	loadTexture(file) {
 	var self = this;
 	var onLoad = function(texture)
 	{
@@ -145,15 +139,16 @@ TextureForm.prototype.loadTexture = function(file)
 	{
 		Loaders.loadVideoTexture(file, onLoad);
 	}
-};
+	}
 
-TextureForm.prototype.updateSize = function()
-{
-	TextureChooser.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.form.position.set(this.size.y + 5, 0);
 	this.form.size.set(this.size.x - this.form.position.x, this.size.y);
 	this.form.updateInterface();
-};
+	}
+
+}
 
 export {TextureForm};

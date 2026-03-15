@@ -7,9 +7,9 @@ import {Points, Color} from "three";
  * @param {Points} object
  * @param {number} hex Helper color in hexadecimal.
  */
-function PointsHelper(object, hex)
-{
-	Points.call(this, object.geometry, object.material.clone());
+class PointsHelper extends Points {
+	constructor(object, hex) {
+	super(object.geometry, object.material.clone());
 
 	this.material.color = new Color(hex !== undefined ? hex : 0xFFFF00);
 	this.material.size = object.material.size * 1.2;
@@ -24,14 +24,13 @@ function PointsHelper(object, hex)
 
 	this.matrixAutoUpdate = false;
 	this.update();
-}
+	}
 
-PointsHelper.prototype = Object.create(Points.prototype);
-
-PointsHelper.prototype.update = function()
-{
+	update() {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
-};
+	}
+
+}
 
 export {PointsHelper};

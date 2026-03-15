@@ -9,27 +9,27 @@ import {Action} from "./Action.js";
  * @extends {Action}
  * @param {Array} actions Array of actions to create the bundle.
  */
-function ActionBundle(actions)
-{
+class ActionBundle {
+	constructor(actions) {
 	Action.call(this);
 
 	this.actions = actions;
-}
+	}
 
-ActionBundle.prototype.apply = function()
-{
+	apply() {
 	for (var i = 0; i < this.actions.length; i++)
 	{
 		this.actions[i].apply();
 	}
-};
+	}
 
-ActionBundle.prototype.revert = function()
-{
+	revert() {
 	for (var i = 0; i < this.actions.length; i++)
 	{
 		this.actions[i].revert();
 	}
-};
+	}
+
+}
 
 export {ActionBundle};

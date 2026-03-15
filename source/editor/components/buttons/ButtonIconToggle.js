@@ -8,9 +8,9 @@ import {ButtonToggle} from "./ButtonToggle.js";
  * @extends {ButtonToggle}
  * @param {Component} parent Parent element.
  */
-function ButtonIconToggle(parent)
-{
-	ButtonToggle.call(this, parent);
+class ButtonIconToggle extends ButtonToggle {
+	constructor(parent) {
+	super(parent);
 
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
@@ -30,9 +30,7 @@ function ButtonIconToggle(parent)
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
-}
-
-ButtonIconToggle.prototype = Object.create(ButtonToggle.prototype);
+	}
 
 /**
  * Set button drawer icon.
@@ -40,22 +38,22 @@ ButtonIconToggle.prototype = Object.create(ButtonToggle.prototype);
  * @method setImage
  * @param {string} image Image URL.
  */
-ButtonIconToggle.prototype.setImage = function(image)
-{
+	setImage(image) {
 	this.icon.src = image;
-};
+	}
 
 /**
  * Set icon scale, the icon will be centered.
  *
  * @method setImageScale
  */
-ButtonIconToggle.prototype.setImageScale = function(x, y)
-{
+	setImageScale(x, y) {
 	this.icon.style.top = (1 - y) / 2 * 100 + "%";
 	this.icon.style.left = (1 - x) / 2 * 100 + "%";
 	this.icon.style.width = x * 100 + "%";
 	this.icon.style.height = y * 100 + "%";
-};
+	}
+
+}
 
 export {ButtonIconToggle};

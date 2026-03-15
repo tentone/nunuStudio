@@ -4,9 +4,9 @@ import {Editor} from "../../../../Editor.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {PassNode} from "./PassNode.js";
 
-function ColorifyPassNode(parent)
-{
-	PassNode.call(this, parent, "Colorify");
+class ColorifyPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Colorify");
 
 	var self = this;
 
@@ -24,16 +24,15 @@ function ColorifyPassNode(parent)
 	});
 	this.add(this.color);
 	this.nextRow();
-}
-
-ColorifyPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("Colorify", ColorifyPassNode);
 
-ColorifyPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.color.setValue(this.pass.color.r, this.pass.color.g, this.pass.color.b);
-};
+	}
+
+}
 export {ColorifyPassNode};

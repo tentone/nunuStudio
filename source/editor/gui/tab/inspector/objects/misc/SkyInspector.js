@@ -10,9 +10,9 @@ import {ColorGradientChooser} from "../../../../../components/input/ColorGradien
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function SkyInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class SkyInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -288,13 +288,10 @@ function SkyInspector(parent, object)
 	});
 	this.form.add(this.shadowBottom);
 	this.form.nextRow();
-}
+	}
 
-SkyInspector.prototype = Object.create(ObjectInspector.prototype);
-
-SkyInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.colorTop.setValue(this.object.colorTop);
 	this.colorBottom.setValue(this.object.colorBottom);
@@ -317,6 +314,8 @@ SkyInspector.prototype.updateInspector = function()
 	this.shadowRight.setValue(this.object.sun.shadow.camera.right);
 	this.shadowTop.setValue(this.object.sun.shadow.camera.top);
 	this.shadowBottom.setValue(this.object.sun.shadow.camera.bottom);
-};
+	}
+
+}
 
 export {SkyInspector};
