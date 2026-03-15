@@ -83,6 +83,7 @@ class Component {
 	 */
 	this._mode = Component.TOP_LEFT;
 	}
+}
 
 /**
  * Top-left positioning.
