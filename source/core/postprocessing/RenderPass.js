@@ -7,33 +7,34 @@ import {Pass} from "./Pass.js";
  * @extends {Pass}
  * @module Postprocessing
  */
-function RenderPass()
+class RenderPass extends Pass
 {
-	Pass.call(this);
+constructor()
+{
+super();
 
-	this.type = "Render";
-	
-	this.clear = true;
+this.type = "Render";
+
+this.clear = true;
 }
 
-RenderPass.prototype = Object.create(Pass.prototype);
-
-RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
+render(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	if (this.clear)
-	{
-		renderer.autoClear = true;
-		renderer.autoClearColor = true;
-		renderer.autoClearDepth = true;
-		renderer.autoClearStencil = true;
-	}
-	else
-	{
-		renderer.autoClear = false;
-	}
+if (this.clear)
+{
+renderer.autoClear = true;
+renderer.autoClearColor = true;
+renderer.autoClearDepth = true;
+renderer.autoClearStencil = true;
+}
+else
+{
+renderer.autoClear = false;
+}
 
-	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
-	renderer.render(scene, camera);
-};
+renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
+renderer.render(scene, camera);
+}
+}
 
 export {RenderPass};

@@ -1,4 +1,4 @@
-import {CubeReflectionMapping, Texture, Math as TMath, Vector3} from "three";
+import {CubeReflectionMapping, Texture, MathUtils, Vector3} from "three";
 import {Image} from "../resources/Image.js";
 
 
@@ -22,55 +22,213 @@ import {Image} from "../resources/Image.js";
  * @param {number} anisotropy
  * @param {number} encoding
  */
-function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
+class CubeTexture extends Texture
 {
-	if (mapping === undefined)
+	constructor(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 	{
-		mapping = CubeReflectionMapping;
+		if (mapping === undefined)
+		{
+			mapping = CubeReflectionMapping;
+		}
+
+		var array = [];
+		for (var i = 0; i < 6; i++)
+		{
+			array.push(document.createElement("canvas"));
+		}
+
+		super(array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+
+		this.images = images !== undefined ? images : [];
+
+		/**
+		 * Size of each one of the texture that compose the CubeTexture.
+		 *
+		 * @property size
+		 * @type {number}
+		 * @default 512
+		 */
+		this.size = 512;
+		
+		this.flipY = false;
+		
+		/**
+		 * Cube texture mode, the mode specifies how the cube texture is created.
+		 *
+		 * Source format may vary from a mode to another.
+		 *
+		 * @property mode
+		 * @type {number}
+		 */
+		this.mode = this.images.length === 6 ? CubeTexture.CUBE : CubeTexture.CROSS;
+
+		if (this.images.length > 0)
+		{
+			this.updateImages();
+		}
+
+		this.name = "cubetexture";
+		this.category = "Cube";
 	}
 
-	var array = [];
-	for (var i = 0; i < 6; i++)
-	{
-		array.push(document.createElement("canvas"));
-	}	
-
-	Texture.call(this, array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
-
-	this.images = images !== undefined ? images : [];
-
 	/**
-	 * Size of each one of the texture that compose the CubeTexture.
+	 * Set resolution of each face of the cubemap.
 	 *
-	 * @property size
-	 * @type {number}
-	 * @default 512
+	 * The size has to be a power of 2.
+	 * 
+	 * @method setSize
+	 * @param {number} size Cube face resolution.
 	 */
-	this.size = 512;
-	
-	this.flipY = false;
-	
-	/**
-	 * Cube texture mode, the mode specifies how the cube texture is created.
-	 *
-	 * Source format may vary from a mode to another.
-	 *
-	 * @property mode
-	 * @type {number}
-	 */
-	this.mode = this.images.length === 6 ? CubeTexture.CUBE : CubeTexture.CROSS;
-
-	if (this.images.length > 0)
+	setSize(size)
 	{
-		this.updateImages();
+		if ((size & size - 1) !== 0)
+		{
+			console.warn("nunuStudio: CubeTexture new size is not a power of two.");
+			return;
+		}
+
+		this.size = size;
 	}
 
-	this.name = "cubetexture";
-	this.category = "Cube";
+	/**
+	 * Set new images for this cube texture.
+	 *
+	 * @method setImages
+	 * @param {Array} images Cube texture images.
+	 * @param {number} mode Mode to be used.
+	 */
+	setImages(images, mode)
+	{
+		this.mode = mode !== undefined ? mode : CubeTexture.CUBE;
+		this.images = images;
+	}
+
+	/**
+	 * Updates the CubeTexture images, should be called after changing the images attached to the texture
+	 * 
+	 * @method updateImages
+	 */
+	updateImages()
+	{
+		var self = this;
+
+		if (this.mode === CubeTexture.CUBE)
+		{
+			for (var i = 0; i < this.images.length; i++)
+			{
+				if (typeof this.images[i] === "string")
+				{
+					this.images[i] = new Image(this.images[i]);
+				}
+
+				var image = document.createElement("img");
+				image.crossOrigin = "anonymous";
+				image.index = i;
+				image.src = this.images[i].data;
+				image.onload = function()
+				{
+					self.image[this.index].width = self.size;
+					self.image[this.index].height = self.size;
+
+					var context = self.image[this.index].getContext("2d");
+					context.drawImage(this, 0, 0, self.size, self.size);
+
+					self.needsUpdate = true;
+				};
+			}
+		}
+		else if (this.mode === CubeTexture.CROSS)
+		{
+			for (var i = 0; i < this.image.length; i++)
+			{
+				this.image[i].width = this.size;
+				this.image[i].height = this.size;
+			}
+
+			var image = document.createElement("img");
+			image.src = this.images[0].data;
+			image.onload = function()
+			{
+				var x = this.naturalWidth / 4;
+				var y = this.naturalHeight / 3; 
+
+				self.image[CubeTexture.LEFT].getContext("2d").drawImage(this, 0, y, x, y, 0, 0, self.size, self.size);
+				self.image[CubeTexture.FRONT].getContext("2d").drawImage(this, x, y, x, y, 0, 0, self.size, self.size);
+				self.image[CubeTexture.RIGHT].getContext("2d").drawImage(this, x * 2, y, x, y, 0, 0, self.size, self.size);
+				self.image[CubeTexture.BACK].getContext("2d").drawImage(this, x * 3, y, x, y, 0, 0, self.size, self.size);
+				self.image[CubeTexture.TOP].getContext("2d").drawImage(this, x, 0, x, y, 0, 0, self.size, self.size);
+				self.image[CubeTexture.BOTTOM].getContext("2d").drawImage(this, x, y * 2, x, y, 0, 0, self.size, self.size);
+
+				self.needsUpdate = true;
+			};
+		}
+		else if (this.mode === CubeTexture.EQUIRECTANGULAR)
+		{
+			for (var i = 0; i < this.image.length; i++)
+			{
+				this.image[i].width = this.size;
+				this.image[i].height = this.size;
+			}
+			
+			var image = document.createElement("img");
+			image.src = this.images[0].data;
+			image.onload = function()
+			{
+				var canvas = document.createElement("canvas");
+				canvas.width = image.naturalWidth;
+				canvas.height = image.naturalHeight;
+
+				var context = canvas.getContext("2d");
+				context.drawImage(image, 0, 0);
+				var data = context.getImageData(0, 0, canvas.width, canvas.height);
+
+				for (var i = 0; i < 6; i++)
+				{
+					var out = CubeTexture.renderEquirectFace(data, i, Math.PI, self.size);
+					self.image[i].getContext("2d").putImageData(out, 0, 0);
+				}
+				
+				self.needsUpdate = true;
+			};
+		}
+	}
+
+	/**
+	 * Serialize cube texture to JSON.
+	 * 
+	 * All images of the cube texture are stored individually.
+	 * 
+	 * @method toJSON
+	 * @param {Object} meta
+	 * @return {Object} json
+	 */
+	toJSON(meta)
+	{
+		var data = super.toJSON(meta);
+
+		data.size = this.size;
+		data.mode = this.mode;
+
+		data.images = [];
+
+		if (this.mode === CubeTexture.EQUIRECTANGULAR || this.mode === CubeTexture.CROSS)
+		{
+			var image = this.images[0].toJSON(meta);
+			data.images.push(image.uuid);
+		}
+		else
+		{
+			for (var i = 0; i < this.images.length; i++)
+			{	
+				var image = this.images[i].toJSON(meta);
+				data.images.push(image.uuid);
+			}
+		}
+
+		return data;
+	}
 }
 
-CubeTexture.prototype = Object.create(Texture.prototype);
-CubeTexture.prototype.constructor = CubeTexture;
 CubeTexture.prototype.isCubeTexture = true;
 
 /**
@@ -156,119 +314,6 @@ CubeTexture.EQUIRECTANGULAR = 22;
  * @method setSize
  * @param {number} size Cube face resolution.
  */
-CubeTexture.prototype.setSize = function(size)
-{
-	if ((size & size - 1) !== 0)
-	{
-		console.warn("nunuStudio: CubeTexture new size is not a power of two.");
-		return;
-	}
-
-	this.size = size;
-};
-
-/**
- * Set new images for this cube texture.
- *
- * @method setImages
- * @param {Array} images Cube texture images.
- * @param {number} mode Mode to be used.
- */
-CubeTexture.prototype.setImages = function(images, mode)
-{
-	this.mode = mode !== undefined ? mode : CubeTexture.CUBE;
-	this.images = images;
-};
-
-/**
- * Updates the CubeTexture images, should be called after changing the images attached to the texture
- * 
- * @method updateImages
- */
-CubeTexture.prototype.updateImages = function()
-{
-	var self = this;
-
-	if (this.mode === CubeTexture.CUBE)
-	{
-		for (var i = 0; i < this.images.length; i++)
-		{
-			if (typeof this.images[i] === "string")
-			{
-				this.images[i] = new Image(this.images[i]);
-			}
-
-			var image = document.createElement("img");
-			image.crossOrigin = "anonymous";
-			image.index = i;
-			image.src = this.images[i].data;
-			image.onload = function()
-			{
-				self.image[this.index].width = self.size;
-				self.image[this.index].height = self.size;
-
-				var context = self.image[this.index].getContext("2d");
-				context.drawImage(this, 0, 0, self.size, self.size);
-
-				self.needsUpdate = true;
-			};
-		}
-	}
-	else if (this.mode === CubeTexture.CROSS)
-	{
-		for (var i = 0; i < this.image.length; i++)
-		{
-			this.image[i].width = this.size;
-			this.image[i].height = this.size;
-		}
-
-		var image = document.createElement("img");
-		image.src = this.images[0].data;
-		image.onload = function()
-		{
-			var x = this.naturalWidth / 4;
-			var y = this.naturalHeight / 3; 
-
-			self.image[CubeTexture.LEFT].getContext("2d").drawImage(this, 0, y, x, y, 0, 0, self.size, self.size);
-			self.image[CubeTexture.FRONT].getContext("2d").drawImage(this, x, y, x, y, 0, 0, self.size, self.size);
-			self.image[CubeTexture.RIGHT].getContext("2d").drawImage(this, x * 2, y, x, y, 0, 0, self.size, self.size);
-			self.image[CubeTexture.BACK].getContext("2d").drawImage(this, x * 3, y, x, y, 0, 0, self.size, self.size);
-			self.image[CubeTexture.TOP].getContext("2d").drawImage(this, x, 0, x, y, 0, 0, self.size, self.size);
-			self.image[CubeTexture.BOTTOM].getContext("2d").drawImage(this, x, y * 2, x, y, 0, 0, self.size, self.size);
-
-			self.needsUpdate = true;
-		};
-	}
-	else if (this.mode === CubeTexture.EQUIRECTANGULAR)
-	{
-		for (var i = 0; i < this.image.length; i++)
-		{
-			this.image[i].width = this.size;
-			this.image[i].height = this.size;
-		}
-		
-		var image = document.createElement("img");
-		image.src = this.images[0].data;
-		image.onload = function()
-		{
-			var canvas = document.createElement("canvas");
-			canvas.width = image.naturalWidth;
-			canvas.height = image.naturalHeight;
-
-			var context = canvas.getContext("2d");
-			context.drawImage(image, 0, 0);
-			var data = context.getImageData(0, 0, canvas.width, canvas.height);
-
-			for (var i = 0; i < 6; i++)
-			{
-				var out = CubeTexture.renderEquirectFace(data, i, Math.PI, self.size);
-				self.image[i].getContext("2d").putImageData(out, 0, 0);
-			}
-			
-			self.needsUpdate = true;
-		};
-	}
-};
 
 /**
  * Resample an image pixel from ImageData to ImageData, using bilinear interpolation.
@@ -286,12 +331,12 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 	var height = read.height;
 	var data = read.data;
 
-	var xl = TMath.clamp(Math.floor(x), 0, width - 1);
-	var xr = TMath.clamp(Math.ceil(x), 0, width - 1);
+	var xl = MathUtils.clamp(Math.floor(x), 0, width - 1);
+	var xr = MathUtils.clamp(Math.ceil(x), 0, width - 1);
 	var xf = x - xl;
 
-	var yl = TMath.clamp(Math.floor(y), 0, height - 1);
-	var yr = TMath.clamp(Math.ceil(y), 0, height - 1);
+	var yl = MathUtils.clamp(Math.floor(y), 0, height - 1);
+	var yr = MathUtils.clamp(Math.ceil(y), 0, height - 1);
 	var yf = y - yl;
 
 	var ll = 4 * (yl * width + xl);
@@ -337,7 +382,7 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 
 			// Project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
-			var lon = TMath.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
+			var lon = MathUtils.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
 
 			var px = read.width * lon / Math.PI / 2 - 0.5;
@@ -378,38 +423,4 @@ CubeTexture.faces =
 	}
 ];
 
-/**
- * Serialize cube texture to JSON.
- * 
- * All images of the cube texture are stored individually.
- * 
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-CubeTexture.prototype.toJSON = function(meta)
-{
-	var data = Texture.prototype.toJSON.call(this, meta);
-
-	data.size = this.size;
-	data.mode = this.mode;
-
-	data.images = [];
-
-	if (this.mode === CubeTexture.EQUIRECTANGULAR || this.mode === CubeTexture.CROSS)
-	{
-		var image = this.images[0].toJSON(meta);
-		data.images.push(image.uuid);
-	}
-	else
-	{
-		for (var i = 0; i < this.images.length; i++)
-		{	
-			var image = this.images[i].toJSON(meta);
-			data.images.push(image.uuid);
-		}
-	}
-
-	return data;
-};
 export {CubeTexture};

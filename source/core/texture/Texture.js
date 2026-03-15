@@ -20,142 +20,146 @@ import {Image} from "../resources/Image.js";
  * @param {number} anisotropy
  * @param {number} encoding
  */
-function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
+class Texture extends TTexture
 {
-	/**
-	 * Source image of the texture.
-	 * 
-	 * @property source
-	 * @type {Image}
-	 */
-	if (typeof source === "string")
+	constructor(source, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 	{
-		this.source = new Image(source);
-	}
-	else if (source === undefined)
-	{
-		this.source = new Image();
-	}
-	else
-	{
-		this.source = source;
-	}
-
-	TTexture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
-	
-	var self = this;
-
-	/**
-	 * Name of the texture (doesn't need to be unique).
-	 *
-	 * @property name
-	 * @type {string}
-	 */
-	this.name = "texture";
-	this.category = "Image";
-
-	/**
-	 * Flag used to know is the texture has been disposed.
-	 * 
-	 * Is used to control animation when using a gif as a texture.
-	 * 
-	 * @property disposed
-	 * @type {boolean}
-	 * @default false
-	 */
-	this.disposed = false;
-
-	this.format = this.source.hasTransparency() ? RGBAFormat : RGBFormat;
-
-	this.updateSource();
-
-	// Check if image is animated format and start an update cycle
-	if (this.source.encoding === "gif")
-	{
-		this.generateMipmaps = false;
-		this.magFilter = LinearFilter;
-		this.minFilter = LinearFilter;
-
-		function update()
+		// Resolve source before calling super
+		var resolvedSource;
+		if (typeof source === "string")
 		{
-			if (!self.disposed)
-			{
-				self.needsUpdate = true;
-				requestAnimationFrame(update);
-			}
+			resolvedSource = new Image(source);
 		}
-		update();
-	}
-}
+		else if (source === undefined)
+		{
+			resolvedSource = new Image();
+		}
+		else
+		{
+			resolvedSource = source;
+		}
 
-Texture.prototype = Object.create(TTexture.prototype);
-Texture.isTexture = true;
+		super(document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-/**
- * Should be called after updating the source of the texture.
- *
- * Will copy the source data to the texture for upload to the GPU.
- *
- * @method updateSource
- */
-Texture.prototype.updateSource = function()
-{
-	if (this.source !== null)
-	{
+		/**
+		 * Source image of the texture.
+		 * 
+		 * @property source
+		 * @type {Image}
+		 */
+		this.source = resolvedSource;
+
 		var self = this;
 
-		this.image.crossOrigin = "anonymous";
-		this.image.src = this.source.data;
-		this.image.onload = function()
+		/**
+		 * Name of the texture (doesn't need to be unique).
+		 *
+		 * @property name
+		 * @type {string}
+		 */
+		this.name = "texture";
+		this.category = "Image";
+
+		/**
+		 * Flag used to know is the texture has been disposed.
+		 * 
+		 * Is used to control animation when using a gif as a texture.
+		 * 
+		 * @property disposed
+		 * @type {boolean}
+		 * @default false
+		 */
+		this.disposed = false;
+
+		this.format = this.source.hasTransparency() ? RGBAFormat : RGBFormat;
+
+		this.updateSource();
+
+		// Check if image is animated format and start an update cycle
+		if (this.source.encoding === "gif")
 		{
-			self.needsUpdate = true;
-		};
-		this.image.onerror = function()
-		{
-			console.log("nunuStudio: Failed to load image " + self.source.uuid + " data.");
-			self.source.createSolidColor();
-			self.image.src = self.source.data;
-			self.needsUpdate = true;
-		};
+			this.generateMipmaps = false;
+			this.magFilter = LinearFilter;
+			this.minFilter = LinearFilter;
+
+			function update()
+			{
+				if (!self.disposed)
+				{
+					self.needsUpdate = true;
+					requestAnimationFrame(update);
+				}
+			}
+			update();
+		}
 	}
-	else
+
+	/**
+	 * Should be called after updating the source of the texture.
+	 *
+	 * Will copy the source data to the texture for upload to the GPU.
+	 *
+	 * @method updateSource
+	 */
+	updateSource()
 	{
-		console.warn("nunuStudio: Texture source is null.");
+		if (this.source !== null)
+		{
+			var self = this;
 
-		this.source.createSolidColor();
-		this.image.src = self.source.data;
-		this.needsUpdate = true;
+			this.image.crossOrigin = "anonymous";
+			this.image.src = this.source.data;
+			this.image.onload = function()
+			{
+				self.needsUpdate = true;
+			};
+			this.image.onerror = function()
+			{
+				console.log("nunuStudio: Failed to load image " + self.source.uuid + " data.");
+				self.source.createSolidColor();
+				self.image.src = self.source.data;
+				self.needsUpdate = true;
+			};
+		}
+		else
+		{
+			console.warn("nunuStudio: Texture source is null.");
+
+			this.source.createSolidColor();
+			this.image.src = self.source.data;
+			this.needsUpdate = true;
+		}
 	}
-};
 
-/**
- * Dispose texture.
- * 
- * @method dispose
- */
-Texture.prototype.dispose = function()
-{	
-	TTexture.prototype.dispose.call(this);
+	/**
+	 * Dispose texture.
+	 * 
+	 * @method dispose
+	 */
+	dispose()
+	{
+		super.dispose();
 
-	this.disposed = true;
-};
+		this.disposed = true;
+	}
 
-/**
- * Create JSON description for texture, serializes image used in the texture
- * Texture serialization is different inside nunuStudio, the Texture class does not serialize any image data.
- *
- * @param {Object} meta
- * @method toJSON
- */
-Texture.prototype.toJSON = function(meta)
-{
-	var data = TTexture.prototype.toJSON.call(this, meta);
-	var image = this.source.toJSON(meta);
+	/**
+	 * Create JSON description for texture, serializes image used in the texture
+	 * Texture serialization is different inside nunuStudio, the Texture class does not serialize any image data.
+	 *
+	 * @param {Object} meta
+	 * @method toJSON
+	 */
+	toJSON(meta)
+	{
+		var data = super.toJSON(meta);
+		var image = this.source.toJSON(meta);
 
-	data.image = image.uuid;
+		data.image = image.uuid;
 
-	return data;
-};
+		return data;
+	}
+}
 
 /**
  * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
