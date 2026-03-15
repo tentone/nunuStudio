@@ -12,14 +12,16 @@ import {AmbientLight as TAmbientLight} from "three";
  * @extends {AmbientLight}
  * @module Lights
  */
-function AmbientLight(hex)
+class AmbientLight extends TAmbientLight
 {
-	TAmbientLight.call(this, hex);
+	constructor(hex)
+	{
+		super(hex);
 
-	this.name = "ambient";
+		this.name = "ambient";
 
-	this.matrixAutoUpdate = false;
+		this.matrixAutoUpdate = false;
+	}
 }
 
-AmbientLight.prototype = Object.create(TAmbientLight.prototype);
 export {AmbientLight};

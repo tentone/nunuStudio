@@ -17,54 +17,55 @@ import {SpotLight as TSpotLight, Light} from "three";
  * @extends {SpotLight}
  * @module Lights
  */
-function SpotLight(hex, intensity, distance, angle, exponent, decay)
+class SpotLight extends TSpotLight
 {
-	TSpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
+	constructor(hex, intensity, distance, angle, exponent, decay)
+	{
+		super(hex, intensity, distance, angle, exponent, decay);
 
-	this.name = "spotlight";
+		this.name = "spotlight";
 
-	this.castShadow = true;
+		this.castShadow = true;
 
-	this.shadow.camera.near = 0.05;
-	this.shadow.camera.far = 5000;
-	this.shadow.mapSize.width = 512;
-	this.shadow.mapSize.height = 512;
+		this.shadow.camera.near = 0.05;
+		this.shadow.camera.far = 5000;
+		this.shadow.mapSize.width = 512;
+		this.shadow.mapSize.height = 512;
+	}
+
+	/**
+	 * SpotLight looks to the target object coordinates.
+	 *
+	 * The target object should always be at the scene root.
+	 *
+	 * @method setTarget
+	 * @param {Object3D} target Target object.
+	 */
+	setTarget(target)
+	{
+		this.target = target;
+	}
+
+	/**
+	 * Update light shadow map atributtes at runtime.
+	 *
+	 * @method updateShadowMap
+	 */
+	updateShadowMap()
+	{
+		this.shadow.map.dispose();
+		this.shadow.map = null;
+		this.shadow.camera.updateProjectionMatrix();
+	}
+
+	toJSON(meta)
+	{
+		var data = Light.prototype.toJSON.call(this, meta);
+
+		data.object.target = this.target.uuid;
+
+		return data;
+	}
 }
-
-SpotLight.prototype = Object.create(TSpotLight.prototype);
-
-/**
- * SpotLight looks to the target object coordinates.
- *
- * The target object should always be at the scene root.
- *
- * @method setTarget
- * @param {Object3D} target Target object.
- */
-SpotLight.prototype.setTarget = function(target)
-{
-	this.target = target;
-};
-
-/**
- * Update light shadow map atributtes at runtime.
- *
- * @method updateShadowMap
- */
-SpotLight.prototype.updateShadowMap = function()
-{
-	this.shadow.map.dispose();
-	this.shadow.map = null;
-	this.shadow.camera.updateProjectionMatrix();
-};
-
-SpotLight.prototype.toJSON = function(meta)
-{
-	var data = Light.prototype.toJSON.call(this, meta);
-
-	data.object.target = this.target.uuid;
-
-	return data;
-};
 
 export {SpotLight};

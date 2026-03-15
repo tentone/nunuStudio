@@ -10,60 +10,59 @@ import {LightProbeGenerator} from "three/examples/jsm/lights/LightProbeGenerator
  * @extends {LightProbe}
  * @module Lights
  */
-function LightProbe(sh, intensity)
+class LightProbe extends TLightProbe
 {
-	TLightProbe.call(this, sh, intensity);
-
-	this.type = "LightProbe";
-	this.name = "probe";
-}
-
-LightProbe.prototype = Object.create(TLightProbe.prototype);
-
-/**
- * Generate light probe data from cube camera render.
- *
- * @method generate
- */
-LightProbe.prototype.generate = function()
-{
-	var scene = this.getScene();
-	if (scene === null)
+	constructor(sh, intensity)
 	{
-		console.warn("nunuStudio: LightProbe cannot generate, no scene.", this);
-		return;
+		super(sh, intensity);
+
+		this.type = "LightProbe";
+		this.name = "probe";
 	}
 
-	var canvas = new OffscreenCanvas(256, 256);
-
-	var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
-
-	var cubeCamera = new TCubeCamera(1, 1000, 256,
+	/**
+	 * Generate light probe data from cube camera render.
+	 *
+	 * @method generate
+	 */
+	generate()
+	{
+		var scene = this.getScene();
+		if (scene === null)
 		{
-			format: RGBAFormat,
-			magFilter: LinearFilter,
-			minFilter: LinearFilter
-		});
-	cubeCamera.matrixAutoUpdate = false;
-	cubeCamera.matrix.copy(this.matrix);
-	cubeCamera.matrixWorld.copy(this.matrixWorld);
+			console.warn("nunuStudio: LightProbe cannot generate, no scene.", this);
+			return;
+		}
 
-	// Since gamma is applied during rendering, the cubeCamera renderTarget texture encoding must be sRGBEncoding
-	cubeCamera.renderTarget.texture.encoding = THREE.sRGBEncoding;
-	cubeCamera.update(renderer, scene);
+		var canvas = new OffscreenCanvas(256, 256);
 
-	// Calculate probe from cube camera result
-	var result = LightProbeGenerator.fromCubeRenderTarget(renderer, cubeCamera.renderTarget);
-	this.sh = result.sh;
-};
+		var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
 
-LightProbe.prototype.toJSON = function(meta)
-{
-	var data = Light.prototype.toJSON.call(this, meta);
+		var cubeCamera = new TCubeCamera(1, 1000, 256,
+			{
+				format: RGBAFormat,
+				magFilter: LinearFilter,
+				minFilter: LinearFilter
+			});
+		cubeCamera.matrixAutoUpdate = false;
+		cubeCamera.matrix.copy(this.matrix);
+		cubeCamera.matrixWorld.copy(this.matrixWorld);
 
-	data.object.sh = this.sh.toArray();
+		cubeCamera.update(renderer, scene);
 
-	return data;
-};
+		// Calculate probe from cube camera result
+		var result = LightProbeGenerator.fromCubeRenderTarget(renderer, cubeCamera.renderTarget);
+		this.sh = result.sh;
+	}
+
+	toJSON(meta)
+	{
+		var data = Light.prototype.toJSON.call(this, meta);
+
+		data.object.sh = this.sh.toArray();
+
+		return data;
+	}
+}
 
 export {LightProbe};

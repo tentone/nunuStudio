@@ -17,23 +17,24 @@ import {Sprite as TSprite, Object3D} from "three";
  * @property material
  * @type {Material}
  */
-function Sprite(material)
+class Sprite extends TSprite
 {
-	TSprite.call(this, material);
-
-	this.name = "sprite";
-}
-
-Sprite.prototype = Object.create(TSprite.prototype);
-
-Sprite.prototype.dispose = function()
-{
-	if (this.material !== null && this.material.dispose !== undefined)
+	constructor(material)
 	{
-		this.material.dispose();
+		super(material);
+
+		this.name = "sprite";
 	}
 
-	Object3D.prototype.dispose.call(this);
-};
+	dispose()
+	{
+		if (this.material !== null && this.material.dispose !== undefined)
+		{
+			this.material.dispose();
+		}
+
+		Object3D.prototype.dispose.call(this);
+	}
+}
 
 export {Sprite};
