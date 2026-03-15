@@ -12,120 +12,121 @@ import {AnimationMixer as TAnimationMixer} from "three";
  * @extends {AnimationMixer}
  * @param {Object3D} root Animation root object
  */
-function AnimationMixer(root)
+class AnimationMixer extends TAnimationMixer
 {
-	TAnimationMixer.call(this, root);
-
-	this.playing = false;
-}
-
-AnimationMixer.prototype = Object.create(TAnimationMixer.prototype);
-
-/**
- * Create actions from array of animations.
- *
- * @method createActions
- * @param {Array} animations Array of animations.
- */
-AnimationMixer.prototype.createActions = function(animations)
-{
-	for (var i = 0; i < animations.length; i++)
+	constructor(root)
 	{
-		var action = this.clipAction(animations[i]);
-		action.setLoop(animations[i].loop);
-		action.weight = animations[i].weight;
-		action.timeScale = animations[i].timeScale;
-		action.enabled = animations[i].enabled;
-		action.play();
+		super(root);
+
+		this.playing = false;
 	}
 
-	return this._actions;
-};
-
-/**
- * Set animation mixer time.
- *
- * @method setTime
- * @param {number} time Time in seconds.
- */
-AnimationMixer.prototype.setTime = function(time)
-{
-	this.time = time;
-
-	for (var i = 0; i < this._actions.length; i++)
+	/**
+	 * Create actions from array of animations.
+	 *
+	 * @method createActions
+	 * @param {Array} animations Array of animations.
+	 */
+	createActions(animations)
 	{
-		this._actions[i].time = time;
+		for (var i = 0; i < animations.length; i++)
+		{
+			var action = this.clipAction(animations[i]);
+			action.setLoop(animations[i].loop);
+			action.weight = animations[i].weight;
+			action.timeScale = animations[i].timeScale;
+			action.enabled = animations[i].enabled;
+			action.play();
+		}
+
+		return this._actions;
 	}
 
-	this.update(0, true);
-};
-
-/**
- * Play animation.
- *
- * @method play
- */
-AnimationMixer.prototype.play = function()
-{
-	this.playing = true;
-};
-
-/**
- * Stop animation playback.
- *
- * @method stop
- */
-AnimationMixer.prototype.stop = function()
-{
-	this.setTime(0);
-	this.playing = false;
-};
-
-/**
- * Pause animation playback.
- *
- * @method pause
- */
-AnimationMixer.prototype.pause = function()
-{
-	this.playing = false;
-};
-
-AnimationMixer.prototype.dispose = function()
-{
-	this.stopAllAction();
-	this.uncacheRoot(this._root);
-};
-
-/**
- * Update animation state.
- *
- * @method update
- * @param {number} delta Time since last call.
- * @param {boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
- */
-AnimationMixer.prototype.update = function(delta, forceUpdate)
-{
-	if (this.playing || forceUpdate)
+	/**
+	 * Set animation mixer time.
+	 *
+	 * @method setTime
+	 * @param {number} time Time in seconds.
+	 */
+	setTime(time)
 	{
-		this.time += delta;
+		this.time = time;
 
-		var direction = Math.sign(delta);
-
-		// Run active actions
 		for (var i = 0; i < this._actions.length; i++)
 		{
-			this._actions[i]._update(this.time, delta, direction, this._accuIndex);
+			this._actions[i].time = time;
 		}
 
-		// Update scene graph
-		for (var i = 0; i < this._bindings.length; i++)
-		{
-			this._bindings[i].apply(this._accuIndex);
-		}
+		this.update(0, true);
 	}
 
-	return this;
-};
+	/**
+	 * Play animation.
+	 *
+	 * @method play
+	 */
+	play()
+	{
+		this.playing = true;
+	}
+
+	/**
+	 * Stop animation playback.
+	 *
+	 * @method stop
+	 */
+	stop()
+	{
+		this.setTime(0);
+		this.playing = false;
+	}
+
+	/**
+	 * Pause animation playback.
+	 *
+	 * @method pause
+	 */
+	pause()
+	{
+		this.playing = false;
+	}
+
+	dispose()
+	{
+		this.stopAllAction();
+		this.uncacheRoot(this._root);
+	}
+
+	/**
+	 * Update animation state.
+	 *
+	 * @method update
+	 * @param {number} delta Time since last call.
+	 * @param {boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
+	 */
+	update(delta, forceUpdate)
+	{
+		if (this.playing || forceUpdate)
+		{
+			this.time += delta;
+
+			var direction = Math.sign(delta);
+
+			// Run active actions
+			for (var i = 0; i < this._actions.length; i++)
+			{
+				this._actions[i]._update(this.time, delta, direction, this._accuIndex);
+			}
+
+			// Update scene graph
+			for (var i = 0; i < this._bindings.length; i++)
+			{
+				this._bindings[i].apply(this._accuIndex);
+			}
+		}
+
+		return this;
+	}
+}
 
 export {AnimationMixer};

@@ -1,4 +1,4 @@
-import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat} from "three";
+import {RepeatWrapping, LinearFilter, RGBAFormat} from "three";
 import {Image} from "../resources/Image.js";
 import {Texture} from "./Texture.js";
 
@@ -20,279 +20,280 @@ import {Texture} from "./Texture.js";
  * @param {number} type
  * @param {number} anisotropy
  */
-function SpriteSheetTexture(source, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
+class SpriteSheetTexture extends Texture
 {
-	Texture.call(this, source, mapping, RepeatWrapping, RepeatWrapping, LinearFilter, LinearFilter, RGBFormat, type, anisotropy);
+	constructor(source, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
+	{
+		super(source, mapping, RepeatWrapping, RepeatWrapping, LinearFilter, LinearFilter, undefined, type, anisotropy);
 
-	this.name = "animation";
-	this.category = "SpriteSheet";
-	this.disposed = false;
-	this.format = this.source.hasTransparency() ? RGBAFormat : RGBFormat;
-	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
+		this.name = "animation";
+		this.category = "SpriteSheet";
+		this.disposed = false;
+		this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 
-	/**
-	 * If true the animation plays in loop.
-	 *
-	 * @property loop
-	 * @default true
-	 * @type {boolean}
-	 */
-	this.loop = true;
-
-	/**
-	 * Animation speed in seconds.
-	 *
-	 * @property animationSpeed
-	 * @default 0.1
-	 * @type {number}
-	 */
-	this.animationSpeed = 0.1;
-
-	this._totalFrames = totalFrames;
-	this._beginFrame = 0;
-	this._endFrame = 0;
-	this._framesHorizontal = framesHorizontal;
-	this._framesVertical = framesVertical;
-
-	var self = this;
-
-	Object.defineProperties(this,
-		{
 		/**
-		 * Spritesheet number of frames horizontally.
+		 * If true the animation plays in loop.
 		 *
-		 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
+		 * @property loop
+		 * @default true
+		 * @type {boolean}
+		 */
+		this.loop = true;
+
+		/**
+		 * Animation speed in seconds.
 		 *
-		 * @property framesHorizontal
-		 * @default 1.0
+		 * @property animationSpeed
+		 * @default 0.1
 		 * @type {number}
 		 */
-			framesHorizontal:
-		{
-			get: function()
-			{
-				return this._framesHorizontal;
-			},
-			set: function(value)
-			{
-				this._framesHorizontal = value;
-				this.repeat.x = 1 / value;
-				this.totalFrames = this._framesHorizontal * this._framesVertical;
-			}
-		},
+		this.animationSpeed = 0.1;
 
+		this._totalFrames = totalFrames;
+		this._beginFrame = 0;
+		this._endFrame = 0;
+		this._framesHorizontal = framesHorizontal;
+		this._framesVertical = framesVertical;
+
+		var self = this;
+
+		Object.defineProperties(this,
+			{
 			/**
-			 * Spritesheet number of frames vertically.
+			 * Spritesheet number of frames horizontally.
 			 *
 			 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
 			 *
-			 * @property framesVertical
+			 * @property framesHorizontal
 			 * @default 1.0
 			 * @type {number}
 			 */
-			framesVertical:
-		{
-			get: function()
+				framesHorizontal:
 			{
-				return this._framesVertical;
-			},
-			set: function(value)
-			{
-				this._framesVertical = value;
-				this.repeat.y = 1 / value;
-				this.totalFrames = this._framesHorizontal * this._framesVertical;
-			}
-		},
-
-			/**
-			 * The offset frame can be ajusted to control in which frame the animation ends.
-			 * 
-			 * @property endFrame
-			 * @type {number}
-			 */
-			endFrame:
-		{
-			get: function()
-			{
-				return this._endFrame;
-			},
-			set: function(value)
-			{
-				if (value > this._totalFrames)
+				get: function()
 				{
-					value = this._totalFrames;
-				}
-				this._endFrame = value;
-			}
-		},
-
-			/**
-			 * The offset frame can be ajusted to control in which frame the animation starts.
-			 * 
-			 * @property beginFrame
-			 * @default 0
-			 * @type {number}
-			 */
-			beginFrame:
-		{
-			get: function()
-			{
-				return this._beginFrame;
-			},
-			set: function(value)
-			{
-				if (value < 0)
+					return this._framesHorizontal;
+				},
+				set: function(value)
 				{
-					value = 0;
+					this._framesHorizontal = value;
+					this.repeat.x = 1 / value;
+					this.totalFrames = this._framesHorizontal * this._framesVertical;
 				}
-				this.currentFrame = value;
-				this._beginFrame = value;
-			}
-		},
-
-			/**
-			 * Total number of frames present in the texture.
-			 * 
-			 * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
-			 *
-			 * @property totalFrames
-			 * @default 1
-			 * @type {number}
-			 */
-			totalFrames:
-		{
-			get: function()
-			{
-				return this._totalFrames;
 			},
-			set: function(value)
+
+				/**
+				 * Spritesheet number of frames vertically.
+				 *
+				 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
+				 *
+				 * @property framesVertical
+				 * @default 1.0
+				 * @type {number}
+				 */
+				framesVertical:
 			{
-				this._beginFrame = 0;
-				this._endFrame = value;
-				this._totalFrames = value;
+				get: function()
+				{
+					return this._framesVertical;
+				},
+				set: function(value)
+				{
+					this._framesVertical = value;
+					this.repeat.y = 1 / value;
+					this.totalFrames = this._framesHorizontal * this._framesVertical;
+				}
+			},
+
+				/**
+				 * The offset frame can be ajusted to control in which frame the animation ends.
+				 * 
+				 * @property endFrame
+				 * @type {number}
+				 */
+				endFrame:
+			{
+				get: function()
+				{
+					return this._endFrame;
+				},
+				set: function(value)
+				{
+					if (value > this._totalFrames)
+					{
+						value = this._totalFrames;
+					}
+					this._endFrame = value;
+				}
+			},
+
+				/**
+				 * The offset frame can be ajusted to control in which frame the animation starts.
+				 * 
+				 * @property beginFrame
+				 * @default 0
+				 * @type {number}
+				 */
+				beginFrame:
+			{
+				get: function()
+				{
+					return this._beginFrame;
+				},
+				set: function(value)
+				{
+					if (value < 0)
+					{
+						value = 0;
+					}
+					this.currentFrame = value;
+					this._beginFrame = value;
+				}
+			},
+
+				/**
+				 * Total number of frames present in the texture.
+				 * 
+				 * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
+				 *
+				 * @property totalFrames
+				 * @default 1
+				 * @type {number}
+				 */
+				totalFrames:
+			{
+				get: function()
+				{
+					return this._totalFrames;
+				},
+				set: function(value)
+				{
+					this._beginFrame = 0;
+					this._endFrame = value;
+					this._totalFrames = value;
+				}
 			}
-		}
-		});
+			});
 
-	/**
-	 * Indicates the current frame of the animation.
-	 *
-	 * @property currentFrame
-	 * @type {number}
-	 */
-	this.currentFrame = 0;
+		/**
+		 * Indicates the current frame of the animation.
+		 *
+		 * @property currentFrame
+		 * @type {number}
+		 */
+		this.currentFrame = 0;
 
-	function update()
-	{
-		if (!self.disposed)
+		function update()
 		{
-			self.step();
-			setTimeout(update, self.animationSpeed * 1e3);
-		}
-	};
+			if (!self.disposed)
+			{
+				self.step();
+				setTimeout(update, self.animationSpeed * 1e3);
+			}
+		};
 
-	update();
-}
-
-SpriteSheetTexture.prototype = Object.create(Texture.prototype);
-SpriteSheetTexture.isTexture = true;
-
-/**
- * Step the sprite sheet animation, move to next frame and recalculate the texture offset.
- *
- * @method step
- */
-SpriteSheetTexture.prototype.step = function()
-{
-	this.currentFrame++;
-
-	if (this.currentFrame >= this._endFrame)
-	{
-		this.currentFrame = this._beginFrame;
+		update();
 	}
 
-	this.offset.x = this.currentFrame % this.framesHorizontal / this.framesHorizontal;
-	this.offset.y = 1 - this.repeat.y - Math.floor(this.currentFrame / this.framesHorizontal) / this.framesVertical;
-};
+	/**
+	 * Step the sprite sheet animation, move to next frame and recalculate the texture offset.
+	 *
+	 * @method step
+	 */
+	step()
+	{
+		this.currentFrame++;
 
+		if (this.currentFrame >= this._endFrame)
+		{
+			this.currentFrame = this._beginFrame;
+		}
 
-/**
- * Set animation playback speed.
- * 
- * @method setAnimationSpeed
- * @param {number} animationSpeed
- */
-SpriteSheetTexture.prototype.setAnimationSpeed = function(animationSpeed)
-{
-	this.animationSpeed = animationSpeed;
-};
+		this.offset.x = this.currentFrame % this.framesHorizontal / this.framesHorizontal;
+		this.offset.y = 1 - this.repeat.y - Math.floor(this.currentFrame / this.framesHorizontal) / this.framesVertical;
+	}
 
-/**
- * Set the sprite sheet grid dimension.
- *
- * Automatically sets the totalFrame value to framesHorizontal * framesVertical.
- * 	
- *
- * @method setFrameGrid
- * @param {number} framesHorizontal
- * @param {number} framesVertical
- */
-SpriteSheetTexture.prototype.setFrameGrid = function(framesHorizontal, framesVertical)
-{
-	this._framesHorizontal = framesHorizontal;
-	this._framesVertical = framesVertical;
-	this._totalFrames = framesHorizontal * framesVertical;
-	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
-};
+	/**
+	 * Set animation playback speed.
+	 * 
+	 * @method setAnimationSpeed
+	 * @param {number} animationSpeed
+	 */
+	setAnimationSpeed(animationSpeed)
+	{
+		this.animationSpeed = animationSpeed;
+	}
 
-/**
- * Set frames to be used for this animation.
- *
- * Frame starts counting from 0.
- * 
- * @method setAnimationFrames
- * @param {number} beginFrame
- * @param {number} endFrame
- */
-SpriteSheetTexture.prototype.setAnimationFrames = function(beginFrame, endFrame)
-{
-	this.beginFrame = beginFrame;
-	this.endFrame = endFrame;
-};
+	/**
+	 * Set the sprite sheet grid dimension.
+	 *
+	 * Automatically sets the totalFrame value to framesHorizontal * framesVertical.
+	 * 	
+	 *
+	 * @method setFrameGrid
+	 * @param {number} framesHorizontal
+	 * @param {number} framesVertical
+	 */
+	setFrameGrid(framesHorizontal, framesVertical)
+	{
+		this._framesHorizontal = framesHorizontal;
+		this._framesVertical = framesVertical;
+		this._totalFrames = framesHorizontal * framesVertical;
+		this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
+	}
 
-/**
- * Dispose spritesheet texture.
- *
- * @method dispose
- */
-SpriteSheetTexture.prototype.dispose = function()
-{
-	Texture.prototype.dispose.call(this);
+	/**
+	 * Set frames to be used for this animation.
+	 *
+	 * Frame starts counting from 0.
+	 * 
+	 * @method setAnimationFrames
+	 * @param {number} beginFrame
+	 * @param {number} endFrame
+	 */
+	setAnimationFrames(beginFrame, endFrame)
+	{
+		this.beginFrame = beginFrame;
+		this.endFrame = endFrame;
+	}
 
-	this.disposed = true;
-};
+	/**
+	 * Dispose spritesheet texture.
+	 *
+	 * @method dispose
+	 */
+	dispose()
+	{
+		super.dispose();
 
-/**
- * Create texture json description.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-SpriteSheetTexture.prototype.toJSON = function(meta)
-{
-	var data = Texture.prototype.toJSON.call(this, meta);
-	var image = this.source.toJSON(meta);
+		this.disposed = true;
+	}
 
-	data.image = image.uuid;
-	data.loop = this.loop;
-	data.animationSpeed = this.animationSpeed;
-	data.framesHorizontal = this._framesHorizontal;
-	data.framesVertical = this._framesVertical;
-	data.totalFrames = this._totalFrames;
-	data.beginFrame = this._beginFrame;
-	data.endFrame = this._endFrame;
+	/**
+	 * Create texture json description.
+	 *
+	 * @method toJSON
+	 * @param {Object} meta
+	 * @return {Object} json
+	 */
+	toJSON(meta)
+	{
+		var data = super.toJSON(meta);
+		var image = this.source.toJSON(meta);
 
-	return data;
-};
+		data.image = image.uuid;
+		data.loop = this.loop;
+		data.animationSpeed = this.animationSpeed;
+		data.framesHorizontal = this._framesHorizontal;
+		data.framesVertical = this._framesVertical;
+		data.totalFrames = this._totalFrames;
+		data.beginFrame = this._beginFrame;
+		data.endFrame = this._endFrame;
+
+		return data;
+	}
+}
+
+SpriteSheetTexture.isTexture = true;
+
 export {SpriteSheetTexture};

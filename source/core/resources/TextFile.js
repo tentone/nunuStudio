@@ -9,16 +9,42 @@ import {Resource} from "./Resource.js";
  * @extends {Resource}
  * @module Resources
  */
-function TextFile(data, encoding)
+class TextFile extends Resource
 {
-	Resource.call(this, "text", "TextFile");
+	constructor(data, encoding)
+	{
+		super("text", "TextFile");
 
-	this.format = "string";
-	this.encoding = encoding !== undefined ? encoding : "txt";
-	this.data = data !== undefined ? data : "";
+		this.format = "string";
+		this.encoding = encoding !== undefined ? encoding : "txt";
+		this.data = data !== undefined ? data : "";
+	}
+
+	/**
+	 * Serialize File resource data to json.
+	 *
+	 * @method toJSON
+	 * @param {meta} meta
+	 * @return {Object} data
+	 */
+	toJSON(meta)
+	{
+		if (meta.resources[this.uuid] !== undefined)
+		{
+			return meta.resources[this.uuid];
+		}
+
+		var data = super.toJSON(meta);
+		
+		data.encoding = this.encoding;
+		data.data = this.data;
+		data.format = this.format;
+
+		meta.resources[this.uuid] = data;
+
+		return data;
+	}
 }
-
-TextFile.prototype = Object.create(Resource.prototype);
 
 TextFile.extensions = [".js", ".txt", ".glsl", ".json", ".xml", ".yaml", ".csv", ".css", ".html"];
 
@@ -43,31 +69,6 @@ TextFile.fileIsText = function(file)
 	}
 
 	return false;
-};
-
-/**
- * Serialize File resource data to json.
- *
- * @method toJSON
- * @param {meta} meta
- * @return {Object} data
- */
-TextFile.prototype.toJSON = function(meta)
-{
-	if (meta.resources[this.uuid] !== undefined)
-	{
-		return meta.resources[this.uuid];
-	}
-
-	var data = Resource.prototype.toJSON.call(this, meta);
-	
-	data.encoding = this.encoding;
-	data.data = this.data;
-	data.format = this.format;
-
-	meta.resources[this.uuid] = data;
-
-	return data;
 };
 
 export {TextFile};
