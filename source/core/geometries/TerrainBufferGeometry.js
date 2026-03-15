@@ -15,126 +15,126 @@ import {Image} from "../resources/Image.js";
  * @param {number} scale Scale of the terrain in height (maximum altitude of the terrain).
  * @param {Image} image Image containing the height data of the terrain.
  */
-function TerrainBufferGeometry(width, height, widthSegments, heightSegments, scale, image)
+class TerrainBufferGeometry extends BufferGeometry
 {
-	BufferGeometry.call(this);
-
-	this.type = "TerrainBufferGeometry";
-
-	this.parameters =
+	constructor(width, height, widthSegments, heightSegments, scale, image)
 	{
-		width: width || 1,
-		height: height || 1,
-		widthSegments: widthSegments || 10,
-		heightSegments: heightSegments || 10,
-		scale: scale || 1
-	};
+		super();
 
-	this.image = image;
+		this.type = "TerrainBufferGeometry";
+
+		this.parameters =
+		{
+			width: width || 1,
+			height: height || 1,
+			widthSegments: widthSegments || 10,
+			heightSegments: heightSegments || 10,
+			scale: scale || 1
+		};
+
+		this.image = image;
 
 
-	this.generate();
-};
+		this.generate();
+	}
 
-TerrainBufferGeometry.prototype = Object.create(BufferGeometry.prototype);
-TerrainBufferGeometry.constructor = TerrainBufferGeometry;
-
-TerrainBufferGeometry.prototype.generate = function()
-{
-	var width = this.parameters.width;
-	var height = this.parameters.height;
-	var widthSegments = this.parameters.widthSegments;
-	var heightSegments = this.parameters.heightSegments;
-	var scale = this.parameters.scale;
-
-	var self = this;
-	
-	this.image.getImageData(function(data, imgWidth, imgHeight)
+	generate()
 	{
-		var imgChannels = 4;
+		var width = this.parameters.width;
+		var height = this.parameters.height;
+		var widthSegments = this.parameters.widthSegments;
+		var heightSegments = this.parameters.heightSegments;
+		var scale = this.parameters.scale;
 
-		var widthHalf = width / 2;
-		var heightHalf = height / 2;
-
-		var gridX = Math.floor(widthSegments) || 1;
-		var gridX1 = gridX + 1;
-		var gridY = Math.floor(heightSegments) || 1;
-
-		// Size of each individual segment
-		var segWidth = width / gridX;
-		var segHeight = height / gridY;
-
-		// Buffers
-		var indices = [];
-		var vertices = [];
-		var normals = [];
-		var uvs = [];
-
-		var widthRatio = imgWidth / (width + 1);
-		var heightRatio = imgHeight / (height + 1);
-
-		// Get image pixel from x, y coordinates in the geometry space, value is normalized
-		function getPixel(x, z)
+		var self = this;
+		
+		this.image.getImageData(function(data, imgWidth, imgHeight)
 		{
-			var imgX = Math.round((x + widthHalf) * widthRatio);
-			var imgY = Math.round((z + heightHalf) * heightRatio);
-			var iy = imgY * (imgWidth * imgChannels) + imgX * imgChannels;
-			return data.data[iy] / 255;
-		}
+			var imgChannels = 4;
 
-		// Generate vertices, normals and uvs
-		for (var iz = 0; iz <= gridY; iz++)
-		{
-			var z = iz * segHeight - heightHalf;
+			var widthHalf = width / 2;
+			var heightHalf = height / 2;
 
-			for (var ix = 0; ix <= gridX; ix++)
+			var gridX = Math.floor(widthSegments) || 1;
+			var gridX1 = gridX + 1;
+			var gridY = Math.floor(heightSegments) || 1;
+
+			// Size of each individual segment
+			var segWidth = width / gridX;
+			var segHeight = height / gridY;
+
+			// Buffers
+			var indices = [];
+			var vertices = [];
+			var normals = [];
+			var uvs = [];
+
+			var widthRatio = imgWidth / (width + 1);
+			var heightRatio = imgHeight / (height + 1);
+
+			// Get image pixel from x, y coordinates in the geometry space, value is normalized
+			function getPixel(x, z)
 			{
-				var x = ix * segWidth - widthHalf;
-
-				// Read height from the image data
-				var y = getPixel(x, z) * scale;
-				vertices.push(x, y, z);
-				normals.push(0, 1, 0);
-
-				uvs.push(ix / gridX);
-				uvs.push(1 - iz / gridY);
+				var imgX = Math.round((x + widthHalf) * widthRatio);
+				var imgY = Math.round((z + heightHalf) * heightRatio);
+				var iy = imgY * (imgWidth * imgChannels) + imgX * imgChannels;
+				return data.data[iy] / 255;
 			}
-		}
 
-		// Indices
-		for (var iz = 0; iz < gridY; iz ++)
-		{
-			for (var ix = 0; ix < gridX; ix ++)
+			// Generate vertices, normals and uvs
+			for (var iz = 0; iz <= gridY; iz++)
 			{
-				var a = ix + gridX1 * iz;
-				var b = ix + gridX1 * (iz + 1);
-				var c = ix + 1 + gridX1 * (iz + 1);
-				var d = ix + 1 + gridX1 * iz;
+				var z = iz * segHeight - heightHalf;
 
-				indices.push(a, b, d);
-				indices.push(b, c, d);
+				for (var ix = 0; ix <= gridX; ix++)
+				{
+					var x = ix * segWidth - widthHalf;
+
+					// Read height from the image data
+					var y = getPixel(x, z) * scale;
+					vertices.push(x, y, z);
+					normals.push(0, 1, 0);
+
+					uvs.push(ix / gridX);
+					uvs.push(1 - iz / gridY);
+				}
 			}
-		}
 
-		self.setIndex(indices);
-		self.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-		self.setAttribute("normal", new Float32BufferAttribute(normals, 3));
-		self.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+			// Indices
+			for (var iz = 0; iz < gridY; iz ++)
+			{
+				for (var ix = 0; ix < gridX; ix ++)
+				{
+					var a = ix + gridX1 * iz;
+					var b = ix + gridX1 * (iz + 1);
+					var c = ix + 1 + gridX1 * (iz + 1);
+					var d = ix + 1 + gridX1 * iz;
 
-		self.computeVertexNormals();
+					indices.push(a, b, d);
+					indices.push(b, c, d);
+				}
+			}
 
-		self.boundingBox = null;
-		self.boundingSphere = null;
-	});
-};
+			self.setIndex(indices);
+			self.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+			self.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+			self.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
 
-TerrainBufferGeometry.prototype.toJSON = function()
-{
-	var data = BufferGeometry.prototype.toJSON.call(this);
-	
-	data.image = this.image.uuid;
+			self.computeVertexNormals();
 
-	return data;
-};
+			self.boundingBox = null;
+			self.boundingSphere = null;
+		});
+	}
+
+	toJSON()
+	{
+		var data = super.toJSON();
+		
+		data.image = this.image.uuid;
+
+		return data;
+	}
+}
 
 export {TerrainBufferGeometry};

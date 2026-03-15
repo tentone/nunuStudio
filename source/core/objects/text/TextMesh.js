@@ -20,225 +20,226 @@ import {Mesh} from "../mesh/Mesh.js";
  * @param {boolean} extruded
  * @extends {Mesh}
  */
-function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments, extruded)
+class TextMesh extends Mesh
 {
-	Mesh.call(this, TextMesh.EMPTY_GEOMETRY, material);
-
-	this.name = "text";
-	this.type = "TextMesh";
-
-	/**
-	 * Font used to draw text.
-	 *
-	 * @property font
-	 * @type {Font}
-	 */
-	this.font = font !== undefined ? font : null;
-
-	/**
-	 * Indicates if the text mesh has volume or not.
-	 *
-	 * @property extruded
-	 * @type {boolean}
-	 */
-	this.extruded = extruded !== undefined ? extruded : true;
-
-	/**
-	 * Size of the text (depth).
-	 *
-	 * @property size
-	 * @type {number}
-	 */
-	this.size = size !== undefined ? size : 1;
-
-	/**
-	 * Height of the text.
-	 *
-	 * @property height
-	 * @type {number}
-	 */
-	this.height = height !== undefined ? height : 0.5;
-
-	/**
-	 * Number of segments that compose a curve in the font.
-	 *
-	 * @property curveSegments
-	 * @type {number}
-	 */
-	this.curveSegments = curveSegments !== undefined ? curveSegments : 15;
-
-	/**
-	 * If true a bevel is added to the text.
-	 *
-	 * @property bevel
-	 * @type {boolean}
-	 */
-	this.bevel = bevel !== undefined ? bevel : false;
-
-	/**
-	 * Bevel thickness.
-	 *
-	 * @property bevelThickness
-	 * @type {number}
-	 */
-	this.bevelThickness = bevelThickness !== undefined ? bevelThickness : 0.1;
-
-	/**
-	 * Bevel size.
-	 *
-	 * @property bevelSize
-	 * @type {number}
-	 */
-	this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
-
-	/**
-	 * Text to be diplayed in the mesh.
-	 *
-	 * @property text
-	 * @type {string}
-	 */
-	if (text !== undefined)
+	constructor(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments, extruded)
 	{
-		text = "text";
-	}
-	Object.defineProperties(this,
+		super(TextMesh.EMPTY_GEOMETRY, material);
+
+		this.name = "text";
+		this.type = "TextMesh";
+
+		/**
+		 * Font used to draw text.
+		 *
+		 * @property font
+		 * @type {Font}
+		 */
+		this.font = font !== undefined ? font : null;
+
+		/**
+		 * Indicates if the text mesh has volume or not.
+		 *
+		 * @property extruded
+		 * @type {boolean}
+		 */
+		this.extruded = extruded !== undefined ? extruded : true;
+
+		/**
+		 * Size of the text (depth).
+		 *
+		 * @property size
+		 * @type {number}
+		 */
+		this.size = size !== undefined ? size : 1;
+
+		/**
+		 * Height of the text.
+		 *
+		 * @property height
+		 * @type {number}
+		 */
+		this.height = height !== undefined ? height : 0.5;
+
+		/**
+		 * Number of segments that compose a curve in the font.
+		 *
+		 * @property curveSegments
+		 * @type {number}
+		 */
+		this.curveSegments = curveSegments !== undefined ? curveSegments : 15;
+
+		/**
+		 * If true a bevel is added to the text.
+		 *
+		 * @property bevel
+		 * @type {boolean}
+		 */
+		this.bevel = bevel !== undefined ? bevel : false;
+
+		/**
+		 * Bevel thickness.
+		 *
+		 * @property bevelThickness
+		 * @type {number}
+		 */
+		this.bevelThickness = bevelThickness !== undefined ? bevelThickness : 0.1;
+
+		/**
+		 * Bevel size.
+		 *
+		 * @property bevelSize
+		 * @type {number}
+		 */
+		this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
+
+		/**
+		 * Text to be diplayed in the mesh.
+		 *
+		 * @property text
+		 * @type {string}
+		 */
+		if (text !== undefined)
 		{
-			text:
-		{
-			get: function() {return text;},
-			set: function(value)
+			text = "text";
+		}
+		Object.defineProperties(this,
 			{
-				if (text !== value)
+				text:
+			{
+				get: function() {return text;},
+				set: function(value)
 				{
-					text = value;
-					this.updateGeometry();
+					if (text !== value)
+					{
+						text = value;
+						this.updateGeometry();
+					}
 				}
 			}
-		}
-		});
+			});
 
-	this.updateGeometry();
-}
-
-TextMesh.prototype = Object.create(Mesh.prototype);
-
-TextMesh.EMPTY_GEOMETRY = new Geometry();
-
-/**
- * Set font used by this text 3D instance.
- *
- * @param {Font} font Font
- * @method setFont
- */
-TextMesh.prototype.setFont = function(font)
-{
-	if (this.font !== font)
-	{
-		this.font = font;
 		this.updateGeometry();
 	}
-};
 
-/**
- * Change text.
- *
- * @param {string} text
- * @method setText
- */
-TextMesh.prototype.setText = function(text)
-{
-	this.text = text;
-};
-
-/**
- * Update the text geometry.
- *
- * Should be called after chaging any attribute to generate a new geometry.
- *
- * @method updateGeometry
- */
-TextMesh.prototype.updateGeometry = function()
-{
-	if (this.font !== null)
+	/**
+	 * Set font used by this text 3D instance.
+	 *
+	 * @param {Font} font Font
+	 * @method setFont
+	 */
+	setFont(font)
 	{
-		if (this.geometry !== undefined)
+		if (this.font !== font)
 		{
-			this.geometry.dispose();
-		}
-
-		if (this.font.isFont !== true)
-		{
-			console.warn("nunuStudio: Font parameter is not an instance of Font.");
-			this.geometry = TextMesh.EMPTY_GEOMETRY;
-			return;
-		}
-
-		var shapes = this.font.generateShapes(this.text, this.size);
-
-		if (this.extruded)
-		{
-			this.geometry = new ExtrudeBufferGeometry(shapes,
-				{
-					curveSegments: this.curveSegments,
-					depth: this.height,
-					bevelEnabled: this.bevel,
-					bevelSize: this.bevelSize,
-					bevelThickness: this.bevelThickness
-				});
-			this.geometry.computeVertexNormals();
-		}
-		else
-		{
-			this.geometry = new ShapeBufferGeometry(shapes, this.curveSegments);
+			this.font = font;
+			this.updateGeometry();
 		}
 	}
-};
 
-/**
- * Clone this object instance into a new object.
- *
- * @method clone
- * @return {TextMesh} Clone of this object.
- */
-TextMesh.prototype.clone = function()
-{
-	return new TextMesh(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
-};
-
-/**
- * Create JSON for object.
- *
- * Need to backup geometry and set to undefined to avoid it being stored.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-TextMesh.prototype.toJSON = function(meta)
-{
-	var geometry = this.geometry;
-	this.geometry = undefined;
-
-	var font = this.font;
-
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	/**
+	 * Change text.
+	 *
+	 * @param {string} text
+	 * @method setText
+	 */
+	setText(text)
 	{
-		font = font.toJSON(meta);
-	});
+		this.text = text;
+	}
 
-	data.object.text = this.text;
-	data.object.font = font.uuid;
-	data.object.size = this.size;
-	data.object.curveSegments = this.curveSegments;
-	data.object.height = this.height;
-	data.object.bevel = this.bevel;
-	data.object.bevelThickness = this.bevelThickness;
-	data.object.bevelSize = this.bevelSize;
-	data.object.extruded = this.extruded;
+	/**
+	 * Update the text geometry.
+	 *
+	 * Should be called after chaging any attribute to generate a new geometry.
+	 *
+	 * @method updateGeometry
+	 */
+	updateGeometry()
+	{
+		if (this.font !== null)
+		{
+			if (this.geometry !== undefined)
+			{
+				this.geometry.dispose();
+			}
 
-	this.geometry = geometry;
+			if (this.font.isFont !== true)
+			{
+				console.warn("nunuStudio: Font parameter is not an instance of Font.");
+				this.geometry = TextMesh.EMPTY_GEOMETRY;
+				return;
+			}
 
-	return data;
-};
+			var shapes = this.font.generateShapes(this.text, this.size);
+
+			if (this.extruded)
+			{
+				this.geometry = new ExtrudeBufferGeometry(shapes,
+					{
+						curveSegments: this.curveSegments,
+						depth: this.height,
+						bevelEnabled: this.bevel,
+						bevelSize: this.bevelSize,
+						bevelThickness: this.bevelThickness
+					});
+				this.geometry.computeVertexNormals();
+			}
+			else
+			{
+				this.geometry = new ShapeBufferGeometry(shapes, this.curveSegments);
+			}
+		}
+	}
+
+	/**
+	 * Clone this object instance into a new object.
+	 *
+	 * @method clone
+	 * @return {TextMesh} Clone of this object.
+	 */
+	clone()
+	{
+		return new TextMesh(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
+	}
+
+	/**
+	 * Create JSON for object.
+	 *
+	 * Need to backup geometry and set to undefined to avoid it being stored.
+	 *
+	 * @method toJSON
+	 * @param {Object} meta
+	 * @return {Object} json
+	 */
+	toJSON(meta)
+	{
+		var geometry = this.geometry;
+		this.geometry = undefined;
+
+		var font = this.font;
+
+		var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+		{
+			font = font.toJSON(meta);
+		});
+
+		data.object.text = this.text;
+		data.object.font = font.uuid;
+		data.object.size = this.size;
+		data.object.curveSegments = this.curveSegments;
+		data.object.height = this.height;
+		data.object.bevel = this.bevel;
+		data.object.bevelThickness = this.bevelThickness;
+		data.object.bevelSize = this.bevelSize;
+		data.object.extruded = this.extruded;
+
+		this.geometry = geometry;
+
+		return data;
+	}
+}
+
+TextMesh.EMPTY_GEOMETRY = new Geometry();
 
 export {TextMesh};

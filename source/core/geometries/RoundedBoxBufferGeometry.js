@@ -8,174 +8,270 @@ import {BufferGeometry, BufferAttribute, Vector3} from "three";
  * @class RoundedBoxBufferGeometry
  * @constructor
  */
-function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
+class RoundedBoxBufferGeometry extends BufferGeometry
 {
-	BufferGeometry.call(this);
-
-	this.type = "RoundedBoxBufferGeometry";
-
-	// Validate params
-	radiusSegments = !isNaN(radiusSegments) ? Math.max(1, Math.floor(radiusSegments)) : 1;
-	width = !isNaN(width) ? width : 1;
-	height = !isNaN(height) ? height : 1;
-	depth = !isNaN(depth) ? depth : 1;
-	radius = !isNaN(radius) ? radius : .15;
-	radius = Math.min(radius, Math.min(width, Math.min(height, Math.min(depth))) / 2);
-
-	var edgeHalfWidth = width / 2 - radius;
-	var edgeHalfHeight = height / 2 - radius;
-	var edgeHalfDepth = depth / 2 - radius;
-
-	// Serialization parameters
-	this.parameters =
+	constructor(width, height, depth, radius, radiusSegments)
 	{
-		width: width,
-		height: height,
-		depth: depth,
-		radius: radius,
-		radiusSegments: radiusSegments
-	};
+		super();
 
-	// Calculate vertices count
-	var rs1 = radiusSegments + 1; // Radius segments + 1 
-	var totalVertexCount = rs1 * radiusSegments + 1 << 3;
+		this.type = "RoundedBoxBufferGeometry";
 
-	// Make buffers
-	var positions = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
-	var normals = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+		// Validate params
+		radiusSegments = !isNaN(radiusSegments) ? Math.max(1, Math.floor(radiusSegments)) : 1;
+		width = !isNaN(width) ? width : 1;
+		height = !isNaN(height) ? height : 1;
+		depth = !isNaN(depth) ? depth : 1;
+		radius = !isNaN(radius) ? radius : .15;
+		radius = Math.min(radius, Math.min(width, Math.min(height, Math.min(depth))) / 2);
 
-	// Some vars
-	var cornerVerts = [];
-	var cornerNormals = [];
-	var normal = new Vector3();
-	var vertex = new Vector3();
-	var vertexPool = [];
-	var normalPool = [];
-	var indices = [];
+		var edgeHalfWidth = width / 2 - radius;
+		var edgeHalfHeight = height / 2 - radius;
+		var edgeHalfDepth = depth / 2 - radius;
 
-	var lastVertex = rs1 * radiusSegments;
-	var cornerVertNumber = lastVertex + 1;
-
-	doVertices();
-	doFaces();
-	doCorners();
-	doHeightEdges();
-	doWidthEdges();
-	doDepthEdges();
-
-	// Calculate vert positions
-	function doVertices() 
-	{
-
-		// Corner offsets
-		var cornerLayout = [
-			new Vector3(1, 1, 1),
-			new Vector3(1, 1, -1),
-			new Vector3(-1, 1, -1),
-			new Vector3(-1, 1, 1),
-			new Vector3(1, -1, 1),
-			new Vector3(1, -1, -1),
-			new Vector3(-1, -1, -1),
-			new Vector3(-1, -1, 1)
-		];
-
-		// Corner holder 
-		for (var j = 0; j < 8; j++)
+		// Serialization parameters
+		this.parameters =
 		{
-			cornerVerts.push([]);
-			cornerNormals.push([]);
-		}
+			width: width,
+			height: height,
+			depth: depth,
+			radius: radius,
+			radiusSegments: radiusSegments
+		};
 
-		// Construct 1/8 sphere
-		var PIhalf = Math.PI / 2;
-		var cornerOffset = new Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
+		// Calculate vertices count
+		var rs1 = radiusSegments + 1; // Radius segments + 1 
+		var totalVertexCount = rs1 * radiusSegments + 1 << 3;
 
-		for (var y = 0; y <= radiusSegments; y++)
+		// Make buffers
+		var positions = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+		var normals = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+
+		// Some vars
+		var cornerVerts = [];
+		var cornerNormals = [];
+		var normal = new Vector3();
+		var vertex = new Vector3();
+		var vertexPool = [];
+		var normalPool = [];
+		var indices = [];
+
+		var lastVertex = rs1 * radiusSegments;
+		var cornerVertNumber = lastVertex + 1;
+
+		doVertices();
+		doFaces();
+		doCorners();
+		doHeightEdges();
+		doWidthEdges();
+		doDepthEdges();
+
+		// Calculate vert positions
+		function doVertices() 
 		{
-			var v = y / radiusSegments;
-			var va = v * PIhalf; // Arrange in 90 deg
 
-			var cosVa = Math.cos(va); // Scale of vertical angle 
-			var sinVa = Math.sin(va);
+			// Corner offsets
+			var cornerLayout = [
+				new Vector3(1, 1, 1),
+				new Vector3(1, 1, -1),
+				new Vector3(-1, 1, -1),
+				new Vector3(-1, 1, 1),
+				new Vector3(1, -1, 1),
+				new Vector3(1, -1, -1),
+				new Vector3(-1, -1, -1),
+				new Vector3(-1, -1, 1)
+			];
 
-			if (y === radiusSegments)
+			// Corner holder 
+			for (var j = 0; j < 8; j++)
 			{
-				vertex.set(0, 1, 0);
-
-				var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
-				cornerVerts[0].push(vert);
-				vertexPool.push(vert);
-
-				var norm = vertex.clone();
-				cornerNormals[0].push(norm);
-				normalPool.push(norm);
-
-				continue; // Skip row loop
+				cornerVerts.push([]);
+				cornerNormals.push([]);
 			}
 
-			for (var x = 0; x <= radiusSegments; x++)
+			// Construct 1/8 sphere
+			var PIhalf = Math.PI / 2;
+			var cornerOffset = new Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
+
+			for (var y = 0; y <= radiusSegments; y++)
 			{
-				var u = x / radiusSegments;
-				var ha = u * PIhalf;
+				var v = y / radiusSegments;
+				var va = v * PIhalf; // Arrange in 90 deg
 
-				// Make 1/8 sphere points
-				vertex.x = cosVa * Math.cos(ha);
-				vertex.y = sinVa;
-				vertex.z = cosVa * Math.sin(ha);
+				var cosVa = Math.cos(va); // Scale of vertical angle 
+				var sinVa = Math.sin(va);
 
-				// Copy sphere point, scale by radius, offset by half whd
-				var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
-				cornerVerts[0].push(vert);
-				vertexPool.push(vert);
+				if (y === radiusSegments)
+				{
+					vertex.set(0, 1, 0);
 
-				// Sphere already normalized, just clone
-				var norm = vertex.clone().normalize();
-				cornerNormals[0].push(norm);
-				normalPool.push(norm);
+					var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
+					cornerVerts[0].push(vert);
+					vertexPool.push(vert);
+
+					var norm = vertex.clone();
+					cornerNormals[0].push(norm);
+					normalPool.push(norm);
+
+					continue; // Skip row loop
+				}
+
+				for (var x = 0; x <= radiusSegments; x++)
+				{
+					var u = x / radiusSegments;
+					var ha = u * PIhalf;
+
+					// Make 1/8 sphere points
+					vertex.x = cosVa * Math.cos(ha);
+					vertex.y = sinVa;
+					vertex.z = cosVa * Math.sin(ha);
+
+					// Copy sphere point, scale by radius, offset by half whd
+					var vert = vertex.clone().multiplyScalar(radius).add(cornerOffset);
+					cornerVerts[0].push(vert);
+					vertexPool.push(vert);
+
+					// Sphere already normalized, just clone
+					var norm = vertex.clone().normalize();
+					cornerNormals[0].push(norm);
+					normalPool.push(norm);
+				}
+			}
+
+			// Distribute corner verts
+			for (var i = 1; i < 8; i++)
+			{
+				for (var j = 0; j < cornerVerts[0].length; j++)
+				{
+					var vert = cornerVerts[0][j].clone().multiply(cornerLayout[i]);
+					cornerVerts[i].push(vert);
+					vertexPool.push(vert);
+
+					var norm = cornerNormals[0][j].clone().multiply(cornerLayout[i]);
+					cornerNormals[i].push(norm);
+					normalPool.push(norm);
+				}
 			}
 		}
 
-		// Distribute corner verts
-		for (var i = 1; i < 8; i++)
+		// Weave corners
+		function doCorners()
 		{
-			for (var j = 0; j < cornerVerts[0].length; j++)
-			{
-				var vert = cornerVerts[0][j].clone().multiply(cornerLayout[i]);
-				cornerVerts[i].push(vert);
-				vertexPool.push(vert);
+			var indexInd = 0;
+			var flips = [true, false, true, false, false, true, false, true];
 
-				var norm = cornerNormals[0][j].clone().multiply(cornerLayout[i]);
-				cornerNormals[i].push(norm);
-				normalPool.push(norm);
+			var lastRowOffset = rs1 * (radiusSegments - 1);
+			for (var i = 0; i < 8; i++)
+			{
+				var cornerOffset = cornerVertNumber * i;
+
+				for (var v = 0; v < radiusSegments - 1; v++)
+				{
+					var r1 = v * rs1; // Row offset
+					var r2 = (v + 1) * rs1; // Next row
+
+					for (var u = 0; u < radiusSegments; u++)
+					{
+						var u1 = u + 1;
+						var a = cornerOffset + r1 + u;
+						var b = cornerOffset + r1 + u1;
+						var c = cornerOffset + r2 + u;
+						var d = cornerOffset + r2 + u1;
+
+						if (!flips[i])
+						{
+							indices.push(a, b, c, b, d, c);
+						}
+						else
+						{
+							indices.push(a, c, b, b, c, d);
+						}
+					}
+
+				}
+
+				for (var u = 0; u < radiusSegments; u++)
+				{
+					var a = cornerOffset + lastRowOffset + u;
+					var b = cornerOffset + lastRowOffset + u + 1;
+					var c = cornerOffset + lastVertex;
+
+					if (!flips[i])
+					{
+						indices.push(a, b, c);
+					}
+					else
+					{
+						indices.push(a, c, b);
+					}
+				}
 			}
 		}
-	}
 
-	// Weave corners
-	function doCorners()
-	{
-		var indexInd = 0;
-		var flips = [true, false, true, false, false, true, false, true];
 
-		var lastRowOffset = rs1 * (radiusSegments - 1);
-		for (var i = 0; i < 8; i++)
+		// Plates
+		function doFaces()
 		{
-			var cornerOffset = cornerVertNumber * i;
+			// Top
+			var a = lastVertex; // + cornerVertNumber * 0;
+			var b = lastVertex + cornerVertNumber; // * 1;
+			var c = lastVertex + cornerVertNumber * 2;
+			var d = lastVertex + cornerVertNumber * 3;
+			indices.push(a, b, c, a, c, d);
 
-			for (var v = 0; v < radiusSegments - 1; v++)
+			// Bottom
+			a = lastVertex + cornerVertNumber * 4; // + cornerVertNumber * 0;
+			b = lastVertex + cornerVertNumber * 5; // * 1;
+			c = lastVertex + cornerVertNumber * 6;
+			d = lastVertex + cornerVertNumber * 7;
+			indices.push(a, c, b, a, d, c);
+
+			// Left 
+			a = 0;
+			b = cornerVertNumber;
+			c = cornerVertNumber * 4;
+			d = cornerVertNumber * 5;
+			indices.push(a, c, b, b, c, d);
+
+			// Right 
+			a = cornerVertNumber * 2;
+			b = cornerVertNumber * 3;
+			c = cornerVertNumber * 6;
+			d = cornerVertNumber * 7;
+			indices.push(a, c, b, b, c, d);
+
+			// Front 
+			a = radiusSegments;
+			b = radiusSegments + cornerVertNumber * 3;
+			c = radiusSegments + cornerVertNumber * 4;
+			d = radiusSegments + cornerVertNumber * 7;
+			indices.push(a, b, c, b, d, c);
+
+			// Back 
+			a = radiusSegments + cornerVertNumber;
+			b = radiusSegments + cornerVertNumber * 2;
+			c = radiusSegments + cornerVertNumber * 5;
+			d = radiusSegments + cornerVertNumber * 6;
+			indices.push(a, c, b, b, c, d);
+		}
+
+		// Weave edges
+		function doHeightEdges()
+		{
+			for (var i = 0; i < 4; i++)
 			{
-				var r1 = v * rs1; // Row offset
-				var r2 = (v + 1) * rs1; // Next row
+				var cOffset = i * cornerVertNumber;
+				var cRowOffset = 4 * cornerVertNumber + cOffset;
+				var needsFlip = i & 1 === 1;
 
 				for (var u = 0; u < radiusSegments; u++)
 				{
 					var u1 = u + 1;
-					var a = cornerOffset + r1 + u;
-					var b = cornerOffset + r1 + u1;
-					var c = cornerOffset + r2 + u;
-					var d = cornerOffset + r2 + u1;
+					var a = cOffset + u;
+					var b = cOffset + u1;
+					var c = cRowOffset + u;
+					var d = cRowOffset + u1;
 
-					if (!flips[i])
+					if (!needsFlip)
 					{
 						indices.push(a, b, c, b, d, c);
 					}
@@ -184,183 +280,87 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 						indices.push(a, c, b, b, c, d);
 					}
 				}
-
-			}
-
-			for (var u = 0; u < radiusSegments; u++)
-			{
-				var a = cornerOffset + lastRowOffset + u;
-				var b = cornerOffset + lastRowOffset + u + 1;
-				var c = cornerOffset + lastVertex;
-
-				if (!flips[i])
-				{
-					indices.push(a, b, c);
-				}
-				else
-				{
-					indices.push(a, c, b);
-				}
 			}
 		}
-	}
 
-
-	// Plates
-	function doFaces()
-	{
-		// Top
-		var a = lastVertex; // + cornerVertNumber * 0;
-		var b = lastVertex + cornerVertNumber; // * 1;
-		var c = lastVertex + cornerVertNumber * 2;
-		var d = lastVertex + cornerVertNumber * 3;
-		indices.push(a, b, c, a, c, d);
-
-		// Bottom
-		a = lastVertex + cornerVertNumber * 4; // + cornerVertNumber * 0;
-		b = lastVertex + cornerVertNumber * 5; // * 1;
-		c = lastVertex + cornerVertNumber * 6;
-		d = lastVertex + cornerVertNumber * 7;
-		indices.push(a, c, b, a, d, c);
-
-		// Left 
-		a = 0;
-		b = cornerVertNumber;
-		c = cornerVertNumber * 4;
-		d = cornerVertNumber * 5;
-		indices.push(a, c, b, b, c, d);
-
-		// Right 
-		a = cornerVertNumber * 2;
-		b = cornerVertNumber * 3;
-		c = cornerVertNumber * 6;
-		d = cornerVertNumber * 7;
-		indices.push(a, c, b, b, c, d);
-
-		// Front 
-		a = radiusSegments;
-		b = radiusSegments + cornerVertNumber * 3;
-		c = radiusSegments + cornerVertNumber * 4;
-		d = radiusSegments + cornerVertNumber * 7;
-		indices.push(a, b, c, b, d, c);
-
-		// Back 
-		a = radiusSegments + cornerVertNumber;
-		b = radiusSegments + cornerVertNumber * 2;
-		c = radiusSegments + cornerVertNumber * 5;
-		d = radiusSegments + cornerVertNumber * 6;
-		indices.push(a, c, b, b, c, d);
-	}
-
-	// Weave edges
-	function doHeightEdges()
-	{
-		for (var i = 0; i < 4; i++)
+		function doDepthEdges()
 		{
-			var cOffset = i * cornerVertNumber;
-			var cRowOffset = 4 * cornerVertNumber + cOffset;
-			var needsFlip = i & 1 === 1;
+			var cStarts = [0, 2, 4, 6];
+			var cEnds = [1, 3, 5, 7];
 
-			for (var u = 0; u < radiusSegments; u++)
+			for (var i = 0; i < 4; i++)
 			{
-				var u1 = u + 1;
-				var a = cOffset + u;
-				var b = cOffset + u1;
-				var c = cRowOffset + u;
-				var d = cRowOffset + u1;
+				var cStart = cornerVertNumber * cStarts[i];
+				var cEnd = cornerVertNumber * cEnds[i];
+				var needsFlip = 1 >= i;
 
-				if (!needsFlip)
+				for (var u = 0; u < radiusSegments; u++)
 				{
-					indices.push(a, b, c, b, d, c);
-				}
-				else
-				{
-					indices.push(a, c, b, b, c, d);
+					var urs1 = u * rs1;
+					var u1rs1 = (u + 1) * rs1;
+					var a = cStart + urs1;
+					var b = cStart + u1rs1;
+					var c = cEnd + urs1;
+					var d = cEnd + u1rs1;
+
+					if (needsFlip)
+					{
+						indices.push(a, c, b, b, c, d);
+					}
+					else
+					{
+						indices.push(a, b, c, b, d, c);
+					}
 				}
 			}
 		}
-	}
 
-	function doDepthEdges()
-	{
-		var cStarts = [0, 2, 4, 6];
-		var cEnds = [1, 3, 5, 7];
-
-		for (var i = 0; i < 4; i++)
+		function doWidthEdges()
 		{
-			var cStart = cornerVertNumber * cStarts[i];
-			var cEnd = cornerVertNumber * cEnds[i];
-			var needsFlip = 1 >= i;
+			var end = radiusSegments - 1;
+			var cStarts = [0, 1, 4, 5];
+			var cEnds = [3, 2, 7, 6];
+			var needsFlip = [0, 1, 1, 0];
 
-			for (var u = 0; u < radiusSegments; u++)
+			for (var i = 0; i < 4; i++)
 			{
-				var urs1 = u * rs1;
-				var u1rs1 = (u + 1) * rs1;
-				var a = cStart + urs1;
-				var b = cStart + u1rs1;
-				var c = cEnd + urs1;
-				var d = cEnd + u1rs1;
+				var cStart = cStarts[i] * cornerVertNumber;
+				var cEnd = cEnds[i] * cornerVertNumber;
 
-				if (needsFlip)
+				for (var u = 0; u <= end; u++)
 				{
-					indices.push(a, c, b, b, c, d);
-				}
-				else
-				{
-					indices.push(a, b, c, b, d, c);
+					var a = cStart + radiusSegments + u * rs1;
+					var b = cStart + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
+
+					var c = cEnd + radiusSegments + u * rs1;
+					var d = cEnd + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
+
+					if (!needsFlip[i])
+					{
+						indices.push(a, b, c, b, d, c);
+					}
+					else
+					{
+						indices.push(a, c, b, b, c, d);
+					}
 				}
 			}
 		}
-	}
 
-	function doWidthEdges()
-	{
-		var end = radiusSegments - 1;
-		var cStarts = [0, 1, 4, 5];
-		var cEnds = [3, 2, 7, 6];
-		var needsFlip = [0, 1, 1, 0];
 
-		for (var i = 0; i < 4; i++)
+		// Fill buffers
+		var index = 0;
+		for (var i = 0; i < vertexPool.length; i++)
 		{
-			var cStart = cStarts[i] * cornerVertNumber;
-			var cEnd = cEnds[i] * cornerVertNumber;
-
-			for (var u = 0; u <= end; u++)
-			{
-				var a = cStart + radiusSegments + u * rs1;
-				var b = cStart + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
-
-				var c = cEnd + radiusSegments + u * rs1;
-				var d = cEnd + (u !== end ? radiusSegments + (u + 1) * rs1 : cornerVertNumber - 1);
-
-				if (!needsFlip[i])
-				{
-					indices.push(a, b, c, b, d, c);
-				}
-				else
-				{
-					indices.push(a, c, b, b, c, d);
-				}
-			}
+			positions.setXYZ(index, vertexPool[i].x, vertexPool[i].y, vertexPool[i].z);
+			normals.setXYZ(index, normalPool[i].x, normalPool[i].y, normalPool[i].z);
+			index++;
 		}
+
+		this.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
+		this.addAttribute("position", positions);
+		this.addAttribute("normal", normals);
 	}
-
-
-	// Fill buffers
-	var index = 0;
-	for (var i = 0; i < vertexPool.length; i++)
-	{
-		positions.setXYZ(index, vertexPool[i].x, vertexPool[i].y, vertexPool[i].z);
-		normals.setXYZ(index, normalPool[i].x, normalPool[i].y, normalPool[i].z);
-		index++;
-	}
-
-	this.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
-	this.addAttribute("position", positions);
-	this.addAttribute("normal", normals);
-};
-
-RoundedBoxBufferGeometry.prototype = Object.create(BufferGeometry.prototype);
-RoundedBoxBufferGeometry.constructor = RoundedBoxBufferGeometry;
+}
 
 export {RoundedBoxBufferGeometry};
