@@ -14,169 +14,167 @@ import {Keyboard} from "../../input/Keyboard.js";
  * @extends {Group}
  * @module Controls
  */
-function FirstPersonControls()
+class FirstPersonControls extends Group
 {
-	Group.call(this);
+constructor()
+{
+super();
 
-	this.name = "controls";
-	this.type = "FirstPersonControls";
+this.name = "controls";
+this.type = "FirstPersonControls";
 
-	/**
-	 * Mouse sensitivity.
-	 * 
-	 * @property sensitivity
-	 * @type {number}
-	 */
-	this.sensitivity = 0.005;
+/**
+ * Mouse sensitivity.
+ * 
+ * @property sensitivity
+ * @type {number}
+ */
+this.sensitivity = 0.005;
 
-	/**
-	 * Flag to indicate if the button left button needs to be pressed to rotate the object.
-	 * 
-	 * @property needsButtonPressed
-	 * @default true
-	 * @type {boolean}
-	 */
-	this.needsButtonPressed = true;
+/**
+ * Flag to indicate if the button left button needs to be pressed to rotate the object.
+ * 
+ * @property needsButtonPressed
+ * @default true
+ * @type {boolean}
+ */
+this.needsButtonPressed = true;
 
-	/**
-	 * Indicates if its possible to move the object using the Keyboard keys.
-	 * 
-	 * @property movementEnabled
-	 * @default true
-	 * @type {boolean}
-	 */
-	this.movementEnabled = true;
+/**
+ * Indicates if its possible to move the object using the Keyboard keys.
+ * 
+ * @property movementEnabled
+ * @default true
+ * @type {boolean}
+ */
+this.movementEnabled = true;
 
-	/**
-	 * Movement speed, relative to the world.
-	 * 
-	 * @property moveSpeed
-	 * @default moveSpeed
-	 * @type {number}
-	 */
-	this.moveSpeed = 0.05;
+/**
+ * Movement speed, relative to the world.
+ * 
+ * @property moveSpeed
+ * @default moveSpeed
+ * @type {number}
+ */
+this.moveSpeed = 0.05;
 
-	/**
-	 * If set to true the object will only move on X and Z axis.
-	 * 
-	 * @property moveOnPlane
-	 * @default false
-	 * @type {boolean}
-	 */
-	this.moveOnPlane = false;
+/**
+ * If set to true the object will only move on X and Z axis.
+ * 
+ * @property moveOnPlane
+ * @default false
+ * @type {boolean}
+ */
+this.moveOnPlane = false;
 
-	/**
-	 * Array with keys to be used to move the object.
-	 *  - Forward
-	 *  - Backward
-	 *  - Left
-	 *  - Right
-	 * 
-	 * @property moveKeys
-	 * @type {Array}
-	 */
-	this.moveKeys = [Keyboard.W, Keyboard.S, Keyboard.A, Keyboard.D];
-	
-	/**
-	 * Orientation of the camera.
-	 *
-	 * X is the horizontal orientation and Y the vertical orientation.
-	 *
-	 * @property vector
-	 * @type {Vector2}
-	 */	
-	this.vector = new Vector2(0, 0);
+/**
+ * Array with keys to be used to move the object.
+ *  - Forward
+ *  - Backward
+ *  - Left
+ *  - Right
+ * 
+ * @property moveKeys
+ * @type {Array}
+ */
+this.moveKeys = [Keyboard.W, Keyboard.S, Keyboard.A, Keyboard.D];
 
-	this.mouse = null;
-	this.keyboard = null;
+/**
+ * Orientation of the camera.
+ *
+ * X is the horizontal orientation and Y the vertical orientation.
+ *
+ * @property vector
+ * @type {Vector2}
+ */
+this.vector = new Vector2(0, 0);
 
-	this.tempVector = new Vector3();
+this.mouse = null;
+this.keyboard = null;
+
+this.tempVector = new Vector3();
 }
 
-FirstPersonControls.UP = new Vector3(0, 1, 0);
-
-FirstPersonControls.prototype = Object.create(Group.prototype);
-
-FirstPersonControls.prototype.initialize = function()
+initialize()
 {
-	var node = this;
-	while (node.parent !== null)
-	{
-		node = node.parent;
-
-		if (node instanceof Program)
-		{
-			this.mouse = node.mouse;
-			this.keyboard = node.keyboard;
-		}
-	}
-
-	this.updateControls();
-	
-	Group.prototype.initialize.call(this);
-};
-
-FirstPersonControls.prototype.update = function(delta)
+var node = this;
+while (node.parent !== null)
 {
-	if (!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
-	{
-		this.vector.y -= this.sensitivity * this.mouse.delta.y;
-		this.vector.x -= this.sensitivity * this.mouse.delta.x;
+node = node.parent;
 
-		if (this.vector.y < -1.57)
-		{
-			this.vector.y = -1.57;
-		}
-		else if (this.vector.y > 1.57)
-		{
-			this.vector.y = 1.57;
-		}
+if (node instanceof Program)
+{
+this.mouse = node.mouse;
+this.keyboard = node.keyboard;
+}
+}
 
-		this.updateControls();
-	}
+this.updateControls();
 
-	if (this.movementEnabled)
-	{
-		if (this.keyboard.keyPressed(this.moveKeys[0]))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			if (this.moveOnPlane)
-			{
-				direction.y = 0;
-			}
-			direction.normalize();
-			direction.multiplyScalar(this.moveSpeed);
-			this.position.sub(direction);
-		}
-		if (this.keyboard.keyPressed(this.moveKeys[1]))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			if (this.moveOnPlane)
-			{
-				direction.y = 0;
-			}
-			direction.normalize();
-			direction.multiplyScalar(this.moveSpeed);
-			this.position.add(direction);
-		}
-		if (this.keyboard.keyPressed(this.moveKeys[2]))
-		{
-			var direction = new Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
-			direction.normalize();
-			direction.multiplyScalar(this.moveSpeed);
-			this.position.sub(direction);
-		}
-		if (this.keyboard.keyPressed(this.moveKeys[3]))
-		{
-			var direction = new Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
-			direction.normalize();
-			direction.multiplyScalar(this.moveSpeed);
-			this.position.sub(direction);
-		}
-	}
-	
-	Object3D.prototype.update.call(this, delta);
-};
+super.initialize();
+}
+
+update(delta)
+{
+if (!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
+{
+this.vector.y -= this.sensitivity * this.mouse.delta.y;
+this.vector.x -= this.sensitivity * this.mouse.delta.x;
+
+if (this.vector.y < -1.57)
+{
+this.vector.y = -1.57;
+}
+else if (this.vector.y > 1.57)
+{
+this.vector.y = 1.57;
+}
+
+this.updateControls();
+}
+
+if (this.movementEnabled)
+{
+if (this.keyboard.keyPressed(this.moveKeys[0]))
+{
+var direction = this.getWorldDirection(this.tempVector);
+if (this.moveOnPlane)
+{
+direction.y = 0;
+}
+direction.normalize();
+direction.multiplyScalar(this.moveSpeed);
+this.position.sub(direction);
+}
+if (this.keyboard.keyPressed(this.moveKeys[1]))
+{
+var direction = this.getWorldDirection(this.tempVector);
+if (this.moveOnPlane)
+{
+direction.y = 0;
+}
+direction.normalize();
+direction.multiplyScalar(this.moveSpeed);
+this.position.add(direction);
+}
+if (this.keyboard.keyPressed(this.moveKeys[2]))
+{
+var direction = new Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
+direction.normalize();
+direction.multiplyScalar(this.moveSpeed);
+this.position.sub(direction);
+}
+if (this.keyboard.keyPressed(this.moveKeys[3]))
+{
+var direction = new Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
+direction.normalize();
+direction.multiplyScalar(this.moveSpeed);
+this.position.sub(direction);
+}
+}
+
+Object3D.prototype.update.call(this, delta);
+}
 
 /**
  * Update controls position and rotation.
@@ -185,16 +183,16 @@ FirstPersonControls.prototype.update = function(delta)
  *
  * @method updateControls
  */
-FirstPersonControls.prototype.updateControls = function()
+updateControls()
 {
-	var cos = Math.cos(this.vector.y);
-	var direction = new Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
-	direction.add(this.position);
+var cos = Math.cos(this.vector.y);
+var direction = new Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
+direction.add(this.position);
 
-	var matrix = new Matrix4();
-	matrix.lookAt(this.position, direction, FirstPersonControls.UP);
-	this.quaternion.setFromRotationMatrix(matrix);
-};
+var matrix = new Matrix4();
+matrix.lookAt(this.position, direction, FirstPersonControls.UP);
+this.quaternion.setFromRotationMatrix(matrix);
+}
 
 /**
  * Used to get camera direction for this controller.
@@ -204,24 +202,28 @@ FirstPersonControls.prototype.updateControls = function()
  * @method getDirection
  * @return {Vector3} Normalized camera direction. 
  */
-FirstPersonControls.prototype.getDirection = function()
+getDirection()
 {
-	var direction = this.getWorldDirection(this.tempVector);
-	direction.normalize();
-	return direction;
-};
+var direction = this.getWorldDirection(this.tempVector);
+direction.normalize();
+return direction;
+}
 
-FirstPersonControls.prototype.toJSON = function(meta)
+toJSON(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+var data = Object3D.prototype.toJSON.call(this, meta);
 
-	data.object.moveSpeed = this.moveSpeed;
-	data.object.sensitivity = this.sensitivity;
-	data.object.needsButtonPressed = this.needsButtonPressed;
-	data.object.movementEnabled = this.movementEnabled;
-	data.object.moveOnPlane = this.moveOnPlane;
-	data.object.moveKeys = this.moveKeys;
-	
-	return data;
-};
+data.object.moveSpeed = this.moveSpeed;
+data.object.sensitivity = this.sensitivity;
+data.object.needsButtonPressed = this.needsButtonPressed;
+data.object.movementEnabled = this.movementEnabled;
+data.object.moveOnPlane = this.moveOnPlane;
+data.object.moveKeys = this.moveKeys;
+
+return data;
+}
+}
+
+FirstPersonControls.UP = new Vector3(0, 1, 0);
+
 export {FirstPersonControls};

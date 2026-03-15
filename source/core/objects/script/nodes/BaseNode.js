@@ -12,65 +12,64 @@ import {DOMUtils} from "../../../../editor/utils/DOMUtils.js";
  * @class BaseNode
  * @module Script
  */
-function BaseNode()
+class BaseNode extends Node
 {
-	Node.call(this);
+constructor()
+{
+super();
 
-	this.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
+this.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
 
-	this.strokeStyle = new ColorStyle(DOMUtils.getCSSVariable("--color-light"));
+this.strokeStyle = new ColorStyle(DOMUtils.getCSSVariable("--color-light"));
 
-	var self = this;
+this.onPointerEnter = (pointer, viewport) =>
+{
+this.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--panel-color"));
+};
 
-	this.onPointerEnter = function(pointer, viewport)
-	{
-		self.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--panel-color"));
-	};
-	
-	this.onPointerLeave = function(pointer, viewport)
-	{
-		self.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
-	};
-	
+this.onPointerLeave = (pointer, viewport) =>
+{
+this.fillStyle = new ColorStyle(DOMUtils.getCSSVariable("--bar-color"));
+};
 
-	/**
-	 * Button used to destroy the node and remove it from the graph.
-	 * 
-	 * @attribute destroyButton
-	 * @type {Circle} 
-	 */
-	this.destroyButton = new Circle();
-	this.destroyButton.serializable = false;
-	this.destroyButton.layer = 2;
-	this.destroyButton.radius = 8;
-	this.destroyButton.onButtonDown = () => 
-	{
-		this.destroy();
-	};
-	
-	this.destroyButton.draw = function(context, viewport, canvas) 
-	{
-		Circle.prototype.draw.call(this, context, viewport, canvas);
 
-		const size = this.radius * 0.5;
-		context.beginPath();
-		context.moveTo(-size, -size);
-		context.lineTo(size, size);
-		context.moveTo(-size, size);
-		context.lineTo(size, -size);
-		context.stroke();
-	};
+/**
+ * Button used to destroy the node and remove it from the graph.
+ * 
+ * @attribute destroyButton
+ * @type {Circle} 
+ */
+this.destroyButton = new Circle();
+this.destroyButton.serializable = false;
+this.destroyButton.layer = 2;
+this.destroyButton.radius = 8;
+this.destroyButton.onButtonDown = () => 
+{
+this.destroy();
+};
 
-	this.add(this.destroyButton);
+this.destroyButton.draw = function(context, viewport, canvas) 
+{
+Circle.prototype.draw.call(this, context, viewport, canvas);
+
+const size = this.radius * 0.5;
+context.beginPath();
+context.moveTo(-size, -size);
+context.lineTo(size, size);
+context.moveTo(-size, size);
+context.lineTo(size, -size);
+context.stroke();
+};
+
+this.add(this.destroyButton);
 }
 
-BaseNode.prototype = Object.create(Node.prototype);
-
-BaseNode.prototype.onUpdate = function()
+onUpdate()
 {
-	this.destroyButton.position.set(this.box.max.x, this.box.min.y);
+this.destroyButton.position.set(this.box.max.x, this.box.min.y);
 
-	Node.prototype.onUpdate.call(this);
-};
+super.onUpdate();
+}
+}
 
 export {BaseNode};

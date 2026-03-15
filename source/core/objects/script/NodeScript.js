@@ -10,23 +10,23 @@ import {NodeGraph} from "escher.js/build/escher.module.js";
  * @extends {Object}
  * @module Script
  */
-function NodeScript()
+class NodeScript extends Group
 {
-	Group.call(this);
+constructor()
+{
+super();
 
-	this.type = "NodeScript";
-	this.name = "script";
+this.type = "NodeScript";
+this.name = "script";
 
-	/**
-	 * Node graph that composes this script.
-	 *
-	 * @attribute graph
-	 * @type {NodeGraph}
-	 */
-	this.graph = new NodeGraph();
+/**
+ * Node graph that composes this script.
+ *
+ * @attribute graph
+ * @type {NodeGraph}
+ */
+this.graph = new NodeGraph();
 }
-
-NodeScript.prototype = Object.create(Group.prototype);
 
 /**
  * Add a node the graph, these nodes can be connected with other already existing nodes in the graph.
@@ -34,10 +34,10 @@ NodeScript.prototype = Object.create(Group.prototype);
  * @method addNode
  * @param {Node} node Node to be added into the graph.
  */
-NodeScript.prototype.addNode = function(node)
+addNode(node)
 {
-	this.graph.addNode(node);
-};
+this.graph.addNode(node);
+}
 
 /**
  * Initialize script, automatically called by the runtime.
@@ -46,24 +46,24 @@ NodeScript.prototype.addNode = function(node)
  *
  * @method initialize
  */
-NodeScript.prototype.initialize = function()
+initialize()
 {
-	Object3D.prototype.initialize.call(this);
+Object3D.prototype.initialize.call(this);
 
-	// TODO <ADD CODE HERE>
-};
+// TODO <ADD CODE HERE>
+}
 
 /**
  * Update node script state runs the update methods from the node graph.
  *
  * @method update
  */
-NodeScript.prototype.update = function(delta)
+update(delta)
 {
-	// TODO <ADD CODE HERE>
+// TODO <ADD CODE HERE>
 
-	Object3D.prototype.update.call(this, delta);
-};
+Object3D.prototype.update.call(this, delta);
+}
 
 /**
  * Disposes the script, can be used to clear resources when the program exits.
@@ -72,12 +72,12 @@ NodeScript.prototype.update = function(delta)
  *
  * @method dispose
  */
-NodeScript.prototype.dispose = function()
+dispose()
 {
-	// TODO <ADD CODE HERE>
+// TODO <ADD CODE HERE>
 
-	Object3D.prototype.dispose.call(this);
-};
+Object3D.prototype.dispose.call(this);
+}
 
 /**
  * Call resize method if available.
@@ -86,18 +86,19 @@ NodeScript.prototype.dispose = function()
  *
  * @method resize
  */
-NodeScript.prototype.resize = function(x, y)
+resize(x, y)
 {
-	// TODO <ADD CODE HERE>
-};
+// TODO <ADD CODE HERE>
+}
 
-NodeScript.prototype.toJSON = function(meta)
+toJSON(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+var data = Object3D.prototype.toJSON.call(this, meta);
 
-	data.object.graph = this.graph.serialize();
+data.object.graph = this.graph.serialize();
 
-	return data;
-};
+return data;
+}
+}
 
 export {NodeScript};

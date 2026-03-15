@@ -14,114 +14,114 @@ import {AudioEmitter} from "./AudioEmitter.js";
  * @extends {AudioEmitter}
  * @module Audio
  */
-function PositionalAudio(audio)
+class PositionalAudio extends AudioEmitter
 {
-	AudioEmitter.call(this, audio);
+constructor(audio)
+{
+super(audio);
 
-	this.type = "PositionalAudio";
-	this.matrixAutoUpdate = true;
+this.type = "PositionalAudio";
+this.matrixAutoUpdate = true;
 
-	/**
-	 * Distance model to be applied to the audio panner.
-	 *
-	 * @property distanceModel
-	 * @type {string}
-	 */
-	this.distanceModel = "inverse";
+/**
+ * Distance model to be applied to the audio panner.
+ *
+ * @property distanceModel
+ * @type {string}
+ */
+this.distanceModel = "inverse";
 
-	/**
-	 * Model to be applied to the audio panner.
-	 *
-	 * @property panningModel
-	 * @type {string}
-	 */
-	this.panningModel = "HRTF";
+/**
+ * Model to be applied to the audio panner.
+ *
+ * @property panningModel
+ * @type {string}
+ */
+this.panningModel = "HRTF";
 
-	/**
-	 * WebAudio panner effect.
-	 *
-	 * https:// developer.mozilla.org/en-US/docs/Web/API/PannerNode
-	 *
-	 * @property panner
-	 * @type {PannerNode}
-	 */
-	this.panner = this.context.createPanner();
-	this.panner.connect(this.gain);
-	this.panner.panningModel = this.panningModel;
-	this.panner.distanceModel = this.distanceModel;
-	this.panner.refDistance = 1;
-	this.panner.maxDistance = 10000;
-	this.panner.rolloffFactor = 1;
-	this.panner.coneInnerAngle = 360;
-	this.panner.coneOuterAngle = 0;
-	this.panner.coneOuterGain = 0;
+/**
+ * WebAudio panner effect.
+ *
+ * https:// developer.mozilla.org/en-US/docs/Web/API/PannerNode
+ *
+ * @property panner
+ * @type {PannerNode}
+ */
+this.panner = this.context.createPanner();
+this.panner.connect(this.gain);
+this.panner.panningModel = this.panningModel;
+this.panner.distanceModel = this.distanceModel;
+this.panner.refDistance = 1;
+this.panner.maxDistance = 10000;
+this.panner.rolloffFactor = 1;
+this.panner.coneInnerAngle = 360;
+this.panner.coneOuterAngle = 0;
+this.panner.coneOuterGain = 0;
 
-	/**
-	 * Runtime pointer to the scene to get the camera list.
-	 *
-	 * @attribute scene
-	 * @type {Scene}
-	 */
-	this.scene = null;
+/**
+ * Runtime pointer to the scene to get the camera list.
+ *
+ * @attribute scene
+ * @type {Scene}
+ */
+this.scene = null;
 
-	this.tempPosition = new Vector3();
-	this.tempPositionCamera = new Vector3();
-	this.tempQuaternionCamera = new Quaternion();
+this.tempPosition = new Vector3();
+this.tempPositionCamera = new Vector3();
+this.tempQuaternionCamera = new Quaternion();
 }
-
-PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
 
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
  *
  * @method initialize
  */
-PositionalAudio.prototype.initialize = function()
+initialize()
 {
-	AudioEmitter.prototype.initialize.call(this);
+super.initialize();
 
-	var node = this.parent;
-	while (node !== null)
-	{
-		if (node instanceof Scene)
-		{
-			this.scene = node;
-			break;
-		}
+var node = this.parent;
+while (node !== null)
+{
+if (node instanceof Scene)
+{
+this.scene = node;
+break;
+}
 
-		node = node.parent;
-	}
-};
+node = node.parent;
+}
+}
 
 /**
  * Update positional audio panner relative to the camera.
  *
  * @method update
  */
-PositionalAudio.prototype.update = function(delta)
+update(delta)
 {
-	if (this.scene.cameras.length > 0)
-	{
-		var camera = this.scene.cameras[0];
+if (this.scene.cameras.length > 0)
+{
+var camera = this.scene.cameras[0];
 
-		this.getWorldPosition(this.tempPosition);
-		camera.getWorldPosition(this.tempPositionCamera);
-		camera.getWorldQuaternion(this.tempQuaternionCamera);
+this.getWorldPosition(this.tempPosition);
+camera.getWorldPosition(this.tempPositionCamera);
+camera.getWorldQuaternion(this.tempQuaternionCamera);
 
-		this.tempPosition.sub(this.tempPositionCamera);
-		this.tempPosition.z = -this.tempPosition.z;
+this.tempPosition.sub(this.tempPositionCamera);
+this.tempPosition.z = -this.tempPosition.z;
 
-		this.tempPosition.applyQuaternion(this.tempQuaternionCamera);
-		this.panner.setPosition(this.tempPosition.x, this.tempPosition.z, this.tempPosition.y);
-	}
-	else
-	{
-		this.panner.setPosition(0, 0, 0);
-		this.panner.setOrientation(0, 0, 0);
-	}
+this.tempPosition.applyQuaternion(this.tempQuaternionCamera);
+this.panner.setPosition(this.tempPosition.x, this.tempPosition.z, this.tempPosition.y);
+}
+else
+{
+this.panner.setPosition(0, 0, 0);
+this.panner.setOrientation(0, 0, 0);
+}
 
-	Object3D.prototype.update.call(this, delta);
-};
+Object3D.prototype.update.call(this, delta);
+}
 
 /**
  * Get output audio node.
@@ -129,10 +129,10 @@ PositionalAudio.prototype.update = function(delta)
  * @method getOutput
  * @return {Object} Output audio node.
  */
-PositionalAudio.prototype.getOutput = function()
+getOutput()
 {
-	return this.panner;
-};
+return this.panner;
+}
 
 /**
  * Get reference distance.
@@ -140,10 +140,10 @@ PositionalAudio.prototype.getOutput = function()
  * @method getRefDistance
  * @return {number} Reference distance.
  */
-PositionalAudio.prototype.getRefDistance = function()
+getRefDistance()
 {
-	return this.panner.refDistance;
-};
+return this.panner.refDistance;
+}
 
 /**
  * Set reference distance.
@@ -151,10 +151,10 @@ PositionalAudio.prototype.getRefDistance = function()
  * @method setRefDistance
  * @param {number} value Reference distance.
  */
-PositionalAudio.prototype.setRefDistance = function(value)
+setRefDistance(value)
 {
-	this.panner.refDistance = value;
-};
+this.panner.refDistance = value;
+}
 
 /**
  * Get rolloff factor.
@@ -162,10 +162,10 @@ PositionalAudio.prototype.setRefDistance = function(value)
  * @method getRolloffFactor
  * @return {number} Rolloff factor.
  */
-PositionalAudio.prototype.getRolloffFactor = function()
+getRolloffFactor()
 {
-	return this.panner.rolloffFactor;
-};
+return this.panner.rolloffFactor;
+}
 
 /**
  * Set rolloff factor.
@@ -173,10 +173,10 @@ PositionalAudio.prototype.getRolloffFactor = function()
  * @method setRolloffFactor
  * @param {number} value Rolloff factor.
  */
-PositionalAudio.prototype.setRolloffFactor = function(value)
+setRolloffFactor(value)
 {
-	this.panner.rolloffFactor = value;
-};
+this.panner.rolloffFactor = value;
+}
 
 
 /**
@@ -185,10 +185,10 @@ PositionalAudio.prototype.setRolloffFactor = function(value)
  * @method getDistanceModel
  * @return {string} Distance model.
  */
-PositionalAudio.prototype.getDistanceModel = function()
+getDistanceModel()
 {
-	return this.panner.distanceModel;
-};
+return this.panner.distanceModel;
+}
 
 /**
  * Set distance model to be used.
@@ -206,10 +206,10 @@ PositionalAudio.prototype.getDistanceModel = function()
  * @method setDistanceModel
  * @param {string} model Distance Model to be used.
  */
-PositionalAudio.prototype.setDistanceModel = function(distanceModel)
+setDistanceModel(distanceModel)
 {
-	this.panner.distanceModel = distanceModel;
-};
+this.panner.distanceModel = distanceModel;
+}
 
 /**
  * Get maximum distance for this audio emitter.
@@ -217,10 +217,10 @@ PositionalAudio.prototype.setDistanceModel = function(distanceModel)
  * @method getMaxDistance
  * @return Maximum distance.
  */
-PositionalAudio.prototype.getMaxDistance = function()
+getMaxDistance()
 {
-	return this.panner.maxDistance;
-};
+return this.panner.maxDistance;
+}
 
 /**
  * Set maximum distance for this audio emitter.
@@ -228,18 +228,20 @@ PositionalAudio.prototype.getMaxDistance = function()
  * @method setMaxDistance
  * @param {number} value Maximum distance.
  */
-PositionalAudio.prototype.setMaxDistance = function(value)
+setMaxDistance(value)
 {
-	this.panner.maxDistance = value;
-};
+this.panner.maxDistance = value;
+}
 
-PositionalAudio.prototype.toJSON = function(meta)
+toJSON(meta)
 {
-	var data = AudioEmitter.prototype.toJSON.call(this, meta);
+var data = super.toJSON(meta);
 
-	data.object.distanceModel = this.distanceModel;
-	data.object.panningModel = this.panningModel;
+data.object.distanceModel = this.distanceModel;
+data.object.panningModel = this.panningModel;
 
-	return data;
-};
+return data;
+}
+}
+
 export {PositionalAudio};
