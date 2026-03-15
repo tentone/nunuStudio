@@ -7,13 +7,14 @@ import {ShaderPass} from "../ShaderPass.js";
  * @class TechnicolorPass
  * @module Postprocessing
  */
-function TechnicolorPass()
+class TechnicolorPass extends ShaderPass
 {
-	ShaderPass.call(this, TechnicolorShader);
+constructor()
+{
+super(TechnicolorShader);
 
-	this.type = "Technicolor";
+this.type = "Technicolor";
 }
-
-TechnicolorPass.prototype = Object.create(ShaderPass.prototype);
+}
 
 export {TechnicolorPass};

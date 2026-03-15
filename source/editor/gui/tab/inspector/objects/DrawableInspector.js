@@ -4,9 +4,9 @@ import {Editor} from "../../../../Editor.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ObjectInspector} from "./ObjectInspector.js";
 
-function DrawableInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class DrawableInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -42,17 +42,16 @@ function DrawableInspector(parent, object)
 	});
 	this.form.add(this.frustumCulled);
 	this.form.nextRow();
-}
+	}
 
-DrawableInspector.prototype = Object.create(ObjectInspector.prototype);
-
-DrawableInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.castShadow.setValue(this.object.castShadow);
 	this.receiveShadow.setValue(this.object.receiveShadow);
 	this.frustumCulled.setValue(this.object.frustumCulled);
-};
+	}
+
+}
 
 export {DrawableInspector};

@@ -10,15 +10,16 @@ import {Video} from "./Video.js";
  * @param {string} url URL to video file.
  * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
-function VideoStream(url)
+class VideoStream extends Video
 {
-	Video.call(this);
+	constructor(url)
+	{
+		super();
 
-	this.format = "url";
-	this.encoding = FileSystem.getFileExtension(url);
-	this.data = url;
+		this.format = "url";
+		this.encoding = FileSystem.getFileExtension(url);
+		this.data = url;
+	}
 }
-
-VideoStream.prototype = Object.create(Video.prototype);
 
 export {VideoStream};

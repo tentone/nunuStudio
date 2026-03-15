@@ -9,9 +9,9 @@ import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function PointLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class PointLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -72,13 +72,10 @@ function PointLightInspector(parent, object)
 	// Shadow
 	this.shadow = new LightShadowFormSnippet(this.form, object);
 
-}
+	}
 
-PointLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-PointLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.distance.setValue(this.object.distance);
@@ -86,6 +83,8 @@ PointLightInspector.prototype.updateInspector = function()
 	this.castShadow.setValue(this.object.castShadow);
 
 	this.shadow.attach(this.object);
-};
+	}
+
+}
 
 export {PointLightInspector};

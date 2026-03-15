@@ -15,8 +15,8 @@ import {Editor} from "../../../Editor.js";
  * @param {Object3D} newParent New parent of the object.
  * @param {number} newIndex Index to insert the object.
  */
-function MoveAction(object, newParent, newIndex, keepGlobalPose)
-{
+class MoveAction {
+	constructor(object, newParent, newIndex, keepGlobalPose) {
 	Action.call(this);
 	
 	this.object = object;
@@ -28,10 +28,9 @@ function MoveAction(object, newParent, newIndex, keepGlobalPose)
 	this.newIndex = newIndex;
 
 	this.keepGlobalPose = keepGlobalPose !== undefined ? keepGlobalPose : Editor.settings.editor.keepTransformMove;
-}
+	}
 
-MoveAction.prototype.apply = function()
-{
+	apply() {
 	this.oldParent.remove(this.object);
 	
 	if (this.keepGlobalPose)
@@ -52,10 +51,9 @@ MoveAction.prototype.apply = function()
 	}
 
 	MoveAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
-};
+	}
 
-MoveAction.prototype.revert = function()
-{
+	revert() {
 	this.newParent.remove(this.object);
 
 	if (this.keepGlobalPose)
@@ -68,10 +66,9 @@ MoveAction.prototype.revert = function()
 	this.object.parent = this.oldParent;
 
 	MoveAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
-};
+	}
 
-MoveAction.prototype.inverseTransform = function(oldParent, newParent)
-{
+	inverseTransform(oldParent, newParent) {
 	var matrix = this.object.matrix;
 
 	// Apply world matrix to object (calculate transform as if it was on the root)
@@ -86,7 +83,9 @@ MoveAction.prototype.inverseTransform = function(oldParent, newParent)
 
 	// Decompose matrix into components
 	matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
-};
+	}
+
+}
 
 MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
@@ -97,6 +96,5 @@ MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 	
 	Editor.gui.tree.moveObject(object, oldParent, newParent, newIndex);
 };
-
 
 export {MoveAction};

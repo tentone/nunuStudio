@@ -4,9 +4,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {PassNode} from "./PassNode.js";
 
-function AdaptiveToneMappingPassNode(parent)
-{
-	PassNode.call(this, parent, "Adaptive Tone Mapping");
+class AdaptiveToneMappingPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Adaptive Tone Mapping");
 
 	var self = this;
 
@@ -39,17 +39,16 @@ function AdaptiveToneMappingPassNode(parent)
 	});
 	this.add(this.adaptive);
 	this.nextRow();
-}
-
-AdaptiveToneMappingPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("AdaptiveToneMapping", AdaptiveToneMappingPassNode);
 
-AdaptiveToneMappingPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.minLuminance.setValue(pass.minLuminance);
 	this.tau.setValue(pass.tau);
-};
+	}
+
+}
 export {AdaptiveToneMappingPassNode};

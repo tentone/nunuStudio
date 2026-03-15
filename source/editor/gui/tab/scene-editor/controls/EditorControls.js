@@ -8,9 +8,9 @@ import {Keyboard} from "../../../../../core/input/Keyboard.js";
  * @class EditorControls
  * @extends {Group}
  */
-function EditorControls()
-{
-	Group.call(this);
+class EditorControls extends Group {
+	constructor() {
+	super();
 
 	/**
 	 * Camera object attached to this controls.
@@ -19,9 +19,7 @@ function EditorControls()
 	 * @type {Object3D}
 	 */
 	this.camera = null;
-}
-
-EditorControls.prototype = Object.create(Group.prototype);
+	}
 
 /**
  * Attach a camera to this controls object.
@@ -29,8 +27,7 @@ EditorControls.prototype = Object.create(Group.prototype);
  * @method attach
  * @param {Camera} camera
  */
-EditorControls.prototype.attach = function(camera)
-{
+	attach(camera) {
 	while (this.children.length > 0)
 	{
 		this.remove(this.children[0]);
@@ -39,14 +36,14 @@ EditorControls.prototype.attach = function(camera)
 
 	this.camera = camera;
 	this.updateControls();
-};
+	}
 
 /**
  * Reset the controls to its original position.
  * 
  * @method reset
  */
-EditorControls.prototype.reset = function() {};
+	reset() {}
 
 /** 
  * Focus camera on a object.
@@ -54,14 +51,14 @@ EditorControls.prototype.reset = function() {};
  * @method focusObject
  * @param {Object3D} object Object to point camera at.
  */
-EditorControls.prototype.focusObject = function() {};
+	focusObject() {}
 
 /** 
  * Set controls orientation, using orientation code form OrientationCube 
  *
  * @method setOrientation
  */
-EditorControls.prototype.setOrientation = function() {};
+	setOrientation() {}
 
 /**
  * Update the orbit controls position, the keyboard movement should be optional.
@@ -71,7 +68,7 @@ EditorControls.prototype.setOrientation = function() {};
  * @param {Keyboard} keyboard
  * @param {number} delta Time passed after from the last update.
  */
-EditorControls.prototype.update = function() {};
+	update() {}
 
 /**
  * Update controls position and rotation.
@@ -80,6 +77,8 @@ EditorControls.prototype.update = function() {};
  * 
  * @method updateControls
  */
-EditorControls.prototype.updateControls = function() {};
+	updateControls() {}
+
+}
 
 export {EditorControls};

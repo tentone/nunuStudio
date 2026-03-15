@@ -4,9 +4,9 @@ import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {PassNode} from "./PassNode.js";
 
-function SSAONOHPassNode(parent)
-{
-	PassNode.call(this, parent, "SSAO NOH");
+class SSAONOHPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "SSAO NOH");
 
 	var self = this;
 
@@ -51,19 +51,18 @@ function SSAONOHPassNode(parent)
 	});
 	this.add(this.maxDistance);
 	this.nextRow();
-}
-
-SSAONOHPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("SSAONOH", SSAONOHPassNode);
 
-SSAONOHPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.kernelRadius.setValue(pass.kernelRadius);
 	this.minDistance.setValue(pass.minDistance);
 	this.maxDistance.setValue(pass.maxDistance);
 	this.kernelSize.setValue(pass.kernelSize);
-};
+	}
+
+}
 export {SSAONOHPassNode};

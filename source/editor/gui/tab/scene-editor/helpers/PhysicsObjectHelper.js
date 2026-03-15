@@ -1,5 +1,5 @@
 import {Vec3, Sphere, Box, Plane, ConvexPolyhedron, Trimesh, Heightfield, Shape} from "cannon-es";
-import {Object3D, MeshBasicMaterial, SphereBufferGeometry, BoxBufferGeometry, PlaneBufferGeometry, CylinderBufferGeometry, SphereGeometry, BoxGeometry, PlaneGeometry, Mesh, Geometry, Vector3, Face3} from "three";
+import {Object3D, MeshBasicMaterial, SphereGeometry, BoxGeometry, PlaneGeometry, CylinderGeometry, Mesh, Vector3} from "three";
 
 /**
  * Helper to preview physics objects on the editor.
@@ -8,9 +8,9 @@ import {Object3D, MeshBasicMaterial, SphereBufferGeometry, BoxBufferGeometry, Pl
  *
  * @class PhysicsObjectHelper
  */
-function PhysicsObjectHelper(object, color)
-{
-	Object3D.call(this);
+class PhysicsObjectHelper extends Object3D {
+	constructor(object, color) {
+	super();
 
 	/**
 	 * Object attached to the helper.
@@ -36,22 +36,15 @@ function PhysicsObjectHelper(object, color)
 			transparent: true,
 			opacity: 0.5
 		});
-}
+	}
 
-PhysicsObjectHelper.SPHERE = new SphereBufferGeometry(1, 32, 32);
-PhysicsObjectHelper.BOX = new BoxBufferGeometry(1, 1, 1);
-PhysicsObjectHelper.PLANE = new PlaneBufferGeometry(100, 100);
-PhysicsObjectHelper.CYLINDER = new CylinderBufferGeometry(1, 1, 10, 32);
-
-PhysicsObjectHelper.prototype = Object.create(Object3D.prototype);
 
 /**
  * Update the helper from the physics body.
  *
  * @method update
  */
-PhysicsObjectHelper.prototype.update = function()
-{
+	update() {
 	this.matrix.copy(this.object.matrixWorld);
 
 	var body = this.object.body;
@@ -95,10 +88,9 @@ PhysicsObjectHelper.prototype.update = function()
 	}
 
 	this.meshes.length = index;
-};
+	}
 
-PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
-{
+	updateMesh(index, body, shape) {
 	var mesh = this.meshes[index];
 	if (!this.typeMatch(mesh, shape))
 	{
@@ -110,7 +102,7 @@ PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 	}
 
 	this.scaleMesh(mesh, shape);
-};
+	}
 
 /**
  * Check if the mesh attahched to this helper object matches the CANNON body shape.
@@ -118,8 +110,7 @@ PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
  * @method typeMatch
  * @return {boolean} True if the mesh matches the shape.
  */
-PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
-{
+	typeMatch(mesh, shape) {
 	if (!mesh)
 	{
 		return false;
@@ -131,7 +122,7 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 	geometry instanceof BoxGeometry && shape instanceof Box ||
 	geometry instanceof PlaneGeometry && shape instanceof Plane ||
 	(geometry.id === shape.geometryId && (shape instanceof ConvexPolyhedron || shape instanceof Trimesh) || shape instanceof Heightfield);
-};
+	}
 
 /**
  * Create a mesh to represent a CANNON physics shape and attach it to this helper object.
@@ -139,8 +130,7 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
  * @method createMesh
  * @return {Mesh} Mesh created to represent the shape.
  */
-PhysicsObjectHelper.prototype.createMesh = function(shape)
-{
+	createMesh(shape) {
 	var material = this.material;
 	var mesh = null;
 
@@ -251,7 +241,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 	}
 
 	return mesh;
-};
+	}
 
 /**
  * Set to correct scale of the helper mesh based on the shape type and size configuration.
@@ -260,8 +250,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
  * @param {Mesh} mesh Mesh to be changed.
  * @param {Shape} shape Shape to analyse and extract scale from.
  */
-PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
-{
+	scaleMesh(mesh, shape) {
 	var type = shape.type;
 
 	if (type === Shape.types.SPHERE)
@@ -290,6 +279,13 @@ PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 	{
 		mesh.scale.set(1, 1, 1);
 	}
-};
+	}
+
+}
+
+PhysicsObjectHelper.SPHERE = new SphereGeometry(1, 32, 32);
+PhysicsObjectHelper.BOX = new BoxGeometry(1, 1, 1);
+PhysicsObjectHelper.PLANE = new PlaneGeometry(100, 100);
+PhysicsObjectHelper.CYLINDER = new CylinderGeometry(1, 1, 10, 32);
 
 export {PhysicsObjectHelper};

@@ -5,9 +5,9 @@ import {ObjectInspector} from "../ObjectInspector.js";
 import {Editor} from "../../../../../Editor.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 
-function AmbientLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class AmbientLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -21,15 +21,14 @@ function AmbientLightInspector(parent, object)
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
-}
+	}
 
-AmbientLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-AmbientLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
-};
+	}
+
+}
 
 export {AmbientLightInspector};

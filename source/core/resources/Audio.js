@@ -12,37 +12,82 @@ import {Resource} from "./Resource.js";
  * @param {ArrayBuffer | string} url URL to Audio file or ArrayBuffer data.
  * @param {string} encoding Audio encoding (mp3, wav, etc).
  */
-function Audio(url, encoding)
+class Audio extends Resource
 {
-	Resource.call(this, "audio", "Audio");
-
-	if (url !== undefined)
+	constructor(url, encoding)
 	{
-		// Arraybuffer
-		if (url instanceof ArrayBuffer)
+		super("audio", "Audio");
+
+		if (url !== undefined)
 		{
-			this.data = url;
-			this.encoding = encoding !== undefined ? encoding : "";
-			this.format = "arraybuffer";
-		}
-		// Base64
-		else if (Base64Utils.isBase64(url))
-		{
-			this.encoding = encoding !== undefined ? encoding : "";
-			this.data = ArraybufferUtils.fromBase64(url);
-			this.format = "arraybuffer";
-		}
-		// URL
-		else
-		{
-			this.data = FileSystem.readFileArrayBuffer(url);
-			this.encoding = FileSystem.getFileExtension(url);
-			this.format = "arraybuffer";
+			// Arraybuffer
+			if (url instanceof ArrayBuffer)
+			{
+				this.data = url;
+				this.encoding = encoding !== undefined ? encoding : "";
+				this.format = "arraybuffer";
+			}
+			// Base64
+			else if (Base64Utils.isBase64(url))
+			{
+				this.encoding = encoding !== undefined ? encoding : "";
+				this.data = ArraybufferUtils.fromBase64(url);
+				this.format = "arraybuffer";
+			}
+			// URL
+			else
+			{
+				this.data = FileSystem.readFileArrayBuffer(url);
+				this.encoding = FileSystem.getFileExtension(url);
+				this.format = "arraybuffer";
+			}
 		}
 	}
-}
 
-Audio.prototype = Object.create(Resource.prototype);
+	/**
+	 * Get an WebAudio buffer to play the audio stored in this resources.
+	 *
+	 * This method is asyncronous and the value is returned using a callback function.
+	 *
+	 * @method getAudioBuffer
+	 * @param {AudioContext} context WebAudio context used to decode the audio data.
+	 * @param {Function} callback Callback funtion that receives an audio buffer as argument.
+	 */
+	getAudioBuffer(context, callback)
+	{
+		context.decodeAudioData(this.data.slice(0), callback, function(error)
+		{
+			console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+		});
+	}
+
+	/**
+	 * Serialize audio data as json.
+	 *
+	 * Audio data is serialized in Base64.
+	 *
+	 * @method toJSON
+	 * @param {meta} meta
+	 * @return {Object} data
+	 */
+	toJSON(meta)
+	{
+		if (meta.audio[this.uuid] !== undefined)
+		{
+			return meta.audio[this.uuid];
+		}
+
+		var data = super.toJSON(meta);
+
+		data.encoding = this.encoding;
+		data.data = this.data;
+		data.format = this.format;
+
+		meta.audio[this.uuid] = data;
+
+		return data;
+	}
+}
 
 /**
  * Check if a file name refers to a supported audio file.
@@ -65,48 +110,4 @@ Audio.fileIsAudio = function(file)
 	return false;
 };
 
-/**
- * Get an WebAudio buffer to play the audio stored in this resources.
- *
- * This method is asyncronous and the value is returned using a callback function.
- *
- * @method getAudioBuffer
- * @param {AudioContext} context WebAudio context used to decode the audio data.
- * @param {Function} callback Callback funtion that receives an audio buffer as argument.
- */
-Audio.prototype.getAudioBuffer = function(context, callback)
-{
-	context.decodeAudioData(this.data.slice(0), callback, function(error)
-	{
-		console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
-	});
-};
-
-
-/**
- * Serialize audio data as json.
- *
- * Audio data is serialized in Base64.
- *
- * @method toJSON
- * @param {meta} meta
- * @return {Object} data
- */
-Audio.prototype.toJSON = function(meta)
-{
-	if (meta.audio[this.uuid] !== undefined)
-	{
-		return meta.audio[this.uuid];
-	}
-
-	var data = Resource.prototype.toJSON.call(this, meta);
-
-	data.encoding = this.encoding;
-	data.data = this.data;
-	data.format = this.format;
-
-	meta.audio[this.uuid] = data;
-
-	return data;
-};
 export {Audio};

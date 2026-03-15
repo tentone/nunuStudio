@@ -1,4 +1,4 @@
-import {IcosahedronBufferGeometry, IcosahedronGeometry, BufferGeometry} from "three";
+import {IcosahedronGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
@@ -6,8 +6,8 @@ import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function IcosahedronGeometryForm(form, object)
-{
+class IcosahedronGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -48,19 +48,19 @@ function IcosahedronGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-IcosahedronGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? IcosahedronBufferGeometry : IcosahedronGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? IcosahedronGeometry : IcosahedronGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
-};
+	}
 
-IcosahedronGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radius.setValue(this.object.geometry.parameters.radius || 2);
 	this.detail.setValue(this.object.geometry.parameters.detail || 0);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {IcosahedronGeometryForm};

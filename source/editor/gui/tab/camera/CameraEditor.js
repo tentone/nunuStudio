@@ -26,9 +26,9 @@ import {DualContainer} from "../../../components/containers/DualContainer.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
 import {PassNode} from "./postprocessing/PassNode.js";
 
-function CameraEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, "camera", Global.FILE_PATH + "icons/camera/camera.png");
+class CameraEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, "camera", Global.FILE_PATH + "icons/camera/camera.png");
 
 	var self = this;
 
@@ -90,7 +90,6 @@ function CameraEditor(parent, closeable, container, index)
 		self.form.add(button);
 	};
 
-
 	addRenderPassButton(Locale.render, RenderPass);
 	addRenderPassButton("FXAA", FXAAPass);
 	addRenderPassButton("Colorify", ColorifyPass);
@@ -117,22 +116,18 @@ function CameraEditor(parent, closeable, container, index)
 	this.postNodes = new TableForm(this.form);
 	this.form.add(this.postNodes);
 	this.form.nextRow();
-}
-
-CameraEditor.prototype = Object.create(TabComponent.prototype);
+	}
 
 // Activate
-CameraEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.name.setText(this.camera.name);
 	this.updatePostNodes();
-};
+	}
 
 // Update post processing nodes
-CameraEditor.prototype.updatePostNodes = function()
-{
+	updatePostNodes() {
 	this.postNodes.removeAll();
 
 	var passes = this.camera.composer.passes;
@@ -149,19 +144,17 @@ CameraEditor.prototype.updatePostNodes = function()
 	
 	this.postNodes.updateInterface();
 	this.form.updateInterface();
-};
+	}
 
 // Destroy
-CameraEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.canvas.destroy();
-};
+	}
 
 // Update tab state
-CameraEditor.prototype.update = function()
-{
+	update() {
 	if (this.camera !== null)
 	{
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
@@ -169,11 +162,10 @@ CameraEditor.prototype.update = function()
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);
 		this.camera.render(this.canvas.renderer, this.camera.getScene());
 	}
-};
+	}
 
 // Update tab metadata
-CameraEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.camera !== null)
 	{
 		this.setName(this.camera.name);
@@ -202,25 +194,24 @@ CameraEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
-CameraEditor.prototype.attach = function(camera)
-{
+	attach(camera) {
 	this.camera = camera;
 
 	this.updateMetadata();
-};
+	}
 
-CameraEditor.prototype.isAttached = function(camera)
-{
+	isAttached(camera) {
 	return this.camera === camera;
-};
+	}
 
-CameraEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
-};
+	}
+
+}
 export {CameraEditor};

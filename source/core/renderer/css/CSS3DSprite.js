@@ -9,13 +9,14 @@ import {CSS3DObject} from "./CSS3DObject.js";
  * @extends {CSS3DObject}
  * @param {Component} element DOM element encapsulated in the object container.
  */
-function CSS3DSprite(element)
+class CSS3DSprite extends CSS3DObject
 {
-	CSS3DObject.call(this, element);
+	constructor(element)
+	{
+		super(element);
+	}
 }
 
-CSS3DSprite.prototype = Object.create(CSS3DObject.prototype);
-CSS3DSprite.prototype.constructor = CSS3DSprite;
 CSS3DSprite.prototype.isCSS3DSprite = true;
 
 export {CSS3DSprite};

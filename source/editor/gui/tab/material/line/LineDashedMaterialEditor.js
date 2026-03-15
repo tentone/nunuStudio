@@ -3,9 +3,9 @@ import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {LineBasicMaterialEditor} from "./LineBasicMaterialEditor.js";
 
-function LineDashedMaterialEditor(parent, closeable, container, index)
-{
-	LineBasicMaterialEditor.call(this, parent, closeable, container, index);
+class LineDashedMaterialEditor extends LineBasicMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 	
@@ -50,17 +50,16 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.dashScale);
 	this.form.nextRow();
-}
+	}
 
-LineDashedMaterialEditor.prototype = Object.create(LineBasicMaterialEditor.prototype);
-
-LineDashedMaterialEditor.prototype.attach = function(material, asset)
-{
-	LineBasicMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.dashSize.setValue(material.dashSize);
 	this.gapSize.setValue(material.gapSize);
 	this.dashScale.setValue(material.scale);
-};
+	}
+
+}
 
 export {LineDashedMaterialEditor};

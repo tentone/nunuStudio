@@ -12,9 +12,9 @@ import {Component} from "../../../components/Component.js";
  * @class AnimationKeyframe
  * @extends {Component}
  */
-function AnimationKeyframe(parent, editor, trackEditor, track, index)
-{
-	Component.call(this, parent, "div");
+class AnimationKeyframe extends Component {
+	constructor(parent, editor, trackEditor, track, index) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.cursor = "pointer";
@@ -102,7 +102,6 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 		context.updateInterface();
 	};
 }
-
-AnimationKeyframe.prototype = Object.create(Component.prototype);
+}
 
 export {AnimationKeyframe};

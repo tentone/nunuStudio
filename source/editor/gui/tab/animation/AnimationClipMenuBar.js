@@ -12,9 +12,9 @@ import {Component} from "../../../components/Component.js";
  * @class AnimationClipMenuBar
  * @extends {Component}
  */
-function AnimationClipMenuBar(parent, editor, animation)
-{
-	Component.call(this, parent, "div");
+class AnimationClipMenuBar extends Component {
+	constructor(parent, editor, animation) {
+	super(parent, "div");
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.position = "relative";
@@ -95,17 +95,16 @@ function AnimationClipMenuBar(parent, editor, animation)
 	});
 
 	this.updateAnimation();
-}
+	}
 
-AnimationClipMenuBar.prototype = Object.create(Component.prototype);
-
-AnimationClipMenuBar.prototype.updateAnimation = function()
-{
+	updateAnimation() {
 	this.loop.setValue(this.animation.loop);
 	this.timeScale.setValue(this.animation.timeScale);
 	this.duration.setValue(this.animation.duration);
 	this.enabled.setValue(this.animation.enabled);
-};
+	}
 
-AnimationClipMenuBar.prototype.updateInterface = function() {};
+	updateInterface() {}
+
+}
 export {AnimationClipMenuBar};

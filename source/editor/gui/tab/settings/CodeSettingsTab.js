@@ -7,10 +7,9 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 
-
-function CodeSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, "Code Editor", Global.FILE_PATH + "icons/script/script.png");
+class CodeSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, "Code Editor", Global.FILE_PATH + "icons/script/script.png");
 	
 	this.element.style.overflow = "auto";
 
@@ -203,12 +202,9 @@ function CodeSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.vimMode);
 	this.form.nextRow();
-}
+	}
 
-CodeSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-CodeSettingsTab.prototype.activate = function()
-{
+	activate() {
 	this.codeTheme.setValue(Editor.settings.code.theme);
 	this.codeFontSize.setValue(Editor.settings.code.fontSize);
 	this.codeKeymap.setValue(Editor.settings.code.keymap);
@@ -224,13 +220,14 @@ CodeSettingsTab.prototype.activate = function()
 	this.matchBrackets.setValue(Editor.settings.code.matchBrackets);
 	this.smartIndent.setValue(Editor.settings.code.smartIndent);
 	this.vimMode.setValue(Editor.settings.code.vimMode);
-};
+	}
 
-CodeSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {CodeSettingsTab};

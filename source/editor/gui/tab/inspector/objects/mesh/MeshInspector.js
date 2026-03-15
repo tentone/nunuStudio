@@ -1,18 +1,15 @@
 import {DrawableInspector} from "../DrawableInspector.js";
 import {GeometryForm} from "../../geometries/GeometryForm.js";
 
-function MeshInspector(parent, object)
-{
-	DrawableInspector.call(this, parent, object);
+class MeshInspector extends DrawableInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	this.geometry = GeometryForm.create(this.form, this.object);
-}
+	}
 
-MeshInspector.prototype = Object.create(DrawableInspector.prototype);
-
-MeshInspector.prototype.updateInspector = function()
-{
-	DrawableInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	if (this.geometry !== null)
 	{
@@ -26,6 +23,8 @@ MeshInspector.prototype.updateInspector = function()
 			this.geometry = GeometryForm.create(this.form, this.object);
 		}
 	}
-};
+	}
+
+}
 
 export {MeshInspector};

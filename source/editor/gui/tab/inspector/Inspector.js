@@ -12,9 +12,9 @@ import {Component} from "../../../components/Component.js";
  * @param {Component} parent
  * @param {Object} object Object to be edited by this inspector panel.
  */
-function Inspector(parent, object)
-{
-	Component.call(this, parent, "div");
+class Inspector extends Component {
+	constructor(parent, object) {
+	super(parent, "div");
 
 	this.element.style.overflow = "auto";
 	this.preventDragEvents();
@@ -36,9 +36,7 @@ function Inspector(parent, object)
 	 */
 	this.form = new TableForm(this);
 	this.form.setAutoSize(false);
-}
-
-Inspector.prototype = Object.create(Component.prototype);
+	}
 
 /** 
  * Attach object to panel.
@@ -46,24 +44,24 @@ Inspector.prototype = Object.create(Component.prototype);
  * @method attach
  * @param {Object3D} object
  */
-Inspector.prototype.attach = function(object)
-{
+	attach(object) {
 	this.object = object;
-};
+	}
 
 /**
  * Update panel information to match the attached object.
  *
  * @method updateInspector
  */
-Inspector.prototype.updateInspector = function() {};
+	updateInspector() {}
 
-Inspector.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 
 export {Inspector};

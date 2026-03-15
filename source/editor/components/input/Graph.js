@@ -15,9 +15,9 @@ import {Component} from "../Component.js";
  * @param {string} name Name of the default graph.
  * @param {string} color CSS hex color code of the default graph.
  */
-function Graph(parent, name, color)
-{
-	Component.call(this, parent, "div");
+class Graph extends Component {
+	constructor(parent, name, color) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -83,9 +83,7 @@ function Graph(parent, name, color)
 	 */
 	this.scale = [];
 	this.createScale(3);
-}
-
-Graph.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Graph lines represents a subgraph in the graph GUI object.
@@ -118,8 +116,7 @@ function SubGraph(canvas, name, color)
  * @method createScale
  * @param {number} size Number of values in the scale.
  */
-Graph.prototype.createScale = function(size)
-{
+	createScale(size) {
 	for (var i = 0; i < this.scale; i++)
 	{
 		this.element.removeChild(this.scale[i]);
@@ -141,22 +138,21 @@ Graph.prototype.createScale = function(size)
 		this.scale.push(scale);
 		this.element.appendChild(scale);
 	}
-};
+	}
 
 /**
  * Update values of the scale.
  *
  * @method updateScale
  */
-Graph.prototype.updateScale = function()
-{
+	updateScale() {
 	var step = (this.max - this.min) / (this.scale.length - 1);
 
 	for (var i = 0; i < this.scale.length; i++)
 	{
 		this.scale[this.scale.length - 1 - i].text.data = this.min + step * i;
 	}
-};
+	}
 
 /**
  * Add new graph line.
@@ -165,15 +161,14 @@ Graph.prototype.updateScale = function()
  * @param {string} name Name of the graph.
  * @param {Color} color Color of the graph.
  */
-Graph.prototype.addGraph = function(name, color)
-{
+	addGraph(name, color) {
 	var canvas = document.createElement("canvas");
 	canvas.style.position = "absolute";
 	canvas.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(canvas);
 
 	this.graph.push(new SubGraph(canvas, name, color));
-};
+	}
 
 /** 
  * Attach onchange callback to a graph by its name.
@@ -182,11 +177,10 @@ Graph.prototype.addGraph = function(name, color)
  * @param {Function} onChange
  * @param {string} name Graph name.
  */
-Graph.prototype.setOnChange = function(onChange, name)
-{
+	setOnChange(onChange, name) {
 	var graph = this.getGraph(name);
 	graph.onchange = onChange;
-};
+	}
 
 /**
  * Set value range of the graph.
@@ -195,8 +189,7 @@ Graph.prototype.setOnChange = function(onChange, name)
  * @param {number} min
  * @param {number} max
  */
-Graph.prototype.setRange = function(min, max)
-{
+	setRange(min, max) {
 	this.min = min;
 	this.max = max;
 
@@ -235,7 +228,7 @@ Graph.prototype.setRange = function(min, max)
 	{
 		this.updateGraph(this.graph[i]);
 	}
-};
+	}
 
 /**
  * Set values array to a graph using its name.
@@ -244,8 +237,7 @@ Graph.prototype.setRange = function(min, max)
  * @param {Array} values Array of numeric values.
  * @param {string} name Name of the graph line.
  */
-Graph.prototype.setValue = function(values, name)
-{	
+	setValue(values, name) {	
 	var self = this;
 	var graph = this.getGraph(name);
 
@@ -340,7 +332,7 @@ Graph.prototype.setValue = function(values, name)
 
 	// Update graph
 	this.updateGraph(graph);
-};
+	}
 
 /**
  * Return value array of a graph by its name.
@@ -348,8 +340,7 @@ Graph.prototype.setValue = function(values, name)
  * @method getValue
  * @param {string} name Graph name.
  */
-Graph.prototype.getValue = function(name)
-{
+	getValue(name) {
 	var graph = this.getGraph(name);
 
 	if (graph !== null)
@@ -358,7 +349,7 @@ Graph.prototype.getValue = function(name)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Get graph object by name.
@@ -366,8 +357,7 @@ Graph.prototype.getValue = function(name)
  * @method getGraph
  * @param {string} name Graph name.
  */
-Graph.prototype.getGraph = function(name)
-{
+	getGraph(name) {
 	if (name !== undefined)
 	{
 		for (var i = 0; i < this.graph.length; i++)
@@ -385,7 +375,7 @@ Graph.prototype.getGraph = function(name)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Update graph canvas and buttons.
@@ -393,8 +383,7 @@ Graph.prototype.getGraph = function(name)
  * @method updateGraph
  * @param {Object} graph Graph object.
  */
-Graph.prototype.updateGraph = function(graph)
-{
+	updateGraph(graph) {
 	var width = this.size.x - this.scaleMargin;
 
 	// Get canvas context
@@ -423,15 +412,14 @@ Graph.prototype.updateGraph = function(graph)
 	}
 
 	context.stroke();
-};
+	}
 
 /**
  * Draw background grid canvas.
  *
  * @method updateGrid
  */
-Graph.prototype.updateGrid = function()
-{
+	updateGrid() {
 	var width = this.size.x - this.scaleMargin;
 
 	var context = this.grid.getContext("2d");
@@ -468,11 +456,10 @@ Graph.prototype.updateGrid = function()
 		context.lineTo(width, i);
 		context.stroke();
 	}
-};
+	}
 
-Graph.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	var width = this.size.x - this.scaleMargin;
 
@@ -500,6 +487,8 @@ Graph.prototype.updateSize = function()
 	{
 		this.scale[i].style.top = i * step + "px";
 	}
-};
+	}
+
+}
 
 export {Graph};

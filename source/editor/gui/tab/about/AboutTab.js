@@ -6,9 +6,9 @@ import {Global} from "../../../Global.js";
 import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 
-function AboutTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
+class AboutTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 
@@ -32,7 +32,6 @@ function AboutTab(parent, closeable, container, index)
 	this.name.setTextSize(25);
 	this.name.setAlignment(Text.CENTER);
 	this.name.setText(Nunu.NAME + " " + VERSION + " Build " + TIMESTAMP);
-
 
 	// Libraries
 	var libs = [];
@@ -60,7 +59,6 @@ function AboutTab(parent, closeable, container, index)
 		top += 6;
 	}
 }
-
-AboutTab.prototype = Object.create(TabComponent.prototype);
+}
 
 export {AboutTab};

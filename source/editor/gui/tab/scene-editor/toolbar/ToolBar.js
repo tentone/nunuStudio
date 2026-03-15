@@ -13,9 +13,9 @@ import {ToolBarGroup} from "./ToolBarGroup.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ToolBar(parent)
-{
-	Component.call(this, parent, "div");
+class ToolBar extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.setStyle("overflow", "visible");
 
@@ -68,18 +68,15 @@ function ToolBar(parent)
 	});
 
 	this.updateGroups();
-}
+	}
 
-ToolBar.prototype = Object.create(Component.prototype);
-
-ToolBar.prototype.selectTool = function(tool)
-{
+	selectTool(tool) {
 	this.select.setSelected(tool === SceneEditor.SELECT);
 	this.move.setSelected(tool === SceneEditor.MOVE);
 	this.scale.setSelected(tool === SceneEditor.SCALE);
 	this.rotate.setSelected(tool === SceneEditor.ROTATE);
 	this.measure.setSelected(tool === SceneEditor.MEASURE);
-};
+	}
 
 /**
  * Add new group to this tool bar.
@@ -87,13 +84,12 @@ ToolBar.prototype.selectTool = function(tool)
  * @method addGroup
  * @return {ToolBarGroup} The new group created.
  */
-ToolBar.prototype.addGroup = function()
-{
+	addGroup() {
 	var group = new ToolBarGroup(this);
 	group.size.y = this.size.y;
 	this.groups.push(group);
 	return group;
-};
+	}
 
 /**
  * Update the groups position and recalculate the bar size.
@@ -102,8 +98,7 @@ ToolBar.prototype.addGroup = function()
  * 
  * @method updateGroups
  */
-ToolBar.prototype.updateGroups = function()
-{
+	updateGroups() {
 	this.size.x = 0;
 
 	for (var i = 0; i < this.groups.length; i++)
@@ -118,6 +113,8 @@ ToolBar.prototype.updateGroups = function()
 			this.size.x += this.spacing;
 		}
 	}
-};
+	}
+
+}
 
 export {ToolBar};

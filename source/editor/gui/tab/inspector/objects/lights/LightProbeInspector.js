@@ -4,10 +4,9 @@ import {ObjectInspector} from "../ObjectInspector.js";
 import {Editor} from "../../../../../Editor.js";
 import {Slider} from "../../../../../components/input/Slider.js";
 
-
-function LightProbeInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class LightProbeInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -23,15 +22,14 @@ function LightProbeInspector(parent, object)
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();	
-}
+	}
 
-LightProbeInspector.prototype = Object.create(ObjectInspector.prototype);
-
-LightProbeInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.intensity.setValue(this.object.intensity);
-};
+	}
+
+}
 
 export {LightProbeInspector};

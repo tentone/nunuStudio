@@ -6,13 +6,13 @@ import {Action} from "./action/Action.js";
  * @class History
  * @param {number} limit Maximum actions stored in the object.
  */
-function History(limit)
-{
+class History {
+	constructor(limit) {
 	this.actions = [];
 
 	this.position = -1;
 	this.limit = limit !== undefined ? limit : 50;
-}
+	}
 
 /**
  * Get action from its id.
@@ -21,8 +21,7 @@ function History(limit)
  * @param {number} id Action identifier.
  * @return {Action} The action requested, if it is not found returns null.
  */
-History.prototype.getAction = function(id)
-{
+	getAction(id) {
 	for (var i = 0; i < this.actions.length; i++)
 	{
 		if (this.actions[i].id === id)
@@ -32,7 +31,7 @@ History.prototype.getAction = function(id)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Add an Action to the history.
@@ -41,8 +40,7 @@ History.prototype.getAction = function(id)
  * @param {Actions} action Actions that represent the change.
  * @param {EditorScreen} editor Editor instance for the action to update status of.
  */
-History.prototype.add = function(action, editor)
-{	
+	add(action, editor) {	
 	// If there are more recent changes remove them
 	while (this.actions.length > this.position + 1)
 	{
@@ -62,7 +60,7 @@ History.prototype.add = function(action, editor)
 		this.actions.splice(0, 1);
 		this.position = this.actions.length - 1;
 	}
-};
+	}
 
 /**
  * Revert last action
@@ -70,8 +68,7 @@ History.prototype.add = function(action, editor)
  * @method undo
  * @param {EditorScreen} editor Editor instance for the action to update status of.
  */
-History.prototype.undo = function(editor)
-{
+	undo(editor) {
 	if (this.actions.length > 0 && this.position >= 0)
 	{
 		var action = this.actions[this.position];
@@ -83,7 +80,7 @@ History.prototype.undo = function(editor)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Redo last reverted action.
@@ -91,8 +88,7 @@ History.prototype.undo = function(editor)
  * @method redo
  * @param {EditorScreen} editor Editor instance for the action to update status of.
  */
-History.prototype.redo = function(editor)
-{
+	redo(editor) {
 	if (this.position < this.actions.length - 1)
 	{
 		this.position++;
@@ -104,6 +100,8 @@ History.prototype.redo = function(editor)
 	}
 
 	return null;
-};
+	}
+
+}
 
 export {History};

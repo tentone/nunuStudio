@@ -11,14 +11,12 @@ import {TabGroupSplit} from "./TabGroupSplit.js";
  * @class TabContainer
  * @extends {Component}
  */
-function TabContainer(parent)
-{
-	Component.call(this, parent, "div");
+class TabContainer extends Component {
+	constructor(parent) {
+	super(parent, "div");
 	
 	this.group = null;
-}
-
-TabContainer.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Split this tab group into two new tab groups.
@@ -27,20 +25,17 @@ TabContainer.prototype = Object.create(Component.prototype);
  * @param {number} direction Direction where to insert the new tab.
  * @return {TabGroupSplit} The new created tab group.
  */
-TabContainer.prototype.split = function(direction)
-{
+	split(direction) {
 	return this.group.split(direction);
-};
+	}
 
-TabContainer.prototype.attach = function(element)
-{
+	attach(element) {
 	this.group = element;
 	this.group.attachTo(this);
-};
+	}
 
-TabContainer.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	if (this.group !== null)
 	{
@@ -48,27 +43,25 @@ TabContainer.prototype.updateSize = function()
 		this.group.size.copy(this.size);
 		this.group.updateInterface();
 	}
-};
+	}
 
 /**
  * Update all tabs object data.
  *
  * @method updateMetadata
  */
-TabContainer.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	this.group.updateMetadata();
-};
+	}
 
 /**
  * Update all tab object views.
  *
  * @method updateObjectsView
  */
-TabContainer.prototype.updateObjectsView = function()
-{
+	updateObjectsView() {
 	this.group.updateObjectsView();
-};
+	}
 
 /**
  * Update all tab object selection status.
@@ -77,10 +70,9 @@ TabContainer.prototype.updateObjectsView = function()
  *
  * @method updateSelection
  */
-TabContainer.prototype.updateSelection = function()
-{
+	updateSelection() {
 	this.group.updateSelection();
-};
+	}
 
 /**
  * Update all tab settings.
@@ -89,10 +81,9 @@ TabContainer.prototype.updateSelection = function()
  *
  * @method updateSettings
  */
-TabContainer.prototype.updateSettings = function()
-{
+	updateSettings() {
 	this.group.updateSettings();
-};
+	}
 
 /**
  * Get an array with all the tabs currently active.
@@ -100,8 +91,7 @@ TabContainer.prototype.updateSettings = function()
  * @method getActiveTab
  * @return {Array} Active tabs.
  */
-TabContainer.prototype.getActiveTab = function()
-{
+	getActiveTab() {
 	var active = [];
 
 	if (this.group instanceof TabGroup)
@@ -118,17 +108,16 @@ TabContainer.prototype.getActiveTab = function()
 	}
 
 	return this.group.getActiveTab();
-};
+	}
 
 /**
  * Close the tab that is currently being shown if it is closeable.
  *
  * @method closeActual
  */
-TabContainer.prototype.closeActual = function()
-{
+	closeActual() {
 	this.group.closeActual();
-};
+	}
 
 /**
  * Select a specific tab from the container tab tree.
@@ -136,30 +125,27 @@ TabContainer.prototype.closeActual = function()
  * @method selectTab
  * @param {TabComponent} tab Tab to select.
  */
-TabContainer.prototype.selectTab = function(tab)
-{
+	selectTab(tab) {
 	this.group.selectTab(tab);
-};
+	}
 
 /**
  * Select next tab from the currently focused tab group.
  *
  * @method selectNextTab
  */
-TabContainer.prototype.selectNextTab = function()
-{
+	selectNextTab() {
 	this.group.selectNextTab();
-};
+	}
 
 /**
  * Select previous tab from the currently focused tab group.
  *
  * @method selectPreviousTab
  */
-TabContainer.prototype.selectPreviousTab = function()
-{
+	selectPreviousTab() {
 	this.group.selectPreviousTab();
-};
+	}
 
 /**
  * Add new tab to the tab container.
@@ -168,10 +154,9 @@ TabContainer.prototype.selectPreviousTab = function()
  * @param {Constructor} TabConstructor Constructor if the TabComponent to be added to the container.
  * @param {boolean} closeable Indicates if the tab can be closed.
  */
-TabContainer.prototype.addTab = function(TabConstructor, closeable)
-{
+	addTab(TabConstructor, closeable) {
 	return this.group.addTab(TabConstructor, closeable);
-};
+	}
 
 /**
  * Get tab from tab type and attached object is there is any.
@@ -180,19 +165,19 @@ TabContainer.prototype.addTab = function(TabConstructor, closeable)
  * @param {Object} object Object attached to the tab.
  * @return TabComponent The tab from the type specified that has the object attached to it.
  */
-TabContainer.prototype.getTab = function(type, object)
-{
+	getTab(type, object) {
 	return this.group.getTab(type, object);
-};
+	}
 
 /**
  * Remove all tabs from the container.
  * 
  * @method clear
  */
-TabContainer.prototype.clear = function()
-{
+	clear() {
 	this.group.clear();
-};
+	}
+
+}
 
 export {TabContainer};

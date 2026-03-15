@@ -14,8 +14,8 @@ import {AddAction} from "./AddAction.js";
  * @param {Object3D} newObject Object to take place of the old one.
  * @param {boolean} moveChildren If true move the children from the original object to the new.
  */
-function SwapAction(originalObject, newObject, moveChildren)
-{
+class SwapAction {
+	constructor(originalObject, newObject, moveChildren) {
 	Action.call(this);
 	
 	this.originalObject = originalObject;
@@ -25,10 +25,9 @@ function SwapAction(originalObject, newObject, moveChildren)
 	this.index = -1;
 	
 	this.moveChildren = moveChildren !== undefined ? moveChildren : true;
-}
+	}
 
-SwapAction.prototype.apply = function()
-{	
+	apply() {	
 	// Check the index
 	this.index = this.parent.children.indexOf(this.originalObject);
 
@@ -52,10 +51,9 @@ SwapAction.prototype.apply = function()
 
 	RemoveAction.updateGUI(this.originalObject, this.parent);
 	AddAction.updateGUI(this.newObject, this.parent, this.index);
-};
+	}
 
-SwapAction.prototype.revert = function()
-{
+	revert() {
 	this.parent.remove(this.newObject);
 
 	// Add original object to parent
@@ -75,5 +73,7 @@ SwapAction.prototype.revert = function()
 
 	RemoveAction.updateGUI(this.newObject, this.parent);
 	AddAction.updateGUI(this.originalObject, this.parent, this.index);
-};
+	}
+
+}
 export {SwapAction};

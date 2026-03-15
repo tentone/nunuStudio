@@ -7,13 +7,12 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Division(parent)
-{
-	Component.call(this, parent, "div");
+class Division extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "visible";
 }
-
-Division.prototype = Object.create(Component.prototype);
+}
 
 export {Division};

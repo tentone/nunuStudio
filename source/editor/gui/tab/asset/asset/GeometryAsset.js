@@ -9,10 +9,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function GeometryAsset(parent)
-{
-	Asset.call(this, parent);
+class GeometryAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/scene.png");
 	
@@ -78,12 +77,9 @@ function GeometryAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
-GeometryAsset.prototype = Object.create(Asset.prototype);
-
-GeometryAsset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.asset !== null)
 	{
 		this.setText(this.asset.name);
@@ -95,5 +91,7 @@ GeometryAsset.prototype.updateMetadata = function()
 			image.src = url;
 		});
 	}
-};
+	}
+
+}
 export {GeometryAsset};

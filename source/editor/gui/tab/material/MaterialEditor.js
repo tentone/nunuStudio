@@ -1,4 +1,4 @@
-import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereBufferGeometry, TorusBufferGeometry, BoxBufferGeometry, TorusKnotBufferGeometry, ConeBufferGeometry, Quaternion, Euler} from "three";
+import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereGeometry, TorusGeometry, BoxGeometry, TorusKnotGeometry, ConeGeometry, Quaternion, Euler} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
@@ -15,9 +15,9 @@ import {CheckBox} from "../../../components/input/CheckBox.js";
 import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
 
-function MaterialEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
+class MaterialEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
 
@@ -300,21 +300,18 @@ function MaterialEditor(parent, closeable, container, index)
 	this.main.tabPositionMax = 0.95;
 	this.main.attachA(this.preview);
 	this.main.attachB(this.form);
-}
+	}
 
 MaterialEditor.geometries = [
-	[Locale.sphere, new SphereBufferGeometry(1, 40, 40)],
-	[Locale.torus, new TorusBufferGeometry(0.8, 0.4, 32, 64)],
-	[Locale.cube, new BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
-	[Locale.torusKnot, new TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
-	[Locale.cone, new ConeBufferGeometry(1, 2, 32)]
+	[Locale.sphere, new SphereGeometry(1, 40, 40)],
+	[Locale.torus, new TorusGeometry(0.8, 0.4, 32, 64)],
+	[Locale.cube, new BoxGeometry(1, 1, 1, 1, 1, 1)],
+	[Locale.torusKnot, new TorusKnotGeometry(0.7, 0.3, 128, 64)],
+	[Locale.cone, new ConeGeometry(1, 2, 32)]
 ];
 
-MaterialEditor.prototype = Object.create(TabComponent.prototype);
-
 // Attach material to material editor
-MaterialEditor.prototype.attach = function(material, asset)
-{
+	attach(material, asset) {
 	// Material asset
 	if (asset !== undefined)
 	{
@@ -344,38 +341,33 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.polygonOffset.setValue(material.polygonOffset);
 	this.polygonOffsetFactor.setValue(material.polygonOffsetFactor);
 	this.polygonOffsetUnits.setValue(material.polygonOffsetUnits);
-};
+	}
 
-MaterialEditor.prototype.isAttached = function(material)
-{
+	isAttached(material) {
 	return this.material === material;
-};
+	}
 
-MaterialEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 	
 	this.mouse.create();
-};
+	}
 
-MaterialEditor.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 	
 	this.mouse.dispose();
-};
+	}
 
-MaterialEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.mouse.dispose();
 	this.canvas.destroy();
-};
+	}
 
 // Update object data
-MaterialEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.material !== null)
 	{
 		// Set name
@@ -393,11 +385,10 @@ MaterialEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
 // Update material editor
-MaterialEditor.prototype.update = function()
-{
+	update() {
 	this.mouse.update();
 
 	// Render Material
@@ -432,18 +423,19 @@ MaterialEditor.prototype.update = function()
 			this.interactive.quaternion.multiplyQuaternions(delta, this.interactive.quaternion);
 		}
 	}
-};
+	}
 
 // Update elements
-MaterialEditor.prototype.updateSize = function()
-{	
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {	
+	super.updateSize();
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
 
 	this.previewForm.updateInterface();
 	this.form.updateInterface();
-};
+	}
+
+}
 
 export {MaterialEditor};

@@ -27,73 +27,75 @@ import {Texture} from "three";
  * @param {number} anisotropy
  * @param {number} encoding
  */
-function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
+class CompressedTexture extends Texture
 {
-	Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
-
-	this.category = "Compressed";
-
-	this.image = {width: width, height: height};
-	this.mipmaps = mipmaps;
-	this.isCubeTexture = false;
-
-	this.flipY = false;
-	this.generateMipmaps = false;
-}
-
-CompressedTexture.prototype = Object.create(Texture.prototype);
-CompressedTexture.prototype.constructor = CompressedTexture;
-CompressedTexture.prototype.isCompressedTexture = true;
-
-CompressedTexture.prototype.toJSON = function(meta)
-{
-	var data = Texture.prototype.toJSON.call(this, meta);
-
-	data.isCubeTexture = this.isCubeTexture;
-
-	if (this.isCubeTexture)
+	constructor(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
 	{
-		data.image = [];
+		super(null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-		for (var j = 0; j < this.image.length; j++)
-		{	
-			var image = 
-			{
-				mipmaps: [],
-				format: this.image[j].format,
-				width: this.image[j].width,
-				height: this.image[j].height
-			};
+		this.category = "Compressed";
 
-			for (var i = 0; i < this.image[j].mipmaps.length; i++)
+		this.image = {width: width, height: height};
+		this.mipmaps = mipmaps;
+		this.isCubeTexture = false;
+
+		this.flipY = false;
+		this.generateMipmaps = false;
+	}
+
+	toJSON(meta)
+	{
+		var data = super.toJSON(meta);
+
+		data.isCubeTexture = this.isCubeTexture;
+
+		if (this.isCubeTexture)
+		{
+			data.image = [];
+
+			for (var j = 0; j < this.image.length; j++)
+			{	
+				var image = 
+				{
+					mipmaps: [],
+					format: this.image[j].format,
+					width: this.image[j].width,
+					height: this.image[j].height
+				};
+
+				for (var i = 0; i < this.image[j].mipmaps.length; i++)
+				{
+					image.mipmaps.push(
+						{
+							width: this.image[j].mipmaps[i].width,
+							height: this.image[j].mipmaps[i].height,
+							data: this.image[j].mipmaps[i].data
+						});
+				}
+				
+				data.image.push(image);
+			}
+		}
+		else
+		{
+			data.mipmaps = [];
+			data.width = this.image.width;
+			data.height = this.image.height;
+			for (var i = 0; i < this.mipmaps.length; i++)
 			{
-				image.mipmaps.push(
+				data.mipmaps.push(
 					{
-						width: this.image[j].mipmaps[i].width,
-						height: this.image[j].mipmaps[i].height,
-						data: this.image[j].mipmaps[i].data
+						width: this.mipmaps[i].width,
+						height: this.mipmaps[i].height,
+						data: this.mipmaps[i].data
 					});
 			}
-			
-			data.image.push(image);
 		}
-	}
-	else
-	{
-		data.mipmaps = [];
-		data.width = this.image.width;
-		data.height = this.image.height;
-		for (var i = 0; i < this.mipmaps.length; i++)
-		{
-			data.mipmaps.push(
-				{
-					width: this.mipmaps[i].width,
-					height: this.mipmaps[i].height,
-					data: this.mipmaps[i].data
-				});
-		}
-	}
 
-	return data;
-};
+		return data;
+	}
+}
+
+CompressedTexture.prototype.isCompressedTexture = true;
+
 export {CompressedTexture};

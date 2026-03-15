@@ -1,12 +1,12 @@
-import {RingBufferGeometry, RingGeometry, BufferGeometry} from "three";
+import {RingGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function RingGeometryForm(form, object)
-{
+class RingGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -85,17 +85,15 @@ function RingGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-RingGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? RingBufferGeometry : RingGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? RingGeometry : RingGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.innerRadius.getValue(), this.outerRadius.getValue(), this.thetaSegments.getValue(), this.phiSegments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
-};
+	}
 
-RingGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.innerRadius.setValue(this.object.geometry.parameters.innerRadius || 0.5);
 	this.outerRadius.setValue(this.object.geometry.parameters.outerRadius || 1);
 	this.thetaSegments.setValue(this.object.geometry.parameters.thetaSegments || 8);
@@ -103,5 +101,7 @@ RingGeometryForm.prototype.updateValues = function()
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {RingGeometryForm};

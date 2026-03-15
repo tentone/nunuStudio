@@ -1,4 +1,4 @@
-import {Math} from "three";
+import {MathUtils} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {VideoTexture} from "../../../../../core/texture/VideoTexture.js";
 import {SpriteSheetTexture} from "../../../../../core/texture/SpriteSheetTexture.js";
@@ -22,10 +22,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function TextureAsset(parent)
-{
-	Asset.call(this, parent);
+class TextureAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/texture.png");
 
@@ -128,7 +127,7 @@ function TextureAsset(parent)
 
 				// Load
 				var texture = loader.parse(json); 
-				texture.uuid = Math.generateUUID();
+				texture.uuid = MathUtils.generateUUID();
 				texture.name += "*";
 				
 				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
@@ -157,13 +156,10 @@ function TextureAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
-TextureAsset.prototype = Object.create(Asset.prototype);
-
-TextureAsset.prototype.attach = function(asset)
-{
-	Asset.prototype.attach.call(this, asset);
+	attach(asset) {
+	super.attach(asset);
 
 	this.preview = TextureRenderer.generateElement(asset);
 
@@ -177,5 +173,7 @@ TextureAsset.prototype.attach = function(asset)
 		this.preview.style.height = "66%";
 		this.element.appendChild(this.preview);	
 	}
-};
+	}
+
+}
 export {TextureAsset};

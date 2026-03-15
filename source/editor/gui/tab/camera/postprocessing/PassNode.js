@@ -5,9 +5,9 @@ import {TableForm} from "../../../../components/TableForm.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
 
-function PassNode(parent, name)
-{
-	TableForm.call(this, parent);
+class PassNode extends TableForm {
+	constructor(parent, name) {
+	super(parent);
 
 	this.element.style.overflow = "hidden"; 
 	
@@ -88,11 +88,8 @@ function PassNode(parent, name)
 		self.composer.removePass(self.pass);
 		self.editor.updatePostNodes();
 	});
-}
+	}
 
-PassNode.prototype = Object.create(TableForm.prototype);
-
-PassNode.passes = {};
 
 PassNode.createPass = function(element, type)
 {
@@ -109,27 +106,28 @@ PassNode.registerPass = function(type, Constructor)
 	PassNode.passes[type] = Constructor;
 };
 
-PassNode.prototype.setPass = function(pass)
-{
+	setPass(pass) {
 	this.pass = pass;
 
 	this.enabled.setValue(pass.enabled);
 	this.clear.setValue(pass.clear);
 	this.renderToScreen.setValue(pass.renderToScreen);
-};
+	}
 
-PassNode.prototype.setComposer = function(composer)
-{
+	setComposer(composer) {
 	this.composer = composer;
-};
+	}
 
-PassNode.prototype.setEditor = function(editor)
-{
+	setEditor(editor) {
 	this.editor = editor;
 
 	this.add(this.up);
 	this.add(this.down);
 	this.add(this.delete);
-};
+	}
+
+}
+
+PassNode.passes = {};
 
 export {PassNode};

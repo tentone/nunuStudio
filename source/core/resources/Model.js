@@ -10,12 +10,13 @@ import {Font} from "./Font.js";
  * @extends {Resource}
  * @module Resources
  */
-function Model()
+class Model extends Resource
 {
-	Resource.call(this, "model", "Model");
+	constructor()
+	{
+		super("model", "Model");
+	}
 }
-
-Model.prototype = Object.create(Resource.prototype);
 
 /**
  * List of file types supported for 3D models.

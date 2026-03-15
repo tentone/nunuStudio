@@ -5,8 +5,8 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CodeInput} from "../../../../components/input/CodeInput.js";
 import {ParametricBufferGeometry} from "../../../../../core/geometries/ParametricBufferGeometry.js";
 
-function ParametricGeometryForm(form, object)
-{
+class ParametricGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -47,21 +47,20 @@ function ParametricGeometryForm(form, object)
 	this.stacks.setOnChange(updateGeometry);
 	this.form.add(this.stacks);
 	this.form.nextRow();
-}
+	}
 
-ParametricGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	var geometry = new ParametricBufferGeometry(this.code.getValue(), this.slices.getValue(), this.stacks.getValue());
 
 	this.object.geometry.dispose();
 	Editor.addAction(new ChangeAction(this.object, "geometry", geometry));
-};
+	}
 
-
-ParametricGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.code.setValue(this.object.geometry.parameters.code);
 	this.slices.setValue(this.object.geometry.parameters.slices);
 	this.stacks.setValue(this.object.geometry.parameters.stacks);
-};
+	}
+
+}
 export {ParametricGeometryForm};

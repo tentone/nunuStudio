@@ -13,23 +13,24 @@ import {RectAreaLight as TRectAreaLight, Light} from "three";
  * @extends {RectAreaLight}
  * @module Lights
  */
-function RectAreaLight(color, intensity, width, height)
+class RectAreaLight extends TRectAreaLight
 {
-	TRectAreaLight.call(this, color, intensity, width, height);
+	constructor(color, intensity, width, height)
+	{
+		super(color, intensity, width, height);
 
-	this.name = "rectarea";
+		this.name = "rectarea";
+	}
+
+	toJSON(meta)
+	{
+		var data = Light.prototype.toJSON.call(this, meta);
+
+		data.object.width = this.width;
+		data.object.height = this.height;
+
+		return data;
+	}
 }
-
-RectAreaLight.prototype = Object.create(TRectAreaLight.prototype);
-
-RectAreaLight.prototype.toJSON = function(meta)
-{
-	var data = Light.prototype.toJSON.call(this, meta);
-
-	data.object.width = this.width;
-	data.object.height = this.height;
-
-	return data;
-};
 
 export {RectAreaLight};

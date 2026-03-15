@@ -9,9 +9,9 @@ import {Component} from "../Component.js";
  *
  * @class DualDivision
  */
-function DualDivision(parent)
-{
-	Component.call(this, parent, "div");
+class DualDivision extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = "var(--panel-color)";
@@ -83,21 +83,15 @@ function DualDivision(parent)
 	{
 		Editor.gui.updateInterface();
 	};
-}
+	}
 
-DualDivision.HORIZONTAL = 0;
-DualDivision.VERTICAL = 1;
 
-DualDivision.prototype = Object.create(Component.prototype);
-
-DualDivision.prototype.setOnResize = function(callback)
-{
+	setOnResize(callback) {
 	this.onResize = callback;
-};
+	}
 
-DualDivision.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	if (this.orientation === DualDivision.HORIZONTAL)
 	{
@@ -135,6 +129,11 @@ DualDivision.prototype.updateSize = function()
 		this.resizeTab.style.width = this.size.x + "px";
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
-};
+	}
+
+}
+
+DualDivision.HORIZONTAL = 0;
+DualDivision.VERTICAL = 1;
 
 export {DualDivision};

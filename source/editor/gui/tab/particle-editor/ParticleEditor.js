@@ -26,9 +26,9 @@ import {DualContainer} from "../../../components/containers/DualContainer.js";
  *
  * Allows the user to change all the parameters of the emitter.
  */
-function ParticleEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.particle, Global.FILE_PATH + "icons/misc/particles.png");
+class ParticleEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.particle, Global.FILE_PATH + "icons/misc/particles.png");
 
 	var self = this;
 
@@ -441,13 +441,10 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.colorSpread);
 	this.form.nextRow();
-}
-
-ParticleEditor.prototype = Object.create(TabComponent.prototype);
+	}
 
 // Update object data
-ParticleEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.particle !== null)
 	{
 		this.setName(this.particle.name);
@@ -476,11 +473,10 @@ ParticleEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
 // Attach particle to particle editor
-ParticleEditor.prototype.attach = function(particle)
-{
+	attach(particle) {
 	// Attach particle
 	this.particle = particle;
 	this.updateMetadata();
@@ -539,48 +535,42 @@ ParticleEditor.prototype.attach = function(particle)
 
 	// Create runtime particle to preview particle
 	this.particle.reload();
-};
+	}
 
 // Update camera position and rotation from variables
-ParticleEditor.prototype.updateCamera = function()
-{
+	updateCamera() {
 	// Calculate direction vector
 	var cosAngleY = Math.cos(this.cameraRotation.y);
 	var position = new Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
 	this.camera.lookAt(new Vector3(0, 0, 0));
-};
+	}
 
-ParticleEditor.prototype.isAttached = function(particle)
-{
+	isAttached(particle) {
 	return this.particle === particle;
-};
+	}
 
-ParticleEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.mouse.create();
-};
+	}
 
-ParticleEditor.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 
 	this.mouse.dispose();
-};
+	}
 
-ParticleEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 	
 	this.mouse.dispose();
 	this.canvas.destroy();
-};
+	}
 
 // Update material editor
-ParticleEditor.prototype.update = function()
-{
+	update() {
 	this.mouse.update();
 
 	if (this.mouse.insideCanvas())
@@ -618,14 +608,15 @@ ParticleEditor.prototype.update = function()
 	this.canvas.renderer.clear(true, true, true);
 	this.canvas.renderer.render(this.scene, this.camera);
 	this.canvas.renderer.render(this.particle, this.camera);
-};
+	}
 
-ParticleEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
-};
+	}
+
+}
 
 export {ParticleEditor};

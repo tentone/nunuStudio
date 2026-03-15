@@ -1,7 +1,7 @@
-import {ShaderMaterial, SphereBufferGeometry, Mesh} from "three";
+import {ShaderMaterial, SphereGeometry, Mesh} from "three";
 
-function LightProbeHelper(lightProbe, size)
-{
+class LightProbeHelper extends Mesh {
+	constructor(lightProbe, size) {
 	this.lightProbe = lightProbe;
 	this.size = size;
 
@@ -68,28 +68,25 @@ function LightProbeHelper(lightProbe, size)
 		].join('\n')
 	});
 
-	var geometry = new SphereBufferGeometry(1, 32, 16);
+	var geometry = new SphereGeometry(1, 32, 16);
 
-	Mesh.call(this, geometry, material);
+	super(geometry, material);
 
 	this.onBeforeRender();
 
-}
+	}
 
-LightProbeHelper.prototype = Object.create(Mesh.prototype);
-LightProbeHelper.prototype.constructor = LightProbeHelper;
-
-LightProbeHelper.prototype.dispose = function()
-{
+	dispose() {
 	this.geometry.dispose();
 	this.material.dispose();
-};
+	}
 
-LightProbeHelper.prototype.onBeforeRender = function()
-{
+	onBeforeRender() {
 	this.position.copy(this.lightProbe.position);
 	this.scale.set(1, 1, 1).multiplyScalar(this.size);
 	this.material.uniforms.intensity.value = this.lightProbe.intensity;
-};
+	}
+
+}
 
 export {LightProbeHelper};

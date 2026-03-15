@@ -18,9 +18,9 @@ import {Canvas} from "../../../components/Canvas.js";
  * @param container
  * @param index
  */
-function ProfilingTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
+class ProfilingTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
 
 	/**
 	 * Canvas used to draw the profilling graphs.
@@ -47,12 +47,9 @@ function ProfilingTab(parent, closeable, container, index)
 	circle.position.set(100, 0);
 	circle.radius = 50;
 	this.group.add(circle);
-}
+	}
 
-ProfilingTab.prototype = Object.create(TabComponent.prototype);
-
-ProfilingTab.prototype.update = function()
-{
+	update() {
 	// Renderer info
 	var tabs = Editor.gui.tab.getActiveTab();
 	for (var i = 0; i < tabs.length; i++)
@@ -74,15 +71,16 @@ ProfilingTab.prototype.update = function()
 
 	// System metrics
 	// TODO <ADD CODE HERE>
-};
+	}
 
-ProfilingTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.canvas.size.copy(this.size);
 	this.canvas.position.set(0, 0);
 	this.canvas.updateInterface();
-};
+	}
+
+}
 
 export {ProfilingTab};

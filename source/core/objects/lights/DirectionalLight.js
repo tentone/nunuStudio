@@ -13,30 +13,31 @@ import {DirectionalLight as TDirectionalLight} from "three";
  * @extends {DirectionalLight}
  * @module Lights
  */
-function DirectionalLight(hex, intensity)
+class DirectionalLight extends TDirectionalLight
 {
-	TDirectionalLight.call(this, hex, intensity);
+	constructor(hex, intensity)
+	{
+		super(hex, intensity);
 
-	this.name = "directional";
+		this.name = "directional";
 
-	this.castShadow = true;
+		this.castShadow = true;
 
-	this.shadow.camera.near = 0.5;
-	this.shadow.camera.far = 10000;
+		this.shadow.camera.near = 0.5;
+		this.shadow.camera.far = 10000;
+	}
+
+	/**
+	 * Update light shadow map attributes at runtime.
+	 *
+	 * @method updateShadowMap
+	 */
+	updateShadowMap()
+	{
+		this.shadow.map.dispose();
+		this.shadow.map = null;
+		this.shadow.camera.updateProjectionMatrix();
+	}
 }
-
-DirectionalLight.prototype = Object.create(TDirectionalLight.prototype);
-
-/**
- * Update light shadow map attributes at runtime.
- *
- * @method updateShadowMap
- */
-DirectionalLight.prototype.updateShadowMap = function()
-{
-	this.shadow.map.dispose();
-	this.shadow.map = null;
-	this.shadow.camera.updateProjectionMatrix();
-};
 
 export {DirectionalLight};

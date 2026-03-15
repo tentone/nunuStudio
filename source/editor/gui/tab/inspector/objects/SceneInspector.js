@@ -14,9 +14,9 @@ import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
 import {ObjectInspector} from "./ObjectInspector.js";
 
-function SceneInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class SceneInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -241,14 +241,12 @@ function SceneInspector(parent, object)
 	});
 	this.form.add(this.iterations);
 	this.form.nextRow();
-}
+	}
 
 // Super prototypes
-SceneInspector.prototype = Object.create(ObjectInspector.prototype);
 
 // Update panel content from attached object
-SceneInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
 
 	if (this.object.fog instanceof Fog)
@@ -290,18 +288,16 @@ SceneInspector.prototype.updateInspector = function()
 	}
 	this.alpha.setValue(this.object.alpha);
 
-
 	this.environment.setValue(this.object.environment);
 	this.usePhysics.setValue(this.object.usePhysics);
 	this.gravity.setValue(this.object.world.gravity.x, this.object.world.gravity.y, this.object.world.gravity.z);
 	this.tolerance.setValue(this.object.world.solver.tolerance);
 	this.iterations.setValue(this.object.world.solver.iterations);
-};
+	}
 
 // Update wich forms should be visible in the panel
-SceneInspector.prototype.updateForms = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateForms() {
+	super.updateInspector();
 
 	this.fogLinearForm.visible = this.object.fog instanceof Fog;
 	this.fogLinearForm.updateInterface();
@@ -310,6 +306,8 @@ SceneInspector.prototype.updateForms = function()
 	this.fogExponentialForm.updateInterface();
 
 	this.form.updateInterface();
-};
+	}
+
+}
 
 export {SceneInspector};

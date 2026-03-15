@@ -8,18 +8,19 @@ import {ShaderPass} from "../ShaderPass.js";
  * @class SobelPass
  * @module Postprocessing
  */
-function SobelPass()
+class SobelPass extends ShaderPass
 {
-	ShaderPass.call(this, SobelOperatorShader);
+constructor()
+{
+super(SobelOperatorShader);
 
-	this.type = "Sobel";
+this.type = "Sobel";
 }
 
-SobelPass.prototype = Object.create(ShaderPass.prototype);
-
-SobelPass.prototype.setSize = function(width, height)
+setSize(width, height)
 {
-	this.uniforms.resolution.value.set(width, height);
-};
+this.uniforms.resolution.value.set(width, height);
+}
+}
 
 export {SobelPass};

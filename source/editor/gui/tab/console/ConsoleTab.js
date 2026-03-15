@@ -19,9 +19,9 @@ import {Component} from "../../../components/Component.js";
  * @class ConsoleTab
  * @extends {TabComponent}
  */
-function ConsoleTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.console, Global.FILE_PATH + "icons/misc/console.png");
+class ConsoleTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.console, Global.FILE_PATH + "icons/misc/console.png");
 
 	var self = this;
 
@@ -237,9 +237,7 @@ function ConsoleTab(parent, closeable, container, index)
 	};
 
 	this.useConsole(this.enabled);
-}
-
-ConsoleTab.prototype = Object.create(TabComponent.prototype);
+	}
 
 /**
  * Run a user command from the console, commands are regular code, they have access to the global application space.
@@ -248,8 +246,7 @@ ConsoleTab.prototype = Object.create(TabComponent.prototype);
  *
  * @method runCommand
  */
-ConsoleTab.prototype.runCommand = function(code)
-{
+	runCommand(code) {
 	var container = document.createElement("div");
 	container.style.paddingLeft = "5px";
 	container.style.paddingTop = "5px";
@@ -277,7 +274,7 @@ ConsoleTab.prototype.runCommand = function(code)
 
 	this.history.push(code);
 	this.historyPointer = this.history.length - 1;
-};
+	}
 
 /**
  * Get stack trace up until the point that this method was called.
@@ -316,8 +313,7 @@ ConsoleTab.getStackTrace = function()
  * @method useConsole
  * @param {boolean} enabled
  */
-ConsoleTab.prototype.useConsole = function(enabled)
-{
+	useConsole(enabled) {
 	var self = this;
 
 	this.enabled = enabled;
@@ -355,7 +351,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		window.console.error = self.handlers.error;
 		window.console.clear = self.handlers.clear;
 	}
-};
+	}
 
 /**
  * Show a log messsage in the console.
@@ -366,8 +362,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
  *
  * @method warn
  */
-ConsoleTab.prototype.log = function(args)
-{
+	log(args) {
 	for (var i = 0; i < args.length; i++)
 	{
 		this.content.appendChild(ConsoleTab.createMessage(args[i]));
@@ -380,15 +375,14 @@ ConsoleTab.prototype.log = function(args)
 
 	this.content.appendChild(ConsoleTab.createBar());
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
-};
+	}
 
 /**
  * Show an warning message from a console.warn() call.
  *
  * @method warn
  */
-ConsoleTab.prototype.warn = function(args)
-{
+	warn(args) {
 	for (var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
@@ -399,15 +393,14 @@ ConsoleTab.prototype.warn = function(args)
 
 	this.content.appendChild(ConsoleTab.createBar());
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
-};
+	}
 
 /**
  * Show an error message from a console.error() call.
  *
  * @method error
  */
-ConsoleTab.prototype.error = function(args)
-{
+	error(args) {
 	for (var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
@@ -418,15 +411,14 @@ ConsoleTab.prototype.error = function(args)
 
 	this.content.appendChild(ConsoleTab.createBar());
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
-};
+	}
 
 /**
  * Clear content from the console, remove all nodes created and reset GUI.
  *
  * @method clear 
  */
-ConsoleTab.prototype.clear = function()
-{
+	clear() {
 	this.history = [];
 
 	while (this.content.hasChildNodes())
@@ -435,11 +427,10 @@ ConsoleTab.prototype.clear = function()
 	}
 
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
-};
+	}
 
-ConsoleTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.content.style.height = this.size.y - 30 + "px";
 	this.content.style.width = this.size.x + "px";
@@ -447,7 +438,9 @@ ConsoleTab.prototype.updateSize = function()
 	this.input.style.height = "30px";
 	this.input.style.width = this.size.x + "px";
 	this.code.setSize(this.size.x, 30);
-};
+	}
+
+}
 
 /**
  * Create a new log division element and fill with information from the object.

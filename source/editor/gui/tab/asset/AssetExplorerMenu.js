@@ -15,10 +15,9 @@ import {Editor} from "../../../Editor.js";
 import {DropdownMenu} from "../../../components/dropdown/DropdownMenu.js";
 import {Component} from "../../../components/Component.js";
 
-
-function AssetExplorerMenu(parent)
-{
-	Component.call(this, parent, "div");
+class AssetExplorerMenu extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.overflow = "visible";
@@ -277,7 +276,6 @@ function AssetExplorerMenu(parent)
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/script/script.png");
 
-
 	var others = material.addMenu(Locale.more);
 
 	others.addOption(Locale.normalMaterial, function()
@@ -332,6 +330,6 @@ function AssetExplorerMenu(parent)
 
 	create.updateInterface();
 }
+}
 
-AssetExplorerMenu.prototype = Object.create(Component.prototype);
 export {AssetExplorerMenu};

@@ -8,9 +8,9 @@ import {Slider} from "../../../../components/input/Slider.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function MaterialInspector(parent, object)
-{
-	Inspector.call(this, parent, object);
+class MaterialInspector extends Inspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -159,12 +159,9 @@ function MaterialInspector(parent, object)
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
-}
+	}
 
-MaterialInspector.prototype = Object.create(Inspector.prototype);
-
-MaterialInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.name.setText(this.object.name);
 		
 	if (this.uuid !== undefined)
@@ -186,5 +183,7 @@ MaterialInspector.prototype.updateInspector = function()
 	this.opacity.setValue(this.object.opacity);
 	this.alphaTest.setValue(this.object.alphaTest);
 	this.blending.setValue(this.object.blending);
-};
+	}
+
+}
 export {MaterialInspector};

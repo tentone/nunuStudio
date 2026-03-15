@@ -1,4 +1,4 @@
-import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, DirectionalLight, DirectionalLightHelper, Float32BufferAttribute, Geometry, HemisphereLight, HemisphereLightHelper, Light, LightProbe, Line, LineBasicMaterial, Material, Mesh, MeshStandardMaterial, Object3D, Plane, PointLight, PointLightHelper, Points, PointsMaterial, Raycaster, RectAreaLight, Scene, ShaderMaterial, SkinnedMesh, SpotLight, SpotLightHelper, Sprite, SpriteMaterial, Texture, Vector2, Vector3} from "three";
+import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, DirectionalLight, DirectionalLightHelper, Float32BufferAttribute, HemisphereLight, HemisphereLightHelper, Light, LightProbe, Line, LineBasicMaterial, Material, Mesh, MeshStandardMaterial, Object3D, Plane, PointLight, PointLightHelper, Points, PointsMaterial, Raycaster, RectAreaLight, Scene, ShaderMaterial, SkinnedMesh, SpotLight, SpotLightHelper, Sprite, SpriteMaterial, Texture, Vector2, Vector3} from "three";
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
 import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
 import {Audio} from "../../../../core/resources/Audio.js";
@@ -61,9 +61,9 @@ import {WireframeHelper} from "./helpers/WireframeHelper.js";
  * @class SceneEditor
  * @extends {TabComponent}
  */
-function SceneEditor(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
+class SceneEditor extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
@@ -706,25 +706,11 @@ function SceneEditor(parent, closeable, container, index)
 	});
 
 	this.canvas.resetCanvas();
-}
+	}
 
-SceneEditor.ORTHOGRAPHIC = 20;
-SceneEditor.PERSPECTIVE = 21;
 
-SceneEditor.SELECT = 0;
-SceneEditor.MOVE = 100;
-SceneEditor.SCALE = 101;
-SceneEditor.ROTATE = 102;
-SceneEditor.MEASURE = 103;
 
-SceneEditor.prototype = Object.create(TabComponent.prototype);
-
-SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
-SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
-SceneEditor.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
-
-SceneEditor.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.scene !== null)
 	{
 		this.setName(this.scene.name);
@@ -752,11 +738,10 @@ SceneEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-};
+	}
 
-SceneEditor.prototype.activate = function()
-{
-	TabComponent.prototype.activate.call(this);
+	activate() {
+	super.activate();
 
 	this.canvas.createRenderer();
 	this.updateSettings();
@@ -767,15 +752,14 @@ SceneEditor.prototype.activate = function()
 	this.manager.create();
 
 	this.selectTool(SceneEditor.SELECT);
-};
+	}
 
-SceneEditor.prototype.deactivate = function()
-{
-	TabComponent.prototype.deactivate.call(this);
+	deactivate() {
+	super.deactivate();
 
 	this.mouse.dispose();
 	this.manager.destroy();
-};
+	}
 
 /**
  * Update camera controller object.
@@ -785,8 +769,7 @@ SceneEditor.prototype.deactivate = function()
  * @method updateCameraControls
  * @param {number} mode Camera mode.
  */
-SceneEditor.prototype.updateCameraControls = function(mode)
-{
+	updateCameraControls(mode) {
 	if (this.controlsMode === mode)
 	{
 		return;
@@ -808,10 +791,9 @@ SceneEditor.prototype.updateCameraControls = function(mode)
 	}
 
 	this.controls.attach(this.camera);
-};
+	}
 
-SceneEditor.prototype.updateSettings = function()
-{
+	updateSettings() {
 	// Grid
 	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
 	this.gridHelper.setSize(Editor.settings.editor.gridSize);
@@ -835,11 +817,10 @@ SceneEditor.prototype.updateSettings = function()
 	this.transform.snap = Editor.settings.editor.snap;
 	this.transform.translationSnap = Editor.settings.editor.gridSpacing;
 	this.transform.rotationSnap = Editor.settings.editor.snapAngle;
-};
+	}
 
-SceneEditor.prototype.destroy = function()
-{
-	TabComponent.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
@@ -848,10 +829,9 @@ SceneEditor.prototype.destroy = function()
 	this.mouse.setLock(false);
 
 	this.canvas.forceContextLoss();
-};
+	}
 
-SceneEditor.prototype.attach = function(scene)
-{
+	attach(scene) {
 	this.scene = scene;
 	this.updateMetadata();
 
@@ -859,7 +839,7 @@ SceneEditor.prototype.attach = function(scene)
 	{
 		this.scene.defaultCamera = this.camera;
 	}
-};
+	}
 
 /**
  * Check if a scene or object is attached to the editor.
@@ -867,18 +847,16 @@ SceneEditor.prototype.attach = function(scene)
  * @method isAttached
  * @param {Scene} scene Scene to verify if is attached to this tab.
  */
-SceneEditor.prototype.isAttached = function(scene)
-{
+	isAttached(scene) {
 	return this.scene === scene;
-};
+	}
 
 /**
  * Focus the first currently selected object, if there is one.
  *
  * @method focusObject
  */
-SceneEditor.prototype.focusObject = function()
-{
+	focusObject() {
 	if (Editor.selection.length > 0 && Editor.selection[0].isObject3D === true)
 	{
 		this.controls.focusObject(Editor.selection[0]);
@@ -887,15 +865,14 @@ SceneEditor.prototype.focusObject = function()
 	{
 		Editor.alert(Locale.selectObjectFirst);
 	}
-};
+	}
 
 /**
  * Update scene editor logic.
  *
  * @method update
  */
-SceneEditor.prototype.update = function()
-{
+	update() {
 	this.mouse.update();
 	this.keyboard.update();
 
@@ -1008,20 +985,18 @@ SceneEditor.prototype.update = function()
 
         this.render();
 
-};
+	}
 
-SceneEditor.prototype.updateMeasurementPreview = function(start, end)
-{
+	updateMeasurementPreview(start, end) {
         var position = this.measurementPreview.geometry.attributes.position;
         position.setXYZ(0, start.x, start.y, start.z);
         position.setXYZ(1, end.x, end.y, end.z);
         position.needsUpdate = true;
         this.measurementPreview.geometry.computeBoundingSphere();
         this.measurementPreview.visible = true;
-};
+	}
 
-SceneEditor.prototype.getMeasurementPoint = function()
-{
+	getMeasurementPoint() {
         if (this.scene === null)
         {
                 return null;
@@ -1040,10 +1015,9 @@ SceneEditor.prototype.getMeasurementPoint = function()
         }
 
         return null;
-};
+	}
 
-SceneEditor.prototype.createMeasurement = function(start, end)
-{
+	createMeasurement(start, end) {
         if (this.scene === null)
         {
                 return;
@@ -1052,7 +1026,7 @@ SceneEditor.prototype.createMeasurement = function(start, end)
         var measurement = new Measurement();
         measurement.setPoints(start, end);
         Editor.addObject(measurement, this.scene);
-};
+	}
 
 /**
  * Render all the editor scenes to the canvas using the renderer.
@@ -1061,8 +1035,7 @@ SceneEditor.prototype.createMeasurement = function(start, end)
  * 
  * @method render
  */
-SceneEditor.prototype.render = function()
-{
+	render() {
 	if (this.canvas.renderer === null)
 	{
 		console.warn("nunuStudio: SceneEditor renderer is null.", this);
@@ -1182,26 +1155,24 @@ SceneEditor.prototype.render = function()
 	}
 
 	renderer.setScissorTest(false);
-};
+	}
 
 /**
  * Update raycaster position from editor mouse position.
  *
  * @method updateRaycasterFromMouse
  */
-SceneEditor.prototype.updateRaycasterFromMouse = function()
-{
+	updateRaycasterFromMouse() {
 	this.normalized.set(this.mouse.position.x / this.canvas.size.x * 2 - 1, -(this.mouse.position.y / this.canvas.size.y) * 2 + 1);
 	this.raycaster.setFromCamera(this.normalized, this.camera);
-};
+	}
 
 /**
  * Select objects mouse based on the mouse position.
  *
  * @method selectObjectWithMouse
  */
-SceneEditor.prototype.selectObjectWithMouse = function()
-{
+	selectObjectWithMouse() {
 	this.updateRaycasterFromMouse();
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
@@ -1224,7 +1195,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 			Editor.selectObject(intersects[0].object);
 		}
 	}
-};
+	}
 
 /**
  * Update raycaster with new x and y positions (normalized -1 to 1).
@@ -1233,11 +1204,10 @@ SceneEditor.prototype.selectObjectWithMouse = function()
  * @param {number} x
  * @param {number} y
  */
-SceneEditor.prototype.updateRaycaster = function(x, y)
-{
+	updateRaycaster(x, y) {
 	this.normalized.set(x, y);
 	this.raycaster.setFromCamera(this.normalized, this.camera);
-};
+	}
 
 /**
  * Set the editor camera projection mode (ortographic or perspective).
@@ -1245,8 +1215,7 @@ SceneEditor.prototype.updateRaycaster = function(x, y)
  * @method setCameraMode
  * @param {number} mode
  */
-SceneEditor.prototype.setCameraMode = function(mode)
-{
+	setCameraMode(mode) {
 	if (mode === this.cameraMode)
 	{
 		return;
@@ -1282,7 +1251,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.controls.attach(this.camera);
 		this.controls.reset();
 	}
-};
+	}
 
 /**
  * Select transform tool, possible values are:
@@ -1293,8 +1262,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
  * @param selectTool
  * @param {number} tool Tool to select.
  */
-SceneEditor.prototype.selectTool = function(tool)
-{
+	selectTool(tool) {
         var previousMode = this.mode;
 
         if (tool !== undefined)
@@ -1344,7 +1312,7 @@ SceneEditor.prototype.selectTool = function(tool)
         }
 
         this.toolBar.selectTool(this.mode);
-};
+	}
 
 /**
  * Update the selection status of the tab.
@@ -1353,8 +1321,7 @@ SceneEditor.prototype.selectTool = function(tool)
  *
  * @method updateSelection
  */
-SceneEditor.prototype.updateSelection = function()
-{
+	updateSelection() {
 	// Filter Object3D objects only (to exclude resources)
 	var selectedObjects = [];
 	for (var i = 0; i < Editor.selection.length; i++)
@@ -1471,16 +1438,14 @@ SceneEditor.prototype.updateSelection = function()
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 	}
-};
+	}
 
-SceneEditor.prototype.updateVisibility = function()
-{
-	TabComponent.prototype.updateVisibility.call(this);
-};
+	updateVisibility() {
+	super.updateVisibility();
+	}
 
-SceneEditor.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.sideBar.position.set(0, 0);
 	this.sideBar.size.set(40, this.size.y);
@@ -1501,6 +1466,20 @@ SceneEditor.prototype.updateSize = function()
 		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
 	}
-};
+	}
+
+}
+
+SceneEditor.ORTHOGRAPHIC = 20;
+SceneEditor.PERSPECTIVE = 21;
+SceneEditor.SELECT = 0;
+SceneEditor.MOVE = 100;
+SceneEditor.SCALE = 101;
+SceneEditor.ROTATE = 102;
+SceneEditor.MEASURE = 103;
+
+SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
+SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
+SceneEditor.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
 export {SceneEditor};

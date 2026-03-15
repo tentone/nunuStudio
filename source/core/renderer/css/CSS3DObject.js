@@ -11,51 +11,52 @@ import {Object3D} from "three";
  * @extends {Object3D}
  * @param {Component} element DOM element encapsulated in the object container.
  */
-function CSS3DObject(element)
+class CSS3DObject extends Object3D
 {
-	Object3D.call(this);
-
-	/**
-	 * The DOM element to be projected in 3D space.
-	 *
-	 * It is automatically added to the appropiate DOM container used by the renderer.
-	 *
-	 * @attribute element
-	 * @type {Element}
-	 */
-	this.element = element;
-	this.element.style.position = "absolute";
-	
-	this.addEventListener("removed", function()
+	constructor(element)
 	{
-		if (this.element.parentNode !== null)
-		{
-			this.element.parentNode.removeChild(this.element);
-		}
-	});
+		super();
 
-	var self = this;
-	var visible = true;
-	Object.defineProperties(this,
+		/**
+		 * The DOM element to be projected in 3D space.
+		 *
+		 * It is automatically added to the appropiate DOM container used by the renderer.
+		 *
+		 * @attribute element
+		 * @type {Element}
+		 */
+		this.element = element;
+		this.element.style.position = "absolute";
+		
+		this.addEventListener("removed", function()
 		{
-			visible:
-		{
-			get: function()
+			if (this.element.parentNode !== null)
 			{
-				return visible;
-			},
-			set: function(value)
-			{
-				visible = value;
-				
-				self.element.style.display = value ? "block" :"none";
+				this.element.parentNode.removeChild(this.element);
 			}
-		}
 		});
-};
 
-CSS3DObject.prototype = Object.create(Object3D.prototype);
-CSS3DObject.prototype.constructor = CSS3DObject;
+		var self = this;
+		var visible = true;
+		Object.defineProperties(this,
+			{
+				visible:
+			{
+				get: function()
+				{
+					return visible;
+				},
+				set: function(value)
+				{
+					visible = value;
+					
+					self.element.style.display = value ? "block" :"none";
+				}
+			}
+			});
+	}
+}
+
 CSS3DObject.prototype.isCSS3DObject = true;
 
 export {CSS3DObject};

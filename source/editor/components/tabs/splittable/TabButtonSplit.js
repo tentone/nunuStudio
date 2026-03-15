@@ -15,9 +15,9 @@ import {Component} from "../../Component.js";
  * @param {Component} parent
  * @param {TabComponent} tab
  */
-function TabButtonSplit(parent, tab)
-{
-	Component.call(this, parent, "div");
+class TabButtonSplit extends Component {
+	constructor(parent, tab) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -269,13 +269,8 @@ function TabButtonSplit(parent, tab)
 			this.style.backgroundColor = "var(--bar-color)";
 		}
 	};
-}
+	}
 
-TabButtonSplit.prototype = Object.create(Component.prototype);
-
-TabButtonSplit.NONE = 0;
-TabButtonSplit.PREVIOUS = 1;
-TabButtonSplit.NEXT = 2;
 
 /**
  * Set the tab icon image.
@@ -283,11 +278,10 @@ TabButtonSplit.NEXT = 2;
  * @method setIcon
  * @param {string} icon URL of the icon image.
  */
-TabButtonSplit.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	this.tab.icon = icon;
 	this.icon.src = icon;
-};
+	}
 
 /**
  * Set text to be displayed in the button as its name.
@@ -295,20 +289,17 @@ TabButtonSplit.prototype.setIcon = function(icon)
  * @method setName
  * @param {string} text
  */
-TabButtonSplit.prototype.setName = function(text)
-{
+	setName(text) {
 	this.tab.title = text;
 	this.title.data = text;
-};
+	}
 
-TabButtonSplit.prototype.updateSelection = function()
-{
+	updateSelection() {
 	this.element.style.backgroundColor = this.tab.isSelected() ? "var(--button-over-color)" : "var(--bar-color)";
-};
+	}
 
-TabButtonSplit.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	// Icon
 	this.icon.style.top = this.size.y * 0.2 + "px";
@@ -337,6 +328,12 @@ TabButtonSplit.prototype.updateSize = function()
 	}
 
 	this.updateSelection();
-};
+	}
+
+}
+
+TabButtonSplit.NONE = 0;
+TabButtonSplit.PREVIOUS = 1;
+TabButtonSplit.NEXT = 2;
 
 export {TabButtonSplit};

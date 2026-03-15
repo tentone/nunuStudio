@@ -10,9 +10,9 @@ import {Button} from "./Button.js";
  * @extends {Button}
  * @param {Component} parent Parent element.
  */
-function ButtonToggle(parent)
-{
-	Button.call(this, parent);
+class ButtonToggle extends Button {
+	constructor(parent) {
+	super(parent);
 
 	/**
 	 * Indicates if the toggle button is currently selected.
@@ -50,17 +50,14 @@ function ButtonToggle(parent)
 			}
 		}
 	});
-}
-
-ButtonToggle.prototype = Object.create(Button.prototype);
+	}
 
 /**
  * Set the selected state of the toggle button.
  *
  * @param {boolean} value Selected state of the button.
  */
-ButtonToggle.prototype.setSelected = function(value)
-{
+	setSelected(value) {
 	this.selected = value;
 
 	if (this.selected)
@@ -71,5 +68,7 @@ ButtonToggle.prototype.setSelected = function(value)
 	{
 		this.setStyles(this.styleBase);
 	}
-};
+	}
+
+}
 export {ButtonToggle};

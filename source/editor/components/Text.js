@@ -8,9 +8,9 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Text(parent)
-{
-	Component.call(this, parent, "div");
+class Text extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.pointerEvents = "none";
 	this.element.style.display = "flex";
@@ -45,18 +45,9 @@ function Text(parent)
 	this.allowWordBreak(false);
 	this.setVerticalAlignment(Text.CENTER);
 	this.setAlignment(Text.CENTER);
-}
+	}
 
-Text.CENTER = 0;
-Text.LEFT = 1;
-Text.RIGHT = 2;
-Text.TOP = 3;
-Text.BOTTOM = 4;
 
-Text.CLIP = 10;
-Text.ELLIPSIS = 11;
-
-Text.prototype = Object.create(Component.prototype);
 
 /**
  * Set font to use for the text.
@@ -66,8 +57,7 @@ Text.prototype = Object.create(Component.prototype);
  * @param {number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
  * @param {string} fontStyle Font style, specifies the font style for a text.
  */
-Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
-{
+	setFont(fontFamily, fontWeight, fontStyle) {
 	this.span.style.fontFamily = fontFamily;
 
 	if (fontWeight !== undefined)
@@ -79,7 +69,7 @@ Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 	{
 		this.span.style.fontStyle = fontStyle;
 	}
-};
+	}
 
 /**
  * Enable of disable word breaking.
@@ -87,8 +77,7 @@ Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  * @method allowWordBreak
  * @param {boolean} line If true words can be breaked.
  */
-Text.prototype.allowWordBreak = function(value)
-{
+	allowWordBreak(value) {
 	if (value === true)
 	{
 		this.span.style.whiteSpace = "normal";
@@ -99,7 +88,7 @@ Text.prototype.allowWordBreak = function(value)
 		this.span.style.whiteSpace = "pre";
 		this.span.style.wordBreak = "normal";
 	}
-};
+	}
 
 /**
  * Set text displayed in the component.
@@ -107,10 +96,9 @@ Text.prototype.allowWordBreak = function(value)
  * @method setText
  * @param {string} text Text. 
  */
-Text.prototype.setText = function(text)
-{
+	setText(text) {
 	this.text.data = text;
-};
+	}
 
 /**
  * Set text border size in px. The border is set as a solid centered shadow with a defined color.
@@ -119,10 +107,9 @@ Text.prototype.setText = function(text)
  * @param {number} size Border size in pixels.
  * @param {string} color CSS Color. 
  */
-Text.prototype.setTextBorder = function(size, color)
-{
+	setTextBorder(size, color) {
 	this.span.style.textShadow = "-" + size + "px 0 " + color + ", 0 " + size + "px " + color + ", " + size + "px 0 " + color + ", 0 -" + size + "px " + color;
-};
+	}
 
 /**
  * Set Text size, in pixels.
@@ -130,10 +117,9 @@ Text.prototype.setTextBorder = function(size, color)
  * @method setTextSize
  * @param {number} size Size in pixel for this text element.
  */
-Text.prototype.setTextSize = function(size)
-{
+	setTextSize(size) {
 	this.element.style.fontSize = size + "px";
-};
+	}
 
 /**
  * Set text color.
@@ -141,10 +127,9 @@ Text.prototype.setTextSize = function(size)
  * @method setTextColor
  * @param {string} color Color code.
  */
-Text.prototype.setTextColor = function(color)
-{
+	setTextColor(color) {
 	this.span.style.color = color;
-};
+	}
 
 /**
  * Set text overflow handling
@@ -152,8 +137,7 @@ Text.prototype.setTextColor = function(color)
  * @method setOverflow
  * @param {number} overflow
  */
-Text.prototype.setOverflow = function(overflow)
-{
+	setOverflow(overflow) {
 	if (overflow === Text.ELLIPSIS)
 	{
 		this.span.style.whiteSpace = "nowrap";
@@ -164,7 +148,7 @@ Text.prototype.setOverflow = function(overflow)
 		this.span.style.whiteSpace = "pre";
 		this.span.style.textOverflow = "clip";
 	}
-};
+	}
 
 /**
  * Set text horizontal alignment.
@@ -175,8 +159,7 @@ Text.prototype.setOverflow = function(overflow)
  * @method setAlignment
  * @param {number} align Alingment mode.
  */
-Text.prototype.setAlignment = function(align)
-{
+	setAlignment(align) {
 	if (align === Text.CENTER)
 	{
 		this.element.style.justifyContent = "center";
@@ -192,7 +175,7 @@ Text.prototype.setAlignment = function(align)
 		this.element.style.justifyContent = "flex-end";
 		this.element.style.textAlign = "right";
 	}
-};
+	}
 
 /**
  * Set text vertical alignment.
@@ -203,8 +186,7 @@ Text.prototype.setAlignment = function(align)
  * @method setVerticalAlignment
  * @param {number} align Alingment mode.
  */
-Text.prototype.setVerticalAlignment = function(align)
-{
+	setVerticalAlignment(align) {
 	if (align === Text.CENTER)
 	{
 		this.element.style.alignItems = "center";
@@ -217,7 +199,7 @@ Text.prototype.setVerticalAlignment = function(align)
 	{
 		this.element.style.alignItems = "flex-end";
 	}
-};
+	}
 
 /**
  * Get size of the text inside of this component in px.
@@ -225,10 +207,9 @@ Text.prototype.setVerticalAlignment = function(align)
  * @method measure
  * @return {Vector2} A vector with the size of the text. 
  */
-Text.prototype.measure = function()
-{
+	measure() {
  	return new Vector2(this.span.offsetWidth, this.span.offsetHeight);
-};
+	}
 
 /**
  * Set text internal margin in pixels.
@@ -236,24 +217,31 @@ Text.prototype.measure = function()
  * @method setMargin
  * @param {number} margin Margin size in pixels.
  */
-Text.prototype.setMargin = function(margin)
-{
+	setMargin(margin) {
 	this.span.style.margin = margin + "px";
-};
+	}
 
-Text.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+	}
 
-Text.prototype.updateSize = function()
-{
+	updateSize() {
 	if (this.fitContent)
 	{
 		this.size.x = this.span.clientWidth;
 		this.size.y = this.span.clientHeight;
 	}
 	
-	Component.prototype.updateSize.call(this);
-};
+	super.updateSize();
+	}
+
+}
+
+Text.CENTER = 0;
+Text.LEFT = 1;
+Text.RIGHT = 2;
+Text.TOP = 3;
+Text.BOTTOM = 4;
+Text.CLIP = 10;
+Text.ELLIPSIS = 11;
 export {Text};

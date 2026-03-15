@@ -14,33 +14,95 @@ import {Resource} from "./Resource.js";
  * @param {string} url URL to video file.
  * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
-function Video(url, encoding)
+class Video extends Resource
 {
-	Resource.call(this, "video", "Video");
+	constructor(url, encoding)
+	{
+		super("video", "Video");
 
-	if (url !== undefined)
-	{	
-		// ArrayBuffer
-		if (url instanceof ArrayBuffer)
-		{
-			this.loadArrayBufferData(url, encoding);
-		}
-		// Base64
-		else if (Base64Utils.isBase64(url))
-		{
-			this.encoding = Base64Utils.getFileFormat(url);
-			this.format = "base64";
-			this.data = url;
-		}
-		// URL
-		else
-		{
-			this.loadArrayBufferData(FileSystem.readFileArrayBuffer(url), FileSystem.getFileExtension(url));
+		if (url !== undefined)
+		{	
+			// ArrayBuffer
+			if (url instanceof ArrayBuffer)
+			{
+				this.loadArrayBufferData(url, encoding);
+			}
+			// Base64
+			else if (Base64Utils.isBase64(url))
+			{
+				this.encoding = Base64Utils.getFileFormat(url);
+				this.format = "base64";
+				this.data = url;
+			}
+			// URL
+			else
+			{
+				this.loadArrayBufferData(FileSystem.readFileArrayBuffer(url), FileSystem.getFileExtension(url));
+			}
 		}
 	}
-}
 
-Video.prototype = Object.create(Resource.prototype);
+	/**
+	 * Load arraybuffer data to this image.
+	 *
+	 * Creates a blob with data to be stored on data atribute and used by external objects.
+	 *
+	 * @method loadArrayBufferData
+	 * @param {ArrayBuffer} data Data to be loaded.
+	 * @param {string} encoding Video enconding (mp4, webm, etc).
+	 */
+	loadArrayBufferData(data, encoding)
+	{
+		var view = new Uint8Array(data);
+		var blob = new Blob([view], {type: "video/" + encoding});
+
+		this.data = URL.createObjectURL(blob);
+		this.arraybuffer = data;
+		this.encoding = encoding;
+		this.format = "arraybuffer";
+	}
+
+	/**
+	 * Serialize resource to json.
+	 * 
+	 * Video data is stored in Base64.
+	 *
+	 * @method toJSON
+	 * @param {Object} meta
+	 * @return {Object} json
+	 */
+	toJSON(meta)
+	{
+		if (meta.videos[this.uuid] !== undefined)
+		{
+			return meta.videos[this.uuid];
+		}
+		
+		var data = super.toJSON(meta);
+		
+		data.encoding = this.encoding;
+
+		if (this.format === "arraybuffer")
+		{
+			data.format = this.format;
+			data.data = this.arraybuffer;
+		}
+		else if (this.format === "base64")
+		{
+			data.format = "arraybuffer";
+			data.data = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(this.data));
+		}
+		else
+		{
+			data.format = this.format;
+			data.data = this.data;
+		}
+
+		meta.videos[this.uuid] = data;
+
+		return data;
+	}
+}
 
 /**
  * Check if a file name refers to a supported video file.
@@ -63,64 +125,4 @@ Video.fileIsVideo = function(file)
 	return false;
 };
 
-/**
- * Load arraybuffer data to this image.
- *
- * Creates a blob with data to be stored on data atribute and used by external objects.
- *
- * @method loadArrayBufferData
- * @param {ArrayBuffer} data Data to be loaded.
- * @param {string} encoding Video enconding (mp4, webm, etc).
- */
-Video.prototype.loadArrayBufferData = function(data, encoding)
-{
-	var view = new Uint8Array(data);
-	var blob = new Blob([view], {type: "video/" + encoding});
-
-	this.data = URL.createObjectURL(blob);
-	this.arraybuffer = data;
-	this.encoding = encoding;
-	this.format = "arraybuffer";
-};
-
-/**
- * Serialize resource to json.
- * 
- * Video data is stored in Base64.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-Video.prototype.toJSON = function(meta)
-{
-	if (meta.videos[this.uuid] !== undefined)
-	{
-		return meta.videos[this.uuid];
-	}
-	
-	var data = Resource.prototype.toJSON.call(this, meta);
-	
-	data.encoding = this.encoding;
-
-	if (this.format === "arraybuffer")
-	{
-		data.format = this.format;
-		data.data = this.arraybuffer;
-	}
-	else if (this.format === "base64")
-	{
-		data.format = "arraybuffer";
-		data.data = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(this.data));
-	}
-	else
-	{
-		data.format = this.format;
-		data.data = this.data;
-	}
-
-	meta.videos[this.uuid] = data;
-
-	return data;
-};
 export {Video};

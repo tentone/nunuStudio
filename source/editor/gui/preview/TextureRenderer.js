@@ -1,4 +1,4 @@
-import {MeshBasicMaterial, Mesh, PlaneBufferGeometry, Texture} from "three";
+import {MeshBasicMaterial, Mesh, PlaneGeometry, Texture} from "three";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
 import {CubemapFlatRenderer} from "./CubemapFlatRenderer.js";
@@ -9,9 +9,9 @@ import {CubemapFlatRenderer} from "./CubemapFlatRenderer.js";
  * @class TextureRenderer
  * @extends {PreviewRenderer}
  */
-function TextureRenderer()
-{
-	PreviewRenderer.call(this);
+class TextureRenderer extends PreviewRenderer {
+	constructor() {
+	super();
 
 	// Camera
 	this.camera = new OrthographicCamera(1, 1, OrthographicCamera.RESIZE_VERTICAL);
@@ -20,12 +20,10 @@ function TextureRenderer()
 	this.material = new MeshBasicMaterial({transparent: true});
 
 	// Plane
-	this.plane = new Mesh(new PlaneBufferGeometry(1, 1), this.material);
+	this.plane = new Mesh(new PlaneGeometry(1, 1), this.material);
 	this.plane.position.set(0, 0, -1);
 	this.scene.add(this.plane);
-}
-
-TextureRenderer.prototype = Object.create(PreviewRenderer.prototype);
+	}
 
 /**
  * Create a DOM element with the texture preview render.
@@ -49,14 +47,12 @@ TextureRenderer.render = function(texture, onRender)
 {
 	if (TextureRenderer.instance === undefined)
 	{
-		TextureRenderer.instance = new TextureRenderer();
 	}
 
 	TextureRenderer.instance.render(texture, onRender);
 };
 
-TextureRenderer.prototype.render = function(texture, onRender)
-{
+	render(texture, onRender) {
 	if (texture.isCubeTexture)
 	{
 		var cube = new CubemapFlatRenderer(texture, 64/4, 0, 64/8);
@@ -71,6 +67,10 @@ TextureRenderer.prototype.render = function(texture, onRender)
 		this.renderer.render(this.scene, this.camera);
 		onRender(this.canvas.toDataURL());
 	}
-};
+	}
+
+}
+
+TextureRenderer.instance = new TextureRenderer();
 
 export {TextureRenderer};

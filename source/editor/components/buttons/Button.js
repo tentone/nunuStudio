@@ -7,9 +7,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Button(parent)
-{
-	Component.call(this, parent, "div");
+class Button extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.cursor = "pointer";
 
@@ -70,9 +70,7 @@ function Button(parent)
 			self.setStyles(self.styleBase);
 		}
 	});
-}
-
-Button.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set disabled state of a button element.
@@ -82,8 +80,7 @@ Button.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} disabled
  */
-Button.prototype.updateDisabled = function()
-{
+	updateDisabled() {
 	if (this.disabled)
 	{
 		this.setStyles(this.styleDisabled);
@@ -92,7 +89,7 @@ Button.prototype.updateDisabled = function()
 	{
 		this.setStyles(this.styleBase);
 	}
-};
+	}
 
 /**
  * Updates the buttons styles can also change them providing new ones as parameters.
@@ -102,8 +99,7 @@ Button.prototype.updateDisabled = function()
  * @param {Object} stylePointerOver Style to be applied when mouse is over.
  * @param {Object} styleDisabled Style to be applied when the button is disabled.
  */
-Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabled)
-{
+	updateSyles(styleBase, stylePointerOver, styleDisabled) {
 	if (styleBase !== undefined)
 	{
 		this.styleBase = styleBase;
@@ -120,6 +116,8 @@ Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabl
 	}
 
 	this.updateDisabled(this.disabled);
-};
+	}
+
+}
 
 export {Button};

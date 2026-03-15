@@ -12,9 +12,9 @@ import {Component} from "../Component.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
 
-function CubeTextureBox(parent)
-{
-	Component.call(this, parent, "div");
+class CubeTextureBox extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	// Texture preview division
 	this.preview = document.createElement("div");
@@ -118,9 +118,7 @@ function CubeTextureBox(parent)
 
 	// Texture
 	this.texture = null;
-}
-
-CubeTextureBox.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -128,12 +126,11 @@ CubeTextureBox.prototype = Object.create(Component.prototype);
  * @method setOnChange
  * @param {Function} onChange
  */
-CubeTextureBox.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.onChange = onChange;
 	this.useTexture.setOnChange(onChange);
 	this.mapping.setOnChange(onChange);
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -141,8 +138,7 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {Texture} texture
  */
-CubeTextureBox.prototype.setValue = function(texture)
-{
+	setValue(texture) {
 	if (texture !== null && texture.isCubeTexture)
 	{
 		this.texture = texture;
@@ -158,7 +154,7 @@ CubeTextureBox.prototype.setValue = function(texture)
 		this.useTexture.setValue(false);
 		this.texture = null;
 	}
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -166,8 +162,7 @@ CubeTextureBox.prototype.setValue = function(texture)
  * @method setValue
  * @return {Object} Value stored in the input element.
  */
-CubeTextureBox.prototype.getValue = function()
-{
+	getValue() {
 	if (this.useTexture.getValue())
 	{
 		if (this.texture !== null)
@@ -180,22 +175,20 @@ CubeTextureBox.prototype.getValue = function()
 	}
 
 	return null;
-};
+	}
 
 // Set Texture
-CubeTextureBox.prototype.setTexture = function(texture)
-{
+	setTexture(texture) {
 	this.setValue(texture);
 
 	if (this.onChange !== null)
 	{
 		this.onChange();
 	}
-};
+	}
 
 // Update texture preview
-CubeTextureBox.prototype.updatePreview = function()
-{
+	updatePreview() {
 	if (this.texture instanceof CubeTexture)
 	{
 		this.img.src = this.texture.images[0].data;
@@ -205,11 +198,10 @@ CubeTextureBox.prototype.updatePreview = function()
 		// TODO <ADD CODE HERE>
 		this.img.src = Global.FILE_PATH + "icon.png";
 	}
-};
+	}
 
 // Update Interface
-CubeTextureBox.prototype.updateInterface = function()
-{
+	updateInterface() {
 	if (this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -235,6 +227,8 @@ CubeTextureBox.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-};
+	}
+
+}
 
 export {CubeTextureBox};

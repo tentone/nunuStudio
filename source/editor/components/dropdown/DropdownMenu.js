@@ -12,9 +12,9 @@ import {ButtonMenu} from "./ButtonMenu.js";
  * @extends {Text}
  * @param {Component} parent Parent element.
  */
-function DropdownMenu(parent)
-{
-	Text.call(this, parent);
+class DropdownMenu extends Text {
+	constructor(parent) {
+	super(parent);
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.cursor = "pointer";
@@ -116,34 +116,26 @@ function DropdownMenu(parent)
 	{
 		self.setExpanded(false);
 	});
-}
+	}
 
-DropdownMenu.DOWN = 0;
-DropdownMenu.UP = 1;
-DropdownMenu.LEFT = 2;
-DropdownMenu.RIGHT = 3;
-
-DropdownMenu.prototype = Object.create(Text.prototype);
 
 /**
  * Set location to where options should open.
  *
  * @method setDirection
  */
-DropdownMenu.prototype.setDirection = function(location)
-{
+	setDirection(location) {
 	this.direction = location;
-};
+	}
 
 /**
  * Show arrow.
  *
  * @method showArrow
  */
-DropdownMenu.prototype.showArrow = function()
-{
+	showArrow() {
 	this.arrow.style.display = "block";
-};
+	}
 
 /**
  * Set icon.
@@ -151,8 +143,7 @@ DropdownMenu.prototype.showArrow = function()
  * @method setIcon
  * @param {string} icon Image URL.
  */
-DropdownMenu.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	if (this.icon === null)
 	{
 		this.icon = document.createElement("img");
@@ -166,7 +157,7 @@ DropdownMenu.prototype.setIcon = function(icon)
 	}
 
 	this.icon.src = icon;
-};
+	}
 
 /**
  * Remove option from menu.
@@ -174,14 +165,13 @@ DropdownMenu.prototype.setIcon = function(icon)
  * @method removeOption
  * @param {number} index
  */
-DropdownMenu.prototype.removeOption = function(index)
-{
+	removeOption(index) {
 	if (index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 	}
-};
+	}
 
 /**
  * Add new option to menu
@@ -192,8 +182,7 @@ DropdownMenu.prototype.removeOption = function(index)
  * @param {string} icon Icon URL.
  * @return {ButtonMenu} Button created for the new option.
  */
-DropdownMenu.prototype.addOption = function(name, callback, icon)
-{
+	addOption(name, callback, icon) {
 	var button = new ButtonMenu(this.panel);
 	button.element.style.zIndex = "200";
 	button.text.setText(name);
@@ -215,7 +204,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	this.options.push(button);
 
 	return button;
-};
+	}
 
 /**
  * Add new menu to menu.
@@ -225,8 +214,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
  * @param {string} icon Optional icon, image URL.
  * @return {DropdownMenu} The new menu created.
  */
-DropdownMenu.prototype.addMenu = function(name, icon)
-{
+	addMenu(name, icon) {
 	var menu = new DropdownMenu(this.panel);
 	menu.setText(name);
 	menu.setDirection(DropdownMenu.LEFT);
@@ -242,7 +230,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	this.options.push(menu);
 
 	return menu;
-};
+	}
 
 /** 
  * Update expanded state, position all options in this dropdown.
@@ -250,8 +238,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
  * @method setExpanded
  * @param {boolean} expanded If true the menu will be expanded.
  */
-DropdownMenu.prototype.setExpanded = function(expanded)
-{
+	setExpanded(expanded) {
 	this.expanded = expanded;
 
 	if (this.expanded)
@@ -325,15 +312,14 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 	{
 		this.panel.element.style.display = "none";
 	}
-};
+	}
 
 /**
  * Update all options in the menu.
  * 
  * @method updateOptions
  */
-DropdownMenu.prototype.updateOptions = function()
-{
+	updateOptions() {
 	for (var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
@@ -343,20 +329,25 @@ DropdownMenu.prototype.updateOptions = function()
 
 	this.panel.element.style.width = this.size.x + "px";
 	this.panel.element.style.height = this.optionsSize.y * this.options.length + "px";
-};
+	}
 
-DropdownMenu.prototype.destroy = function()
-{
-	Text.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.parent.destroy();
-};
+	}
 
-DropdownMenu.prototype.updateSize = function()
-{
-	Text.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	this.updateOptions();
-};
+	}
+
+}
+
+DropdownMenu.DOWN = 0;
+DropdownMenu.UP = 1;
+DropdownMenu.LEFT = 2;
+DropdownMenu.RIGHT = 3;
 
 export {DropdownMenu};

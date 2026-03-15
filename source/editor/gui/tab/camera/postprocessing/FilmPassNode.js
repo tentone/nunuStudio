@@ -5,9 +5,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {PassNode} from "./PassNode.js";
 
-function FilmPassNode(parent)
-{
-	PassNode.call(this, parent, "Film");
+class FilmPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Film");
 
 	var self = this;
 
@@ -50,19 +50,18 @@ function FilmPassNode(parent)
 	});
 	this.add(this.scanlinesCount);
 	this.nextRow();
-}
-
-FilmPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("Film", FilmPassNode);
 
-FilmPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.grayscale.setValue(pass.grayscale);
 	this.noiseIntensity.setValue(pass.noiseIntensity);
 	this.scanlinesIntensity.setValue(pass.scanlinesIntensity);
 	this.scanlinesCount.setValue(pass.scanlinesCount);
-};
+	}
+
+}
 export {FilmPassNode};

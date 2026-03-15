@@ -12,9 +12,9 @@ import {Text} from "../../../components/Text.js";
  * @extends {Component}
  * @param {NodeEditor} parent Node editor where the sidebar is placed at.
  */
-function SideBar(parent)
-{
-	Component.call(this, parent, "div");
+class SideBar extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.preventDragEvents();
 
@@ -46,17 +46,14 @@ function SideBar(parent)
 	this.more = new ButtonDrawer(this);
 	this.more.setImage(Global.FILE_PATH + "icons/misc/more.png");
 	this.more.optionsPerLine = 1;
-}
-
-SideBar.prototype = Object.create(Component.prototype);
+	}
 
 /** 
  * Create the icons to add objects to the scene.
  *
  * @method create
  */
-SideBar.prototype.createObject = function()
-{
+	createObject() {
 	var self = this;
 
 	// Events
@@ -104,18 +101,16 @@ SideBar.prototype.createObject = function()
 		self.parent.node.graph.addNode(new OperationNode("*"));
 	}, Locale.multiply);
 
-
 	methods.addOption(Global.FILE_PATH + "icons/math/divide.png", function()
 	{
 		self.parent.node.graph.addNode(new OperationNode("/"));
 	}, Locale.divide);
 
 	methods.updateOptions();
-};
+	}
 
-SideBar.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	var size = this.size.x;
 	var y = 30, i = 0;
@@ -162,6 +157,8 @@ SideBar.prototype.updateSize = function()
 			this.more.setVisibility(false);
 		}
 	}
-};
+	}
+
+}
 
 export {SideBar};

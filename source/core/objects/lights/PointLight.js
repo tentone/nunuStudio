@@ -14,31 +14,32 @@ import {PointLight as TPointLight} from "three";
  * @extends {PointLight}
  * @module Lights
  */
-function PointLight(hex, intensity, distance, decay)
+class PointLight extends TPointLight
 {
-	TPointLight.call(this, hex, intensity, distance, decay);
+	constructor(hex, intensity, distance, decay)
+	{
+		super(hex, intensity, distance, decay);
 
-	this.name = "point";
+		this.name = "point";
 
-	this.castShadow = true;
+		this.castShadow = true;
 
-	this.shadow.camera.near = 0.1;
-	this.shadow.camera.far = 1000;
-	this.shadow.bias = 0.0;
+		this.shadow.camera.near = 0.1;
+		this.shadow.camera.far = 1000;
+		this.shadow.bias = 0.0;
+	}
+
+	/**
+	 * Update light shadow map atributtes at runtime
+	 *
+	 * @method updateShadowMap
+	 */
+	updateShadowMap()
+	{
+		this.shadow.map.dispose();
+		this.shadow.map = null;
+		this.shadow.camera.updateProjectionMatrix();
+	}
 }
-
-PointLight.prototype = Object.create(TPointLight.prototype);
-
-/**
- * Update light shadow map atributtes at runtime
- *
- * @method updateShadowMap
- */
-PointLight.prototype.updateShadowMap = function()
-{
-	this.shadow.map.dispose();
-	this.shadow.map = null;
-	this.shadow.camera.updateProjectionMatrix();
-};
 
 export {PointLight};

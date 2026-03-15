@@ -10,47 +10,48 @@ import {Object3D} from "three";
  * @extends {Object3D}
  * @module Lights
  */
-function DirectionalLightCSM()
+class DirectionalLightCSM extends Object3D
 {
-	Object3D.call(globalThis);
-
-	this.name = "directional";
-	this.type = "DirectionalLightCSM";
-
-	this.shadowMapSize = 1024;
-
-	this.lightDirection = new THREE.Vector3(1, 1, 1).normalize();
-
-	this.mode = "pratical";
-
-	this.cascades = 4;
-
-	this.maxFar = 1000;
-
-	this.fade = false;
-
-	this.csm = new CSM({
-		fade: this.fade,
-		maxFar: this.maxFar,
-		cascades: this.cascades,
-		mode: this.mode,
-		parent: this,
-		shadowMapSize: this.shadowMapSize,
-		lightDirection: this.lightDirection
-	});
-}
-
-DirectionalLightCSM.prototype = Object.create(Object3D.prototype);
-
-DirectionalLightCSM.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-{
-	if (this.csm.camera !== camera)
+	constructor()
 	{
-		this.csm.camera = camera;
-		this.csm.updateFrustums();
+		super();
+
+		this.name = "directional";
+		this.type = "DirectionalLightCSM";
+
+		this.shadowMapSize = 1024;
+
+		this.lightDirection = new THREE.Vector3(1, 1, 1).normalize();
+
+		this.mode = "pratical";
+
+		this.cascades = 4;
+
+		this.maxFar = 1000;
+
+		this.fade = false;
+
+		this.csm = new CSM({
+			fade: this.fade,
+			maxFar: this.maxFar,
+			cascades: this.cascades,
+			mode: this.mode,
+			parent: this,
+			shadowMapSize: this.shadowMapSize,
+			lightDirection: this.lightDirection
+		});
 	}
 
-	this.csm.update();
-};
+	onBeforeRender(renderer, scene, camera, geometry, material, group)
+	{
+		if (this.csm.camera !== camera)
+		{
+			this.csm.camera = camera;
+			this.csm.updateFrustums();
+		}
+
+		this.csm.update();
+	}
+}
 
 export {DirectionalLightCSM};

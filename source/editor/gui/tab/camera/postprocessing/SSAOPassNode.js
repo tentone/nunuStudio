@@ -5,9 +5,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {PassNode} from "./PassNode.js";
 
-function SSAOPassNode(parent)
-{
-	PassNode.call(this, parent, "SSAO");
+class SSAOPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "SSAO");
 
 	var self = this;
 
@@ -50,19 +50,18 @@ function SSAOPassNode(parent)
 	});
 	this.add(this.lumInfluence);
 	this.nextRow();
-}
-
-SSAOPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("SSAO", SSAOPassNode);
 
-SSAOPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.radius.setValue(pass.radius);
 	this.onlyAO.setValue(pass.onlyAO);
 	this.aoClamp.setValue(pass.aoClamp);
 	this.lumInfluence.setValue(pass.lumInfluence);
-};
+	}
+
+}
 export {SSAOPassNode};

@@ -6,9 +6,9 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 
-function UnitsSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/ruler.png");
+class UnitsSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/ruler.png");
 
 	this.element.style.overflow = "auto";
 
@@ -45,22 +45,20 @@ function UnitsSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.distance);
 	this.form.nextRow();
-}
+	}
 
-UnitsSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-UnitsSettingsTab.prototype.activate = function()
-{
+	activate() {
 	this.angle.setValue(Editor.settings.units.angle);
 	this.distance.setValue(Editor.settings.units.distance);
-};
+	}
 
-UnitsSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 
 export {UnitsSettingsTab};

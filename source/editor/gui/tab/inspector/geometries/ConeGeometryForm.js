@@ -1,12 +1,12 @@
-import {ConeBufferGeometry, ConeGeometry, BufferGeometry} from "three";
+import {ConeGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function ConeGeometryForm(form, object)
-{
+class ConeGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -68,21 +68,21 @@ function ConeGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-ConeGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? ConeBufferGeometry : ConeGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? ConeGeometry : ConeGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
-};
+	}
 
-ConeGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radius.setValue(this.object.geometry.parameters.radius || 20);
 	this.height.setValue(this.object.geometry.parameters.height || 100);
 	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {ConeGeometryForm};

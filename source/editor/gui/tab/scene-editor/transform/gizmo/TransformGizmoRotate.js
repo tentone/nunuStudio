@@ -1,4 +1,4 @@
-import {Line, Mesh, Geometry, TorusBufferGeometry, BufferGeometry, Float32BufferAttribute, Matrix4, Euler, Quaternion, Vector3} from "three";
+import {Line, Mesh, TorusGeometry, BufferGeometry, Float32BufferAttribute, Matrix4, Euler, Quaternion, Vector3} from "three";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
 import {TransformControls} from "../TransformControls.js";
@@ -12,8 +12,8 @@ import {TransformGizmo} from "./TransformGizmo.js";
  * @class TransformGizmoRotate
  * @extends {TransformGizmo}
  */
-function TransformGizmoRotate()
-{
+class TransformGizmoRotate extends TransformGizmo {
+	constructor() {
 	this.handleGizmos =
 	{
 		X: [[new Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
@@ -32,20 +32,18 @@ function TransformGizmoRotate()
 		XYZE: [[new Mesh(new Geometry())]]
 	};
 
-	TransformGizmo.call(this);
-}
+	super();
+	}
 
-TransformGizmoRotate.torus = new TorusBufferGeometry(1, 0.12, 4, 12, Math.PI);
-TransformGizmoRotate.torusBig = new TorusBufferGeometry(1.25, 0.12, 2, 24);
 
 /**
  * Circle geometry used for the rotation gizmo rings.
  *
  * @class CircleGeometry
  */
-function CircleGeometry(radius, facing, arc)
-{
-	BufferGeometry.call(this);
+class CircleGeometry extends BufferGeometry {
+	constructor(radius, facing, arc) {
+	super();
 	var vertices = [];
 
 	var arcLen = arc !== undefined ? arc * 64 : 64;
@@ -67,14 +65,11 @@ function CircleGeometry(radius, facing, arc)
 	}
 
 	this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-};
+	}
+}
+;
 
-CircleGeometry.prototype = Object.create(BufferGeometry.prototype);
-
-TransformGizmoRotate.prototype = Object.create(TransformGizmo.prototype);
-
-TransformGizmoRotate.prototype.setActivePlane = function(axis)
-{
+	setActivePlane(axis) {
 	if (axis === "E")
 	{
 		this.activePlane = this.planes["XYZE"];
@@ -91,12 +86,10 @@ TransformGizmoRotate.prototype.setActivePlane = function(axis)
 	{
 		this.activePlane = this.planes["XY"];
 	}
-};
+	}
 
-TransformGizmoRotate.prototype.update = function(rotation, eye2)
-{
-	TransformGizmo.prototype.update.apply(this, arguments);
-
+	update(rotation, eye2) {
+	super.update(arguments);
 
 	var tempMatrix = new Matrix4();
 	var worldRotation = new Euler(0, 0, 1);
@@ -138,10 +131,9 @@ TransformGizmoRotate.prototype.update = function(rotation, eye2)
 			child.quaternion.copy(tempQuaternion);
 		}
 	});
-};
+	}
 
-TransformGizmoRotate.prototype.applyChanges = function(controls)
-{
+	applyChanges(controls) {
 	var actions = [];
 
 	for (var i = 0; i < controls.objects.length; i++)
@@ -154,10 +146,9 @@ TransformGizmoRotate.prototype.applyChanges = function(controls)
 	}
 	
 	Editor.addAction(new ActionBundle(actions));
-};
+	}
 
-TransformGizmoRotate.prototype.transformObject = function(controls)
-{
+	transformObject(controls) {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
 	if (planeIntersect === false) 
 	{
@@ -281,5 +272,10 @@ TransformGizmoRotate.prototype.transformObject = function(controls)
 			controls.objects[i].quaternion.copy(controls.tempQuaternion);
 		}
 	}
-};
+	}
+
+}
+
+TransformGizmoRotate.torus = new TorusGeometry(1, 0.12, 4, 12, Math.PI);
+TransformGizmoRotate.torusBig = new TorusGeometry(1.25, 0.12, 2, 24);
 export {TransformGizmoRotate};

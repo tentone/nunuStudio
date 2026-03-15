@@ -9,9 +9,9 @@ import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {Component} from "../../../../components/Component.js";
 
-function ObjectInspector(parent, object)
-{
-	Inspector.call(this, parent, object);
+class ObjectInspector extends Inspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -170,12 +170,9 @@ function ObjectInspector(parent, object)
 	});
 	this.form.add(this.static);
 	this.form.nextRow();
-}
+	}
 
-ObjectInspector.prototype = Object.create(Inspector.prototype);
-
-ObjectInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.name.setText(this.object.name);
 		
 	if (this.uuid !== undefined)
@@ -194,5 +191,7 @@ ObjectInspector.prototype.updateInspector = function()
 	this.visible.setValue(this.object.visible);
 	this.renderOrder.setValue(this.object.renderOrder);
 	this.static.setValue(!this.object.matrixAutoUpdate);
-};
+	}
+
+}
 export {ObjectInspector};

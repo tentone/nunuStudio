@@ -8,9 +8,9 @@ import {Button} from "./Button.js";
  * @extends {Button}
  * @param {Component} parent Parent element.
  */
-function ButtonIcon(parent)
-{
-	Button.call(this, parent);
+class ButtonIcon extends Button {
+	constructor(parent) {
+	super(parent);
 
 	/**
 	 * Icon of the button displayed in the middle.
@@ -26,9 +26,7 @@ function ButtonIcon(parent)
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
-}
-
-ButtonIcon.prototype = Object.create(Button.prototype);
+	}
 
 /**
  * Set button drawer icon.
@@ -36,22 +34,22 @@ ButtonIcon.prototype = Object.create(Button.prototype);
  * @method setImage
  * @param {string} image Image URL.
  */
-ButtonIcon.prototype.setImage = function(image)
-{
+	setImage(image) {
 	this.icon.src = image;
-};
+	}
 
 /**
  * Set icon scale, the icon will be centered.
  *
  * @method setImageScale
  */
-ButtonIcon.prototype.setImageScale = function(x, y)
-{
+	setImageScale(x, y) {
 	this.icon.style.top = (1 - y) / 2 * 100 + "%";
 	this.icon.style.left = (1 - x) / 2 * 100 + "%";
 	this.icon.style.width = x * 100 + "%";
 	this.icon.style.height = y * 100 + "%";
-};
+	}
+
+}
 
 export {ButtonIcon};

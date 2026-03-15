@@ -1,4 +1,4 @@
-import {DodecahedronBufferGeometry, DodecahedronGeometry, BufferGeometry} from "three";
+import {DodecahedronGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
@@ -6,8 +6,8 @@ import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function DodecahedronGeometryForm(form, object)
-{
+class DodecahedronGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -48,19 +48,19 @@ function DodecahedronGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-DodecahedronGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? DodecahedronBufferGeometry : DodecahedronGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? DodecahedronGeometry : DodecahedronGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
-};
+	}
 
-DodecahedronGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radius.setValue(this.object.geometry.parameters.radius || 2);
 	this.detail.setValue(this.object.geometry.parameters.detail || 0);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {DodecahedronGeometryForm};

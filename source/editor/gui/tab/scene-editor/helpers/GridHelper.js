@@ -10,12 +10,12 @@ import {LineSegments, BufferGeometry, LineBasicMaterial, Float32BufferAttribute}
  * @param spacing {number} Spacing between lines.
  * @param color {number} Hex color of the grid lines.
  */
-function GridHelper(size, spacing, color)
-{
+class GridHelper extends LineSegments {
+	constructor(size, spacing, color) {
 	this.size = size !== undefined ? size : 100;
 	this.spacing = spacing !== undefined ? spacing : 1;
 
-	LineSegments.call(this, new BufferGeometry(), new LineBasicMaterial(
+	super(new BufferGeometry(), new LineBasicMaterial(
 		{
 			color: color !== undefined ? color : 0x888888,
 			depthWrite: false,
@@ -24,27 +24,22 @@ function GridHelper(size, spacing, color)
 		}));
 
 	this.update();
-};
+	};
 
-GridHelper.prototype = Object.create(LineSegments.prototype);
-
-GridHelper.prototype.setSize = function(size)
-{
+	setSize(size) {
 	this.size = size;
-};
+	}
 
-GridHelper.prototype.setSpacing = function(spacing)
-{
+	setSpacing(spacing) {
 	this.spacing = spacing;
-};
+	}
 
 /**
  * Update the geometry of the grid.
  *
  * @method update
  */
-GridHelper.prototype.update = function()
-{
+	update() {
 	var geometry = this.geometry;
 	geometry.deleteAttribute("position");
 
@@ -61,6 +56,8 @@ GridHelper.prototype.update = function()
 	}
 
 	geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-};
+	}
+
+}
 
 export {GridHelper};

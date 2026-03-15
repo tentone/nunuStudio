@@ -4,9 +4,9 @@ import {Editor} from "../../../Editor.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {TextureEditor} from "./TextureEditor.js";
 
-function CanvasTextureEditor(parent, closeable, container, index)
-{
-	TextureEditor.call(this, parent, closeable, container, index);
+class CanvasTextureEditor extends TextureEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -43,15 +43,14 @@ function CanvasTextureEditor(parent, closeable, container, index)
 		this.width.addValue(size, size);
 		this.height.addValue(size, size);
 	}
-}
+	}
 
-CanvasTextureEditor.prototype = Object.create(TextureEditor.prototype);
-
-CanvasTextureEditor.prototype.attach = function(texture)
-{
-	TextureEditor.prototype.attach.call(this, texture);
+	attach(texture) {
+	super.attach(texture);
 
 	this.width.setValue(this.texture.width);
 	this.height.setValue(this.texture.height);
-};
+	}
+
+}
 export {CanvasTextureEditor};

@@ -9,15 +9,15 @@ import {Group as TGroup} from "three";
  * @extends {Group}
  * @module Misc
  */
-function Group()
+class Group extends TGroup
 {
-	TGroup.call(this);
+	constructor()
+	{
+		super();
 
-	this.name = "group";
-	this.type = "Group";
+		this.name = "group";
+		this.type = "Group";
+	}
 }
-
-Group.prototype = Object.create(TGroup.prototype);
-Group.prototype.constructor = Group;
 
 export {Group};

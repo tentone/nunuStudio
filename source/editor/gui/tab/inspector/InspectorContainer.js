@@ -1,4 +1,4 @@
-import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, Geometry, BufferGeometry, Material, Texture} from "three";
+import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, BufferGeometry, Material, Texture} from "three";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Video} from "../../../../core/resources/Video.js";
 import {Resource} from "../../../../core/resources/Resource.js";
@@ -66,9 +66,9 @@ import {MaterialInspector} from "./materials/MaterialInspector.js";
  * @class InspectorContainer
  * @extends {TabComponent}
  */
-function InspectorContainer(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
+class InspectorContainer extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
 
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = "var(--panel-color)";
@@ -86,12 +86,9 @@ function InspectorContainer(parent, closeable, container, index)
 	this.emptyText.setText(Locale.nothingToShow);
 
 	this.panel = null;
-}
+	}
 
-InspectorContainer.prototype = Object.create(TabComponent.prototype);
-
-InspectorContainer.prototype.destroyInspector = function()
-{
+	destroyInspector() {
 	if (this.panel !== null)
 	{
 		this.panel.destroy();
@@ -99,29 +96,26 @@ InspectorContainer.prototype.destroyInspector = function()
 	}
 
 	this.emptyText.setVisibility(true);
-};
+	}
 
-InspectorContainer.prototype.attach = function(object)
-{
+	attach(object) {
 	if (this.panel !== null)
 	{
 		this.panel.attach(object);
 		this.panel.updateInspector();
 	}
-};
+	}
 
-InspectorContainer.prototype.isAttached = function(object)
-{
+	isAttached(object) {
 	if (this.panel !== null)
 	{
 		return this.panel.object === object;
 	}
 
 	return false;
-};
+	}
 
-InspectorContainer.prototype.updateObjectsView = function()
-{
+	updateObjectsView() {
 	if (this.panel !== null)
 	{	
 		var object = this.panel.object;
@@ -134,10 +128,9 @@ InspectorContainer.prototype.updateObjectsView = function()
 			}
 		}
 	}
-};
+	}
 
-InspectorContainer.prototype.updateSelection = function()
-{	
+	updateSelection() {	
 	var object = Editor.hasObjectSelected() ? Editor.selection[0] : null;
 	
 	if (this.panel !== null && this.panel.object === object)
@@ -305,19 +298,17 @@ InspectorContainer.prototype.updateSelection = function()
 		this.panel.size.copy(this.size);
 		this.panel.updateInterface();
 	}
-};
+	}
 
-InspectorContainer.prototype.updateValues = function()
-{	
+	updateValues() {	
 	if (this.panel !== null)
 	{
 		this.panel.updateInspector();
 	}
-};
+	}
 
-InspectorContainer.prototype.updateSize = function()
-{	
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {	
+	super.updateSize();
 
 	this.emptyText.position.x = this.size.x * 0.1;
 	this.emptyText.size.set(this.size.x * 0.8, this.size.y);
@@ -328,6 +319,8 @@ InspectorContainer.prototype.updateSize = function()
 		this.panel.size.copy(this.size);
 		this.panel.updateInterface();
 	}
-};
+	}
+
+}
 
 export {InspectorContainer};

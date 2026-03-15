@@ -13,9 +13,9 @@ import {FormSnippet} from "./FormSnippet.js";
  * @class ViewportFormSnippet
  * @extends {FormSnippet}
  */
-function ViewportFormSnippet(form, object)
-{
-	FormSnippet.call(this, form, object);
+class ViewportFormSnippet extends FormSnippet {
+	constructor(form, object) {
+	super(form, object);
 
 	var self = this;
 	
@@ -82,16 +82,15 @@ function ViewportFormSnippet(form, object)
 	});
 	this.form.add(this.anchor);
 	this.form.nextRow();
-}
+	}
 
-ViewportFormSnippet.prototype = Object.create(FormSnippet.prototype);
-
-ViewportFormSnippet.prototype.updateValues = function()
-{
+	updateValues() {
 	this.offset.setValue(this.object.offset);
 	this.sizeBox.setValue(this.object.size);
 	this.modeDrop.setValue(this.object.mode);
 	this.anchor.setValue(this.object.anchor);
-};
+	}
+
+}
 
 export {ViewportFormSnippet};

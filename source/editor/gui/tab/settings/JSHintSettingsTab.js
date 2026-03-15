@@ -6,10 +6,9 @@ import {TableForm} from "../../../components/TableForm.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 
-
-function JSHintSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.javascript, Global.FILE_PATH + "icons/misc/js.png");
+class JSHintSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.javascript, Global.FILE_PATH + "icons/misc/js.png");
 
 	this.element.style.overflow = "auto";
 
@@ -223,12 +222,9 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.evil);
 	this.form.nextRow();
-}
+	}
 
-JSHintSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-JSHintSettingsTab.prototype.activate = function()
-{
+	activate() {
 	this.bitwise.setValue(Editor.settings.jslint.bitwise);
 	this.curly.setValue(Editor.settings.jslint.curly);
 	this.eqeqeq.setValue(Editor.settings.jslint.eqeqeq);
@@ -248,13 +244,14 @@ JSHintSettingsTab.prototype.activate = function()
 	this.esversion.setValue(Editor.settings.jslint.esversion);
 	this.moz.setValue(Editor.settings.jslint.moz);
 	this.evil.setValue(Editor.settings.jslint.evil);
-};
+	}
 
-JSHintSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {JSHintSettingsTab};

@@ -11,8 +11,8 @@ import {Group} from "../../core/objects/misc/Group.js";
  * @param {Component} parent Parent element.
  * @param {string} type Type of the based DOM element.
  */
-function Component(parent, type)
-{
+class Component {
+	constructor(parent, type) {
 	/** 
 	 * Base DOM element for this component.
 	 *
@@ -82,11 +82,8 @@ function Component(parent, type)
 	 * @type {number}
 	 */
 	this._mode = Component.TOP_LEFT;
+	}
 }
-
-Component.prototype.constructor = Component;
-
-Component.prototype.isComponent = true;
 
 /**
  * Top-left positioning.
@@ -95,7 +92,6 @@ Component.prototype.isComponent = true;
  * @attribute TOP_LEFT
  * @type {number}
  */
-Component.TOP_LEFT = 0;
 
 /**
  * Top-right positioning.
@@ -104,7 +100,6 @@ Component.TOP_LEFT = 0;
  * @attribute TOP_RIGHT
  * @type {number}
  */
-Component.TOP_RIGHT = 1;
 
 /**
  * Bottom-left positioning.
@@ -113,7 +108,6 @@ Component.TOP_RIGHT = 1;
  * @attribute BOTTOM_LEFT
  * @type {number}
  */
-Component.BOTTOM_LEFT = 2;
 
 /**
  * Bottom-right positioning.
@@ -122,7 +116,6 @@ Component.BOTTOM_LEFT = 2;
  * @attribute BOTTOM_RIGHT
  * @type {number}
  */
-Component.BOTTOM_RIGHT = 3;
 
 Component.preventDefault = function(event)
 {
@@ -136,10 +129,9 @@ Component.preventDefault = function(event)
  * @param {string} event Event name.
  * @param {Function} callback Callback function passed to the event handler.
  */
-Component.prototype.addEvent = function(event, callback)
-{
+	addEvent(event, callback) {
 	this.event.addAndCreate(this.element, event, callback);
-};
+	}
 
 /**
  * Remove all ocurrences of a event from the component. 
@@ -147,10 +139,9 @@ Component.prototype.addEvent = function(event, callback)
  * @method removeEvent
  * @param {string} event Event name.
  */
-Component.prototype.removeEvent = function(event)
-{
+	removeEvent(event) {
 	this.event.remove(this.element, event);
-};
+	}
 
 /**
  * Replace all instance of a specific event with a new event.
@@ -159,11 +150,10 @@ Component.prototype.removeEvent = function(event)
  * @param {string} event Event name.
  * @param {Function} callback Callback function passed to the event handler.
  */
-Component.prototype.replaceEvent = function(event, callback)
-{
+	replaceEvent(event, callback) {
 	this.event.remove(this.element, event);
 	this.event.addAndCreate(this.element, event, callback);
-};
+	}
 
 /** 
  * Add a CSS class to the base DOM element of this Component.
@@ -171,10 +161,9 @@ Component.prototype.replaceEvent = function(event, callback)
  * @method addClass
  * @param {string} name Name of the class to be added.
  */
-Component.prototype.addClass = function(name)
-{
+	addClass(name) {
 	this.element.classList.add(name);
-};
+	}
 
 /** 
  * Remove a CSS class from the base DOM element of this Component.
@@ -182,13 +171,12 @@ Component.prototype.addClass = function(name)
  * @method removeClass
  * @param {string} name Name of the class to be removed.
  */
-Component.prototype.removeClass = function(name)
-{
+	removeClass(name) {
 	if (this.element.classList.contains(name))
 	{
 		this.element.classList.remove(name);
 	}
-};
+	}
 
 /**
  * Change style of the base DOM element.
@@ -197,10 +185,9 @@ Component.prototype.removeClass = function(name)
  * @param {string} attribute Name of the style attribute.
  * @param {string} value Value of the style.
  */
-Component.prototype.setStyle = function(attribute, value)
-{
+	setStyle(attribute, value) {
 	this.element.style[attribute] = value;
-};
+	}
 
 /**
  * Set the multiple styles to the DOM element.
@@ -216,13 +203,12 @@ Component.prototype.setStyle = function(attribute, value)
  * @method setStyles
  * @param {Object} styles Object describing the style to be applied to the object.
  */
-Component.prototype.setStyles = function(styles)
-{
+	setStyles(styles) {
 	for (var i in styles)
 	{
 		this.element.style[i] = styles[i];
 	}
-};
+	}
 
 /**
  * Add and drag and drop default event prevention to this component.
@@ -231,11 +217,10 @@ Component.prototype.setStyles = function(styles)
  *
  * @method preventDragEvents
  */
-Component.prototype.preventDragEvents = function()
-{
+	preventDragEvents() {
 	this.element.ondrop = Component.preventDefault;
 	this.element.ondragover = Component.preventDefault;
-};
+	}
 
 /**
  * Set alt text, that is displayed when the mouse is over the element. Returns the element created that is attached to the document body.
@@ -243,8 +228,7 @@ Component.prototype.preventDragEvents = function()
  * @method setAltText
  * @param {string} altText Alt text.
  */
-Component.prototype.setAltText = function(altText)
-{
+	setAltText(altText) {
 	var element = document.createElement("div");
 	element.style.position = "absolute";
 	element.style.display = "none";
@@ -289,7 +273,7 @@ Component.prototype.setAltText = function(altText)
 	});
 
 	return element;
-};
+	}
 
 /**
  * Set method to be called on component click.
@@ -299,23 +283,21 @@ Component.prototype.setAltText = function(altText)
  * @method setOnClick
  * @param {Function} callback Function called when the component is clicked.
  */
-Component.prototype.setOnClick = function(callback)
-{
+	setOnClick(callback) {
 	this.addEvent("click", callback);
-};
+	}
 
 /**
  * Remove all DOM children from the element.
  * 
  * @method removeAllChildren
  */
-Component.prototype.removeAllChildren = function()
-{
+	removeAllChildren() {
 	while (this.element.firstChild)
 	{
 		this.element.removeChild(this.element.firstChild);
 	}
-};
+	}
 
 /**
  * Attach this component to a new parent component.
@@ -325,8 +307,7 @@ Component.prototype.removeAllChildren = function()
  * @method attachTo
  * @param {Component} parent Parent container.
  */
-Component.prototype.attachTo = function(parent)
-{
+	attachTo(parent) {
 	if (this.parent === parent || parent === undefined)
 	{
 		return;
@@ -348,7 +329,7 @@ Component.prototype.attachTo = function(parent)
 		console.warn("nunuStudio: Parent is not a Component.", this);
 		this.parent.appendChild(this.element);
 	}
-};
+	}
 
 /**
  * Create event listeners to watch for pointer enter/leave events.
@@ -357,8 +338,7 @@ Component.prototype.attachTo = function(parent)
  * 
  * @method watchPointer
  */
-Component.prototype.watchPointer = function()
-{
+	watchPointer() {
 	var self = this;
 
 	this.pointerInside = false;
@@ -372,7 +352,7 @@ Component.prototype.watchPointer = function()
 	{
 		self.pointerInside = false;
 	});
-};
+	}
 
 /**
  * Called to destroy a component.
@@ -381,8 +361,7 @@ Component.prototype.watchPointer = function()
  * 
  * @method destroy
  */
-Component.prototype.destroy = function()
-{
+	destroy() {
 	if (this.parent !== null)
 	{
 		if (this.parent.isComponent === true)
@@ -403,7 +382,7 @@ Component.prototype.destroy = function()
 			}
 		}
 	}
-};
+	}
 
 /**
  * Set positioning mode.
@@ -411,14 +390,13 @@ Component.prototype.destroy = function()
  * @method setMode
  * @param {number} setMode
  */
-Component.prototype.setMode = function(mode)
-{
+	setMode(mode) {
 	this._mode = mode;
 	this.element.style.bottom = null;
 	this.element.style.top = null;
 	this.element.style.right = null;
 	this.element.style.left = null;
-};
+	}
 
 /**
  * Calculate the position of the container to make it centered.
@@ -427,39 +405,35 @@ Component.prototype.setMode = function(mode)
  * 
  * @method center
  */
-Component.prototype.center = function()
-{
+	center() {
 	this.position.set((this.parent.size.x - this.size.x) / 2, (this.parent.size.y - this.size.y) / 2);
-};
+	}
 
 /**
  * Update visibility of this element.
  *
  * @method setVisibility
  */
-Component.prototype.setVisibility = function(visible)
-{
+	setVisibility(visible) {
 	this.visible = visible;
 	this.updateVisibility();
-};
+	}
 
 /**
  * Update the visibility of this element.
  *
  * @method updateVisibility
  */
-Component.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.display = this.visible ? "block" : "none";
-};
+	}
 
 /**
  * Update the position of this element.
  * 
  * @method updatePosition
  */
-Component.prototype.updatePosition = function(mode)
-{
+	updatePosition(mode) {
 	if (mode !== undefined)
 	{
 		this._mode = mode;
@@ -482,18 +456,17 @@ Component.prototype.updatePosition = function(mode)
 	{
 		this.element.style.right = this.position.x + "px";
 	}
-};
+	}
 
 /**
  * Update the size of this element.
  * 
  * @method updateSize
  */
-Component.prototype.updateSize = function()
-{
+	updateSize() {
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-};
+	}
 
 /**
  * Update component appearance.
@@ -504,8 +477,7 @@ Component.prototype.updateSize = function()
  * 
  * @method update
  */
-Component.prototype.updateInterface = function()
-{
+	updateInterface() {
 	this.updateVisibility();
 
 	if (this.visible)
@@ -513,6 +485,15 @@ Component.prototype.updateInterface = function()
 		this.updateSize();
 		this.updatePosition();
 	}
-};
+	}
+
+}
+
+Component.TOP_LEFT = 0;
+Component.TOP_RIGHT = 1;
+Component.BOTTOM_LEFT = 2;
+Component.BOTTOM_RIGHT = 3;
+
+Component.prototype.isComponent = true;
 
 export {Component};

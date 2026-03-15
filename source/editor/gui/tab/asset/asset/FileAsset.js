@@ -10,9 +10,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-function FileAsset(parent)
-{
-	Asset.call(this, parent);
+class FileAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
 	this.setIcon(Global.FILE_PATH + "icons/misc/file.png");
 	
@@ -83,7 +83,6 @@ function FileAsset(parent)
 		context.updateInterface();
 	};
 
-
 	// Open text editor
 	this.element.ondblclick = function()
 	{
@@ -97,12 +96,9 @@ function FileAsset(parent)
 		
 		tab.select();
 	};
-}
+	}
 
-FileAsset.prototype = Object.create(Asset.prototype);
-
-FileAsset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	this.setText(this.asset.name);
 
 	if (this.asset.encoding === "js" || this.asset.encoding === "glsl")
@@ -113,6 +109,8 @@ FileAsset.prototype.updateMetadata = function()
 	{
 		this.image.src = Global.FILE_PATH + "icons/misc/file.png";
 	}
-};
+	}
+
+}
 
 export {FileAsset};

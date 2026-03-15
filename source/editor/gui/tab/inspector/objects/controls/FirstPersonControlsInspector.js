@@ -5,9 +5,9 @@ import {Editor} from "../../../../../Editor.js";
 import {Slider} from "../../../../../components/input/Slider.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function FirstPersonControlsInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class FirstPersonControlsInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -69,19 +69,18 @@ function FirstPersonControlsInspector(parent, object)
 	});
 	this.form.add(this.moveOnPlane);
 	this.form.nextRow();
-}
+	}
 
-FirstPersonControlsInspector.prototype = Object.create(ObjectInspector.prototype);
-
-FirstPersonControlsInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.needsButtonPressed.setValue(this.object.needsButtonPressed);
 	this.movementEnabled.setValue(this.object.movementEnabled);
 	this.sensitivity.setValue(this.object.sensitivity);
 	this.moveSpeed.setValue(this.object.moveSpeed);
 	this.moveOnPlane.setValue(this.object.moveOnPlane);
-};
+	}
+
+}
 
 export {FirstPersonControlsInspector};

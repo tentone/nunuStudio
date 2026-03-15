@@ -10,9 +10,9 @@ import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
  * @extends {ButtonIconToggle}
  * @param {Component} parent Parent element.
  */
-function ToolBarToogleButton(parent)
-{
-	ButtonIconToggle.call(this, parent);
+class ToolBarToogleButton extends ButtonIconToggle {
+	constructor(parent) {
+	super(parent);
 
 	var self = this;
 
@@ -44,9 +44,7 @@ function ToolBarToogleButton(parent)
 	{
 		self.text.setVisibility(false);
 	};
-}
-
-ToolBarToogleButton.prototype = Object.create(ButtonIconToggle.prototype);
+	}
 
 /**
  * Set button text, the text is displayed when mouse passes over the button.
@@ -54,19 +52,19 @@ ToolBarToogleButton.prototype = Object.create(ButtonIconToggle.prototype);
  * @method setText
  * @param {String} text Text to display on mouse over.
  */
-ToolBarToogleButton.prototype.setText = function(text)
-{
+	setText(text) {
 	this.text.setText(text);
-};
+	}
 
-ToolBarToogleButton.prototype.updateSize = function()
-{
+	updateSize() {
 	ButtonIcon.prototype.updateSize.call(this);
 
 	this.text.size.set(this.text.measure().x + 20, 30);
 	this.text.updateSize();
 	this.text.position.set((this.size.x - this.text.size.x) / 2, this.size.y + 2);
 	this.text.updatePosition();
-};
+	}
+
+}
 
 export {ToolBarToogleButton};

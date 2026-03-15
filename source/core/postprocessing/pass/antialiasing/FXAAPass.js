@@ -10,17 +10,19 @@ import {ShaderPass} from "../../ShaderPass.js";
  * @class FXAAPass
  * @module Postprocessing
  */
-function FXAAPass()
+class FXAAPass extends ShaderPass
 {
-	ShaderPass.call(this, FXAAShader);
+constructor()
+{
+super(FXAAShader);
 
-	this.type = "FXAA";
+this.type = "FXAA";
 }
 
-FXAAPass.prototype = Object.create(ShaderPass.prototype);
-
-FXAAPass.prototype.setSize = function(width, height)
+setSize(width, height)
 {
-	this.uniforms["resolution"].value.set(1.0 / width, 1.0 / height);
-};
+this.uniforms["resolution"].value.set(1.0 / width, 1.0 / height);
+}
+}
+
 export {FXAAPass};

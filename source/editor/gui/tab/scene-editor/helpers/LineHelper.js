@@ -7,9 +7,9 @@ import {Line, Color} from "three";
  * @param {Line} object
  * @param {number} hex Helper color in hexadecimal.
  */
-function LineHelper(object, hex)
-{
-	Line.call(this, object.geometry, object.material.clone());
+class LineHelper extends Line {
+	constructor(object, hex) {
+	super(object.geometry, object.material.clone());
 
 	this.material.color = new Color(hex !== undefined ? hex : 0xFFFF00);
 	
@@ -23,13 +23,12 @@ function LineHelper(object, hex)
 	
 	this.matrixAutoUpdate = false;
 	this.update();
-}
+	}
 
-LineHelper.prototype = Object.create(Line.prototype);
-
-LineHelper.prototype.update = function()
-{
+	update() {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
-};
+	}
+
+}
 export {LineHelper};

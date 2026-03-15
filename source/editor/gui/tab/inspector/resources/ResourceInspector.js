@@ -4,9 +4,9 @@ import {Inspector} from "../Inspector.js";
 import {Editor} from "../../../../Editor.js";
 import {TextBox} from "../../../../components/input/TextBox.js";
 
-function ResourceInspector(parent, object)
-{
-	Inspector.call(this, parent, object);
+class ResourceInspector extends Inspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -37,12 +37,9 @@ function ResourceInspector(parent, object)
 		this.type = this.form.addText("");
 		this.form.nextRow();
 	}
-}
+	}
 
-ResourceInspector.prototype = Object.create(Inspector.prototype);
-
-ResourceInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.name.setText(this.object.name);
 		
 	if (this.uuid !== undefined)
@@ -54,5 +51,7 @@ ResourceInspector.prototype.updateInspector = function()
 	{
 		this.type.setText(this.object.type);
 	}
-};
+	}
+
+}
 export {ResourceInspector};

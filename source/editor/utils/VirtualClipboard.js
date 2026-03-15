@@ -5,8 +5,8 @@
  *
  * @class VirtualClipboard
  */
-function VirtualClipboard()
-{
+class VirtualClipboard {
+	constructor() {
 	/**
 	 * Values stored in the virtual clipboard.
 	 *
@@ -14,7 +14,7 @@ function VirtualClipboard()
 	 * @type {Array}
 	 */
 	this.values = [];
-}
+	}
 
 /**
  * Set data to clipboard
@@ -22,11 +22,10 @@ function VirtualClipboard()
  * @param {Object} data Data to insert into the clipboard
  * @param {string} id Entry id.
  */
-VirtualClipboard.prototype.set = function(data, id)
-{
+	set(data, id) {
 	this.values[id] = data;
 	VirtualClipboard.copy(data);
-};
+	}
 
 /**
  * Get data from clipboard
@@ -34,10 +33,11 @@ VirtualClipboard.prototype.set = function(data, id)
  * @param {string} id Entry id.
  * @return {Object} Data stored in the clipboard
  */
-VirtualClipboard.prototype.get = function(id)
-{
+	get(id) {
 	return this.values[id];
-};
+	}
+
+}
 
 VirtualClipboard.copy = function(text)
 {

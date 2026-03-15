@@ -10,9 +10,9 @@ import {ButtonText} from "../buttons/ButtonText.js";
  * @extends {ButtonText}
  * @param {Component} parent Parent element.
  */
-function ButtonMenu(parent)
-{
-	ButtonText.call(this, parent);
+class ButtonMenu extends ButtonText {
+	constructor(parent) {
+	super(parent);
 
 	this.text.span.style.textIndent = "25px";
 
@@ -23,9 +23,7 @@ function ButtonMenu(parent)
 	 * @type {Element}
 	 */
 	this.icon = null;
-}
-
-ButtonMenu.prototype = Object.create(ButtonText.prototype);
+	}
 
 /**
  * Set button icon image URL.
@@ -35,8 +33,7 @@ ButtonMenu.prototype = Object.create(ButtonText.prototype);
  * @method setIcon
  * @param {string} icon Image URL.
  */
-ButtonMenu.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	if (this.icon === null)
 	{
 		this.icon = document.createElement("img");
@@ -50,6 +47,8 @@ ButtonMenu.prototype.setIcon = function(icon)
 	}
 	
 	this.icon.src = icon;
-};
+	}
+
+}
 
 export {ButtonMenu};

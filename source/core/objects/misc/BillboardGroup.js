@@ -8,24 +8,24 @@ import {BufferGeometry, Mesh, MeshBasicMaterial} from "three";
  * @class BillboardGroup
  * @extends {Mesh}
  */
-function BillboardGroup()
+class BillboardGroup extends Mesh
 {
-	Mesh.call(this, new BufferGeometry(), new MeshBasicMaterial({depthWrite: false, colorWrite: false}));
+	constructor()
+	{
+		super(new BufferGeometry(), new MeshBasicMaterial({depthWrite: false, colorWrite: false}));
 
-	this.name = "billboard";
-	this.type = "BillboardGroup";
+		this.name = "billboard";
+		this.type = "BillboardGroup";
+	}
+
+	onBeforeRender(renderer, scene, camera, geometry, material, group)
+	{
+		var quaternion = new THREE.Quaternion();
+		camera.getWorldQuaternion(quaternion);
+		this.quaternion.copy(quaternion);
+	}
 }
 
-BillboardGroup.prototype = Object.create(Mesh.prototype);
-BillboardGroup.prototype.constructor = BillboardGroup;
-
 BillboardGroup.prototype.isScene = true;
-
-BillboardGroup.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-{
-	var quaternion = new THREE.Quaternion();
-	camera.getWorldQuaternion(quaternion);
-	this.quaternion.copy(quaternion);
-};
 
 export {BillboardGroup};

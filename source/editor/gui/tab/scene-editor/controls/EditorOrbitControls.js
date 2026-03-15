@@ -1,4 +1,4 @@
-import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math as TMath} from "three";
+import {Vector3, Vector2, Matrix4, PerspectiveCamera, MathUtils as TMath} from "three";
 import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
@@ -16,9 +16,9 @@ import {EditorControls} from "./EditorControls.js";
  * @class EditorOrbitControls
  * @extends {EditorControls}
  */
-function EditorOrbitControls()
-{
-	EditorControls.call(this);
+class EditorOrbitControls extends EditorControls {
+	constructor() {
+	super();
 
 	/**
 	 * Distance to the center of the orbit.
@@ -124,22 +124,17 @@ function EditorOrbitControls()
 
 	this.reset();
 	this.updateControls();
-}
+	}
 
-EditorOrbitControls.UP = new Vector3(0, 1, 0);
 
-EditorOrbitControls.prototype = Object.create(EditorControls.prototype);
-
-EditorOrbitControls.prototype.reset = function()
-{
+	reset() {
 	this.distance = 10;
 	this.center.set(0, 0, 0);
 	this.orientation.set(-0.4, 0.4);
 	this.updateControls();
-};
+	}
 
-EditorOrbitControls.prototype.focusObject = function(object)
-{
+	focusObject(object) {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	
 	if (box !== null)
@@ -166,10 +161,9 @@ EditorOrbitControls.prototype.focusObject = function(object)
 		this.distance = this.center.y + 1.0;
 		this.updateControls();
 	}
-};
+	}
 
-EditorOrbitControls.prototype.setOrientation = function(code)
-{
+	setOrientation(code) {
 	if (code === OrientationCube.Z_POS)
 	{
 		this.orientation.set(Math.PI / 2, 0);
@@ -196,10 +190,9 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 	}
 
 	this.updateControls();
-};
+	}
 
-EditorOrbitControls.prototype.update = function(mouse, keyboard)
-{
+	update(mouse, keyboard) {
 	this.needsUpdate = false;
 
 	if (mouse.buttonPressed(Mouse.LEFT))
@@ -308,7 +301,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	{
 		this.updateControls();
 	}
-};
+	}
 
 OrbitControls.prototype.keyboardMovement = function(keyboard)
 {
@@ -365,8 +358,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 	return needsUpdate;
 };
 
-EditorOrbitControls.prototype.applyLimits = function()
-{
+	applyLimits() {
 	if (this.orientation.y < this.limitDown)
 	{
 		this.orientation.y = this.limitDown;
@@ -384,10 +376,9 @@ EditorOrbitControls.prototype.applyLimits = function()
 	{
 		this.distance = this.maxDistance;
 	}
-};
+	}
 
-EditorOrbitControls.prototype.updateControls = function()
-{
+	updateControls() {
 	this.applyLimits();
 
 	var cos = this.distance * Math.cos(this.orientation.y);
@@ -404,6 +395,10 @@ EditorOrbitControls.prototype.updateControls = function()
 		this.camera.size = this.distance;
 		this.camera.updateProjectionMatrix();
 	}
-};
+	}
+
+}
+
+EditorOrbitControls.UP = new Vector3(0, 1, 0);
 
 export {EditorOrbitControls};

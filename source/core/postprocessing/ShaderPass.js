@@ -7,52 +7,53 @@ import {Pass} from "./Pass.js";
  * @class ShaderPass
  * @module Postprocessing
  */
-function ShaderPass(shader, textureID)
+class ShaderPass extends Pass
 {
-	Pass.call(this);
-
-	this.type = "Shader";
-	this.textureID = textureID !== undefined ? textureID : "tDiffuse";
-
-	if (shader instanceof ShaderMaterial)
-	{
-		this.uniforms = shader.uniforms;
-		this.material = shader;
-	}
-	else if (shader)
-	{
-		this.uniforms = UniformsUtils.clone(shader.uniforms);
-		this.material = new ShaderMaterial(
-			{
-				defines: Object.assign({}, shader.defines),
-				uniforms: this.uniforms,
-				vertexShader: shader.vertexShader,
-				fragmentShader: shader.fragmentShader
-			});
-	}
-
-	this.createQuadScene();
-};
-
-ShaderPass.prototype = Object.create(Pass.prototype);
-
-ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
+constructor(shader, textureID)
 {
-	if (this.uniforms[this.textureID])
-	{
-		this.uniforms[this.textureID].value = readBuffer.texture;
-	}
+super();
 
-	this.quad.material = this.material;
+this.type = "Shader";
+this.textureID = textureID !== undefined ? textureID : "tDiffuse";
 
-	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
+if (shader instanceof ShaderMaterial)
+{
+this.uniforms = shader.uniforms;
+this.material = shader;
+}
+else if (shader)
+{
+this.uniforms = UniformsUtils.clone(shader.uniforms);
+this.material = new ShaderMaterial(
+{
+defines: Object.assign({}, shader.defines),
+uniforms: this.uniforms,
+vertexShader: shader.vertexShader,
+fragmentShader: shader.fragmentShader
+});
+}
 
-	if (this.clear)
-	{
-		renderer.clear();
-	}
+this.createQuadScene();
+}
 
-	renderer.render(this.scene, this.camera);
-};
+render(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
+{
+if (this.uniforms[this.textureID])
+{
+this.uniforms[this.textureID].value = readBuffer.texture;
+}
+
+this.quad.material = this.material;
+
+renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
+
+if (this.clear)
+{
+renderer.clear();
+}
+
+renderer.render(this.scene, this.camera);
+}
+}
 
 export {ShaderPass};

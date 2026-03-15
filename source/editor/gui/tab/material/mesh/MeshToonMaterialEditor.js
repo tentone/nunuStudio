@@ -10,9 +10,9 @@ import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
 
-function MeshToonMaterialEditor(parent, closeable, container, index)
-{
-	MeshMaterialEditor.call(this, parent, closeable, container, index);
+class MeshToonMaterialEditor extends MeshMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -280,13 +280,10 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
-}
+	}
 
-MeshToonMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
-
-MeshToonMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
 	this.shininess.setValue(material.shininess);
@@ -309,6 +306,8 @@ MeshToonMaterialEditor.prototype.attach = function(material, asset)
 	this.alphaMap.setValue(material.alphaMap);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
-};
+	}
+
+}
 
 export {MeshToonMaterialEditor};

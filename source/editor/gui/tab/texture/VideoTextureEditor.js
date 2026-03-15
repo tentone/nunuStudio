@@ -6,10 +6,9 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {TextureEditor} from "./TextureEditor.js";
 
-
-function VideoTextureEditor(parent, closeable, container, index)
-{
-	TextureEditor.call(this, parent, closeable, container, index);
+class VideoTextureEditor extends TextureEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 	
@@ -60,17 +59,16 @@ function VideoTextureEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();
-}
+	}
 
-VideoTextureEditor.prototype = Object.create(TextureEditor.prototype);
-
-VideoTextureEditor.prototype.attach = function(texture)
-{
-	TextureEditor.prototype.attach.call(this, texture);
+	attach(texture) {
+	super.attach(texture);
 
 	this.volume.setValue(this.texture.volume);
 	this.autoplay.setValue(this.texture.autoplay);
 	this.loop.setValue(this.texture.loop);
 	this.playbackRate.setValue(this.texture.playbackRate);
-};
+	}
+
+}
 export {VideoTextureEditor};

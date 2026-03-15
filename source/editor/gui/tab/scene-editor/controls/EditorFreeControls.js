@@ -15,9 +15,9 @@ import {EditorControls} from "./EditorControls.js";
  * @class EditorFreeControls
  * @extends {EditorControls}
  */
-function EditorFreeControls()
-{
-	EditorControls.call(this);
+class EditorFreeControls extends EditorControls {
+	constructor() {
+	super();
 
 	/**
 	 * Orientation of the camera.
@@ -45,21 +45,16 @@ function EditorFreeControls()
 
 	this.reset();
 	this.updateControls();
-}
+	}
 
-EditorFreeControls.prototype = Object.create(EditorControls.prototype);
 
-EditorFreeControls.ZERO = new Vector3(0, 0, 0);
-
-EditorFreeControls.prototype.reset = function()
-{
+	reset() {
 	this.orientation.set(0.5, 0.5);
 	this.position.set(5, 4.8, 7.4);
 	this.updateControls();
-};
+	}
 
-EditorFreeControls.prototype.focusObject = function(object)
-{
+	focusObject(object) {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
 
@@ -73,10 +68,9 @@ EditorFreeControls.prototype.focusObject = function(object)
 	
 	this.position.add(direction);
 	this.updateControls();
-};
+	}
 
-EditorFreeControls.prototype.setOrientation = function(code)
-{
+	setOrientation(code) {
 	if (code === OrientationCube.Z_POS)
 	{
 		this.orientation.set(0, 0);
@@ -103,10 +97,9 @@ EditorFreeControls.prototype.setOrientation = function(code)
 	}
 
 	this.updateControls();
-};
+	}
 
-EditorFreeControls.prototype.update = function(mouse, keyboard)
-{
+	update(mouse, keyboard) {
 	this.needsUpdate = false;
 
 	// Look camera
@@ -224,10 +217,9 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	{
 		this.updateControls();
 	}
-};
+	}
 
-EditorFreeControls.prototype.updateControls = function()
-{
+	updateControls() {
 	var cos = Math.cos(this.orientation.y);
 	this.temp.set(Math.sin(this.orientation.x)*cos, Math.sin(this.orientation.y), Math.cos(this.orientation.x)*cos);
 	this.temp.add(this.position);
@@ -235,6 +227,10 @@ EditorFreeControls.prototype.updateControls = function()
 	this.lookAt(this.temp);
 
 	this.updateMatrixWorld(true);
-};
+	}
+
+}
+
+EditorFreeControls.ZERO = new Vector3(0, 0, 0);
 
 export {EditorFreeControls};

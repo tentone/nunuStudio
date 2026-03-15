@@ -1,16 +1,17 @@
 import {Text} from "troika-three-text";
 
-function TextSDF() 
+class TextSDF extends Text
 {
-	Text.call(this);
+	constructor()
+	{
+		super();
 
-	this.text = "text";
-	this.fontSize = 0.1;
-	this.color = 0xFFFFFF;
-	this.anchorX = "center";
-	this.anchorY = "middle";
-	this.rotation.set(Math.PI, Math.PI, Math.PI);
-	this.sync();
+		this.text = "text";
+		this.fontSize = 0.1;
+		this.color = 0xFFFFFF;
+		this.anchorX = "center";
+		this.anchorY = "middle";
+		this.rotation.set(Math.PI, Math.PI, Math.PI);
+		this.sync();
+	}
 }
-
-TextSDF.prototype = Object.create(Text.prototype);

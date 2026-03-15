@@ -15,18 +15,17 @@ import {Editor} from "../../../Editor.js";
  * @param {ResourceManager} manager Manager to insert the resource into.
  * @param {string} category Category of the resource.
  */
-function SwapResourceAction(oldResource, newResource, manager, category)
-{
+class SwapResourceAction {
+	constructor(oldResource, newResource, manager, category) {
 	Action.call(this);
 	
 	this.oldResource = oldResource;
 	this.newResource = newResource;
 	this.manager = manager;
 	this.category = category;
-}
+	}
 
-SwapResourceAction.prototype.apply = function()
-{
+	apply() {
 	ResourceCrawler.swapResource(this.manager, this.category, this.oldResource, this.newResource);
 	
 	if (this.oldResource.dispose !== undefined)
@@ -35,10 +34,9 @@ SwapResourceAction.prototype.apply = function()
 	}
 
 	SwapResourceAction.updateGUI();
-};
+	}
 
-SwapResourceAction.prototype.revert = function()
-{
+	revert() {
 	ResourceCrawler.swapResource(this.manager, this.category, this.newResource, this.oldResource);
 
 	if (this.newResource.dispose !== undefined)
@@ -47,7 +45,9 @@ SwapResourceAction.prototype.revert = function()
 	}
 
 	SwapResourceAction.updateGUI();
-};
+	}
+
+}
 
 SwapResourceAction.updateGUI = function()
 {

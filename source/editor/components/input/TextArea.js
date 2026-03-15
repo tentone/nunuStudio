@@ -10,9 +10,9 @@ import {Component} from "../Component.js";
  * @class TextArea
  * @extends {Component}
  */
-function TextArea(parent)
-{
-	Component.call(this, parent, "textarea");
+class TextArea extends Component {
+	constructor(parent) {
+	super(parent, "textarea");
 
 	this.element.style.overflow = "auto";
 	this.element.style.resize = "none";
@@ -57,9 +57,7 @@ function TextArea(parent)
 		});
 		context.updateInterface();
 	};
-}
-
-TextArea.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * The text in the textarea is not wrapped. This is default.
@@ -68,7 +66,6 @@ TextArea.prototype = Object.create(Component.prototype);
  * @attribute SOFT
  * @type {string}
  */
-TextArea.SOFT = "soft";
 
 /**
  * The text in the textarea is wrapped (contains newlines).
@@ -79,7 +76,6 @@ TextArea.SOFT = "soft";
  * @attribute HARD
  * @type {string}
  */
-TextArea.HARD = "hard";
 
 /**
  * Set font configuration to use for the text presented in this component.
@@ -91,8 +87,7 @@ TextArea.HARD = "hard";
  * @param {number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
  * @param {string} fontStyle Font style, specifies the font style for a text.
  */
-TextArea.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
-{
+	setFont(fontFamily, fontWeight, fontStyle) {
 	this.element.style.fontFamily = fontFamily;
 
 	if (fontWeight !== undefined)
@@ -104,7 +99,7 @@ TextArea.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 	{
 		this.element.style.fontStyle = fontStyle;
 	}
-};
+	}
 
 /**
  * Set the wrap mode used for this text area.
@@ -114,10 +109,9 @@ TextArea.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  * @method setWrap
  * @param {string} mode The wrap mode to use.
  */
-TextArea.prototype.setWrap = function(mode)
-{
+	setWrap(mode) {
 	this.element.wrap = mode;
-};
+	}
 
 /**
  * Set the disabled state of the element.
@@ -125,10 +119,9 @@ TextArea.prototype.setWrap = function(mode)
  * @method setDisabled
  * @param {boolean} disabled
  */
-TextArea.prototype.setDisabled = function(value)
-{
+	setDisabled(value) {
 	this.element.disabled = value;
-};
+	}
 
 /**
  * Set oninput callback called after every letter typed into the box.
@@ -139,8 +132,7 @@ TextArea.prototype.setDisabled = function(value)
  * @param {Function} onInput Callback method called everytime the user types something.
  * @param {number} timeout Time (ms) after the user stopped typing to activate the callback.
  */
-TextArea.prototype.setOnInput = function(onInput, timeout)
-{
+	setOnInput(onInput, timeout) {
 	if (timeout !== undefined)
 	{
 		var timer = null;
@@ -164,7 +156,7 @@ TextArea.prototype.setOnInput = function(onInput, timeout)
 	{
 		this.element.oninput = onInput;
 	}
-};
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -172,10 +164,9 @@ TextArea.prototype.setOnInput = function(onInput, timeout)
  * @method setOnChange
  * @param {Function} onChange
  */
-TextArea.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.element.onchange = onChange;
-};
+	}
 
 /**
  * Set value stored in the input element.
@@ -183,10 +174,9 @@ TextArea.prototype.setOnChange = function(onChange)
  * @method setText
  * @param {Object} text
  */
-TextArea.prototype.setText = function(text)
-{
+	setText(text) {
 	this.element.value = text;
-};
+	}
 
 /**
  * Get text stored in the input element.
@@ -194,10 +184,9 @@ TextArea.prototype.setText = function(text)
  * @method getText
  * @return {string} Text stored in the input element.
  */
-TextArea.prototype.getText = function()
-{
+	getText() {
 	return this.element.value;
-};
+	}
 
 /**
  * Set value stored in the input element. Same as setText().
@@ -205,7 +194,6 @@ TextArea.prototype.getText = function()
  * @method setValue
  * @param {Object} text
  */
-TextArea.prototype.setValue = TextArea.prototype.setText;
 
 /**
  * Get text stored in the input element. Same as getText().
@@ -213,6 +201,13 @@ TextArea.prototype.setValue = TextArea.prototype.setText;
  * @method getValue
  * @return {string} Text stored in the input element.
  */
+
+}
+
+TextArea.SOFT = "soft";
+TextArea.HARD = "hard";
+
+TextArea.prototype.setValue = TextArea.prototype.setText;
 TextArea.prototype.getValue = TextArea.prototype.getText;
 
 export {TextArea};

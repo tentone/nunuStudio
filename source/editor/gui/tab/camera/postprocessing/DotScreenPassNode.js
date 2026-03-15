@@ -5,9 +5,9 @@ import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {PassNode} from "./PassNode.js";
 
-function DotScreenPassNode(parent)
-{
-	PassNode.call(this, parent, "Dot Screen");
+class DotScreenPassNode extends PassNode {
+	constructor(parent) {
+	super(parent, "Dot Screen");
 
 	var self = this;
 
@@ -47,18 +47,17 @@ function DotScreenPassNode(parent)
 	});
 	this.add(this.center);
 	this.nextRow();
-}
-
-DotScreenPassNode.prototype = Object.create(PassNode.prototype);
+	}
 
 PassNode.registerPass("DotScreen", DotScreenPassNode);
 
-DotScreenPassNode.prototype.setPass = function(pass)
-{
-	PassNode.prototype.setPass.call(this, pass);
+	setPass(pass) {
+	super.setPass(pass);
 
 	this.angle.setValue(pass.angle);
 	this.scale.setValue(pass.scale);
 	this.center.setValue(pass.center);
-};
+	}
+
+}
 export {DotScreenPassNode};

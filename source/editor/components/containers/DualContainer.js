@@ -8,9 +8,9 @@ import {Component} from "../Component.js";
  *
  * @class DualContainer
  */
-function DualContainer(parent)
-{
-	Component.call(this, parent, "div");
+class DualContainer extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = "var(--panel-color)";
@@ -73,15 +73,10 @@ function DualContainer(parent)
 	{
 		self.manager.destroy();
 	});
-}
+	}
 
-DualContainer.HORIZONTAL = 0;
-DualContainer.VERTICAL = 1;
 
-DualContainer.prototype = Object.create(Component.prototype);
-
-DualContainer.prototype.attach = function(element)
-{
+	attach(element) {
 	if (this.elementA === null)
 	{
 		this.attachA(element);
@@ -95,23 +90,20 @@ DualContainer.prototype.attach = function(element)
 	}
 	
 	console.warn("nunuStudio: Cannot attach more elements.");
-};
+	}
 
-DualContainer.prototype.attachA = function(element)
-{
+	attachA(element) {
 	this.elementA = element;
 	this.elementA.attachTo(this);
-};
+	}
 
-DualContainer.prototype.attachB = function(element)
-{
+	attachB(element) {
 	this.elementB = element;
 	this.elementB.attachTo(this);
-};
+	}
 
-DualContainer.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 
 	if (this.elementA === null || this.elementB === null)
 	{
@@ -155,6 +147,11 @@ DualContainer.prototype.updateSize = function()
 		this.resizeTab.style.width = this.size.x + "px";
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
-};
+	}
+
+}
+
+DualContainer.HORIZONTAL = 0;
+DualContainer.VERTICAL = 1;
 
 export {DualContainer};

@@ -7,9 +7,9 @@ import {Slider} from "../../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function AudioEmitterInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class AudioEmitterInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -67,20 +67,16 @@ function AudioEmitterInspector(parent, object)
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();
-}
+	}
 
-AudioEmitterInspector.prototype = Object.create(ObjectInspector.prototype);
-
-AudioEmitterInspector.prototype.destroy = function()
-{
-	ObjectInspector.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.player.destroy();
-};
+	}
 
-AudioEmitterInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.player.setAudioBuffer(this.object.audio.data);
 	this.volume.setValue(this.object.volume);
@@ -88,6 +84,8 @@ AudioEmitterInspector.prototype.updateInspector = function()
 	this.autoplay.setValue(this.object.autoplay);
 	this.loop.setValue(this.object.loop);
 	this.playbackRate.setValue(this.object.playbackRate);
-};
+	}
+
+}
 
 export {AudioEmitterInspector};

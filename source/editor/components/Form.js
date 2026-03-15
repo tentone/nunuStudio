@@ -9,9 +9,9 @@ import {Component} from "./Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function Form(parent)
-{
-	Component.call(this, parent, "form");
+class Form extends Component {
+	constructor(parent) {
+	super(parent, "form");
 
 	this.element.autocomplete = true;
 	this.element.noValidate = true;
@@ -21,9 +21,7 @@ function Form(parent)
 		event.preventDefault();
 		return false;
 	});
-}
-
-Form.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Simulate the form submission.
@@ -34,9 +32,10 @@ Form.prototype = Object.create(Component.prototype);
  *
  * @method submit
  */
-Form.prototype.submit = function()
-{
+	submit() {
 	this.element.submit();
-};
+	}
+
+}
 
 export {Form};

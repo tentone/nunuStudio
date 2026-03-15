@@ -20,9 +20,9 @@ import {FileAsset} from "./asset/FileAsset.js";
 import {AudioAsset} from "./asset/AudioAsset.js";
 import {Asset} from "./asset/Asset.js";
 
-function AssetExplorer(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, "Assets", Global.FILE_PATH + "icons/misc/new.png");
+class AssetExplorer extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, "Assets", Global.FILE_PATH + "icons/misc/new.png");
 
 	var self = this;
 
@@ -97,9 +97,7 @@ function AssetExplorer(parent, closeable, container, index)
 	 * @type {ResourceManger}
 	 */
 	this.manager = null;
-}
-
-AssetExplorer.prototype = Object.create(TabComponent.prototype);
+	}
 
 /**
  * Filter assets by their name.
@@ -109,8 +107,7 @@ AssetExplorer.prototype = Object.create(TabComponent.prototype);
  * @method filterByName
  * @param {string} name String with portion of the name to be found and filtered.
  */
-AssetExplorer.prototype.filterByName = function(search)
-{
+	filterByName(search) {
 	search = search.toLowerCase();
 
 	for (var i = 0; i < this.files.length; i++)
@@ -118,15 +115,14 @@ AssetExplorer.prototype.filterByName = function(search)
 		var text = this.files[i].name.data.toLowerCase();
 		this.files[i].setVisibility(text.search(search) !== -1);
 	}
-};
+	}
 
-AssetExplorer.prototype.updateSettings = function()
-{
+	updateSettings() {
 	for (var i = 0; i < this.files.length; i++)
 	{
 		this.files[i].setSize(Editor.settings.general.filePreviewSize);
 	}
-};
+	}
 
 /**
  * Attach a resource manager to this explorer.
@@ -134,14 +130,13 @@ AssetExplorer.prototype.updateSettings = function()
  * @method attach
  * @param {ResourceManager} manager.
  */
-AssetExplorer.prototype.attach = function(manager)
-{
+	attach(manager) {
 	if (this.manager !== manager)
 	{	
 		this.manager = manager;
 		this.updateObjectsView();
 	}
-};
+	}
 
 /** 
  * Add asset to the explorer.
@@ -149,11 +144,10 @@ AssetExplorer.prototype.attach = function(manager)
  * @method add
  * @param {Asset} file
  */
-AssetExplorer.prototype.add = function(file)
-{
+	add(file) {
 	file.setSize(Editor.settings.general.filePreviewSize);
 	this.files.push(file);
-};
+	}
 
 /**
  * Update the full object view in the asset explorer.
@@ -162,8 +156,7 @@ AssetExplorer.prototype.add = function(file)
  *
  * @method updateObjectsView
  */
-AssetExplorer.prototype.updateObjectsView = function()
-{
+	updateObjectsView() {
 	// TODO <USE ONLY TO INITIALIZE THE EXPLORER>
 
 	this.clear();
@@ -239,23 +232,21 @@ AssetExplorer.prototype.updateObjectsView = function()
 		file.attach(resource);
 		this.add(file);
 	}
-};
+	}
 
 /** 
  * Clear the explorer, remove all assets.
  *
  * @method clear
  */
-AssetExplorer.prototype.clear = function()
-{
+	clear() {
 	while (this.files.length > 0)
 	{
 		this.files.pop().destroy();
 	}
-};
+	}
 
-AssetExplorer.prototype.updateSize = function()
-{
+	updateSize() {
 	Component.prototype.updateSize.call(this);
 
 	this.bar.size.set(this.size.x, 25);
@@ -264,5 +255,7 @@ AssetExplorer.prototype.updateSize = function()
 	this.assets.position.set(0, 25);
 	this.assets.size.set(this.size.x, this.size.y - 20);
 	this.assets.updateInterface();
-};
+	}
+
+}
 export {AssetExplorer};

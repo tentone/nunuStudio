@@ -1,4 +1,4 @@
-import {ShaderMaterial, OrthographicCamera, Scene, PlaneBufferGeometry, BufferAttribute, Mesh} from "three";
+import {ShaderMaterial, OrthographicCamera, Scene, PlaneGeometry, BufferAttribute, Mesh} from "three";
 import CubemapFlatVertex from "./cubemap_flat_vertex.glsl";
 import CubemapFlatFragment from "./cubemap_flat_fragment.glsl";
 
@@ -9,8 +9,8 @@ import CubemapFlatFragment from "./cubemap_flat_fragment.glsl";
  *
  * @class CubemapFlatRenderer
  */
-function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
-{
+class CubemapFlatRenderer {
+	constructor(envMap, faceSize, paddingLeft, paddingRight) {
 	this.faceSize = faceSize;
 	this.paddingLeft = paddingLeft;
 	this.paddingRight = paddingRight;
@@ -48,7 +48,7 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 	this.faces = [];
 	for (var i = 0; i < 6; i++)
 	{
-		var geometry = new PlaneBufferGeometry(faceSize, faceSize);
+		var geometry = new PlaneGeometry(faceSize, faceSize);
 		var envLookupArray = new Float32Array(12);
 		geometry.setAttribute("envLookup", new BufferAttribute(envLookupArray, 3));
 		for (var j = 0; j < 4; j++)
@@ -77,10 +77,9 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 		[faceSize, faceSize],
 		[3 * faceSize, faceSize]
 	];
-};
+	};
 
-CubemapFlatRenderer.prototype.setSize = function(width, height)
-{
+	setSize(width, height) {
 	var halfWidth = width / 2;
 	var halfHeight = height / 2;
 
@@ -97,10 +96,11 @@ CubemapFlatRenderer.prototype.setSize = function(width, height)
 	{
 		this.faces[i].position.set(offsetX + this.faceOffsets[i][0], offsetY - this.faceOffsets[i][1], 0);
 	}
-};
+	}
 
-CubemapFlatRenderer.prototype.render = function(renderer)
-{
+	render(renderer) {
 	renderer.render(this.scene, this.camera);
-};
+	}
+
+}
 export {CubemapFlatRenderer};

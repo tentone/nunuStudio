@@ -7,9 +7,9 @@ import {TextArea} from "../../../../../components/input/TextArea.js";
 import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function TextMeshInspector(parent, object)
-{
-	DrawableInspector.call(this, parent, object);
+class TextMeshInspector extends DrawableInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -115,13 +115,10 @@ function TextMeshInspector(parent, object)
 	});
 	this.form.add(this.bevelSize);
 	this.form.nextRow();
-}
+	}
 
-TextMeshInspector.prototype = Object.create(DrawableInspector.prototype);
-
-TextMeshInspector.prototype.updateInspector = function()
-{
-	DrawableInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 
 	this.text.setText(this.object.text);
 	this.textSize.setValue(this.object.size);
@@ -131,6 +128,8 @@ TextMeshInspector.prototype.updateInspector = function()
 	this.bevel.setValue(this.object.bevel);
 	this.bevelThickness.setValue(this.object.bevelThickness);
 	this.bevelSize.setValue(this.object.bevelSize);
-};
+	}
+
+}
 
 export {TextMeshInspector};

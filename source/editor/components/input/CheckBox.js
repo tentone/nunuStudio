@@ -8,9 +8,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function CheckBox(parent)
-{
-	Component.call(this, parent, "div");
+class CheckBox extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -63,9 +63,7 @@ function CheckBox(parent)
 	 * @type {boolean}
 	 */
 	this.disabled = false;
-};
-
-CheckBox.prototype = Object.create(Component.prototype);
+	};
 
 /**
  * Set if element is disabled.
@@ -74,8 +72,7 @@ CheckBox.prototype = Object.create(Component.prototype);
  *
  * @method setDisabled
  */
-CheckBox.prototype.setDisabled = function(value)
-{
+	setDisabled(value) {
 	this.disabled = value;
 	
 	if (this.disabled === true)
@@ -88,7 +85,7 @@ CheckBox.prototype.setDisabled = function(value)
 		this.element.style.cursor = "pointer";
 		this.element.style.pointerEvents = "auto";
 	}
-};
+	}
 
 /**
  * Set checkbox value.
@@ -96,11 +93,10 @@ CheckBox.prototype.setDisabled = function(value)
  * @method setValue
  * @param {boolean} value
  */
-CheckBox.prototype.setValue = function(value)
-{
+	setValue(value) {
 	this.value = value;
 	this.check.style.visibility = this.value ? "visible" : "hidden";
-};
+	}
 
 /**
  * Get checkbox value.
@@ -108,10 +104,9 @@ CheckBox.prototype.setValue = function(value)
  * @method getValue
  * @return {boolean} Value from the element.
  */
-CheckBox.prototype.getValue = function()
-{
+	getValue() {
 	return this.value;
-};
+	}
 
 /**
  * Set onchange callback.
@@ -119,20 +114,19 @@ CheckBox.prototype.getValue = function()
  * @method setOnChange
  * @param {Function} callback
  */
-CheckBox.prototype.setOnChange = function(callback)
-{
+	setOnChange(callback) {
 	this.onChange = callback;
-};
+	}
 
-CheckBox.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+	}
 
-CheckBox.prototype.updateSize = function()
-{
+	updateSize() {
 	this.element.style.width = this.size.y + "px";
 	this.element.style.height = this.size.y + "px";
-};
+	}
+
+}
 
 export {CheckBox};

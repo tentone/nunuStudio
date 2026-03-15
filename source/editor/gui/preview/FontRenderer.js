@@ -9,9 +9,9 @@ import {PreviewRenderer} from "./PreviewRenderer.js";
  * @class FontRenderer
  * @extends {PreviewRenderer}
  */
-function FontRenderer()
-{
-	PreviewRenderer.call(this);
+class FontRenderer extends PreviewRenderer {
+	constructor() {
+	super();
 
 	// Camera
 	this.camera = new OrthographicCamera(3, 1);
@@ -20,22 +20,18 @@ function FontRenderer()
 	this.text = new TextMesh("Abc", new MeshBasicMaterial({color: 0xFFFFFF}), null);
 	this.text.position.z = -3;
 	this.scene.add(this.text);
-}
-
-FontRenderer.prototype = Object.create(PreviewRenderer.prototype);
+	}
 
 FontRenderer.render = function(font, onRender)
 {
 	if (FontRenderer.instance === undefined)
 	{
-		FontRenderer.instance = new FontRenderer();
 	}
 
 	FontRenderer.instance.render(font, onRender);
 };
 
-FontRenderer.prototype.render = function(font, onRender)
-{
+	render(font, onRender) {
 	this.text.setFont(font);
 
 	this.text.geometry.computeBoundingBox();
@@ -51,6 +47,10 @@ FontRenderer.prototype.render = function(font, onRender)
 
 	// Callback
 	onRender(this.canvas.toDataURL());
-};
+	}
+
+}
+
+FontRenderer.instance = new FontRenderer();
 
 export {FontRenderer};

@@ -18,9 +18,9 @@ import {FormSnippet} from "./FormSnippet.js";
  * @class RendererConfigurationFormSnippet
  * @extends {FormSnippet}
  */
-function RendererConfigurationFormSnippet(form, object)
-{
-	FormSnippet.call(this, form, object);
+class RendererConfigurationFormSnippet extends FormSnippet {
+	constructor(form, object) {
+	super(form, object);
 
 	var self = this;
 
@@ -295,12 +295,9 @@ function RendererConfigurationFormSnippet(form, object)
 	});
 	this.form.add(this.checkShaderErrors);
 	this.form.nextRow();
-}
+	}
 
-RendererConfigurationFormSnippet.prototype = Object.create(FormSnippet.prototype);
-
-RendererConfigurationFormSnippet.prototype.updateValues = function()
-{
+	updateValues() {
 	this.backend.setValue(this.object.backend);
 	this.autoClear.setValue(this.object.autoClear);
 	this.autoClearColor.setValue(this.object.autoClearColor);
@@ -323,6 +320,8 @@ RendererConfigurationFormSnippet.prototype.updateValues = function()
 	this.logarithmicDepthBuffer.setValue(this.object.logarithmicDepthBuffer);
 	this.physicallyCorrectLights.setValue(this.object.physicallyCorrectLights);
 	this.checkShaderErrors.setValue(this.object.checkShaderErrors);
-};
+	}
+
+}
 
 export {RendererConfigurationFormSnippet};

@@ -7,13 +7,14 @@ import {ShaderPass} from "../ShaderPass.js";
  * @class CopyPass
  * @module Postprocessing
  */
-function CopyPass()
+class CopyPass extends ShaderPass
 {
-	ShaderPass.call(this, CopyShader);
+constructor()
+{
+super(CopyShader);
 
-	this.type = "Copy";
+this.type = "Copy";
 }
-
-CopyPass.prototype = Object.create(ShaderPass.prototype);
+}
 
 export {CopyPass};

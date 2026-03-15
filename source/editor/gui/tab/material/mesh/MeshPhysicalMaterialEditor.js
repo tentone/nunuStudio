@@ -6,9 +6,9 @@ import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {MeshStandardMaterialEditor} from "./MeshStandardMaterialEditor.js";
 
-function MeshPhysicalMaterialEditor(parent, closeable, container, index)
-{
-	MeshStandardMaterialEditor.call(this, parent, closeable, container, index);
+class MeshPhysicalMaterialEditor extends MeshStandardMaterialEditor {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index);
 
 	var self = this;
 
@@ -117,13 +117,10 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.clearcoatNormalScale);
 	this.form.nextRow();
-}
+	}
 
-MeshPhysicalMaterialEditor.prototype = Object.create(MeshStandardMaterialEditor.prototype);
-
-MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
-{
-	MeshStandardMaterialEditor.prototype.attach.call(this, material, asset);
+	attach(material, asset) {
+	super.attach(material, asset);
 
 	this.clearcoat.setValue(material.clearcoat);
 	this.clearcoatRoughness.setValue(material.clearcoatRoughness);
@@ -133,5 +130,7 @@ MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 	this.clearcoatNormalScale.setValue(material.clearcoatNormalScale);
 	this.clearcoatMap.setValue(material.clearcoatMap);
 	this.clearcoatRoughnessMap.setValue(material.clearcoatRoughnessMap);
-};
+	}
+
+}
 export {MeshPhysicalMaterialEditor};

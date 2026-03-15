@@ -1,11 +1,11 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
+import {RoundedBoxGeometry} from "../../../../../core/geometries/RoundedBoxGeometry.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 
-function RoundedBoxGeometryForm(form, object)
-{
+class RoundedBoxGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -61,24 +61,24 @@ function RoundedBoxGeometryForm(form, object)
 	this.radiusSegments.setOnChange(updateGeometry);
 	this.form.add(this.radiusSegments);
 	this.form.nextRow();
-}
+	}
 
-RoundedBoxGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
 
-	var geometry = new RoundedBoxBufferGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.radius.getValue(), this.radiusSegments.getValue());
+	var geometry = new RoundedBoxGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.radius.getValue(), this.radiusSegments.getValue());
 
 	Editor.addAction(new ChangeAction(this.object, "geometry", geometry));
-};
+	}
 
-RoundedBoxGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.width.setValue(this.object.geometry.parameters.width);
 	this.height.setValue(this.object.geometry.parameters.height);
 	this.depth.setValue(this.object.geometry.parameters.depth);
 	this.radius.setValue(this.object.geometry.parameters.radius);
 	this.radiusSegments.setValue(this.object.geometry.parameters.radiusSegments);
 
-};
+	}
+
+}
 export {RoundedBoxGeometryForm};

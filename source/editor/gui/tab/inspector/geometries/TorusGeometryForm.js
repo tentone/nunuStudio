@@ -1,12 +1,12 @@
-import {TorusBufferGeometry, TorusGeometry, BufferGeometry} from "three";
+import {TorusGeometry, BufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 
-function TorusGeometryForm(form, object)
-{
+class TorusGeometryForm {
+	constructor(form, object) {
 	this.form = form;
 	this.object = object;
 	
@@ -75,22 +75,22 @@ function TorusGeometryForm(form, object)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-}
+	}
 
-TorusGeometryForm.prototype.updateGeometry = function()
-{
+	updateGeometry() {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? TorusBufferGeometry : TorusGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? TorusGeometry : TorusGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue())));
-};
+	}
 
-TorusGeometryForm.prototype.updateValues = function()
-{
+	updateValues() {
 	this.radius.setValue(this.object.geometry.parameters.radius || 100);
 	this.tube.setValue(this.object.geometry.parameters.tube || 40);
 	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
 	this.tubularSegments.setValue(this.object.geometry.parameters.tubularSegments || 6);
 	this.arc.setValue(this.object.geometry.parameters.arc || Math.PI * 2);
 	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
-};
+	}
+
+}
 export {TorusGeometryForm};

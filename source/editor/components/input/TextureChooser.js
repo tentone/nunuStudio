@@ -13,9 +13,9 @@ import {Global} from "../../Global.js";
 import {Editor} from "../../Editor.js";
 import {Component} from "../Component.js";
 
-function TextureChooser(parent)
-{
-	Component.call(this, parent, "div");
+class TextureChooser extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	// Preview
 	this.preview = document.createElement("div");
@@ -124,9 +124,7 @@ function TextureChooser(parent)
 	 * @type {Texture}
 	 */
 	this.texture = null;
-}
-
-TextureChooser.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Set onchange callback, called after changes.
@@ -134,14 +132,12 @@ TextureChooser.prototype = Object.create(Component.prototype);
  * @method setOnChange
  * @param {Function} onChange
  */
-TextureChooser.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.onChange = onChange;
-};
+	}
 
 // Set texture value
-TextureChooser.prototype.setValue = function(texture)
-{
+	setValue(texture) {
 	if (texture instanceof Texture)
 	{
 		this.texture = texture;
@@ -151,7 +147,7 @@ TextureChooser.prototype.setValue = function(texture)
 	{
 		this.texture = null;
 	}
-};
+	}
 
 /**
  * Get value stored in the input element.
@@ -159,25 +155,22 @@ TextureChooser.prototype.setValue = function(texture)
  * @method getValue
  * @return {Object} Value stored in the input element.
  */
-TextureChooser.prototype.getValue = function()
-{
+	getValue() {
 	return this.texture;
-};
+	}
 
 // Set Texture
-TextureChooser.prototype.setTexture = function(texture)
-{
+	setTexture(texture) {
 	this.setValue(texture);
 
 	if (this.onChange !== null)
 	{
 		this.onChange();
 	}
-};
+	}
 
 // Load texture from file
-TextureChooser.prototype.loadTexture = function(file)
-{
+	loadTexture(file) {
 	var self = this;
 	var onLoad = function(texture)
 	{
@@ -198,11 +191,10 @@ TextureChooser.prototype.loadTexture = function(file)
 	{
 		Loaders.loadVideoTexture(file, onLoad);
 	}
-};
+	}
 
 // Update texture preview
-TextureChooser.prototype.updatePreview = function()
-{
+	updatePreview() {
 	var texture = this.texture;
 
 	if (texture instanceof CanvasTexture)
@@ -234,19 +226,19 @@ TextureChooser.prototype.updatePreview = function()
 		this.img.style.display = "none";
 		this.video.style.display = "none";
 	}
-};
+	}
 
-TextureChooser.prototype.updateVisibility = function()
-{
+	updateVisibility() {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+	}
 
-TextureChooser.prototype.updateSize = function()
-{
+	updateSize() {
 	this.preview.style.width = this.size.y + "px";
 	this.preview.style.height = this.size.y + "px";
 
-	Component.prototype.updateSize.call(this);
-};
+	super.updateSize();
+	}
+
+}
 
 export {TextureChooser};

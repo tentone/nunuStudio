@@ -6,9 +6,9 @@ import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function CubeCameraInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class CubeCameraInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -66,18 +66,17 @@ function CubeCameraInspector(parent, object)
 	});
 	this.form.add(this.far);
 	this.form.nextRow();
-}
+	}
 
-CubeCameraInspector.prototype = Object.create(ObjectInspector.prototype);
-
-CubeCameraInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.autoUpdate.setValue(this.object.autoUpdate);
 	this.resolution.setValue(this.object.resolution);
 	this.near.setValue(this.object.near);
 	this.far.setValue(this.object.far);
-};
+	}
+
+}
 
 export {CubeCameraInspector};

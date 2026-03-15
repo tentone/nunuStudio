@@ -12,18 +12,17 @@ import {Action} from "./Action.js";
  * @param {Object} newValue New value for the object attribute.
  * @param {Object} oldValue Optionally we can pass the old value.
  */
-function ChangeAction(object, attribute, newValue, oldValue)
-{
+class ChangeAction {
+	constructor(object, attribute, newValue, oldValue) {
 	Action.call(this);
 
 	this.object = object;
 	this.attribute = attribute;
 	this.newValue = newValue;
 	this.oldValue = oldValue !== undefined ? oldValue : ChangeAction.isVetorial(object[attribute]) ? object[attribute].clone() : object[attribute];
-}
+	}
 
-ChangeAction.prototype.apply = function()
-{
+	apply() {
 	if (ChangeAction.isVetorial(this.object[this.attribute]))
 	{
 		this.object[this.attribute].copy(this.newValue);
@@ -34,10 +33,9 @@ ChangeAction.prototype.apply = function()
 	}
 
 	ChangeAction.updateGUI(this.object, this.attribute, this.newValue);
-};
+	}
 
-ChangeAction.prototype.revert = function()
-{
+	revert() {
 	if (ChangeAction.isVetorial(this.object[this.attribute]))
 	{
 		this.object[this.attribute].copy(this.oldValue);
@@ -48,7 +46,9 @@ ChangeAction.prototype.revert = function()
 	}
 
 	ChangeAction.updateGUI(this.object, this.attribute, this.oldValue);
-};
+	}
+
+}
 
 ChangeAction.updateGUI = function(object, attribute, newValue)
 {

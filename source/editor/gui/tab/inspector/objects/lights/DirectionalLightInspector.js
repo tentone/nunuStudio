@@ -7,9 +7,9 @@ import {Editor} from "../../../../../Editor.js";
 import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function DirectionalLightInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class DirectionalLightInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -43,18 +43,17 @@ function DirectionalLightInspector(parent, object)
 
 	// Shadow
 	this.shadow = new LightShadowFormSnippet(this.form, object);
-}
+	}
 
-DirectionalLightInspector.prototype = Object.create(ObjectInspector.prototype);
-
-DirectionalLightInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.castShadow.setValue(this.object.castShadow);
 	
 	this.shadow.attach(this.object);
-};
+	}
+
+}
 
 export {DirectionalLightInspector};

@@ -8,9 +8,9 @@ import {NumberBox} from "../../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function OrthographicCameraInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class OrthographicCameraInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -140,13 +140,10 @@ function OrthographicCameraInspector(parent, object)
 	});
 	this.form.add(this.clearStencil);
 	this.form.nextRow();
-}
+	}
 
-OrthographicCameraInspector.prototype = Object.create(ObjectInspector.prototype);
-
-OrthographicCameraInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.sizeBox.setValue(this.object.size);
 	this.mode.setSelectedIndex(this.object.mode);
@@ -158,6 +155,8 @@ OrthographicCameraInspector.prototype.updateInspector = function()
 	this.clearDepth.setValue(this.object.clearDepth);
 	this.clearStencil.setValue(this.object.clearStencil);
 	this.viewport.attach(this.object.viewport);
-};
+	}
+
+}
 
 export {OrthographicCameraInspector};

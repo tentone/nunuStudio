@@ -21,8 +21,8 @@ import {MainMenu} from "./MainMenu.js";
  *
  * @class Interface
  */
-function Interface()
-{
+class Interface {
+	constructor() {
 	/**
 	 * Main tab container that has all the interface tabs.
 	 * 
@@ -59,7 +59,7 @@ function Interface()
 	this.inspector = rightBottom.addTab(InspectorContainer, false);
 
 	this.menuBar = new MainMenu(DocumentBody);
-}
+	}
 
 /**
  * Save program into file.
@@ -68,8 +68,7 @@ function Interface()
  *
  * @method saveProgram
  */
-Interface.prototype.saveProgram = function()
-{
+	saveProgram() {
 	if (Nunu.runningOnDesktop())
 	{
 		FileSystem.chooseFile(function(files)
@@ -84,7 +83,7 @@ Interface.prototype.saveProgram = function()
 			Editor.saveProgram(fname, true);
 		}, ".nsp", Editor.openFile !== null ? Editor.openFile : "file");
 	}
-};
+	}
 
 /** 
  * Load new project from file.
@@ -93,8 +92,7 @@ Interface.prototype.saveProgram = function()
  *
  * @method loadProgram
  */
-Interface.prototype.loadProgram = function()
-{
+	loadProgram() {
 	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
 	{
 		FileSystem.chooseFile(function(files)
@@ -105,29 +103,29 @@ Interface.prototype.loadProgram = function()
 			}
 		}, ".isp, .nsp");
 	}
-};
+	}
 
 /**
  * Create new program.
  *
  * @method newProgram
  */
-Interface.prototype.newProgram = function()
-{
+	newProgram() {
 	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
 	{
 		Editor.createNewProgram();
 	}
-};
+	}
 
-Interface.prototype.updateInterface = function()
-{
+	updateInterface() {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 
 	this.tab.position.set(0, this.menuBar.size.y);
 	this.tab.size.set(width, height - this.menuBar.size.y);
 	this.tab.updateInterface();
-};
+	}
+
+}
 
 export {Interface};

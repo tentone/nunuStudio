@@ -10,19 +10,16 @@ import {EditorOrbitControls} from "./EditorOrbitControls.js";
  * @extends {OrbitControls}
  * @param {number} mode Mode indicates the orientation to be locked.
  */
-function EditorPlanarControls(mode)
-{
-	EditorOrbitControls.call(this);
+class EditorPlanarControls extends EditorOrbitControls {
+	constructor(mode) {
+	super();
 
 	this.setMode(mode !== undefined ? mode : Settings.PLANAR_LEFT);
-}
+	}
 
-EditorPlanarControls.prototype = Object.create(EditorOrbitControls.prototype);
+	setOrientation() {}
 
-EditorPlanarControls.prototype.setOrientation = function() {};
-
-EditorPlanarControls.prototype.setMode = function(mode)
-{
+	setMode(mode) {
 	this.mode = mode;
 
 	if (mode === Settings.PLANAR_FRONT)
@@ -51,17 +48,15 @@ EditorPlanarControls.prototype.setMode = function(mode)
 	}
 
 	this.updateControls();
-};
+	}
 
-EditorPlanarControls.prototype.reset = function()
-{
+	reset() {
 	this.distance = 10;
 	this.center.set(0, 0, 0);
 	this.updateControls();
-};
+	}
 
-EditorPlanarControls.prototype.update = function(mouse)
-{
+	update(mouse) {
 	var needsUpdate = false;
 
 	if (mouse.buttonPressed(Mouse.RIGHT))
@@ -150,6 +145,8 @@ EditorPlanarControls.prototype.update = function(mouse)
 	{
 		this.updateControls();
 	}
-};
+	}
+
+}
 
 export {EditorPlanarControls};

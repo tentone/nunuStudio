@@ -10,10 +10,9 @@ import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Asset} from "./Asset.js";
 
-
-function VideoAsset(parent)
-{
-	Asset.call(this, parent);
+class VideoAsset extends Asset {
+	constructor(parent) {
+	super(parent);
 
         this.preview = document.createElement("video");
         this.preview.volume = 0;
@@ -100,22 +99,20 @@ function VideoAsset(parent)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
-}
+	}
 
-VideoAsset.prototype = Object.create(Asset.prototype);
-
-VideoAsset.prototype.attach = function(asset)
-{
-	Asset.prototype.attach.call(this, asset);
+	attach(asset) {
+	super.attach(asset);
 
 	this.preview.src = asset.data;
-};
+	}
 
-VideoAsset.prototype.updateMetadata = function()
-{
+	updateMetadata() {
 	if (this.asset !== null)
 	{
 		this.setText(this.asset.name);
 	}
-};
+	}
+
+}
 export {VideoAsset};

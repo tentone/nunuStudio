@@ -13,9 +13,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function LoadingModal(parent)
-{
-	Component.call(this, parent, "div");
+class LoadingModal extends Component {
+	constructor(parent) {
+	super(parent, "div");
 	
 	var self = this;
 
@@ -74,9 +74,7 @@ function LoadingModal(parent)
 	{
 		self.updateInterface();
 	});
-}
-
-LoadingModal.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Show the loading box.
@@ -85,8 +83,7 @@ LoadingModal.prototype = Object.create(Component.prototype);
  * @param {boolean} showCancel If true shows the cancel button.
  * @param {Function} callback Callback function.
  */
-LoadingModal.prototype.show = function()
-{	
+	show() {	
 	this.counter++;
 
 	if (this.counter === 1)
@@ -96,7 +93,7 @@ LoadingModal.prototype.show = function()
 		this.visible = true;
 		this.updateInterface();
 	}
-};
+	}
 
 /**
  * Hide modal box.
@@ -104,8 +101,7 @@ LoadingModal.prototype.show = function()
  * @method hide
  * @param {boolean} force Hide box and reset counter;
  */
-LoadingModal.prototype.hide = function(force)
-{
+	hide(force) {
 	this.counter--;
 
 	if (this.counter < 1 || force === true)
@@ -115,22 +111,20 @@ LoadingModal.prototype.hide = function(force)
 		this.manager.destroy();
 		this.setVisibility(false);
 	}
-};
+	}
 
-LoadingModal.prototype.destroy = function()
-{
-	Component.prototype.destroy.call(this);
+	destroy() {
+	super.destroy();
 
 	this.counter = 0;
 	this.timer.stop();
 	this.manager.destroy();
-};
+	}
 
-LoadingModal.prototype.updateSize = function()
-{
+	updateSize() {
 	this.size.copy(this.parent.size);
 
-	Component.prototype.updateSize.call(this);
+	super.updateSize();
 
 	// Text
 	this.text.setStyle("fontSize", "38px");
@@ -151,6 +145,8 @@ LoadingModal.prototype.updateSize = function()
 	this.icon.center();
 	this.icon.position.y += 30;
 	this.icon.updateInterface();
-};
+	}
+
+}
 
 export {LoadingModal};

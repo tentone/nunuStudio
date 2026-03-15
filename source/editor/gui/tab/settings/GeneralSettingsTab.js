@@ -10,10 +10,9 @@ import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
 
-
-function GeneralSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.general, Global.FILE_PATH + "icons/misc/tool.png");
+class GeneralSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.general, Global.FILE_PATH + "icons/misc/tool.png");
 
 	this.element.style.overflow = "auto";
 
@@ -125,12 +124,9 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.immediateMode);
 	this.form.nextRow();
-}
+	}
 
-GeneralSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-GeneralSettingsTab.prototype.activate = function()
-{
+	activate() {
 	this.theme.setValue(Editor.settings.general.theme);
 	if (this.autoUpdate !== undefined)
 	{
@@ -139,13 +135,14 @@ GeneralSettingsTab.prototype.activate = function()
 	this.historySize.setValue(Editor.settings.general.historySize);
 	this.ignorePixelRatio.setValue(Editor.settings.general.ignorePixelRatio);
 	this.immediateMode.setValue(Editor.settings.general.immediateMode);
-};
+	}
 
-GeneralSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {GeneralSettingsTab};

@@ -12,9 +12,9 @@ import {TabComponent} from "./TabComponent.js";
  * @param {Component} parent
  * @param {TabComponent} tab
  */
-function TabButton(parent, tab)
-{
-	Component.call(this, parent, "div");
+class TabButton extends Component {
+	constructor(parent, tab) {
+	super(parent, "div");
 
 	var self = this;
 
@@ -76,7 +76,6 @@ function TabButton(parent, tab)
 	{
 		self.tab.close();
 	};
-
 
 	// Drag state
 	var dragState = TabButton.NONE;
@@ -239,13 +238,8 @@ function TabButton(parent, tab)
 			this.style.backgroundColor = "var(--bar-color)";
 		}
 	};
-}
+	}
 
-TabButton.prototype = Object.create(Component.prototype);
-
-TabButton.NONE = 0;
-TabButton.PREVIOUS = 1;
-TabButton.NEXT = 2;
 
 /**
  * Set the tab icon image.
@@ -253,11 +247,10 @@ TabButton.NEXT = 2;
  * @method setIcon
  * @param {string} icon URL of the icon image.
  */
-TabButton.prototype.setIcon = function(icon)
-{
+	setIcon(icon) {
 	this.tab.icon = icon;
 	this.icon.src = icon;
-};
+	}
 
 /**
  * Set text to be displayed in the button as its name.
@@ -265,21 +258,18 @@ TabButton.prototype.setIcon = function(icon)
  * @method setName
  * @param {string} text
  */
-TabButton.prototype.setName = function(text)
-{
+	setName(text) {
 	this.tab.title = text;
 	this.title.data = text;
-};
+	}
 
 // Update selected state of the button
-TabButton.prototype.updateSelection = function()
-{
+	updateSelection() {
 	this.element.style.backgroundColor = this.tab.isSelected() ? "var(--button-over-color)" : "var(--bar-color)";
-};
+	}
 
-TabButton.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	// Icon
 	this.icon.style.top = this.size.y * 0.2 + "px";
@@ -308,6 +298,12 @@ TabButton.prototype.updateSize = function()
 	}
 
 	this.updateSelection();
-};
+	}
+
+}
+
+TabButton.NONE = 0;
+TabButton.PREVIOUS = 1;
+TabButton.NEXT = 2;
 
 export {TabButton};

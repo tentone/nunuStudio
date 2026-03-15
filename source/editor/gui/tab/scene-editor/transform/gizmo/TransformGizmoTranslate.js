@@ -1,4 +1,4 @@
-import {Geometry, Mesh, CylinderGeometry, BufferGeometry, Float32BufferAttribute, Line, CylinderBufferGeometry, BoxBufferGeometry, PlaneBufferGeometry, Matrix4} from "three";
+import {Mesh, CylinderGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxGeometry, PlaneGeometry, Matrix4} from "three";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
 import {TransformControls} from "../TransformControls.js";
@@ -13,8 +13,8 @@ import {TransformGizmo} from "./TransformGizmo.js";
  * @class TransformGizmoTranslate
  * @extends {TransformGizmo}
  */
-function TransformGizmoTranslate()
-{
+class TransformGizmoTranslate extends TransformGizmo {
+	constructor() {
 	var arrowGeometry = new Geometry();
 	var mesh = new Mesh(new CylinderGeometry(0, 0.05, 0.2, 12, 1, false));
 	mesh.position.y = 0.5;
@@ -53,18 +53,11 @@ function TransformGizmoTranslate()
 		XYZ: [[new Mesh(TransformGizmoTranslate.box, TransformGizmo.pickerMaterial)]]
 	};
 
-	TransformGizmo.call(this);
-}
+	super();
+	}
 
-TransformGizmoTranslate.prototype = Object.create(TransformGizmo.prototype);
 
-TransformGizmoTranslate.cylinder = new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false);
-TransformGizmoTranslate.box = new BoxBufferGeometry(0.1, 0.1, 0.1);
-TransformGizmoTranslate.plane = new PlaneBufferGeometry(0.29, 0.29);
-TransformGizmoTranslate.planeBig = new PlaneBufferGeometry(0.4, 0.4);
-
-TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
-{
+	setActivePlane(axis, eye) {
 	var tempMatrix = new Matrix4();
 	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
 
@@ -108,10 +101,9 @@ TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
 	{
 		this.activePlane = this.planes["XZ"];
 	}
-};
+	}
 
-TransformGizmoTranslate.prototype.applyChanges = function(controls)
-{
+	applyChanges(controls) {
 	var actions = [];
 
 	for (var i = 0; i < controls.objects.length; i++)
@@ -123,11 +115,9 @@ TransformGizmoTranslate.prototype.applyChanges = function(controls)
 	}
 
 	Editor.addAction(new ActionBundle(actions));
-};
+	}
 
-
-TransformGizmoTranslate.prototype.transformObject = function(controls)
-{
+	transformObject(controls) {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
 	if (planeIntersect === false) 
 	{
@@ -208,6 +198,13 @@ TransformGizmoTranslate.prototype.transformObject = function(controls)
 			}
 		}
 	}
-};
+	}
+
+}
+
+TransformGizmoTranslate.cylinder = new CylinderGeometry(0.2, 0, 1, 4, 1, false);
+TransformGizmoTranslate.box = new BoxGeometry(0.1, 0.1, 0.1);
+TransformGizmoTranslate.plane = new PlaneGeometry(0.29, 0.29);
+TransformGizmoTranslate.planeBig = new PlaneGeometry(0.4, 0.4);
 
 export {TransformGizmoTranslate};

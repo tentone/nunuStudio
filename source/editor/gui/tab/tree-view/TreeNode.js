@@ -1,4 +1,4 @@
-import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
+import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, MathUtils, Material, Camera} from "three";
 import {ConvexGeometry} from "three/examples/jsm/geometries/ConvexGeometry";
 import {BufferGeometryUtils} from "three/examples/jsm/utils/BufferGeometryUtils";
 import {Locale} from "../../../locale/LocaleManager.js";
@@ -44,8 +44,8 @@ import {NodeEditor} from "../node-editor/NodeEditor.js";
  * @class TreeNode
  * @param {TreeNode} container Parent tree node.
  */
-function TreeNode(container)
-{
+class TreeNode extends Component {
+	constructor(container) {
 	// Container
 	this.container = container;
 
@@ -447,7 +447,7 @@ function TreeNode(container)
 					var object = new ObjectLoader().parse(self.object.toJSON());
 					object.traverse(function(child)
 					{
-						child.uuid = Math.generateUUID();
+						child.uuid = MathUtils.generateUUID();
 					});
 					Editor.addAction(new AddAction(object, self.object.parent));
 				});
@@ -735,10 +735,8 @@ function TreeNode(container)
 	{
 		openTab(ParticleEditor, self.object);
 	}
-}
+	}
 
-TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";
-TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
 
 /**
  * Default value.
@@ -746,7 +744,6 @@ TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
  * @static
  * @attribute NONE
  */
-TreeNode.NONE = -1;
 
 /**
  * Place inside the object.
@@ -754,7 +751,6 @@ TreeNode.NONE = -1;
  * @static
  * @attribute INSIDE
  */
-TreeNode.INSIDE = 0;
 
 /**
  * Place above object.
@@ -762,7 +758,6 @@ TreeNode.INSIDE = 0;
  * @static
  * @attribute ABOVE
  */
-TreeNode.ABOVE = 1;
 
 /**
  * Place bellow object.
@@ -770,52 +765,44 @@ TreeNode.ABOVE = 1;
  * @static
  * @attribute BELLOW
  */
-TreeNode.BELLOW = 2;
-
-TreeNode.prototype = Object.create(Component.prototype);
 
 /**
  * Clear node element border.
  *
  * @method clearBorder
  */
-TreeNode.prototype.clearBorder = function()
-{
+	clearBorder() {
 	this.element.style.border = null;
 	this.element.style.borderTop = null;
 	this.element.style.borderBottom = null;
-};
-
+	}
 
 /**
  * Set base style of the tree node.
  *
  * @method styleNormal
  */
-TreeNode.prototype.styleNormal = function()
-{
+	styleNormal() {
 	this.element.style.backgroundColor = null;
-};
+	}
 
 /**
  * Set style for node selected.
  *
  * @method styleSelected
  */
-TreeNode.prototype.styleSelected = function()
-{
+	styleSelected() {
 	this.element.style.backgroundColor = "var(--button-over-color)";
-};
+	}
 
 /**
  * Set style of the node on mouse over
  *
  * @method styleMouseOver
  */
-TreeNode.prototype.styleMouseOver = function()
-{
+	styleMouseOver() {
 	this.element.style.backgroundColor = "var(--bar-color)";
-};
+	}
 
 /**
  * Set selection state of this tree node.
@@ -823,8 +810,7 @@ TreeNode.prototype.styleMouseOver = function()
  * @method setSelected
  * @param {boolean} selected If true set selected, otherwise se unselected.
  */
-TreeNode.prototype.setSelected = function(selected)
-{
+	setSelected(selected) {
 	this.selected = selected;
 
 	if (this.selected === true)
@@ -835,7 +821,7 @@ TreeNode.prototype.setSelected = function(selected)
 	{
 		this.styleNormal();
 	}
-};
+	}
 
 /**
  * Set node border.
@@ -843,8 +829,7 @@ TreeNode.prototype.setSelected = function(selected)
  * @method setBorder
  * @param {number} place Border position.
  */
-TreeNode.prototype.setBorder = function(place)
-{
+	setBorder(place) {
 	this.clearBorder();
 
 	if (place === TreeNode.ABOVE)
@@ -859,7 +844,7 @@ TreeNode.prototype.setBorder = function(place)
 	{
 		this.element.style.border = "1px solid var(--color-gray-light)";
 	}
-};
+	}
 
 /**
  * Attach a object to this tree element, the icon and name of the node is set automatically.
@@ -867,8 +852,7 @@ TreeNode.prototype.setBorder = function(place)
  * @method attach
  * @param {Object3D} object
  */
-TreeNode.prototype.attach = function(object)
-{
+	attach(object) {
 	this.object = object;
 	this.object.gui = {node: this};
 
@@ -880,7 +864,7 @@ TreeNode.prototype.attach = function(object)
 	this.labelText.data = object.name;
 	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;
-};
+	}
 
 /**
  * Add tree element from object.
@@ -888,14 +872,13 @@ TreeNode.prototype.attach = function(object)
  * @method addObject
  * @param {Object3D} object
  */
-TreeNode.prototype.addObject = function(object)
-{
+	addObject(object) {
 	var element = new TreeNode(this.container);
 	element.attach(object);
 	element.parent = this;
 	this.children.push(element);
 	return element;
-};
+	}
 
 /**
  * Add tree node from object.
@@ -904,22 +887,20 @@ TreeNode.prototype.addObject = function(object)
  * @param {Object3D} object
  * @param {number} index
  */
-TreeNode.prototype.insertObject = function(object, index)
-{
+	insertObject(object, index) {
 	var element = new TreeNode(this.container);
 	element.attach(object);
 	element.parent = this;
 	this.children.splice(index, 0, element);
 	return element;
-};
+	}
 
 /**
  * Remove element using its uuid.
  *
  * @method removeElementUUID
  */
-TreeNode.prototype.removeElementUUID = function(uuid)
-{
+	removeElementUUID(uuid) {
 	for (var i = 0; i < this.children.length; i++)
 	{
 		if (this.children[i].uuid === uuid)
@@ -936,7 +917,7 @@ TreeNode.prototype.removeElementUUID = function(uuid)
 	}
 
 	return null;
-};
+	}
 
 /**
  * Update folded state for this tree element.
@@ -944,8 +925,7 @@ TreeNode.prototype.removeElementUUID = function(uuid)
  * @method updatedFoldedState
  * @param {boolean} folded.
  */
-TreeNode.prototype.updateFoldedState = function(folded)
-{
+	updateFoldedState(folded) {
 	if (folded !== undefined)
 	{
 		this.folded = folded;
@@ -954,15 +934,14 @@ TreeNode.prototype.updateFoldedState = function(folded)
 	this.object.folded = this.folded;
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;
 	this.container.updateChildPosition();
-};
+	}
 
 /**
  * Expand all elements from this node to the root.
  *
  * @method expandToRoot
  */
-TreeNode.prototype.expandToRoot = function()
-{
+	expandToRoot() {
 	var parent = this.parent;
 
 	while (parent !== null)
@@ -973,10 +952,9 @@ TreeNode.prototype.expandToRoot = function()
 	}
 
 	this.element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-};
+	}
 
-TreeNode.prototype.destroy = function()
-{
+	destroy() {
 	if (this.container.element.contains(this.element))
 	{
 		this.container.element.removeChild(this.element);
@@ -986,10 +964,9 @@ TreeNode.prototype.destroy = function()
 	{
 		this.children[i].destroy();
 	}
-};
+	}
 
-TreeNode.prototype.updateInterface = function()
-{
+	updateInterface() {
 	if (this.visible)
 	{
 		var offset = this.level * 20;
@@ -1021,6 +998,15 @@ TreeNode.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-};
+	}
+
+}
+
+TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";
+TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
+TreeNode.NONE = -1;
+TreeNode.INSIDE = 0;
+TreeNode.ABOVE = 1;
+TreeNode.BELLOW = 2;
 
 export {TreeNode};

@@ -2,9 +2,9 @@ import {Locale} from "../../../../locale/LocaleManager.js";
 import {Inspector} from "../Inspector.js";
 import {Editor} from "../../../../Editor.js";
 
-function LockedInspector(parent, object)
-{
-	Inspector.call(this, parent, object);
+class LockedInspector extends Inspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	// Name
 	this.form.addText(Locale.name);
@@ -26,13 +26,10 @@ function LockedInspector(parent, object)
 		this.uuid = this.form.addText("");
 		this.form.nextRow();
 	}
-}
-
-LockedInspector.prototype = Object.create(Inspector.prototype);
+	}
 
 // Update panel information
-LockedInspector.prototype.updateInspector = function()
-{
+	updateInspector() {
 	this.name.setText(this.object.name);
 	
 	if (this.type !== undefined)
@@ -44,5 +41,7 @@ LockedInspector.prototype.updateInspector = function()
 	{
 		this.uuid.setText(this.object.uuid);
 	}
-};
+	}
+
+}
 export {LockedInspector};

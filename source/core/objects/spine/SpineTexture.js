@@ -10,14 +10,15 @@ import {Texture} from "../../texture/Texture.js";
  * @module Textures
  * @param {Texture} texture Texture to be used inside of this spine texture.
  */
-function SpineTexture(texture)
+class SpineTexture extends ThreeJsTexture
 {
-	ThreeJsTexture.call(this, texture.image);
+	constructor(texture)
+	{
+		super(texture.image);
 
-	this.texture = texture;
-	this.texture.flipY = false;
+		this.texture = texture;
+		this.texture.flipY = false;
+	}
 }
-
-SpineTexture.prototype = Object.create(ThreeJsTexture.prototype);
 
 export {SpineTexture};

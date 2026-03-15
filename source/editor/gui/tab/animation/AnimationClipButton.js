@@ -15,9 +15,9 @@ import {Component} from "../../../components/Component.js";
  * @class AnimationClipButton
  * @extends {Component}
  */
-function AnimationClipButton(parent, editor, animation)
-{
-	Component.call(this, parent, "div");
+class AnimationClipButton extends Component {
+	constructor(parent, editor, animation) {
+	super(parent, "div");
 
 	this.element.style.position = "relative";
 	this.element.style.width = "100%";
@@ -159,14 +159,13 @@ function AnimationClipButton(parent, editor, animation)
 	this.element.appendChild(this.name);
 
 	this.updateAnimation();
-}
+	}
 
-AnimationClipButton.prototype = Object.create(Component.prototype);
-
-AnimationClipButton.prototype.updateAnimation = function()
-{
+	updateAnimation() {
 	this.name.appendChild(document.createTextNode(this.animation.name));
-};
+	}
 
-AnimationClipButton.prototype.updateInterface = function() {};
+	updateInterface() {}
+
+}
 export {AnimationClipButton};

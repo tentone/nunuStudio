@@ -5,9 +5,9 @@ import {Editor} from "../../../../../Editor.js";
 import {DropdownList} from "../../../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
-function SpineInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class SpineInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -54,14 +54,11 @@ function SpineInspector(parent, object)
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
-}
-
-SpineInspector.prototype = Object.create(ObjectInspector.prototype);
+	}
 
 // Update panel content from attached object
-SpineInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 		
 	this.animation.clearValues();
 	this.skin.clearValues();
@@ -82,6 +79,8 @@ SpineInspector.prototype.updateInspector = function()
 	this.skin.setValue(this.object.skin);
 	this.castShadow.setValue(this.object.castShadow);
 	this.receiveShadow.setValue(this.object.receiveShadow);
-};
+	}
+
+}
 
 export {SpineInspector};

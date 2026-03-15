@@ -12,13 +12,14 @@ import {HemisphereLight as THemisphereLight} from "three";
  * @extends {HemisphereLight}
  * @module Lights
  */
-function HemisphereLight(skyColor, groundColor, intensity)
+class HemisphereLight extends THemisphereLight
 {
-	THemisphereLight.call(this, skyColor, groundColor, intensity);
+	constructor(skyColor, groundColor, intensity)
+	{
+		super(skyColor, groundColor, intensity);
 
-	this.name = "hemisphere";
+		this.name = "hemisphere";
+	}
 }
-
-HemisphereLight.prototype = Object.create(THemisphereLight.prototype);
 
 export {HemisphereLight};

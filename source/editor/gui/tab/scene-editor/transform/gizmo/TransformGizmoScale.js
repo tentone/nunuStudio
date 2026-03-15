@@ -1,5 +1,5 @@
 import {Shape} from "cannon-es";
-import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
+import {Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, CylinderGeometry, Matrix4} from "three";
 import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
@@ -14,8 +14,8 @@ import {TransformGizmo} from "./TransformGizmo.js";
  * @class TransformGizmoScale
  * @extends {TransformGizmo}
  */
-function TransformGizmoScale()
-{
+class TransformGizmoScale extends TransformGizmo {
+	constructor() {
 	var arrowGeometry = new Geometry();
 	var mesh = new Mesh(new BoxGeometry(0.125, 0.125, 0.125));
 	mesh.position.y = 0.5;
@@ -37,24 +37,21 @@ function TransformGizmoScale()
 		X: [[new Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]], [new Line(x, GizmoLineMaterial.red)]],
 		Y: [[new Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]], [new Line(y, GizmoLineMaterial.green)]],
 		Z: [[new Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new Line(z, GizmoLineMaterial.blue)]],
-		XYZ: [[new Mesh(new BoxBufferGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
+		XYZ: [[new Mesh(new BoxGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
 	};
 
 	this.pickerGizmos =
 	{
-		X: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
-		Y: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
-		Z: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
-		XYZ: [[new Mesh(new BoxBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
+		X: [[new Mesh(new CylinderGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
+		Y: [[new Mesh(new CylinderGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
+		Z: [[new Mesh(new CylinderGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
+		XYZ: [[new Mesh(new BoxGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
 	};
 
-	TransformGizmo.call(this);
-}
+	super();
+	}
 
-TransformGizmoScale.prototype = Object.create(TransformGizmo.prototype);
-
-TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
-{
+	setActivePlane(axis, eye) {
 	var tempMatrix = new Matrix4();
 	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
 
@@ -86,16 +83,14 @@ TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
 	{
 		this.activePlane = this.planes["XYZE"];
 	}
-};
+	}
 
-TransformGizmoScale.prototype.updatePose = function(controls)
-{
+	updatePose(controls) {
 	controls.gizmo.update(controls.attributes[0].worldRotation, controls.eye);
 	controls.gizmo.highlight(controls.axis);
-};
+	}
 
-TransformGizmoScale.prototype.applyChanges = function(controls)
-{
+	applyChanges(controls) {
 	var actions = [];
 
 	for (var i = 0; i < controls.objects.length; i++)
@@ -107,10 +102,9 @@ TransformGizmoScale.prototype.applyChanges = function(controls)
 	}
 
 	Editor.addAction(new ActionBundle(actions));
-};
+	}
 
-TransformGizmoScale.prototype.transformObject = function(controls)
-{
+	transformObject(controls) {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
 	if (planeIntersect === false)
 	{
@@ -171,5 +165,7 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 			}
 		}
 	}
-};
+	}
+
+}
 export {TransformGizmoScale};

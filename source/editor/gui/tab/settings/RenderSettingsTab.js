@@ -6,9 +6,9 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
 
-function RenderSettingsTab(parent, closeable, container, index)
-{
-	TabComponent.call(this, parent, closeable, container, index, Locale.render, Global.FILE_PATH + "icons/misc/particles.png");
+class RenderSettingsTab extends TabComponent {
+	constructor(parent, closeable, container, index) {
+	super(parent, closeable, container, index, Locale.render, Global.FILE_PATH + "icons/misc/particles.png");
 
 	this.element.style.overflow = "auto";
 
@@ -41,21 +41,19 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.addText("Editor Rendering Quality");
 	this.form.nextRow();
 	this.rendererConfiguration = new RendererConfigurationFormSnippet(this.form, Editor.settings.render);
-}
+	}
 
-RenderSettingsTab.prototype = Object.create(TabComponent.prototype);
-
-RenderSettingsTab.prototype.activate = function()
-{
+	activate() {
 	this.followProject.setValue(Editor.settings.render.followProject);
 	this.rendererConfiguration.attach(Editor.settings.render);
-};
+	}
 
-RenderSettingsTab.prototype.updateSize = function()
-{
-	TabComponent.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
-};
+	}
+
+}
 export {RenderSettingsTab};

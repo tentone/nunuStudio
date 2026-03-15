@@ -5,9 +5,9 @@ import {Editor} from "../../../../Editor.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ObjectInspector} from "./ObjectInspector.js";
 
-function ScriptInspector(parent, object)
-{
-	ObjectInspector.call(this, parent, object);
+class ScriptInspector extends ObjectInspector {
+	constructor(parent, object) {
+	super(parent, object);
 
 	var self = this;
 
@@ -23,15 +23,14 @@ function ScriptInspector(parent, object)
 	this.mode.addValue(Locale.include, Script.INCLUDE);
 	this.form.add(this.mode);
 	this.form.nextRow();
-}
+	}
 
-ScriptInspector.prototype = Object.create(ObjectInspector.prototype);
-
-ScriptInspector.prototype.updateInspector = function()
-{
-	ObjectInspector.prototype.updateInspector.call(this);
+	updateInspector() {
+	super.updateInspector();
 	
 	this.mode.setValue(this.object.mode);
-};
+	}
+
+}
 
 export {ScriptInspector};

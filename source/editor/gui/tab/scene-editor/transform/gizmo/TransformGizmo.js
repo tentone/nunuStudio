@@ -1,4 +1,4 @@
-import {Object3D, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide, Mesh, Matrix4, Euler, Eurler, Vector3} from "three";
+import {Object3D, PlaneGeometry, MeshBasicMaterial, DoubleSide, Mesh, Matrix4, Euler, Eurler, Vector3} from "three";
 import {TransformControls} from "../TransformControls.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
 
@@ -9,9 +9,9 @@ import {GizmoMaterial} from "../GizmoMaterial.js";
  *
  * @class TransformGizmo
  */
-function TransformGizmo()
-{
-	Object3D.call(this);
+class TransformGizmo extends Object3D {
+	constructor() {
+	super();
 
 	this.handles = new Object3D();
 	this.pickers = new Object3D();
@@ -22,7 +22,7 @@ function TransformGizmo()
 	this.add(this.planes);
 
 	// Planes
-	var planeGeometry = new PlaneBufferGeometry(50, 50, 2, 2);
+	var planeGeometry = new PlaneGeometry(50, 50, 2, 2);
 	var planeMaterial = new MeshBasicMaterial({visible: false, side: DoubleSide});
 	var planes =
 	{
@@ -93,9 +93,7 @@ function TransformGizmo()
 			child.scale.set(1, 1, 1);
 		}
 	});
-}
-
-TransformGizmo.prototype = Object.create(Object3D.prototype);
+	}
 
 /**
  * Invisible material used for the picking regions.
@@ -106,7 +104,6 @@ TransformGizmo.prototype = Object.create(Object3D.prototype);
  * @attribute pickerMaterial
  * @type {GizmoMaterial}
  */
-TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: false});
 
 /**
  * Set the currently active plane in the gizmo object.
@@ -117,7 +114,7 @@ TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: 
  * @param {string} axis Axis stored as text. (e.g X, Y, XY, XZ).
  * @param {Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
-TransformGizmo.prototype.setActivePlane = function(axis, eye) {};
+	setActivePlane(axis, eye) {}
 
 /**
  * Called when the controls button is released and there was object being edited.
@@ -127,7 +124,7 @@ TransformGizmo.prototype.setActivePlane = function(axis, eye) {};
  * @method onPointerUp
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.applyChanges = function(controls) {};
+	applyChanges(controls) {}
 
 /**
  * Called while the pointer is moving around the canvas.
@@ -137,7 +134,7 @@ TransformGizmo.prototype.applyChanges = function(controls) {};
  * @method transformObject
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.transformObject = function(controls) {};
+	transformObject(controls) {}
 
 /**
  * Called everytime that the controls button is pressed to start transforming the object.
@@ -145,7 +142,7 @@ TransformGizmo.prototype.transformObject = function(controls) {};
  * @method startTransform
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.startTransform = function(controls) {};
+	startTransform(controls) {}
 
 /**
  * Update transform of the gizmo, called everytime on update to calculate size of the gizmo on screen.
@@ -153,8 +150,7 @@ TransformGizmo.prototype.startTransform = function(controls) {};
  * @method updatePose
  * @param {TransformControls} controls Transform controls object that contain this gizmo.
  */
-TransformGizmo.prototype.updatePose = function(controls)
-{
+	updatePose(controls) {
 	if (controls.space === TransformControls.LOCAL)
 	{
 		controls.gizmo.update(controls.attributes[0].worldRotation, controls.eye);
@@ -165,8 +161,7 @@ TransformGizmo.prototype.updatePose = function(controls)
 	}
 
 	controls.gizmo.highlight(controls.axis);
-};
-
+	}
 
 /**
  * Update the transformation of the gizmo from rotation and combined view matrix.
@@ -175,8 +170,7 @@ TransformGizmo.prototype.updatePose = function(controls)
  * @param {Eurler} rotation Euler rotation.
  * @param {Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
-TransformGizmo.prototype.update = function(rotation, eye)
-{
+	update(rotation, eye) {
 	var vec1 = new Vector3(0, 0, 0);
 	var vec2 = new Vector3(0, 1, 0);
 	var lookAtMatrix = new Matrix4();
@@ -192,7 +186,7 @@ TransformGizmo.prototype.update = function(rotation, eye)
 			child.quaternion.setFromEuler(rotation);
 		}
 	});
-};
+	}
 
 /**
  * Hightlight axis in the gizmo object.
@@ -200,8 +194,7 @@ TransformGizmo.prototype.update = function(rotation, eye)
  * @method highlight
  * @param {string} axis Exact name of the axis to be highlighted (assumes that the material uses the same name as the axis).
  */
-TransformGizmo.prototype.highlight = function(axis)
-{
+	highlight(axis) {
 	this.traverse(function(child)
 	{
 		if (child.material && child.material.highlight)
@@ -209,5 +202,9 @@ TransformGizmo.prototype.highlight = function(axis)
 			child.material.highlight(child.name === axis);
 		}
 	});
-};
+	}
+
+}
+
+TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: false});
 export {TransformGizmo};

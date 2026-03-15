@@ -8,9 +8,9 @@ import {Component} from "../Component.js";
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ColorGradientChooser(parent)
-{
-	Component.call(this, parent, "div");
+class ColorGradientChooser extends Component {
+	constructor(parent) {
+	super(parent, "div");
 
 	/**
 	 * On change callback function.
@@ -56,17 +56,14 @@ function ColorGradientChooser(parent)
 	this.canvas.style.width = "100%";
 	this.canvas.style.height = "100%";
 	this.element.appendChild(this.canvas);
-}
-
-ColorGradientChooser.prototype = Object.create(Component.prototype);
+	}
 
 /**
  * Update the buttos to match new values.
  *
  * @method updateButtons
  */
-ColorGradientChooser.prototype.updateButtons = function()
-{
+	updateButtons() {
 	var self = this;
 
 	// Color change method called in the context of the DOM input
@@ -113,15 +110,14 @@ ColorGradientChooser.prototype.updateButtons = function()
 	{
 		this.buttons[i].index = i;
 	}
-};
+	}
 
 /**
  * Update the representation of the gradient.
  *
  * @method updateValues
  */
-ColorGradientChooser.prototype.updateValues = function()
-{
+	updateValues() {
 	var context = this.canvas.getContext("2d");
 	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
 
@@ -145,7 +141,7 @@ ColorGradientChooser.prototype.updateValues = function()
 
 	context.fillStyle = gradient;
 	context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-};
+	}
 
 /**
  * Set onChange callback that receives (value, index) as arguments.
@@ -153,10 +149,9 @@ ColorGradientChooser.prototype.updateValues = function()
  * @method setOnChange
  * @param {Function} onChange OnChange callback receives value and index as arguments.
  */
-ColorGradientChooser.prototype.setOnChange = function(onChange)
-{
+	setOnChange(onChange) {
 	this.onChange = onChange;
-};
+	}
 
 /**
  * Set an array of color values to be displayed on this gradient.
@@ -164,8 +159,7 @@ ColorGradientChooser.prototype.setOnChange = function(onChange)
  * @method setValue
  * @param {Array} values
  */
-ColorGradientChooser.prototype.setValue = function(values)
-{
+	setValue(values) {
 	this.values = [];
 
 	for (var i = 0; i < values.length; i++)
@@ -177,7 +171,7 @@ ColorGradientChooser.prototype.setValue = function(values)
 
 	this.updateButtons();
 	this.updateValues();
-};
+	}
 
 /**
  * Get the values stored in this element.
@@ -185,19 +179,19 @@ ColorGradientChooser.prototype.setValue = function(values)
  * @method getValue
  * @return {Array} Values of the gradient.
  */
-ColorGradientChooser.prototype.getValue = function()
-{
+	getValue() {
 	return this.values;
-};
+	}
 
-ColorGradientChooser.prototype.updateSize = function()
-{
-	Component.prototype.updateSize.call(this);
+	updateSize() {
+	super.updateSize();
 	
 	this.canvas.width = this.size.x;
 	this.canvas.height = this.size.y;
 
 	this.updateValues();
-};
+	}
+
+}
 
 export {ColorGradientChooser};
