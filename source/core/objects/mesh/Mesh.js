@@ -11,36 +11,37 @@ import {Mesh as TMesh, Object3D} from "three";
  * @param {Material} material Material used to shade the superficie of the geometry
  * @extends {Mesh}
  */
-function Mesh(geometry, material)
+class Mesh extends TMesh
 {
-	TMesh.call(this, geometry, material);
+	constructor(geometry, material)
+	{
+		super(geometry, material);
 
-	this.name = "model";
+		this.name = "model";
 
-	this.receiveShadow = true;
-	this.castShadow = true;
+		this.receiveShadow = true;
+		this.castShadow = true;
+	}
+
+	/**
+	 * Dispose mesh along with its material and geometry.
+	 * 
+	 * @method dispose
+	 */
+	dispose()
+	{
+		if (this.material !== null && this.material.dispose !== undefined)
+		{
+			this.material.dispose();
+		}
+		if (this.geometry !== null && this.geometry.dispose !== undefined)
+		{
+			this.geometry.dispose();
+		}
+
+		Object3D.prototype.dispose.call(this);
+	}
 }
-
-Mesh.prototype = Object.create(TMesh.prototype);
-
-/**
- * Dispose mesh along with its material and geometry.
- * 
- * @method dispose
- */
-Mesh.prototype.dispose = function()
-{
-	if (this.material !== null && this.material.dispose !== undefined)
-	{
-		this.material.dispose();
-	}
-	if (this.geometry !== null && this.geometry.dispose !== undefined)
-	{
-		this.geometry.dispose();
-	}
-
-	Object3D.prototype.dispose.call(this);
-};
 
 /**
  * Geometry defines the object structure.

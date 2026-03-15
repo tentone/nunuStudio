@@ -11,67 +11,68 @@ import {InstancedMesh as TInstancedMesh, BufferAttribute, Object3D} from "three"
  * @param {Material} material Material used to shade the superficie of the geometry
  * @extends {InstancedMesh}
  */
-function InstancedMesh(geometry, material, count)
+class InstancedMesh extends TInstancedMesh
 {
-	TInstancedMesh.call(this, geometry, material, count);
+	constructor(geometry, material, count)
+	{
+		super(geometry, material, count);
 
-	this.name = "instanced";
-	this.type = "InstancedMesh";
+		this.name = "instanced";
+		this.type = "InstancedMesh";
 
-	this.receiveShadow = true;
-	this.castShadow = true;
-	
-	Object.defineProperties(this,
-		{
-		/**
-		 * The number of instances. The count value represents the maximum number of instances of this mesh.
-		 *
-		 * You can change the number of instances at runtime to an integer value in the range [0, count].
-		 *
-		 * @attribute url
-		 * @type {string}
-		 */
-			count:
-		{
-			get: function() {return count;},
-			set: function(value)
+		this.receiveShadow = true;
+		this.castShadow = true;
+
+		Object.defineProperties(this,
 			{
-				// Resize the instanceMatrix to fit the number of instances
-				if (value > count)
+			/**
+			 * The number of instances. The count value represents the maximum number of instances of this mesh.
+			 *
+			 * You can change the number of instances at runtime to an integer value in the range [0, count].
+			 *
+			 * @attribute url
+			 * @type {string}
+			 */
+				count:
+			{
+				get: function() {return count;},
+				set: function(value)
 				{
-					this.instanceMatrix = new BufferAttribute(new Float32Array(value * 16), 16);
+					// Resize the instanceMatrix to fit the number of instances
+					if (value > count)
+					{
+						this.instanceMatrix = new BufferAttribute(new Float32Array(value * 16), 16);
+					}
+
+					count = value;
 				}
-				
-				count = value;
 			}
+			});
+	}
+
+	dispose()
+	{
+		if (this.material !== null && this.material.dispose !== undefined)
+		{
+			this.material.dispose();
 		}
-		});
+		if (this.geometry !== null && this.geometry.dispose !== undefined)
+		{
+			this.geometry.dispose();
+		}
+
+		Object3D.prototype.dispose.call(this);
+	}
+
+	toJSON(meta)
+	{
+		var data = super.toJSON(meta);
+
+		data.object.instanceMatrix = this.instanceMatrix.toJSON();
+		data.object.count = this.count;
+
+		return data;
+	}
 }
-
-InstancedMesh.prototype = Object.create(TInstancedMesh.prototype);
-
-InstancedMesh.prototype.dispose = function()
-{
-	if (this.material !== null && this.material.dispose !== undefined)
-	{
-		this.material.dispose();
-	}
-	if (this.geometry !== null && this.geometry.dispose !== undefined)
-	{
-		this.geometry.dispose();
-	}
-
-	Object3D.prototype.dispose.call(this);
-};
-
-InstancedMesh.prototype.toJSON = function(meta)
-{
-	var data = Object3D.prototype.toJSON.call(this, meta);
-
-	data.object.instanceMatrix = this.instanceMatrix.toJSON();
-	data.object.count = this.count;
-
-	return data;
-};
 
 export {InstancedMesh};
