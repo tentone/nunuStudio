@@ -67,7 +67,6 @@ MaterialRenderer.render = function(material, onRender)
 {
 	if (MaterialRenderer.instance === undefined)
 	{
-		MaterialRenderer.instance = new MaterialRenderer();
 	}
 
 	MaterialRenderer.instance.render(material, onRender);
@@ -123,4 +122,6 @@ MaterialRenderer.render = function(material, onRender)
 	}
 
 }
+
+MaterialRenderer.instance = new MaterialRenderer();
 export {MaterialRenderer};

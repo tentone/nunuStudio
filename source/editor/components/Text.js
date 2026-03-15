@@ -47,14 +47,7 @@ class Text extends Component {
 	this.setAlignment(Text.CENTER);
 	}
 
-Text.CENTER = 0;
-Text.LEFT = 1;
-Text.RIGHT = 2;
-Text.TOP = 3;
-Text.BOTTOM = 4;
 
-Text.CLIP = 10;
-Text.ELLIPSIS = 11;
 
 /**
  * Set font to use for the text.
@@ -243,4 +236,12 @@ Text.ELLIPSIS = 11;
 	}
 
 }
+
+Text.CENTER = 0;
+Text.LEFT = 1;
+Text.RIGHT = 2;
+Text.TOP = 3;
+Text.BOTTOM = 4;
+Text.CLIP = 10;
+Text.ELLIPSIS = 11;
 export {Text};

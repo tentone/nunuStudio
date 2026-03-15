@@ -96,9 +96,6 @@ class VectorBox extends Component {
 	this.type = VectorBox.VECTOR3;
 	}
 
-VectorBox.VECTOR2 = 2;
-VectorBox.VECTOR3 = 3;
-VectorBox.QUATERNION = 4;
 
 /**
  * Set the type of box, (type of data to use).
@@ -325,5 +322,9 @@ VectorBox.QUATERNION = 4;
 	}
 
 }
+
+VectorBox.VECTOR2 = 2;
+VectorBox.VECTOR3 = 3;
+VectorBox.QUATERNION = 4;
 
 export {VectorBox};

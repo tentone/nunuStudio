@@ -21,11 +21,6 @@ class GizmoLineMaterial extends LineBasicMaterial {
 	this.baseOpacity = this.opacity;
 	}
 
-GizmoLineMaterial.red = new GizmoLineMaterial({color: 0xff0000});
-GizmoLineMaterial.green = new GizmoLineMaterial({color: 0x00ff00});
-GizmoLineMaterial.blue = new GizmoLineMaterial({color: 0x0000ff});
-GizmoLineMaterial.yellow = new GizmoLineMaterial({color: 0xFFFF00});
-GizmoLineMaterial.grey = new GizmoLineMaterial({color: 0x787878});
 
 /**
  * Toggle the highlight state of a gizmo material.
@@ -47,4 +42,10 @@ GizmoLineMaterial.grey = new GizmoLineMaterial({color: 0x787878});
 	}
 
 }
+
+GizmoLineMaterial.red = new GizmoLineMaterial({color: 0xff0000});
+GizmoLineMaterial.green = new GizmoLineMaterial({color: 0x00ff00});
+GizmoLineMaterial.blue = new GizmoLineMaterial({color: 0x0000ff});
+GizmoLineMaterial.yellow = new GizmoLineMaterial({color: 0xFFFF00});
+GizmoLineMaterial.grey = new GizmoLineMaterial({color: 0x787878});
 export {GizmoLineMaterial};

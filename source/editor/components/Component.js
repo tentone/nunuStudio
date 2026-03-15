@@ -91,7 +91,6 @@ class Component {
  * @attribute TOP_LEFT
  * @type {number}
  */
-Component.TOP_LEFT = 0;
 
 /**
  * Top-right positioning.
@@ -100,7 +99,6 @@ Component.TOP_LEFT = 0;
  * @attribute TOP_RIGHT
  * @type {number}
  */
-Component.TOP_RIGHT = 1;
 
 /**
  * Bottom-left positioning.
@@ -109,7 +107,6 @@ Component.TOP_RIGHT = 1;
  * @attribute BOTTOM_LEFT
  * @type {number}
  */
-Component.BOTTOM_LEFT = 2;
 
 /**
  * Bottom-right positioning.
@@ -118,7 +115,6 @@ Component.BOTTOM_LEFT = 2;
  * @attribute BOTTOM_RIGHT
  * @type {number}
  */
-Component.BOTTOM_RIGHT = 3;
 
 Component.preventDefault = function(event)
 {
@@ -491,6 +487,11 @@ Component.preventDefault = function(event)
 	}
 
 }
+
+Component.TOP_LEFT = 0;
+Component.TOP_RIGHT = 1;
+Component.BOTTOM_LEFT = 2;
+Component.BOTTOM_RIGHT = 3;
 
 Component.prototype.isComponent = true;
 

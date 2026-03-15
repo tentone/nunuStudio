@@ -271,9 +271,6 @@ class TabButtonSplit extends Component {
 	};
 	}
 
-TabButtonSplit.NONE = 0;
-TabButtonSplit.PREVIOUS = 1;
-TabButtonSplit.NEXT = 2;
 
 /**
  * Set the tab icon image.
@@ -334,5 +331,9 @@ TabButtonSplit.NEXT = 2;
 	}
 
 }
+
+TabButtonSplit.NONE = 0;
+TabButtonSplit.PREVIOUS = 1;
+TabButtonSplit.NEXT = 2;
 
 export {TabButtonSplit};

@@ -126,7 +126,6 @@ class EditorOrbitControls extends EditorControls {
 	this.updateControls();
 	}
 
-EditorOrbitControls.UP = new Vector3(0, 1, 0);
 
 	reset() {
 	this.distance = 10;
@@ -399,5 +398,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 	}
 
 }
+
+EditorOrbitControls.UP = new Vector3(0, 1, 0);
 
 export {EditorOrbitControls};

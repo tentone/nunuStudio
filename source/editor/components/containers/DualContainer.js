@@ -75,8 +75,6 @@ class DualContainer extends Component {
 	});
 	}
 
-DualContainer.HORIZONTAL = 0;
-DualContainer.VERTICAL = 1;
 
 	attach(element) {
 	if (this.elementA === null)
@@ -152,5 +150,8 @@ DualContainer.VERTICAL = 1;
 	}
 
 }
+
+DualContainer.HORIZONTAL = 0;
+DualContainer.VERTICAL = 1;
 
 export {DualContainer};

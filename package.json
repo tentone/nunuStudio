@@ -60,9 +60,9 @@
 		"math-ds": "1.2.1",
 		"sparse-octree": "6.1.0",
 		"tern": "0.24.3",
-		"three": "0.119.0",
+		"three": "0.163.0",
 		"three-bmfont-text": "3.0.1",
-		"three-to-cannon": "3.1.0",
+		"three-to-cannon": "5.0.2",
 		"troika-three-text": "0.44.0"
 	},
 	"devDependencies": {

@@ -104,7 +104,6 @@ class TransformGizmo extends Object3D {
  * @attribute pickerMaterial
  * @type {GizmoMaterial}
  */
-TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: false});
 
 /**
  * Set the currently active plane in the gizmo object.
@@ -206,4 +205,6 @@ TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: 
 	}
 
 }
+
+TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: false});
 export {TransformGizmo};

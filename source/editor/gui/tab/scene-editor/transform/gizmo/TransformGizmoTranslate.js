@@ -56,10 +56,6 @@ class TransformGizmoTranslate extends TransformGizmo {
 	super();
 	}
 
-TransformGizmoTranslate.cylinder = new CylinderGeometry(0.2, 0, 1, 4, 1, false);
-TransformGizmoTranslate.box = new BoxGeometry(0.1, 0.1, 0.1);
-TransformGizmoTranslate.plane = new PlaneGeometry(0.29, 0.29);
-TransformGizmoTranslate.planeBig = new PlaneGeometry(0.4, 0.4);
 
 	setActivePlane(axis, eye) {
 	var tempMatrix = new Matrix4();
@@ -205,5 +201,10 @@ TransformGizmoTranslate.planeBig = new PlaneGeometry(0.4, 0.4);
 	}
 
 }
+
+TransformGizmoTranslate.cylinder = new CylinderGeometry(0.2, 0, 1, 4, 1, false);
+TransformGizmoTranslate.box = new BoxGeometry(0.1, 0.1, 0.1);
+TransformGizmoTranslate.plane = new PlaneGeometry(0.29, 0.29);
+TransformGizmoTranslate.planeBig = new PlaneGeometry(0.4, 0.4);
 
 export {TransformGizmoTranslate};

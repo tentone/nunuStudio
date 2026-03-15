@@ -118,10 +118,6 @@ class DropdownMenu extends Text {
 	});
 	}
 
-DropdownMenu.DOWN = 0;
-DropdownMenu.UP = 1;
-DropdownMenu.LEFT = 2;
-DropdownMenu.RIGHT = 3;
 
 /**
  * Set location to where options should open.
@@ -348,5 +344,10 @@ DropdownMenu.RIGHT = 3;
 	}
 
 }
+
+DropdownMenu.DOWN = 0;
+DropdownMenu.UP = 1;
+DropdownMenu.LEFT = 2;
+DropdownMenu.RIGHT = 3;
 
 export {DropdownMenu};

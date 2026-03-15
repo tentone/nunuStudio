@@ -26,7 +26,6 @@ FontRenderer.render = function(font, onRender)
 {
 	if (FontRenderer.instance === undefined)
 	{
-		FontRenderer.instance = new FontRenderer();
 	}
 
 	FontRenderer.instance.render(font, onRender);
@@ -51,5 +50,7 @@ FontRenderer.render = function(font, onRender)
 	}
 
 }
+
+FontRenderer.instance = new FontRenderer();
 
 export {FontRenderer};

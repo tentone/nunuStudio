@@ -66,7 +66,6 @@ class TextArea extends Component {
  * @attribute SOFT
  * @type {string}
  */
-TextArea.SOFT = "soft";
 
 /**
  * The text in the textarea is wrapped (contains newlines).
@@ -77,7 +76,6 @@ TextArea.SOFT = "soft";
  * @attribute HARD
  * @type {string}
  */
-TextArea.HARD = "hard";
 
 /**
  * Set font configuration to use for the text presented in this component.
@@ -205,6 +203,9 @@ TextArea.HARD = "hard";
  */
 
 }
+
+TextArea.SOFT = "soft";
+TextArea.HARD = "hard";
 
 TextArea.prototype.setValue = TextArea.prototype.setText;
 TextArea.prototype.getValue = TextArea.prototype.getText;

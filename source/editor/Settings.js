@@ -24,7 +24,6 @@ class Settings {
  * @attribute CONFIG_FILE
  * @type {string}
  */
-Settings.CONFIG_FILE = "config.json";
 
 /**
  * Angle in radians, stores the radian symbol as used in the UnitConverter.
@@ -33,7 +32,6 @@ Settings.CONFIG_FILE = "config.json";
  * @attribute RADIAN
  * @type {string}
  */
-Settings.RADIAN = "r";
 
 /**
  * Angle in degrees, stores the degree symbol as used in the UnitConverter.
@@ -42,24 +40,12 @@ Settings.RADIAN = "r";
  * @attribute RADIAN
  * @type {string}
  */
-Settings.DEGREE = "d";
 
 // Distance
-Settings.METER = "m";
 
 // Navigation
-Settings.FIRST_PERSON = 10;
-Settings.ORBIT = 11;
-Settings.PLANAR_LEFT = 12;
-Settings.PLANAR_RIGHT = 13;
-Settings.PLANAR_FRONT = 14;
-Settings.PLANAR_BACK = 15;
-Settings.PLANAR_TOP = 16;
-Settings.PLANAR_BOTTOM = 17;
 
 // Update channel
-Settings.STABLE = 30;
-Settings.BETA = 31;
 
 // Load default settings
 	loadDefault() {
@@ -289,4 +275,19 @@ Settings.BETA = 31;
 	}
 
 }
+
+Settings.CONFIG_FILE = "config.json";
+Settings.RADIAN = "r";
+Settings.DEGREE = "d";
+Settings.METER = "m";
+Settings.FIRST_PERSON = 10;
+Settings.ORBIT = 11;
+Settings.PLANAR_LEFT = 12;
+Settings.PLANAR_RIGHT = 13;
+Settings.PLANAR_FRONT = 14;
+Settings.PLANAR_BACK = 15;
+Settings.PLANAR_TOP = 16;
+Settings.PLANAR_BOTTOM = 17;
+Settings.STABLE = 30;
+Settings.BETA = 31;
 export {Settings};

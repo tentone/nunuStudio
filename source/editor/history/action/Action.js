@@ -10,7 +10,6 @@ class Action {
 	this.id = Action._id++;
 	}
 
-Action._id = 1;
 
 /** 
  * Apply the action.
@@ -31,5 +30,7 @@ Action._id = 1;
 	revert() {}
 
 }
+
+Action._id = 1;
 
 export {Action};

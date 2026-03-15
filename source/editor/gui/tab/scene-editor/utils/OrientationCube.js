@@ -106,12 +106,6 @@ class OrientationCube {
 	this.scene.add(this.zNeg);
 	}
 
-OrientationCube.X_POS = 0;
-OrientationCube.X_NEG = 1;
-OrientationCube.Y_POS = 2;
-OrientationCube.Y_NEG = 3;
-OrientationCube.Z_POS = 4;
-OrientationCube.Z_NEG = 5;
 
 /**
  * Raycast cube from mouse normalized coordinates.
@@ -177,5 +171,12 @@ OrientationCube.Z_NEG = 5;
 	}
 
 }
+
+OrientationCube.X_POS = 0;
+OrientationCube.X_NEG = 1;
+OrientationCube.Y_POS = 2;
+OrientationCube.Y_NEG = 3;
+OrientationCube.Z_POS = 4;
+OrientationCube.Z_NEG = 5;
 
 export {OrientationCube};

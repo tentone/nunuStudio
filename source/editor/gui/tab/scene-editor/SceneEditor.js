@@ -708,14 +708,7 @@ class SceneEditor extends TabComponent {
 	this.canvas.resetCanvas();
 	}
 
-SceneEditor.ORTHOGRAPHIC = 20;
-SceneEditor.PERSPECTIVE = 21;
 
-SceneEditor.SELECT = 0;
-SceneEditor.MOVE = 100;
-SceneEditor.SCALE = 101;
-SceneEditor.ROTATE = 102;
-SceneEditor.MEASURE = 103;
 
 	updateMetadata() {
 	if (this.scene !== null)
@@ -1476,6 +1469,14 @@ SceneEditor.MEASURE = 103;
 	}
 
 }
+
+SceneEditor.ORTHOGRAPHIC = 20;
+SceneEditor.PERSPECTIVE = 21;
+SceneEditor.SELECT = 0;
+SceneEditor.MOVE = 100;
+SceneEditor.SCALE = 101;
+SceneEditor.ROTATE = 102;
+SceneEditor.MEASURE = 103;
 
 SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;

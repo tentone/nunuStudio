@@ -47,7 +47,6 @@ TextureRenderer.render = function(texture, onRender)
 {
 	if (TextureRenderer.instance === undefined)
 	{
-		TextureRenderer.instance = new TextureRenderer();
 	}
 
 	TextureRenderer.instance.render(texture, onRender);
@@ -71,5 +70,7 @@ TextureRenderer.render = function(texture, onRender)
 	}
 
 }
+
+TextureRenderer.instance = new TextureRenderer();
 
 export {TextureRenderer};

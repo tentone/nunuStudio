@@ -90,7 +90,6 @@ class PassNode extends TableForm {
 	});
 	}
 
-PassNode.passes = {};
 
 PassNode.createPass = function(element, type)
 {
@@ -128,5 +127,7 @@ PassNode.registerPass = function(type, Constructor)
 	}
 
 }
+
+PassNode.passes = {};
 
 export {PassNode};

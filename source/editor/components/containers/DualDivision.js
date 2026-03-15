@@ -85,8 +85,6 @@ class DualDivision extends Component {
 	};
 	}
 
-DualDivision.HORIZONTAL = 0;
-DualDivision.VERTICAL = 1;
 
 	setOnResize(callback) {
 	this.onResize = callback;
@@ -134,5 +132,8 @@ DualDivision.VERTICAL = 1;
 	}
 
 }
+
+DualDivision.HORIZONTAL = 0;
+DualDivision.VERTICAL = 1;
 
 export {DualDivision};

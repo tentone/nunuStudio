@@ -29,7 +29,6 @@ GeometryRenderer.render = function(material, onRender)
 {
 	if (GeometryRenderer.instance === undefined)
 	{
-		GeometryRenderer.instance = new GeometryRenderer();
 	}
 
 	GeometryRenderer.instance.render(material, onRender);
@@ -58,5 +57,7 @@ GeometryRenderer.render = function(material, onRender)
 	}
 
 }
+
+GeometryRenderer.instance = new GeometryRenderer();
 
 export {GeometryRenderer};

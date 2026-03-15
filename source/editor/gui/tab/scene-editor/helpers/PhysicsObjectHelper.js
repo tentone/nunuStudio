@@ -38,10 +38,6 @@ class PhysicsObjectHelper extends Object3D {
 		});
 	}
 
-PhysicsObjectHelper.SPHERE = new SphereGeometry(1, 32, 32);
-PhysicsObjectHelper.BOX = new BoxGeometry(1, 1, 1);
-PhysicsObjectHelper.PLANE = new PlaneGeometry(100, 100);
-PhysicsObjectHelper.CYLINDER = new CylinderGeometry(1, 1, 10, 32);
 
 /**
  * Update the helper from the physics body.
@@ -286,5 +282,10 @@ PhysicsObjectHelper.CYLINDER = new CylinderGeometry(1, 1, 10, 32);
 	}
 
 }
+
+PhysicsObjectHelper.SPHERE = new SphereGeometry(1, 32, 32);
+PhysicsObjectHelper.BOX = new BoxGeometry(1, 1, 1);
+PhysicsObjectHelper.PLANE = new PlaneGeometry(100, 100);
+PhysicsObjectHelper.CYLINDER = new CylinderGeometry(1, 1, 10, 32);
 
 export {PhysicsObjectHelper};

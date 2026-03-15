@@ -116,10 +116,6 @@ class TabGroup extends Component {
 	};
 	}
 
-TabGroup.TOP = 0;
-TabGroup.BOTTOM = 1;
-TabGroup.LEFT = 2;
-TabGroup.RIGHT = 3;
 
 /**
  * Update all tabs object data.
@@ -557,5 +553,10 @@ TabGroup.RIGHT = 3;
 	}
 
 }
+
+TabGroup.TOP = 0;
+TabGroup.BOTTOM = 1;
+TabGroup.LEFT = 2;
+TabGroup.RIGHT = 3;
 
 export {TabGroup};

@@ -252,13 +252,7 @@ function TransformControlAtttributes()
 	this.oldRotationMatrix = new Matrix4();
 }
 
-TransformControls.NONE = "none";
-TransformControls.TRANSLATE = "translate";
-TransformControls.ROTATE = "rotate";
-TransformControls.SCALE = "scale";
 
-TransformControls.LOCAL = "local";
-TransformControls.WORLD = "world";
 
 /**
  * Attach a list of objects to the transform controls.
@@ -565,5 +559,12 @@ TransformControls.WORLD = "world";
 	}
 
 }
+
+TransformControls.NONE = "none";
+TransformControls.TRANSLATE = "translate";
+TransformControls.ROTATE = "rotate";
+TransformControls.SCALE = "scale";
+TransformControls.LOCAL = "local";
+TransformControls.WORLD = "world";
 
 export {TransformControls};

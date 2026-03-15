@@ -35,8 +35,6 @@ class TransformGizmoRotate extends TransformGizmo {
 	super();
 	}
 
-TransformGizmoRotate.torus = new TorusGeometry(1, 0.12, 4, 12, Math.PI);
-TransformGizmoRotate.torusBig = new TorusGeometry(1.25, 0.12, 2, 24);
 
 /**
  * Circle geometry used for the rotation gizmo rings.
@@ -277,4 +275,7 @@ class CircleGeometry extends BufferGeometry {
 	}
 
 }
+
+TransformGizmoRotate.torus = new TorusGeometry(1, 0.12, 4, 12, Math.PI);
+TransformGizmoRotate.torusBig = new TorusGeometry(1.25, 0.12, 2, 24);
 export {TransformGizmoRotate};

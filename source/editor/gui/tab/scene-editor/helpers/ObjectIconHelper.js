@@ -37,7 +37,6 @@ class ObjectIconHelper extends Sprite {
  * @attribute MATERIALS
  * @type {Map}
  */
-ObjectIconHelper.MATERIALS = new Map();
 
 /**
  * Get the sprite material for a icon url.
@@ -93,5 +92,7 @@ ObjectIconHelper.getMaterial = function(icon)
 	}
 
 }
+
+ObjectIconHelper.MATERIALS = new Map();
 
 export {ObjectIconHelper};

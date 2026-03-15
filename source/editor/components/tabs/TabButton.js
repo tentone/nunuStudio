@@ -240,9 +240,6 @@ class TabButton extends Component {
 	};
 	}
 
-TabButton.NONE = 0;
-TabButton.PREVIOUS = 1;
-TabButton.NEXT = 2;
 
 /**
  * Set the tab icon image.
@@ -304,5 +301,9 @@ TabButton.NEXT = 2;
 	}
 
 }
+
+TabButton.NONE = 0;
+TabButton.PREVIOUS = 1;
+TabButton.NEXT = 2;
 
 export {TabButton};

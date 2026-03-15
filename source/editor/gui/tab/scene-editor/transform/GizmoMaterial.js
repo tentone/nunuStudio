@@ -21,17 +21,6 @@ class GizmoMaterial extends MeshBasicMaterial {
 	this.baseOpacity = this.opacity;
 	}
 
-GizmoMaterial.red = new GizmoMaterial({color: 0xff0000});
-GizmoMaterial.green = new GizmoMaterial({color: 0x00ff00});
-GizmoMaterial.blue = new GizmoMaterial({color: 0x0000ff});
-GizmoMaterial.yellow = new GizmoMaterial({color: 0xFFFF00});
-GizmoMaterial.yellowAlpha = new GizmoMaterial({color: 0xFFFF00, opacity: 0.25});
-GizmoMaterial.cyan = new GizmoMaterial({color: 0x00ffff});
-GizmoMaterial.cyanAlpha = new GizmoMaterial({color: 0x00ffff, opacity: 0.25});
-GizmoMaterial.magenta = new GizmoMaterial({color: 0xff00ff});
-GizmoMaterial.magentaAlpha = new GizmoMaterial({color: 0xff00ff, opacity: 0.25});
-GizmoMaterial.grey = new GizmoMaterial({color: 0x787878});
-GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
 
 /**
  * Toggle the highlight state of a gizmo material.
@@ -53,5 +42,17 @@ GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
 	}
 
 }
+
+GizmoMaterial.red = new GizmoMaterial({color: 0xff0000});
+GizmoMaterial.green = new GizmoMaterial({color: 0x00ff00});
+GizmoMaterial.blue = new GizmoMaterial({color: 0x0000ff});
+GizmoMaterial.yellow = new GizmoMaterial({color: 0xFFFF00});
+GizmoMaterial.yellowAlpha = new GizmoMaterial({color: 0xFFFF00, opacity: 0.25});
+GizmoMaterial.cyan = new GizmoMaterial({color: 0x00ffff});
+GizmoMaterial.cyanAlpha = new GizmoMaterial({color: 0x00ffff, opacity: 0.25});
+GizmoMaterial.magenta = new GizmoMaterial({color: 0xff00ff});
+GizmoMaterial.magentaAlpha = new GizmoMaterial({color: 0xff00ff, opacity: 0.25});
+GizmoMaterial.grey = new GizmoMaterial({color: 0x787878});
+GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
 
 export {GizmoMaterial};

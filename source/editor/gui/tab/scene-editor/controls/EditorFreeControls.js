@@ -47,7 +47,6 @@ class EditorFreeControls extends EditorControls {
 	this.updateControls();
 	}
 
-EditorFreeControls.ZERO = new Vector3(0, 0, 0);
 
 	reset() {
 	this.orientation.set(0.5, 0.5);
@@ -231,5 +230,7 @@ EditorFreeControls.ZERO = new Vector3(0, 0, 0);
 	}
 
 }
+
+EditorFreeControls.ZERO = new Vector3(0, 0, 0);
 
 export {EditorFreeControls};

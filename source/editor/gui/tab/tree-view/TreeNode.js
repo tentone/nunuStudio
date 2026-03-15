@@ -737,8 +737,6 @@ class TreeNode extends Component {
 	}
 	}
 
-TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";
-TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
 
 /**
  * Default value.
@@ -746,7 +744,6 @@ TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
  * @static
  * @attribute NONE
  */
-TreeNode.NONE = -1;
 
 /**
  * Place inside the object.
@@ -754,7 +751,6 @@ TreeNode.NONE = -1;
  * @static
  * @attribute INSIDE
  */
-TreeNode.INSIDE = 0;
 
 /**
  * Place above object.
@@ -762,7 +758,6 @@ TreeNode.INSIDE = 0;
  * @static
  * @attribute ABOVE
  */
-TreeNode.ABOVE = 1;
 
 /**
  * Place bellow object.
@@ -770,7 +765,6 @@ TreeNode.ABOVE = 1;
  * @static
  * @attribute BELLOW
  */
-TreeNode.BELLOW = 2;
 
 /**
  * Clear node element border.
@@ -1007,5 +1001,12 @@ TreeNode.BELLOW = 2;
 	}
 
 }
+
+TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";
+TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
+TreeNode.NONE = -1;
+TreeNode.INSIDE = 0;
+TreeNode.ABOVE = 1;
+TreeNode.BELLOW = 2;
 
 export {TreeNode};
